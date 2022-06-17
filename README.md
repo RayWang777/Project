@@ -33,4 +33,8 @@ notice
 controller下方@autowired繪製入interface型別的service類別 
 (舉例:  controller 寫 @Autowierd  UserService uService     然後再 UserServiceImp類別上方加註@Controller)
 
+#需要@Requestbody 時需用另外創建的DTO傳輸(Data Transfer Object)
+if a persistent object is used as an argument of a method annotated with @RequestMapping, it’s possible from a specially crafted user input, to change the content of unexpected fields into the database
+所以不用已經變永續類別的物件去接資料
+You should create a DTO class and map it to persistence class.
 

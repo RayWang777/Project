@@ -4,12 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.eeit144.drinkmaster.bean.ProductBean;
+import com.eeit144.drinkmaster.bean.ProductBeanDTO;
+import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.model.ProductService;
-import com.eeit144.drinkmaster.service.ProductServiceImp;
 
 @Controller
 @Transactional
@@ -19,8 +20,24 @@ public class ProductController {
   private ProductService proService; 
   
 	@PostMapping("/product/insert")
-	public String insertProduct(@ModelAttribute("product") ProductBean pro,Model m) {
-		proService.insertProduct(pro);
+	public String insertProduct(@RequestBody ProductBeanDTO pro,Model m) {
+		
+		Integer storeId = pro.getStoreId();
+		
+		System.out.println(storeId);
+		
+		ProductBean productBean = new ProductBean();
+		
+		productBean.setProductName(pro.getProductName());
+		productBean.setPrice(pro.getPrice());
+		
+		StoreBean store = new StoreBean();
+		store.setStoreId(storeId);
+		
+		productBean.setStoreBean(store);
+		
+		
+		proService.insertProduct(productBean);
 		
 		return null;
 	}

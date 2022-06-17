@@ -61,7 +61,7 @@
 						class="large material-icons md-48">account_circle</i> 會員管理<span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
-						<li><a href="${contextRoot}/backend/user">新增</a></li>
+						<li><a href="${contextRoot}/backend/product">新增</a></li>
 						<li><a href="#">修改</a></li>
 
 						<li><a href="#">刪除</a></li>

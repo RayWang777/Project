@@ -22,8 +22,11 @@ notice
 1.後臺頁面mapping皆為/backend/ 以下
 2.<jsp:include page="header.jsp">於頁面開頭
 3<jsp:include page="footer.jsp">於頁面結尾
+(EX: 目前有一個個類別範例可以參考 修正部分在H1那一塊就可以)
 4.pagecontroller 為目前先預設定個頁面後台
 5.各自功能可以直接寫在對應自己controller  記得後台的方法用/backend開頭
+6.要修正後台連結的部分 可以到 header.jsp 找到 對應自己的頁面名稱 href 改成 ${contextRoot}/backend/ 的連結方式連去自己的controller
+
 
 #.model放置為介面已預設基礎方法 可以不用更動
 .service為已實作model的介面類別 新增需要額外功能直接寫在這邊

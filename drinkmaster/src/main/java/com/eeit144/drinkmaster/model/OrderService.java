@@ -10,9 +10,9 @@ public interface OrderService {
 	
 	public Optional<OrderBean> findById(Integer id);
 
-	public Page<OrderBean> findAll();
+	public Page<OrderBean> findAll(Integer pageNumber);
 
-	public void insertOrder();
+	public void insertOrder(OrderBean odb);
 
 	public void deleteById(Integer id);
 

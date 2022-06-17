@@ -29,8 +29,7 @@ public class CommentServiceImp implements CommentService {
 
 	@Override
 	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
-		
+//retiun "sfsdfgsg";		
 	}
 
 }

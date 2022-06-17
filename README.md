@@ -23,3 +23,11 @@ notice
 2.<jsp:include page="header.jsp">於頁面開頭
 3<jsp:include page="footer.jsp">於頁面結尾
 4.pagecontroller 為目前先預設定個頁面後台
+5.各自功能可以直接寫在對應自己controller  記得後台的方法用/backend開頭
+
+#.model放置為介面已預設基礎方法 可以不用更動
+.service為已實作model的介面類別 新增需要額外功能直接寫在這邊
+controller下方@autowired繪製入interface型別的service類別 
+(舉例:  controller 寫 @Autowierd  UserService uService     然後再 UserServiceImp類別上方加註@Controller)
+
+

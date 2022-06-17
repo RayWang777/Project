@@ -12,7 +12,7 @@ public interface FirmService {
 
 	public Page<FirmBean> findAll();
 
-	public void insertUser();
+	public void insertFirm();
 
 	public void deleteById(Integer id);
 	

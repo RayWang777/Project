@@ -21,14 +21,16 @@ public class OrderServiceImp implements OrderService {
 		return null;
 	}
 
+
+
 	@Override
-	public void insertUser() {
+	public void deleteById(Integer id) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void deleteById(Integer id) {
+	public void insertOrder() {
 		// TODO Auto-generated method stub
 		
 	}

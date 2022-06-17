@@ -12,7 +12,7 @@ public interface ServiceService {
 
 	public Page<ServiceBean> findAll();
 
-	public void insertUser();
+	public void insertService();
 
 	public void deleteById(Integer id);
 

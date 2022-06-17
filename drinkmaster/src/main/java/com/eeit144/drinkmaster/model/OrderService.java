@@ -12,7 +12,7 @@ public interface OrderService {
 
 	public Page<OrderBean> findAll();
 
-	public void insertUser();
+	public void insertOrder();
 
 	public void deleteById(Integer id);
 

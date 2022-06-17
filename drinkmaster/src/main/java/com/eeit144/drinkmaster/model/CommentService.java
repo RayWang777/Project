@@ -12,7 +12,7 @@ public interface CommentService {
 
 	public Page<CommentBean> findAll();
 
-	public void insertUser();
+	public void insertComment();
 
 	public void deleteById(Integer id);
 

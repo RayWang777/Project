@@ -12,7 +12,7 @@ public interface ShopCarService {
 
 	public Page<ShopCarBean> findAll();
 
-	public void insertUser();
+	public void insertShopCar();
 
 	public void deleteById(Integer id);
 }

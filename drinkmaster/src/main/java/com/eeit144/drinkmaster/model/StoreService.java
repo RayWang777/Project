@@ -12,7 +12,7 @@ public interface StoreService {
 
 	public Page<StoreBean> findAll();
 
-	public void insertUser();
+	public void insertStore();
 
 	public void deleteById(Integer id);
 	

@@ -21,15 +21,17 @@ public class CommentServiceImp implements CommentService {
 		return null;
 	}
 
-	@Override
-	public void insertUser() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public void deleteById(Integer id) {
 //retiun "sfsdfgsg";		
+	}
+
+	@Override
+	public void insertComment() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

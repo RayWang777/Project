@@ -12,7 +12,7 @@ public interface ProductService {
 
 	public Page<ProductBean> findAll();
 
-	public void insertUser();
+	public void insertProduct();
 
 	public void deleteById(Integer id);
 }

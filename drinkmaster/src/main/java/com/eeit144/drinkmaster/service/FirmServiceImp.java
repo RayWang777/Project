@@ -21,14 +21,16 @@ public class FirmServiceImp implements FirmService {
 		return null;
 	}
 
+
+
 	@Override
-	public void insertUser() {
+	public void deleteById(Integer id) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void deleteById(Integer id) {
+	public void insertFirm() {
 		// TODO Auto-generated method stub
 		
 	}

@@ -21,14 +21,15 @@ public class ShopCarServiceImp implements ShopCarService {
 		return null;
 	}
 
+
 	@Override
-	public void insertUser() {
+	public void deleteById(Integer id) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void deleteById(Integer id) {
+	public void insertShopCar() {
 		// TODO Auto-generated method stub
 		
 	}

@@ -46,12 +46,25 @@ public class CommentBean {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "storeid")
 	private StoreBean storeBean;
+	
+	@Transient
+	@Column(name = "productid")
+	private Integer productId;
+	
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "productid")
+	private ProductBean productBean;
+	
 
 	@Column(name = "score", nullable = false)
 	private Double score;
 
 	@Column(name = "content")
 	private String content;
+	
+	@Column(name = "scoretype", nullable = false)
+	private Integer scoreType;
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8") // JSP DATE
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") // MVC DATE

@@ -51,6 +51,10 @@ public class ProductBean {
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "productBean",cascade = CascadeType.ALL)
 	private Set<ShopCarBean> shopCars = new LinkedHashSet<ShopCarBean>();
+	
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "productBean",cascade = CascadeType.ALL)
+	private Set<CommentBean> comments = new LinkedHashSet<CommentBean>();
 
 	@Column(name = "status")
 	private boolean status;

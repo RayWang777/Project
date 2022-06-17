@@ -50,7 +50,7 @@ public class ShopCarBean {
 	@Column(name = "productamount",nullable = false)
 	private Integer productAmount;
 
-	@Column(name = "status",nullable = false)//送出未送出
+	@Column(name = "status",nullable = false)
 	private boolean status;
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8") // JSP DATE
@@ -59,10 +59,10 @@ public class ShopCarBean {
 	@Column(name = "createtime",nullable = false)
 	private Date createTime;
 
-	@Column(name = "sweet")
+	@Column(name = "sweet", columnDefinition = "nvarchar(10)")
 	private String sweet;
 
-	@Column(name = "ice")
+	@Column(name = "ice", columnDefinition = "nvarchar(10)")
 	private String ice;
 
 	public ShopCarBean() {

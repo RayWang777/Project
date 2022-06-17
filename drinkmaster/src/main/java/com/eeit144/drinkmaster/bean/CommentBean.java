@@ -60,7 +60,7 @@ public class CommentBean {
 	@Column(name = "score", nullable = false)
 	private Double score;
 
-	@Column(name = "content")
+	@Column(name = "content", columnDefinition="nvarchar(255)")
 	private String content;
 	
 	@Column(name = "scoretype", nullable = false)

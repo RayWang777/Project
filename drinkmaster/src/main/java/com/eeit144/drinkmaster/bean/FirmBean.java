@@ -24,10 +24,10 @@ public class FirmBean {
 	@Column(name = "firmid")
 	private Integer firmId;
 		
-	@Column(name = "firmname",nullable = false)
+	@Column(name = "firmname",nullable = false, columnDefinition = "nvarchar(50)")
 	private String firmName;
 	
-	@Column(name = "firmaddress")
+	@Column(name = "firmaddress", columnDefinition = "nvarchar(255)")
 	private String firmAddress;
 	
 	@Column(name = "firmPhone")

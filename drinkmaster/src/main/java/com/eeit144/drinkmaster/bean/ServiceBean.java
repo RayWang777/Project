@@ -38,7 +38,7 @@ public class ServiceBean {
 	@JoinColumn(name = "userid",nullable = false)
 	private UserBean userBean;
 		
-	@Column(name="answer",nullable = false)
+	@Column(name="answer",nullable = false, columnDefinition = "nvarchar(max)")
 	private String answer;
 	
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8" )

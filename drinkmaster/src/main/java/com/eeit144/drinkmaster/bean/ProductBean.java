@@ -27,7 +27,7 @@ public class ProductBean {
 	@Column(name = "productid")
 	private Integer productId;
 
-	@Column(name = "productname",nullable = false)
+	@Column(name = "productname",nullable = false, columnDefinition = "nvarchar(50)")
 	private String productName;
 
 	@Column(name = "price",nullable = false)
@@ -36,7 +36,7 @@ public class ProductBean {
 	@Column(name = "productimage", columnDefinition = "nvarchar(max)")
 	private byte[] productImage;
 
-	@Column(name = "coldhot")
+	@Column(name = "coldhot", columnDefinition = "nvarchar(10)")
 	private String coldHot;
 
 	@Transient

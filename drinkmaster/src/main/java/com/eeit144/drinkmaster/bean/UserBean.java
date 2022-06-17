@@ -31,7 +31,7 @@ public class UserBean {
 	@Column(name = "userid")
 	private Integer userId;
 
-	@Column(name = "username",nullable = false)
+	@Column(name = "username",nullable = false, columnDefinition = "nvarchar(20)")
 	private String userName;
 
 	@Column(name = "useraccount",nullable = false)
@@ -40,10 +40,10 @@ public class UserBean {
 	@Column(name = "userpassword",nullable = false)
 	private String userPassword;
 
-	@Column(name = "useraddress",nullable = false)
+	@Column(name = "useraddress",nullable = false, columnDefinition = "nvarchar(50)")
 	private String userAddress;
 
-	@Column(name = "photo", columnDefinition = "nvarchar(max)")
+	@Column(name = "photo", columnDefinition = "varchar(max)")
 	private byte[] photo;
 
 	@Column(name = "phone",nullable = false)
@@ -52,7 +52,7 @@ public class UserBean {
 	@Column(name = "role",nullable = false)
 	private String role;
 	
-	@Column(name = "gender",nullable = false)
+	@Column(name = "gender",nullable = false, columnDefinition = "nvarchar(10)")
 	private String gender;
 	
 	

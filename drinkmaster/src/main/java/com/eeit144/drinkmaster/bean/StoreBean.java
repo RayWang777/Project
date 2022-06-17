@@ -36,10 +36,10 @@ public class StoreBean {
 	@JoinColumn(name = "firmId",nullable = false)
 	private FirmBean firmBean;
 	
-	@Column(name="storename",nullable = false)
+	@Column(name="storename",nullable = false, columnDefinition = "nvarchar(50)")
 	private String storeName;
 	
-	@Column(name="storeaddress",nullable = false)
+	@Column(name="storeaddress",nullable = false, columnDefinition = "nvarchar(50)")
 	private String storeAddress;
 	
 	@Column(name = "storephone",nullable = false)

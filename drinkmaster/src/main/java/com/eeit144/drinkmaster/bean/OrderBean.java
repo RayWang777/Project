@@ -47,13 +47,13 @@ public class OrderBean {
 	@Column(name = "totalprice",nullable = false)
 	private Integer totalPrice;
 
-	@Column(name = "orderstatus",nullable = false)
+	@Column(name = "orderstatus",nullable = false, columnDefinition = "nvarchar(10)")
 	private String orderStatus;
 
 	@Column(name = "orderphone",nullable = false)
 	private String orderPhone;
 
-	@Column(name = "orderaddress",nullable = false)
+	@Column(name = "orderaddress",nullable = false, columnDefinition = "nvarchar(50)")
 	private String orderAddress;
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8") // JSP DATE

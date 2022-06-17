@@ -33,7 +33,7 @@ public class ProductBean {
 	@Column(name = "price",nullable = false)
 	private Integer price;
 
-	@Column(name = "productimage")
+	@Column(name = "productimage", columnDefinition = "nvarchar(max)")
 	private byte[] productImage;
 
 	@Column(name = "coldhot")

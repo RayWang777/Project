@@ -50,7 +50,7 @@ public class ShopCarBean {
 	@Column(name = "productamount",nullable = false)
 	private Integer productAmount;
 
-	@Column(name = "status",nullable = false)
+	@Column(name = "status",nullable = false)//送出未送出
 	private boolean status;
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8") // JSP DATE

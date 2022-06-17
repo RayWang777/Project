@@ -1,5 +1,6 @@
 package com.eeit144.drinkmaster.model;
 
+
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -10,9 +11,9 @@ public interface ProductService {
 
 	public Optional<ProductBean> findById(Integer id);
 
-	public Page<ProductBean> findAll();
+	public Page<ProductBean> findAll(Integer pageNumber);
 
-	public void insertProduct();
+	public void insertProduct(ProductBean product);
 
 	public void deleteById(Integer id);
 }

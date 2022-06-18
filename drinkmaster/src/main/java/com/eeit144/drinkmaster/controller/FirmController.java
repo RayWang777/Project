@@ -133,24 +133,23 @@ public class FirmController {
 		return "redirect:/backend/firm/all";
 	}
 
+
 	@GetMapping("firm/edit/{id}")
-	public String editFirmPage(@PathVariable("id") Integer id, Model m) {
-		Optional<FirmBean> firm = firmService.findById(id);
+	public String firmAddPage(@PathVariable("id") Integer id,Model m) {
+		FirmBean findById = firmService.findById(id).get();
+		FirmDTO firmDTO = new FirmDTO();
+		
+		firmDTO.setFirmId(findById.getFirmId());
+		firmDTO.setFirmName(findById.getFirmName());
+		firmDTO.setFirmAddress(findById.getFirmAddress());
+		firmDTO.setFirmPhone(findById.getFirmPhone());
+		firmDTO.setFirmLogo(findById.getFirmLogo());
+		
+		m.addAttribute("firm", firmDTO);
+		m.addAttribute("save", "修改廠商");		
+		return "backfirmadd";
+	}	
 
-		if (firm.isEmpty()) {
-			return "redirect:/backend/firm/all";
-		}
-
-		m.addAttribute("firmBean", firm);
-		return "backeditFirm";
-	}
-
-	@PostMapping("firm/edit/{id}")
-	public String updateFirm() {
-
-		return "redirect:/backend/firm/all";
-	}
-	
 	@GetMapping("firm/delete/{id}")
 	public String deleteFirm(@PathVariable("id") Integer id) {
 		firmService.deleteById(id);

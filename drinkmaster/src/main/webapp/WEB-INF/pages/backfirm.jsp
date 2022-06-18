@@ -75,6 +75,7 @@
 								src="<c:url value="/backend/firm/${firm.firmId}/photo"/>"
 								style="width: 100px; height: 100px;"></td>
 							<td class="align-middle" style="width: 13%;">
+							<c:url value="/backend/firm/edit/${firm.firmId}" var="edit_url"/>
 							<a href="${edit_url}"><button	type="button" class="btn btn-primary">編輯</button></a>
 							<c:url value="/backend/firm/delete/${firm.firmId}" var="delete_url"/>
 							<a href="${delete_url}"><button type="button" class="btn btn-danger">刪除</button></a>

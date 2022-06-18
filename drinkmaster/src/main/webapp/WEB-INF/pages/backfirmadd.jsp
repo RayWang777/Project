@@ -11,13 +11,13 @@
 
 	<div class="container">
 		<br> <br>
-		<h2 class="mb-4" style="text-align: center;">新增廠商</h2>
+		<h2 class="mb-4" style="text-align: center;">${save}</h2>
 
 		<div class="row justify-content-center">
 
 			<c:url value="/backend/firm/add" var="link_url"/>
 			<form:form class="form" action="${link_url}" method="post" modelAttribute="firm" enctype="multipart/form-data">
-
+				<form:hidden path="firmId" id="firmId"/>
 				<div class="mb-3">
 					<label for="firmName" class="form-label">廠商名稱</label>
 					<form:input path="firmName" class="form-control" type="text"
@@ -51,7 +51,7 @@
 				</div>
 				
 				<div class="mb-3" style="text-align: center;">
-					<input type="submit" class="btn btn-success" value="新增廠商">
+					<input type="submit" class="btn btn-success" value='<c:out value="${save}"/>'>
 				</div>
 			</form:form>
 

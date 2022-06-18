@@ -33,7 +33,7 @@ public class FirmBean {
 	@Column(name = "firmPhone")
 	private String firmPhone;
 	
-	@Column(name = "firmlogo",nullable = false, columnDefinition = "nvarchar(max)")
+	@Column(name = "firmlogo",columnDefinition = "varbinary(max)")
 	private byte[] firmLogo;
 	
 	@JsonIgnore

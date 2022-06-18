@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.eeit144.drinkmaster.bean.ProductBean;
-import com.eeit144.drinkmaster.bean.ProductBeanDTO;
 import com.eeit144.drinkmaster.bean.StoreBean;
+import com.eeit144.drinkmaster.dto.ProductBeanDTO;
 import com.eeit144.drinkmaster.model.ProductService;
 
 @Controller

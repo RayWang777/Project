@@ -1,4 +1,4 @@
-package com.eeit144.drinkmaster.bean;
+package com.eeit144.drinkmaster.dto;
 
 public class ProductBeanDTO {
 

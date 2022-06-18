@@ -71,7 +71,7 @@
                     class="large material-icons">business</i> 廠商管理 <span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
-						<li><a href="${contextRoot}/backend/firm">新增</a></li>
+						<li><a href="<c:url value="/backend/firm/all"/>">所有廠商</a></li>
 						<li><a href="#">修改</a></li>
 
 						<li><a href="#">刪除</a></li>

@@ -69,7 +69,7 @@ public class FirmController {
 	@GetMapping("firm/all")
 	public String findAllPages(@RequestParam(name = "p", defaultValue = "1") Integer page,
 			@RequestParam(name = "c", defaultValue = "1") Integer column,
-			@RequestParam(name = "s", defaultValue = "10") Integer size,
+			@RequestParam(name = "s", defaultValue = "2") Integer size,
 			@RequestParam(name = "d", defaultValue = "true") boolean direct,Model m) {
 		if (column > 4)
 			column = 1;

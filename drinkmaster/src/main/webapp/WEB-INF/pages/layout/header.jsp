@@ -16,22 +16,10 @@
 
 
 
-<link href="${contextRoot}/css/lib/calendar2/pignose.calendar.min.css"
-	rel="stylesheet">
-<link href="${contextRoot}/css/lib/chartist/chartist.min.css"
-	rel="stylesheet">
-<link href="${contextRoot}/css/lib/font-awesome.min.css"
-	rel="stylesheet">
-<link href="${contextRoot}/css/lib/themify-icons.css" rel="stylesheet">
-<link href="${contextRoot}/css/lib/owl.carousel.min.css"
-	rel="stylesheet" />
-<link href="${contextRoot}/css/lib/owl.theme.default.min.css"
-	rel="stylesheet" />
-<link href="${contextRoot}/css/lib/weather-icons.css" rel="stylesheet" />
-<link href="${contextRoot}/css/lib/menubar/sidebar.css" rel="stylesheet">
-<link href="${contextRoot}/css/lib/bootstrap.min.css" rel="stylesheet">
-<link href="${contextRoot}/css/lib/helper.css" rel="stylesheet">
-<link href="${contextRoot}/css/style.css" rel="stylesheet">
+<link href="<c:url value="/css/lib/themify-icons.css"/>" rel="stylesheet">
+<link href="<c:url value="/css/lib/menubar/sidebar.css"/>" rel="stylesheet">
+<link href="<c:url value="/css/lib/bootstrap.min.css"/>" rel="stylesheet">
+<link href="<c:url value="/css/style.css"/>" rel="stylesheet">
 
 
 
@@ -163,16 +151,17 @@
 </div>
 
 <div class="content-wrap">
-	<div class="main">
-		<div class="container-fluid">
-	
+    <div class="main">
+        <div class="container-fluid">
+
+
 		<!-- jquery vendor -->
-<script src="${contextRoot}/js/lib/jquery.min.js"></script>
-<script src="${contextRoot}/js/lib/jquery.nanoscroller.min.js"></script>
+<script src="<c:url value="/js/lib/jquery.min.js"/>"></script>
+<script src="<c:url value="/js/lib/jquery.nanoscroller.min.js"/>"></script>
 <!-- nano scroller -->
-<script src="${contextRoot}/js/lib/menubar/sidebar.js"></script>
-<script src="${contextRoot}/js/lib/preloader/pace.min.js"></script>
+<script src="<c:url value="/js/lib/menubar/sidebar.js"/>"></script>
+<script src="<c:url value="/js/lib/preloader/pace.min.js"/>"></script>
 <!-- sidebar -->
-<script src="${contextRoot}/js/lib/bootstrap.min.js"></script>
-<script src="${contextRoot}/js/scripts.js"></script>
+<script src="<c:url value="/js/lib/bootstrap.min.js"/>"></script>
+<script src="<c:url value="/js/scripts.js"/>"></script>
 <!-- bootstrap -->

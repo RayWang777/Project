@@ -1,8 +1,11 @@
 package com.eeit144.drinkmaster.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.eeit144.drinkmaster.dto.FirmDTO;
 
 @Controller
 @RequestMapping("/backend")
@@ -24,7 +27,12 @@ public class PageController {
 	}
 
 	@GetMapping("/firm/add")
-	public String firmAddPage() {
+	public String firmAddPage(Model m) {
+		FirmDTO firm = new FirmDTO();
+		
+		m.addAttribute("firm", firm);
+		
+		
 		return "backfirmadd";
 	}
 

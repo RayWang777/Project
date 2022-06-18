@@ -10,6 +10,22 @@
 .table {
 	font-size: 20px;
 }
+  a:link
+        {
+            color: black;
+        }
+        a:visited
+        {
+            color: black;
+        }
+        a:hover
+        {
+            color: red;
+        }
+        a:active
+        {
+            color: black;
+        }
 </style>
 
 <div class="content">
@@ -18,7 +34,8 @@
 		<br> <br>
 		<h2 class="mb-2">廠商列表</h2>
 		
-		<button type="button" class="btn btn-success"><a href="<c:url value="/backend/firm/add"/>">新增廠商</a></button>
+		<c:url value="/backend/firm/add" var="add_url"/>
+		<a href="${add_url}"><button type="button" class="btn btn-success">新增廠商</button></a>
 
 		<div class="table-responsive">
 			<table class="table table-striped custom-table">
@@ -57,9 +74,11 @@
 							<td class="align-middle"><img
 								src="<c:url value="/backend/firm/${firm.firmId}/photo"/>"
 								style="width: 100px; height: 100px;"></td>
-							<td class="align-middle" style="width: 13%;"><button
-									type="button" class="btn btn-primary">編輯</button>
-								<button type="button" class="btn btn-danger">刪除</button></td>
+							<td class="align-middle" style="width: 13%;">
+							<a href="${edit_url}"><button	type="button" class="btn btn-primary">編輯</button></a>
+							<c:url value="/backend/firm/delete/${firm.firmId}" var="delete_url"/>
+							<a href="${delete_url}"><button type="button" class="btn btn-danger">刪除</button></a>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -70,7 +89,7 @@
 						<c:forEach begin="1" end="${firms.totalPages}" var="p">
 							<c:choose>
 								<c:when test="${p==firms.number+1}">
-									<span><c:out value="${p}" /></span>
+									<span style="color: blue;"><c:out value="${p}" /></span>
 								</c:when>
 								<c:otherwise>
 									<a href="<c:url value="/backend/firm/all?p=${p}"/>"><c:out value="${p}" /></a>

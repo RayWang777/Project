@@ -42,8 +42,7 @@ public class FirmServiceImp implements FirmService {
 
 	@Override
 	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
-		
+		firmDao.deleteById(id);
 	}
 
 	@Override

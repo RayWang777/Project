@@ -1,6 +1,8 @@
 package com.eeit144.drinkmaster.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,7 @@ import com.eeit144.drinkmaster.bean.FirmColumn;
 import com.eeit144.drinkmaster.dto.FirmDTO;
 import com.eeit144.drinkmaster.model.FirmService;
 
+
 @Controller
 @RequestMapping("backend/")
 public class FirmController {
@@ -42,7 +45,7 @@ public class FirmController {
 	@GetMapping("firm/{id}")
 	public ResponseEntity<FirmDTO> findFirmById(@PathVariable Integer id) {
 		Optional<FirmBean> firmBean = firmService.findById(id);
-		
+
 		if (firmBean.isEmpty()) {
 			return new ResponseEntity<FirmDTO>(HttpStatus.NO_CONTENT);
 		}
@@ -53,16 +56,16 @@ public class FirmController {
 		firmDTO.setFirmPhone(firmBean.get().getFirmPhone());
 		return new ResponseEntity<FirmDTO>(firmDTO, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("firm/{id}/photo")
 	public ResponseEntity<byte[]> getFirmLogo(@PathVariable("id") Integer id) {
 		Optional<FirmBean> firmBean = firmService.findById(id);
-		
+
 		byte[] firmLogo = firmBean.get().getFirmLogo();
-		
+
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.IMAGE_JPEG);
-		
+
 		return new ResponseEntity<byte[]>(firmLogo, headers, HttpStatus.OK);
 	}
 
@@ -70,7 +73,7 @@ public class FirmController {
 	public String findAllPages(@RequestParam(name = "p", defaultValue = "1") Integer page,
 			@RequestParam(name = "c", defaultValue = "1") Integer column,
 			@RequestParam(name = "s", defaultValue = "2") Integer size,
-			@RequestParam(name = "d", defaultValue = "true") boolean direct,Model m) {
+			@RequestParam(name = "d", defaultValue = "true") boolean direct, Model m) {
 		if (column > 4)
 			column = 1;
 
@@ -82,27 +85,37 @@ public class FirmController {
 		}
 
 		Page<FirmBean> allFirm = firmService.findAll(pab);
-		
-		for(FirmBean firm : allFirm) {
+
+		for (FirmBean firm : allFirm) {
 			firm.setFirmLogo(null);
 		}
-		
+
 		m.addAttribute("firms", allFirm);
-		
+
 		return "backfirm";
 	};
 
 	@PostMapping("firm/add")
 	public String addNewFirm(@RequestParam String firmName, @RequestParam String firmAddress,
-			@RequestParam String firmPhone, @RequestPart MultipartFile firmLogo) {
+							 @RequestParam String firmPhone, @RequestPart MultipartFile firmLogo,Model m) {
 		FirmBean newFirm = new FirmBean();
 
 		String contentType = firmLogo.getContentType();
-		
+
+		System.out.println(contentType);
+
 		if(!contentType.startsWith("image")) {
-			return "redirect:/backend/firm/all";
+			
+			Map<String, String> errors = new HashMap<String, String>();
+			errors.put("firmLogo", "檔案類型必須為圖片");
+			
+			FirmDTO firmDTO = new FirmDTO();
+						
+			m.addAttribute("errors", errors);
+			m.addAttribute("firm", firmDTO);
+			return "backfirmadd";
 		}
-		
+
 		newFirm.setFirmName(firmName);
 		newFirm.setFirmAddress(firmAddress);
 		newFirm.setFirmPhone(firmPhone);
@@ -110,29 +123,37 @@ public class FirmController {
 			newFirm.setFirmLogo(firmLogo.getBytes());
 		} catch (IOException e) {
 			e.printStackTrace();
+			FirmDTO firmDTO = new FirmDTO();
+			m.addAttribute("firm", firmDTO);
+			return "backfirmadd";
 		}
 
 		firmService.insertFirm(newFirm);
-		
+
+		return "redirect:/backend/firm/all";
+	}
+
+	@GetMapping("firm/edit/{id}")
+	public String editFirmPage(@PathVariable("id") Integer id, Model m) {
+		Optional<FirmBean> firm = firmService.findById(id);
+
+		if (firm.isEmpty()) {
+			return "redirect:/backend/firm/all";
+		}
+
+		m.addAttribute("firmBean", firm);
+		return "backeditFirm";
+	}
+
+	@PostMapping("firm/edit/{id}")
+	public String updateFirm() {
+
 		return "redirect:/backend/firm/all";
 	}
 	
-	@GetMapping("firm/edit/{id}")
-	public String editFirmPage(@PathVariable("id") Integer id,Model m) {
-		Optional<FirmBean> firm = firmService.findById(id);
-		
-		if(firm.isEmpty()) {
-			return "redirect:/backend/firm/all";
-		}
-		
-		m.addAttribute("firmBean", firm);
-		return "backeditFirm";	
-	}
-	
-	@PostMapping("firm/edit/{id}")
-	public String updateFirm() {
-		
-		
+	@GetMapping("firm/delete/{id}")
+	public String deleteFirm(@PathVariable("id") Integer id) {
+		firmService.deleteById(id);
 		return "redirect:/backend/firm/all";
 	}
 

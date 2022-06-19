@@ -95,7 +95,7 @@
 				<li><a class="sidebar-sub-toggle"><i class="large material-icons">list</i> 訂單管理 <span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
-						<li><a href="${contextRoot}/backend/order">新增</a></li>
+						<li><a href="<c:url value="/backend/order/findAll"/>">所有訂單</a></li>
 						<li><a href="#">修改</a></li>
 
 						<li><a href="#">刪除</a></li>

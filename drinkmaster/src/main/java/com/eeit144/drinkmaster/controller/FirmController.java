@@ -85,7 +85,7 @@ public class FirmController {
 		}
 
 		Page<FirmBean> allFirm = firmService.findAll(pab);
-
+	
 		for (FirmBean firm : allFirm) {
 			firm.setFirmLogo(null);
 		}

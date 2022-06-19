@@ -2,36 +2,45 @@ package com.eeit144.drinkmaster.service;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import com.eeit144.drinkmaster.bean.StoreBean;
+import com.eeit144.drinkmaster.dao.StoreRepostiory;
 import com.eeit144.drinkmaster.model.StoreService;
 
+@Service
 public class StoreServiceImp implements StoreService {
-
-	@Override
-	public Optional<StoreBean> findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	private StoreRepostiory storeDao;
+	
+	@Autowired
+	public StoreServiceImp(StoreRepostiory storeDao) {
+		super();
+		this.storeDao = storeDao;
 	}
 
 	@Override
-	public Page<StoreBean> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public Optional<StoreBean> findById(Integer id) {
+		return storeDao.findById(id);
+	}
+
+	@Override
+	public Page<StoreBean> findAll(Pageable pab) {
+		return storeDao.findAll(pab);
 	}
 
 
 	@Override
 	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
-		
+		storeDao.deleteById(id);
 	}
 
 	@Override
-	public void insertStore() {
-		// TODO Auto-generated method stub
-		
+	public void insertStore(StoreBean store) {
+		storeDao.save(store);
 	}
 
 }

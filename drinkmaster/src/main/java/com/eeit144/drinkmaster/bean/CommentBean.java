@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,7 +31,7 @@ public class CommentBean {
 
 	@Transient
 	@Column(name = "userid")
-	private Integer userId;
+	private Integer userid;
 
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -58,28 +57,20 @@ public class CommentBean {
 	private ProductBean productBean;
 	
 
-	@Column(name = "score", nullable = false)  //不能null , nullable = false
+	@Column(name = "score", nullable = false)
 	private Double score;
 
 	@Column(name = "content", columnDefinition="nvarchar(255)")
 	private String content;
 	
-	@Column(name = "scoretype", nullable = false)  //不能null , nullable = false
+	@Column(name = "scoretype", nullable = false)
 	private Integer scoreType;
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8") // JSP DATE
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") // MVC DATE
 	@Temporal(TemporalType.TIMESTAMP) // SQL DATE
-	@Column(name = "createtime", nullable = false)  //不能null , nullable = false
+	@Column(name = "createtime", nullable = false)
 	private Date createTime;
-	
-	
-	@PrePersist
-	public void onCreate() {
-		if(createTime ==null) {
-			this.createTime = new Date();
-		}
-	}
 
 	public CommentBean() {
 	}
@@ -92,12 +83,12 @@ public class CommentBean {
 		this.commentId = commentId;
 	}
 
-	public Integer getUserId() {
-		return userId;
+	public Integer getUserid() {
+		return userid;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUserid(Integer userid) {
+		this.userid = userid;
 	}
 
 	public UserBean getUserBean() {

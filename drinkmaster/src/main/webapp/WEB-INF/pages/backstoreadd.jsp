@@ -15,12 +15,13 @@
 
 		<div class="row justify-content-center">
 
-			<c:url value="/backend/store/add" var="link_url"/>
-			<form:form class="form" action="${link_url}" method="post" modelAttribute="store">
-			
-				<form:hidden path="firmId" id="firmId" value="${userfirmid}"/>
-			
-				<form:hidden path="storeId" id="storeId"/>
+			<c:url value="/backend/store/add" var="link_url" />
+			<form:form class="form" action="${link_url}" method="post"
+				modelAttribute="store">
+
+				<form:hidden path="firmId" id="firmId" value="${userfirmid}" />
+
+				<form:hidden path="storeId" id="storeId" />
 				<div class="mb-3">
 					<label for="storeName" class="form-label">店家名稱</label>
 					<form:input path="storeName" class="form-control" type="text"
@@ -45,15 +46,16 @@
 				<div class="mb-4">
 					<label for="openTime" class="form-label">開店時間</label>
 					<form:input path="openTime" class="form-control" type="text"
-						id="openTime"/>
+						id="openTime" />
 					<span id=openTimeSp></span>
 				</div>
-					<form:input path="latitude" class="form-control" type="text"
-						id="latitude"/>
-					<form:input path="longitude" class="form-control" type="text"
-						id="longitude"/>
+				<form:input path="latitude" class="form-control" type="text"
+					id="latitude" />
+				<form:input path="longitude" class="form-control" type="text"
+					id="longitude" />
 				<div class="mb-3" style="text-align: center;">
-					<input type="submit" class="btn btn-success" value='<c:out value="${save}"/>'>
+					<input type="submit" class="btn btn-success"
+						value='<c:out value="${save}"/>'>
 				</div>
 			</form:form>
 
@@ -63,9 +65,37 @@
 	</div>
 </div>
 
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=API_KEY">
+</script>
+
+
 <script type="text/javascript">
 
 $(function(){
+	$('#storeAddress').change(function(){
+		var location = $('#storeAddress').val();
+
+		const geocoder = new google.maps.Geocoder();
+
+// 請 Google Maps API 依據地址轉換成經緯度
+		geocoder.geocode( { 'address': location}, function(results, status) {
+	  if (status == 'OK') {
+    // 若轉換成功...
+    
+    var lat = results[0].geometry.location.lat();
+    var lng = results[0].geometry.location.lng();
+	$('#latitude').val(lat);
+	$('#longitude').val(lng);
+
+  			} else {
+    // 若轉換失敗...
+    			console.log(status)
+  				}
+			});
+		
+	});
+	
 
 });
 

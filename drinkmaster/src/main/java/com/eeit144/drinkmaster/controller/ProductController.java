@@ -1,7 +1,5 @@
 package com.eeit144.drinkmaster.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -10,20 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eeit144.drinkmaster.bean.ProductBean;
-<<<<<<< HEAD
-import com.eeit144.drinkmaster.bean.StoreBean;
-import com.eeit144.drinkmaster.dto.ProductBeanDTO;
-import com.eeit144.drinkmaster.model.ProductService;
-=======
-
 import com.eeit144.drinkmaster.service.ProductServiceImp;
->>>>>>> e880ea310b9b55544c7a854db2c00eec3b1d68eb
+
 
 @Controller
 @Transactional

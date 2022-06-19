@@ -3,10 +3,10 @@ package com.eeit144.drinkmaster.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.eeit144.drinkmaster.dto.FirmDTO;
+import com.eeit144.drinkmaster.dto.StoreDTO;
 
 @Controller
 @RequestMapping("/backend")
@@ -39,10 +39,18 @@ public class PageController {
 	public String storePage() {
 		return "backstore";
 	}
+	
+	@GetMapping("/store/add")
+	public String storeAddPage(Model m) {
+		StoreDTO store = new StoreDTO();
+		m.addAttribute("store", store);
+		m.addAttribute("save", "新增店家");
+		return "backstoreadd";
+	}
 
 	@GetMapping("/product")
 	public String productPage() {
-		return "backproductinsert";
+		return "backproduct";
 	}
 	
 

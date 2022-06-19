@@ -1,16 +1,29 @@
 package com.eeit144.drinkmaster.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.eeit144.drinkmaster.dto.FirmDTO;
-import com.eeit144.drinkmaster.dto.StoreDTO;
+import com.eeit144.drinkmaster.bean.CommentBean;
+import com.eeit144.drinkmaster.bean.StoreBean;
+import com.eeit144.drinkmaster.bean.UserBean;
+import com.eeit144.drinkmaster.model.CommentService;
 
 @Controller
 @RequestMapping("/backend")
 public class PageController {
+	
+	
+	@Autowired
+	private CommentService commentService;
 	
 	@GetMapping("/")
 	public String welcomePage() {
@@ -22,30 +35,15 @@ public class PageController {
 		return "backuser";
 	}
 	
+
 	@GetMapping("/firm")
 	public String firmPage() {
 		return "backfirm";
 	}
 
-	@GetMapping("/firm/add")
-	public String firmAddPage(Model m) {
-		FirmDTO firm = new FirmDTO();
-		m.addAttribute("firm", firm);
-		m.addAttribute("save", "新增廠商");
-		return "backfirmadd";
-	}
-	
 	@GetMapping("/store")
 	public String storePage() {
 		return "backstore";
-	}
-	
-	@GetMapping("/store/add")
-	public String storeAddPage(Model m) {
-		StoreDTO store = new StoreDTO();
-		m.addAttribute("store", store);
-		m.addAttribute("save", "新增店家");
-		return "backstoreadd";
 	}
 
 	@GetMapping("/product")
@@ -64,10 +62,43 @@ public class PageController {
 		return "backorder";
 	}
 
+//	@GetMapping("/comment")
+//	public String commentPage() {
+//		return "backcomment";
+//	}
+	
 	@GetMapping("/comment")
-	public String commentPage() {
-		return "backcomment";
+	public String addCommentPage(Model model) {   //@ModelAttribute("userId")UserBean userid,
+		
+//		String userName = userid.getUserName();
+		
+		CommentBean commentBean = new CommentBean();
+		
+//		StoreBean storeBean = new StoreBean();
+		
+		CommentBean lastComment = commentService.getLastest();
+
+		model.addAttribute("commentBean", commentBean);
+//		model.addAttribute("storeBean", storeBean);
+		model.addAttribute("lastestComment", lastComment);
+		
+
+		return "addcomment";
 	}
+	
+	
+	@GetMapping("/comment/all")
+	public String viewMessage(@RequestParam(name="p",defaultValue = "1") Integer pageNumber,Model model) {
+		
+		Page<CommentBean> page = commentService.findByPage(pageNumber);
+			
+		model.addAttribute("page",page);
+		
+		return "viewcomment";
+		
+	}
+	
+	
 
 	@GetMapping("/service")
 	public String servicePage() {

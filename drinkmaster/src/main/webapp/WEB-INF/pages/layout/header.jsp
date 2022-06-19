@@ -77,11 +77,11 @@
 				<li><a class="sidebar-sub-toggle"><i class="large material-icons">local_cafe</i> 商品管理 <span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
-						<li><a href="${contextRoot}/backend/product">新增</a></li>
+						<li><a href="${contextRoot}/backend/product/insertview">新增</a></li>
 						<li><a href="#">修改</a></li>
 
 						<li><a href="#">刪除</a></li>
-						<li><a href="#">查詢</a></li>
+						<li><a href="${contextRoot}/backend/product/all">查詢</a></li>
 					</ul></li>
 				<li><a class="sidebar-sub-toggle"><i class="large material-icons">local_grocery_store</i> 購物車管理 <span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>

@@ -50,7 +50,7 @@ public class PageController {
 
 	@GetMapping("/product")
 	public String productPage() {
-		return "backproductinsert";
+		return "backproduct";
 	}
 	
 

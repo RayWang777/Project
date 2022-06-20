@@ -1,0 +1,8 @@
+INDEX VERSION 1.4+C:\Users\lovel\git2\project\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3490485492.index
+1892613857.index
+443587471.index
+24917662.index
+3901209907.index
+507529083.index
+983178150.index

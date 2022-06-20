@@ -54,6 +54,7 @@ public class FirmController {
 		firmDTO.setFirmName(firmBean.get().getFirmName());
 		firmDTO.setFirmAddress(firmBean.get().getFirmAddress());
 		firmDTO.setFirmPhone(firmBean.get().getFirmPhone());
+		firmDTO.setUserId(firmBean.get().getUserBean().getUserId());
 		return new ResponseEntity<FirmDTO>(firmDTO, HttpStatus.OK);
 	}
 

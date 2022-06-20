@@ -11,6 +11,8 @@ public class FirmDTO {
 	private String firmPhone;
 
 	private byte[] firmLogo;
+	
+	private Integer userId;
 
 	public FirmDTO() {
 	}
@@ -55,4 +57,13 @@ public class FirmDTO {
 		this.firmLogo = firmLogo;
 	}
 
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	
 }

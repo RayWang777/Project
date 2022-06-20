@@ -1,5 +1,0 @@
-INDEX VERSION 1.131
-C:\Users\lovel\git2\project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3148588420.index
-\drinkmaster\src\main\java
-C:\Users\lovel\git2\project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\983178150.index
-\drinkmaster\src\main\java

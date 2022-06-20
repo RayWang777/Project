@@ -1,19 +1,19 @@
 package com.eeit144.drinkmaster.model;
 
-import java.util.Optional;
-
 import org.springframework.data.domain.Page;
 
 import com.eeit144.drinkmaster.bean.ServiceBean;
 
 public interface ServiceService {
 	
-	public Optional<ServiceBean> findById(Integer id);
+	public ServiceBean findById(Integer id);
 
-	public Page<ServiceBean> findAll();
+	public Page<ServiceBean> findByPage(Integer pageNumber);
 
-	public void insertService();
+	public void insertService(ServiceBean service);
 
 	public void deleteById(Integer id);
+	
+	public ServiceBean getLatest() ;
 
 }

@@ -50,13 +50,13 @@ public class ShopCarBean {
 	@Column(name = "productamount",nullable = false)
 	private Integer productAmount;
 
-	@Column(name = "status",nullable = false)
+	@Column(name = "status",nullable = false)//送出or未送出
 	private boolean status;
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8") // JSP DATE
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") // MVC DATE
 	@Temporal(value = TemporalType.TIMESTAMP)
-	@Column(name = "createtime",nullable = false)
+	@Column(name = "createtime",nullable = false, columnDefinition = "smalldatetime")
 	private Date createTime;
 
 	@Column(name = "sweet", columnDefinition = "nvarchar(10)")
@@ -116,7 +116,7 @@ public class ShopCarBean {
 		this.productAmount = productAmount;
 	}
 
-	public boolean isStatus() {
+	public boolean getStatus() {
 		return status;
 	}
 

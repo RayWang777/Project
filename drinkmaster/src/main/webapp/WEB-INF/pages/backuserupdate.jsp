@@ -7,7 +7,7 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
 
-<h1>購物車首頁</h1>
+<h1>用戶首頁</h1>
 
 
 <jsp:include page="layout/footer.jsp" />

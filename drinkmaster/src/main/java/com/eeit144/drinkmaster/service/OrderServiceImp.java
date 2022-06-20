@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.eeit144.drinkmaster.bean.OrderBean;
+import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.dao.FirmRepository;
 import com.eeit144.drinkmaster.dao.OrderRepostiory;
 import com.eeit144.drinkmaster.model.OrderService;
@@ -20,18 +21,25 @@ import com.eeit144.drinkmaster.model.OrderService;
 @Transactional
 public class OrderServiceImp implements OrderService {
 
+	@Autowired
 	private OrderRepostiory orderDao;
 	
-	@Autowired
-	public OrderServiceImp(OrderRepostiory orderDao) {
-		super();
-		this.orderDao = orderDao;
-	}
+//	@Autowired
+//	public OrderServiceImp(OrderRepostiory orderDao) {
+//		super();
+//		this.orderDao = orderDao;
+//	}
 	
 	@Override
-	public Optional<OrderBean> findById(Integer id) {
-		return orderDao.findById(id);
+	public OrderBean findById(Integer id) {
+		Optional<OrderBean> orderBean= orderDao.findById(id);
+		 
+		if(orderBean.isPresent()) {
+			 return orderBean.get();
+		 }
+		 return null;
 	}
+
 
 	@Override
 	public Page<OrderBean> findAll(Pageable pageNumber) {
@@ -50,7 +58,7 @@ public class OrderServiceImp implements OrderService {
 	
 	@Override
 	public Page<OrderBean> findByPage(Integer pageNumber){
-		Pageable pgb = PageRequest.of(pageNumber-1, 5 ,Sort.Direction.DESC ,"added");
+		Pageable pgb = PageRequest.of(pageNumber-1, 10 ,Sort.Direction.DESC ,"orderId");
 		
 		Page<OrderBean> page = orderDao.findAll(pgb);
 		
@@ -58,9 +66,5 @@ public class OrderServiceImp implements OrderService {
 		
 	}
 	
-	@Override
-	public List<OrderBean> listFindAll(){
-		return orderDao.findAll();
-	}
 
 }

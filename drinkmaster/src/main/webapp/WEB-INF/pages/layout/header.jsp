@@ -49,11 +49,11 @@
 						class="large material-icons md-48">account_circle</i> 會員管理<span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
-						<li><a href="${contextRoot}/backend/product">新增</a></li>
-						<li><a href="#">修改</a></li>
+						<li><a href="${contextRoot}/backend/user/insert">新增</a></li>
+						<li><a href="${contextRoot}/backend/user/update">修改</a></li>
 
 						<li><a href="#">刪除</a></li>
-						<li><a href="#">查詢</a></li>
+						<li><a href="${contextRoot}/backend/user/all">查詢</a></li>
 					</ul></li>
 				<li><a class="sidebar-sub-toggle"><i
                     class="large material-icons">business</i> 廠商管理 <span
@@ -86,7 +86,7 @@
 				<li><a class="sidebar-sub-toggle"><i class="large material-icons">local_grocery_store</i> 購物車管理 <span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
-						<li><a href="${contextRoot}/backend/shoppingcar">新增</a></li>
+						<li><a href="<c:url value="/backend/shopCar/findAll"/>">購物車列表</a></li>
 						<li><a href="#">修改</a></li>
 
 						<li><a href="#">刪除</a></li>
@@ -95,7 +95,7 @@
 				<li><a class="sidebar-sub-toggle"><i class="large material-icons">list</i> 訂單管理 <span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
-						<li><a href="<c:url value="/backend/order/findAll"/>">所有訂單</a></li>
+						<li><a href="<c:url value="/backend/order/findAll"/>">訂單列表</a></li>
 						<li><a href="#">修改</a></li>
 
 						<li><a href="#">刪除</a></li>
@@ -112,10 +112,10 @@
 				<li><a class="sidebar-sub-toggle"><i class="large material-icons">room_service</i> 客服管理 <span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
-						<li><a href="${contextRoot}/backend/service">新增</a></li>
-						<li><a href="#">修改</a></li>
-						<li><a href="#">刪除</a></li>
-						<li><a href="#">查詢</a></li>
+						<li><a href="${contextRoot}/backend/serviceadd">新增</a></li>
+						<li><a href="${contextRoot}/backend/serviceedit">修改</a></li>
+						<li><a href="${contextRoot}/backend/servicedelete">刪除</a></li>
+						<li><a href="${contextRoot}/backend/serviceall">查詢</a></li>
 					</ul></li>
 				<li><a><i class="ti-close"></i> Logout</a></li>
 			</ul>

@@ -26,10 +26,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.FirmColumn;
 import com.eeit144.drinkmaster.bean.OrderBean;
+import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.dto.FirmDTO;
 import com.eeit144.drinkmaster.dto.OrderDTO;
 import com.eeit144.drinkmaster.model.FirmService;
@@ -38,104 +40,66 @@ import com.eeit144.drinkmaster.model.OrderService;
 @Controller
 @RequestMapping("backend/")
 public class OrderController {
-
-		private OrderService orderService;
 		
 		@Autowired
-		public OrderController(OrderService orderService) {
-			super();
-			this.orderService = orderService;
-		}
+		private OrderService orderService;
+		
+//		@Autowired
+//		public OrderController(OrderService orderService) {
+//			super();
+//			this.orderService = orderService;
+//		}
 		
 			
+		@GetMapping("order/insertView")
+		public String addView(Model m) {
+			OrderBean orderBean = new OrderBean();
+			m.addAttribute("orderBean", orderBean);
+			return "backorderinsert";
+		}
+		
 		@GetMapping("order/findAll")
-		public String findAllOrderPages(Model model) {
-			List<OrderBean> orderList = orderService.listFindAll();
-			model.addAttribute("order", orderList);
-			
-			return "backorder";
-		}
-		
-		@GetMapping("order/delete/{id}")
-		public String deleteOrder(@PathVariable("id") Integer id) {
-			orderService.deleteById(id);
-			return "backorder";
-		}
-		
-		@GetMapping("order/{id}")
-		public ResponseEntity<OrderDTO> findOrderById(@PathVariable Integer id) {
-			Optional<OrderBean> orderBean = orderService.findById(id);
+		public ModelAndView findView(ModelAndView mav, @RequestParam(name = "o", defaultValue = "1") Integer pageNumber) {
+			Page<OrderBean> page = orderService.findByPage(pageNumber);
 
-			if (orderBean.isEmpty()) {
-				return new ResponseEntity<OrderDTO>(HttpStatus.NO_CONTENT);
-			}
-			
-			OrderDTO orderDTO = new OrderDTO();
-			orderDTO.setOrderId(orderBean.get().getOrderId());
-			orderDTO.setShopCarId(orderBean.get().getShopCarId());
-			orderDTO.setStoreId(orderBean.get().getStoreId());
-			orderDTO.setTotalPrice(orderBean.get().getTotalPrice());
-			orderDTO.setOrderStatus(orderBean.get().getOrderStatus());
-			orderDTO.setOrderPhone(orderBean.get().getOrderPhone());
-			orderDTO.setOrderAddress(orderBean.get().getOrderAddress());
-			orderDTO.setCreateTime(orderBean.get().getCreateTime());
-			
-			
-			return new ResponseEntity<OrderDTO>(orderDTO, HttpStatus.OK);
+			mav.getModel().put("page", page);
+			mav.setViewName("backorder");
+			return mav;
 		}
+		
+		@GetMapping("order/delete")
+		public String deleteOrder(@RequestParam("id") Integer id) {
+			orderService.deleteById(id);
+			return "redirect:/backend/order/findAll";
+		}
+		
+
 		
 		@PostMapping("order/insert")
 		public String insertOrder(@ModelAttribute("orderBean") OrderBean orderBean, Model model) {			
 			orderService.insertOrder(orderBean);
-			OrderBean newOrderBean = new OrderBean();
-						
-			model.addAttribute("orderBean", newOrderBean);
 			
-			return "backorder";
+			return "redirect:/backend/order/findAll";
 			}
 		
+		@GetMapping("order/edit")
+		public String editById(@RequestParam("id") Integer id, Model m) {
+			OrderBean orderBean = orderService.findById(id);
+			m.addAttribute("orderBean", orderBean);
+			return "backorderupdate";
+		}
 		
-		@GetMapping("order/update/{id}")
-		public String updateOrder(@PathVariable("id") Integer id,Model m) {
+		@PostMapping("order/update")
+		public String updateOrder(@ModelAttribute("orderBean") OrderBean orderBean, Model m) {
+			orderService.insertOrder(orderBean);
+
+			return "redirect:/backend/order/findAll";
+		}
+		
+}		
+		
+
 			
-			OrderBean findOrderById = orderService.findById(id).get();
-			OrderDTO orderDTO = new OrderDTO();			
-			
-			orderDTO.setOrderId(findOrderById.getOrderId());
-			orderDTO.setOrderAddress(findOrderById.getOrderAddress());
-			orderDTO.setOrderPhone(findOrderById.getOrderPhone());
-			orderDTO.setOrderStatus(findOrderById.getOrderStatus());
-			orderDTO.setTotalPrice(findOrderById.getTotalPrice());
-			orderDTO.setCreateTime(findOrderById.getCreateTime());
-			
-			m.addAttribute("order", orderDTO);
-		
-			return "backorder";
-		}	
-		
-		
-}	
-	
-		
-		
-//		@PostMapping("order/findAll")
-//		@ResponseBody
-//		public List<OrderBean> postMessageApi(@RequestBody OrderDTO orderDTO) {
-//			Integer id = orderDTO.getOrderId();
-//			String address = orderDTO.getOrderAddress();
-//			
-//			OrderBean orderBean = new OrderBean();
-//			orderBean.setOrderStatus(address);
-//			orderService.insertOrder(orderBean);
-//			
-//			
-//			Page<OrderBean> page = orderService.findByPage(1);
-//			List<OrderBean> content = page.getContent();
-//			
-//			return content;
-//		}
-		
-		
 		
 		
 		//參考作法(未完成)
@@ -159,6 +123,7 @@ public class OrderController {
 //			return "backorder";
 //			}
 		
+
 
 		
 

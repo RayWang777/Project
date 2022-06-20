@@ -22,7 +22,7 @@
   </div>
   <div class="card-body">
   
-  <form:form class="form" method="post" action="${contextRoot}/comment/insert" modelAttribute="commentBean">
+  <form:form class="form" method="post" action="${contextRoot}/backend/comment/insert" modelAttribute="commentBean">
   
 <div class="form-group">
 	

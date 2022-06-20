@@ -10,10 +10,11 @@ public interface UserService {
 
 	public Optional<UserBean> findById(Integer id);
 
-	public Page<UserBean> findAll();
+	public Page<UserBean> findAll(Integer pageNumber);
 
-	public void insertUser();
+	public void insertUser(UserBean userBean);
 
 	public void deleteById(Integer id);
+
 
 }

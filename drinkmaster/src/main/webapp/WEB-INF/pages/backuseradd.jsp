@@ -16,25 +16,25 @@
 
 <div>
    <form:form class="form" method="post" action="${contextRoot}/backend/user/insertGo" modelAttribute="user">
-       姓名<form:label path="userName"/>
+       姓&emsp;&emsp;名<form:label path="userName"/>
        <form:input path="userName"/><br><br>
-       帳號<form:label path="userAccount"/>
+       帳&emsp;&emsp;號<form:label path="userAccount"/>
        <form:input path="userAccount"/><br><br>
-       密碼<form:label path="userPassword"/>
+       密&emsp;&emsp;碼<form:label path="userPassword"/>
        <form:input path="userPassword"/><br><br>
-       地址<form:label path="userAddress"/>
+       地&emsp;&emsp;址<form:label path="userAddress"/>
        <form:input path="userAddress"/><br><br>
-       大頭貼<form:label path="photo"/>
+       大&ensp;頭&ensp;貼<form:label path="photo"/>
        <form:input path="photo"/><br><br>
-       手機<form:label path="phone"/>
+       手&emsp;&emsp;機<form:label path="phone"/>
        <form:input path="phone"/><br><br>
-       性別<form:label path="gender"/>
+       性&emsp;&emsp;別<form:label path="gender"/>
        <form:input path="gender"/><br><br>
-       生日<form:label path="birthday"/>
+       生&emsp;&emsp;日<form:label path="birthday"/>
        <form:input path="birthday"/><br><br>
        創建日期<form:label path="createdate"/>
        <form:input path="createdate"/><br><br>
-       職權<form:label path="role"/>
+       職&emsp;&emsp;權<form:label path="role"/>
        <form:input path="role"/><br><br>
        
        <div class="row justify-content-center">

@@ -1,4 +1,4 @@
-package com.eeit144.drinkmaster.bean;
+package com.eeit144.drinkmaster.dto;
 
 import java.util.Date;
 import java.util.LinkedHashSet;

@@ -21,8 +21,12 @@ public class UserServiceImp implements UserService {
 	private UserRepostiory userDao;
 
 	@Override
-	public Optional<UserBean> findById(Integer id) {
-		return userDao.findById(id);
+	public UserBean findById(Integer id) {
+		Optional<UserBean> user = userDao.findById(id);
+		if(user.isPresent()) {
+			return user.get();
+		}		
+		return null;
 	}
 
 	@Override
@@ -41,5 +45,10 @@ public class UserServiceImp implements UserService {
 	public void deleteById(Integer id) {
 		userDao.deleteById(id);
 	}
-
+	
+	public Page<UserBean> select(Integer pageNumber,String name){
+		PageRequest page = PageRequest.of(pageNumber-1, 10, Sort.Direction.ASC, "userId");
+		return userDao.findByUserNameLike(page, name);
+	}
+	
 }

@@ -1,2 +1,4 @@
 pom.properties
 */classes/com/*
+*/test-classes/*
+*/src/test/*

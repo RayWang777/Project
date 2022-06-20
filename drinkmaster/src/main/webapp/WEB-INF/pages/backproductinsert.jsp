@@ -15,7 +15,7 @@
 <div class="row justify-content-center" >
 
 <div>
-<form:form class="form" method="post" action="${contextRoot}/backend/product/insert" modelAttribute="product">
+<form:form class="form" method="post" enctype="multipart/form-data" action="${contextRoot}/backend/product/insert" modelAttribute="product">
   <form:label path="productName" >商品</form:label>
   <form:input type="text" path="productName" id="productName" /><br><br>
   <form:label path="price"> 價格</form:label>

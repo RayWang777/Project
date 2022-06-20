@@ -1,0 +1,41 @@
+package com.eeit144.drinkmaster.dao;
+
+import org.springframework.data.domain.Pageable;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Base64;
+
+import javax.servlet.http.Part;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+import com.eeit144.drinkmaster.bean.ProductBean;
+
+
+
+
+public interface ProductRepostiory extends JpaRepository<ProductBean, Integer> {
+	 Page<ProductBean> findByproductNameLike(Pageable pageable, String productName);
+	 Page<ProductBean> findByprice(Pageable pageable, Integer price);
+	 Page<ProductBean> findBycoldHotLike(Pageable pageable, String coldHot);
+	 Page<ProductBean> findBystatus(Pageable pageable, boolean status);
+	 public  String getFileBase64String(Part part) throws IOException {
+			InputStream in = part.getInputStream();
+			byte[] picin = in.readAllBytes();
+			String picstr =Base64.getEncoder().encodeToString(picin);
+			return picstr;
+		}
+	    
+		public static String getFileType(Part part) {
+			String header =part.getHeader("content-disposition");
+//			form-data; name="firmLogo"; filename="chngstar.gif"
+//			form-data; name="firmLogo"; filename="D:\chngstar.gif"
+			int substridx = header.lastIndexOf(".");
+			String filetype = header.substring(substridx + 1, header.length()-1);
+			return filetype;		
+		}
+}
+

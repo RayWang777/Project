@@ -5,7 +5,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.eeit144.drinkmaster.dto.FirmDTO;
 import com.eeit144.drinkmaster.dto.StoreDTO;
 
 
@@ -31,14 +30,6 @@ public class PageController {
 		return "backfirm";
 	}
 
-	@GetMapping("/firm/add")
-	public String firmAddPage(Model m) {
-		FirmDTO firm = new FirmDTO();
-		m.addAttribute("firm", firm);
-		m.addAttribute("save", "新增廠商");
-		return "backfirmadd";
-	}
-	
 	@GetMapping("/store")
 	public String storePage() {
 		return "backstore";

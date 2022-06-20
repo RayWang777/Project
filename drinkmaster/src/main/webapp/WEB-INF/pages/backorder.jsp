@@ -1,111 +1,71 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <jsp:include page="layout/header.jsp" />
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-
+<html>
+<head>
 <style>
-.table {
-	font-size: 20px;
-}
-  a:link
-        {
-            color: black;
-        }
-        a:visited
-        {
-            color: black;
-        }
-        a:hover
-        {
-            color: red;
-        }
-        a:active
-        {
-            color: black;
-        }
+
 </style>
 
-<div class="content">
+</head>
+<body>
+<br>
+<p>
+<a href="${contextRoot}/backend/order/insertview"><button type="button" class="btn btn-success">新增廠商</button></a>
+</p>		
+<table class="table table-hover"style="width:100%;table-layout:fixed;">
+  <thead>
+    <tr>
+      <th scope="col">訂單編號</th>
+      <th scope="col">訂單時間</th>
+      <th scope="col">地址</th>
+      <th scope="col">電話</th>
+      <th scope="col">狀態</th>
+      <th scope="col">總金額</th>
+      <th scope="col">  </th>
+    </tr>
+  </thead>
+  <tbody>
+  <c:forEach var="orderBean" items="${page.content}">
+    <tr>
+      <th scope="row"><c:out value="${orderBean.orderId}"/></th>
+      <td><c:out value="${orderBean.createTime}"/></td>
+      <td><c:out value="${orderBean.orderAddress}"/></td>
+      <td><c:out value="${orderBean.orderPhone}"/></td>
+      <td><c:out value="${orderBean.orderStatus}"/></td>
+      <td><c:out value="${orderBean.totalPrice}"/></td>
+      <td><a href="${contextRoot}/backend/order/edit?id=${orderBean.orderId}"><button class="btn btn-outline-primary">編輯</button></a>
+        <a onclick="return confirm('確定要刪除嗎?')"  href="${contextRoot}/backend/order/delete?id=${orderBean.orderId}"><button class="btn btn-outline-danger">刪除</button></a></td>
+      </tr>
+    </c:forEach>
+ 
+  </tbody>
+</table>
+<div class="row justify-content-center" style="font-size: x-large;">
+  <c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
+   <c:choose>
+   <c:when test="${page.number!=pageNumber-1}">
+   <a href="${contextRoot}/backend/order/findAll?o=${pageNumber}"> <c:out value="${pageNumber}" /> </a>
+   </c:when>
+   <c:otherwise>
+   <c:out value="${pageNumber}"></c:out>
+   </c:otherwise>
+   </c:choose> 
+   <c:if test="${pageNumber!= page.totalPages }">
+   |
+   </c:if>
+   </c:forEach>
+   </div>
+   <div  class="row justify-content-center" style="font-size: large; color:black;">
+   <c:out value="總共有 ${page.totalElements }筆資料"></c:out>
+   </div>
+</body>
 
-	<div class="container">
-		<br> <br>
-		<h2 class="mb-2">訂單列表</h2>
-		
-		<c:url value="/backend/order/insert" var="insert_url"/>
-		<a href="${insert_url}"><button type="button" class="btn btn-success">新增訂單</button></a>
+</html>
 
-		<div class="table-responsive">
-			<table class="table table-striped custom-table">
-				<thead style="vertical-align: middle;">
-					<tr>
-						<th></th>
-						<th scope="col"><label class="control control--checkbox">
-								<input type="checkbox" class="js-check-all" />
-								<div class="control__indicator"></div>
-						</label></th>
-						<th scope="col">訂單狀態</th>
-						<th scope="col">訂單日期</th>
-						<th scope="col">訂單地址</th>
-						<th scope="col">訂單電話</th>		
-						<th scope="col" style="text-align: left;">  </th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${orders.content}" var="order">
-
-						<tr scope="row">
-							<th></th>
-							<td class="align-middle"><label
-								class="control control--checkbox"><input type="checkbox"
-									id="check" value="<c:out value='${order.orderId}'/>"
-									style="margin-top: 20px;" />
-									<div class="control__indicator"></div></label></td>
-							<td class="align-middle">
-								<div class="d-flex align-items-center">
-									<a href="#"><c:out value='${order.orderStatus}' /></a>
-								</div>
-							</td>
-							<td class="align-middle"><c:out value='${order.createTime}' />
-							</td>
-							<td class="align-middle"><c:out value='${order.orderAddress}' /></td>
-							<td class="align-middle"><c:out value='${order.orderPhone}' /></td>
-							<td class="align-middle" style="width: 13%;">
-							<c:url value="/backend/firm/edit/${firm.firmId}" var="edit_url"/>
-							<a href="${edit_url}"><button	type="button" class="btn btn-primary">編輯</button></a>
-							<c:url value="/backend/order/delete/${order.orderId}" var="delete_url"/>
-							<a href="${delete_url}"><button type="button" class="btn btn-danger">刪除</button></a>
-							</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-			
-			<br/>
-<!-- 					<div style="text-align: center;color:black;font-size: medium;"> -->
-<%-- 						<c:forEach begin="1" end="${firms.totalPages}" var="p"> --%>
-<%-- 							<c:choose> --%>
-<%-- 								<c:when test="${p==firms.number+1}"> --%>
-<%-- 									<span style="color: blue;"><c:out value="${p}" /></span> --%>
-<%-- 								</c:when> --%>
-<%-- 								<c:otherwise> --%>
-<%-- 									<a href="<c:url value="/backend/firm/all?p=${p}"/>"><c:out value="${p}" /></a> --%>
-<%-- 								</c:otherwise> --%>
-<%-- 							</c:choose> --%>
-<%-- 							<c:if test="${p!=firms.totalPages}"> --%>
-<!-- 							| -->
-<%-- 							</c:if> --%>
-<%-- 						</c:forEach> --%>
-<!-- 					</div> -->
-			</div>
-	</div>
-</div>
-
-
-
-<script src="<c:url value="/js/lib/popper.min.js"/>"></script>
-<script src="<c:url value="/js/lib/main.js"/>"></script>
 
 <jsp:include page="layout/footer.jsp" />

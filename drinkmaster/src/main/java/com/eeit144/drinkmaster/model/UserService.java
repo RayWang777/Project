@@ -16,5 +16,7 @@ public interface UserService {
 
 	public void deleteById(Integer id);
 
+	public Page<UserBean> select(Integer pageNumber, String string);
+
 
 }

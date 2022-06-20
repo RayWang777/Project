@@ -8,14 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eeit144.drinkmaster.bean.UserBean;
-
-import com.eeit144.drinkmaster.dto.UserBeanDTO;
 import com.eeit144.drinkmaster.model.UserService;
 
 
@@ -24,7 +21,7 @@ import com.eeit144.drinkmaster.model.UserService;
 @RequestMapping("/backend")
 public class UserController {
 
-<<<<<<< HEAD
+
 	@Autowired
 	private UserService userService;
 	
@@ -35,33 +32,8 @@ public class UserController {
 		
 		return "backuseradd";
 	}
-=======
-//	@Autowired
-//	private UserService userService;
-//	
-//	@PostMapping("/user/insert")
-//	public String insertUser(@RequestBody UserBeanDTO user, Model m) {
-//		Integer userId = user.getUserId();
-//		
-//		System.out.println(userId);
-//		
-//		UserBean userBean = new UserBean();
-//		
-//		userBean.setUserName(user.getUserName());
-//		userBean.setUserAccount(user.getUserAccount());
-//		userBean.setUserPassword(user.getUserPassword());
-//		userBean.setUserAddress(user.getUserAddress());
-//		userBean.setPhone(user.getPhone());
-//		userBean.setRole(user.getRole());
-//		userBean.setGender(user.getGender());
-//		userBean.setCreatedate(user.getCreatedate());
-//		
-//		userService.insertUser(userBean);
-//		
-//		return null;
-//	}
->>>>>>> p987654cm-main
-	
+
+
 	@PostMapping("user/insertGo")
 	public String insertUserGo(@ModelAttribute("user") UserBean userBean, Model m) {
 		userService.insertUser(userBean);

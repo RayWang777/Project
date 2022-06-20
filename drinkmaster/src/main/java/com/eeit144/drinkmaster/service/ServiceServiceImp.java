@@ -1,6 +1,5 @@
 package com.eeit144.drinkmaster.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +49,11 @@ public class ServiceServiceImp implements ServiceService {
 	@Override
 	public void insertService(ServiceBean service) {
 		serviceDao.save(service);
-		
+	}
+	
+	@Override
+	public ServiceBean getLatest() {
+		return serviceDao.findFirstByOrderByAddedDesc();
 	}
 
 }

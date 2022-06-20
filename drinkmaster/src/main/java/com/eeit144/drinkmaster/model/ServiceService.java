@@ -13,5 +13,7 @@ public interface ServiceService {
 	public void insertService(ServiceBean service);
 
 	public void deleteById(Integer id);
+	
+	public ServiceBean getLatest() ;
 
 }

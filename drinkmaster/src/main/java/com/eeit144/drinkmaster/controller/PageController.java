@@ -16,8 +16,6 @@ import com.eeit144.drinkmaster.model.ServiceService;
 @RequestMapping("/backend")
 public class PageController {
 
-	@Autowired
-	private ServiceService sService;
 	
 	@GetMapping("/")
 	public String welcomePage() {
@@ -65,25 +63,5 @@ public class PageController {
 		return "backservice";
 	}
 
-	@GetMapping("/backend/serviceadd")
-	public String addMessagePage(Model model) {
-		
-		ServiceBean workMessages = new ServiceBean();
-		
-		ServiceBean lastestMsg = sService.getLatest();
-		
-		model.addAttribute("workMessages", workMessages);
-		model.addAttribute("lastestMsg", lastestMsg);
-		
-		return "backserviceadd";
-	}
-	@GetMapping("/backend/serviceall")
-	public ModelAndView viewMessages(ModelAndView mav, 
-			@RequestParam(name="p", defaultValue = "1") Integer pageNumber) {
-		Page<ServiceBean> page = sService.findByPage(pageNumber);
-		
-		mav.getModel().put("page", page);
-		mav.setViewName("backserviceview");
-		return mav;
-	}
+	
 }

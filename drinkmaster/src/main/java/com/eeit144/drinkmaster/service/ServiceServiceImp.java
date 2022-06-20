@@ -10,6 +10,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.eeit144.drinkmaster.bean.ServiceBean;
 import com.eeit144.drinkmaster.dao.ServiceRepository;
@@ -34,7 +38,7 @@ public class ServiceServiceImp implements ServiceService {
 
 	@Override
 	public Page<ServiceBean> findByPage(Integer pageNumber) {
-		Pageable pgb = PageRequest.of(pageNumber-1,3,Sort.Direction.DESC,"added");
+		Pageable pgb = PageRequest.of(pageNumber-1,3,Sort.Direction.DESC,"answerTime");
 		Page<ServiceBean> findAll = serviceDao.findAll(pgb);
 		return findAll;
 	}
@@ -53,7 +57,8 @@ public class ServiceServiceImp implements ServiceService {
 	
 	@Override
 	public ServiceBean getLatest() {
-		return serviceDao.findFirstByOrderByAddedDesc();
+		return serviceDao.findFirstByOrderByAnswerDesc();
 	}
+	
 
 }

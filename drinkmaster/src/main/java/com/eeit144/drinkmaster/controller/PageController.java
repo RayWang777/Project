@@ -5,12 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-<<<<<<< HEAD
-import org.springframework.web.servlet.ModelAndView;
-=======
 import com.eeit144.drinkmaster.dto.FirmDTO;
 import com.eeit144.drinkmaster.dto.StoreDTO;
->>>>>>> 0b195dc3a0a811761411a77a60a08749cabbf814
+
 
 
 
@@ -18,10 +15,7 @@ import com.eeit144.drinkmaster.dto.StoreDTO;
 @RequestMapping("/backend")
 public class PageController {
 	
-<<<<<<< HEAD
-=======
-	
->>>>>>> 0b195dc3a0a811761411a77a60a08749cabbf814
+
 	@GetMapping("/")
 	public String welcomePage() {
 		return "backindex";

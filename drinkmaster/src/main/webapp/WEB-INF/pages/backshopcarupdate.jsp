@@ -27,7 +27,11 @@
   甜&emsp;&emsp;度<form:label path="sweet"></form:label>
   <form:input path="sweet" /><br><br>
   狀&emsp;&emsp;態<form:label path="status"></form:label>
-  <form:input path="status" /><br><br>
+  <select id="carstatus" style="width: 168px; height: 27px;">
+  <option value="false">未送出</option>
+  <option value="true">已送出</option>
+  </select>
+  <form:input id="substatus" path="status" /><br><br>
   
  
   <br><br>
@@ -44,6 +48,18 @@
 </div>
 </div>
 
+<script type="text/javascript">
+$(function(){
+	
+$('#carstatus').change(function(){
+var valuesta = $('#carstatus').val();
+console.log(valuesta);
+$('#substatus').val(valuesta);	
+	
+})	
+	
+});
 
+</script>
 
 <jsp:include page="layout/footer.jsp" />

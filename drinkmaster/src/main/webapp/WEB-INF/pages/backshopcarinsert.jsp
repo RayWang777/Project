@@ -47,17 +47,15 @@
 </div>
 </div>
 
-<<script type="text/javascript">
+<script type="text/javascript">
 $(function(){
 	
 $('#carstatus').change(function(){
 var valuesta = $('#carstatus').val();
 console.log(valuesta);
-$('#substatus').val(valuesta);
+$('#substatus').val(valuesta);	
 	
-	
-})
-	
+})	
 	
 });
 

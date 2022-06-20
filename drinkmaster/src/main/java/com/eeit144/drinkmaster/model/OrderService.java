@@ -10,7 +10,7 @@ import com.eeit144.drinkmaster.bean.OrderBean;
 
 public interface OrderService {
 	
-	public Optional<OrderBean> findById(Integer id);
+	public OrderBean findById(Integer id);
 
 	public Page<OrderBean> findAll(Pageable pageNumber);
 
@@ -19,7 +19,6 @@ public interface OrderService {
 	public void deleteById(Integer id);
 
 	public Page<OrderBean> findByPage(Integer pageNumber);
-	
-	public List<OrderBean> listFindAll();
+
 
 }

@@ -7,40 +7,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-<<<<<<< HEAD
 
-import com.eeit144.drinkmaster.bean.CommentBean;
-import com.eeit144.drinkmaster.bean.ProductBean;
-import com.eeit144.drinkmaster.bean.StoreBean;
-import com.eeit144.drinkmaster.bean.UserBean;
-import com.eeit144.drinkmaster.dto.FirmDTO;
-import com.eeit144.drinkmaster.dto.StoreDTO;
-import com.eeit144.drinkmaster.model.CommentService;
-
-
-=======
 import org.springframework.web.servlet.ModelAndView;
 
-import com.eeit144.drinkmaster.bean.ServiceBean;
-import com.eeit144.drinkmaster.model.ServiceService;
->>>>>>> d507e4bd6875bd96cf39268dcc7b0a8a41870079
+
 
 @Controller
 @RequestMapping("/backend")
 public class PageController {
-<<<<<<< HEAD
-	
-	@Autowired
-	private CommentService commentService;
-	private Integer userId = 1;			//測試用
-	private Integer storeId = 1;		//測試用
-	private Integer productId = 1;		//測試用
-	private Double score = 1.0;			//測試用
-	private Integer scoreType = 10;		//測試用
-	
-=======
-
->>>>>>> d507e4bd6875bd96cf39268dcc7b0a8a41870079
 	
 	@GetMapping("/")
 	public String welcomePage() {

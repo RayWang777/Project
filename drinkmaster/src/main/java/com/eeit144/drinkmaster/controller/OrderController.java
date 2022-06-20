@@ -51,7 +51,7 @@ public class OrderController {
 //		}
 		
 			
-		@GetMapping("order/insertview")
+		@GetMapping("order/insertView")
 		public String addView(Model m) {
 			OrderBean orderBean = new OrderBean();
 			m.addAttribute("orderBean", orderBean);
@@ -92,7 +92,7 @@ public class OrderController {
 		@PostMapping("order/update")
 		public String updateOrder(@ModelAttribute("orderBean") OrderBean orderBean, Model m) {
 			orderService.insertOrder(orderBean);
-			System.out.println(orderBean.getCreateTime());
+
 			return "redirect:/backend/order/findAll";
 		}
 		

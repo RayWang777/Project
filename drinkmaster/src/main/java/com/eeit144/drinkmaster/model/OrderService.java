@@ -14,7 +14,7 @@ public interface OrderService {
 
 	public Page<OrderBean> findAll(Pageable pageNumber);
 
-	public void insertOrder(OrderBean odb);
+	public void insertOrder(OrderBean orderBean);
 
 	public void deleteById(Integer id);
 

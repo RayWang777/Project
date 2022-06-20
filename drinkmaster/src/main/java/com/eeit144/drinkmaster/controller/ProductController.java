@@ -1,9 +1,9 @@
 package com.eeit144.drinkmaster.controller;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -51,13 +51,18 @@ public class ProductController {
 
 	@GetMapping("product/select")
 	public ModelAndView selectLike(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber,
-			@RequestParam("select") String select) {
+			@RequestParam("select") String select,@RequestParam ("filed") String filed) {
 
 		System.out.println(select);
-
-		Page<ProductBean> page = proService.select(pageNumber, "%" + select + "%");
+		System.out.println(filed);
+		if(filed.equals("上架中")|| filed.equals("已下架")) {
+			Page<ProductBean> page = proService.select(pageNumber, filed ,filed);
+			mav.getModel().put("page", page);
+			mav.setViewName("backproduct");
+			return mav;
+		}
+		Page<ProductBean> page = proService.select(pageNumber, select ,filed);
 		mav.getModel().put("page", page);
-
 		mav.setViewName("backproduct");
 		return mav;
 	}

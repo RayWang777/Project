@@ -16,15 +16,15 @@
 
 <div>
 <form:form class="form" method="post" action="${contextRoot}/backend/updateproduct" modelAttribute="product">
-  商品<form:label path="productName"></form:label>
+  <form:label path="productName">商品</form:label>
   <form:input path="productName" /><br><br>
-  價格 <form:label path="price"></form:label>
+   <form:label path="price">價格</form:label>
   <form:input path="price" /><br><br>
-   店家<form:label path="storeId"></form:label>
+  <form:label path="storeId">店家</form:label>
   <form:input path="storeBean" type="readonly" /><br><br>
-   溫度<form:label path="coldHot"></form:label>
+   <form:label path="coldHot">溫度</form:label>
   <form:input path="coldHot" /><br><br>
-   狀態<form:label path="status"></form:label>
+   <form:label path="status">狀態</form:label>
   <form:input path="status" />
   <form:label path="productImage"></form:label>
   <form:input path="productImage" type="hidden"/>

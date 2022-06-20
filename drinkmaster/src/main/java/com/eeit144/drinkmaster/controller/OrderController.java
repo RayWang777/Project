@@ -92,53 +92,14 @@ public class OrderController {
 		@PostMapping("order/update")
 		public String updateOrder(@ModelAttribute("orderBean") OrderBean orderBean, Model m) {
 			orderService.insertOrder(orderBean);
-
+			System.out.println(orderBean.getCreateTime());
 			return "redirect:/backend/order/findAll";
 		}
 		
 }		
 		
-//		@GetMapping("order/update/{id}")
-//		public String updateOrder(@PathVariable("id") Integer id,Model m) {
-//			
-//			OrderBean findOrderById = orderService.findById(id).get();
-//			OrderDTO orderDTO = new OrderDTO();			
-//			
-//			orderDTO.setOrderId(findOrderById.getOrderId());
-//			orderDTO.setOrderAddress(findOrderById.getOrderAddress());
-//			orderDTO.setOrderPhone(findOrderById.getOrderPhone());
-//			orderDTO.setOrderStatus(findOrderById.getOrderStatus());
-//			orderDTO.setTotalPrice(findOrderById.getTotalPrice());
-//			orderDTO.setCreateTime(findOrderById.getCreateTime());
-//			
-//			m.addAttribute("order", orderDTO);
-//		
-//			return "backorder";
-//		}	
-		
-		
-	
-	
-		
-		
-//		@PostMapping("order/findAll")
-//		@ResponseBody
-//		public List<OrderBean> postMessageApi(@RequestBody OrderDTO orderDTO) {
-//			Integer id = orderDTO.getOrderId();
-//			String address = orderDTO.getOrderAddress();
-//			
-//			OrderBean orderBean = new OrderBean();
-//			orderBean.setOrderStatus(address);
-//			orderService.insertOrder(orderBean);
-//			
-//			
-//			Page<OrderBean> page = orderService.findByPage(1);
-//			List<OrderBean> content = page.getContent();
-//			
-//			return content;
-//		}
-		
-		
+
+			
 		
 		
 		//參考作法(未完成)
@@ -162,27 +123,7 @@ public class OrderController {
 //			return "backorder";
 //			}
 		
-//@GetMapping("order/{id}")
-//public ResponseEntity<OrderDTO> findOrderById(@PathVariable Integer id) {
-//	Optional<OrderBean> orderBean = orderService.findById(id);
-//
-//	if (orderBean.isEmpty()) {
-//		return new ResponseEntity<OrderDTO>(HttpStatus.NO_CONTENT);
-//	}
-//	
-//	OrderDTO orderDTO = new OrderDTO();
-//	orderDTO.setOrderId(orderBean.get().getOrderId());
-//	orderDTO.setShopCarId(orderBean.get().getShopCarId());
-//	orderDTO.setStoreId(orderBean.get().getStoreId());
-//	orderDTO.setTotalPrice(orderBean.get().getTotalPrice());
-//	orderDTO.setOrderStatus(orderBean.get().getOrderStatus());
-//	orderDTO.setOrderPhone(orderBean.get().getOrderPhone());
-//	orderDTO.setOrderAddress(orderBean.get().getOrderAddress());
-//	orderDTO.setCreateTime(orderBean.get().getCreateTime());
-//	
-//	
-//	return new ResponseEntity<OrderDTO>(orderDTO, HttpStatus.OK);
-//}
+
 
 		
 

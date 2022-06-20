@@ -59,7 +59,7 @@ public class OrderBean {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8") // JSP DATE
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") // MVC DATE
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "createtime",nullable = false)
+	@Column(name = "createtime",nullable = false, columnDefinition = "smalldatetime")
 	private Date createTime;
 
 	public OrderBean() {

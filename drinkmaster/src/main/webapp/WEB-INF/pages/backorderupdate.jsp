@@ -32,7 +32,7 @@
  
   <br><br>
   <div class="row justify-content-center">
-  <input type="submit" name="submit" value="更新訂單">&emsp;
+  <input type="submit" name="submit" value="更新訂單" onclick="return confirm('確定要更新嗎?')">&emsp;
   <input type ="button" onclick="history.back()" value="回到上一頁"></input>
   </div>
   </form:form>

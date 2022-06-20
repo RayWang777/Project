@@ -31,7 +31,7 @@
  
   <br><br>
   <div class="row justify-content-center">
-  <input type="submit" name="submit" value="新增訂單">&emsp;
+  <input type="submit" name="submit" value="新增訂單" onclick="return confirm('確定要新增嗎?')">&emsp;
   <input type ="button" onclick="history.back()" value="回到上一頁"></input>
   </div>
   </form:form>

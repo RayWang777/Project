@@ -1,7 +1,5 @@
 package com.eeit144.drinkmaster.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,45 +17,74 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService;
 	
-	@PostMapping("postComment")
-	public String addcomment(@ModelAttribute("comments") CommentBean comment, Model model) {
+	@PostMapping("comment/insert")
+	public String addcomment(@ModelAttribute("commentBean") CommentBean comment, Model model) {
 
 		commentService.insertComment(comment);
 		
-		CommentBean newComment = new CommentBean();
+		CommentBean commentBean = new CommentBean();
 		
-		model.addAttribute("comments", newComment);
+		CommentBean lastComment = commentService.getLastest();
+
+		model.addAttribute("commentBean", commentBean);
+		model.addAttribute("lastestComment", lastComment);
 		
-		return "addcomment";
+		return "backcommentadd";
 		
 	}
 	
 	@GetMapping("comment/editComment")
-	public String editComment(@RequestParam("id") Integer id,Model model) {
+	public String editComment(@RequestParam("commentid") Integer id,Model model) {
 		
-		Optional<CommentBean> comment = commentService.findById(id);
+		CommentBean comment = commentService.findById(id);
 		
 		model.addAttribute("comment", comment);
 		
-		return "editComment";
+		return "backcommentedit";
 	}
 	
+	
 	@PostMapping("comment/editComment")
-	public String postEditComment(@ModelAttribute(name="Comment") CommentBean comment) {
+	public String postEditComment(@ModelAttribute(name="comment") CommentBean comment) {
 		
 		commentService.insertComment(comment);
 		
-		return "redirect:/comment/all";
-		
+		return "redirect:/backend/comment/all";	
 	}
 	
-	@GetMapping("message/delete")
-	public String deletemsg(@RequestParam(name="id") Integer id) {
+	@GetMapping("comment/delete")
+	public String deletemsg(@RequestParam(name="commentid") Integer id) {
 		commentService.deleteById(id);
 		
-		return "redirect:/comment/all";
+		return "redirect:/backend/comment/all";
 	}
 	
+	
+	
+//	@PostMapping("comment/insert")
+//	public String addcomment(@RequestBody CommentBeanDTO commentdto, Model model) {
+//
+//		Integer userId = commentdto.getUserid();
+//		Integer storeId = commentdto.getStoreId();
+//		
+//		
+//		
+//		CommentBean commentBean = new CommentBean();
+//		
+//		commentBean.setContent(commentdto.getContent());
+//		commentBean.setScore(commentdto.getScore());
+//		commentBean.setScore(commentdto.getScore());
+//		
+//		
+//		commentService.insertComment();
+//		
+//		
+//		
+//		model.addAttribute("comments", );
+//		
+//		return "addcomment";
+//		
+//	}
 	
 
 }

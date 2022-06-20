@@ -22,65 +22,31 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
-@Entity
-@Table(name = "users")
-public class UserBean {
+public class UserBeanDTO {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "userid")
 	private Integer userId;
 
-	@Column(name = "username",nullable = false, columnDefinition = "nvarchar(20)")
 	private String userName;
 
-	@Column(name = "useraccount",nullable = false)
 	private String userAccount;
 
-	@Column(name = "userpassword",nullable = false)
 	private String userPassword;
 
-	@Column(name = "useraddress",nullable = false, columnDefinition = "nvarchar(50)")
 	private String userAddress;
 
-	@Column(name = "photo", columnDefinition = "varchar(max)")
 	private byte[] photo;
 
-	@Column(name = "phone",nullable = false)
 	private String phone;
 
-	@Column(name = "role",nullable = false)
 	private String role;
 	
-	@Column(name = "gender",nullable = false, columnDefinition = "nvarchar(10)")
 	private String gender;
 	
-	
-	@JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8" )
-	@DateTimeFormat(pattern="yyyy-MM-dd") 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "birthday", columnDefinition="date")
 	private Date birthday;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8" ) // JSP DATE
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") //MVC DATE 
-	@Temporal(TemporalType.TIMESTAMP)	//SQL DATE
-	@Column(name = "createdate", columnDefinition="datetime",nullable = false)
 	private Date createdate;
 	
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "userBean",cascade = CascadeType.ALL)
-	private Set<ServiceBean> services = new LinkedHashSet<ServiceBean>();
-	
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "userBean",cascade = CascadeType.ALL)
-	private Set<ShopCarBean> shopCars = new LinkedHashSet<ShopCarBean>();
-	
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "userBean",cascade = CascadeType.ALL)
-	private Set<CommentBean> comments = new LinkedHashSet<CommentBean>();
-	
-	public UserBean() {
+	public UserBeanDTO() {
 	}
 
 	public Integer getUserId() {
@@ -171,12 +137,5 @@ public class UserBean {
 		this.createdate = createdate;
 	}
 
-	public Set<ServiceBean> getServices() {
-		return services;
-	}
-
-	public void setServices(Set<ServiceBean> services) {
-		this.services = services;
-	}
 
 }

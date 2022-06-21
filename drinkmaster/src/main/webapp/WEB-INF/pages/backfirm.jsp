@@ -8,16 +8,27 @@
 
 
 <body>
+<br>
+	<c:url value="/backend/firm/add" var="add_url"/>
+	<a href="${add_url}"><button type="button" class="btn btn-success">新增店家</button></a>
 	<form action="${contextRoot}/backend/product/select" method="get">
+	
 		<div class="mb-3">
-			<label for="exampleInputEmail1" class="form-label">搜尋</label> <input
-				type="text" class="form-control" name="select" />
-
-		</div>
-		<button type="submit" class="btn btn-primary">Submit</button>
+			<label for="select" class="form-label">搜尋</label> <input type="text"name="select" id="select" /> 
+				<select name="filed">
+				<option>品項</option>
+				<option>價格</option>
+				<option>溫度</option>
+				<option>上架中</option>
+				<option>已下架</option>
+			</select>
+		<button type="submit" class="btn btn  btn-sm" style="color:blue;">查詢</button>
+		<c:out value="查到 ${page.totalElements }筆資料"></c:out>
+		</div >
 	</form>
 
 
+	
 	<table class="table table-hover"
 		style="width: 100%; table-layout: fixed;">
 		<thead>
@@ -29,6 +40,7 @@
 				<th scope="col">廠商名稱</th>
 				<th scope="col">廠商電話</th>
 				<th scope="col">廠商地址</th>
+				<th scope="col">管理者</th>
 				<th scope="col">Logo</th>
 				<th scope="col" style="text-align: left;">動作</th>
 			</tr>
@@ -51,6 +63,9 @@
 					<td class="align-middle"><c:out value='${firm.firmPhone}' />
 					</td>
 					<td class="align-middle"><c:out value='${firm.firmAddress}' /></td>
+
+					<td class="align-middle"><c:out value="管理人員" /></td>
+
 					<td class="align-middle"><img
 						src="<c:url value="/backend/firm/${firm.firmId}/photo"/>"
 						style="width: 100px; height: 100px;"></td>
@@ -58,17 +73,11 @@
 							value="/backend/firm/edit/${firm.firmId}" var="edit_url" /> <a
 						href="${edit_url}"><button type="button"
 								class="btn btn-primary">編輯</button></a> <c:url
-							value="/backend/firm/delete/${firm.firmId}" var="delete_url" /> <a
-						href="${delete_url}" onclick="return confirm('真的要刪除嗎')"><button
+							value="/backend/firm/delete/${firm.firmId}" var="delete_url" />
+						<a href="${delete_url}" onclick="return confirm('真的要刪除嗎')"><button
 								type="button" class="btn btn-danger">刪除</button></a></td>
 				</tr>
 			</c:forEach>
-
-
-
-
-
-
 
 		</tbody>
 	</table>
@@ -76,22 +85,18 @@
 		<c:forEach var="pageNumber" begin="1" end="${firms.totalPages}">
 			<c:choose>
 				<c:when test="${firms.number!=pageNumber-1}">
-					<a href="${contextRoot}/backend/product/all?p=${pageNumber}"> <c:out
-							value="${pageNumber}" />
-					</a>
+				&nbsp;<a href="${contextRoot}/backend/firm/all?p=${pageNumber}"><c:out value="${pageNumber}" /></a>&nbsp;
 				</c:when>
 				<c:otherwise>
-					<c:out value="${pageNumber}"></c:out>
+					&nbsp;<c:out value="${pageNumber}"></c:out>&nbsp;
 				</c:otherwise>
 			</c:choose>
-			<c:if test="${pageNumber!= firms.totalPages }">
-   |
-   </c:if>
+			&nbsp;<c:if test="${pageNumber!= firms.totalPages }">|</c:if>&nbsp;
 		</c:forEach>
 	</div>
 	<div class="row justify-content-center"
 		style="font-size: large; color: black;">
-		<c:out value="總共有 ${firms.totalElements }筆資料"></c:out>
+		<c:out value="總共有 ${firms.totalElements} 筆資料"></c:out>
 	</div>
 </body>
 

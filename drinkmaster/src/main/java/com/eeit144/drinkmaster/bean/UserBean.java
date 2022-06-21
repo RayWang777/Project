@@ -80,6 +80,10 @@ public class UserBean {
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "userBean",cascade = CascadeType.ALL)
 	private Set<CommentBean> comments = new LinkedHashSet<CommentBean>();
 	
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "userBean",cascade = CascadeType.ALL)
+	private Set<FirmBean> firms = new LinkedHashSet<FirmBean>();
+	
 	public UserBean() {
 	}
 
@@ -179,4 +183,29 @@ public class UserBean {
 		this.services = services;
 	}
 
+	public Set<ShopCarBean> getShopCars() {
+		return shopCars;
+	}
+
+	public void setShopCars(Set<ShopCarBean> shopCars) {
+		this.shopCars = shopCars;
+	}
+
+	public Set<CommentBean> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<CommentBean> comments) {
+		this.comments = comments;
+	}
+
+	public Set<FirmBean> getFirms() {
+		return firms;
+	}
+
+	public void setFirms(Set<FirmBean> firms) {
+		this.firms = firms;
+	}
+
+	
 }

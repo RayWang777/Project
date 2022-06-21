@@ -17,21 +17,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.FirmColumn;
+import com.eeit144.drinkmaster.bean.UserBean;
 import com.eeit144.drinkmaster.dto.FirmDTO;
 import com.eeit144.drinkmaster.model.FirmService;
 
 
 @Controller
 @RequestMapping("backend/")
+@SessionAttributes("firmsave")
 public class FirmController {
 
 	private FirmService firmService;
@@ -54,6 +58,7 @@ public class FirmController {
 		firmDTO.setFirmName(firmBean.get().getFirmName());
 		firmDTO.setFirmAddress(firmBean.get().getFirmAddress());
 		firmDTO.setFirmPhone(firmBean.get().getFirmPhone());
+		firmDTO.setUserId(firmBean.get().getUserBean().getUserId());
 		return new ResponseEntity<FirmDTO>(firmDTO, HttpStatus.OK);
 	}
 
@@ -94,20 +99,28 @@ public class FirmController {
 
 		return "backfirm";
 	};
+	
+	@GetMapping("/firm/add")
+	public String firmAddPage(Model m) {
+		FirmDTO firm = new FirmDTO();
+		m.addAttribute("firm", firm);
+		m.addAttribute("firmsave", "新增廠商");
+		return "backfirmadd";
+	}
 
+	
 	@PostMapping("firm/add")
-	public String addNewFirm(@RequestParam String firmName, @RequestParam String firmAddress,
-							 @RequestParam String firmPhone, @RequestPart MultipartFile firmLogo,Model m) {
+	public String addNewFirm(@ModelAttribute("firm") FirmDTO firm, @RequestPart("reallogo") MultipartFile logo,Model m) {
 		FirmBean newFirm = new FirmBean();
 
-		String contentType = firmLogo.getContentType();
+		String contentType = logo.getContentType();
 
 		System.out.println(contentType);
 
 		if(!contentType.startsWith("image")) {
 			
 			Map<String, String> errors = new HashMap<String, String>();
-			errors.put("firmLogo", "檔案類型必須為圖片");
+			errors.put("firmLogo", "檔案必須為圖片");
 			
 			FirmDTO firmDTO = new FirmDTO();
 						
@@ -115,12 +128,16 @@ public class FirmController {
 			m.addAttribute("firm", firmDTO);
 			return "backfirmadd";
 		}
-
-		newFirm.setFirmName(firmName);
-		newFirm.setFirmAddress(firmAddress);
-		newFirm.setFirmPhone(firmPhone);
+		UserBean userBean = new UserBean();
+		userBean.setUserId(firm.getUserId());
+		
+		newFirm.setFirmId(firm.getFirmId());
+		newFirm.setUserBean(userBean);
+		newFirm.setFirmName(firm.getFirmName());
+		newFirm.setFirmAddress(firm.getFirmAddress());
+		newFirm.setFirmPhone(firm.getFirmPhone());
 		try {
-			newFirm.setFirmLogo(firmLogo.getBytes());
+			newFirm.setFirmLogo(logo.getBytes());
 		} catch (IOException e) {
 			e.printStackTrace();
 			FirmDTO firmDTO = new FirmDTO();
@@ -138,15 +155,15 @@ public class FirmController {
 	public String firmAddPage(@PathVariable("id") Integer id,Model m) {
 		FirmBean findById = firmService.findById(id).get();
 		FirmDTO firmDTO = new FirmDTO();
-		
+
 		firmDTO.setFirmId(findById.getFirmId());
 		firmDTO.setFirmName(findById.getFirmName());
 		firmDTO.setFirmAddress(findById.getFirmAddress());
 		firmDTO.setFirmPhone(findById.getFirmPhone());
-		firmDTO.setFirmLogo(findById.getFirmLogo());
-		
+
+		firmDTO.setUserId(findById.getUserBean().getUserId());
 		m.addAttribute("firm", firmDTO);
-		m.addAttribute("save", "修改廠商");		
+		m.addAttribute("firmsave", "修改廠商");		
 		return "backfirmadd";
 	}	
 

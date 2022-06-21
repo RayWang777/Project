@@ -15,32 +15,9 @@
 <link href="${contextRoot}/font/fontawesome-webfont.ttf" rel="stylesheet" type="text/css" media="all">
 <link href="${contextRoot}/font/fontawesome-webfont.woff" rel="stylesheet" type="text/css" media="all">
 <link href="${contextRoot}/font/fontawesome-webfont.woff2" rel="stylesheet" type="text/css" media="all">
-<script type="text/javascript" src="${contextRoot}/js/lib/knockout-3.1.0.js"></script>
-<script type="text/javascript" src="${contextRoot}/js/lib/awesomeRating.knockout.min.js"></script>
 
 <script src="${contextRoot}/js/lib/awesomeRating.min.js"></script>
-<style type="text/css">
-/* font-face{font-family:'FontAwesome';src:url('../fonts/fontawesome-webfont.eot?v=4.3.0');src:url('../fonts/fontawesome-webfont.eot?#iefix&v=4.3.0') format('embedded-opentype'),url('../fonts/fontawesome-webfont.woff2?v=4.3.0') format('woff2'),url('../fonts/fontawesome-webfont.woff?v=4.3.0') format('woff'),url('../fonts/fontawesome-webfont.ttf?v=4.3.0') format('truetype'),url('../fonts/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular') */
-/* .fa-star:before{content:"\f005"}.fa-star-o:before{content:"\f006"}.fa-star-half-o:before{content:"\f123"} */
-/* .fa-star-half-full:before.fa-star-half-empty:before.fa-star-half:before{content:"\f089"} */
-html, body { 
- 	width: 100%; 
-	margin: 0; 
- 	padding: 0; 
- } 
 
- div.awesomeRating { 
- 	font-size: 4em; 
-	padding: 1em 0em; 
- 	text-align: center; 
- } */
-
- div.awesomeRatingValue { 
- 	font-size: 2em; 
-	padding: 1em 0em; 
- 	text-align: center; 
-} 
-</style>
 
 
 
@@ -55,7 +32,7 @@ html, body {
 <div class="container">
 
 
-<c:forEach  var="comment" items="${page.content}">
+<c:forEach  var="comment" items="${page.content}" >
 
 <div class="row justify-content-center">
 <div class="col-9">
@@ -67,32 +44,23 @@ html, body {
   <div class="card-body">
   	<c:out value="${comment.userBean.userName}"></c:out>
   	<br/>
-  	<div class="awesomeRating" data-bind=" awesomeRating: rating, awesomeRatingOptions: options" ></div>
- 	<div class="scores" ><c:out value="${comment.score}"></c:out></div>
-<script type="text/javascript">
-		$(function() {
-			var model = {
-				rating : ko.observable("${comment.score}"),
-				options : {
-					values: ["1.0", "2.0", "3.0", "4.0", "5.0"],
-					targetSelector: 'span.awesomeRatingValue'
-				}
-			};
-
-			ko.applyBindings(model);
+  	
+  	
+  	
+  	<div style="pointer-events: none" id="scores${comment.commentId}" class="awesomeRating"></div>
+	<div class="awesomeRatingValue"></div>
+	<script type="text/javascript">
+	
+		$("#scores${comment.commentId}").awesomeRating({
+			
+			valueInitial: "${comment.score}",
+			values: ["1.0", "2.0", "3.0", "4.0", "5.0"],
+			targetSelector: "span.awesomeRatingValue"
 		});
+	
+		console.log(${comment.score});
 	</script>
-
-
-<%--  	${comment.score} --%>
- 	
- 	<div class="awesomeRatingValue">
-		<span class="awesomeRatingValue" data-bind="text: &#39;Value: &#39; + rating()">Value: E</span>
-	</div>
- 	
- 	
- 	<span class="awesomeRatingValue"></span>
-	<br/>
+	
 	<c:out value="${comment.content}"></c:out>
 	<br/>
 	(時間) <fmt:formatDate pattern="yyyy 年 MM 月 dd 日 a hh:mm:ss EEEE" value="${comment.createTime}" />
@@ -108,6 +76,8 @@ html, body {
 </div>
 
 </c:forEach>
+
+
 
 <div class="row justify-content-center">
 	<div class="col-9">

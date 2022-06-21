@@ -66,12 +66,9 @@ public class StoreBean {
 	public StoreBean() {
 	}
 
-
 	public Integer getStoreId() {
 		return storeId;
 	}
-
-
 
 	public void setStoreId(Integer storeId) {
 		this.storeId = storeId;
@@ -109,46 +106,52 @@ public class StoreBean {
 		this.storeAddress = storeAddress;
 	}
 
-
-
 	public String getStorePhone() {
 		return storePhone;
 	}
-
-
 
 	public void setStorePhone(String storePhone) {
 		this.storePhone = storePhone;
 	}
 
-
 	public String getOpenTime() {
 		return openTime;
 	}
-
 
 	public void setOpenTime(String openTime) {
 		this.openTime = openTime;
 	}
 
-
 	public Double getLongitude() {
 		return longitude;
 	}
-
 
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
 
-
 	public Double getLatitude() {
 		return latitude;
 	}
 
-
 	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
+	}
+
+	public Set<ProductBean> getProducts() {
+		return products;
+	}
+
+	public void setProducts(Set<ProductBean> products) {
+		this.products = products;
+	}
+
+	public Set<CommentBean> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<CommentBean> comments) {
+		this.comments = comments;
 	}
 
 

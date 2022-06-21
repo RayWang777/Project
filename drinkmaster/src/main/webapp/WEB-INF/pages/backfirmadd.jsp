@@ -6,12 +6,13 @@
 <jsp:include page="layout/header.jsp" />
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
+<c:set var="userId" value="1"></c:set>
 
 <div class="content">
 
 	<div class="container">
 		<br> <br>
-		<h2 class="mb-4" style="text-align: center;">${save}</h2>
+		<h2 class="mb-4" style="text-align: center;">${firmsave}</h2>
 
 		<div class="row justify-content-center">
 
@@ -38,20 +39,30 @@
 						id="firmPhone" />
 					<span id=firmPhoneSp></span>
 				</div>
+				
+				<div class="mb-3">
+					<label for="userId" class="form-label">使用者</label>
+					<form:input path="userId" class="form-control" type="text"
+						id="userId" value="${userId}"/>
+					<span id=firmPhoneSp></span>
+				</div>
 
 				<div class="mb-4">
-					<label for="firmLogo" class="form-label">Logo</label>
-					<form:input path="firmLogo" class="form-control" type="file"
-						id="firmLogo" onchange="preview()" />
-					<span id=firmLogoSp><c:out value="${errors.firmLogo}"/></span>
+					<label for="reallogo" class="form-label">Logo</label>
+					<input name="reallogo" class="form-control" type="file"
+						id="reallogo" onchange="preview()" />
+					<span id=firmLogoSp><c:url value="${errors.firmLogo}"/></span>
 				</div>
 
 				<div class="mb-3"style="text-align: center;">
-					<img id="logo" src="" width="100px" height="100px" />
+					<img id="logo" src="<c:url value="/backend/firm/${firm.firmId}/photo"/>" width="100px" height="100px" />
+					<c:if test="${firm.firmId!=null}">
+					<img id="oldlogo" src="<c:url value="/backend/firm/${firm.firmId}/photo"/>"width="100px" height="100px"/>
+					</c:if>
 				</div>
 				
 				<div class="mb-3" style="text-align: center;">
-					<input type="submit" class="btn btn-success" value='<c:out value="${save}"/>'>
+					<input type="submit" class="btn btn-success" value='<c:out value="${firmsave}"/>'>
 				</div>
 			</form:form>
 
@@ -70,6 +81,7 @@ $(function(){
 function preview() {
 	logo.src=URL.createObjectURL(event.target.files[0]);
 	if ( (event.target.files[0].type).startsWith("image")){
+		$('#oldlogo').hide();
 		$('#logo').show();
 	} 
 }

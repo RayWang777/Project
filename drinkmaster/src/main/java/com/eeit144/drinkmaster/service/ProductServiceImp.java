@@ -1,12 +1,18 @@
 package com.eeit144.drinkmaster.service;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Base64;
 import java.util.Optional;
+
+import javax.servlet.http.Part;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Pageable;
@@ -72,6 +78,19 @@ public class ProductServiceImp implements ProductService {
 
 		
 	}
+	   public  String getFileBase64String(Part part) throws IOException {
+			InputStream in = part.getInputStream();
+			byte[] picin = in.readAllBytes();
+			String picstr =Base64.getEncoder().encodeToString(picin);
+			return picstr;
+		}
+	    
+		public  String getFileType(Part part) {
+			String header =part.getHeader("content-disposition");
+			int substridx = header.lastIndexOf(".");
+			String filetype = header.substring(substridx + 1, header.length()-1);
+			return filetype;		
+		}
 	// 判斷字串可否轉整數
 	public static boolean isStr2Num(String str) { 
 		try {

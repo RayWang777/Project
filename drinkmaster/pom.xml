@@ -89,6 +89,7 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.11.0</version>
 		</dependency>
+<<<<<<< HEAD
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -96,6 +97,13 @@
 			<optional>true</optional>
 		</dependency>
 
+=======
+		    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+>>>>>>> eric841201-main
 	</dependencies>
 	<build>
 		<plugins>

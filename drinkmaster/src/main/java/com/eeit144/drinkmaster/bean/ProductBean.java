@@ -18,8 +18,11 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "product")
+@Data
 public class ProductBean {
 
 	@Id
@@ -60,71 +63,9 @@ public class ProductBean {
 	private boolean status;
 
 	public ProductBean() {
+		super();
 	}
 
-	public Integer getProductId() {
-		return productId;
-	}
-
-	public void setProductId(Integer productId) {
-		this.productId = productId;
-	}
-
-	public String getProductName() {
-		return productName;
-	}
-
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
-
-	public Integer getPrice() {
-		return price;
-	}
-
-	public void setPrice(Integer price) {
-		this.price = price;
-	}
-
-	public String getProductImage() {
-		return productImage;
-	}
-
-	public void setProductImage(String productImage) {
-		this.productImage = productImage;
-	}
-
-	public String getColdHot() {
-		return coldHot;
-	}
-
-	public void setColdHot(String coldHot) {
-		this.coldHot = coldHot;
-	}
-
-	public Integer getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(Integer storeId) {
-		this.storeId = storeId;
-	}
-
-	public StoreBean getStoreBean() {
-		return storeBean;
-	}
-
-	public void setStoreBean(StoreBean storeBean) {
-		this.storeBean = storeBean;
-	}
-
-	public boolean isStatus() {
-		return status;
-	}
-
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
-
+	
 	
 }

@@ -15,20 +15,21 @@
 <div class="row justify-content-center">
 
 <div>
-<form:form class="form" method="post" action="${contextRoot}/backend/updateproduct" modelAttribute="product">
-  <form:label path="productName">商品</form:label>
-  <form:input path="productName" /><br><br>
-   <form:label path="price">價格</form:label>
-  <form:input path="price" /><br><br>
-  <form:label path="storeId">店家</form:label>
-  <form:input path="storeBean" type="readonly" /><br><br>
-   <form:label path="coldHot">溫度</form:label>
-  <form:input path="coldHot" /><br><br>
-   <form:label path="status">狀態</form:label>
-  <form:input path="status" />
-  <form:label path="productImage"></form:label>
-  <form:input path="productImage" type="hidden"/>
- <form:input path="productId" type="hidden"/>
+<form:form class="form" method="post" enctype="multipart/form-data" action="${contextRoot}/backend/updateproduct" modelAttribute="product">
+  <form:hidden path="productId" id="productId"/>
+ 
+  <label  for="productName" >商品</label>
+  <form:input type="text" path="productName" id="productName"  name="productName"/><br><br>
+  <label for="price"> 價格</label>
+  <form:input path="price" id="price" name="price" /><br><br>
+   <label  for="productImage"> 圖片</label>
+  <form:input  path="productImage" id="productImage" name="productImage" type="file" /><br><br>
+   <label  for="storeBean" >店家</label>
+  <form:input path="storeBean"  id="storeBean" name="storeBean"/><br><br>
+   <label  for="coldHot">溫度</label>
+  <form:input path="coldHot" id="coldHot" name="coldHot"/><br><br>
+  <label for="status">狀態</label>
+  <form:input path="status" id="status"  name="status"/>
  
   <br><br>
   <div class="row justify-content-center">

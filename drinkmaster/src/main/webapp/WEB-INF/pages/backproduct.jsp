@@ -46,7 +46,7 @@
 					<th scope="row"><b><c:out value="${productBean.productName}"  /></b></th>
 					<td style="text-align:center;"><c:out value="${productBean.price}" /></td>
 					<td style="text-align:center;"><c:out value="${productBean.storeBean.storeId}" /></td>
-					<td style="text-align:center;"><c:out value="${productBean.productImage}" /></td>
+					<td style="text-align:center;"><img src="${productBean.productImage}" style="width: 40px" /></td>
 					<td style="text-align:center;"><c:out value="${productBean.coldHot}" /></td>
 					<c:choose>
 					<c:when test="${productBean.status==true}">

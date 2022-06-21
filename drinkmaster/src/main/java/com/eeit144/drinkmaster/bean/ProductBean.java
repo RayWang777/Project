@@ -34,7 +34,7 @@ public class ProductBean {
 	private Integer price;
 
 	@Column(name = "productimage", columnDefinition = "nvarchar(max)")
-	private byte[] productImage;
+	private String productImage;
 
 	@Column(name = "coldhot", columnDefinition = "nvarchar(10)")
 	private String coldHot;
@@ -86,11 +86,11 @@ public class ProductBean {
 		this.price = price;
 	}
 
-	public byte[] getProductImage() {
+	public String getProductImage() {
 		return productImage;
 	}
 
-	public void setProductImage(byte[] productImage) {
+	public void setProductImage(String productImage) {
 		this.productImage = productImage;
 	}
 

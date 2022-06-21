@@ -1,4 +1,21 @@
-*/pom.properties
-*/classes/com/*
-*/test-classes/*
-*/src/test/*
+### Eclipse ###
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+### Java ###
+# Compiled class file
+*.class
+
+# Log file
+*.log
+target/classes/*
+pom.properties

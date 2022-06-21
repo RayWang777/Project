@@ -53,14 +53,20 @@ public class ProductController {
 		
 		pro.setPrice(price);
 		pro.setColdHot(coldHot);
-		pro.isStatus();
+		pro.setStatus(status);
 		pro.setProductName(productName);
 		pro.setStoreBean(storeBean);
 		Part part=req.getPart("productImage");
+		System.out.println(part+ "++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		String filetype=proService.getFileType(part);
 		String filebase64=proService.getFileBase64String(part);
 		String productimage="data:image/"+filetype+";base64,"+filebase64+"";
+		if(productimage.equals("data:image/form-data; name=\"productImage\"; filename=\";base64,")) {
+			pro.setProductImage(null);
+		}else {
 		pro.setProductImage(productimage);
+		}
+		
 		proService.insertProduct(pro);
 
 		return "redirect:/backend/product/all";
@@ -121,7 +127,11 @@ public class ProductController {
 		String filetype=proService.getFileType(part);
 		String filebase64=proService.getFileBase64String(part);
 		String productimage="data:image/"+filetype+";base64,"+filebase64+"";
+		if(productimage.equals("data:image/form-data; name=\"productImage\"; filename=\";base64,")) {
+			pro.setProductImage(null);
+		}else {
 		pro.setProductImage(productimage);
+		}
 		proService.insertProduct(pro);
 
 		return "redirect:/backend/product/all";

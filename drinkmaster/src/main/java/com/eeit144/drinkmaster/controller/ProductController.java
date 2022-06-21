@@ -2,39 +2,24 @@ package com.eeit144.drinkmaster.controller;
 
 
 import java.io.IOException;
-import java.util.Optional;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 
-import org.apache.catalina.session.StoreBase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.ProductBean;
-<<<<<<< HEAD
-import com.eeit144.drinkmaster.model.OrderService;
-=======
 import com.eeit144.drinkmaster.bean.StoreBean;
->>>>>>> 831d7f70c0219e729bd7f02b27ca7d23e03b9b50
 import com.eeit144.drinkmaster.service.ProductServiceImp;
 
 @Controller
@@ -130,10 +115,5 @@ public class ProductController {
 
 		return "redirect:/backend/product/all";
 	}
-<<<<<<< HEAD
 
-=======
-	
-	
->>>>>>> 831d7f70c0219e729bd7f02b27ca7d23e03b9b50
 }

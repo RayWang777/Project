@@ -23,14 +23,24 @@
   <label for="price"> 價格</label>
   <form:input path="price" id="price" name="price" /><br><br>
    <label  for="productImage"> 圖片</label>
-  <form:input  path="productImage" id="productImage" name="productImage" type="file" /><br><br>
+  <form:input  path="productImage" id="productImage" name="productImage" type="file" onchange="preview()" />
+  <img id="nimage" src="" width="100px" height="100px" />
+					<c:if test="${product.productId!=null}">
+					<img id="oldImage" src="${product.productImage}"width="100px" height="100px"/>
+					</c:if>
+  <br><br>
    <label  for="storeBean" >店家</label>
   <form:input path="storeBean"  id="storeBean" name="storeBean"/><br><br>
    <label  for="coldHot">溫度</label>
   <form:input path="coldHot" id="coldHot" name="coldHot"/><br><br>
   <label for="status">狀態</label>
-  <form:input path="status" id="status"  name="status"/>
- 
+    <form:select path="status" id="status" name="status">
+  <form:option value="true">上架中</form:option>
+    <form:option value="false">已下架</form:option>
+  </form:select>
+ 	
+				
+				
   <br><br>
   <div class="row justify-content-center">
   <input type="submit" name="submit" value="更新訊息">
@@ -45,5 +55,20 @@
 </div>
 
 
+<script type="text/javascript">
 
+$(function(){
+	$('#nimage').hide();
+});
+
+function preview() {
+	nimage.src=URL.createObjectURL(event.target.files[0]);
+	if ( (event.target.files[0].type).startsWith("image")){
+		$('#oldImage').hide();
+		$('#nimage').show();
+	} 
+}
+
+
+</script>
 <jsp:include page="layout/footer.jsp" />

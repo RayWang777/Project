@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.data.domain.Pageable;
 import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.dao.ProductRepostiory;
@@ -78,19 +79,19 @@ public class ProductServiceImp implements ProductService {
 
 		
 	}
-	   public  String getFileBase64String(Part part) throws IOException {
-			InputStream in = part.getInputStream();
-			byte[] picin = in.readAllBytes();
+	   public   String getFileBase64String(MultipartFile part) throws IOException {
+			 
+			byte[] picin = part.getBytes();
 			String picstr =Base64.getEncoder().encodeToString(picin);
 			return picstr;
 		}
 	    
-		public  String getFileType(Part part) {
-			String header =part.getHeader("content-disposition");
-			int substridx = header.lastIndexOf(".");
-			String filetype = header.substring(substridx + 1, header.length()-1);
-			return filetype;		
-		}
+//		public  String getFileType(Part part) {
+//			String header =part.getHeader("content-disposition");
+//			int substridx = header.lastIndexOf(".");
+//			String filetype = header.substring(substridx + 1, header.length()-1);
+//			return filetype;		
+//		}
 	// 判斷字串可否轉整數
 	public static boolean isStr2Num(String str) { 
 		try {

@@ -8,7 +8,7 @@ public interface CommentService {
 	
 	public CommentBean findById(Integer id);
 
-//	public Page<CommentBean> findAll();
+	public Page<CommentBean> findAll();
 
 	public void insertComment(CommentBean comment);
 

@@ -26,9 +26,9 @@
   
 <div class="form-group">
 	
-	<form:textarea path="userId" class="form-control" />
-	<form:textarea path="storeId" class="form-control" />
-	<form:textarea path="productId" class="form-control" />
+	<form:textarea path="userBean" class="form-control" />
+	<form:textarea path="storeBean" class="form-control" />
+	<form:textarea path="productBean" class="form-control" />
 	<form:textarea path="score" class="form-control" />
 	<form:textarea path="scoreType" class="form-control" />
 	<form:textarea path="content" class="form-control" />

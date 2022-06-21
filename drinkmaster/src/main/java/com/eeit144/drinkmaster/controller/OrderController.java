@@ -79,17 +79,24 @@ public class OrderController {
 		}
 		
 		
-//		@GetMapping("orderapi")
-//		@ResponseBody
-//		public List<OrderBean> findByStoreId(Integer id) {
-////			return orderService.findByStoreId(id);
-//		}
 		
 		@GetMapping("orderapi")
 		@ResponseBody
 		public List<OrderBean> findBystoreId(Integer id) {
 				return orderService.findBystoreId(id);
 		}
+		
+		
+		@GetMapping("order/findStatus")
+		public ModelAndView findStatusView(ModelAndView mav, @RequestParam(name = "S", defaultValue = "1") Integer pageNumber, 
+				@RequestParam(name = "sta", defaultValue = "待付款") String orderStatus) {
+			Page<OrderBean> page = orderService.findByorderStatus(pageNumber, orderStatus);
+
+			mav.getModel().put("page", page);
+			mav.setViewName("backorder");
+			return mav;
+		}
+		
 		
 }		
 		

@@ -82,14 +82,14 @@
   <c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
    <c:choose>
    <c:when test="${page.number!=pageNumber-1}">
-   <a href="${contextRoot}/backend/order/findAll?o=${pageNumber}"> <c:out value="${pageNumber}" /> </a>
+   <a href="${contextRoot}/backend/order/findStatus?s=${pageNumber}"> <c:out value="${pageNumber}" /> </a>
    </c:when>
    <c:otherwise>
    <c:out value="${pageNumber}"></c:out>
    </c:otherwise>
    </c:choose> 
    <c:if test="${pageNumber!= page.totalPages }">
-    &thinsp;| &thinsp;
+   |
    </c:if>
    </c:forEach>
 <!--    </div> -->

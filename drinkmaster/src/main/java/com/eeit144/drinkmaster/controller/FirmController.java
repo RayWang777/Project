@@ -46,34 +46,7 @@ public class FirmController {
 		this.firmService = firmService;
 	}
 
-	@GetMapping("firm/{id}")
-	public ResponseEntity<FirmDTO> findFirmById(@PathVariable Integer id) {
-		Optional<FirmBean> firmBean = firmService.findById(id);
-
-		if (firmBean.isEmpty()) {
-			return new ResponseEntity<FirmDTO>(HttpStatus.NO_CONTENT);
-		}
-		FirmDTO firmDTO = new FirmDTO();
-		firmDTO.setFirmId(firmBean.get().getFirmId());
-		firmDTO.setFirmName(firmBean.get().getFirmName());
-		firmDTO.setFirmAddress(firmBean.get().getFirmAddress());
-		firmDTO.setFirmPhone(firmBean.get().getFirmPhone());
-		firmDTO.setUserId(firmBean.get().getUserBean().getUserId());
-		return new ResponseEntity<FirmDTO>(firmDTO, HttpStatus.OK);
-	}
-
-	@GetMapping("firm/{id}/photo")
-	public ResponseEntity<byte[]> getFirmLogo(@PathVariable("id") Integer id) {
-		Optional<FirmBean> firmBean = firmService.findById(id);
-
-		byte[] firmLogo = firmBean.get().getFirmLogo();
-
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.IMAGE_JPEG);
-
-		return new ResponseEntity<byte[]>(firmLogo, headers, HttpStatus.OK);
-	}
-
+	
 	@GetMapping("firm/all")
 	public String findAllPages(@RequestParam(name = "p", defaultValue = "1") Integer page,
 			@RequestParam(name = "c", defaultValue = "1") Integer column,

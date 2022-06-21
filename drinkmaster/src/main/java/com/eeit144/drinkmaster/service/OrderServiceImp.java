@@ -67,4 +67,9 @@ public class OrderServiceImp implements OrderService {
 	}
 	
 
+	@Override
+	public List<OrderBean> findBystoreId(Integer storeId){
+		return orderDao.findByStoreBean_storeId(storeId);
+	}
+
 }

@@ -16,7 +16,25 @@
 <br>
 <p>
 <a href="${contextRoot}/backend/order/insertView"><button type="button" class="btn btn-success btn-sm">新增訂單</button></a>
-</p>		
+</p>
+
+<form action="${contextRoot}/backend/product/select" method="get">
+		<div class="mb-3">
+			<label for="select" class="form-label">搜尋</label> <input type="text"name="select" id="select" /> 
+				<select name="filed">
+				<option>品項</option>
+				<option>價格</option>
+				<option>溫度</option>
+				<option>處理中</option>
+				<option>已確認</option>
+				<option>已完成</option>
+				<option>已取消</option>
+			</select>
+		<button type="submit" class="btn btn  btn-sm" style="font-style:italic;color:blue;">查詢</button>
+		<c:out value="查到 ${page.totalElements }筆資料"></c:out>
+		</div >
+		
+	</form>		
 <table class="table table-hover"style="width:100%;table-layout:fixed;">
   <thead>
     <tr>
@@ -69,10 +87,10 @@
    |
    </c:if>
    </c:forEach>
-   </div>
-   <div  class="row justify-content-center" style="font-size: large; color:black;">
-   <c:out value="總共有 ${page.totalElements }筆資料"></c:out>
-   </div>
+<!--    </div> -->
+<!--    <div  class="row justify-content-center" style="font-size: large; color:black;"> -->
+<%--    <c:out value="總共有 ${page.totalElements }筆資料"></c:out> --%>
+<!--    </div> -->
 </body>
 
 </html>

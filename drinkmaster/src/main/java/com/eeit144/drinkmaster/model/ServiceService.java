@@ -16,4 +16,4 @@ public interface ServiceService {
 	
 	public ServiceBean getLatest() ;
 
-}
+	}

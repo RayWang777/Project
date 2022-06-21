@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,7 +36,7 @@ public class ServiceBean {
 		
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "userid",nullable = false)
+	@JoinColumn(name = "userid")  //,nullable = false
 	private UserBean userBean;
 		
 	@Column(name="answer",nullable = false, columnDefinition = "nvarchar(max)")
@@ -44,9 +45,15 @@ public class ServiceBean {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8" )
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="answertime",nullable = false)
+	@Column(name="answertime",nullable = false,columnDefinition = "datetime")
 	private Date answerTime;
 
+	@PrePersist
+	public void onCreate() {
+		if(answerTime == null) {
+			this.answerTime = new Date();
+		}
+	}
 	public ServiceBean() {
 	}
 

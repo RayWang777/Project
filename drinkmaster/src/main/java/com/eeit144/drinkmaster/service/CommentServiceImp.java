@@ -37,10 +37,10 @@ public class CommentServiceImp implements CommentService {
 		return null;
 	}
 
-//	@Override
-//	public Page<CommentBean> findAll() {
-//		return null;
-//	}
+	@Override
+	public Page<CommentBean> findAll() {
+		return null;
+	}
 
 	
 

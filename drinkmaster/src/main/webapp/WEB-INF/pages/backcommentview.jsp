@@ -55,7 +55,7 @@ html, body {
 <div class="container">
 
 
-<c:forEach  var="comment" items="${page.content}">
+<c:forEach  var="comment" items="${page.content}" >
 
 <div class="row justify-content-center">
 <div class="col-9">
@@ -67,12 +67,14 @@ html, body {
   <div class="card-body">
   	<c:out value="${comment.userBean.userName}"></c:out>
   	<br/>
-  	<div class="awesomeRating" data-bind=" awesomeRating: rating, awesomeRatingOptions: options" ></div>
- 	<div class="scores" ><c:out value="${comment.score}"></c:out></div>
+  	<div id="${comment.commentId}" class="awesomeRating" data-bind=" awesomeRating: rating, awesomeRatingOptions: options" ></div>
+ 	<input id="scores" readonly value='<c:out value="${comment.score}"></c:out>'></input>
+ 	
 <script type="text/javascript">
+	
 		$(function() {
 			var model = {
-				rating : ko.observable("${comment.score}"),
+				rating : ko.observable($("#scores").val()),
 				options : {
 					values: ["1.0", "2.0", "3.0", "4.0", "5.0"],
 					targetSelector: 'span.awesomeRatingValue'
@@ -83,15 +85,14 @@ html, body {
 		});
 	</script>
 
-
 <%--  	${comment.score} --%>
  	
- 	<div class="awesomeRatingValue">
-		<span class="awesomeRatingValue" data-bind="text: &#39;Value: &#39; + rating()">Value: E</span>
-	</div>
+<!--  	<div class="awesomeRatingValue"> -->
+<!-- 		<span class="awesomeRatingValue" data-bind="text: &#39;Value: &#39; + rating()">Value: E</span> -->
+<!-- 	</div> -->
  	
  	
- 	<span class="awesomeRatingValue"></span>
+<!--  	<span class="awesomeRatingValue"></span> -->
 	<br/>
 	<c:out value="${comment.content}"></c:out>
 	<br/>

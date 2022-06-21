@@ -6,6 +6,29 @@
 <jsp:include page="layout/header.jsp" />
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
+<!DOCTYPE html>
+<html>
+<head>
+
+<link href="${contextRoot}/css/lib/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+<link href="${contextRoot}/css/lib/awesomeRating.min.css" rel="stylesheet" type="text/css" media="all">
+<link href="${contextRoot}/font/fontawesome-webfont.ttf" rel="stylesheet" type="text/css" media="all">
+<link href="${contextRoot}/font/fontawesome-webfont.woff" rel="stylesheet" type="text/css" media="all">
+<link href="${contextRoot}/font/fontawesome-webfont.woff2" rel="stylesheet" type="text/css" media="all">
+
+<script src="${contextRoot}/js/lib/awesomeRating.min.js"></script>
+
+<style>
+
+div.awesomeRating {
+	font-size: 2em;
+}
+
+</style>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
 
 <h1>新增評價</h1>
 
@@ -26,12 +49,27 @@
   
 <div class="form-group">
 	
-	<form:textarea path="userBean" class="form-control" />
-	<form:textarea path="storeBean" class="form-control" />
-	<form:textarea path="productBean" class="form-control" />
-	<form:textarea path="score" class="form-control" />
-	<form:textarea path="scoreType" class="form-control" />
-	<form:textarea path="content" class="form-control" />
+	userid<form:input path="userBean" class="form-control" />
+	storeid<form:input path="storeBean" class="form-control" />
+	productid<form:input path="productBean" class="form-control" />
+	score<form:input path="score" class="form-control" />
+	<div id=score class="awesomeRating"></div>
+	<input class="awesomeRatingValue" />
+	
+	<script type="text/javascript">
+	
+		$("#score").awesomeRating({
+			
+			valueInitial: "$(".")",
+			values: ["1.0", "2.0", "3.0", "4.0", "5.0"],
+			targetSelector: "input.awesomeRatingValue"
+		});
+	
+		console.log(${comment.score});
+	</script>
+	
+	<form:input path="scoreType" class="form-control" />
+	content<form:input path="content" class="form-control" />
 	
 </div>    
     
@@ -65,3 +103,8 @@
 
 
 <jsp:include page="layout/footer.jsp" />
+
+
+
+</body>
+</html>

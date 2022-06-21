@@ -19,3 +19,19 @@ local.properties
 *.log
 target/classes/*
 pom.properties
+
+### Maven template
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+# ignore eclipse files
+.project
+.classpath
+.settings
+.metadata

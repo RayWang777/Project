@@ -23,8 +23,8 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService;
 	private Integer userId = 1;			//測試用
-	private Integer storeId = 1;		//測試用
-	private Integer productId = 1;		//測試用
+	private Integer storeId = 2;		//測試用
+	private Integer productId = 3;		//測試用
 	private Double score = 1.0;			//測試用
 	private Integer scoreType = 10;		//測試用
 	
@@ -46,7 +46,7 @@ public class CommentController {
 		commentBean.setUserBean(ub);
 		commentBean.setStoreBean(sb);
 		commentBean.setProductBean(pb);
-		commentBean.setScore(score);
+//		commentBean.setScore(score);
 		commentBean.setScoreType(scoreType);	
 //		StoreBean storeBean = new StoreBean();
 		CommentBean lastComment = commentService.getLastest();

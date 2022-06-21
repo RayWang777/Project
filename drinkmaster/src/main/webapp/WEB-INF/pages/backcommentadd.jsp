@@ -52,21 +52,32 @@ div.awesomeRating {
 	userid<form:input path="userBean" class="form-control" />
 	storeid<form:input path="storeBean" class="form-control" />
 	productid<form:input path="productBean" class="form-control" />
-	score<form:input path="score" class="form-control" />
-	<div id=score class="awesomeRating"></div>
-	<input class="awesomeRatingValue" />
+	score<form:input id="score1" path="score" class="form-control" style="pointer-events: none" />
 	
+	<div id="scores" class="awesomeRating"></div>
+	<div class="awesomeRatingValue" style="display:none"></div>
 	<script type="text/javascript">
 	
-		$("#score").awesomeRating({
+		$("#scores").click(function(){
 			
-			valueInitial: "$(".")",
+			var test = $(".awesomeRatingValue").val();
+			console.log(test);
+			$("#score1").attr("value",test);
+			
+		});
+		
+	
+		$(".awesomeRating").awesomeRating({
+			
+			valueInitial: "",
 			values: ["1.0", "2.0", "3.0", "4.0", "5.0"],
-			targetSelector: "input.awesomeRatingValue"
+			targetSelector: "div.awesomeRatingValue"
+			
 		});
 	
-		console.log(${comment.score});
+		
 	</script>
+	
 	
 	<form:input path="scoreType" class="form-control" />
 	content<form:input path="content" class="form-control" />
@@ -76,6 +87,10 @@ div.awesomeRating {
     <input type="submit" name="submit" value="新增訊息	">
   
   </form:form>
+  
+  <div id="score" class="awesomeRating"></div>
+	<div class="awesomeRatingValue" /></div>
+	
   
   </div>
 </div>

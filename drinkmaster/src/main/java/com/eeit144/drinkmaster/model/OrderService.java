@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.eeit144.drinkmaster.bean.OrderBean;
 
+
 public interface OrderService {
 	
 	public OrderBean findById(Integer id);
@@ -26,4 +27,7 @@ public interface OrderService {
 
 	
 	public List<OrderBean> findBystoreId(Integer storeId);
+	
+	
+	public Page<OrderBean> findByorderStatus(Integer pageNumber, String orderStatus);
 }

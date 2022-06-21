@@ -71,5 +71,14 @@ public class OrderServiceImp implements OrderService {
 	public List<OrderBean> findBystoreId(Integer storeId){
 		return orderDao.findByStoreBean_storeId(storeId);
 	}
+	
+
+	
+	@Override
+	public Page<OrderBean> findByorderStatus(Integer pageNumber, String orderStatus){
+		Pageable pgb = PageRequest.of(pageNumber-1, 10 ,Sort.Direction.DESC ,"orderId");
+		return orderDao.findByorderStatus1(pgb, orderStatus);
+	};
+	
 
 }

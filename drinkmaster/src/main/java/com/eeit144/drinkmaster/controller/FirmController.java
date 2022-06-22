@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -87,7 +89,26 @@ public class FirmController {
 			pab = PageRequest.of(page - 1, size, Sort.Direction.DESC, FirmColumn.getColumne(column));
 		}
 
-		Page<FirmBean> allFirm = firmService.findAll(pab);
+//		Page<FirmBean> allFirm = firmService.findAll(pab);
+		
+		
+		UserBean userBean = new UserBean();
+		userBean.setRole("m");
+		FirmBean firmBean = new FirmBean();
+//		firmBean.setFirmName("0");		
+//		firmBean.setFirmPhone("3");		
+		firmBean.setUserBean(userBean);
+		ExampleMatcher matcher = ExampleMatcher.matchingAll().withMatcher("firmName",ExampleMatcher.GenericPropertyMatchers.contains())
+				.withMatcher("firmPhone", ExampleMatcher.GenericPropertyMatchers.contains())
+				.withMatcher("userBean.role", ExampleMatcher.GenericPropertyMatchers.contains());
+		
+		Example<FirmBean> example = Example.of(firmBean,matcher);
+		
+		Page<FirmBean> allFirm = firmService.findAll2(example,pab);
+		
+		
+//		Page<FirmBean> allFirm = firmService.findAllByFirmNameOrFirmPhone("0", "3", pab);
+		
 
 		for (FirmBean firm : allFirm) {
 			firm.setFirmLogo(null);

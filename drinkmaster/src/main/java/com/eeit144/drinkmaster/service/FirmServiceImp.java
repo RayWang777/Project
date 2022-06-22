@@ -3,6 +3,7 @@ package com.eeit144.drinkmaster.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -54,6 +55,15 @@ public class FirmServiceImp implements FirmService {
 		firmDTO.setFirmPhone(firm.getFirmPhone());
 		firmDTO.setUserId(firm.getUserBean().getUserId());
 		return firmDTO;
+	}
+
+	@Override
+	public Page<FirmBean> findAllByFirmNameOrFirmPhone(String FirmName, String FirmPhone, Pageable pab) {
+		return firmDao.findAllByFirmNameContainingAndFirmPhoneContaining(FirmName, FirmPhone, pab);		 
+	}
+	
+	public Page<FirmBean> findAll2(Example<FirmBean> firm,Pageable pab){
+		return firmDao.findAll(firm, pab);
 	}
 
 }

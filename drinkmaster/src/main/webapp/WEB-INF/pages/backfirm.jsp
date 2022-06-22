@@ -63,7 +63,7 @@
 					</td>
 					<td class="align-middle"><c:out value='${firm.firmAddress}' /></td>
 
-					<td class="align-middle"><c:out value="管理人員" /></td>
+					<td class="align-middle"><c:out value="${firm.userBean.role}" /></td>
 
 					<td class="align-middle"><img
 						src="<c:url value="/backend/firm/${firm.firmId}/photo"/>"

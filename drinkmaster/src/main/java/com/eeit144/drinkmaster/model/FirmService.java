@@ -2,6 +2,7 @@ package com.eeit144.drinkmaster.model;
 
 import java.util.Optional;
 
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -20,4 +21,7 @@ public interface FirmService {
 
 	public FirmDTO change(FirmBean firm);
 	
+	public Page<FirmBean> findAllByFirmNameOrFirmPhone(String FirmName,String FirmPhone,Pageable pab);
+	
+	public Page<FirmBean> findAll2(Example<FirmBean> firm,Pageable pab);
 }

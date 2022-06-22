@@ -10,17 +10,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.dao.FirmRepository;
+import com.eeit144.drinkmaster.dto.FirmDTO;
 import com.eeit144.drinkmaster.model.FirmService;
-
-
 
 @Service
 @Transactional
 public class FirmServiceImp implements FirmService {
 
 	private FirmRepository firmDao;
-	
-	
+
 	@Autowired
 	public FirmServiceImp(FirmRepository firmDao) {
 		super();
@@ -32,13 +30,10 @@ public class FirmServiceImp implements FirmService {
 		return firmDao.findById(id);
 	}
 
-
 	@Override
 	public Page<FirmBean> findAll(Pageable pab) {
 		return firmDao.findAll(pab);
 	}
-
-
 
 	@Override
 	public void deleteById(Integer id) {
@@ -48,6 +43,17 @@ public class FirmServiceImp implements FirmService {
 	@Override
 	public void insertFirm(FirmBean firm) {
 		firmDao.save(firm);
+	}
+
+	@Override
+	public FirmDTO change(FirmBean firm) {
+		FirmDTO firmDTO = new FirmDTO();
+		firmDTO.setFirmId(firm.getFirmId());
+		firmDTO.setFirmName(firm.getFirmName());
+		firmDTO.setFirmAddress(firm.getFirmAddress());
+		firmDTO.setFirmPhone(firm.getFirmPhone());
+		firmDTO.setUserId(firm.getUserBean().getUserId());
+		return firmDTO;
 	}
 
 }

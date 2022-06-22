@@ -7,7 +7,78 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <html>
 <head>
-<style>
+<style type="text/css">
+#shopcarform input:focus
+{
+	border-color:rgba(82, 168, 236, 0.8);
+	outline:0;outline:thin dotted \9;
+	-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+	-moz-box-shadow:inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+	box-shadow:inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+	outline-style: none ;
+	border-radius: 3px;
+	padding: 14px 14px;
+	font-family: "Microsoft soft";
+	font-size: 14px;
+	height: 25px;
+	width: 350px;
+}
+
+#shopcarform input
+{
+ 	outline-style: none ; 
+    border: 1px solid #ccc;  
+    border-radius: 3px; 
+    padding: 14px 14px; 
+    font-family: "Microsoft soft";
+ 	height: 25px; 
+ 	width: 350px; 
+    outline: 0; 
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0, 106, 255,.4);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0, 106, 255,.4); 
+	font-size: 14px;
+}
+
+
+#shopcarform label {
+	font-size: 16px;
+}
+
+#shopcarform #status{ 
+	height: 25px; 
+	width: 150px;
+	font-size: 16px;
+ } 
+ 
+#shopcarform #shopcarsubmit{ 
+ 	height: 30px; 
+ 	width: 60px; 
+ 	font-size: 16px; 
+   	vertical-align: middle; 
+   	line-height: 30px; 
+   	padding:0px 8px; 
+   	border-radius: 2px; 
+   	border-color: #007BFF;
+ } 
+ 
+#shopcarform #closebutton{ 
+ 	height: 30px; 
+ 	width: 60px; 
+ 	font-size: 16px; 
+   	vertical-align: middle; 
+   	line-height: 30px; 
+   	padding:0px 8px; 
+   	border-radius: 2px; 
+ } 
+ 
+ 
+
+#shopcarform select{
+	height: 20px;
+	width: 80px;
+	border-color: black;
+	border-radius: 2px;
+}
 
 </style>
 
@@ -15,7 +86,7 @@
 <body>
 <br>
 <p>
-<a href="${contextRoot}/backend/shopCar/insertView"><button type="button" class="btn btn-success btn-sm">新增購物車</button></a>
+<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="">新增購物車</button></a>&emsp;
 </p>		
 <table class="table table-hover"style="width:100%;table-layout:fixed;">
   <thead>
@@ -71,8 +142,83 @@
    </c:forEach>
    </div>
    <div  class="row justify-content-center" style="font-size: large; color:black;">
-   <c:out value="總共有 ${page.totalElements }筆資料"></c:out>
+   <c:out value="總共有 ${page.totalElements } 筆資料"></c:out>
    </div>
+   
+   
+   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">新增購物車</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+  <div class="modal-body">
+  <form:form id="shopcarform" class="form" method="post" action="${contextRoot}/backend/shopCar/insert" modelAttribute="shopCarBean">
+  <span><form:label path="createTime">成立時間&thinsp;</form:label></span>
+  <form:input path="createTime" /><br><br>
+  <form:label path="productAmount">數&emsp;&emsp;量&thinsp;</form:label>
+  <form:input path="productAmount" /><br><br>
+  <form:label path="ice">冰&emsp;&emsp;塊&thinsp;</form:label>
+  <form:input path="ice" /><br><br>
+  <form:label path="status">狀&emsp;&emsp;態&thinsp;</form:label>
+  <select id="status" >
+  <option value="false">未送出</option>
+  <option value="true">已送出</option>
+  </select>
+  <form:hidden id="shopcarstatus" path="status" /><br><br>
+  <form:label path="sweet">甜&emsp;&emsp;度&thinsp;</form:label>
+  <form:input path="sweet" /><br>
+  
+ 
+  <br><br>
+  <div class="row justify-content-center">
+  <a href="${contextRoot}/backend/shopCar/insert">
+  <button type="submit" id="shopcarsubmit" class="btn btn-primary btn-sm"  name="submit"  onclick="return confirm('確定要新增嗎?')" >確認</button>&emsp;  
+  </a>
+  <button type="button" id="closebutton" class="btn btn-outline-dark btn-sm" data-dismiss="modal" aria-label="Close" >取消</button>
+  </div>
+  </form:form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+   
+ <script type="text/javascript">
+$('#exampleModal').on('show.bs.modal', function (event) {
+	  var button = $(event.relatedTarget) // Button that triggered the modal
+	  var recipient = button.data('whatever') // Extract info from data-* attributes
+	  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+	  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+	  var modal = $(this)
+	  modal.find('.modal-title').text('新增購物車 ' + recipient)
+	  modal.find('.modal-body input').val(recipient)
+	})
+
+
+
+$('#shopcarsubmit').click(function() {
+  $('#shopcarform').submit();
+});
+
+
+
+$(function(){
+	
+$('#status').change(function(){
+var valuesta = $('#status').val();
+console.log(valuesta);
+$('#shopcarstatus').val(valuesta);	
+	
+})	
+	
+});
+</script>  
+   
+   
 </body>
 
 </html>

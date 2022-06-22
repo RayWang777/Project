@@ -1,5 +1,6 @@
 package com.eeit144.drinkmaster.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +39,11 @@ public class CommentServiceImp implements CommentService {
 	}
 
 	@Override
-	public Page<CommentBean> findAll() {
-		return null;
+	public List<CommentBean> findAll() {
+		
+		List<CommentBean> findAll = commentDao.findAll();
+		
+		return findAll;
 	}
 
 	
@@ -54,8 +58,6 @@ public class CommentServiceImp implements CommentService {
 		
 		Pageable pgb = PageRequest.of(pageNumber-1, 3 , Sort.Direction.DESC ,"createTime");
 		
-		
-		
 		Page<CommentBean> page = commentDao.findAll(pgb);
 		
 		return page;
@@ -66,5 +68,27 @@ public class CommentServiceImp implements CommentService {
 		return commentDao.findFirstByOrderByCreateTimeDesc();
 }
 
+	@Override
+	public List<CommentBean> findCommentByStoreid(Integer storeId) {
+		return commentDao.findCommentByStoreid(storeId);
+	}
+	
+	
+	public CommentBean getScoreAsc() {
+		return commentDao.findAllByOrderByScoreAsc();
+	}
+	
+	public CommentBean getScoreDesc() {
+		return commentDao.findAllByOrderByScoreDesc();
+	}
+	
+	public CommentBean getCreateTimeAsc() {
+		return commentDao.findAllByOrderByCreateTimeAsc();
+	}
+	
+	public CommentBean getCreateTimeDesc() {
+		return commentDao.findAllByOrderByCreateTimeAsc();
+	}
+	
 	
 }

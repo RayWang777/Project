@@ -24,4 +24,7 @@ public interface OrderRepostiory extends JpaRepository<OrderBean, Integer> {
 	
 	@Query(value = "select * from orders where orderstatus = :orderstatus",nativeQuery = true)
 	public Page<OrderBean> findByorderStatus1(Pageable pageable,@Param(value="orderstatus") String orderStatus);
+
+	
+
 }

@@ -17,9 +17,33 @@
 <link href="${contextRoot}/font/fontawesome-webfont.woff2" rel="stylesheet" type="text/css" media="all">
 
 <script src="${contextRoot}/js/lib/awesomeRating.min.js"></script>
+<script src="${contextRoot}/js/lib/average-rating.min.js" type="text/javascript"></script>
 
+<style type="text/css">
+.ratingBar {
+  height: 30px;
+}
 
+#ratingBarOne {
+  background-color: #ff6f31;
+}
 
+#ratingBarTwo {
+  background-color: #ff9f02;
+}
+
+#ratingBarThree {
+  background-color: #ffcf02;
+}
+
+#ratingBarFour {
+  background-color: #88b131;
+}
+
+#ratingBarFive {
+  background-color: #99cc00;
+}
+</style>
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -32,7 +56,22 @@
 <div class="container">
 
 
-<c:forEach  var="comment" items="${page.content}" >
+<script>
+const rating = [134055, 57472, 143135, 365957, 1448459]
+average(rating)
+
+console.log(average(rating));
+</script>
+
+<div id="ratingBarFive" class="ratingBar"></div>
+<div id="ratingBarFour" class="ratingBar"></div>
+<div id="ratingBarThree" class="ratingBar"></div>
+<div id="ratingBarTwo" class="ratingBar"></div>
+<div id="ratingBarOne" class="ratingBar"></div>
+
+
+<c:forEach  var="comment" items="${page}" >
+<%-- <c:forEach  var="comment" items="${page.content}" > --%>
 
 <div class="row justify-content-center">
 <div class="col-9">
@@ -81,27 +120,27 @@
 
 <div class="row justify-content-center">
 	<div class="col-9">
-		<c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
+<%-- 		<c:forEach var="pageNumber" begin="1" end="${page.totalPages}"> --%>
 		
-		<c:choose>
-			<c:when test="${page.number != pageNumber-1}" >
+<%-- 		<c:choose> --%>
+<%-- 			<c:when test="${page.number != pageNumber-1}" > --%>
 			
-				<a href="${contextRoot}/backend/comment/all/?p=${pageNumber}" > <c:out value="${pageNumber}" /></a>
+<%-- 				<a href="${contextRoot}/backend/comment/all/?p=${pageNumber}" > <c:out value="${pageNumber}" /></a> --%>
 			
-			</c:when>
+<%-- 			</c:when> --%>
 		
-			<c:otherwise>
-				<c:out value="${pageNumber}" />
-			</c:otherwise>	
+<%-- 			<c:otherwise> --%>
+<%-- 				<c:out value="${pageNumber}" /> --%>
+<%-- 			</c:otherwise>	 --%>
 		
-		</c:choose>
+<%-- 		</c:choose> --%>
 		
-		<c:if test="${page.totalPages != pageNumber}">
-			|
-		</c:if>
+<%-- 		<c:if test="${page.totalPages != pageNumber}"> --%>
+<!-- 			| -->
+<%-- 		</c:if> --%>
 			
 		
-		</c:forEach>
+<%-- 		</c:forEach> --%>
 
 	</div>
 </div>

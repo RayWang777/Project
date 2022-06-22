@@ -46,34 +46,7 @@ public class FirmController {
 		this.firmService = firmService;
 	}
 
-	@GetMapping("firm/{id}")
-	public ResponseEntity<FirmDTO> findFirmById(@PathVariable Integer id) {
-		Optional<FirmBean> firmBean = firmService.findById(id);
-
-		if (firmBean.isEmpty()) {
-			return new ResponseEntity<FirmDTO>(HttpStatus.NO_CONTENT);
-		}
-		FirmDTO firmDTO = new FirmDTO();
-		firmDTO.setFirmId(firmBean.get().getFirmId());
-		firmDTO.setFirmName(firmBean.get().getFirmName());
-		firmDTO.setFirmAddress(firmBean.get().getFirmAddress());
-		firmDTO.setFirmPhone(firmBean.get().getFirmPhone());
-		firmDTO.setUserId(firmBean.get().getUserBean().getUserId());
-		return new ResponseEntity<FirmDTO>(firmDTO, HttpStatus.OK);
-	}
-
-	@GetMapping("firm/{id}/photo")
-	public ResponseEntity<byte[]> getFirmLogo(@PathVariable("id") Integer id) {
-		Optional<FirmBean> firmBean = firmService.findById(id);
-
-		byte[] firmLogo = firmBean.get().getFirmLogo();
-
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.IMAGE_JPEG);
-
-		return new ResponseEntity<byte[]>(firmLogo, headers, HttpStatus.OK);
-	}
-
+	
 	@GetMapping("firm/all")
 	public String findAllPages(@RequestParam(name = "p", defaultValue = "1") Integer page,
 			@RequestParam(name = "c", defaultValue = "1") Integer column,
@@ -151,26 +124,30 @@ public class FirmController {
 	}
 
 
-	@GetMapping("firm/edit/{id}")
-	public String firmAddPage(@PathVariable("id") Integer id,Model m) {
-		FirmBean findById = firmService.findById(id).get();
-		FirmDTO firmDTO = new FirmDTO();
 
-		firmDTO.setFirmId(findById.getFirmId());
-		firmDTO.setFirmName(findById.getFirmName());
-		firmDTO.setFirmAddress(findById.getFirmAddress());
-		firmDTO.setFirmPhone(findById.getFirmPhone());
 
-		firmDTO.setUserId(findById.getUserBean().getUserId());
-		m.addAttribute("firm", firmDTO);
-		m.addAttribute("firmsave", "修改廠商");		
-		return "backfirmadd";
-	}	
 
-	@GetMapping("firm/delete/{id}")
-	public String deleteFirm(@PathVariable("id") Integer id) {
-		firmService.deleteById(id);
-		return "redirect:/backend/firm/all";
+	
+	@ModelAttribute
+	public FirmDTO editFirmDTO(
+			@RequestParam(value="firmId", required = false) Integer id) {
+		FirmDTO cbean = new FirmDTO();
+		Optional<FirmBean> firm = firmService.findById(id);
+		if (id != null) {
+		
+			System.out.println("在@ModelAttribute修飾的方法 getCustomerBean()中，讀到物件:" + cbean);
+		} else {
+			cbean = new CustomerBean();
+			cbean.setName("小明");
+			cbean.setBirthday(java.sql.Date.valueOf("1980-2-1"));
+			cbean.setTotalPayment(0.001);
+			System.out.println("在@ModelAttribute修飾的方法 getCustomerBean()中，無法讀取物件:" + cbean);
+		}
+		return cbean;
 	}
+	
+	protected void name() {
+		
+	} 
 
 }

@@ -1,4 +1,37 @@
-*/pom.properties
-*/classes/com/*
-*/test-classes/*
-*/src/test/*
+### Eclipse ###
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+### Java ###
+# Compiled class file
+*.class
+
+# Log file
+*.log
+target/classes/*
+pom.properties
+
+### Maven template
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+# ignore eclipse files
+.project
+.classpath
+.settings
+.metadata

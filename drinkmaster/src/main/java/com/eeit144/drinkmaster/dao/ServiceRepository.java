@@ -7,5 +7,5 @@ import com.eeit144.drinkmaster.bean.ServiceBean;
 
 @Repository
 public interface ServiceRepository extends JpaRepository<ServiceBean, Integer> {
-	public ServiceBean findFirstByOrderByAnswerDesc();
+	public ServiceBean findFirstByOrderByAnswerTimeDesc();
 }

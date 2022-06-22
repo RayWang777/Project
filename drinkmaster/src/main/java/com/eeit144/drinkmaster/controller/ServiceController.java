@@ -1,7 +1,5 @@
 package com.eeit144.drinkmaster.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -23,7 +21,9 @@ public class ServiceController {
 	@Autowired
 	private ServiceService sService;
 	
-	@PostMapping("backend/serviceadd")
+//	private Integer userId = 1;  //測試用
+	
+	@PostMapping("backend/servicepost")
 	public String ServiceAdd(@ModelAttribute("workMessages") ServiceBean msg,Model model) {
 		sService.insertService(msg);
 		
@@ -37,8 +37,8 @@ public class ServiceController {
 	}
 	
 	@GetMapping("backend/serviceedit")
-	public String editMessage(@RequestParam("id") Integer id,Model model) {
-		ServiceBean msg = sService.findById(id);
+	public String editMessage(@RequestParam("serviceId") Integer serviceId,Model model) {
+		ServiceBean msg = sService.findById(serviceId);
 		model.addAttribute("msg", msg);
 		return "backserviceedit";
 	}
@@ -50,15 +50,17 @@ public class ServiceController {
 		      
 	}
 	@GetMapping("backend/servicedelete")
-	public String deleteMessage(@RequestParam("id") Integer id) {
-		sService.deleteById(id);
+	public String deleteMessage(@RequestParam("serviceId") Integer serviceId) {
+		sService.deleteById(serviceId);
 		return "redirect:/backend/serviceall";
 	}
 	@GetMapping("/backend/serviceadd")
 	public String addMessagePage(Model model) {
 		
-		ServiceBean workMessages = new ServiceBean();
+//		UserBean ub = new UserBean();
+//		ub.setUserId(userId);	
 		
+		ServiceBean workMessages = new ServiceBean();	
 		ServiceBean latestMsg = sService.getLatest();
 		
 		model.addAttribute("workMessages", workMessages);

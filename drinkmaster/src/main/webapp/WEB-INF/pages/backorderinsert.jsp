@@ -24,7 +24,13 @@
   電&emsp;&emsp;話<form:label path="orderPhone"></form:label>
   <form:input path="orderPhone" /><br><br>
   狀&emsp;&emsp;態<form:label path="orderStatus"></form:label>
-  <form:input path="orderStatus" /><br><br>
+  <select id="orderStatus" style="width: 168px; height: 27px;">
+  <option value="待付款">待付款</option>
+  <option value="待出貨">待出貨</option>
+  <option value="已出貨">已出貨</option>
+  <option value="已取消">已取消</option>
+  </select>
+  <form:input id="substatus" path="orderStatus" /><br><br>
   總&ensp;金&ensp;額<form:label path="totalPrice"></form:label>
   <form:input path="totalPrice" /><br><br>
   
@@ -43,6 +49,20 @@
 </div>
 </div>
 
+<script type="text/javascript">
+$(function(){
+	
+$('#orderStatus').change(function(){
+var valuesta = $('#orderStatus').val();
+console.log(valuesta);
+$('#substatus').val(valuesta);	
+	
+})	
+	
+});
 
+
+
+</script>
 
 <jsp:include page="layout/footer.jsp" />

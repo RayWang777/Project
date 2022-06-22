@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.eeit144.drinkmaster.bean.CommentBean;
 import com.eeit144.drinkmaster.bean.ProductBean;
@@ -160,13 +161,14 @@ public class CommentController {
 //	}
 	
 	@PostMapping("comment/commentstore")
-	public String findCommentByStoreid(@RequestParam("storeId")Integer storeId, Model model){
+	@ResponseBody
+	public List<CommentBean> findCommentByStoreid(@RequestParam("storeId")Integer storeId, Model model){
 		
 		List<CommentBean> CBS = commentService.findCommentByStoreid(storeId);
 		
-		model.addAttribute("CBS", CBS);
+//		model.addAttribute("CBS", CBS);
 		
-		return "commentstore" ;
+		return CBS ;
 	}
 	
 	

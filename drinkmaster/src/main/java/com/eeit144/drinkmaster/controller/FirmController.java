@@ -137,11 +137,11 @@ public class FirmController {
 		
 			System.out.println("在@ModelAttribute修飾的方法 getCustomerBean()中，讀到物件:" + cbean);
 		} else {
-			cbean = new CustomerBean();
-			cbean.setName("小明");
-			cbean.setBirthday(java.sql.Date.valueOf("1980-2-1"));
-			cbean.setTotalPayment(0.001);
-			System.out.println("在@ModelAttribute修飾的方法 getCustomerBean()中，無法讀取物件:" + cbean);
+//			cbean = new CustomerBean();
+//			cbean.setName("小明");
+//			cbean.setBirthday(java.sql.Date.valueOf("1980-2-1"));
+//			cbean.setTotalPayment(0.001);
+//			System.out.println("在@ModelAttribute修飾的方法 getCustomerBean()中，無法讀取物件:" + cbean);
 		}
 		return cbean;
 	}

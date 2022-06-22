@@ -3,10 +3,16 @@ package com.eeit144.drinkmaster.dao;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.eeit144.drinkmaster.bean.UserBean;
 
 public interface UserRepostiory extends JpaRepository<UserBean, Integer> {
 	Page<UserBean> findByUserNameLike(Pageable pageable, String userName);
+	
+	@Query(value="select * from users where useraccount= :userAccount and userpassword= :userPassword", nativeQuery = true)
+	public UserBean findByAccPwd(@Param(value="userAccount") String userAccount,@Param(value="userPassword") String userPassword);
 	
 }

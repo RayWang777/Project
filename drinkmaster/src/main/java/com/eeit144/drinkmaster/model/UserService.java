@@ -18,5 +18,6 @@ public interface UserService {
 
 	public Page<UserBean> select(Integer pageNumber, String string);
 
+	public UserBean findByAccPwd(String userAccount, String userPassword);
 
 }

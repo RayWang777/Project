@@ -51,4 +51,11 @@ public class UserServiceImp implements UserService {
 		return userDao.findByUserNameLike(page, name);
 	}
 	
+	public UserBean findByAccPwd(String userAccount, String userPassword) {
+		UserBean user = userDao.findByAccPwd(userAccount, userPassword);
+		if(user != null) {
+			return user;
+		}
+		return null;
+	}
 }

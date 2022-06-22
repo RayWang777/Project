@@ -8,6 +8,6 @@
 
 
 <h1>後台首頁</h1>
-
+<p>你好, ${userBean.userName}</p>
 
 <jsp:include page="layout/footer.jsp" />

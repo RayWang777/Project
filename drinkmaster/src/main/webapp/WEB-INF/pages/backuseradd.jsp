@@ -23,19 +23,18 @@
        密&emsp;&emsp;碼<form:label path="userPassword"/>
        <form:input path="userPassword"/><br><br>
        地&emsp;&emsp;址<form:label path="userAddress"/>
-       <form:input path="userAddress"/><br><br>
-       大&ensp;頭&ensp;貼<form:label path="photo"/>
-       <form:input path="photo"/><br><br>
+       <form:input path="userAddress"/><br><br>       
        手&emsp;&emsp;機<form:label path="phone"/>
        <form:input path="phone"/><br><br>
        性&emsp;&emsp;別<form:label path="gender"/>
        <form:input path="gender"/><br><br>
        生&emsp;&emsp;日<form:label path="birthday"/>
-       <form:input path="birthday"/><br><br>
+       <form:input path="birthday" /><br><br>
        創建日期<form:label path="createdate"/>
-       <form:input path="createdate"/><br><br>
+       <form:input path="createdate" /><br><br>
        職&emsp;&emsp;權<form:label path="role"/>
        <form:input path="role"/><br><br>
+       
        
        <div class="row justify-content-center">
        	<input type="submit" name="submit" value="新增商品">

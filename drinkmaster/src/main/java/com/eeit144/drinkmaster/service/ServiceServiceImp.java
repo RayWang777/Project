@@ -41,7 +41,7 @@ public class ServiceServiceImp implements ServiceService {
 
 	@Override
 	public void deleteById(Integer serviceId) {
-		serviceDao.existsById(serviceId);
+		serviceDao.deleteById(serviceId);
 		
 	}
 	

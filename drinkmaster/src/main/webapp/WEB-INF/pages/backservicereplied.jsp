@@ -10,10 +10,10 @@
 
 <div class="row justify-content-center">
 <div class="col-6">
-  <h1>更新意見回饋頁面</h1>
+  <h1>回覆意見頁面</h1>
 <div class="card">
   <div class="card-header">
-    請輸入想更新的訊息
+    請輸入想回覆的訊息
   </div>
   <div class="card-body">
   
@@ -23,11 +23,11 @@
   <form:input path="answerTime" type="hidden" />
   
   <div class="form-group">
-  <form:textarea path="answer" class="form-control"/>
+  <form:textarea path="answer" value="clear" class="form-control"/>
   </div>
   
-  <input type="submit" name="submit"  class="btn btn-success" value="更新">
-  
+  <input type="submit" name="submit" class="btn btn-lg btn-primary" value="回覆">
+ 
   </form:form>
     
   </div>

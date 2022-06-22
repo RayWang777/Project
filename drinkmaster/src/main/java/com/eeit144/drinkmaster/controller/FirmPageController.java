@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,5 +58,28 @@ public class FirmPageController {
 
 		return new ResponseEntity<byte[]>(firmLogo, headers, HttpStatus.OK);
 	}
+	
+	@GetMapping("firm/edit/{id}")
+	public String firmAddPage(@PathVariable("id") Integer id,Model m) {
+		FirmBean findById = firmService.findById(id).get();
+		FirmDTO firmDTO = new FirmDTO();
+
+		firmDTO.setFirmId(findById.getFirmId());
+		firmDTO.setFirmName(findById.getFirmName());
+		firmDTO.setFirmAddress(findById.getFirmAddress());
+		firmDTO.setFirmPhone(findById.getFirmPhone());
+
+		firmDTO.setUserId(findById.getUserBean().getUserId());
+		m.addAttribute("firm", firmDTO);
+		m.addAttribute("firmsave", "修改廠商");		
+		return "backfirmadd";
+	}	
+	
+	@GetMapping("firm/delete/{id}")
+	public String deleteFirm(@PathVariable("id") Integer id) {
+		firmService.deleteById(id);
+		return "redirect:/backend/firm/all";
+	}
+	
 
 }

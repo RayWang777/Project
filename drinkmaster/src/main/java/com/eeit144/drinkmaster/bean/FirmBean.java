@@ -18,6 +18,9 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "firm")
 public class FirmBean {
@@ -51,72 +54,13 @@ public class FirmBean {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId", nullable = false)
 	private UserBean userBean;
+	
+	
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "firmBean", cascade = CascadeType.ALL)
+	private Set<SaleCodeBean> saleCodes = new LinkedHashSet<SaleCodeBean>();
 
 	public FirmBean() {
-	}
-
-	public Integer getFirmId() {
-		return firmId;
-	}
-
-	public void setFirmId(Integer firmId) {
-		this.firmId = firmId;
-	}
-
-	public String getFirmName() {
-		return firmName;
-	}
-
-	public void setFirmName(String firmName) {
-		this.firmName = firmName;
-	}
-
-	public String getFirmAddress() {
-		return firmAddress;
-	}
-
-	public void setFirmAddress(String firmAddress) {
-		this.firmAddress = firmAddress;
-	}
-
-	public String getFirmPhone() {
-		return firmPhone;
-	}
-
-	public void setFirmPhone(String firmPhone) {
-		this.firmPhone = firmPhone;
-	}
-
-	public byte[] getFirmLogo() {
-		return firmLogo;
-	}
-
-	public void setFirmLogo(byte[] firmLogo) {
-		this.firmLogo = firmLogo;
-	}
-
-	public Set<StoreBean> getStores() {
-		return stores;
-	}
-
-	public void setStores(Set<StoreBean> stores) {
-		this.stores = stores;
-	}
-
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-
-	public UserBean getUserBean() {
-		return userBean;
-	}
-
-	public void setUserBean(UserBean userBean) {
-		this.userBean = userBean;
 	}
 
 }

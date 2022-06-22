@@ -61,6 +61,8 @@ $('#substatus').val(valuesta);
 	
 });
 
+
+
 </script>
 
 <jsp:include page="layout/footer.jsp" />

@@ -32,10 +32,8 @@ import com.eeit144.drinkmaster.bean.UserBean;
 import com.eeit144.drinkmaster.dto.FirmDTO;
 import com.eeit144.drinkmaster.model.FirmService;
 
-
 @Controller
 @RequestMapping("backend/")
-@SessionAttributes("firmsave")
 public class FirmController {
 
 	private FirmService firmService;
@@ -46,11 +44,38 @@ public class FirmController {
 		this.firmService = firmService;
 	}
 
-	
+	@GetMapping("firm/{id}")
+	public ResponseEntity<FirmDTO> findFirmById(@PathVariable Integer id) {
+		Optional<FirmBean> firmBean = firmService.findById(id);
+
+		if (firmBean.isEmpty()) {
+			return new ResponseEntity<FirmDTO>(HttpStatus.NO_CONTENT);
+		}
+		FirmDTO firmDTO = new FirmDTO();
+		firmDTO.setFirmId(firmBean.get().getFirmId());
+		firmDTO.setFirmName(firmBean.get().getFirmName());
+		firmDTO.setFirmAddress(firmBean.get().getFirmAddress());
+		firmDTO.setFirmPhone(firmBean.get().getFirmPhone());
+		firmDTO.setUserId(firmBean.get().getUserBean().getUserId());
+		return new ResponseEntity<FirmDTO>(firmDTO, HttpStatus.OK);
+	}
+
+	@GetMapping("firm/{id}/photo")
+	public ResponseEntity<byte[]> getFirmLogo(@PathVariable("id") Integer id) {
+		Optional<FirmBean> firmBean = firmService.findById(id);
+
+		byte[] firmLogo = firmBean.get().getFirmLogo();
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.IMAGE_JPEG);
+
+		return new ResponseEntity<byte[]>(firmLogo, headers, HttpStatus.OK);
+	}
+
 	@GetMapping("firm/all")
 	public String findAllPages(@RequestParam(name = "p", defaultValue = "1") Integer page,
 			@RequestParam(name = "c", defaultValue = "1") Integer column,
-			@RequestParam(name = "s", defaultValue = "2") Integer size,
+			@RequestParam(name = "s", defaultValue = "5") Integer size,
 			@RequestParam(name = "d", defaultValue = "true") boolean direct, Model m) {
 		if (column > 4)
 			column = 1;
@@ -63,7 +88,7 @@ public class FirmController {
 		}
 
 		Page<FirmBean> allFirm = firmService.findAll(pab);
-	
+
 		for (FirmBean firm : allFirm) {
 			firm.setFirmLogo(null);
 		}
@@ -72,38 +97,35 @@ public class FirmController {
 
 		return "backfirm";
 	};
-	
+
 	@GetMapping("/firm/add")
 	public String firmAddPage(Model m) {
-		FirmDTO firm = new FirmDTO();
-		m.addAttribute("firm", firm);
-		m.addAttribute("firmsave", "新增廠商");
+		FirmDTO firmDTO = new FirmDTO();
+		m.addAttribute("firm", firmDTO);
 		return "backfirmadd";
 	}
 
-	
 	@PostMapping("firm/add")
-	public String addNewFirm(@ModelAttribute("firm") FirmDTO firm, @RequestPart("reallogo") MultipartFile logo,Model m) {
-		FirmBean newFirm = new FirmBean();
+	public String addNewFirm(@ModelAttribute("firm") FirmDTO firm, @RequestPart("reallogo") MultipartFile logo,
+			Model m) {
 
 		String contentType = logo.getContentType();
 
-		System.out.println(contentType);
+		if (!contentType.startsWith("image")) {
 
-		if(!contentType.startsWith("image")) {
-			
 			Map<String, String> errors = new HashMap<String, String>();
 			errors.put("firmLogo", "檔案必須為圖片");
-			
+
 			FirmDTO firmDTO = new FirmDTO();
-						
+
 			m.addAttribute("errors", errors);
 			m.addAttribute("firm", firmDTO);
 			return "backfirmadd";
 		}
+
+		FirmBean newFirm = new FirmBean();
 		UserBean userBean = new UserBean();
 		userBean.setUserId(firm.getUserId());
-		
 		newFirm.setFirmId(firm.getFirmId());
 		newFirm.setUserBean(userBean);
 		newFirm.setFirmName(firm.getFirmName());
@@ -117,37 +139,56 @@ public class FirmController {
 			m.addAttribute("firm", firmDTO);
 			return "backfirmadd";
 		}
-
 		firmService.insertFirm(newFirm);
-
 		return "redirect:/backend/firm/all";
 	}
 
-
-
-
-
-	
-	@ModelAttribute
-	public FirmDTO editFirmDTO(
-			@RequestParam(value="firmId", required = false) Integer id) {
-		FirmDTO cbean = new FirmDTO();
-		Optional<FirmBean> firm = firmService.findById(id);
-		if (id != null) {
-		
-			System.out.println("在@ModelAttribute修飾的方法 getCustomerBean()中，讀到物件:" + cbean);
-		} else {
-			cbean = new CustomerBean();
-			cbean.setName("小明");
-			cbean.setBirthday(java.sql.Date.valueOf("1980-2-1"));
-			cbean.setTotalPayment(0.001);
-			System.out.println("在@ModelAttribute修飾的方法 getCustomerBean()中，無法讀取物件:" + cbean);
-		}
-		return cbean;
+	@GetMapping("firm/edit/{id}")
+	public String firmUpdatePage(@PathVariable("id") Integer id, Model m) {
+		FirmBean findById = firmService.findById(id).get();
+		FirmDTO firmDTO = firmService.change(findById);
+		m.addAttribute("firm", firmDTO);
+		return "backfirmupdate";
 	}
-	
-	protected void name() {
-		
-	} 
+
+	@PostMapping("firm/edit/{id}")
+	public String updateFirm(@ModelAttribute("firm") FirmDTO firm, @RequestPart("reallogo") MultipartFile logo,
+			Model m) {
+
+		FirmBean oldFirm = firmService.findById(firm.getFirmId()).get();
+		String contentType = logo.getContentType();
+		oldFirm.setFirmName(firm.getFirmName());
+		oldFirm.setFirmAddress(firm.getFirmAddress());
+		oldFirm.setFirmPhone(firm.getFirmPhone());
+
+		if (logo.getSize() == 0) {
+			firmService.insertFirm(oldFirm);
+			return "redirect:/backend/firm/all";
+		}
+
+		if (!contentType.startsWith("image")) {
+
+			Map<String, String> errors = new HashMap<String, String>();
+			errors.put("firmLogo", "檔案必須為圖片");
+			m.addAttribute("firm", oldFirm);
+			m.addAttribute("errors", errors);
+			return "backfirmupdate";
+		}
+		try {
+			oldFirm.setFirmLogo(logo.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+			m.addAttribute("firm", oldFirm);
+			return "backfirmupdate";
+		}
+		firmService.insertFirm(oldFirm);
+		return "redirect:/backend/firm/all";
+	}
+
+	@GetMapping("firm/delete/{id}")
+	public String deleteFirm(@PathVariable("id") Integer id) {
+		firmService.deleteById(id);
+		return "redirect:/backend/firm/all";
+	}
 
 }

@@ -10,17 +10,16 @@
 <body>
 <br>
 	<c:url value="/backend/firm/add" var="add_url"/>
-	<a href="${add_url}"><button type="button" class="btn btn-success">新增店家</button></a>
+	<a href="${add_url}"><button type="button" class="btn btn-success">新增廠商</button></a>
 	<form action="${contextRoot}/backend/product/select" method="get">
 	
 		<div class="mb-3">
 			<label for="select" class="form-label">搜尋</label> <input type="text"name="select" id="select" /> 
 				<select name="filed">
-				<option>品項</option>
-				<option>價格</option>
-				<option>溫度</option>
-				<option>上架中</option>
-				<option>已下架</option>
+				<option>廠商名稱</option>
+				<option>廠商電話</option>
+				<option>廠商地址</option>
+				<option>管理者</option>
 			</select>
 		<button type="submit" class="btn btn  btn-sm" style="color:blue;">查詢</button>
 		<c:out value="查到 ${page.totalElements }筆資料"></c:out>

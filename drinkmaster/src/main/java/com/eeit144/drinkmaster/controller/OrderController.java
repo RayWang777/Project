@@ -32,8 +32,14 @@ public class OrderController {
 //			this.orderService = orderService;
 //		}
 		
-			
 		
+		@GetMapping("order/detail")
+		public String detailView(Model m) {
+			OrderBean orderBean = new OrderBean();
+			m.addAttribute("orderBean", orderBean);
+			return "backorderdetail";
+		}
+			
 		@GetMapping("order/insertView")
 		public String addView(Model m) {
 			OrderBean orderBean = new OrderBean();
@@ -44,7 +50,8 @@ public class OrderController {
 		@GetMapping("order/findAll")
 		public ModelAndView findView(ModelAndView mav, @RequestParam(name = "o", defaultValue = "1") Integer pageNumber) {
 			Page<OrderBean> page = orderService.findByPage(pageNumber);
-
+			OrderBean orderBean = new OrderBean();
+			mav.getModel().put("orderBean", orderBean);
 			mav.getModel().put("page", page);
 			mav.setViewName("backorder");
 			return mav;
@@ -92,7 +99,8 @@ public class OrderController {
 		public ModelAndView findStatusView(ModelAndView mav, @RequestParam(name = "S", defaultValue = "1") Integer pageNumber, 
 				@RequestParam(name = "sta", defaultValue = "待付款") String orderStatus) {
 			Page<OrderBean> page = orderService.findByorderStatus(pageNumber, orderStatus);
-
+			OrderBean orderBean = new OrderBean();
+			mav.getModel().put("orderBean", orderBean);
 			mav.getModel().put("page", page);
 			mav.setViewName("backorder");
 			return mav;

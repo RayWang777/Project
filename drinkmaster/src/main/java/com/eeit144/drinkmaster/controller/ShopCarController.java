@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.eeit144.drinkmaster.bean.OrderBean;
 import com.eeit144.drinkmaster.bean.ShopCarBean;
 import com.eeit144.drinkmaster.model.ShopCarService;
 
@@ -37,7 +36,9 @@ public class ShopCarController {
 	@GetMapping("shopCar/findAll")
 	public ModelAndView findView(ModelAndView mav, @RequestParam(name = "s", defaultValue = "1") Integer pageNumber) {
 		Page<ShopCarBean> page = shopCarService.findByPage(pageNumber);
-
+		ShopCarBean shopCarBean = new ShopCarBean();
+		mav.getModel().put("shopCarBean", shopCarBean);
+		
 		mav.getModel().put("page", page);
 		mav.setViewName("backshopcar");
 		return mav;

@@ -33,6 +33,12 @@ public class OrderController {
 //		}
 		
 		
+		@GetMapping("order/detail")
+		public String detailView(Model m) {
+			OrderBean orderBean = new OrderBean();
+			m.addAttribute("orderBean", orderBean);
+			return "backorderdetail";
+		}
 			
 		@GetMapping("order/insertView")
 		public String addView(Model m) {

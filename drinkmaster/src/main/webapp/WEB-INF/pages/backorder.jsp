@@ -7,7 +7,8 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <html>
 <head>
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
 <style type="text/css">
 #orderform input:focus
 {
@@ -81,6 +82,10 @@
 	border-radius: 2px;
 }
 
+/* .material-icons{ */
+/* size: large; */
+/* } */
+
 </style>
 
 </head>
@@ -108,7 +113,7 @@
 				<option>已取消</option>
 			</select>
 		<button type="submit" class="btn btn  btn-sm" style="font-style:italic;color:blue;">查詢</button>
-		<c:out value="查到 ${page.totalElements }筆資料"></c:out>
+		<c:out value="查到 ${page.totalElements } 筆資料"></c:out>
 		</div >
 		
 	</form>		
@@ -143,6 +148,7 @@
       <td><c:out value="${orderBean.orderPhone}"/></td>
       <td><c:out value="${orderBean.orderStatus}"/></td>
       <td><c:out value="${orderBean.totalPrice}"/></td>
+      <td><a href="${contextRoot}/backend/order/findAll"><i class="tiny material-icons">collections</i></a></td>
       <td>
       <a href="${contextRoot}/backend/order/edit?id=${orderBean.orderId}"><button class="btn btn-outline-primary btn-sm">編輯</button></a>
         <a onclick="return confirm('確定要刪除嗎?')"  href="${contextRoot}/backend/order/delete?id=${orderBean.orderId}"><button class="btn btn-outline-danger btn-sm">刪除</button></a></td>
@@ -197,9 +203,8 @@
  
   <br><br>
   <div class="row justify-content-center">
-<!--   <input type="submit" id="ordersubmit" class="btn btn-outline-primary btn-sm" value="確認" name="submit"  onclick="return confirm('確定要新增嗎?')" >&emsp;   -->
   <a href="${contextRoot}/backend/order/insert">
-  <button type="submit" id="ordersubmit" class="btn btn-primary btn-sm"  name="submit"  onclick="return confirm('確定要新增嗎?')" >確認</button>&emsp;  
+  <button type="submit" id="ordersubmit" class="btn btn-primary btn-sm"  name="submit"  onclick="return confirm('確定要新增嗎?')" >確認</button></a>&emsp;  
   
   <button type="button" id="closebutton" class="btn btn-outline-dark btn-sm" data-dismiss="modal" aria-label="Close" >取消</button>
   </div>

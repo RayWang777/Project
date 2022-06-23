@@ -87,7 +87,27 @@
 <br>
 <p>
 <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="">新增購物車</button></a>&emsp;
-</p>		
+<a href="${contextRoot}/backend/shopCar/findAll"><button type="button" class="btn btn-outline-dark btn-sm">購物車列表</button></a>&emsp;
+<a href="${contextRoot}/backend/shopCar/findStatus?sta=true"><button type="button" class="btn btn-outline-dark btn-sm">已送出</button></a>&emsp;
+<a href="${contextRoot}/backend/shopCar/findStatus?sta=false"><button type="button" class="btn btn-outline-dark btn-sm">未送出</button></a>&emsp;
+</p>
+<form action="${contextRoot}/backend/product/select" method="get">
+		<div class="mb-3">
+			<label for="select" class="form-label">搜尋</label> <input type="text"name="select" id="select" /> 
+				<select name="filed">
+				<option>品項</option>
+				<option>價格</option>
+				<option>溫度</option>
+				<option>待付款</option>
+				<option>待出貨</option>
+				<option>已出貨</option>
+				<option>已取消</option>
+			</select>
+		<button type="submit" class="btn btn  btn-sm" style="font-style:italic;color:blue;">查詢</button>
+		<c:out value="查到 ${page.totalElements } 筆資料"></c:out>
+		</div >
+		
+	</form>			
 <table class="table table-hover"style="width:100%;table-layout:fixed;">
   <thead>
     <tr>
@@ -96,6 +116,7 @@
 						<div class="control__indicator"></div>
 	</label></th>
       <th scope="col">購物車編號</th>
+      <th scope="col">商品</th>
       <th scope="col" style="width: 170px;">成立時間</th>
       <th scope="col">數量</th>
       <th scope="col">冰塊</th>
@@ -114,13 +135,23 @@
 							<div class="control__indicator"></div></label></td>
     
       <th scope="row"><c:out value="${shopCarBean.shopcarId}"/></th>
+      <td><c:out value="${shopCarBean.productBean.productId}"/></td>
       <td><fmt:formatDate  value="${shopCarBean.createTime}" pattern="yyyy-MM-dd HH:mm"/></td>
       <td><c:out value="${shopCarBean.productAmount}"/></td>
       <td><c:out value="${shopCarBean.ice}"/></td>
       <td><c:out value="${shopCarBean.sweet}"/></td>
-      <td><c:out value="${shopCarBean.status}"/></td>
+      <c:choose>
+			<c:when test="${shopCarBean.status==true}">
+			<td style="color: green;">
+					<c:out value="已送出" /></td>
+						</c:when>
+						<c:otherwise>
+			<td style="color: red;">
+					<c:out value="未送出" /></td>
+						</c:otherwise>
+					   </c:choose>               
       <td><a href="${contextRoot}/backend/shopCar/edit?id=${shopCarBean.shopcarId}"><button class="btn btn-outline-primary btn-sm">編輯</button></a>
-        <a onclick="return confirm('確定要刪除嗎?')"  href="${contextRoot}/backend/shopCar/delete?id=${shopCarBean.shopcarId}"><button class="btn btn-outline-danger btn-sm">刪除</button></a></td>
+          <a onclick="return confirm('確定要刪除嗎?')"  href="${contextRoot}/backend/shopCar/delete?id=${shopCarBean.shopcarId}"><button class="btn btn-outline-danger btn-sm">刪除</button></a></td>
       </tr>
     </c:forEach>
  
@@ -140,10 +171,7 @@
    |
    </c:if>
    </c:forEach>
-   </div>
-   <div  class="row justify-content-center" style="font-size: large; color:black;">
-   <c:out value="總共有 ${page.totalElements } 筆資料"></c:out>
-   </div>
+
    
    
    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

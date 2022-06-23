@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.eeit144.drinkmaster.bean.OrderBean;
 import com.eeit144.drinkmaster.bean.ShopCarBean;
 import com.eeit144.drinkmaster.model.ShopCarService;
 
@@ -69,6 +70,17 @@ public class ShopCarController {
 		shopCarService.insertShopCar(shopCarBean);
 
 		return "redirect:/backend/shopCar/findAll";
+	}
+	
+	@GetMapping("shopCar/findStatus")
+	public ModelAndView findStatusView(ModelAndView mav, @RequestParam(name = "S", defaultValue = "1") Integer pageNumber, 
+			@RequestParam(name = "sta", defaultValue = "未送出") String status) {
+		Page<ShopCarBean> page = shopCarService.findByStatus(pageNumber, status);
+		ShopCarBean shopCarBean = new ShopCarBean();
+		mav.getModel().put("shopCarBean", shopCarBean);
+		mav.getModel().put("page", page);
+		mav.setViewName("backshopcar");
+		return mav;
 	}
 	
 }

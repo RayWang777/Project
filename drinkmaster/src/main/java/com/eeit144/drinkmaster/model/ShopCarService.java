@@ -19,4 +19,6 @@ public interface ShopCarService {
 	public void deleteById(Integer id);
 	
 	public Page<ShopCarBean> findByPage(Integer pageNumber);
+	
+	public Page<ShopCarBean> findByStatus(Integer pageNumber, String status);
 }

@@ -1,5 +1,6 @@
 package com.eeit144.drinkmaster.model;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -18,5 +19,6 @@ public interface UserService {
 
 	public Page<UserBean> select(Integer pageNumber, String string);
 
-
+	//firm need no delete
+	public List<UserBean> findAllUsers();
 }

@@ -1,5 +1,6 @@
 package com.eeit144.drinkmaster.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,12 @@ public class UserServiceImp implements UserService {
 	public Page<UserBean> select(Integer pageNumber,String name){
 		PageRequest page = PageRequest.of(pageNumber-1, 10, Sort.Direction.ASC, "userId");
 		return userDao.findByUserNameLike(page, name);
+	}
+
+	//firm need no delete
+	@Override
+	public List<UserBean> findAllUsers() {
+		return userDao.findAll();
 	}
 	
 }

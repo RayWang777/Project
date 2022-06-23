@@ -163,6 +163,6 @@
 <script src="<c:url value="/js/lib/menubar/sidebar.js"/>"></script>
 <script src="<c:url value="/js/lib/preloader/pace.min.js"/>"></script>
 <!-- sidebar -->
-<script src="<c:url value="/js/lib/bootstrap.min.js"/>"></script>
+<script src="<c:url value="/js/lib/bootstrap.bundle.min.js"/>"></script>
 <script src="<c:url value="/js/scripts.js"/>"></script>
 <!-- bootstrap -->

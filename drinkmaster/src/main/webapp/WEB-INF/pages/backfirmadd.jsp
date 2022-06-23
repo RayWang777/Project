@@ -41,9 +41,11 @@
 				</div>
 				
 				<div class="mb-3">
-					<label for="userId" class="form-label">使用者</label>
-					<form:input path="userId" class="form-control" type="text"
-						id="userId" value="${userId}"/>
+					<label for="selectuserId" class="form-label">管理者</label>
+					<form:select id="selectuserId" path="userBean.userId">
+					
+					<form:options items="${firmaddusers}" itemLabel="userName" itemValue="userId" /></form:select>
+					<form:input path="userId" value="1"/>
 					<span id=firmPhoneSp></span>
 				</div>
 
@@ -86,6 +88,14 @@ function preview() {
 	} 
 }
 
+
+$('#selectuserId').change(function(){
+	
+	var selected =$('#selectuserId').val()
+	console.log(selected)
+	$('#userId').val(selected);
+	
+})
 
 </script>
 

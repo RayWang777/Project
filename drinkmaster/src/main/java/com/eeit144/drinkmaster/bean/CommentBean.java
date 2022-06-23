@@ -66,6 +66,10 @@ public class CommentBean {
 	
 	@Column(name = "scoretype", nullable = false)  //不能null , nullable = false
 	private Integer scoreType;
+	
+	
+	@Column(name = "commentPhoto", columnDefinition = "varbinary(max)")
+	private byte[] commentPhoto;
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8") // JSP DATE
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") // MVC DATE

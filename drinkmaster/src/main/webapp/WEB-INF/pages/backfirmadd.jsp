@@ -89,7 +89,7 @@ function preview() {
 }
 
 
-$('#selectuserId').change(function(){
+$('#selectuserId').click(function(){
 	
 	var selected =$('#selectuserId').val()
 	console.log(selected)

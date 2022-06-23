@@ -142,11 +142,11 @@
       <td><c:out value="${shopCarBean.sweet}"/></td>
       <c:choose>
 			<c:when test="${shopCarBean.status==true}">
-			<td style="color: green;">
+			<td style="color: green;font-weight: bold;">
 					<c:out value="已送出" /></td>
 						</c:when>
 						<c:otherwise>
-			<td style="color: red;">
+			<td style="color: red;font-weight: bold;">
 					<c:out value="未送出" /></td>
 						</c:otherwise>
 					   </c:choose>               
@@ -193,6 +193,7 @@
   <form:input path="ice" /><br><br>
   <form:label path="status">狀&emsp;&emsp;態&thinsp;</form:label>
   <select id="status" >
+  <option value="-1">請選擇</option>
   <option value="false">未送出</option>
   <option value="true">已送出</option>
   </select>

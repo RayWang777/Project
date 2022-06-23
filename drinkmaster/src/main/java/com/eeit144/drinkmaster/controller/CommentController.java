@@ -80,10 +80,10 @@ public class CommentController {
 	}
 	
 	
-	@GetMapping("/comment/all")
+	@GetMapping("/comment/timeasc")
 	public String viewMessage(Model model) {
 		
-		List<CommentBean> page = commentService.findAll();
+		List<CommentBean> page = commentService.getCreateTimeAsc();
 		
 		model.addAttribute("page",page);
 		
@@ -91,7 +91,38 @@ public class CommentController {
 		
 	}
 	
+	@GetMapping("/comment/all")
+	public String viewtimedesc(Model model) {
+		
+		List<CommentBean> page = commentService.getCreateTimeDesc();
+		
+		model.addAttribute("page",page);
+		
+		return "backcommentview";
+		
+	}
 	
+	@GetMapping("/comment/scoredesc")
+	public String viewscoredesc(Model model) {
+		
+		List<CommentBean> page = commentService.getScoreDesc();
+		
+		model.addAttribute("page",page);
+		
+		return "backcommentview";
+		
+	}
+	
+	@GetMapping("/comment/scoreasc")
+	public String viewscoreasc(Model model) {
+		
+		List<CommentBean> page = commentService.getScoreAsc();
+		
+		model.addAttribute("page",page);
+		
+		return "backcommentview";
+		
+	}
 	
 	
 	

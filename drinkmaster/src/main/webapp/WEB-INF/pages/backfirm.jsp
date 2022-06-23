@@ -14,19 +14,17 @@
 <br>
 	<c:url value="/backend/firm/add" var="add_url"/>
 	<a href="${add_url}"><button type="button" class="btn btn-success">新增廠商</button></a>
-	<form action="${contextRoot}/backend/product/select" method="get">
 	
-		<div class="mb-3">
-			<label for="select" class="form-label">搜尋</label> <input type="text"name="select" id="select" /> 
-				<select name="filed">
-				<option>廠商名稱</option>
-				<option>廠商電話</option>
-				<option>廠商地址</option>
-				<option>管理者</option>
-			</select>
+	
+	<form action="${contextRoot}/backend/firm/all?p=1" method="get">
+		<div class="mb-3 input-group">
+			<input type="text" name="fa" class="form-control" placeholder="廠商名稱">
+			<input type="text" name="fp" class="form-control" placeholder="廠商電話">
+			<input type="text" name="fa" class="form-control" placeholder="廠商地址">
+			<input type="text" name="un" class="form-control" placeholder="管理者">
+		</div >
 		<button type="submit" class="btn btn  btn-sm" style="color:blue;">查詢</button>
 		<c:out value="查到 ${page.totalElements }筆資料"></c:out>
-		</div >
 	</form>
 
 
@@ -100,20 +98,7 @@
 		style="font-size: large; color: black;">
 		<c:out value="總共有 ${firms.totalElements} 筆資料"></c:out>
 	</div>
-	
-	<div class="dropdown">
-  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
-    Dropdown link
-  </a>
-
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-  </div>
-</div>
-	
-	
+		
 </body>
 
 <script src="<c:url value="/js/lib/popper.min.js"/>"></script>

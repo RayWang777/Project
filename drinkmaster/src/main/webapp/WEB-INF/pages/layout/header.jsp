@@ -112,10 +112,11 @@
 				<li><a class="sidebar-sub-toggle"><i class="large material-icons">room_service</i> 客服管理 <span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
-						<li><a href="${contextRoot}/backend/serviceadd">新增</a></li>
-						<li><a href="${contextRoot}/backend/serviceedit">修改</a></li>
-						<li><a href="${contextRoot}/backend/servicedelete">刪除</a></li>
-						<li><a href="${contextRoot}/backend/serviceall">查詢</a></li>
+					    <li><a href="${contextRoot}/backend/service/reply">意見回覆</a></li>
+						<li><a href="${contextRoot}/backend/service/viewall">意見總覽</a></li>
+						<li><a href="${contextRoot}/backend/service/add">新增意見</a></li>
+						
+						
 					</ul></li>
 				<li><a><i class="ti-close"></i> Logout</a></li>
 			</ul>

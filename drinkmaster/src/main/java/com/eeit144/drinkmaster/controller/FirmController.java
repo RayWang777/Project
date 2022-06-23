@@ -81,17 +81,17 @@ public class FirmController {
 
 	@GetMapping("firm/all")
 	public String findAllPages(@RequestParam(name = "p", defaultValue = "1") Integer page,
-			@RequestParam(name = "c", defaultValue = "1") Integer column,
 			@RequestParam(name = "s", defaultValue = "5") Integer size,
 			@RequestParam(name = "d", defaultValue = "true") boolean direct, Model m) {
-		if (column > 4)
-			column = 1;
+	
+
+
 
 		Pageable pab = null;
 		if (direct) {
-			pab = PageRequest.of(page - 1, size, Sort.Direction.ASC, FirmColumn.getColumne(column));
+			pab = PageRequest.of(page - 1, size, Sort.Direction.ASC,"firmId");
 		} else {
-			pab = PageRequest.of(page - 1, size, Sort.Direction.DESC, FirmColumn.getColumne(column));
+			pab = PageRequest.of(page - 1, size, Sort.Direction.DESC,"firmId");
 		}
 
 //		Page<FirmBean> allFirm = firmService.findAll(pab);
@@ -100,22 +100,26 @@ public class FirmController {
 		
 		
 		
-//		UserBean userBean = new UserBean();
-//		userBean.setUserName("凱");
-//		FirmBean firmBean = new FirmBean();
-//		firmBean.setFirmName("0");		
-//		firmBean.setFirmPhone("3");		
+		UserBean userBean = new UserBean();
+//		userBean.setUserName("0");
+		FirmBean firmBean = new FirmBean();
+//		firmBean.setFirmName("");		
+//		firmBean.setFirmPhone("");	
+//		firmBean.setFirmAddress("");
 //		firmBean.setUserBean(userBean);
-//		ExampleMatcher matcher = ExampleMatcher.matchingAll().withMatcher("firmName",ExampleMatcher.GenericPropertyMatchers.contains())
-//				.withMatcher("firmPhone", ExampleMatcher.GenericPropertyMatchers.contains())
-//				.withMatcher("userBean.userName", ExampleMatcher.GenericPropertyMatchers.contains());
-//		
-//		Example<FirmBean> example = Example.of(firmBean,matcher);
-//		
-//		Page<FirmBean> allFirm = firmService.findAll2(example,pab);
+		ExampleMatcher matcher = ExampleMatcher.matchingAll().withMatcher("firmName",ExampleMatcher.GenericPropertyMatchers.contains())
+				.withMatcher("firmPhone", ExampleMatcher.GenericPropertyMatchers.contains())
+				.withMatcher("firmAddress", ExampleMatcher.GenericPropertyMatchers.contains())
+				.withMatcher("userBean.userName", ExampleMatcher.GenericPropertyMatchers.contains());
 		
+		Example<FirmBean> example = Example.of(firmBean,matcher);
 		
-		Page<FirmBean> allFirm = firmService.findAllByFirmNameOrFirmPhone("0", "3", pab);
+		Page<FirmBean> allFirm = firmService.findAll2(example,pab);
+		
+		allFirm.getContent();
+		allFirm.getTotalPages();
+		allFirm.getNumber();
+//		Page<FirmBean> allFirm = firmService.findAllByFirmNameOrFirmPhone("0", "3", pab);
 		
 
 		for (FirmBean firm : allFirm) {

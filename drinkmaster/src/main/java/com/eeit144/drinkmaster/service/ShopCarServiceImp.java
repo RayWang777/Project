@@ -60,4 +60,10 @@ public class ShopCarServiceImp implements ShopCarService {
 		
 	}
 
+	@Override
+	public Page<ShopCarBean> findByStatus(Integer pageNumber, String status){
+		Pageable pgb = PageRequest.of(pageNumber-1, 10 ,Sort.Direction.DESC ,"shopcarId");
+		return shopCarDao.findByStatus1(pgb, status);
+		
+	}
 }

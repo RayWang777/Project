@@ -116,7 +116,7 @@
 		<c:out value="查到 ${page.totalElements } 筆資料"></c:out>
 		</div >
 		
-	</form>		
+</form>		
 <table class="table table-hover"style="width:100%;table-layout:fixed;">
   <thead>
     <tr>
@@ -190,7 +190,7 @@
   <form:label path="orderPhone">電&emsp;&emsp;話</form:label>
   <form:input path="orderPhone" /><br><br>
   <form:label path="orderStatus">狀&emsp;&emsp;態</form:label>
-  <select id="orderStatus" >
+  <select id="orderStatus" path="orderStatus">
   <option value="待付款">待付款</option>
   <option value="待出貨">待出貨</option>
   <option value="已出貨">已出貨</option>

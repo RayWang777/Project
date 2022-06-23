@@ -34,8 +34,8 @@
  	height: 25px; 
  	width: 350px; 
     outline: 0; 
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0, 106, 255,.4);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0, 106, 255,.4); 
+/*     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0, 106, 255,.4); */
+/*     box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0, 106, 255,.4);  */
 	font-size: 14px;
 }
 
@@ -135,7 +135,7 @@
 							<div class="control__indicator"></div></label></td>
     
       <th scope="row"><c:out value="${shopCarBean.shopcarId}"/></th>
-      <td><c:out value="${shopCarBean.productBean.productId}"/></td>
+      <td><c:out value="${shopCarBean.productBean.productName}"/></td>
       <td><fmt:formatDate  value="${shopCarBean.createTime}" pattern="yyyy-MM-dd HH:mm"/></td>
       <td><c:out value="${shopCarBean.productAmount}"/></td>
       <td><c:out value="${shopCarBean.ice}"/></td>

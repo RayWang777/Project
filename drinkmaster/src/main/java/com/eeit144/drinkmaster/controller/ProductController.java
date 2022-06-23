@@ -23,7 +23,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eeit144.drinkmaster.bean.ProductBean;
+import com.eeit144.drinkmaster.bean.ProductCategoryBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
+import com.eeit144.drinkmaster.service.ProductCategoryServiceImp;
 import com.eeit144.drinkmaster.service.ProductServiceImp;
 
 @Controller
@@ -32,6 +34,7 @@ import com.eeit144.drinkmaster.service.ProductServiceImp;
 public class ProductController {
 	@Autowired
 	private ProductServiceImp proService;
+	@Autowired ProductCategoryServiceImp categoryService;
 
 	@GetMapping("product/insertview")
 	public String addView(Model m) {
@@ -40,11 +43,23 @@ public class ProductController {
 		m.addAttribute("insert", "product/insert");
 		return "backproductinsert";
 	}
-
+	@GetMapping("prodcuct/insertcategory")
+	public String addCategoryView(Model m) {
+		ProductCategoryBean category=new ProductCategoryBean();
+		m.addAttribute("category",category);
+		m.addAttribute("insert", "category/add");
+		return "backproductcategoryinsert";
+	}
+	@PostMapping("/category/add")
+	public String saveCategory(@ModelAttribute("category") ProductCategoryBean cate ) {
+		categoryService.insertCategory(cate);
+		
+		return "redirect:/backend/category/all";
+	} 
 	@PostMapping("/product/insert")
 	public String insertProduct(@RequestParam String productName, @RequestParam String price,
-			@RequestParam String coldHot, @RequestParam Boolean status, @RequestParam StoreBean storeBean,
-			@RequestPart("productImage") MultipartFile productImage, Model m) throws IOException {
+			@RequestParam String coldHot, @RequestParam Boolean status,
+			@RequestParam ProductCategoryBean productCategoryBean,@RequestPart("productImage") MultipartFile productImage, Model m) throws IOException {
 		Map<String, String> errors = new HashMap<String, String>();
 		m.addAttribute("errors", errors);
 		if (productName == null || productName.length() == 0) {
@@ -70,7 +85,7 @@ public class ProductController {
 		pro.setColdHot(coldHot);
 		pro.setStatus(status);
 		pro.setProductName(productName);
-		pro.setStoreBean(storeBean);
+		pro.setProductCategoryBean(productCategoryBean);
 
 		String filebase64 = proService.getFileBase64String(productImage);
 		String productimage = "data:" + filetype + ";base64," + filebase64 + "";
@@ -92,6 +107,15 @@ public class ProductController {
 
 		mav.getModel().put("page", page);
 		mav.setViewName("backproduct");
+		return mav;
+	}
+	
+	@GetMapping("category/all")
+	public ModelAndView categoryView(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber) {
+		Page<ProductCategoryBean> page = categoryService.findByPage(pageNumber);
+
+		mav.getModel().put("page", page);
+		mav.setViewName("backcategory");
 		return mav;
 	}
 
@@ -120,6 +144,19 @@ public class ProductController {
 		return "redirect:/backend/product/all";
 
 	}
+	@GetMapping("deletecategory")
+	public String deleteCategoryById(@RequestParam("id") Integer id) {
+
+		categoryService.deleteById(id);
+		return "redirect:/backend/category/all";
+}
+	@GetMapping("editcategory")
+	public String updateCategoryById(@RequestParam("id") Integer id, Model m) {
+		ProductCategoryBean proBean = categoryService.findById(id);
+		m.addAttribute("category", proBean);
+		m.addAttribute("insert", "updatecategory");
+		return "backproductcategoryinsert";
+	}
 
 	@GetMapping("editproduct")
 	public String updateById(@RequestParam("id") Integer id, Model m) {
@@ -128,11 +165,18 @@ public class ProductController {
 		m.addAttribute("insert", "updateproduct");
 		return "backproductinsert";
 	}
+	@PostMapping("updatecategory")
+	public String editCategory(@ModelAttribute("category") ProductCategoryBean cate ) {
+		
+		categoryService.insertCategory(cate);
+		
+		return "redirect:/backend/category/all";
+	} 
 
 	@PostMapping("updateproduct")
-	public String postUpdate(@RequestParam Integer productId, @RequestParam String productName,
+	public String postUpdate(@RequestParam Integer productId,@RequestParam ProductCategoryBean productCategoryName, @RequestParam String productName,
 			@RequestParam String price, @RequestParam String coldHot, @RequestParam Boolean status,
-			@RequestParam StoreBean storeBean, @RequestPart("productImage") MultipartFile productImage, Model m)
+			 @RequestPart("productImage") MultipartFile productImage, Model m)
 			throws IOException {
 
 		Map<String, String> errors = new HashMap<String, String>();
@@ -160,7 +204,8 @@ public class ProductController {
 		pro.setColdHot(coldHot);
 		pro.setStatus(status);
 		pro.setProductName(productName);
-		pro.setStoreBean(storeBean);
+		
+		pro.setProductCategoryBean(productCategoryName);
 
 		String filetype = productImage.getContentType();
 

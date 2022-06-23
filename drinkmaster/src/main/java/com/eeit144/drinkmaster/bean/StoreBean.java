@@ -18,7 +18,7 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
+@Entity 
 @Table(name = "store")
 public class StoreBean {
 
@@ -55,10 +55,10 @@ public class StoreBean {
 	@Column(name="latitude")
 	private Double latitude;
 	
+	
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "storeBean",cascade = CascadeType.ALL)
-	private Set<ProductBean> products = new LinkedHashSet<ProductBean>();
-	
+	private Set<ProductCategoryBean> productCategory = new LinkedHashSet<ProductCategoryBean>();
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "storeBean",cascade = CascadeType.ALL)
 	private Set<CommentBean> comments = new LinkedHashSet<CommentBean>();
@@ -138,12 +138,14 @@ public class StoreBean {
 		this.latitude = latitude;
 	}
 
-	public Set<ProductBean> getProducts() {
-		return products;
+
+
+	public Set<ProductCategoryBean> getProductCategory() {
+		return productCategory;
 	}
 
-	public void setProducts(Set<ProductBean> products) {
-		this.products = products;
+	public void setProductCategory(Set<ProductCategoryBean> productCategory) {
+		this.productCategory = productCategory;
 	}
 
 	public Set<CommentBean> getComments() {

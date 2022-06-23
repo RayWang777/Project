@@ -3,6 +3,7 @@ package com.eeit144.drinkmaster.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -10,17 +11,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.dao.FirmRepository;
+import com.eeit144.drinkmaster.dto.FirmDTO;
 import com.eeit144.drinkmaster.model.FirmService;
-
-
 
 @Service
 @Transactional
 public class FirmServiceImp implements FirmService {
 
 	private FirmRepository firmDao;
-	
-	
+
 	@Autowired
 	public FirmServiceImp(FirmRepository firmDao) {
 		super();
@@ -32,13 +31,10 @@ public class FirmServiceImp implements FirmService {
 		return firmDao.findById(id);
 	}
 
-
 	@Override
 	public Page<FirmBean> findAll(Pageable pab) {
 		return firmDao.findAll(pab);
 	}
-
-
 
 	@Override
 	public void deleteById(Integer id) {
@@ -48,6 +44,26 @@ public class FirmServiceImp implements FirmService {
 	@Override
 	public void insertFirm(FirmBean firm) {
 		firmDao.save(firm);
+	}
+
+	@Override
+	public FirmDTO change(FirmBean firm) {
+		FirmDTO firmDTO = new FirmDTO();
+		firmDTO.setFirmId(firm.getFirmId());
+		firmDTO.setFirmName(firm.getFirmName());
+		firmDTO.setFirmAddress(firm.getFirmAddress());
+		firmDTO.setFirmPhone(firm.getFirmPhone());
+		firmDTO.setUserId(firm.getUserBean().getUserId());
+		return firmDTO;
+	}
+
+	@Override
+	public Page<FirmBean> findAllByFirmNameOrFirmPhone(String FirmName, String FirmPhone, Pageable pab) {
+		return firmDao.findAllByFirmNameContainingAndFirmPhoneContaining(FirmName, FirmPhone, pab);		 
+	}
+	
+	public Page<FirmBean> findAll2(Example<FirmBean> firm,Pageable pab){
+		return firmDao.findAll(firm, pab);
 	}
 
 }

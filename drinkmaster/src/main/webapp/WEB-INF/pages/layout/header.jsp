@@ -96,7 +96,7 @@
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
 						<li><a href="<c:url value="/backend/order/findAll"/>">訂單列表</a></li>
-						<li><a href="#">修改</a></li>
+						<li><a href="<c:url value="/backend/order/detail"/>">修改</a></li>
 
 						<li><a href="#">刪除</a></li>
 						<li><a href="#">查詢</a></li>

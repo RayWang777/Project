@@ -1,7 +1,10 @@
 package com.eeit144.drinkmaster.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +28,7 @@ public class CommentController {
 	private Integer userId = 1;			//測試用
 	private Integer storeId = 2;		//測試用
 	private Integer productId = 3;		//測試用
-	private Double score = 1.0;			//測試用
+//	private Double score = 1.0;			//測試用
 	private Integer scoreType = 10;		//測試用
 	
 	
@@ -77,15 +80,30 @@ public class CommentController {
 	
 	
 	@GetMapping("/comment/all")
-	public String viewMessage(@RequestParam(name="p",defaultValue = "1") Integer pageNumber,Model model) {
+	public String viewMessage(Model model) {
 		
-		Page<CommentBean> page = commentService.findByPage(pageNumber);
-			
+		List<CommentBean> page = commentService.findAll();
+		
 		model.addAttribute("page",page);
 		
 		return "backcommentview";
 		
 	}
+	
+	
+	
+	
+	
+//	@GetMapping("/comment/all")
+//	public String viewMessage(@RequestParam(name="p",defaultValue = "1") Integer pageNumber,Model model) {
+//		
+//		Page<CommentBean> page = commentService.findByPage(pageNumber);
+//			
+//		model.addAttribute("page",page);
+//		
+//		return "backcommentview";
+//		
+//	}
 	
 	
 	@GetMapping("comment/editComment")
@@ -140,6 +158,17 @@ public class CommentController {
 //		return "addcomment";
 //		
 //	}
+	
+	@PostMapping("comment/commentstore")
+	public String findCommentByStoreid(@RequestParam("storeId")Integer storeId, Model model){
+		
+		List<CommentBean> CBS = commentService.findCommentByStoreid(storeId);
+		
+		model.addAttribute("CBS", CBS);
+		
+		return "commentstore" ;
+	}
+	
 	
 
 }

@@ -1,5 +1,10 @@
 package com.eeit144.drinkmaster.dto;
 
+import com.eeit144.drinkmaster.bean.UserBean;
+
+import lombok.Data;
+
+@Data
 public class FirmDTO {
 
 	private Integer firmId;
@@ -11,6 +16,8 @@ public class FirmDTO {
 	private String firmPhone;
 
 	private String firmLogo;
+	
+	private UserBean userBean;
 	
 	private Integer userId;
 
@@ -65,6 +72,14 @@ public class FirmDTO {
 
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+
+	public UserBean getUserBean() {
+		return userBean;
+	}
+
+	public void setUserBean(UserBean userBean) {
+		this.userBean = userBean;
 	}
 
 	

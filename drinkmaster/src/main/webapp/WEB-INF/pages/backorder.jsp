@@ -36,8 +36,8 @@
  	height: 25px; 
  	width: 350px; 
     outline: 0; 
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0, 106, 255,.4);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0, 106, 255,.4); 
+/*     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0, 106, 255,.4); */
+/*     box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0, 106, 255,.4);  */
 	font-size: 14px;
 }
 
@@ -146,7 +146,29 @@
       <td><fmt:formatDate  value="${orderBean.createTime}" pattern="yyyy-MM-dd HH:mm"/></td>
       <td><c:out value="${orderBean.orderAddress}"/></td>
       <td><c:out value="${orderBean.orderPhone}"/></td>
-      <td><c:out value="${orderBean.orderStatus}"/></td>
+      
+      <c:choose>
+			<c:when test="${orderBean.orderStatus=='已出貨'}">
+			<td style="color: green;">
+					<c:out value="已出貨" /></td>
+						</c:when>
+			<c:when test="${orderBean.orderStatus=='已取消'}">
+			<td style="color: blue;">
+					<c:out value="已取消" /></td>
+						</c:when>
+			<c:when test="${orderBean.orderStatus=='待付款'}">
+			<td style="color: orange;">
+					<c:out value="待付款" /></td>
+						</c:when>			
+						<c:otherwise>
+			<td style="color: red;" test="${orderBean.orderStatus=='未出貨'}">
+					<c:out value="待出貨" /></td>
+						</c:otherwise>
+
+
+						
+					   </c:choose>  
+<%--       <td><c:out value="${orderBean.orderStatus}"/></td> --%>
       <td><c:out value="${orderBean.totalPrice}"/></td>
       <td><a href="${contextRoot}/backend/order/findAll"><i class="tiny material-icons">collections</i></a></td>
       <td>
@@ -154,9 +176,14 @@
         <a onclick="return confirm('確定要刪除嗎?')"  href="${contextRoot}/backend/order/delete?id=${orderBean.orderId}"><button class="btn btn-outline-danger btn-sm">刪除</button></a></td>
       </tr>
     </c:forEach>
+    
  
   </tbody>
+  
 </table>
+<p>
+    <button type="button" class="btn btn-warning btn-sm" >匯出Excel</button>&emsp;
+</p>
 <div class="row justify-content-center" style="font-size: x-large;">
   <c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
    <c:choose>

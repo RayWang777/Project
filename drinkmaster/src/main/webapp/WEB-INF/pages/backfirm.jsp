@@ -7,6 +7,9 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
 
+<link href="<c:url value="/js/lib/popper.min.js"/>" rel="stylesheet">
+
+
 <body>
 <br>
 	<c:url value="/backend/firm/add" var="add_url"/>
@@ -63,7 +66,7 @@
 					</td>
 					<td class="align-middle"><c:out value='${firm.firmAddress}' /></td>
 
-					<td class="align-middle"><c:out value="${firm.userBean.role}" /></td>
+					<td class="align-middle"><c:out value="${firm.userBean.userName}" /></td>
 
 					<td class="align-middle"><img
 						src="<c:url value="/backend/firm/${firm.firmId}/photo"/>"
@@ -97,6 +100,20 @@
 		style="font-size: large; color: black;">
 		<c:out value="總共有 ${firms.totalElements} 筆資料"></c:out>
 	</div>
+	
+	<div class="dropdown">
+  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+    Dropdown link
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+  </div>
+</div>
+	
+	
 </body>
 
 <script src="<c:url value="/js/lib/popper.min.js"/>"></script>

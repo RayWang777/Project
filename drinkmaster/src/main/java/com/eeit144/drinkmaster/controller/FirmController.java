@@ -2,6 +2,7 @@ package com.eeit144.drinkmaster.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -33,17 +34,21 @@ import com.eeit144.drinkmaster.bean.FirmColumn;
 import com.eeit144.drinkmaster.bean.UserBean;
 import com.eeit144.drinkmaster.dto.FirmDTO;
 import com.eeit144.drinkmaster.model.FirmService;
+import com.eeit144.drinkmaster.model.UserService;
 
 @Controller
 @RequestMapping("backend/")
 public class FirmController {
 
 	private FirmService firmService;
+	
+	private UserService userService;
 
 	@Autowired
-	public FirmController(FirmService firmService) {
+	public FirmController(FirmService firmService, UserService userService) {
 		super();
 		this.firmService = firmService;
+		this.userService = userService;
 	}
 
 	@GetMapping("firm/{id}")
@@ -92,22 +97,25 @@ public class FirmController {
 //		Page<FirmBean> allFirm = firmService.findAll(pab);
 		
 		
-		UserBean userBean = new UserBean();
-		userBean.setRole("m");
-		FirmBean firmBean = new FirmBean();
+		
+		
+		
+//		UserBean userBean = new UserBean();
+//		userBean.setUserName("凱");
+//		FirmBean firmBean = new FirmBean();
 //		firmBean.setFirmName("0");		
 //		firmBean.setFirmPhone("3");		
-		firmBean.setUserBean(userBean);
-		ExampleMatcher matcher = ExampleMatcher.matchingAll().withMatcher("firmName",ExampleMatcher.GenericPropertyMatchers.contains())
-				.withMatcher("firmPhone", ExampleMatcher.GenericPropertyMatchers.contains())
-				.withMatcher("userBean.role", ExampleMatcher.GenericPropertyMatchers.contains());
+//		firmBean.setUserBean(userBean);
+//		ExampleMatcher matcher = ExampleMatcher.matchingAll().withMatcher("firmName",ExampleMatcher.GenericPropertyMatchers.contains())
+//				.withMatcher("firmPhone", ExampleMatcher.GenericPropertyMatchers.contains())
+//				.withMatcher("userBean.userName", ExampleMatcher.GenericPropertyMatchers.contains());
+//		
+//		Example<FirmBean> example = Example.of(firmBean,matcher);
+//		
+//		Page<FirmBean> allFirm = firmService.findAll2(example,pab);
 		
-		Example<FirmBean> example = Example.of(firmBean,matcher);
 		
-		Page<FirmBean> allFirm = firmService.findAll2(example,pab);
-		
-		
-//		Page<FirmBean> allFirm = firmService.findAllByFirmNameOrFirmPhone("0", "3", pab);
+		Page<FirmBean> allFirm = firmService.findAllByFirmNameOrFirmPhone("0", "3", pab);
 		
 
 		for (FirmBean firm : allFirm) {
@@ -122,6 +130,9 @@ public class FirmController {
 	@GetMapping("/firm/add")
 	public String firmAddPage(Model m) {
 		FirmDTO firmDTO = new FirmDTO();
+		List<UserBean> users = userService.findAllUsers();
+		
+		m.addAttribute("firmaddusers", users);
 		m.addAttribute("firm", firmDTO);
 		return "backfirmadd";
 	}

@@ -74,20 +74,20 @@ public class CommentServiceImp implements CommentService {
 	}
 	
 	
-	public CommentBean getScoreAsc() {
+	public List<CommentBean> getScoreAsc() {
 		return commentDao.findAllByOrderByScoreAsc();
 	}
 	
-	public CommentBean getScoreDesc() {
+	public List<CommentBean> getScoreDesc() {
 		return commentDao.findAllByOrderByScoreDesc();
 	}
 	
-	public CommentBean getCreateTimeAsc() {
+	public List<CommentBean> getCreateTimeAsc() {
 		return commentDao.findAllByOrderByCreateTimeAsc();
 	}
 	
-	public CommentBean getCreateTimeDesc() {
-		return commentDao.findAllByOrderByCreateTimeAsc();
+	public List<CommentBean> getCreateTimeDesc() {
+		return commentDao.findAllByOrderByCreateTimeDesc();
 	}
 	
 	

@@ -18,8 +18,7 @@
 
 <script src="${contextRoot}/js/lib/awesomeRating.min.js"></script>
 <script src="${contextRoot}/js/lib/average-rating.min.js" type="text/javascript"></script>
-<script src="${contextRoot}/js/lib/popper.min.js" type="text/javascript"></script>
-<script src="${contextRoot}/js/lib/bootstrap.bundle.js" type="text/javascript"></script>
+
 
 
 
@@ -46,6 +45,11 @@
 
 #ratingBarFive {
   background-color: #99cc00;
+}
+
+#dropdownMenu2{
+	background-color: white;
+	border: 1px solid gray;
 }
 </style>
 
@@ -75,37 +79,18 @@ console.log(average(rating));
 
 
 
-<select>
-	<option selected>最新</option>
-	<option>評分最高</option>
-	<option>評分最低</option>
-	<option>最早</option>
-
-</select>
-
-
-<!-- <div class="dropdown"> -->
-<!--   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false"> -->
-<!--     排序 -->
-<!--   </button> -->
-<!--   <div class="dropdown-menu" aria-labelledby="dropdownMenu2"> -->
-<!--     <button class="dropdown-item" type="button">最新</button> -->
-<!--     <button class="dropdown-item" type="button">評分最高</button> -->
-<!--     <button class="dropdown-item" type="button">評分最低</button> -->
-<!--     <button class="dropdown-item" type="button">評分最低</button> -->
-<!--   </div> -->
-<!-- </div> -->
-
 <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">
-    Dropdown
+  <button class="btn btn-black dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">
+    排序
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-    <button class="dropdown-item" type="button">Action</button>
-    <button class="dropdown-item" type="button">Another action</button>
-    <button class="dropdown-item" type="button">Something else here</button>
+    <a href="${contextRoot}/backend/comment/all"><button class="dropdown-item" type="button">最新</button></a>
+    <a href="${contextRoot}/backend/comment/scoredesc"><button class="dropdown-item" type="button">評分最高</button></a>
+    <a href="${contextRoot}/backend/comment/scoreasc"><button class="dropdown-item" type="button">評分最低</button></a>
+    <a href="${contextRoot}/backend/comment/timeasc"><button class="dropdown-item" type="button">最早</button></a>
   </div>
 </div>
+
 
 
 

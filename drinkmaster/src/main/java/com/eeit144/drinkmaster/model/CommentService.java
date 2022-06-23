@@ -22,13 +22,13 @@ public interface CommentService {
 		
 	public List<CommentBean> findCommentByStoreid(Integer storeId);
 
-	public CommentBean getScoreAsc();
+	public List<CommentBean> getScoreAsc();
 	
-	public CommentBean getScoreDesc();
+	public List<CommentBean> getScoreDesc();
 	
-	public CommentBean getCreateTimeAsc();
+	public List<CommentBean> getCreateTimeAsc();
 	
-	public CommentBean getCreateTimeDesc();
+	public List<CommentBean> getCreateTimeDesc();
 	
 	
 

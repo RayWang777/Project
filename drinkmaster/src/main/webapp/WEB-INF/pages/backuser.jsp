@@ -18,19 +18,62 @@
 <table class="table table-hover" style="width:100%;table-layout:fixed;">
 	<thead>
 		<tr>
+			<th scope="col">
+			<label class="control control--checkbox">
+				<input type="checkbox" class="js-check-all"/>
+			</label>
+			</th>
 			<th scope="col">姓名</th>
 			<th scope="col">帳號</th>
 			<th scope="col">地址</th>
 			<th scope="col">手機</th>
 			<th scope="col">性別</th>
 			<th scope="col">生日</th>
-			<th scope="col">功能</th>
+			<th scope="col">大頭貼</th>
+			<th scope="col" style="text-align: left;">功能</th>
 		</tr>
 	</thead>
 	<tbody>
 	<c:forEach var="userBean" items="${page.content}">
 		<tr>
-			<td scope="row"><c:out value="${userBean.userName}"/></td>
+			<td class="align-middle">
+			<label class="control control--checkbox">
+				<input type="checkbox" id="check" value="<c:out value='${userBean.userId}'/>"
+					style="margin-top:20px;"/>
+			</label>
+			</td>
+			<td class="align-middle"><div class="d-flex align-items-center">
+				<a href="#"><c:out value="${userBean.userName}"/></a>
+			</div></td>
+			<td class="align-middle"><div class="d-flex align-items-center">
+				<c:out value="${userBean.userAccount}"/>
+			</div></td>
+			<td class="align-middle"><div class="d-flex align-items-center">
+				<c:out value="${userBean.userAddress}"/>
+			</div></td>
+			<td class="align-middle"><div class="d-flex align-items-center">
+				<c:out value="${userBean.phone}"/>
+			</div></td>
+			<td class="align-middle"><div class="d-flex align-items-center">
+				<c:out value="${userBean.gender}"/>
+			</div></td>
+			<td class="align-middle"><div class="d-flex align-items-center">
+				<c:out value="${userBean.birthday}"/>
+			</div></td>
+			
+			<td class="align-middle"><img src="<c:url value="/backend/user/${userBean.userId}/photo"/>"
+						style="width: 100px; height: 100px;"></td>
+						
+			<td class="align-middle" style="width: 13%;"><div class="d-flex align-items-center">
+				<div style="margin: 5px"><c:url value="/backend/user/update/${userBean.userId}" var="update_url" />
+				<a href="${update_url}">
+					<button type="button" class="btn btn-primary">編輯</button>
+				</a></div>
+				<div style="margin: 5px"><c:url value="/backend/user/delete/${userBean.userId}" var="delete_url" />
+				<a href="${delete_url}" onclick="return confirm('真的要刪除嗎')">
+					<button type="button" class="btn btn-danger">刪除</button>
+				</a></div>
+			</div></td>
 		</tr>
 	</c:forEach>
 	</tbody>

@@ -43,7 +43,7 @@ public class UserBean {
 	@Column(name = "useraddress",nullable = false, columnDefinition = "nvarchar(50)")
 	private String userAddress;
 
-	@Column(name = "photo", columnDefinition = "varchar(max)")
+	@Column(name = "photo", columnDefinition = "varbinary(max)")
 	private byte[] photo;
 
 	@Column(name = "phone",nullable = false)

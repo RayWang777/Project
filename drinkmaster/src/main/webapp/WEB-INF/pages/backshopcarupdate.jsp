@@ -28,10 +28,11 @@
   <form:input path="sweet" /><br><br>
   狀&emsp;&emsp;態<form:label path="status"></form:label>
   <select id="carstatus" style="width: 168px; height: 27px;">
+  <option value="-1">請選擇</option>
   <option value="false">未送出</option>
   <option value="true">已送出</option>
   </select>
-  <form:input id="substatus" path="status" /><br><br>
+  <form:hidden id="substatus" path="status" /><br><br>
   
  
   <br><br>

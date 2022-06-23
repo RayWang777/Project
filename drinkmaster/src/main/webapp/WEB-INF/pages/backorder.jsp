@@ -7,6 +7,9 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <html>
 <head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 <style type="text/css">
@@ -90,6 +93,7 @@
 
 </head>
 <body>
+
 <br>
 <p>
 <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="">新增訂單</button></a>&emsp;
@@ -117,6 +121,7 @@
 		</div >
 		
 </form>		
+
 <table class="table table-hover"style="width:100%;table-layout:fixed;">
   <thead>
     <tr>
@@ -149,19 +154,19 @@
       
       <c:choose>
 			<c:when test="${orderBean.orderStatus=='已出貨'}">
-			<td style="color: green;">
+			<td style="color: green;font-weight: bold;">
 					<c:out value="已出貨" /></td>
 						</c:when>
 			<c:when test="${orderBean.orderStatus=='已取消'}">
-			<td style="color: blue;">
+			<td style="color: blue;font-weight: bold;">
 					<c:out value="已取消" /></td>
 						</c:when>
 			<c:when test="${orderBean.orderStatus=='待付款'}">
-			<td style="color: orange;">
+			<td style="color: orange;font-weight: bold;">
 					<c:out value="待付款" /></td>
 						</c:when>			
 						<c:otherwise>
-			<td style="color: red;" test="${orderBean.orderStatus=='未出貨'}">
+			<td style="color: red;font-weight: bold;" test="${orderBean.orderStatus=='未出貨'}">
 					<c:out value="待出貨" /></td>
 						</c:otherwise>
 
@@ -181,9 +186,11 @@
   </tbody>
   
 </table>
+
 <p>
     <button type="button" class="btn btn-warning btn-sm" >匯出Excel</button>&emsp;
 </p>
+
 <div class="row justify-content-center" style="font-size: x-large;">
   <c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
    <c:choose>
@@ -198,6 +205,7 @@
     &thinsp;| &thinsp;
    </c:if>
    </c:forEach>
+   <canvas id="myChart" width="200" height="200"></canvas>
    
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -218,6 +226,7 @@
   <form:input path="orderPhone" /><br><br>
   <form:label path="orderStatus">狀&emsp;&emsp;態</form:label>
   <select id="orderStatus" path="orderStatus">
+  <option value="-1">請選擇</option>
   <option value="待付款">待付款</option>
   <option value="待出貨">待出貨</option>
   <option value="已出貨">已出貨</option>
@@ -243,6 +252,50 @@
 </div>
 
 <script type="text/javascript">
+
+$(document).ready(function(){
+	
+	$ajax({
+		type:"GET",
+		url:'order/findStatus',
+		contentType:'application/json',
+		data: JSON.stringify(),
+		success: function(data){
+			console.log(data);
+		},error: function(e){
+			   console.log(e);
+		   }
+	})
+})
+
+
+
+var ctx = document.getElementById('myChart');
+var myChart = new Chart(ctx, {
+  type: 'pie',
+  data: {
+    labels: ['一月', '二月', '三月'],
+    datasets: [{
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)'
+      ],
+      borderColor: [
+        'rgba(255,99,132,1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)'
+      ],
+      borderWidth: 1,
+      label: '銷售業績(百萬)',
+      data: [60, 49, 72]
+    }]
+  }
+});
+
+
+
 $('#exampleModal').on('show.bs.modal', function (event) {
 	  var button = $(event.relatedTarget) // Button that triggered the modal
 	  var recipient = button.data('whatever') // Extract info from data-* attributes

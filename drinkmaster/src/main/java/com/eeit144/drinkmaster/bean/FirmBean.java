@@ -62,5 +62,5 @@ public class FirmBean {
 
 	public FirmBean() {
 	}
-
+	
 }

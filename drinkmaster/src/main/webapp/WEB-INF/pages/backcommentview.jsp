@@ -18,6 +18,10 @@
 
 <script src="${contextRoot}/js/lib/awesomeRating.min.js"></script>
 <script src="${contextRoot}/js/lib/average-rating.min.js" type="text/javascript"></script>
+<script src="${contextRoot}/js/lib/popper.min.js" type="text/javascript"></script>
+<script src="${contextRoot}/js/lib/bootstrap.bundle.js" type="text/javascript"></script>
+
+
 
 <style type="text/css">
 .ratingBar {
@@ -68,6 +72,49 @@ console.log(average(rating));
 <div id="ratingBarThree" class="ratingBar"></div>
 <div id="ratingBarTwo" class="ratingBar"></div>
 <div id="ratingBarOne" class="ratingBar"></div>
+
+
+
+<select>
+	<option selected>最新</option>
+	<option>評分最高</option>
+	<option>評分最低</option>
+	<option>最早</option>
+
+</select>
+
+
+<!-- <div class="dropdown"> -->
+<!--   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false"> -->
+<!--     排序 -->
+<!--   </button> -->
+<!--   <div class="dropdown-menu" aria-labelledby="dropdownMenu2"> -->
+<!--     <button class="dropdown-item" type="button">最新</button> -->
+<!--     <button class="dropdown-item" type="button">評分最高</button> -->
+<!--     <button class="dropdown-item" type="button">評分最低</button> -->
+<!--     <button class="dropdown-item" type="button">評分最低</button> -->
+<!--   </div> -->
+<!-- </div> -->
+
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">
+    Dropdown
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <button class="dropdown-item" type="button">Action</button>
+    <button class="dropdown-item" type="button">Another action</button>
+    <button class="dropdown-item" type="button">Something else here</button>
+  </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+
+	$()
+
+</script>
 
 
 <c:forEach  var="comment" items="${page}" >

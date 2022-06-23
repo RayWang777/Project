@@ -19,6 +19,9 @@
 <script src="${contextRoot}/js/lib/awesomeRating.min.js"></script>
 <script src="${contextRoot}/js/lib/average-rating.min.js" type="text/javascript"></script>
 
+
+
+
 <style type="text/css">
 .ratingBar {
   height: 30px;
@@ -42,6 +45,11 @@
 
 #ratingBarFive {
   background-color: #99cc00;
+}
+
+#dropdownMenu2{
+	background-color: white;
+	border: 1px solid gray;
 }
 </style>
 
@@ -68,6 +76,30 @@ console.log(average(rating));
 <div id="ratingBarThree" class="ratingBar"></div>
 <div id="ratingBarTwo" class="ratingBar"></div>
 <div id="ratingBarOne" class="ratingBar"></div>
+
+
+
+<div class="dropdown">
+  <button class="btn btn-black dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">
+    排序
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <a href="${contextRoot}/backend/comment/all"><button class="dropdown-item" type="button">最新</button></a>
+    <a href="${contextRoot}/backend/comment/scoredesc"><button class="dropdown-item" type="button">評分最高</button></a>
+    <a href="${contextRoot}/backend/comment/scoreasc"><button class="dropdown-item" type="button">評分最低</button></a>
+    <a href="${contextRoot}/backend/comment/timeasc"><button class="dropdown-item" type="button">最早</button></a>
+  </div>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+
+	$()
+
+</script>
 
 
 <c:forEach  var="comment" items="${page}" >

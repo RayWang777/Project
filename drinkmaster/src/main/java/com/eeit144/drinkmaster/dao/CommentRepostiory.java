@@ -25,13 +25,13 @@ public interface CommentRepostiory extends JpaRepository<CommentBean, Integer> {
 //	public List<CommentBean> findCommentOrderByScoreAsc();
 	
 	
-	public CommentBean findAllByOrderByScoreAsc();
+	public List<CommentBean> findAllByOrderByScoreAsc();
 	
-	public CommentBean findAllByOrderByScoreDesc();
+	public List<CommentBean> findAllByOrderByScoreDesc();
 	
-	public CommentBean findAllByOrderByCreateTimeAsc();
+	public List<CommentBean> findAllByOrderByCreateTimeAsc();
 	
-	public CommentBean findAllByOrderByCreateTimeDesc();
+	public List<CommentBean> findAllByOrderByCreateTimeDesc();
 	
 	
 }

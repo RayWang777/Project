@@ -22,6 +22,7 @@
 .ratingBar {
   height: 30px;
 }
+</style>
 
 <meta charset="UTF-8">
 <title>Insert title here</title>

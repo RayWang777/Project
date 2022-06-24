@@ -27,8 +27,8 @@ public class UserBeanValidator implements Validator{
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "gender", "", "性別不得為空");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "role", "", "職權不得為空");
 		
-		if (ub.getUserAccount().length()<5) {
-			errors.rejectValue("userAccount","", "帳號不能小於五個字元");
+		if (ub.getUserAccount().length()<6) {
+			errors.rejectValue("userAccount","", "帳號不能小於6個字元");
 		}
 		
 		

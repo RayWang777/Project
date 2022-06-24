@@ -28,7 +28,8 @@
        
        <form:label path="userPassword">密&emsp;&emsp;碼</form:label>
        <form:input path="userPassword" class="form-control"/>
-       <form:errors path="userPassword" cssClass="error" /><br><br>
+       <form:errors path="userPassword" cssClass="error" />
+       <span id="passwordSp"></span><br/>  <br><br>
        
        <form:label path="userAddress">地&emsp;&emsp;址</form:label>
        <form:input path="userAddress" class="form-control"/>
@@ -43,7 +44,8 @@
        <form:errors path="gender" cssClass="error" /><br><br>
        
        <form:label path="birthday">生&emsp;&emsp;日</form:label>
-       <form:input path="birthday" class="form-control"/>
+<%--   <form:input path="birthday" class="form-control"/> --%>
+       <input type="date" name="birthday" id="birthday" class="form-control"/>
        <form:errors path="birthday" cssClass="error" /><br><br>
        
        <form:label path="createdate">創建日期</form:label>
@@ -90,6 +92,43 @@ function preview() {
 		$('#oldlogo').hide();
 		$('#logo').show();
 	} 
+}
+
+document.getElementById("userPassword").addEventListener("blur",checkPwd);
+function checkPwd(){
+    //取得userPassword元素
+    let thePwdObj=document.getElementById("userPassword");
+    console.log(thePwdObj);
+    //取得userPassword元素值
+    let thePwdObjVal=thePwdObj.value;
+    console.log(thePwdObjVal);
+    console.log(typeof thePwdObjVal);
+
+    //判斷元素值是否為空白，密碼長度是否大於6
+    //如果長度是否大於6，判斷是否包含字母、數字、特殊符號
+    let sp=document.getElementById("passwordSp");
+    let thePwdObjValLen=thePwdObjVal.length;
+    let flag1=false,flag2=false,flag3=false;
+
+    if(thePwdObjVal=="")
+        sp.innerHTML="密碼不得為空"; 
+    else if(thePwdObjValLen>=6){
+        // sp.innerHTML=">=6";
+        for(let i=0;i<thePwdObjValLen;i++){
+            let ch=thePwdObjVal.charAt(i).toUpperCase();
+            if(ch>="A" && ch<="Z")
+                flag1=true;
+            else if(ch>="0" && ch<="9")
+                flag2=true;
+            if(flag1 && flag2) break;
+        }
+        if(flag1 && flag2)
+            sp.innerHTML="✅";
+        else
+            sp.innerHTML="密碼需含數字與英文";
+    }else{
+        sp.innerHTML="密碼不能小於6個字元";
+    }     
 }
 
 </script>

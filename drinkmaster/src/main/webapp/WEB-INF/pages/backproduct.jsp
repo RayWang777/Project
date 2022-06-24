@@ -33,6 +33,7 @@
 			<tr>
 				<th scope="col"style="text-align:center;">品項</th>
 				<th scope="col"style="text-align:center;">價格</th>
+				<th scope="col"style="text-align:center;">種類</th>
 				<th scope="col"style="text-align:center;">店家</th>
 				<th scope="col"style="text-align:center;">圖片</th>
 				<th scope="col"style="text-align:center;">溫度</th>
@@ -43,9 +44,10 @@
 		<tbody>
 			<c:forEach var="productBean" items="${page.content}">
 				<tr>
-					<th scope="row"><b><c:out value="${productBean.productName}"  /></b></th>
+					<th style="text-align:center;" scope="row"><b><c:out value="${productBean.productName}"  /></b></th>
 					<td style="text-align:center;"><c:out value="${productBean.price}" /></td>
-					<td style="text-align:center;"><c:out value="${productBean.storeBean.storeId}" /></td>
+					<td style="text-align:center;"><c:out value="${productBean.productCategoryBean.productCategoryName}" /></td>
+					<td style="text-align:center;"><c:out value="${productBean.productCategoryBean.storeBean.storeId}" /></td>
 					<td style="text-align:center;"><img src="${productBean.productImage}" style="width: 60px" /></td>
 					<td style="text-align:center;"><c:out value="${productBean.coldHot}" /></td>
 					<c:choose>

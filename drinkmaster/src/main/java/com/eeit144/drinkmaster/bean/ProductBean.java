@@ -22,7 +22,7 @@ import lombok.Data;
 
 @Entity
 @Table(name = "product")
-@Data
+
 public class ProductBean {
 
 	@Id
@@ -38,22 +38,24 @@ public class ProductBean {
 
 	@Column(name = "productimage", columnDefinition = "nvarchar(max)")
 	private String productImage;
-
+	
 	@Column(name = "coldhot", columnDefinition = "nvarchar(10)")
 	private String coldHot;
-
+	
 	@Transient
-	@Column(name = "storeid")
-	private Integer storeId;
-
+	@Column(name = "productcategoryid")
+	private String productCategoryId;
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "storeid",nullable = false)
-	private StoreBean storeBean;
+	@JoinColumn(name = "productCategoryId",nullable = false)
+	private ProductCategoryBean productCategoryBean;
+	
+
+
 	
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "productBean",cascade = CascadeType.ALL)
-	private Set<ShopCarBean> shopCars = new LinkedHashSet<ShopCarBean>();
+	private Set<ShopCarBean> shopCars = new LinkedHashSet<ShopCarBean>(); 
 	
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "productBean",cascade = CascadeType.ALL)
@@ -66,6 +68,86 @@ public class ProductBean {
 		super();
 	}
 
+	public Integer getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public Integer getPrice() {
+		return price;
+	}
+
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
+
+	public String getProductImage() {
+		return productImage;
+	}
+
+	public void setProductImage(String productImage) {
+		this.productImage = productImage;
+	}
+
+	public String getColdHot() {
+		return coldHot;
+	}
+
+	public void setColdHot(String coldHot) {
+		this.coldHot = coldHot;
+	}
+
+	public String getProductCategoryId() {
+		return productCategoryId;
+	}
+
+	public void setProductCategoryId(String productCategoryId) {
+		this.productCategoryId = productCategoryId;
+	}
+
+	public ProductCategoryBean getProductCategoryBean() {
+		return productCategoryBean;
+	}
+
+	public void setProductCategoryBean(ProductCategoryBean productCategoryBean) {
+		this.productCategoryBean = productCategoryBean;
+	}
+
+	public Set<ShopCarBean> getShopCars() {
+		return shopCars;
+	}
+
+	public void setShopCars(Set<ShopCarBean> shopCars) {
+		this.shopCars = shopCars;
+	}
+
+	public Set<CommentBean> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<CommentBean> comments) {
+		this.comments = comments;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+	
 	
 	
 }

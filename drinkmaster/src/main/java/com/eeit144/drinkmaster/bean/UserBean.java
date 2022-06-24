@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -43,7 +44,7 @@ public class UserBean {
 	@Column(name = "useraddress",nullable = false, columnDefinition = "nvarchar(50)")
 	private String userAddress;
 
-	@Column(name = "photo", columnDefinition = "varchar(max)")
+	@Column(name = "photo", columnDefinition = "varbinary(max)")
 	private byte[] photo;
 
 	@Column(name = "phone",nullable = false)
@@ -207,5 +208,10 @@ public class UserBean {
 		this.firms = firms;
 	}
 
-	
+	public String getByteArrayString() {
+		  if(this.photo!= null) {
+		   return Base64.encodeBase64String(this.photo);
+		  }
+		  return null;
+		 }
 }

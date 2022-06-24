@@ -2808,7 +2808,16 @@ tbody tr td:last-child {
 .login-form {
   background: #ffffff;
   padding: 30px 30px 20px;
-  border-radius: 2px;
+  border-radius: 30px;
+  border-width: 3px;
+  border-style: solid;
+  border-color: #FFAC55;
+  
+  width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -200px 0 0 -250px;
 }
 .login-form h4 {
   color: #373757;

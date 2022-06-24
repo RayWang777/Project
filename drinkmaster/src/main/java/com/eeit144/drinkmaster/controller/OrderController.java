@@ -87,7 +87,7 @@ public class OrderController {
 			
 			//要先找到 store user product 的ID 把資料放到前端
 			StoreBean oldStore = storeService.findById(orderBean.getStoreId()).get();
-			UserBean oldUser = userService.findById(orderBean.getUserId());
+			UserBean oldUser = userService.findById(orderBean.getUserId()).get();
 			ProductBean oldProduct = productService.findById(orderBean.getProductId());
 			
 			orderBean.setUserBean(oldUser);
@@ -109,7 +109,7 @@ public class OrderController {
 		@PostMapping("order/update")
 		public String updateOrder(@ModelAttribute("orderBean") OrderBean orderBean, Model m) {
 			StoreBean oldStore = storeService.findById(orderBean.getStoreId()).get();
-			UserBean oldUser = userService.findById(orderBean.getUserId());
+			UserBean oldUser = userService.findById(orderBean.getUserId()).get();
 			ProductBean oldProduct = productService.findById(orderBean.getProductId());
 			
 			orderBean.setUserBean(oldUser);

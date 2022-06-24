@@ -20,12 +20,10 @@ public interface UserService {
 
 	public Page<UserBean> select(Integer pageNumber, String string);
 
-<<<<<<< HEAD
-	//firm need no delete
 	public List<UserBean> findAllUsers();
-=======
+
 	public UserBean findByAccPwd(String userAccount, String userPassword);
 
 	public String findIdByName(String userName);
->>>>>>> cfde28f656de0b60c85402b1b6e29356489c8101
+
 }

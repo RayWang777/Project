@@ -149,8 +149,7 @@ public class ProductController {
 	public ModelAndView selecCategorytLike(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber,
 			@RequestParam("select") String select, @RequestParam("filed") String filed) {
 
-		Page<ProductBean> page = categoryService.select(pageNumber, select, filed);
-		mav.getModel().put("page", page);
+		
 		mav.setViewName("backcategory");
 		return mav;
 	}

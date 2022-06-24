@@ -1,5 +1,7 @@
 package com.eeit144.drinkmaster.controller;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.eeit144.drinkmaster.bean.CommentBean;
 import com.eeit144.drinkmaster.bean.ProductBean;
@@ -64,8 +68,14 @@ public class CommentController {
 	
 	
 	@PostMapping("comment/insert")
-	public String addcomment(@ModelAttribute("commentBean") CommentBean comment, Model model) {
+	public String addcomment(@RequestPart("commentPhoto1") MultipartFile cPhoto, @ModelAttribute("commentBean") CommentBean comment, Model model) throws Exception {
 
+		
+		String temp=new String(Base64.getEncoder().encode(cPhoto.getBytes()));
+		String profile="data:image/png;base64,"+temp;
+		
+		comment.setCommentPhoto(profile);
+		
 		commentService.insertComment(comment);
 		
 		CommentBean commentBean = new CommentBean();
@@ -78,6 +88,8 @@ public class CommentController {
 		return "backcommentadd";
 		
 	}
+	
+	
 	
 	
 	@GetMapping("/comment/timeasc")
@@ -150,7 +162,12 @@ public class CommentController {
 	
 	
 	@PostMapping("comment/editComment")
-	public String postEditComment(@ModelAttribute(name="comment") CommentBean comment) {
+	public String postEditComment(@RequestPart("commentPhoto1") MultipartFile cPhoto, @ModelAttribute(name="comment") CommentBean comment) throws Exception {
+		
+		String temp=new String(Base64.getEncoder().encode(cPhoto.getBytes()));
+		String profile="data:image/png;base64,"+ temp;
+		
+		comment.setCommentPhoto(profile);
 		
 		commentService.insertComment(comment);
 		

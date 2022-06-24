@@ -20,6 +20,7 @@
   <form:form class="form" method="post" modelAttribute="msg">
   
   <form:input path="serviceId" type="hidden" />
+    <form:input path="userBean" type="hidden" />
   <form:input path="answerTime" type="hidden" />
   
   <div class="form-group">

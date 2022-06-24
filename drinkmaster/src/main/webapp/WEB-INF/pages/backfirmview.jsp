@@ -8,6 +8,16 @@
 
 <c:set var="userId" value="1"></c:set>
 
+<style>
+
+input+select{
+width:306px;
+}
+
+
+</style>
+
+
 <div class="content">
 
 	<div class="container">
@@ -16,33 +26,33 @@
 
 		<div class="row justify-content-center">
 
-			
-			<form:form class="form" method="post" modelAttribute="firm" enctype="multipart/form-data">
+			<c:url value="/backend/firm/edit/${firm.firmId}" var="link_url" />
+			<form:form class="form" method="post" action="${link_url}" modelAttribute="firm" enctype="multipart/form-data">
 				<form:hidden path="firmId" id="firmId"/>
 				<div class="mb-3">
 					<label for="firmName" class="form-label">廠商名稱</label>
-					<form:input path="firmName" class="form-control" type="text"
+					<form:input disabled="true" path="firmName" class="form-control" type="text"
 						id="firmName" />
 					<span id=firmNameSp></span>
 				</div>
 
 				<div class="mb-3">
 					<label for="firmAddress" class="form-label">廠商地址</label>
-					<form:input path="firmAddress" class="form-control" type="text"
+					<form:input disabled="true" path="firmAddress" class="form-control" type="text"
 						id="firmAddress" />
 					<span id=firmAddressSp></span>
 				</div>
 
 				<div class="mb-3">
 					<label for="firmPhone" class="form-label">廠商電話</label>
-					<form:input path="firmPhone" class="form-control" type="text"
+					<form:input disabled="true" path="firmPhone" class="form-control" type="text"
 						id="firmPhone" />
 					<span id=firmPhoneSp></span>
 				</div>
 				
 				<div class="mb-3">
 					<label for="selectuserId" class="form-label">管理者</label>
-					<form:select id="selectuserId" path="userBean.userId"
+					<form:select disabled="true" id="selectuserId" path="userBean.userId"
 						class="form-control">
 
 						<form:options items="${firmaddusers}" itemLabel="userName"
@@ -59,7 +69,7 @@
 					</c:if>
 				</div>
 
-				<div class="mb-4">
+				<div class="mb-4" id="imgall">
 					<label for="reallogo" class="form-label">Logo</label>
 					<input name="reallogo" class="form-control" type="file"
 						id="reallogo" onchange="preview()" />
@@ -67,7 +77,8 @@
 				</div>
 
 				<div class="mb-3" style="text-align: center;">
-					<input type="submit" class="btn btn-success" value='<c:out value="修改廠商"/>'>
+					<input id="readyupdate" type="button" class="btn btn-primary" value='<c:out value="編輯"/>'>
+					<input id="toupdate" type="submit" class="btn btn-success" value='<c:out value="修改廠商"/>'>
 				</div>
 			</form:form>
 
@@ -81,6 +92,9 @@
 
 $(function(){
 	$('#logo').hide();
+	$('#imgall').hide();
+	$('#toupdate').hide();
+	
 });
 
 function preview() {
@@ -98,6 +112,20 @@ $('#selectuserId').click(function() {
 	console.log(selected)
 	$('#userId').val(selected);
 
+})
+
+$('#readyupdate').click(function(){
+	$('#firmName').prop('disabled',false);
+	$('#firmAddress').prop('disabled',false);
+	$('#firmPhone').prop('disabled',false);
+	$('#selectuserId').prop('disabled',false);
+	$('#imgall').show();
+	
+	$('#toupdate').show();
+	$('#readyupdate').hide();
+
+	
+	
 })
 
 </script>

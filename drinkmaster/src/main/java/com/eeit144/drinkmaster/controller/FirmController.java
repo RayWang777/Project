@@ -51,19 +51,21 @@ public class FirmController {
 	}
 
 	@GetMapping("firm/{id}")
-	public ResponseEntity<FirmDTO> findFirmById(@PathVariable Integer id) {
+	public String findFirmById(@PathVariable Integer id,Model m) {
 		Optional<FirmBean> firmBean = firmService.findById(id);
 
 		if (firmBean.isEmpty()) {
-			return new ResponseEntity<FirmDTO>(HttpStatus.NO_CONTENT);
+			return "redirect:/backend/firm/all";
 		}
-		FirmDTO firmDTO = new FirmDTO();
-		firmDTO.setFirmId(firmBean.get().getFirmId());
-		firmDTO.setFirmName(firmBean.get().getFirmName());
-		firmDTO.setFirmAddress(firmBean.get().getFirmAddress());
-		firmDTO.setFirmPhone(firmBean.get().getFirmPhone());
-		firmDTO.setUserId(firmBean.get().getUserBean().getUserId());
-		return new ResponseEntity<FirmDTO>(firmDTO, HttpStatus.OK);
+
+		FirmBean findById = firmService.findById(id).get();
+		FirmDTO firmDTO = firmService.change(findById);
+
+		List<UserBean> users = userService.findAllUsers();
+
+		m.addAttribute("firmaddusers", users);
+		m.addAttribute("firm", firmDTO);
+		return "backfirmview";
 	}
 
 	@GetMapping("firm/{id}/photo")
@@ -183,6 +185,10 @@ public class FirmController {
 	public String firmUpdatePage(@PathVariable("id") Integer id, Model m) {
 		FirmBean findById = firmService.findById(id).get();
 		FirmDTO firmDTO = firmService.change(findById);
+
+		List<UserBean> users = userService.findAllUsers();
+
+		m.addAttribute("firmaddusers", users);
 		m.addAttribute("firm", firmDTO);
 		return "backfirmupdate";
 	}
@@ -196,6 +202,8 @@ public class FirmController {
 		oldFirm.setFirmName(firm.getFirmName());
 		oldFirm.setFirmAddress(firm.getFirmAddress());
 		oldFirm.setFirmPhone(firm.getFirmPhone());
+		oldFirm.setUserBean(firm.getUserBean());
+	
 
 		if (logo.getSize() == 0) {
 			firmService.insertFirm(oldFirm);
@@ -224,7 +232,6 @@ public class FirmController {
 	@GetMapping("firm/delete/{id}")
 	public String deleteFirm(@PathVariable("id") Integer id) {
 		firmService.deleteById(id);
-		System.out.println("123456");
 		return "redirect:/backend/firm/all";
 	}
 	

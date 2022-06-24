@@ -18,6 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.data.domain.Pageable;
 import com.eeit144.drinkmaster.bean.ProductBean;
+import com.eeit144.drinkmaster.bean.ProductCategoryBean;
+import com.eeit144.drinkmaster.dao.ProductCategoryRepostiory;
 import com.eeit144.drinkmaster.dao.ProductRepostiory;
 import com.eeit144.drinkmaster.model.ProductService;
 
@@ -26,7 +28,8 @@ import com.eeit144.drinkmaster.model.ProductService;
 public class ProductServiceImp implements ProductService {
 	@Autowired
 	private ProductRepostiory productDao;
-
+	@Autowired 
+	private ProductCategoryRepostiory categoryDao;
 	@Override
 	public ProductBean findById(Integer id) {
 		Optional<ProductBean> pro = productDao.findById(id);
@@ -67,7 +70,12 @@ public class ProductServiceImp implements ProductService {
 			else return null;
 		} else if (field.equals("溫度")) {
 			return productDao.findBycoldHotLike(page, "%" + name + "%");
-		} else if (field.equals("上架中")) {
+		} 
+		else if(field.equals("種類")) {
+			ProductCategoryBean category= categoryDao.findByProductCategoryNameLike("%"+name+"%");
+			return productDao.findByproductCategoryBean(page, category);
+		}
+		else if (field.equals("上架中")) {
 			boolean temp = true;
 			return productDao.findBystatus(page, temp);
 		

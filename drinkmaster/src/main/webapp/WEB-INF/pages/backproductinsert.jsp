@@ -7,7 +7,7 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
 <div class="row justify-content-center">
-	<h2>新增商品</h2>
+	<h2><c:out value="${now}"></c:out></h2>
 </div>
 <div class="container">
 
@@ -26,8 +26,12 @@
 				<br>
 				<br>
 				<label for="productCategoryBean">商品種類</label>
-				<form:input  path="productCategoryBean" id="productCategoryBean"
-					name="ProductCategoryBean" />
+				<form:select path="productCategoryBean" id="productCategoryBean" name="productCategoryBean">
+				<c:forEach var="productCategoryBean" items="${productcategory1}">
+					<form:option value="${productCategoryBean.productCategoryId}">${productCategoryBean.productCategoryName}</form:option>
+				</c:forEach>
+				</form:select>
+				
 					<br>
 					<br>
 				<label for="price"> 價格</label>
@@ -64,7 +68,7 @@
 				<br>
 				<br>
 				<div class="row justify-content-center">
-					<input type="submit" name="submit" value="更新訊息"
+					<input type="submit" name="submit" value="${status}"
 						onclick="checkname()">
 				</div>
 			</form:form>

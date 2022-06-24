@@ -7,7 +7,7 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
 <div class="row justify-content-center">
-	<h2>新增商品種類</h2>
+	<h2><c:out value="${now}"></c:out></h2>
 </div>
 <div class="container">
 
@@ -30,7 +30,7 @@
 				<br>
 				<br>
 				<div class="row justify-content-center">
-					<input type="submit" name="submit" value="確定新增"
+					<input type="submit" name="submit" value="${status}"
 						onclick="checkname()">
 				</div>
 			</form:form>

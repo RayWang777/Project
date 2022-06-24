@@ -2,6 +2,7 @@ package com.eeit144.drinkmaster.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -39,13 +40,23 @@ public class ProductController {
 	@GetMapping("product/insertview")
 	public String addView(Model m) {
 		ProductBean pro = new ProductBean();
+		m.addAttribute("now","新增商品");
+		m.addAttribute("status","確定新增");
+		List<ProductCategoryBean> productcategory1 =categoryService.findAll();
+		m.addAttribute("productcategory1",productcategory1);
 		m.addAttribute("product", pro);
 		m.addAttribute("insert", "product/insert");
 		return "backproductinsert";
 	}
+	@GetMapping ("productanalyze")
+	public String analyzeview() {
+		return "productanalyze";
+	}
 	@GetMapping("prodcuct/insertcategory")
 	public String addCategoryView(Model m) {
 		ProductCategoryBean category=new ProductCategoryBean();
+		m.addAttribute("status","確定新增");
+		m.addAttribute("now","新增種類");
 		m.addAttribute("category",category);
 		m.addAttribute("insert", "category/add");
 		return "backproductcategoryinsert";
@@ -104,7 +115,6 @@ public class ProductController {
 	@GetMapping("product/all")
 	public ModelAndView findView(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber) {
 		Page<ProductBean> page = proService.findByPage(pageNumber);
-
 		mav.getModel().put("page", page);
 		mav.setViewName("backproduct");
 		return mav;
@@ -135,6 +145,14 @@ public class ProductController {
 		mav.getModel().put("page", page);
 		mav.setViewName("backproduct");
 		return mav;
+	}@GetMapping("category/select")
+	public ModelAndView selecCategorytLike(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber,
+			@RequestParam("select") String select, @RequestParam("filed") String filed) {
+
+		Page<ProductBean> page = categoryService.select(pageNumber, select, filed);
+		mav.getModel().put("page", page);
+		mav.setViewName("backcategory");
+		return mav;
 	}
 
 	@GetMapping("deleteproduct")
@@ -153,6 +171,8 @@ public class ProductController {
 	@GetMapping("editcategory")
 	public String updateCategoryById(@RequestParam("id") Integer id, Model m) {
 		ProductCategoryBean proBean = categoryService.findById(id);
+		m.addAttribute("status","確定修改");
+		m.addAttribute("now","修改種類");
 		m.addAttribute("category", proBean);
 		m.addAttribute("insert", "updatecategory");
 		return "backproductcategoryinsert";
@@ -161,6 +181,10 @@ public class ProductController {
 	@GetMapping("editproduct")
 	public String updateById(@RequestParam("id") Integer id, Model m) {
 		ProductBean proBean = proService.findById(id);
+		List<ProductCategoryBean> productcategory1 =categoryService.findAll();
+		m.addAttribute("now","編輯商品");
+		m.addAttribute("status","確定修改");
+		m.addAttribute("productcategory1",productcategory1);
 		m.addAttribute("product", proBean);
 		m.addAttribute("insert", "updateproduct");
 		return "backproductinsert";

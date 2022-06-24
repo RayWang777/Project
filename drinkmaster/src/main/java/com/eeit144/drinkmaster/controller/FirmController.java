@@ -226,5 +226,8 @@ public class FirmController {
 		firmService.deleteById(id);
 		return "redirect:/backend/firm/all";
 	}
+	
+	@GetMapping("firm/minus")
+	public void DeleteFirms(Integer[] ids){}
 
 }

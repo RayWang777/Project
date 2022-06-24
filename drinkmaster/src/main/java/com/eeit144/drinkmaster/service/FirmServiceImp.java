@@ -1,5 +1,6 @@
 package com.eeit144.drinkmaster.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,10 @@ public class FirmServiceImp implements FirmService {
 	
 	public Page<FirmBean> findAll2(Example<FirmBean> firm,Pageable pab){
 		return firmDao.findAll(firm, pab);
+	}
+	
+	public void deleteByIds(List<Integer> ids) {
+		firmDao.deleteAllById(ids);
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.eeit144.drinkmaster.model;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Example;
@@ -24,4 +25,6 @@ public interface FirmService {
 	public Page<FirmBean> findAllByFirmNameOrFirmPhone(String FirmName,String FirmPhone,Pageable pab);
 	
 	public Page<FirmBean> findAll2(Example<FirmBean> firm,Pageable pab);
+	
+	public void deleteByIds(List<Integer> ids);
 }

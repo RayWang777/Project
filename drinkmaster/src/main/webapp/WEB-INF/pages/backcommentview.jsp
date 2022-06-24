@@ -133,6 +133,11 @@ console.log(average(rating));
 	</script>
 	
 	<c:out value="${comment.content}"></c:out>
+	
+	<br/>
+	
+	<img src="${comment.commentPhoto}" style="width: 100px;heiget: 100px" />
+
 	<br/>
 	(時間) <fmt:formatDate pattern="yyyy 年 MM 月 dd 日 a hh:mm:ss EEEE" value="${comment.createTime}" />
 	<div class="edit-link">

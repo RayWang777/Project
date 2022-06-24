@@ -68,8 +68,8 @@ public class CommentBean {
 	private Integer scoreType;
 	
 	
-	@Column(name = "commentPhoto", columnDefinition = "varbinary(max)")
-	private byte[] commentPhoto;
+	@Column(name = "commentPhoto", columnDefinition = "nvarchar(255)")
+	private String commentPhoto;
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8") // JSP DATE
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") // MVC DATE
@@ -145,6 +145,15 @@ public class CommentBean {
 	}
 
 	
+
+	public String getCommentPhoto() {
+		return commentPhoto;
+	}
+
+	public void setCommentPhoto(String commentPhoto) {
+		this.commentPhoto = commentPhoto;
+	}
+
 	public Integer getProductId() {
 		return productId;
 	}

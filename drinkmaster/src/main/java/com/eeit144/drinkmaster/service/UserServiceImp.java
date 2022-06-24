@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,10 +23,10 @@ public class UserServiceImp implements UserService {
 	private UserRepostiory userDao;
 
 	@Override
-	public UserBean findById(Integer id) {
+	public Optional<UserBean> findById(Integer id) {
 		Optional<UserBean> user = userDao.findById(id);
 		if(user.isPresent()) {
-			return user.get();
+			return user;
 		}		
 		return null;
 	}
@@ -58,4 +59,20 @@ public class UserServiceImp implements UserService {
 		return userDao.findAll();
 	}
 	
+	public UserBean findByAccPwd(String userAccount, String userPassword) {
+		UserBean user = userDao.findByAccPwd(userAccount, userPassword);
+		if(user != null) {
+			return user;
+		}
+		return null;
+	}
+	
+	public String findIdByName(String userName) {
+		
+		String user = userDao.findIdByName(userName);
+		if(user.isBlank()) {
+			return null;
+		}
+		return user;
+	}
 }

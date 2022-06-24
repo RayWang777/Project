@@ -62,6 +62,10 @@ public class StoreBean {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "storeBean", cascade = CascadeType.ALL)
 	private Set<CommentBean> comments = new LinkedHashSet<CommentBean>();
 
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "storeBean", cascade = CascadeType.ALL)
+	private Set<OrderBean> orders = new LinkedHashSet<OrderBean>();
+
 	public StoreBean() {
 	}
 
@@ -151,6 +155,14 @@ public class StoreBean {
 
 	public void setComments(Set<CommentBean> comments) {
 		this.comments = comments;
+	}
+
+	public Set<OrderBean> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Set<OrderBean> orders) {
+		this.orders = orders;
 	}
 
 }

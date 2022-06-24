@@ -25,7 +25,7 @@
 <link href="<c:url value="/css/style.css"/>" rel="stylesheet">
 
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
- <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+ 
 
 
 <style>
@@ -129,7 +129,9 @@ li {
 
 
 					</ul></li>
+					<li><a href="${contextRoot}/front/">前台首頁</a></li>
 				<li><a><i class="ti-close"></i> Logout</a></li>
+
 			</ul>
 		</div>
 	</div>
@@ -151,8 +153,10 @@ li {
 
 					<div class="dropdown dib">
 						<div class="header-icon" data-toggle="dropdown">
-							<span class="user-avatar"><a>Logout</a>
-							</li> </span>
+						<span class="user-avatar">
+						<a id="frontpage" href="${contextRoot}/front/">前台首頁</a>
+						</span>&emsp;&emsp;
+							<span class="user-avatar">Logout</li> </span>
 
 						</div>
 					</div>
@@ -177,4 +181,15 @@ li {
 			<script src="<c:url value="/js/lib/bootstrap.bundle.min.js"/>"></script>
 			<script src="<c:url value="/js/scripts.js"/>"></script>
 			<!-- bootstrap -->
+<script type="text/javascript">
+$(function(){
+	$('#frontpage').click(function(){
+		location.replace('${contextRoot}/front/');
+	});
+	
+	
+})
+
+
+</script>
 			

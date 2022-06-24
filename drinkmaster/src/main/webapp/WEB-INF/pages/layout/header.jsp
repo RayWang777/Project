@@ -24,7 +24,8 @@
 	rel="stylesheet">
 <link href="<c:url value="/css/style.css"/>" rel="stylesheet">
 
-
+<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+ <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 
 
 <style>
@@ -86,7 +87,7 @@ li {
 						<li><a href="${contextRoot}/backend/product/insertview">新增商品</a></li>
 						<li><a href="${contextRoot}/backend/category/all">種類列表</a></li>
 
-						<li><a href="#">銷量圖表</a></li>
+						<li><a href="${contextRoot}/backend/productanalyze">銷量圖表</a></li>
 
 					</ul></li>
 				<li><a class="sidebar-sub-toggle"><i
@@ -165,7 +166,7 @@ li {
 	<div class="main">
 		<div class="container-fluid">
 
-
+			
 			<!-- jquery vendor -->
 			<script src="<c:url value="/js/lib/jquery.min.js"/>"></script>
 			<script src="<c:url value="/js/lib/jquery.nanoscroller.min.js"/>"></script>
@@ -176,3 +177,4 @@ li {
 			<script src="<c:url value="/js/lib/bootstrap.bundle.min.js"/>"></script>
 			<script src="<c:url value="/js/scripts.js"/>"></script>
 			<!-- bootstrap -->
+			

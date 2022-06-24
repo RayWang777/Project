@@ -16,11 +16,8 @@
 		<div class="mb-3">
 			<label for="select" class="form-label">搜尋</label> <input type="text"name="select" id="select" /> 
 				<select name="filed">
-				<option>品項</option>
-				<option>價格</option>
-				<option>溫度</option>
-				<option>上架中</option>
-				<option>已下架</option>
+				<option>種類</option>
+				<option>店家</option>
 			</select>
 		<button type="submit" class="btn btn  btn-sm" style="font-style:italic;color:blue;">查詢</button>
 		<c:out value="查到 ${page.totalElements }筆資料"></c:out>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-link btn-sm" href="${contextRoot}/backend/prodcuct/insertcategory" role="button">新增商品種類</a>

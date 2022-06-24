@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.bean.ProductCategoryBean;
 import com.eeit144.drinkmaster.dao.ProductCategoryRepostiory;
 import com.eeit144.drinkmaster.model.ProductCategoryService;
@@ -52,7 +53,12 @@ public class ProductCategoryServiceImp implements ProductCategoryService{
 	public List<ProductCategoryBean> findAll(){
 		return productCategoryDao.findAll();
 		}
-
+	
+	public Page<ProductCategoryBean> select(Integer pageNumber, String name, String field) {
+		Pageable page = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "productId");
+		
+		return productCategoryDao.findByproductCategoryNameLike(page, name);
+	}
 }
 
 

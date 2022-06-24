@@ -19,6 +19,7 @@
 				<option>品項</option>
 				<option>價格</option>
 				<option>溫度</option>
+				<option>種類</option>
 				<option>上架中</option>
 				<option>已下架</option>
 			</select>

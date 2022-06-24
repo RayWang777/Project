@@ -25,6 +25,11 @@
 				<span id="name">${errors.name}</span>
 				<br>
 				<br>
+				<label for="productCategoryBean">商品種類</label>
+				<form:input  path="productCategoryBean" id="productCategoryBean"
+					name="ProductCategoryBean" />
+					<br>
+					<br>
 				<label for="price"> 價格</label>
 				<form:input path="price" id="price" name="price" onblur="check()" />
 				<span id="price1">${errors.price1}</span>
@@ -38,10 +43,6 @@
 					<img id="oldImage" src="${product.productImage}" width="100px"
 						height="100px" />
 				</c:if>
-				<br>
-				<br>
-				<label for="storeBean">店家</label>
-				<form:input path="storeBean" id="storeBean" name="storeBean" />
 				<br>
 				<br>
 				<label for="coldHot">溫度</label>

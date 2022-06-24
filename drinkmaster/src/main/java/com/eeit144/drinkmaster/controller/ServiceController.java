@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eeit144.drinkmaster.bean.ServiceBean;
+import com.eeit144.drinkmaster.bean.UserBean;
 import com.eeit144.drinkmaster.model.ServiceService;
 
 @Controller
@@ -22,7 +23,7 @@ public class ServiceController {
 	@Autowired
 	private ServiceService sService;
 
-//	private Integer userId = 1;  //測試用
+	private Integer userId = 1;  //測試用
 
 	@GetMapping("/backend/service/reply")
 	public ModelAndView deleteMessagePage(ModelAndView mav,
@@ -47,12 +48,13 @@ public class ServiceController {
 	@GetMapping("/backend/service/add")
 	public String addMessagePage(Model model) {
 
-//		UserBean ub = new UserBean();
-//		ub.setUserId(userId);	
+		UserBean ub = new UserBean();
+		ub.setUserId(userId);	
 
 		ServiceBean workMessages = new ServiceBean();
 		ServiceBean latestMsg = sService.getLatest();
-
+		workMessages.setUserBean(ub);
+		
 		model.addAttribute("workMessages", workMessages);
 		model.addAttribute("latestMsg", latestMsg);
 

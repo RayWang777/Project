@@ -224,6 +224,7 @@ public class FirmController {
 	@GetMapping("firm/delete/{id}")
 	public String deleteFirm(@PathVariable("id") Integer id) {
 		firmService.deleteById(id);
+		System.out.println("123456");
 		return "redirect:/backend/firm/all";
 	}
 	

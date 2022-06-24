@@ -130,6 +130,8 @@
 						<div class="control__indicator"></div>
 	</label></th>
       <th scope="col">訂單編號</th>
+<!--       <th scope="col">訂購人</th> -->
+      <th scope="col">商品</th>
       <th scope="col" style="width: 170px;">訂單時間</th>
       <th scope="col">地址</th>
       <th scope="col">電話</th>
@@ -148,6 +150,8 @@
 							<div class="control__indicator"></div></label></td>
     
       <th scope="row"><c:out value="${orderBean.orderId}"/></th>
+      <td><c:out value="${orderBean.userBean.userName}"/></td>
+<%--       <td><c:out value="${orderBean.productId}"/></td> --%>
       <td><fmt:formatDate  value="${orderBean.createTime}" pattern="yyyy-MM-dd HH:mm"/></td>
       <td><c:out value="${orderBean.orderAddress}"/></td>
       <td><c:out value="${orderBean.orderPhone}"/></td>
@@ -173,7 +177,7 @@
 
 						
 					   </c:choose>  
-<%--       <td><c:out value="${orderBean.orderStatus}"/></td> --%>
+
       <td><c:out value="${orderBean.totalPrice}"/></td>
       <td><a href="${contextRoot}/backend/order/findAll"><i class="tiny material-icons">collections</i></a></td>
       <td>
@@ -220,6 +224,12 @@
   <form:form id="orderform" class="form" method="post" action="${contextRoot}/backend/order/insert" modelAttribute="orderBean">
   <span><form:label path="createTime">訂單日期</form:label></span>
   <form:input path="createTime" /><br><br>
+  <form:label path="storeId">s&emsp;&emsp;ID</form:label>
+  <form:input path="storeId" /><br><br>
+  <form:label path="productId">p&emsp;&emsp;ID</form:label>
+  <form:input path="productId" /><br><br>
+  <form:label path="userId">u&emsp;&emsp;ID</form:label>
+  <form:input path="userId" /><br><br>
   <form:label path="orderAddress">地&emsp;&emsp;址</form:label>
   <form:input path="orderAddress" /><br><br>
   <form:label path="orderPhone">電&emsp;&emsp;話</form:label>
@@ -253,20 +263,20 @@
 
 <script type="text/javascript">
 
-$(document).ready(function(){
+// $(document).ready(function(){
 	
-	$ajax({
-		type:"GET",
-		url:'order/findStatus',
-		contentType:'application/json',
-		data: JSON.stringify(),
-		success: function(data){
-			console.log(data);
-		},error: function(e){
-			   console.log(e);
-		   }
-	})
-})
+// 	$ajax({
+// 		type:"GET",
+// 		url:'order/findStatus',
+// 		contentType:'application/json',
+// 		data: JSON.stringify(),
+// 		success: function(data){
+// 			console.log(data);
+// 		},error: function(e){
+// 			   console.log(e);
+// 		   }
+// 	})
+// })
 
 
 

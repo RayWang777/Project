@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -37,14 +38,14 @@ public class OrderBean {
 	
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "userId",nullable = false)
+	@JoinColumn(name = "userid",nullable = false)
 	private UserBean userBean;
 
 	@Transient
 	@Column(name = "storeid")
 	private Integer storeId;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "storeid")
 	private StoreBean storeBean;
 	
@@ -86,7 +87,6 @@ public class OrderBean {
 		this.orderId = orderId;
 	}
 
-
 	public Integer getUserId() {
 		return userId;
 	}
@@ -117,6 +117,22 @@ public class OrderBean {
 
 	public void setStoreBean(StoreBean storeBean) {
 		this.storeBean = storeBean;
+	}
+
+	public Integer getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
+	}
+
+	public ProductBean getProductBean() {
+		return productBean;
+	}
+
+	public void setProductBean(ProductBean productBean) {
+		this.productBean = productBean;
 	}
 
 	public Integer getTotalPrice() {
@@ -158,5 +174,7 @@ public class OrderBean {
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
+
+	
 
 }

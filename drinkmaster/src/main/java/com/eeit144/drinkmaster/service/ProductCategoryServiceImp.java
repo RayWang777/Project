@@ -1,6 +1,7 @@
 package com.eeit144.drinkmaster.service;
 
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,9 @@ public class ProductCategoryServiceImp implements ProductCategoryService{
 		return productCategoryDao.findAll(page);
 
 	}
+	public List<ProductCategoryBean> findAll(){
+		return productCategoryDao.findAll();
+		}
 
 }
 

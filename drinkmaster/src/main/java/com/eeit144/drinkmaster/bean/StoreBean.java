@@ -59,6 +59,7 @@ public class StoreBean {
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "storeBean",cascade = CascadeType.ALL)
 	private Set<ProductCategoryBean> productCategory = new LinkedHashSet<ProductCategoryBean>();
+	
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "storeBean",cascade = CascadeType.ALL)
 	private Set<CommentBean> comments = new LinkedHashSet<CommentBean>();

@@ -1,7 +1,7 @@
 package com.eeit144.drinkmaster.bean;
 
 public enum FirmColumn {
-	firmId(1,"firmId"), firmName(2,"firmName"), firmAddress(3,"firmAddress"), firmPhone(4,"firmPhone");
+	firmId(1,"firmId"), firmName(2,"firmName"), firmAddress(3,"firmAddress"), firmPhone(4,"firmPhone"),userName(5,"userBean.userName");
 
 	private final int value;
 	private final String columnName;

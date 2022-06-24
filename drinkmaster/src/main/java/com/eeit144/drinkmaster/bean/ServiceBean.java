@@ -88,5 +88,11 @@ public class ServiceBean {
 	public void setAnswerTime(Date answerTime) {
 		this.answerTime = answerTime;
 	}
+	public UserBean getUserBean() {
+		return userBean;
+	}
+	public void setUserBean(UserBean userBean) {
+		this.userBean = userBean;
+	}
 
 }

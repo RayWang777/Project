@@ -12,10 +12,14 @@
  <h1>新增意見回饋</h1>
 <form:form class="form" method="post" action="${contextRoot}/backend/service/post" modelAttribute="workMessages">
 <div class="form-group">
+    <div class="form-group">
+    <label for="exampleFormControlInput1">UserID</label>
+  <form:input  path="userBean" class="form-control" />
+   </div>
     <label for="exampleFormControlInput1">姓名</label>
     <input type="text" class="form-control" id="FormControlInput1">
   </div>
-  
+   
   <div class="form-group">
     <label for="exampleFormControlInput1">Email信箱</label>
     <input type="email" class="form-control" id="FormControlInput2" placeholder="name@example.com">
@@ -40,6 +44,11 @@
 		<div class="col-6">
 
 			<div class="card">
+			<div class="card-header">
+					UserID:
+					 <c:out value="${workMessage.userBean}" />
+				</div>
+				<br/>
 				<div class="card-header">
 					姓名 :
 					 <c:out value="${workMessage.userBean.userName}" />

@@ -5,10 +5,12 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -18,6 +20,7 @@ import javax.persistence.Transient;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "orders")
@@ -27,14 +30,15 @@ public class OrderBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "orderid")
 	private Integer orderId;
-
+	
 	@Transient
-	@Column(name = "shopcarid")
-	private Integer shopCarId;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "shopcarid")
-	private ShopCarBean shopCarBean;
+	@Column(name = "userid")
+	private Integer userId;
+	
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "userId",nullable = false)
+	private UserBean userBean;
 
 	@Transient
 	@Column(name = "storeid")
@@ -43,6 +47,15 @@ public class OrderBean {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "storeid")
 	private StoreBean storeBean;
+	
+	@Transient
+	@Column(name = "productId")
+	private Integer productId;
+	
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "productId",nullable = false)
+	private ProductBean productBean;
 
 	@Column(name = "totalprice",nullable = false)
 	private Integer totalPrice;
@@ -73,20 +86,21 @@ public class OrderBean {
 		this.orderId = orderId;
 	}
 
-	public Integer getShopCarId() {
-		return shopCarId;
+
+	public Integer getUserId() {
+		return userId;
 	}
 
-	public void setShopCarId(Integer shopCarId) {
-		this.shopCarId = shopCarId;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
-	public ShopCarBean getShopCarBean() {
-		return shopCarBean;
+	public UserBean getUserBean() {
+		return userBean;
 	}
 
-	public void setShopCarBean(ShopCarBean shopCarBean) {
-		this.shopCarBean = shopCarBean;
+	public void setUserBean(UserBean userBean) {
+		this.userBean = userBean;
 	}
 
 	public Integer getStoreId() {

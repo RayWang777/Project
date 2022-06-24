@@ -2,22 +2,25 @@ package com.eeit144.drinkmaster.dto;
 
 import java.util.Date;
 
-import com.eeit144.drinkmaster.bean.ShopCarBean;
+import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
-
-
+import com.eeit144.drinkmaster.bean.UserBean;
 
 public class OrderDTO {
 
 	private Integer orderId;
 
-	private Integer shopCarId;
+	private Integer userId;
 
-//	private ShopCarBean shopCarBean;
+	private UserBean userBean;
 
 	private Integer storeId;
 
-//	private StoreBean storeBean;
+	private StoreBean storeBean;
+
+	private Integer productId;
+
+	private ProductBean productBean;
 
 	private Integer totalPrice;
 
@@ -30,6 +33,7 @@ public class OrderDTO {
 	private Date createTime;
 
 	public OrderDTO() {
+		super();
 	}
 
 	public Integer getOrderId() {
@@ -40,21 +44,21 @@ public class OrderDTO {
 		this.orderId = orderId;
 	}
 
-	public Integer getShopCarId() {
-		return shopCarId;
+	public Integer getUserId() {
+		return userId;
 	}
 
-	public void setShopCarId(Integer shopCarId) {
-		this.shopCarId = shopCarId;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
-//	public ShopCarBean getShopCarBean() {
-//		return shopCarBean;
-//	}
-//
-//	public void setShopCarBean(ShopCarBean shopCarBean) {
-//		this.shopCarBean = shopCarBean;
-//	}
+	public UserBean getUserBean() {
+		return userBean;
+	}
+
+	public void setUserBean(UserBean userBean) {
+		this.userBean = userBean;
+	}
 
 	public Integer getStoreId() {
 		return storeId;
@@ -64,13 +68,29 @@ public class OrderDTO {
 		this.storeId = storeId;
 	}
 
-//	public StoreBean getStoreBean() {
-//		return storeBean;
-//	}
-//
-//	public void setStoreBean(StoreBean storeBean) {
-//		this.storeBean = storeBean;
-//	}
+	public StoreBean getStoreBean() {
+		return storeBean;
+	}
+
+	public void setStoreBean(StoreBean storeBean) {
+		this.storeBean = storeBean;
+	}
+
+	public Integer getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
+	}
+
+	public ProductBean getProductBean() {
+		return productBean;
+	}
+
+	public void setProductBean(ProductBean productBean) {
+		this.productBean = productBean;
+	}
 
 	public Integer getTotalPrice() {
 		return totalPrice;

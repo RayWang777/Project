@@ -18,7 +18,7 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity 
+@Entity
 @Table(name = "store")
 public class StoreBean {
 
@@ -26,44 +26,42 @@ public class StoreBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "storeid")
 	private Integer storeId;
-	
+
 	@Transient
-	@Column(name="firmid")
+	@Column(name = "firmid")
 	private Integer firmId;
-		
+
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "firmId",nullable = false)
+	@JoinColumn(name = "firmId", nullable = false)
 	private FirmBean firmBean;
-	
-	@Column(name="storename",nullable = false, columnDefinition = "nvarchar(50)")
+
+	@Column(name = "storename", nullable = false, columnDefinition = "nvarchar(50)")
 	private String storeName;
-	
-	@Column(name="storeaddress",nullable = false, columnDefinition = "nvarchar(50)")
+
+	@Column(name = "storeaddress", nullable = false, columnDefinition = "nvarchar(50)")
 	private String storeAddress;
-	
-	@Column(name = "storephone",nullable = false)
+
+	@Column(name = "storephone", nullable = false)
 	private String storePhone;
-	
-	
-	@Column(name = "opentime",nullable = false)
+
+	@Column(name = "opentime", nullable = false)
 	private String openTime;
-	
-	@Column(name="longitude")
+
+	@Column(name = "longitude")
 	private Double longitude;
-	
-	@Column(name="latitude")
+
+	@Column(name = "latitude")
 	private Double latitude;
-	
-	
+
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "storeBean",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "storeBean", cascade = CascadeType.ALL)
 	private Set<ProductCategoryBean> productCategory = new LinkedHashSet<ProductCategoryBean>();
-	
+
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "storeBean",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "storeBean", cascade = CascadeType.ALL)
 	private Set<CommentBean> comments = new LinkedHashSet<CommentBean>();
-	
+
 	public StoreBean() {
 	}
 
@@ -139,8 +137,6 @@ public class StoreBean {
 		this.latitude = latitude;
 	}
 
-
-
 	public Set<ProductCategoryBean> getProductCategory() {
 		return productCategory;
 	}
@@ -156,6 +152,5 @@ public class StoreBean {
 	public void setComments(Set<CommentBean> comments) {
 		this.comments = comments;
 	}
-
 
 }

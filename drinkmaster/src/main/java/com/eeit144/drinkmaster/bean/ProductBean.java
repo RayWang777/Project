@@ -44,18 +44,16 @@ public class ProductBean {
 	
 	@Transient
 	@Column(name = "productcategoryid")
-	private String productCategoryId;
+	private Integer productCategoryId;
+	
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "productCategoryId",nullable = false)
 	private ProductCategoryBean productCategoryBean;
 	
-
-
-	
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "productBean",cascade = CascadeType.ALL)
-	private Set<ShopCarBean> shopCars = new LinkedHashSet<ShopCarBean>(); 
+	private Set<OrderBean> orders = new LinkedHashSet<OrderBean>(); 
 	
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "productBean",cascade = CascadeType.ALL)
@@ -108,11 +106,11 @@ public class ProductBean {
 		this.coldHot = coldHot;
 	}
 
-	public String getProductCategoryId() {
+	public Integer getProductCategoryId() {
 		return productCategoryId;
 	}
 
-	public void setProductCategoryId(String productCategoryId) {
+	public void setProductCategoryId(Integer productCategoryId) {
 		this.productCategoryId = productCategoryId;
 	}
 
@@ -124,12 +122,12 @@ public class ProductBean {
 		this.productCategoryBean = productCategoryBean;
 	}
 
-	public Set<ShopCarBean> getShopCars() {
-		return shopCars;
+	public Set<OrderBean> getOrders() {
+		return orders;
 	}
 
-	public void setShopCars(Set<ShopCarBean> shopCars) {
-		this.shopCars = shopCars;
+	public void setOrders(Set<OrderBean> orders) {
+		this.orders = orders;
 	}
 
 	public Set<CommentBean> getComments() {
@@ -147,7 +145,6 @@ public class ProductBean {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
-	
-	
-	
+
+
 }

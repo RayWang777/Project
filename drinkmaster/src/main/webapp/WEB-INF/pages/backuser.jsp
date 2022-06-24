@@ -61,8 +61,10 @@
 				<c:out value="${userBean.birthday}"/>
 			</div></td>
 			
-			<td class="align-middle"><img src="<c:url value="/backend/user/${userBean.userId}/photo"/>"
-						style="width: 100px; height: 100px;"></td>
+			<td class="align-middle">
+<%-- 			<img src="<c:url value="/backend/user/${userBean.userId}/photo"/>" style="width: 100px; height: 100px;"> --%>
+				<img width="100" src="data:image/jpg;base64,<c:out value='${userBean.byteArrayString}'/>">
+			</td>
 						
 			<td class="align-middle" style="width: 13%;"><div class="d-flex align-items-center">
 				<div style="margin: 5px"><c:url value="/backend/user/update/${userBean.userId}" var="update_url" />

@@ -1,6 +1,5 @@
 package com.eeit144.drinkmaster.controller;
 
-import java.io.Console;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,20 +15,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.UserBean;
-import com.eeit144.drinkmaster.dto.FirmDTO;
 import com.eeit144.drinkmaster.dto.UserBeanDTO;
 import com.eeit144.drinkmaster.model.UserService;
 
@@ -67,6 +64,7 @@ public class UserController {
 		System.out.println("PostMapping:" + userAccount + "  " + userPassword);
 
 		user = userService.findByAccPwd(userAccount, userPassword);
+		
 		m.addAttribute(user);
 		
 //		System.out.println(user.getUserId());
@@ -93,10 +91,17 @@ public class UserController {
 
 	@PostMapping("user/insert")
 	// 前端會提供UserBean user 跟 MultipartFile photo這兩個物件
-	public String insertUserGo(@ModelAttribute("user") UserBean user, @RequestParam("reallogo") MultipartFile photo,Model m) {
-//		UserBean newUserBean = new UserBean();
+	public String insertUserGo(@ModelAttribute("user") UserBean user, BindingResult result,
+			@RequestParam("reallogo") MultipartFile photo,Model m) {
 
-		// 將photo的
+		// 以下為用UserBeanValidator識別欄位錯誤格式
+		UserBeanValidator validator = new UserBeanValidator();
+		validator.validate(user, result);
+		if(result.hasErrors()) {
+			return "backuseradd";
+		}
+		
+		// 以下為新增動作
 		String contentType = photo.getContentType();
 		System.out.println(contentType);
 		
@@ -115,17 +120,6 @@ public class UserController {
 		Date createDate = new Date();
 		user.setCreatedate(createDate);
 		
-//		newUserBean.setUserId(user.getUserId());
-//		newUserBean.setBirthday(user.getBirthday());
-//		newUserBean.setCreatedate(createDate);
-//		newUserBean.setUserName(user.getUserName());
-//		newUserBean.setUserAccount(user.getUserAccount());
-//		newUserBean.setUserPassword(user.getUserPassword());
-//		newUserBean.setUserAddress(user.getUserAddress());
-//		newUserBean.setPhone(user.getPhone());
-//		newUserBean.setGender(user.getGender());
-//		newUserBean.setRole(user.getRole());
-		
 		try {
 			user.setPhoto(photo.getBytes());
 		} catch (IOException e) {
@@ -140,12 +134,6 @@ public class UserController {
 		return "redirect:/backend/user/all";
 	}
 
-
-//	@PostMapping("user/insertGo")
-//	public String insertUserGo(@ModelAttribute("user") UserBean user, Model m) {
-//		userService.insertUser(user);
-//		return "redirect:/backend/user/all";
-//	}
 	
 	@GetMapping("user/all")
 	public ModelAndView findView(ModelAndView mav, @RequestParam(name="u", defaultValue = "1") Integer pageNumber) {

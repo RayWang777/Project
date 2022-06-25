@@ -14,6 +14,8 @@ public interface FirmService {
 
 	public Optional<FirmBean> findById(Integer id);
 
+	public Page<FirmBean> findByfirmId(Integer userId, Pageable pab);
+	
 	public Page<FirmBean> findAll(Pageable pab);
 
 	public void insertFirm(FirmBean firm);
@@ -27,4 +29,8 @@ public interface FirmService {
 	public Page<FirmBean> findAll2(Example<FirmBean> firm,Pageable pab);
 	
 	public void deleteByIds(List<Integer> ids);
+
+	Page<FirmBean> findFirmByUserId(Integer userId, Pageable pab);
+
+
 }

@@ -9,6 +9,8 @@
 
 <h1>後台首頁</h1>
 <p>你好, ${userBean.userName}</p>
+
+<c:out value="${userBean.role}" /><c:out value="${userBean.userId}" />
 <table class="table table-hover" style="width:100%;table-layout:fixed;">
 	<tr>
 		<th scope="col">ID</th>

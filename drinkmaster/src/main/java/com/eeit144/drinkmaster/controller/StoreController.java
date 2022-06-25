@@ -57,18 +57,14 @@ public class StoreController {
 	}
 
 	@GetMapping("store/all")
-	public String findAllPages(@RequestParam(name = "p", defaultValue = "1") Integer page,
-			@RequestParam(name = "c", defaultValue = "1") Integer column,
-			@RequestParam(name = "s", defaultValue = "2") Integer size,
-			@RequestParam(name = "d", defaultValue = "true") boolean direct, Model m) {
-		if (column > 8)
-			column = 1;
+	public String findAllPages(@RequestParam(name = "p", defaultValue = "1") Integer page,Model m) {
+
 
 		Pageable pab = null;
-		if (direct) {
-			pab = PageRequest.of(page - 1, size, Sort.Direction.ASC, StoreColumn.getColumne(column));
+		if (true) {
+			pab = PageRequest.of(page - 1, 5, Sort.Direction.ASC, "storeId");
 		} else {
-			pab = PageRequest.of(page - 1, size, Sort.Direction.DESC, StoreColumn.getColumne(column));
+			pab = PageRequest.of(page - 1, 5, Sort.Direction.DESC,"storeId");
 		}
 
 		Page<StoreBean> allStore = storeService.findAll(pab);

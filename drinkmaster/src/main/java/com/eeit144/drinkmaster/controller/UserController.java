@@ -33,7 +33,7 @@ import com.eeit144.drinkmaster.model.UserService;
 
 @Controller
 @Transactional
-@RequestMapping("/backend")
+@RequestMapping("backend/")
 @SessionAttributes(names= {"userBean"})
 public class UserController {
 
@@ -66,6 +66,8 @@ public class UserController {
 		user = userService.findByAccPwd(userAccount, userPassword);
 		
 		m.addAttribute(user);
+		
+		m.addAttribute("userBean",user);
 		
 //		System.out.println(user.getUserId());
 		

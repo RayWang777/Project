@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eeit144.drinkmaster.bean.FirmBean;
@@ -51,11 +52,15 @@ public class FirmController {
 	}
 
 	@GetMapping("firm/{id}")
-	public String findFirmById(@PathVariable Integer id,Model m) {
+	public String findFirmById(@PathVariable Integer id,@SessionAttribute("userBean") UserBean user,Model m) {
 		Optional<FirmBean> firmBean = firmService.findById(id);
 
 		if (firmBean.isEmpty()) {
 			return "redirect:/backend/firm/all";
+		}
+		
+		if(!((user.getRole().equals("admin"))  ||  !(user.getRole().equals("firm")))) {
+			return "redirect:/backend/";
 		}
 
 		FirmBean findById = firmService.findById(id).get();
@@ -81,7 +86,14 @@ public class FirmController {
 	}
 
 	@GetMapping("firm/all")
-	public String findAllPages(@ModelAttribute("firmSerch") FirmSerch firmSerch, Model m) {
+	public String findAllPages(@ModelAttribute("firmSerch") FirmSerch firmSerch,@SessionAttribute("userBean") UserBean user, Model m) {
+		
+		
+		if(!(user.getRole().equals("admin"))) {
+//		
+			return "redirect:/backend/";			
+		}
+		
 		String serchFirmName = firmSerch.getSfn();
 		String serchFirmPhone = firmSerch.getSfp();
 		String serchFirmAddress = firmSerch.getSfa();
@@ -98,7 +110,6 @@ public class FirmController {
 			pab = PageRequest.of(page - 1, size, Sort.Direction.DESC, FirmColumn.getColumne(column));
 		}
 
-//		Page<FirmBean> allFirm = firmService.findAll(pab);
 
 		UserBean userBean = new UserBean();
 		userBean.setUserName(serchUserName);
@@ -114,6 +125,7 @@ public class FirmController {
 				.withMatcher("userBean.userName", ExampleMatcher.GenericPropertyMatchers.contains());
 
 		Example<FirmBean> example = Example.of(firmBean, matcher);
+		
 
 		Page<FirmBean> allFirm = firmService.findAll2(example, pab);
 
@@ -123,6 +135,7 @@ public class FirmController {
 			firm.setFirmLogo(null);
 		}
 
+		
 		FirmSerch firmSerch2 = new FirmSerch();
 		m.addAttribute("serchFirm", firmSerch);
 		m.addAttribute("firmSerch", firmSerch2);

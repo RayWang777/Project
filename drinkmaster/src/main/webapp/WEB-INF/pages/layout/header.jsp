@@ -59,16 +59,24 @@ li {
 						<li><a href="#">刪除</a></li>
 						<li><a href="${contextRoot}/backend/user/all">查詢</a></li>
 					</ul></li>
+				<c:choose>
+				<c:when test="${userBean.role != 'admin' && userBean.role != 'firm'}"></c:when>
+				<c:otherwise>
 				<li><a class="sidebar-sub-toggle"><i
 						class="large material-icons">business</i> 廠商管理 <span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
-						<li><a href="<c:url value="/backend/firm/all"/>">所有廠商</a></li>
-						<li><a href="#">修改</a></li>
+						<c:if test="${userBean.role == 'admin'}">
+						<li><a href="<c:url value="/backend/firm/all"/>">廠商列表</a></li>
+						</c:if>
+						<c:if test="${userBean.role == 'firm'}">
+						<li><a href="<c:url value="/backend/firm/${userBean.userId}"/>">修改資料</a></li>
+						</c:if>
 
 						<li><a href="#">刪除</a></li>
 						<li><a href="#">查詢</a></li>
 					</ul></li>
+				</c:otherwise></c:choose>
 				<li><a class="sidebar-sub-toggle"><i
 						class="large material-icons">store</i> 店家管理 <span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
@@ -120,7 +128,7 @@ li {
 
 					</ul></li>
 					<li><a href="${contextRoot}/front/">前台首頁</a></li>
-				<li><a><i class="ti-close"></i> Logout</a></li>
+				<li><a href="<c:url value="/backend/login"/>"><i class="ti-close"></i> Logout</a></li>
 
 			</ul>
 		</div>

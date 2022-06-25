@@ -25,7 +25,7 @@
 <link href="<c:url value="/css/style.css"/>" rel="stylesheet">
 
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
- 
+
 
 
 <style>

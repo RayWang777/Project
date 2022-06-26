@@ -2,6 +2,8 @@ package com.eeit144.drinkmaster.service;
 
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +14,7 @@ import com.eeit144.drinkmaster.dao.StoreRepostiory;
 import com.eeit144.drinkmaster.model.StoreService;
 
 @Service
+@Transactional
 public class StoreServiceImp implements StoreService {
 	
 	private StoreRepostiory storeDao;

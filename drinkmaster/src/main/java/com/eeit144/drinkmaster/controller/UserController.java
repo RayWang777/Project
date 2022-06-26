@@ -92,6 +92,10 @@ public class UserController {
 			
 			return("redirect:/backend/");
 		} else if(role.equals("store")) {
+			
+			
+			
+			
 			return("redirect:/backend/");
 		}
 		return "redirect:/backend/login";

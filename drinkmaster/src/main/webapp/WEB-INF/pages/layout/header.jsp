@@ -81,9 +81,12 @@ li {
 						class="large material-icons">store</i> 店家管理 <span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
-						<li><a href="<c:url value="/backend/store/all"/>">所有店家</a></li>
-						<li><a href="#">修改</a></li>
-
+						<c:if test="${userBean.role != 'store'}">
+						<li><a href="<c:url value="/backend/store/all"/>">店家列表</a></li>
+						</c:if>
+						<c:if test="${userBean.role == 'store'}">
+						<li><a href="<c:url value="/backend/firm/edit/${canSeeFirm.firmId}"/>">修改資料</a></li>
+						</c:if>
 						<li><a href="#">刪除</a></li>
 						<li><a href="#">查詢</a></li>
 					</ul></li>

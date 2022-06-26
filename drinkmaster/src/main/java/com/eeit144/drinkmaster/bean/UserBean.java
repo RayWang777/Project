@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,7 +23,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 @Entity
 @Table(name = "users")
 public class UserBean {
@@ -32,58 +32,61 @@ public class UserBean {
 	@Column(name = "userid")
 	private Integer userId;
 
-	@Column(name = "username",nullable = false, columnDefinition = "nvarchar(20)")
+	@Column(name = "username", nullable = false, columnDefinition = "nvarchar(20)")
 	private String userName;
 
-	@Column(name = "useraccount",nullable = false)
+	@Column(name = "useraccount", nullable = false)
 	private String userAccount;
 
-	@Column(name = "userpassword",nullable = false)
+	@Column(name = "userpassword", nullable = false)
 	private String userPassword;
 
-	@Column(name = "useraddress",nullable = false, columnDefinition = "nvarchar(50)")
+	@Column(name = "useraddress", nullable = false, columnDefinition = "nvarchar(50)")
 	private String userAddress;
 
 	@Column(name = "photo", columnDefinition = "varbinary(max)")
 	private byte[] photo;
 
-	@Column(name = "phone",nullable = false)
+	@Column(name = "phone", nullable = false)
 	private String phone;
 
-	@Column(name = "role",nullable = false)
+	@Column(name = "role", nullable = false)
 	private String role;
-	
-	@Column(name = "gender",nullable = false, columnDefinition = "nvarchar(10)")
+
+	@Column(name = "gender", nullable = false, columnDefinition = "nvarchar(10)")
 	private String gender;
-	
-	
-	@JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8" )
-	@DateTimeFormat(pattern="yyyy-MM-dd") 
+
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
-	@Column(name = "birthday", columnDefinition="date")
+	@Column(name = "birthday", columnDefinition = "date")
 	private Date birthday;
-	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8" ) // JSP DATE
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") //MVC DATE 
-	@Temporal(TemporalType.TIMESTAMP)	//SQL DATE
-	@Column(name = "createdate", columnDefinition="datetime",nullable = false)
+
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8") // JSP DATE
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") // MVC DATE
+	@Temporal(TemporalType.TIMESTAMP) // SQL DATE
+	@Column(name = "createdate", columnDefinition = "datetime", nullable = false)
 	private Date createdate;
-	
+
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "userBean",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userBean", cascade = CascadeType.ALL)
 	private Set<ServiceBean> services = new LinkedHashSet<ServiceBean>();
-	
+
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "userBean",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userBean", cascade = CascadeType.ALL)
 	private Set<OrderBean> orders = new LinkedHashSet<OrderBean>();
-	
+
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "userBean",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userBean", cascade = CascadeType.ALL)
 	private Set<CommentBean> comments = new LinkedHashSet<CommentBean>();
-	
+
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "userBean",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userBean", cascade = CascadeType.ALL)
 	private Set<FirmBean> firms = new LinkedHashSet<FirmBean>();
+
+	@JsonIgnore
+	@OneToOne(mappedBy = "userBean",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	private StoreBean storeBean;
 	
 	public UserBean() {
 	}
@@ -209,9 +212,18 @@ public class UserBean {
 	}
 
 	public String getByteArrayString() {
-		  if(this.photo!= null) {
-		   return Base64.encodeBase64String(this.photo);
-		  }
-		  return null;
-		 }
+		if (this.photo != null) {
+			return Base64.encodeBase64String(this.photo);
+		}
+		return null;
+	}
+
+	public StoreBean getStoreBean() {
+		return storeBean;
+	}
+
+	public void setStoreBean(StoreBean storeBean) {
+		this.storeBean = storeBean;
+	}
+
 }

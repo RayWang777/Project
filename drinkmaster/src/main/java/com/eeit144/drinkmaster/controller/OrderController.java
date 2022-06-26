@@ -1,6 +1,7 @@
 package com.eeit144.drinkmaster.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -96,6 +97,9 @@ public class OrderController {
 //			@ModelAttribute("userBean key") UserBean variableName;
 //			 orderBean.setUserbean(variableName);
 			
+			Date createTime = new Date();
+			orderBean.setCreateTime(createTime);
+			
 			//要先找到 store user product 的ID 把資料放到前端
 			StoreBean oldStore = storeService.findById(orderBean.getStoreId()).get();
 			UserBean oldUser = userService.findById(orderBean.getUserId()).get();
@@ -170,26 +174,7 @@ public class OrderController {
 			
 		
 		
-		//參考作法(未完成)
-//		@PostMapping("order/insert")
-//		public String insertOrder(@RequestParam String orderAddress, @RequestParam String orderPhone,
-//				 @RequestParam String orderStatus, @RequestPart Integer totalPrice,
-//				 @RequestParam Date createTime, Model model) {
-//			
-//			OrderBean orderBean = new OrderBean();
-////			OrderDTO orderDTO = new OrderDTO();
-//			
-//			orderBean.setOrderAddress(orderAddress);
-//			orderBean.setOrderPhone(orderPhone);
-//			orderBean.setOrderStatus(orderStatus);
-//			orderBean.setTotalPrice(totalPrice);
-//			orderBean.setCreateTime(createTime);
-//				
-//			orderService.insertOrder(orderBean);
-//			model.addAttribute("orderBean", orderBean);
-//			
-//			return "backorder";
-//			}
+		
 		
 
 

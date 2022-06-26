@@ -213,9 +213,9 @@
         </button>
       </div>
   <div class="modal-body">
-  <form:form id="orderform" class="form" method="post" action="${contextRoot}/backend/order/insert" modelAttribute="orderBean">
-  <span><form:label path="createTime">訂單日期</form:label></span>
-  <form:input path="createTime" /><br><br>
+  <form:form id="orderform" class="form"  method="post" action="${contextRoot}/backend/order/insert" modelAttribute="orderBean">
+<%--   <span><form:label path="createTime">訂單日期</form:label></span> --%>
+<%--   <form:input path="createTime" /><br><br> --%>
   <form:label path="storeId">店家編號</form:label>
   <form:input path="storeId" /><br><br>
   <form:label path="productId">產品編號</form:label>

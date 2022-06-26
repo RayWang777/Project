@@ -56,7 +56,7 @@ public class StoreBean {
 	private Double latitude;
 	
 	@JsonIgnore
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	@JoinColumn(name="userid")
 	private UserBean userBean;
 

@@ -12,6 +12,22 @@
 .table {
 	font-size: 16px;
 }
+  a:link
+        {
+            color: black;
+        }
+        a:visited
+        {
+            color: black;
+        }
+        a:hover
+        {
+            color: red;
+        }
+        a:active
+        {
+            color: black;
+        }
 
 </style>
 
@@ -67,7 +83,6 @@
 		<tbody>
 
 			<c:forEach items="${firms.content}" var="firm">
-
 				<tr scope="row">
 					<td class="align-middle"><label
 						class="control control--checkbox"><input type="checkbox"

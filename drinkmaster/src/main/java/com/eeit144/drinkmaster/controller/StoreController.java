@@ -148,11 +148,16 @@ public class StoreController {
 	}
 
 	@GetMapping("store/edit/{id}")
-	public String storeAddPage(@PathVariable("id") Integer id, Model m) {
-		StoreBean findById = storeService.findById(id).get();
-		StoreDTO storeDTO = new StoreDTO();
+	public String storeUpdatePage(@PathVariable("id") Integer id,@SessionAttribute("userBean") UserBean user, Model m) {
+		
+		String role = user.getRole();
 
-		storeDTO.setFirmId(findById.getFirmId());
+		StoreBean findById = storeService.findById(id).get();
+		
+		StoreDTO storeDTO = new StoreDTO();		
+		storeDTO.setStoreId(findById.getStoreId());
+		storeDTO.setUserBean(findById.getUserBean());
+		storeDTO.setFirmId(findById.getFirmBean().getFirmId());
 		storeDTO.setStoreId(findById.getStoreId());
 		storeDTO.setStoreName(findById.getStoreName());
 		storeDTO.setStoreAddress(findById.getStoreAddress());
@@ -160,15 +165,87 @@ public class StoreController {
 		storeDTO.setOpenTime(findById.getOpenTime());
 		storeDTO.setLatitude(findById.getLatitude());
 		storeDTO.setLongitude(findById.getLongitude());
+		
+		List<UserBean> users = userService.findAllUsers();
+		m.addAttribute("storeaddusers", users);
+		
+		if(role.equals("admin")) {
+			List<FirmBean> findAll3 = firmService.findAll3();
+			m.addAttribute("storeaddfirms", findAll3);
+			m.addAttribute("store", storeDTO);
+			return "backstoreupdate";
+		}
+		
 
-		m.addAttribute("store", storeDTO);
-		m.addAttribute("save", "修改店家");
-		return "backstoreadd";
+		if(role.equals("firm")) {
+			FirmBean findFirmByUserId = firmService.findFirmByUserId(user.getUserId()).get(0);
+			m.addAttribute("storeaddfirms", findFirmByUserId);
+			m.addAttribute("store", storeDTO);
+			return "backstoreupdate";
+		}
+		
+		
+		if(role.equals("store")) {
+
+			Integer oldFirmId = findById.getFirmBean().getFirmId();
+			FirmBean oldFirm = firmService.findById(oldFirmId).get();
+			m.addAttribute("storeaddfirms", oldFirm);
+			m.addAttribute("store", storeDTO);
+			return "backstoreupdate";
+		}
+		
+		return "redirect:/backend/";
+	}
+	
+	
+	@PostMapping("store/edit/{id}")
+	public String UpdateStore(@PathVariable("id") Integer id,@SessionAttribute("userBean") UserBean user,
+			@ModelAttribute("store") StoreDTO store , Model m){
+		
+		if((!(user.getRole().equals("admin"))) && (!(user.getRole().equals("firm"))) && (!(user.getRole().equals("store"))) ) {
+			return "redirect:/backend/";			
+		}
+		
+		StoreBean oldStore = storeService.findById(id).get();
+		FirmBean firmBean = firmService.findById(store.getFirmId()).get();
+		
+		UserBean findById = userService.findById(store.getUserId()).get();
+		
+		oldStore.setStoreId(store.getStoreId());
+		oldStore.setStoreName(store.getStoreName());
+		oldStore.setStorePhone(store.getStorePhone());
+		oldStore.setStoreAddress(store.getStoreAddress());
+		oldStore.setOpenTime(store.getOpenTime());
+		oldStore.setLatitude(store.getLatitude());
+		oldStore.setLongitude(store.getLongitude());
+		oldStore.setFirmBean(firmBean);
+		oldStore.setUserBean(findById);
+		
+		storeService.insertStore(oldStore);		
+		
+		return "redirect:/backend/store/all";		
 	}
 	
 	@GetMapping("store/delete/{id}")
-	public String deleteStore(@PathVariable("id") Integer id) {
+	public String deleteStore(@PathVariable("id") Integer id,@SessionAttribute("userBean") UserBean user) {
+		
+		String role = user.getRole();
+		if( !(role.equals("admin"))&& !(role.equals("firm")) ) {
+			return "redirect:/backend/";
+		}
+		
+		if(role.equals("admin")) {		
 		storeService.deleteById(id);
+		return "redirect:/backend/store/all";
+		}
+		
+		StoreBean findById = storeService.findById(id).get();
+		FirmBean firmBean = firmService.findFirmByUserId(user.getUserId()).get(0);
+		
+		if(findById.getFirmBean().getFirmId() == firmBean.getFirmId()) {
+			storeService.deleteById(id);
+			return "redirect:/backend/store/all";
+		}
 		return "redirect:/backend/store/all";
 	}
 

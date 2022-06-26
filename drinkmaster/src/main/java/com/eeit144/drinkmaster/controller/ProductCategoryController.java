@@ -23,13 +23,13 @@ import com.eeit144.drinkmaster.service.StoreServiceImp;
 @Controller
 @Transactional
 @RequestMapping("/backend")
-@SessionAttributes (names= {"userBean","store"})
+@SessionAttributes (names= {"userBean","canSeeStore"})
 public class ProductCategoryController {
 	@Autowired ProductCategoryServiceImp categoryService;
 	@Autowired
 	StoreServiceImp storeService;
 	@GetMapping("prodcuct/insertcategory")
-	public String addCategoryView(Model m ,@SessionAttribute("store") StoreBean storeBean ) {
+	public String addCategoryView(Model m ,@SessionAttribute("canSeeStore") StoreBean storeBean ) {
 		ProductCategoryBean category=new ProductCategoryBean();
 		category.setStoreBean(storeBean);
 		String storeNane=storeBean.getStoreName();
@@ -69,8 +69,10 @@ public class ProductCategoryController {
 		return "redirect:/backend/category/all";
 }
 	@GetMapping("editcategory")
-	public String updateCategoryById(@RequestParam("id") Integer id, Model m) {
+	public String updateCategoryById(@RequestParam("id") Integer id,@SessionAttribute("canSeeStore") StoreBean storeBean, Model m) {
 		ProductCategoryBean proBean = categoryService.findById(id);
+		String storeNane=storeBean.getStoreName();
+		m.addAttribute("storename",storeNane);
 		m.addAttribute("status","確定修改");
 		m.addAttribute("now","修改種類");
 		m.addAttribute("category", proBean);

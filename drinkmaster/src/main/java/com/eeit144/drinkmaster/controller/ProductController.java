@@ -18,28 +18,32 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.bean.ProductCategoryBean;
+import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.service.ProductCategoryServiceImp;
 import com.eeit144.drinkmaster.service.ProductServiceImp;
 
 @Controller
 @Transactional
 @RequestMapping("/backend")
+@SessionAttributes (names= {"userBean","canSeeStore"})
 public class ProductController {
 	@Autowired
 	private ProductServiceImp proService;
 	@Autowired ProductCategoryServiceImp categoryService;
 
 	@GetMapping("product/insertview")
-	public String addView(Model m) {
+	public String addView(Model m,@SessionAttribute("canSeeStore") StoreBean storeBean) {
 		ProductBean pro = new ProductBean();
 		m.addAttribute("now","新增商品");
 		m.addAttribute("status","確定新增");
-		List<ProductCategoryBean> productcategory1 =categoryService.findAll();
+		List<ProductCategoryBean> productcategory1 =categoryService.findByStoreBean(storeBean);
 		m.addAttribute("productcategory1",productcategory1);
 		m.addAttribute("product", pro);
 		m.addAttribute("insert", "product/insert");
@@ -53,7 +57,7 @@ public class ProductController {
 	@PostMapping("/product/insert")
 	public String insertProduct(@RequestParam String productName, @RequestParam String price,
 			@RequestParam String coldHot, @RequestParam Boolean status,
-			@RequestParam ProductCategoryBean productCategoryBean,@RequestPart("productImage") MultipartFile productImage, Model m) throws IOException {
+			@RequestParam ProductCategoryBean productCategoryBean,@RequestPart("productImage") MultipartFile productImage,@SessionAttribute("canSeeStore") StoreBean storeBean ,Model m) throws IOException {
 		Map<String, String> errors = new HashMap<String, String>();
 		m.addAttribute("errors", errors);
 		if (productName == null || productName.length() == 0) {
@@ -68,8 +72,12 @@ public class ProductController {
 
 		if (errors != null && !errors.isEmpty()) {
 			ProductBean pro = new ProductBean();
+			m.addAttribute("now","新增商品");
 			m.addAttribute("product", pro);
 			m.addAttribute("insert", "product/insert");
+			m.addAttribute("status","確定新增");
+			List<ProductCategoryBean> productcategory1 =categoryService.findByStoreBean(storeBean);
+			m.addAttribute("productcategory1",productcategory1);
 			return "backproductinsert";
 		}
 
@@ -136,9 +144,9 @@ public class ProductController {
 
 
 	@GetMapping("editproduct")
-	public String updateById(@RequestParam("id") Integer id, Model m) {
+	public String updateById(@RequestParam("id") Integer id, Model m,@SessionAttribute("canSeeStore") StoreBean storeBean) {
 		ProductBean proBean = proService.findById(id);
-		List<ProductCategoryBean> productcategory1 =categoryService.findAll();
+		List<ProductCategoryBean> productcategory1 =categoryService.findByStoreBean(storeBean);
 		m.addAttribute("now","編輯商品");
 		m.addAttribute("status","確定修改");
 		m.addAttribute("productcategory1",productcategory1);
@@ -151,7 +159,7 @@ public class ProductController {
 	@PostMapping("updateproduct")
 	public String postUpdate(@RequestParam Integer productId,@RequestParam ProductCategoryBean productCategoryName, @RequestParam String productName,
 			@RequestParam String price, @RequestParam String coldHot, @RequestParam Boolean status,
-			 @RequestPart("productImage") MultipartFile productImage, Model m)
+			 @RequestPart("productImage") MultipartFile productImage, @SessionAttribute("canSeeStore") StoreBean storeBean,Model m)
 			throws IOException {
 
 		Map<String, String> errors = new HashMap<String, String>();
@@ -168,6 +176,10 @@ public class ProductController {
 
 		if (errors != null && !errors.isEmpty()) {
 			ProductBean oldBean = proService.findById(productId);
+			List<ProductCategoryBean> productcategory1 =categoryService.findByStoreBean(storeBean);
+			m.addAttribute("now","編輯商品");
+			m.addAttribute("status","確定修改");
+			m.addAttribute("productcategory1",productcategory1);
 			m.addAttribute("product", oldBean);
 			m.addAttribute("insert", "updateproduct");
 			return "backproductinsert";

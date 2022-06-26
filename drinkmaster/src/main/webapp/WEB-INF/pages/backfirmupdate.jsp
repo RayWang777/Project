@@ -57,9 +57,6 @@
 					  	</c:otherwise>
 					  </c:choose>					 					
 					</c:forEach>
-					
-<%-- 						<form:options items="${firmaddusers}" itemLabel="userName" --%>
-<%-- 							itemValue="userId"  /> --%>
 					</form:select>
 					<form:hidden path="userId" value="${originUserId}" />
 					<span id=firmPhoneSp></span>

@@ -1,5 +1,12 @@
 package com.eeit144.drinkmaster.dto;
 
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+import com.eeit144.drinkmaster.bean.UserBean;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class StoreDTO {
 
 	private Integer storeId;
@@ -17,8 +24,10 @@ public class StoreDTO {
 	private Double longitude;
 
 	private Double latitude;
-	
+
 	private Integer userId;
+
+	private UserBean userBean;
 
 	public StoreDTO() {
 	}
@@ -94,5 +103,13 @@ public class StoreDTO {
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-	
+
+	public UserBean getUserBean() {
+		return userBean;
+	}
+
+	public void setUserBean(UserBean userBean) {
+		this.userBean = userBean;
+	}
+
 }

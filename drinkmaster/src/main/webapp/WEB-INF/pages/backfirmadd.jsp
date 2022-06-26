@@ -50,7 +50,7 @@
 							itemValue="userId" />
 					</form:select>
 					<form:hidden path="userId" value="1" />
-					<span id=firmPhoneSp></span>
+					<span id=firmUserIdSp></span>
 				</div>
 
 				<div class="mb-4" style="text-align: center;">

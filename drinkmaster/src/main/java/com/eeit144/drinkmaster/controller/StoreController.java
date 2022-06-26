@@ -1,5 +1,6 @@
 package com.eeit144.drinkmaster.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,23 +18,32 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
-import com.eeit144.drinkmaster.bean.StoreColumn;
+import com.eeit144.drinkmaster.bean.UserBean;
 import com.eeit144.drinkmaster.dto.StoreDTO;
+import com.eeit144.drinkmaster.model.FirmService;
 import com.eeit144.drinkmaster.model.StoreService;
+import com.eeit144.drinkmaster.model.UserService;
 
 @Controller
 @RequestMapping("backend/")
 public class StoreController {
 
 	private StoreService storeService;
+	
+	private FirmService firmService;
+	
+	private UserService userService;
 
 	@Autowired
-	public StoreController(StoreService storeService) {
+	public StoreController(StoreService storeService,UserService userService,FirmService firmService) {
 		super();
 		this.storeService = storeService;
+		this.userService = userService;
+		this.firmService = firmService;
 	}
 
 	@GetMapping("store/{id}")
@@ -57,30 +67,71 @@ public class StoreController {
 	}
 
 	@GetMapping("store/all")
-	public String findAllPages(@RequestParam(name = "p", defaultValue = "1") Integer page,Model m) {
+	public String findAllPages(@RequestParam(name = "p", defaultValue = "1") Integer page,@SessionAttribute("userBean") UserBean user,Model m) {
 
-
-		Pageable pab = null;
-		if (true) {
-			pab = PageRequest.of(page - 1, 5, Sort.Direction.ASC, "storeId");
-		} else {
-			pab = PageRequest.of(page - 1, 5, Sort.Direction.DESC,"storeId");
+		String role = user.getRole();
+		if( !(role.equals("admin"))&& !(role.equals("firm")) ) {
+			return "redirect:/backend/";
 		}
 
-		Page<StoreBean> allStore = storeService.findAll(pab);
+		Pageable pab = PageRequest.of(page - 1, 5, Sort.Direction.ASC, "storeId");
 
-		m.addAttribute("stores", allStore);
-
+		if(role.equals("admin")) {
+			Page<StoreBean> allStore = storeService.findAll(pab);
+			m.addAttribute("stores", allStore);
+			return "backstore";
+		}
+		Integer userFirmId = firmService.findFirmByUserId(user.getUserId()).get(0).getFirmId();
+		Page<StoreBean> storeByFirmId = storeService.findStoreByFirmId(userFirmId, pab);
+		m.addAttribute("stores", storeByFirmId);
 		return "backstore";
 	};
+	
+	
+	
+	@GetMapping("/store/add")
+	public String storeAddPage(@SessionAttribute("userBean") UserBean user,Model m) {
+		
+		String role = user.getRole();
+		if( !(role.equals("admin"))&& !(role.equals("firm")) ) {
+			return "redirect:/backend/";
+		}
+		
+		StoreDTO store = new StoreDTO();
+		if(role.equals("admin")) {
+			
+			List<FirmBean> findAll3 = firmService.findAll3();
+			List<UserBean> users = userService.findAllUsers();
+
+			m.addAttribute("storeaddfirms", findAll3);
+			m.addAttribute("storeaddusers", users);
+			m.addAttribute("store", store);
+			return "backstoreadd";
+		}
+		
+		FirmBean findFirmByUserId = firmService.findFirmByUserId(user.getUserId()).get(0);
+		List<UserBean> users = userService.findAllUsers();
+		
+		m.addAttribute("storeaddfirms", findFirmByUserId);
+		m.addAttribute("storeaddusers", users);		
+		m.addAttribute("store", store);
+		return "backstoreadd";
+	}
 
 	@PostMapping("store/add")
-	public String addNewStore(@ModelAttribute("store") StoreDTO store, Model m) {
+	public String addNewStore(@ModelAttribute("store") StoreDTO store,@SessionAttribute("userBean") UserBean user, Model m) {
+	
+		String role = user.getRole();
+		if( !(role.equals("admin"))&& !(role.equals("firm")) ) {
+			return "redirect:/backend/";
+		}
+		
 		StoreBean newStore = new StoreBean();
 
 	
 		FirmBean firmBean = new FirmBean();
 		firmBean.setFirmId(store.getFirmId());
+		UserBean oldUser = userService.findById(store.getUserId()).get();
 		
 		newStore.setFirmBean(firmBean);
 		newStore.setStoreId(store.getStoreId());
@@ -90,9 +141,9 @@ public class StoreController {
 		newStore.setOpenTime(store.getOpenTime());
 		newStore.setLatitude(store.getLatitude());
 		newStore.setLongitude(store.getLongitude());
+		newStore.setUserBean(oldUser);
 
 		storeService.insertStore(newStore);
-
 		return "redirect:/backend/store/all";
 	}
 

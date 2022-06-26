@@ -6,20 +6,39 @@
 <jsp:include page="layout/header.jsp" />
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
-<c:set var="userfirmid" scope="session" value="1"></c:set>
 <div class="content">
 
 	<div class="container">
 		<br> <br>
-		<h2 class="mb-4" style="text-align: center;">${save}</h2>
+		<h2 class="mb-4" style="text-align: center;">新增店家</h2>
 
 		<div class="row justify-content-center">
 
 			<c:url value="/backend/store/add" var="link_url" />
-			<form:form class="form" action="${link_url}" method="post"
-				modelAttribute="store">
+			<form:form class="form" action="${link_url}" method="post"	modelAttribute="store">
+				
+				<c:choose>
+				<c:when test="${userBean.role == 'admin' }">
+				<div class="mb-3">
+					<label for="selectfirmId" class="form-label">廠商</label>
+					<form:select id="selectfirmId" path="userBean.userId"
+						class="form-control">
 
-				<form:hidden path="firmId" id="firmId" value="${userfirmid}" />
+						<form:options items="${storeaddfirms}" itemLabel="firmName"
+							itemValue="firmId" />
+					</form:select>
+					<form:hidden path="firmId" value="1" />
+					<span id=firmIdSp></span>
+				</div>
+				</c:when>
+				<c:otherwise>
+					<form:select path="userBean.userId"	class="form-control">
+						<option value="${storeaddfirms.firmId}" selected="true">${storeaddfirms.firmName}</option>
+					</form:select>
+					<form:hidden path="firmId" value="${storeaddfirms.firmId}" />
+				</c:otherwise>
+				</c:choose>
+
 
 				<form:hidden path="storeId" id="storeId" />
 				<div class="mb-3">
@@ -44,18 +63,29 @@
 				</div>
 
 				<div class="mb-4">
-					<label for="openTime" class="form-label">開店時間</label>
-					<form:input path="openTime" class="form-control" type="text"
+					<label for="startTime" class="form-label">開店時間</label>
+					<br/>		
+					<input type="time" accept="number" id="startTime">
+					<input type="time" id="endTime">
+					<form:input path="openTime" class="form-control" 
 						id="openTime" />
 					<span id=openTimeSp></span>
 				</div>
-				<form:input path="latitude" class="form-control" type="text"
-					id="latitude" />
-				<form:input path="longitude" class="form-control" type="text"
-					id="longitude" />
+				<div class="mb-4">
+					<label for="selectuserId" class="form-label">管理者</label>
+						<form:select id="selectuserId" path="userBean.userId" class="form-control" >
+							<form:options items="${storeaddusers}" itemLabel="userName" itemValue="userId"/>
+						</form:select>
+					<form:input path="userId" value="${originUserId}" />
+					<span id=firmPhoneSp></span>
+				</div>
+				
+
+				<form:hidden path="latitude" class="form-control" id="latitude" />
+				<form:hidden path="longitude" class="form-control" id="longitude" />
 				<div class="mb-3" style="text-align: center;">
 					<input type="submit" class="btn btn-success"
-						value='<c:out value="${save}"/>'>
+						value='<c:out value="新增店家"/>'>
 				</div>
 			</form:form>
 
@@ -66,13 +96,14 @@
 </div>
 
 <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmEBK0G5eNsuBCbrJzIYY88lee1rT_S_o">
+  src="https://maps.googleapis.com/maps/api/js?key=APIKEY">
 </script>
-
 
 <script type="text/javascript">
 
 $(function(){
+	
+	
 	$('#storeAddress').change(function(){
 		var location = $('#storeAddress').val();
 
@@ -93,13 +124,46 @@ $(function(){
     			console.log(status)
   				}
 			});
-		
 	});
+
 	
+	$('#selectfirmId').click(function() {
+
+		var selected = $('#selectfirmId').val()
+		console.log(selected)
+		$('#firmId').val(selected);
+	})
+	
+	$('#selectuserId').click(function() {
+
+		var selected = $('#selectuserId').val()
+		console.log(selected)
+		$('#userId').val(selected);
+
+	})
+	
+	
+	$('#startTime').blur(function(){
+		var startime = $('#startTime').val();
+		var endtime = $('#endTime').val();
+		$('#endTime').attr('min',startime);
+		
+		$('#openTime').val(startime+'-'+endtime);
+	})
+	
+	$('#endTime').blur(function(){
+		var startime = $('#startTime').val();
+		var endtime = $('#endTime').val();
+		
+		$('#openTime').val(startime+'-'+endtime);
+	})
+
 
 });
 
 </script>
+
+
 
 
 

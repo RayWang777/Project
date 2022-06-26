@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eeit144.drinkmaster.bean.FirmBean;
+import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.bean.UserBean;
 import com.eeit144.drinkmaster.dto.UserBeanDTO;
 import com.eeit144.drinkmaster.model.FirmService;
@@ -38,7 +39,7 @@ import com.eeit144.drinkmaster.model.UserService;
 @Controller
 @Transactional
 @RequestMapping("backend/")
-@SessionAttributes(names= {"userBean","canSeeFirm"})
+@SessionAttributes(names= {"userBean","canSeeFirm","canSeeStore"})
 public class UserController {
 
 	private UserService userService;
@@ -92,6 +93,12 @@ public class UserController {
 			
 			return("redirect:/backend/");
 		} else if(role.equals("store")) {
+			
+			Optional<StoreBean> StoreByUserId = storeService.findStoreByUserId(user.getUserId());
+			StoreBean storeBean = StoreByUserId.get();
+			
+			m.addAttribute("canSeeStore", storeBean);
+			
 			return("redirect:/backend/");
 		}
 		return "redirect:/backend/login";

@@ -60,6 +60,9 @@ public class FirmController {
 			return "redirect:/backend/firm/all";
 		}
 		
+		if(!(user.getRole().equals("admin"))) {
+			return "redirect:/backend/";			
+		}
 
 		FirmBean findById = firmService.findById(id).get();
 		FirmDTO firmDTO = firmService.change(findById);
@@ -88,7 +91,6 @@ public class FirmController {
 		
 		
 		if(!(user.getRole().equals("admin"))) {
-//		
 			return "redirect:/backend/";			
 		}
 		
@@ -143,7 +145,12 @@ public class FirmController {
 	};
 
 	@GetMapping("/firm/add")
-	public String firmAddPage(Model m) {
+	public String firmAddPage(@SessionAttribute("userBean") UserBean user,Model m) {
+		
+		if(!(user.getRole().equals("admin"))) {
+			return "redirect:/backend/";			
+		}
+		
 		FirmDTO firmDTO = new FirmDTO();
 		List<UserBean> users = userService.findAllUsers();
 
@@ -153,8 +160,14 @@ public class FirmController {
 	}
 
 	@PostMapping("firm/add")
-	public String addNewFirm(@ModelAttribute("firm") FirmDTO firm, @RequestPart("reallogo") MultipartFile logo,
+	public String addNewFirm(@SessionAttribute("userBean") UserBean user,@ModelAttribute("firm") FirmDTO firm, @RequestPart("reallogo") MultipartFile logo,
 			Model m) {
+		
+		if(!(user.getRole().equals("admin"))) {
+			return "redirect:/backend/";			
+		}
+		
+		
 		List<UserBean> users = userService.findAllUsers();
 		m.addAttribute("firmaddusers", users);
 
@@ -197,6 +210,9 @@ public class FirmController {
 		FirmBean findById = firmService.findById(id).get();
 		FirmDTO firmDTO = firmService.change(findById);
 
+		if((!(user.getRole().equals("admin"))) && (!(user.getRole().equals("firm")))) {
+			return "redirect:/backend/";			
+		}
 		List<UserBean> users = userService.findAllUsers();
 
 		m.addAttribute("firmaddusers", users);
@@ -217,8 +233,13 @@ public class FirmController {
 	}
 
 	@PostMapping("firm/edit/{id}")
-	public String updateFirm(@ModelAttribute("firm") FirmDTO firm, @RequestPart("reallogo") MultipartFile logo,
+	public String updateFirm(@ModelAttribute("firm") FirmDTO firm,@SessionAttribute("userBean") UserBean user, @RequestPart("reallogo") MultipartFile logo,
 			Model m) {
+		
+		if((!(user.getRole().equals("admin"))) && (!(user.getRole().equals("firm")))) {
+			return "redirect:/backend/";			
+		}
+		
 
 		FirmBean oldFirm = firmService.findById(firm.getFirmId()).get();
 		String contentType = logo.getContentType();
@@ -253,7 +274,12 @@ public class FirmController {
 	}
 
 	@GetMapping("firm/delete/{id}")
-	public String deleteFirm(@PathVariable("id") Integer id) {
+	public String deleteFirm(@PathVariable("id") Integer id,@SessionAttribute("userBean") UserBean user) {
+		
+		if(!(user.getRole().equals("admin"))) {
+			return "redirect:/backend/";			
+		}
+		
 		firmService.deleteById(id);
 		return "redirect:/backend/firm/all";
 	}

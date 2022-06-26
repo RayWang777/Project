@@ -34,14 +34,7 @@ public class PageController {
 	public String storePage() {
 		return "backstore";
 	}
-	
-	@GetMapping("/store/add")
-	public String storeAddPage(Model m) {
-		StoreDTO store = new StoreDTO();
-		m.addAttribute("store", store);
-		m.addAttribute("save", "新增店家");
-		return "backstoreadd";
-	}
+
 
 	@GetMapping("/product")
 	public String productPage() {

@@ -1,5 +1,6 @@
 package com.eeit144.drinkmaster.model;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -16,5 +17,10 @@ public interface StoreService {
 	public void insertStore(StoreBean store);
 
 	public void deleteById(Integer id);
+
+	public Optional<StoreBean> findStoreByUserId(Integer userId);
+	
+	public Page<StoreBean> findStoreByFirmId(Integer firmId,Pageable pab);
+
 	
 }

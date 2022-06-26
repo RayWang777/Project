@@ -6,8 +6,6 @@
 <jsp:include page="layout/header.jsp" />
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
-<c:set var="userId" value="1"></c:set>
-
 <style>
 
 input+select{
@@ -75,11 +73,13 @@ width:306px;
 						id="reallogo" onchange="preview()" />
 					<span id=firmLogoSp><c:url value="${errors.firmLogo}"/></span>
 				</div>
+				<c:if test="${userBean.role =='admin' }">
 
 				<div class="mb-3" style="text-align: center;">
 					<input id="readyupdate" type="button" class="btn btn-primary" value='<c:out value="編輯"/>'>
 					<input id="toupdate" type="submit" class="btn btn-success" value='<c:out value="修改廠商"/>'>
 				</div>
+				</c:if>
 			</form:form>
 
 

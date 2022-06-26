@@ -1,6 +1,9 @@
 package com.eeit144.drinkmaster.service;
 
+import java.util.List;
 import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,6 +15,7 @@ import com.eeit144.drinkmaster.dao.StoreRepostiory;
 import com.eeit144.drinkmaster.model.StoreService;
 
 @Service
+@Transactional
 public class StoreServiceImp implements StoreService {
 	
 	private StoreRepostiory storeDao;
@@ -41,6 +45,16 @@ public class StoreServiceImp implements StoreService {
 	@Override
 	public void insertStore(StoreBean store) {
 		storeDao.save(store);
+	}
+
+	@Override
+	public Optional<StoreBean> findStoreByUserId(Integer userId){
+		return storeDao.findByUserBean_userId(userId);
+	}
+
+	@Override
+	public Page<StoreBean> findStoreByFirmId(Integer firmId, Pageable pab) {
+		return storeDao.findByFirmBean_firmId(firmId, pab);
 	}
 
 }

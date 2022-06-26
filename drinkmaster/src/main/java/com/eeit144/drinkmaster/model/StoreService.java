@@ -16,5 +16,9 @@ public interface StoreService {
 	public void insertStore(StoreBean store);
 
 	public void deleteById(Integer id);
+
+	public Optional<StoreBean> findStoreByUserId(Integer userId);
+	
+	public Page<StoreBean> findStoreByFirmId(Integer firmId,Pageable pab);
 	
 }

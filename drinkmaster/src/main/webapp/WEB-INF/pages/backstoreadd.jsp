@@ -6,20 +6,30 @@
 <jsp:include page="layout/header.jsp" />
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
-<c:set var="userfirmid" scope="session" value="1"></c:set>
 <div class="content">
 
 	<div class="container">
 		<br> <br>
-		<h2 class="mb-4" style="text-align: center;">${save}</h2>
+		<h2 class="mb-4" style="text-align: center;">新增店家</h2>
 
 		<div class="row justify-content-center">
 
 			<c:url value="/backend/store/add" var="link_url" />
 			<form:form class="form" action="${link_url}" method="post"
 				modelAttribute="store">
+				
+				
+				<div class="mb-3">
+					<label for="selectuserId" class="form-label">廠商</label>
+					<form:select id="selectfirmId" path="userBean.userId"
+						class="form-control">
 
-				<form:hidden path="firmId" id="firmId" value="${userfirmid}" />
+						<form:options items="${storeaddfirms}" itemLabel="firmName"
+							itemValue="firmId" />
+					</form:select>
+					<form:hidden path="firmId" value="1" />
+					<span id=firmPhoneSp></span>
+				</div>
 
 				<form:hidden path="storeId" id="storeId" />
 				<div class="mb-3">
@@ -44,8 +54,22 @@
 				</div>
 
 				<div class="mb-4">
-					<label for="openTime" class="form-label">開店時間</label>
-					<form:input path="openTime" class="form-control" type="text"
+					<label for="startTime" class="form-label">開店時間</label>
+					<br/>		
+					
+					<div class="input-group bootstrap-timepicker timepicker">
+            <input id="timepicker2" type="text" class="form-control input-small">
+            <span class="input-group-addon">
+                <i class="glyphicon glyphicon-time"></i>
+            </span>
+        </div>
+						
+					
+					<input type="time" accept="number" id="startTime">
+					<input type="time" id="endTime">
+					
+					
+					<form:input path="openTime" class="form-control" 
 						id="openTime" />
 					<span id=openTimeSp></span>
 				</div>
@@ -55,7 +79,7 @@
 					id="longitude" />
 				<div class="mb-3" style="text-align: center;">
 					<input type="submit" class="btn btn-success"
-						value='<c:out value="${save}"/>'>
+						value='<c:out value="新增店家"/>'>
 				</div>
 			</form:form>
 
@@ -68,11 +92,13 @@
 <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmEBK0G5eNsuBCbrJzIYY88lee1rT_S_o">
 </script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js" integrity="sha512-2xXe2z/uA+2SyT/sTSt9Uq4jDKsT0lV4evd3eoE/oxKih8DSAsOF6LUb+ncafMJPAimWAXdu9W+yMXGrCVOzQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script type="text/javascript">
 
 $(function(){
+	
+	
 	$('#storeAddress').change(function(){
 		var location = $('#storeAddress').val();
 
@@ -93,13 +119,51 @@ $(function(){
     			console.log(status)
   				}
 			});
-		
 	});
+
+	
+	$('#selectfirmId').click(function() {
+
+		var selected = $('#selectfirmId').val()
+		console.log(selected)
+		$('#firmId').val(selected);
+	})
+	
+	
+	$('#startTime').blur(function(){
+		var startime = $('#startTime').val();
+		var endtime = $('#endTime').val();
+		$('#endTime').attr('min',startime);
+		
+		$('#openTime').val(startime+'-'+endtime);
+	})
+	
+	$('#endTime').blur(function(){
+		var startime = $('#startTime').val();
+		var endtime = $('#endTime').val();
+		
+		$('#openTime').val(startime+'-'+endtime);
+	})
+	
+	
+	$('#timepicker2').timepicker({
+    minuteStep: 1,
+    template: 'modal',
+    appendWidgetTo: 'body',
+    showSeconds: true,
+    showMeridian: false,
+    defaultTime: false
+	})
+
+	
+	
 	
 
 });
 
 </script>
+
+
 
 
 

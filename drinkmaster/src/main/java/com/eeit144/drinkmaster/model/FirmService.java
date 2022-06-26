@@ -31,6 +31,8 @@ public interface FirmService {
 	public Page<FirmBean> findFirmByUserId(Integer userId, Pageable pab);
 	
 	public List<FirmBean> findFirmByUserId(Integer userId);
+	
+	public List<FirmBean> findAll3();
 
 
 }

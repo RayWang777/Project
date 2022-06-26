@@ -6,8 +6,6 @@
 <jsp:include page="layout/header.jsp" />
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
-<c:set var="userId" value="1"></c:set>
-
 <style>
 
 input+select{

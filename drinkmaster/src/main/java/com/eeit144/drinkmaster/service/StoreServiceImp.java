@@ -46,4 +46,13 @@ public class StoreServiceImp implements StoreService {
 		storeDao.save(store);
 	}
 
+	@Override
+	public Optional<StoreBean> findStoreByUserId(Integer userId){
+		return storeDao.findByUserBean_userId(userId);
+	}
+
+	@Override
+	public Page<StoreBean> findStoreByFirmId(Integer firmId, Pageable pab) {
+		return storeDao.findByFirmBean_firmId(firmId, pab);
+	}
 }

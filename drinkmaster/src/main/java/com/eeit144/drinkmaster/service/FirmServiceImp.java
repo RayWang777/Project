@@ -81,6 +81,11 @@ public class FirmServiceImp implements FirmService {
 		return firmDao.findByUserBean_userId(userId);
 	}
 
+	@Override
+	public List<FirmBean> findAll3() {
+		return firmDao.findAll();
+	}
+
 
 
 }

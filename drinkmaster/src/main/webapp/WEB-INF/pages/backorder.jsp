@@ -104,19 +104,11 @@
 <a href="${contextRoot}/backend/order/findStatus?sta=已取消"><button type="button" class="btn btn-outline-dark btn-sm">已取消</button></a>&emsp;
 </p>
 
-<form action="${contextRoot}/backend/product/select" method="get">
+<form action="${contextRoot}/backend/order/select" method="get">
 		<div class="mb-3">
-			<label for="select" class="form-label">搜尋</label> <input type="text"name="select" id="select" /> 
-				<select name="filed">
-				<option>品項</option>
-				<option>價格</option>
-				<option>溫度</option>
-				<option>待付款</option>
-				<option>待出貨</option>
-				<option>已出貨</option>
-				<option>已取消</option>
-			</select>
-		<button type="submit" class="btn btn  btn-sm" style="font-style:italic;color:blue;">查詢</button>
+			<label for="select" class="form-label">搜尋</label> <input type="text"name="oid" id="select" placeholder="查詢編號" /> 
+
+		<button type="submit" class="" style="border-color: gray;">查詢</button>
 		<c:out value="查到 ${page.totalElements } 筆資料"></c:out>
 		</div >
 		
@@ -131,7 +123,7 @@
 	</label></th>
       <th scope="col">訂單編號</th>
 <!--       <th scope="col">訂購人</th> -->
-      <th scope="col">商品</th>
+      <th scope="col">訂購人</th>
       <th scope="col" style="width: 170px;">訂單時間</th>
       <th scope="col">地址</th>
       <th scope="col">電話</th>
@@ -209,7 +201,7 @@
     &thinsp;| &thinsp;
    </c:if>
    </c:forEach>
-   <canvas id="myChart" width="200" height="200"></canvas>
+<%--    <canvas id="myChart" width="200" height="200"></canvas> --%>
    
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -224,11 +216,11 @@
   <form:form id="orderform" class="form" method="post" action="${contextRoot}/backend/order/insert" modelAttribute="orderBean">
   <span><form:label path="createTime">訂單日期</form:label></span>
   <form:input path="createTime" /><br><br>
-  <form:label path="storeId">s&emsp;&emsp;ID</form:label>
+  <form:label path="storeId">店家編號</form:label>
   <form:input path="storeId" /><br><br>
-  <form:label path="productId">p&emsp;&emsp;ID</form:label>
+  <form:label path="productId">產品編號</form:label>
   <form:input path="productId" /><br><br>
-  <form:label path="userId">u&emsp;&emsp;ID</form:label>
+  <form:label path="userId">使用者編號</form:label>
   <form:input path="userId" /><br><br>
   <form:label path="orderAddress">地&emsp;&emsp;址</form:label>
   <form:input path="orderAddress" /><br><br>

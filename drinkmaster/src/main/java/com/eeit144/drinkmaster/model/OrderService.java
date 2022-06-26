@@ -30,4 +30,7 @@ public interface OrderService {
 	
 	
 	public Page<OrderBean> findByorderStatus(Integer pageNumber, String orderStatus);
+
+	
+	public Page<OrderBean> selectById(Integer pageNumber, Integer orderId);
 }

@@ -45,6 +45,17 @@ public class OrderController {
 //			this.orderService = orderService;
 //		}
 		
+		@GetMapping("order/test")
+		public String testView(Model m) {
+
+			return "test";
+		}
+		
+		@GetMapping("order/test2")
+		public String test2View(Model m) {
+
+			return "test2";
+		}
 		
 		@GetMapping("order/detail")
 		public String detailView(Model m) {
@@ -143,6 +154,16 @@ public class OrderController {
 		}
 		
 		
+		@GetMapping("order/select")
+		public ModelAndView selectView(ModelAndView mav, @RequestParam(name = "o", defaultValue = "1") Integer pageNumber,
+				@RequestParam(name = "oid", defaultValue = "oid") Integer orderId) {
+			Page<OrderBean> page = orderService.selectById(pageNumber, orderId);
+			OrderBean orderBean = new OrderBean();
+			mav.getModel().put("orderBean", orderBean);
+			mav.getModel().put("page", page);
+			mav.setViewName("backorder");
+			return mav;
+		}
 }		
 		
 

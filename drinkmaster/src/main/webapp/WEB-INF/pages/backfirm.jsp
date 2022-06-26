@@ -8,7 +8,12 @@
 
 
 <link href="<c:url value="/js/lib/popper.min.js"/>" rel="stylesheet">
+<style>
+.table {
+	font-size: 16px;
+}
 
+</style>
 
 <body>
 	<br>
@@ -48,16 +53,15 @@
 		style="width: 100%; table-layout: fixed;">
 		<thead>
 			<tr>
-				<th scope="col"><label class="control control--checkbox">
+				<th style="width: 50px;"><label class="control control--checkbox">
 						<input type="checkbox" class="js-check-all" />
-						<div class="control__indicator"></div>
 				</label></th>
 				<th scope="col"><a href="<c:url value="/backend/firm/all?sfn=${serchFirm.sfn}&sfp=${serchFirm.sfp}&sfa=${serchFirm.sfa}&sun=${serchFirm.sun}&p=${serchFirm.p}&s=${serchFirm.s}&c=2&d=${!serchFirm.d}"/>">廠商名稱<c:if test="${serchFirm.d}">↓</c:if><c:if test="${!serchFirm.d}">↑</c:if></a></th>
 				<th scope="col"><a href="<c:url value="/backend/firm/all?sfn=${serchFirm.sfn}&sfp=${serchFirm.sfp}&sfa=${serchFirm.sfa}&sun=${serchFirm.sun}&p=${serchFirm.p}&s=${serchFirm.s}&c=4&d=${!serchFirm.d}"/>">廠商電話<c:if test="${serchFirm.d}">↓</c:if><c:if test="${!serchFirm.d}">↑</c:if></a></th>
 				<th scope="col"><a href="<c:url value="/backend/firm/all?sfn=${serchFirm.sfn}&sfp=${serchFirm.sfp}&sfa=${serchFirm.sfa}&sun=${serchFirm.sun}&p=${serchFirm.p}&s=${serchFirm.s}&c=3&d=${!serchFirm.d}"/>">廠商地址<c:if test="${serchFirm.d}">↓</c:if><c:if test="${!serchFirm.d}">↑</c:if></a></th>
 				<th scope="col"><a href="<c:url value="/backend/firm/all?sfn=${serchFirm.sfn}&sfp=${serchFirm.sfp}&sfa=${serchFirm.sfa}&sun=${serchFirm.sun}&p=${serchFirm.p}&s=${serchFirm.s}&c=5&d=${!serchFirm.d}"/>">管理者<c:if test="${serchFirm.d}">↓</c:if><c:if test="${!serchFirm.d}">↑</c:if></a></th>
 				<th scope="col">Logo</th>
-				<th scope="col" style="text-align: left;">動作</th>
+				<th style="width: 140px;text-align: left;">動作</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -69,10 +73,10 @@
 						class="control control--checkbox"><input type="checkbox"
 							id="check" value="<c:out value='${firm.firmId}'/>"
 							style="margin-top: 20px;" />
-							<div class="control__indicator"></div></label></td>
+						</label></td>
 					<td class="align-middle">
 						<div class="d-flex align-items-center">
-							<a href="#"><c:out value='${firm.firmName}' /></a>
+							<a href="<c:url	value="/backend/firm/${firm.firmId}"/>"><c:out value='${firm.firmName}' /></a>
 						</div>
 					</td>
 					<td class="align-middle"><c:out value='${firm.firmPhone}' />

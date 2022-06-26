@@ -61,16 +61,24 @@ li {
 						<li><a href="#">刪除</a></li>
 						<li><a href="${contextRoot}/backend/user/all">查詢</a></li>
 					</ul></li>
+				<c:choose>
+				<c:when test="${userBean.role != 'admin' && userBean.role != 'firm'}"></c:when>
+				<c:otherwise>
 				<li><a class="sidebar-sub-toggle"><i
 						class="large material-icons">business</i> 廠商管理 <span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
-						<li><a href="<c:url value="/backend/firm/all"/>">所有廠商</a></li>
-						<li><a href="#">修改</a></li>
+						<c:if test="${userBean.role == 'admin'}">
+						<li><a href="<c:url value="/backend/firm/all"/>">廠商列表</a></li>
+						</c:if>
+						<c:if test="${userBean.role == 'firm'}">
+						<li><a href="<c:url value="/backend/firm/edit/${canSeeFirm.firmId}"/>">修改資料</a></li>
+						</c:if>
 
 						<li><a href="#">刪除</a></li>
 						<li><a href="#">查詢</a></li>
 					</ul></li>
+				</c:otherwise></c:choose>
 				<li><a class="sidebar-sub-toggle"><i
 						class="large material-icons">store</i> 店家管理 <span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
@@ -92,7 +100,7 @@ li {
 						<li><a href="${contextRoot}/backend/productanalyze">銷量圖表</a></li>
 
 					</ul></li>
-				<li><a class="sidebar-sub-toggle"><i
+<li><a class="sidebar-sub-toggle"><i
 						class="large material-icons">list</i> 訂單管理 <span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
@@ -119,9 +127,10 @@ li {
 						<li><a href="${contextRoot}/backend/service/viewall">意見總覽</a></li>
 						<li><a href="${contextRoot}/backend/service/add">新增意見</a></li>
 
-
 					</ul></li>
-				<li><a><i class="ti-close"></i> Logout</a></li>
+					<li><a href="${contextRoot}/front/">前台首頁</a></li>
+				<li><a href="<c:url value="/backend/login"/>"><i class="ti-close"></i> Logout</a></li>
+
 			</ul>
 		</div>
 	</div>
@@ -143,8 +152,15 @@ li {
 
 					<div class="dropdown dib">
 						<div class="header-icon" data-toggle="dropdown">
+
 							<span class="user-avatar"><a>Logout</a>
 								</li> </span>
+
+						<span class="user-avatar">
+						<a id="frontpage" href="${contextRoot}/front/">前台首頁</a>
+						</span>&emsp;&emsp;
+							<span class="user-avatar">Logout</li> </span>
+
 
 						</div>
 					</div>
@@ -168,4 +184,20 @@ li {
 			<!-- sidebar -->
 			<script src="<c:url value="/js/lib/bootstrap.bundle.min.js"/>"></script>
 			<script src="<c:url value="/js/scripts.js"/>"></script>
+
 			<!-- bootstrap -->
+
+			<!-- bootstrap -->
+<script type="text/javascript">
+$(function(){
+	$('#frontpage').click(function(){
+		location.replace('${contextRoot}/front/');
+	});
+	
+	
+})
+
+
+</script>
+			
+

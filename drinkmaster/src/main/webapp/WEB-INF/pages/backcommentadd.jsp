@@ -45,7 +45,7 @@ div.awesomeRating {
   </div>
   <div class="card-body">
   
-  <form:form class="form" method="post" action="${contextRoot}/backend/comment/insert" modelAttribute="commentBean">
+  <form:form class="form" method="post" action="${contextRoot}/backend/comment/insert" modelAttribute="commentBean" enctype="multipart/form-data">
   
 <div class="form-group">
 	
@@ -82,15 +82,38 @@ div.awesomeRating {
 	<form:input path="scoreType" class="form-control" />
 	content<form:input path="content" class="form-control" />
 	
+	<br/>
+	
+	<input id="commentPhoto1" name="commentPhoto1"  type="file" class="form-control" onchange="preview()" />
+
+		<img id="image" src="" width="100px" height="100px" />
+	<c:if test="${comment.commentId!=null}">
+					<img id="oldImage" src="${comment.commentPhoto}" width="100px"
+						height="100px" />
+	</c:if>
+	
+	
 </div>    
     
     <input type="submit" name="submit" value="新增訊息	">
   
   </form:form>
   
-  <div id="score" class="awesomeRating"></div>
-	<div class="awesomeRatingValue" /></div>
+	<script type="text/javascript">
 	
+	$(function() {
+		$('#image').hide();
+	});
+
+	function preview() {
+		image.src = URL.createObjectURL(event.target.files[0]);
+		if ((event.target.files[0].type).startsWith("image")) {
+			$('#oldImage').hide();
+			$('#image').show();
+		}
+	}
+	
+	</script>
   
   </div>
 </div>

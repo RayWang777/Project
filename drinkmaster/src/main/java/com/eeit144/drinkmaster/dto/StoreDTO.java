@@ -17,6 +17,8 @@ public class StoreDTO {
 	private Double longitude;
 
 	private Double latitude;
+	
+	private Integer userId;
 
 	public StoreDTO() {
 	}
@@ -85,4 +87,12 @@ public class StoreDTO {
 		this.latitude = latitude;
 	}
 
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+	
 }

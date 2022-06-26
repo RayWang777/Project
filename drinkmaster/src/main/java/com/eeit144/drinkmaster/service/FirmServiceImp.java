@@ -60,15 +60,27 @@ public class FirmServiceImp implements FirmService {
 
 	@Override
 	public Page<FirmBean> findAllByFirmNameOrFirmPhone(String FirmName, String FirmPhone, Pageable pab) {
-		return firmDao.findAllByFirmNameContainingAndFirmPhoneContaining(FirmName, FirmPhone, pab);		 
+		return firmDao.findAllByFirmNameContainingAndFirmPhoneContaining(FirmName, FirmPhone, pab);
 	}
-	
-	public Page<FirmBean> findAll2(Example<FirmBean> firm,Pageable pab){
+
+	public Page<FirmBean> findAll2(Example<FirmBean> firm, Pageable pab) {
 		return firmDao.findAll(firm, pab);
 	}
-	
+
 	public void deleteByIds(List<Integer> ids) {
 		firmDao.deleteAllById(ids);
 	}
+	
+	@Override
+	public Page<FirmBean> findFirmByUserId(Integer userId, Pageable pab) {
+		return firmDao.findByUserBean_userId(userId, pab);
+	}
+
+	@Override
+	public List<FirmBean> findFirmByUserId(Integer userId) {
+		return firmDao.findByUserBean_userId(userId);
+	}
+
+
 
 }

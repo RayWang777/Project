@@ -52,3 +52,7 @@
             </div>
         </nav>
       
+
+       <script src="<c:url value="/js/lib/bootstrap.bundle.min.js"/>"></script>
+        <!-- Core theme JS-->
+      <script src="<c:url value="/js/scripts.js"/>"></script>

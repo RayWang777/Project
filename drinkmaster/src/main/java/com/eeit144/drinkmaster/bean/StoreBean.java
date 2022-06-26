@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -53,6 +54,10 @@ public class StoreBean {
 
 	@Column(name = "latitude")
 	private Double latitude;
+	
+	@OneToOne(cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
+	@JoinColumn(name="userid")
+	private UserBean userBean;
 
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "storeBean", cascade = CascadeType.ALL)
@@ -61,6 +66,10 @@ public class StoreBean {
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "storeBean", cascade = CascadeType.ALL)
 	private Set<CommentBean> comments = new LinkedHashSet<CommentBean>();
+
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "storeBean", cascade = CascadeType.ALL)
+	private Set<OrderBean> orders = new LinkedHashSet<OrderBean>();
 
 	public StoreBean() {
 	}
@@ -151,6 +160,22 @@ public class StoreBean {
 
 	public void setComments(Set<CommentBean> comments) {
 		this.comments = comments;
+	}
+
+	public Set<OrderBean> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Set<OrderBean> orders) {
+		this.orders = orders;
+	}
+
+	public UserBean getUserBean() {
+		return userBean;
+	}
+
+	public void setUserBean(UserBean userBean) {
+		this.userBean = userBean;
 	}
 
 }

@@ -2,6 +2,7 @@ package com.eeit144.drinkmaster.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,7 +18,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eeit144.drinkmaster.bean.OrderBean;
+import com.eeit144.drinkmaster.bean.ProductBean;
+import com.eeit144.drinkmaster.bean.StoreBean;
+import com.eeit144.drinkmaster.bean.UserBean;
 import com.eeit144.drinkmaster.model.OrderService;
+import com.eeit144.drinkmaster.model.ProductService;
+import com.eeit144.drinkmaster.model.StoreService;
+import com.eeit144.drinkmaster.model.UserService;
 
 @Controller
 @RequestMapping("backend/")
@@ -25,6 +32,12 @@ public class OrderController {
 		
 		@Autowired
 		private OrderService orderService;
+		@Autowired
+		private StoreService storeService;
+		@Autowired
+		private UserService userService;
+		@Autowired
+		private ProductService productService;
 		
 //		@Autowired
 //		public OrderController(OrderService orderService) {
@@ -65,8 +78,22 @@ public class OrderController {
 		
 
 		
+		
 		@PostMapping("order/insert")
-		public String insertOrder(@ModelAttribute("orderBean") OrderBean orderBean, Model model) {			
+		public String insertOrder(@ModelAttribute("orderBean") OrderBean orderBean, Model model) {
+//			
+//			@ModelAttribute("userBean key") UserBean variableName;
+//			 orderBean.setUserbean(variableName);
+			
+			//要先找到 store user product 的ID 把資料放到前端
+			StoreBean oldStore = storeService.findById(orderBean.getStoreId()).get();
+			UserBean oldUser = userService.findById(orderBean.getUserId()).get();
+			ProductBean oldProduct = productService.findById(orderBean.getProductId());
+			
+			orderBean.setUserBean(oldUser);
+			orderBean.setStoreBean(oldStore);
+			orderBean.setProductBean(oldProduct);
+			
 			orderService.insertOrder(orderBean);
 			
 			return "redirect:/backend/order/findAll";
@@ -81,6 +108,15 @@ public class OrderController {
 		
 		@PostMapping("order/update")
 		public String updateOrder(@ModelAttribute("orderBean") OrderBean orderBean, Model m) {
+			StoreBean oldStore = storeService.findById(orderBean.getStoreId()).get();
+			UserBean oldUser = userService.findById(orderBean.getUserId()).get();
+			ProductBean oldProduct = productService.findById(orderBean.getProductId());
+			
+			orderBean.setUserBean(oldUser);
+			orderBean.setStoreBean(oldStore);
+			orderBean.setProductBean(oldProduct);
+			
+			
 			orderService.insertOrder(orderBean);
 
 			return "redirect:/backend/order/findAll";

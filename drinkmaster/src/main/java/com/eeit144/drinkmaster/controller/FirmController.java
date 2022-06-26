@@ -1,6 +1,7 @@
 package com.eeit144.drinkmaster.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eeit144.drinkmaster.bean.FirmBean;
@@ -51,19 +53,22 @@ public class FirmController {
 	}
 
 	@GetMapping("firm/{id}")
-	public ResponseEntity<FirmDTO> findFirmById(@PathVariable Integer id) {
+	public String findFirmById(@PathVariable Integer id,@SessionAttribute("userBean") UserBean user,Model m) {
 		Optional<FirmBean> firmBean = firmService.findById(id);
 
 		if (firmBean.isEmpty()) {
-			return new ResponseEntity<FirmDTO>(HttpStatus.NO_CONTENT);
+			return "redirect:/backend/firm/all";
 		}
-		FirmDTO firmDTO = new FirmDTO();
-		firmDTO.setFirmId(firmBean.get().getFirmId());
-		firmDTO.setFirmName(firmBean.get().getFirmName());
-		firmDTO.setFirmAddress(firmBean.get().getFirmAddress());
-		firmDTO.setFirmPhone(firmBean.get().getFirmPhone());
-		firmDTO.setUserId(firmBean.get().getUserBean().getUserId());
-		return new ResponseEntity<FirmDTO>(firmDTO, HttpStatus.OK);
+		
+
+		FirmBean findById = firmService.findById(id).get();
+		FirmDTO firmDTO = firmService.change(findById);
+
+		List<UserBean> users = userService.findAllUsers();
+
+		m.addAttribute("firmaddusers", users);
+		m.addAttribute("firm", firmDTO);
+		return "backfirmview";
 	}
 
 	@GetMapping("firm/{id}/photo")
@@ -79,7 +84,14 @@ public class FirmController {
 	}
 
 	@GetMapping("firm/all")
-	public String findAllPages(@ModelAttribute("firmSerch") FirmSerch firmSerch, Model m) {
+	public String findAllPages(@ModelAttribute("firmSerch") FirmSerch firmSerch,@SessionAttribute("userBean") UserBean user, Model m) {
+		
+		
+		if(!(user.getRole().equals("admin"))) {
+//		
+			return "redirect:/backend/";			
+		}
+		
 		String serchFirmName = firmSerch.getSfn();
 		String serchFirmPhone = firmSerch.getSfp();
 		String serchFirmAddress = firmSerch.getSfa();
@@ -96,7 +108,6 @@ public class FirmController {
 			pab = PageRequest.of(page - 1, size, Sort.Direction.DESC, FirmColumn.getColumne(column));
 		}
 
-//		Page<FirmBean> allFirm = firmService.findAll(pab);
 
 		UserBean userBean = new UserBean();
 		userBean.setUserName(serchUserName);
@@ -112,6 +123,7 @@ public class FirmController {
 				.withMatcher("userBean.userName", ExampleMatcher.GenericPropertyMatchers.contains());
 
 		Example<FirmBean> example = Example.of(firmBean, matcher);
+		
 
 		Page<FirmBean> allFirm = firmService.findAll2(example, pab);
 
@@ -121,6 +133,7 @@ public class FirmController {
 			firm.setFirmLogo(null);
 		}
 
+		
 		FirmSerch firmSerch2 = new FirmSerch();
 		m.addAttribute("serchFirm", firmSerch);
 		m.addAttribute("firmSerch", firmSerch2);
@@ -180,9 +193,25 @@ public class FirmController {
 	}
 
 	@GetMapping("firm/edit/{id}")
-	public String firmUpdatePage(@PathVariable("id") Integer id, Model m) {
+	public String firmUpdatePage(@PathVariable("id") Integer id,@SessionAttribute("userBean") UserBean user, Model m) {
 		FirmBean findById = firmService.findById(id).get();
 		FirmDTO firmDTO = firmService.change(findById);
+
+		List<UserBean> users = userService.findAllUsers();
+
+		m.addAttribute("firmaddusers", users);
+
+		Integer originUserId = firmService.findById(id).get().getUserBean().getUserId();
+		
+		m.addAttribute("originUserId", originUserId);
+		
+		if(user.getRole().equals("firm")) {
+
+			List<UserBean> list = new ArrayList<UserBean>();
+			list.add(user);
+			m.addAttribute("firmaddusers", list);		
+		};
+		
 		m.addAttribute("firm", firmDTO);
 		return "backfirmupdate";
 	}
@@ -196,6 +225,8 @@ public class FirmController {
 		oldFirm.setFirmName(firm.getFirmName());
 		oldFirm.setFirmAddress(firm.getFirmAddress());
 		oldFirm.setFirmPhone(firm.getFirmPhone());
+		oldFirm.setUserBean(firm.getUserBean());
+	
 
 		if (logo.getSize() == 0) {
 			firmService.insertFirm(oldFirm);

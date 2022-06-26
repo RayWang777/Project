@@ -15,12 +15,12 @@
 		<div class="row justify-content-center">
 
 			<c:url value="/backend/store/add" var="link_url" />
-			<form:form class="form" action="${link_url}" method="post"
-				modelAttribute="store">
+			<form:form class="form" action="${link_url}" method="post"	modelAttribute="store">
 				
-				
+				<c:choose>
+				<c:when test="${userBean.role == 'admin' }">
 				<div class="mb-3">
-					<label for="selectuserId" class="form-label">廠商</label>
+					<label for="selectfirmId" class="form-label">廠商</label>
 					<form:select id="selectfirmId" path="userBean.userId"
 						class="form-control">
 
@@ -28,8 +28,17 @@
 							itemValue="firmId" />
 					</form:select>
 					<form:hidden path="firmId" value="1" />
-					<span id=firmPhoneSp></span>
+					<span id=firmIdSp></span>
 				</div>
+				</c:when>
+				<c:otherwise>
+					<form:select path="userBean.userId"	class="form-control">
+						<option value="${storeaddfirms.firmId}" selected="true">${storeaddfirms.firmName}</option>
+					</form:select>
+					<form:hidden path="firmId" value="${storeaddfirms.firmId}" />
+				</c:otherwise>
+				</c:choose>
+
 
 				<form:hidden path="storeId" id="storeId" />
 				<div class="mb-3">
@@ -56,27 +65,24 @@
 				<div class="mb-4">
 					<label for="startTime" class="form-label">開店時間</label>
 					<br/>		
-					
-					<div class="input-group bootstrap-timepicker timepicker">
-            <input id="timepicker2" type="text" class="form-control input-small">
-            <span class="input-group-addon">
-                <i class="glyphicon glyphicon-time"></i>
-            </span>
-        </div>
-						
-					
 					<input type="time" accept="number" id="startTime">
 					<input type="time" id="endTime">
-					
-					
 					<form:input path="openTime" class="form-control" 
 						id="openTime" />
 					<span id=openTimeSp></span>
 				</div>
-				<form:input path="latitude" class="form-control" type="text"
-					id="latitude" />
-				<form:input path="longitude" class="form-control" type="text"
-					id="longitude" />
+				<div class="mb-4">
+					<label for="selectuserId" class="form-label">管理者</label>
+						<form:select id="selectuserId" path="userBean.userId" class="form-control" >
+							<form:options items="${storeaddusers}" itemLabel="userName" itemValue="userId"/>
+						</form:select>
+					<form:input path="userId" value="${originUserId}" />
+					<span id=firmPhoneSp></span>
+				</div>
+				
+
+				<form:hidden path="latitude" class="form-control" id="latitude" />
+				<form:hidden path="longitude" class="form-control" id="longitude" />
 				<div class="mb-3" style="text-align: center;">
 					<input type="submit" class="btn btn-success"
 						value='<c:out value="新增店家"/>'>
@@ -90,9 +96,8 @@
 </div>
 
 <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmEBK0G5eNsuBCbrJzIYY88lee1rT_S_o">
+  src="https://maps.googleapis.com/maps/api/js?key=APIKEY">
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js" integrity="sha512-2xXe2z/uA+2SyT/sTSt9Uq4jDKsT0lV4evd3eoE/oxKih8DSAsOF6LUb+ncafMJPAimWAXdu9W+yMXGrCVOzQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script type="text/javascript">
 
@@ -129,6 +134,14 @@ $(function(){
 		$('#firmId').val(selected);
 	})
 	
+	$('#selectuserId').click(function() {
+
+		var selected = $('#selectuserId').val()
+		console.log(selected)
+		$('#userId').val(selected);
+
+	})
+	
 	
 	$('#startTime').blur(function(){
 		var startime = $('#startTime').val();
@@ -144,20 +157,7 @@ $(function(){
 		
 		$('#openTime').val(startime+'-'+endtime);
 	})
-	
-	
-	$('#timepicker2').timepicker({
-    minuteStep: 1,
-    template: 'modal',
-    appendWidgetTo: 'body',
-    showSeconds: true,
-    showMeridian: false,
-    defaultTime: false
-	})
 
-	
-	
-	
 
 });
 

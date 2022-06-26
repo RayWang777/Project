@@ -1,5 +1,6 @@
 package com.eeit144.drinkmaster.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -55,4 +56,5 @@ public class StoreServiceImp implements StoreService {
 	public Page<StoreBean> findStoreByFirmId(Integer firmId, Pageable pab) {
 		return storeDao.findByFirmBean_firmId(firmId, pab);
 	}
+
 }

@@ -1,5 +1,6 @@
 package com.eeit144.drinkmaster.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -15,5 +16,5 @@ public interface StoreRepostiory extends JpaRepository<StoreBean, Integer> {
 	public Optional<StoreBean> findByUserBean_userId(Integer userId);
 	
 	public Page<StoreBean> findByFirmBean_firmId(Integer firmId,Pageable pab);
-	
+
 }

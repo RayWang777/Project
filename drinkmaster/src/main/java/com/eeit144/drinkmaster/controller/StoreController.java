@@ -70,7 +70,6 @@ public class StoreController {
 	public String findAllPages(@RequestParam(name = "p", defaultValue = "1") Integer page,@SessionAttribute("userBean") UserBean user,Model m) {
 
 		String role = user.getRole();
-		
 		if( !(role.equals("admin"))&& !(role.equals("firm")) ) {
 			return "redirect:/backend/";
 		}
@@ -94,37 +93,45 @@ public class StoreController {
 	public String storeAddPage(@SessionAttribute("userBean") UserBean user,Model m) {
 		
 		String role = user.getRole();
-		
 		if( !(role.equals("admin"))&& !(role.equals("firm")) ) {
 			return "redirect:/backend/";
 		}
 		
+		StoreDTO store = new StoreDTO();
 		if(role.equals("admin")) {
-			StoreDTO store = new StoreDTO();
-			List<FirmBean> findAll3 = firmService.findAll3();
 			
+			List<FirmBean> findAll3 = firmService.findAll3();
+			List<UserBean> users = userService.findAllUsers();
+
 			m.addAttribute("storeaddfirms", findAll3);
+			m.addAttribute("storeaddusers", users);
 			m.addAttribute("store", store);
 			return "backstoreadd";
 		}
 		
+		FirmBean findFirmByUserId = firmService.findFirmByUserId(user.getUserId()).get(0);
+		List<UserBean> users = userService.findAllUsers();
 		
-		StoreDTO store = new StoreDTO();
+		m.addAttribute("storeaddfirms", findFirmByUserId);
+		m.addAttribute("storeaddusers", users);		
 		m.addAttribute("store", store);
 		return "backstoreadd";
 	}
 
 	@PostMapping("store/add")
 	public String addNewStore(@ModelAttribute("store") StoreDTO store,@SessionAttribute("userBean") UserBean user, Model m) {
-		
-
-		
+	
+		String role = user.getRole();
+		if( !(role.equals("admin"))&& !(role.equals("firm")) ) {
+			return "redirect:/backend/";
+		}
 		
 		StoreBean newStore = new StoreBean();
 
 	
 		FirmBean firmBean = new FirmBean();
 		firmBean.setFirmId(store.getFirmId());
+		UserBean oldUser = userService.findById(store.getUserId()).get();
 		
 		newStore.setFirmBean(firmBean);
 		newStore.setStoreId(store.getStoreId());
@@ -134,9 +141,9 @@ public class StoreController {
 		newStore.setOpenTime(store.getOpenTime());
 		newStore.setLatitude(store.getLatitude());
 		newStore.setLongitude(store.getLongitude());
+		newStore.setUserBean(oldUser);
 
 		storeService.insertStore(newStore);
-
 		return "redirect:/backend/store/all";
 	}
 

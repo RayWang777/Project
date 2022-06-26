@@ -40,17 +40,44 @@
 					<span id=firmPhoneSp></span>
 				</div>
 				
+				<c:choose>
+				<c:when test="${userBean.role == 'admin'}">
+				
 				<div class="mb-3">
 					<label for="selectuserId" class="form-label">管理者</label>
-					<form:select id="selectuserId" path="userBean.userId"
+					<form:select id="selectuserId" path="userBean.userId" class="form-control" >
+					
+					<c:forEach items="${firmaddusers}" var="firmadduser">
+					 <c:choose>
+					  <c:when test="${firmadduser.userId == originUserId }">
+					  	<option value="${firmadduser.userId}" selected="true">${firmadduser.userName}</option>
+					  </c:when>
+					  <c:otherwise>
+					  	<option value="${firmadduser.userId}">${firmadduser.userName}</option>
+					  	</c:otherwise>
+					  </c:choose>					 					
+					</c:forEach>
+					
+<%-- 						<form:options items="${firmaddusers}" itemLabel="userName" --%>
+<%-- 							itemValue="userId"  /> --%>
+					</form:select>
+					<form:hidden path="userId" value="${originUserId}" />
+					<span id=firmPhoneSp></span>
+				</div>
+				
+				</c:when>
+				<c:otherwise>
+					<form:select hidden="true" path="userBean.userId"
 						class="form-control">
 
 						<form:options items="${firmaddusers}" itemLabel="userName"
 							itemValue="userId" />
 					</form:select>
-					<form:hidden path="userId" value="1" />
-					<span id=firmPhoneSp></span>
-				</div>
+				
+					<form:hidden path="userId" value="${userBean.userId}" />
+				</c:otherwise>
+				</c:choose>
+				
 				
 				<div class="mb-3"style="text-align: center;">
 					<img id="logo" src="<c:url value="/backend/firm/${firm.firmId}/photo"/>" width="100px" height="100px" />

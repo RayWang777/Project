@@ -61,7 +61,7 @@ width:306px;
 					<form:hidden path="userId" value="1" />
 					<span id=firmPhoneSp></span>
 				</div>
-				
+								
 				<div class="mb-3"style="text-align: center;">
 					<img id="logo" src="<c:url value="/backend/firm/${firm.firmId}/photo"/>" width="100px" height="100px" />
 					<c:if test="${firm.firmId!=null}">

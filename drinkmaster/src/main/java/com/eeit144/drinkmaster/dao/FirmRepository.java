@@ -16,4 +16,6 @@ public interface FirmRepository extends JpaRepository<FirmBean, Integer> {
 	
 	public Page<FirmBean> findByUserBean_userId(Integer userId, Pageable pab);	
 	
+	public List<FirmBean> findByUserBean_userId(Integer userId);	
+	
 }

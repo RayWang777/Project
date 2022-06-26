@@ -3,6 +3,7 @@ package com.eeit144.drinkmaster.controller;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -26,18 +27,27 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.UserBean;
 import com.eeit144.drinkmaster.dto.UserBeanDTO;
+import com.eeit144.drinkmaster.model.FirmService;
+import com.eeit144.drinkmaster.model.StoreService;
 import com.eeit144.drinkmaster.model.UserService;
 
 
 @Controller
 @Transactional
 @RequestMapping("backend/")
-@SessionAttributes(names= {"userBean"})
+@SessionAttributes(names= {"userBean","canSeeFirm"})
 public class UserController {
 
 	private UserService userService;
+	
+	@Autowired
+	private FirmService firmService;
+	
+	@Autowired
+	private StoreService storeService;
 	
 	@Autowired
 	public UserController(UserService userService) {
@@ -65,16 +75,21 @@ public class UserController {
 
 		user = userService.findByAccPwd(userAccount, userPassword);
 		
-		m.addAttribute(user);
-		
 		m.addAttribute("userBean",user);
 		
-//		System.out.println(user.getUserId());
 		
 		String role = user.getRole();
 		if(role.equals("admin")) {
+			
 			return("redirect:/backend/");
+			
 		} else if(role.equals("firm")) {
+			
+			List<FirmBean> firmByUserId = firmService.findFirmByUserId(user.getUserId());
+			FirmBean firmBean = firmByUserId.get(0);
+			
+			m.addAttribute("canSeeFirm", firmBean);
+			
 			return("redirect:/backend/");
 		} else if(role.equals("store")) {
 			return("redirect:/backend/");

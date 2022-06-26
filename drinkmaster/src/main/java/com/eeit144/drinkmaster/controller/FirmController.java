@@ -1,6 +1,7 @@
 package com.eeit144.drinkmaster.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,9 +60,6 @@ public class FirmController {
 			return "redirect:/backend/firm/all";
 		}
 		
-		if(!((user.getRole().equals("admin"))  ||  !(user.getRole().equals("firm")))) {
-			return "redirect:/backend/";
-		}
 
 		FirmBean findById = firmService.findById(id).get();
 		FirmDTO firmDTO = firmService.change(findById);
@@ -195,13 +193,25 @@ public class FirmController {
 	}
 
 	@GetMapping("firm/edit/{id}")
-	public String firmUpdatePage(@PathVariable("id") Integer id, Model m) {
+	public String firmUpdatePage(@PathVariable("id") Integer id,@SessionAttribute("userBean") UserBean user, Model m) {
 		FirmBean findById = firmService.findById(id).get();
 		FirmDTO firmDTO = firmService.change(findById);
 
 		List<UserBean> users = userService.findAllUsers();
 
 		m.addAttribute("firmaddusers", users);
+
+		Integer originUserId = firmService.findById(id).get().getUserBean().getUserId();
+		
+		m.addAttribute("originUserId", originUserId);
+		
+		if(user.getRole().equals("firm")) {
+
+			List<UserBean> list = new ArrayList<UserBean>();
+			list.add(user);
+			m.addAttribute("firmaddusers", list);		
+		};
+		
 		m.addAttribute("firm", firmDTO);
 		return "backfirmupdate";
 	}

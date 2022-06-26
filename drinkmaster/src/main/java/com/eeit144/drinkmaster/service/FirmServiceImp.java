@@ -77,10 +77,10 @@ public class FirmServiceImp implements FirmService {
 	}
 
 	@Override
-	public Page<FirmBean> findByfirmId(Integer userId, Pageable pab) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<FirmBean> findFirmByUserId(Integer userId) {
+		return firmDao.findByUserBean_userId(userId);
 	}
+
 
 
 }

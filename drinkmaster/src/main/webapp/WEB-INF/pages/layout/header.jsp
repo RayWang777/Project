@@ -70,7 +70,7 @@ li {
 						<li><a href="<c:url value="/backend/firm/all"/>">廠商列表</a></li>
 						</c:if>
 						<c:if test="${userBean.role == 'firm'}">
-						<li><a href="<c:url value="/backend/firm/${userBean.userId}"/>">修改資料</a></li>
+						<li><a href="<c:url value="/backend/firm/edit/${canSeeFirm.firmId}"/>">修改資料</a></li>
 						</c:if>
 
 						<li><a href="#">刪除</a></li>

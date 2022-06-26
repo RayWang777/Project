@@ -48,7 +48,7 @@
 					<th style="text-align:center;" scope="row"><b><c:out value="${productBean.productName}"  /></b></th>
 					<td style="text-align:center;"><c:out value="${productBean.price}" /></td>
 					<td style="text-align:center;"><c:out value="${productBean.productCategoryBean.productCategoryName}" /></td>
-					<td style="text-align:center;"><c:out value="${productBean.productCategoryBean.storeBean.storeId}" /></td>
+					<td style="text-align:center;"><c:out value="${productBean.productCategoryBean.storeBean.storeName}" /></td>
 					<td style="text-align:center;"><img src="${productBean.productImage}" style="width: 60px" /></td>
 					<td style="text-align:center;"><c:out value="${productBean.coldHot}" /></td>
 					<c:choose>

@@ -24,7 +24,9 @@
 	rel="stylesheet">
 <link href="<c:url value="/css/style.css"/>" rel="stylesheet">
 
-<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+<link
+	href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
+	rel="stylesheet" />
 
 
 
@@ -91,16 +93,6 @@ li {
 
 					</ul></li>
 				<li><a class="sidebar-sub-toggle"><i
-						class="large material-icons">local_grocery_store</i> 購物車管理 <span
-						class="sidebar-collapse-icon ti-angle-down"></span></a>
-					<ul>
-						<li><a href="<c:url value="/backend/shopCar/findAll"/>">購物車列表</a></li>
-						<li><a href="#">修改</a></li>
-
-						<li><a href="#">刪除</a></li>
-						<li><a href="#">查詢</a></li>
-					</ul></li>
-				<li><a class="sidebar-sub-toggle"><i
 						class="large material-icons">list</i> 訂單管理 <span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
@@ -152,7 +144,7 @@ li {
 					<div class="dropdown dib">
 						<div class="header-icon" data-toggle="dropdown">
 							<span class="user-avatar"><a>Logout</a>
-							</li> </span>
+								</li> </span>
 
 						</div>
 					</div>
@@ -166,7 +158,7 @@ li {
 	<div class="main">
 		<div class="container-fluid">
 
-			
+
 			<!-- jquery vendor -->
 			<script src="<c:url value="/js/lib/jquery.min.js"/>"></script>
 			<script src="<c:url value="/js/lib/jquery.nanoscroller.min.js"/>"></script>
@@ -177,4 +169,3 @@ li {
 			<script src="<c:url value="/js/lib/bootstrap.bundle.min.js"/>"></script>
 			<script src="<c:url value="/js/scripts.js"/>"></script>
 			<!-- bootstrap -->
-			

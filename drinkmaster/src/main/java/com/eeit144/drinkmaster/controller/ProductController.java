@@ -25,7 +25,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.bean.ProductCategoryBean;
-import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.service.ProductCategoryServiceImp;
 import com.eeit144.drinkmaster.service.ProductServiceImp;
 
@@ -52,21 +51,7 @@ public class ProductController {
 	public String analyzeview() {
 		return "productanalyze";
 	}
-	@GetMapping("prodcuct/insertcategory")
-	public String addCategoryView(Model m) {
-		ProductCategoryBean category=new ProductCategoryBean();
-		m.addAttribute("status","確定新增");
-		m.addAttribute("now","新增種類");
-		m.addAttribute("category",category);
-		m.addAttribute("insert", "category/add");
-		return "backproductcategoryinsert";
-	}
-	@PostMapping("/category/add")
-	public String saveCategory(@ModelAttribute("category") ProductCategoryBean cate ) {
-		categoryService.insertCategory(cate);
-		
-		return "redirect:/backend/category/all";
-	} 
+
 	@PostMapping("/product/insert")
 	public String insertProduct(@RequestParam String productName, @RequestParam String price,
 			@RequestParam String coldHot, @RequestParam Boolean status,
@@ -120,14 +105,7 @@ public class ProductController {
 		return mav;
 	}
 	
-	@GetMapping("category/all")
-	public ModelAndView categoryView(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber) {
-		Page<ProductCategoryBean> page = categoryService.findByPage(pageNumber);
-
-		mav.getModel().put("page", page);
-		mav.setViewName("backcategory");
-		return mav;
-	}
+	
 
 	@GetMapping("product/select")
 	public ModelAndView selectLike(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber,
@@ -145,14 +123,8 @@ public class ProductController {
 		mav.getModel().put("page", page);
 		mav.setViewName("backproduct");
 		return mav;
-	}@GetMapping("category/select")
-	public ModelAndView selecCategorytLike(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber,
-			@RequestParam("select") String select, @RequestParam("filed") String filed) {
-
-		
-		mav.setViewName("backcategory");
-		return mav;
 	}
+	
 
 	@GetMapping("deleteproduct")
 	public String deleteById(@RequestParam("id") Integer id) {
@@ -161,21 +133,8 @@ public class ProductController {
 		return "redirect:/backend/product/all";
 
 	}
-	@GetMapping("deletecategory")
-	public String deleteCategoryById(@RequestParam("id") Integer id) {
 
-		categoryService.deleteById(id);
-		return "redirect:/backend/category/all";
-}
-	@GetMapping("editcategory")
-	public String updateCategoryById(@RequestParam("id") Integer id, Model m) {
-		ProductCategoryBean proBean = categoryService.findById(id);
-		m.addAttribute("status","確定修改");
-		m.addAttribute("now","修改種類");
-		m.addAttribute("category", proBean);
-		m.addAttribute("insert", "updatecategory");
-		return "backproductcategoryinsert";
-	}
+
 
 	@GetMapping("editproduct")
 	public String updateById(@RequestParam("id") Integer id, Model m) {
@@ -188,13 +147,7 @@ public class ProductController {
 		m.addAttribute("insert", "updateproduct");
 		return "backproductinsert";
 	}
-	@PostMapping("updatecategory")
-	public String editCategory(@ModelAttribute("category") ProductCategoryBean cate ) {
-		
-		categoryService.insertCategory(cate);
-		
-		return "redirect:/backend/category/all";
-	} 
+	
 
 	@PostMapping("updateproduct")
 	public String postUpdate(@RequestParam Integer productId,@RequestParam ProductCategoryBean productCategoryName, @RequestParam String productName,

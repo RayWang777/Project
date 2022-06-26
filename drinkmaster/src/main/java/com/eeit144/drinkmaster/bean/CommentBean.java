@@ -68,7 +68,7 @@ public class CommentBean {
 	private Integer scoreType;
 	
 	
-	@Column(name = "commentPhoto", columnDefinition = "nvarchar(255)")
+	@Column(name = "commentPhoto", columnDefinition = "nvarchar(max)")
 	private String commentPhoto;
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8") // JSP DATE

@@ -34,4 +34,9 @@ public interface CommentRepostiory extends JpaRepository<CommentBean, Integer> {
 	public List<CommentBean> findAllByOrderByCreateTimeDesc();
 	
 	
+	@Query(value="select * from comment where userid = :userId and storeid = :storeId",nativeQuery = true)
+	public List<CommentBean> findCommentByUseridAndStoreid(@Param(value="userId")Integer userId, @Param(value="storeId")Integer storeId);
+	
+	
+	
 }

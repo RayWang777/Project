@@ -6,7 +6,6 @@
 <jsp:include page="layout/header.jsp" />
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,30 +30,44 @@ div.awesomeRating {
 </head>
 <body>
 
-<h1>修改評價</h1>
+<h1>新增評價</h1>
 
 
 <div class="container">
 
+
 <div class="row justify-content-center">
 <div class="col-9">
-	<h1>更新評論頁面</h1>
+	<h1>新增訊息頁面</h1>
 <div class="card">
   <div class="card-header">
-    請輸入想更新的評論
+   <span style="font-size: 1.5em">評論</span>
   </div>
   <div class="card-body">
+  <form:form class="form" method="post" action="${contextRoot}/front/comment/insert" modelAttribute="commentBean" enctype="multipart/form-data">
   
-  <form:form class="form" method="post" modelAttribute="comment" enctype="multipart/form-data" >
+  	<c:if test="${empty userBean}">
+  				登入後可評論~
+ 	</c:if>
   
-  <form:input path="commentId" type="hidden"/>
-  <form:input path="createTime" type="hidden"/>
+  	<c:choose>
+  	
+  	<c:when test="${empty findusId}">
+  	
+  	
   
-  
-  userid<form:input path="userBean" class="form-control" />
-	storeid<form:input path="storeBean" class="form-control" />
-	productid<form:input path="productBean" class="form-control" />
-	score<form:input id="score1" path="score" class="form-control" style="pointer-events: none" />
+	<c:if test="${not empty userBean}">
+	
+ 
+<div class="form-group">
+	
+<!-- 	userid -->
+		<input id=userid name="userid" value="${userBean.userId}" type="hidden" />
+<!-- 	storeid -->
+	<form:input path="storeBean" class="form-control" type="hidden" />
+<%-- 	productid<form:input path="productBean" class="form-control" /> --%>
+<!-- 	score -->
+	<form:input id="score1" path="score" class="form-control" style="pointer-events: none" type="hidden"/>
 	
 	<div id="scores" class="awesomeRating"></div>
 	<div class="awesomeRatingValue" style="display:none"></div>
@@ -68,43 +81,55 @@ div.awesomeRating {
 			
 		});
 		
-		var test1 = "";
-		window.onload=(function(){
-			 test1 = $("#score1").val();
-			 console.log(test1);
-		
 	
 		$(".awesomeRating").awesomeRating({
 			
-			valueInitial: test1,
+			valueInitial: "",
 			values: ["1.0", "2.0", "3.0", "4.0", "5.0"],
 			targetSelector: "div.awesomeRatingValue"
 			
 		});
 	
-		});
+		
 	</script>
 	
 	
-	<form:input path="scoreType" class="form-control" />
-	content<form:input path="content" class="form-control" />
-  
-  	<input id="commentPhoto1" name="commentPhoto1"  type="file" class="form-control" onchange="preview()"/>
+	<form:input path="scoreType" class="form-control" type="hidden"/>
+	content<form:textarea path="content" class="form-control" />
+	
+	<br/>
+	
+	<input id="commentPhoto1" name="commentPhoto1"  type="file" class="form-control" onchange="preview()" />
+
+		<img id="image" src="" width="100px" height="100px" />
+	<c:if test="${comment.commentId!=null}">
+					<img id="oldImage" src="${comment.commentPhoto}" width="100px"
+						height="100px" />
+	</c:if>
+	
+	
+</div>    
     
-   			<img id="image" src="${comment.commentPhoto}" width="100px" height="100px" />
-		<c:if test="${comment.commentPhoto!=null}">
-			<img id="oldImage" src="${comment.commentPhoto}" width="100px" height="100px" />
-		</c:if>
+    <input type="submit" name="submit" value="新增評論">
     
-    <br/>
-    <input type="submit" name="submit" value="更新">
+    </c:if>
+    
+    
+    </c:when>
+  	
+  	<c:otherwise>
+  	
+  		測試
+  	
+  	</c:otherwise>
+  	
+  	</c:choose>
   
   </form:form>
   
-  
-  <script type="text/javascript">
-  	
-  $(function() {
+	<script type="text/javascript">
+	
+	$(function() {
 		$('#image').hide();
 	});
 
@@ -115,13 +140,30 @@ div.awesomeRating {
 			$('#image').show();
 		}
 	}
-  
-  </script>
+	
+	</script>
   
   </div>
 </div>
 </div>
 </div>
+
+<div class="row justify-content-center">
+<div class="col-9">
+
+<div class="card">
+  <div class="card-header">
+    最新留言(時間) <fmt:formatDate pattern="yyyy 年 MM 月 dd 日 a hh:mm:ss EEEE" value="${lastestComment.createTime}" />
+  </div>
+  <div class="card-body">
+  
+	<c:out value="${lastestComment.content}"></c:out>
+  
+  </div>
+</div>
+</div>
+</div>
+
 
 </div>
 

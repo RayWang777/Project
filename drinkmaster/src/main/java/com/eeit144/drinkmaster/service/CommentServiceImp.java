@@ -90,5 +90,10 @@ public class CommentServiceImp implements CommentService {
 		return commentDao.findAllByOrderByCreateTimeDesc();
 	}
 	
+	@Override
+	public List<CommentBean> findCommentByUseridAndStoreid(Integer userId, Integer storeId){
+		return commentDao.findCommentByUseridAndStoreid(userId,storeId);
+	}
+	
 	
 }

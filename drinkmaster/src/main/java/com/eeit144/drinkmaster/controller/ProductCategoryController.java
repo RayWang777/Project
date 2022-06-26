@@ -10,20 +10,30 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eeit144.drinkmaster.bean.ProductCategoryBean;
+import com.eeit144.drinkmaster.bean.StoreBean;
+import com.eeit144.drinkmaster.bean.UserBean;
 import com.eeit144.drinkmaster.service.ProductCategoryServiceImp;
+import com.eeit144.drinkmaster.service.StoreServiceImp;
 
 @Controller
 @Transactional
 @RequestMapping("/backend")
+@SessionAttributes (names= {"userBean","store"})
 public class ProductCategoryController {
 	@Autowired ProductCategoryServiceImp categoryService;
-	
+	@Autowired
+	StoreServiceImp storeService;
 	@GetMapping("prodcuct/insertcategory")
-	public String addCategoryView(Model m) {
+	public String addCategoryView(Model m ,@SessionAttribute("store") StoreBean storeBean ) {
 		ProductCategoryBean category=new ProductCategoryBean();
+		category.setStoreBean(storeBean);
+		String storeNane=storeBean.getStoreName();
+		m.addAttribute("storename",storeNane);
 		m.addAttribute("status","確定新增");
 		m.addAttribute("now","新增種類");
 		m.addAttribute("category",category);

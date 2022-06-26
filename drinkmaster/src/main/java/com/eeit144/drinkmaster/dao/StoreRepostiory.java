@@ -5,8 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import com.eeit144.drinkmaster.bean.StoreBean;
 
+
 @Repository
 public interface StoreRepostiory extends JpaRepository<StoreBean, Integer> {
-
+	
 	
 }

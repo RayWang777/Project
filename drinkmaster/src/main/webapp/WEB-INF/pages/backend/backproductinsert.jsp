@@ -26,11 +26,17 @@
 				<br>
 				<br>
 				<label for="productCategoryBean">商品種類</label>
-				<form:select path="productCategoryBean" id="productCategoryBean" name="productCategoryBean">
+				<select  id="select" name="select">
 				<c:forEach var="productCategoryBean" items="${productcategory1}">
-					<form:option value="${productCategoryBean.productCategoryId}">${productCategoryBean.productCategoryName}</form:option>
+				<c:choose>
+					<c:when test="${product.productCategoryBean.productCategoryId == productCategoryBean.productCategoryId}">
+					<option  selected="selected" value="${productCategoryBean.productCategoryId}">${productCategoryBean.productCategoryName}</option>
+					</c:when>
+					<c:otherwise>
+					<option value="${productCategoryBean.productCategoryId}">${productCategoryBean.productCategoryName}</option>
+				</c:otherwise></c:choose>
 				</c:forEach>
-				</form:select>
+				</select>
 				
 					<br>
 					<br>

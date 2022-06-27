@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -32,32 +30,35 @@ import com.eeit144.drinkmaster.service.ProductServiceImp;
 @Controller
 @Transactional
 @RequestMapping("/backend")
-@SessionAttributes (names= {"userBean","canSeeStore"})
+@SessionAttributes(names = { "userBean", "canSeeStore" })
 public class ProductController {
 	@Autowired
 	private ProductServiceImp proService;
-	@Autowired ProductCategoryServiceImp categoryService;
+	@Autowired
+	ProductCategoryServiceImp categoryService;
 
 	@GetMapping("product/insertview")
-	public String addView(Model m,@SessionAttribute("canSeeStore") StoreBean storeBean) {
+	public String addView(Model m, @SessionAttribute("canSeeStore") StoreBean storeBean) {
 		ProductBean pro = new ProductBean();
-		m.addAttribute("now","新增商品");
-		m.addAttribute("status","確定新增");
-		List<ProductCategoryBean> productcategory1 =categoryService.findByStoreBean(storeBean);
-		m.addAttribute("productcategory1",productcategory1);
+		m.addAttribute("now", "新增商品");
+		m.addAttribute("status", "確定新增");
+		List<ProductCategoryBean> productcategory1 = categoryService.findByStoreBean(storeBean);
+		m.addAttribute("productcategory1", productcategory1);
 		m.addAttribute("product", pro);
 		m.addAttribute("insert", "product/insert");
 		return "/backend/backproductinsert";
 	}
-	@GetMapping ("productanalyze")
+
+	@GetMapping("productanalyze")
 	public String analyzeview() {
 		return "/backend/productanalyze";
 	}
 
 	@PostMapping("/product/insert")
 	public String insertProduct(@RequestParam String productName, @RequestParam String price,
-			@RequestParam String coldHot, @RequestParam Boolean status,
-			@RequestParam ProductCategoryBean productCategoryBean,@RequestPart("productImage") MultipartFile productImage,@SessionAttribute("canSeeStore") StoreBean storeBean ,Model m) throws IOException {
+			@RequestParam String coldHot, @RequestParam Boolean status, @RequestParam Integer select,
+			@RequestPart("productImage") MultipartFile productImage,
+			@SessionAttribute("canSeeStore") StoreBean storeBean, Model m) throws IOException {
 		Map<String, String> errors = new HashMap<String, String>();
 		m.addAttribute("errors", errors);
 		if (productName == null || productName.length() == 0) {
@@ -72,22 +73,23 @@ public class ProductController {
 
 		if (errors != null && !errors.isEmpty()) {
 			ProductBean pro = new ProductBean();
-			m.addAttribute("now","新增商品");
+			m.addAttribute("now", "新增商品");
 			m.addAttribute("product", pro);
 			m.addAttribute("insert", "product/insert");
-			m.addAttribute("status","確定新增");
-			List<ProductCategoryBean> productcategory1 =categoryService.findByStoreBean(storeBean);
-			m.addAttribute("productcategory1",productcategory1);
+			m.addAttribute("status", "確定新增");
+			List<ProductCategoryBean> productcategory1 = categoryService.findByStoreBean(storeBean);
+			m.addAttribute("productcategory1", productcategory1);
 			return "/backend/backproductinsert";
 		}
-
+		ProductCategoryBean cateB = categoryService.findById(select);
+		System.out.println(select);
 		ProductBean pro = new ProductBean();
 		String filetype = productImage.getContentType();
 		pro.setPrice(Integer.parseInt(price));
 		pro.setColdHot(coldHot);
 		pro.setStatus(status);
 		pro.setProductName(productName);
-		pro.setProductCategoryBean(productCategoryBean);
+		pro.setProductCategoryBean(cateB);
 
 		String filebase64 = proService.getFileBase64String(productImage);
 		String productimage = "data:" + filetype + ";base64," + filebase64 + "";
@@ -110,8 +112,6 @@ public class ProductController {
 		mav.setViewName("/backend/backproduct");
 		return mav;
 	}
-	
-	
 
 	@GetMapping("product/select")
 	public ModelAndView selectLike(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber,
@@ -131,7 +131,6 @@ public class ProductController {
 		return mav;
 
 	}
-	
 
 	@GetMapping("deleteproduct")
 	public String deleteById(@RequestParam("id") Integer id) {
@@ -141,26 +140,24 @@ public class ProductController {
 
 	}
 
-
-
 	@GetMapping("editproduct")
-	public String updateById(@RequestParam("id") Integer id, Model m,@SessionAttribute("canSeeStore") StoreBean storeBean) {
+	public String updateById(@RequestParam("id") Integer id, Model m,
+			@SessionAttribute("canSeeStore") StoreBean storeBean) {
 		ProductBean proBean = proService.findById(id);
-		List<ProductCategoryBean> productcategory1 =categoryService.findByStoreBean(storeBean);
-		m.addAttribute("now","編輯商品");
-		m.addAttribute("status","確定修改");
-		m.addAttribute("productcategory1",productcategory1);
+		List<ProductCategoryBean> productcategory1 = categoryService.findByStoreBean(storeBean);
+		m.addAttribute("now", "編輯商品");
+		m.addAttribute("status", "確定修改");
+		m.addAttribute("productcategory1", productcategory1);
 		m.addAttribute("product", proBean);
 		m.addAttribute("insert", "updateproduct");
 		return "/backend/backproductinsert";
 	}
-	
 
 	@PostMapping("updateproduct")
-	public String postUpdate(@RequestParam Integer productId,@RequestParam ProductCategoryBean productCategoryName, @RequestParam String productName,
-			@RequestParam String price, @RequestParam String coldHot, @RequestParam Boolean status,
-			 @RequestPart("productImage") MultipartFile productImage, @SessionAttribute("canSeeStore") StoreBean storeBean,Model m)
-			throws IOException {
+	public String postUpdate(@RequestParam Integer productId, @RequestParam Integer select,
+			@RequestParam String productName, @RequestParam String price, @RequestParam String coldHot,
+			@RequestParam Boolean status, @RequestPart("productImage") MultipartFile productImage,
+			@SessionAttribute("canSeeStore") StoreBean storeBean, Model m) throws IOException {
 
 		Map<String, String> errors = new HashMap<String, String>();
 		m.addAttribute("errors", errors);
@@ -176,14 +173,16 @@ public class ProductController {
 
 		if (errors != null && !errors.isEmpty()) {
 			ProductBean oldBean = proService.findById(productId);
-			List<ProductCategoryBean> productcategory1 =categoryService.findByStoreBean(storeBean);
-			m.addAttribute("now","編輯商品");
-			m.addAttribute("status","確定修改");
-			m.addAttribute("productcategory1",productcategory1);
+			List<ProductCategoryBean> productcategory1 = categoryService.findByStoreBean(storeBean);
+			m.addAttribute("now", "編輯商品");
+			m.addAttribute("status", "確定修改");
+			m.addAttribute("productcategory1", productcategory1);
 			m.addAttribute("product", oldBean);
 			m.addAttribute("insert", "updateproduct");
 			return "/backend/backproductinsert";
 		}
+		ProductCategoryBean cateB = categoryService.findById(select);
+		System.out.println(select);
 		ProductBean pro = new ProductBean();
 		ProductBean oldBean = proService.findById(productId);
 		pro.setProductId(productId);
@@ -191,8 +190,8 @@ public class ProductController {
 		pro.setColdHot(coldHot);
 		pro.setStatus(status);
 		pro.setProductName(productName);
-		
-		pro.setProductCategoryBean(productCategoryName);
+
+		pro.setProductCategoryBean(cateB);
 
 		String filetype = productImage.getContentType();
 

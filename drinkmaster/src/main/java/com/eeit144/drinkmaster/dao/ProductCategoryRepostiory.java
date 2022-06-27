@@ -11,8 +11,8 @@ import com.eeit144.drinkmaster.bean.ProductCategoryBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
 
 public interface ProductCategoryRepostiory extends JpaRepository<ProductCategoryBean, Integer> {
-	ProductCategoryBean findByProductCategoryNameLike(String name);
-	Page<ProductCategoryBean> findByproductCategoryNameLike(Pageable pageable, String name);
+	ProductCategoryBean findByProductCategoryNameLike(String ProductCategoryName);
+	Page<ProductCategoryBean> findByproductCategoryNameLike(Pageable pageable, String productCategoryName);
 //	Page<ProductCategoryBean> firdByStoreBean(StoreBean storBean);
 	List<ProductCategoryBean> findByStoreBean(StoreBean storeBean);
 }

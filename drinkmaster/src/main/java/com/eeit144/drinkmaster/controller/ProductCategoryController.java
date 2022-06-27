@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.bean.ProductCategoryBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.bean.UserBean;
@@ -54,13 +55,19 @@ public class ProductCategoryController {
 		mav.setViewName("/backend/backcategory");
 		return mav;
 	}
+	
+	
 	@GetMapping("category/select")
-	public ModelAndView selecCategorytLike(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber,
+	public ModelAndView selectLike(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber,
 			@RequestParam("select") String select, @RequestParam("filed") String filed) {
 
-		
+		System.out.println(select);
+		System.out.println(filed);
+		Page<ProductCategoryBean> page = categoryService.select(pageNumber, select, filed);
+		mav.getModel().put("page", page);
 		mav.setViewName("/backend/backcategory");
 		return mav;
+
 	}
 	@GetMapping("deletecategory")
 	public String deleteCategoryById(@RequestParam("id") Integer id) {

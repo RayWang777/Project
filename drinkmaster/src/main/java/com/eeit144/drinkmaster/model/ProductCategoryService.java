@@ -1,9 +1,12 @@
 package com.eeit144.drinkmaster.model;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 
 
 import com.eeit144.drinkmaster.bean.ProductCategoryBean;
+import com.eeit144.drinkmaster.bean.StoreBean;
 
 public interface ProductCategoryService {
 
@@ -14,4 +17,6 @@ public interface ProductCategoryService {
 	public void insertCategory(ProductCategoryBean product);
 
 	public void deleteById(Integer id);
+	
+	public List<ProductCategoryBean> findByStoreBean(StoreBean storeBean);
 }

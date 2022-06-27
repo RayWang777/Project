@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.bean.ProductCategoryBean;
+import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.dao.ProductCategoryRepostiory;
 import com.eeit144.drinkmaster.model.ProductCategoryService;
 @Service
@@ -43,7 +44,10 @@ public class ProductCategoryServiceImp implements ProductCategoryService{
 		productCategoryDao.save(product);
 
 	}
-
+	
+	@Override public List<ProductCategoryBean> findByStoreBean(StoreBean storBean){
+		return productCategoryDao.findByStoreBean(storBean);
+	}
 	public Page<ProductCategoryBean> findByPage(Integer pageNumber) {
 		Pageable page = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "productCategoryId");
 

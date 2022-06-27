@@ -24,7 +24,9 @@
 	rel="stylesheet">
 <link href="<c:url value="/css/style.css"/>" rel="stylesheet">
 
-<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+<link
+	href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
+	rel="stylesheet" />
 
 
 
@@ -100,8 +102,7 @@ li {
 						<li><a href="${contextRoot}/backend/productanalyze">銷量圖表</a></li>
 
 					</ul></li>
-				
-				<li><a class="sidebar-sub-toggle"><i
+<li><a class="sidebar-sub-toggle"><i
 						class="large material-icons">list</i> 訂單管理 <span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
@@ -153,10 +154,15 @@ li {
 
 					<div class="dropdown dib">
 						<div class="header-icon" data-toggle="dropdown">
+
+							<span class="user-avatar"><a>Logout</a>
+								</li> </span>
+
 						<span class="user-avatar">
 						<a id="frontpage" href="${contextRoot}/front/">前台首頁</a>
 						</span>&emsp;&emsp;
 							<span class="user-avatar">Logout</li> </span>
+
 
 						</div>
 					</div>
@@ -170,7 +176,7 @@ li {
 	<div class="main">
 		<div class="container-fluid">
 
-			
+
 			<!-- jquery vendor -->
 			<script src="<c:url value="/js/lib/jquery.min.js"/>"></script>
 			<script src="<c:url value="/js/lib/jquery.nanoscroller.min.js"/>"></script>
@@ -180,6 +186,9 @@ li {
 			<!-- sidebar -->
 			<script src="<c:url value="/js/lib/bootstrap.bundle.min.js"/>"></script>
 			<script src="<c:url value="/js/scripts.js"/>"></script>
+
+			<!-- bootstrap -->
+
 			<!-- bootstrap -->
 <script type="text/javascript">
 $(function(){
@@ -193,3 +202,4 @@ $(function(){
 
 </script>
 			
+

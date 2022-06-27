@@ -16,12 +16,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.springframework.web.bind.annotation.SessionAttributes;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 @Entity
 @Table(name = "productcategory")
-
 public class ProductCategoryBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -26,7 +26,8 @@
 				
 				
 				<label for="storeBean">店家</label>
-				<form:input path="storeBean" id="storeBean" name="storeBean" />
+				<input type="text" disabled value="${storename}">
+				<form:hidden  path="storeBean" id="storeBean" name="storeBean"  />
 				<br>
 				<br>
 				<div class="row justify-content-center">

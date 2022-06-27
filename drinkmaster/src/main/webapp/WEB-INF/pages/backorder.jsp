@@ -85,9 +85,19 @@
 	border-radius: 2px;
 }
 
-/* .material-icons{ */
-/* size: large; */
-/* } */
+#orderform #selectuserId{
+	height: 20px;
+	width: 80px;
+	border-color: black;
+	border-radius: 2px;
+}
+
+#orderform #useridoption{ 
+	height: 25px; 
+	width: 150px;
+	font-size: 16px;
+ } 
+ 
 
 </style>
 
@@ -122,7 +132,6 @@
 						<div class="control__indicator"></div>
 	</label></th>
       <th scope="col">訂單編號</th>
-<!--       <th scope="col">訂購人</th> -->
       <th scope="col">訂購人</th>
       <th scope="col" style="width: 170px;">訂單時間</th>
       <th scope="col">地址</th>
@@ -216,12 +225,26 @@
   <form:form id="orderform" class="form"  method="post" action="${contextRoot}/backend/order/insert" modelAttribute="orderBean">
 <%--   <span><form:label path="createTime">訂單日期</form:label></span> --%>
 <%--   <form:input path="createTime" /><br><br> --%>
-  <form:label path="storeId">店家編號</form:label>
-  <form:input path="storeId" /><br><br>
+<%--   <form:label path="storeId">店家編號</form:label> --%>
+<%--   <form:input path="storeId" /><br><br> --%>
   <form:label path="productId">產品編號</form:label>
   <form:input path="productId" /><br><br>
-  <form:label path="userId">使用者編號</form:label>
-  <form:input path="userId" /><br><br>
+  <label for="selectuserId">使用者編號</label>
+					<form:select id="selectuserId" path="userBean.userId">
+
+						<form:options items="${orderaddusers}" itemLabel="userName"
+							itemValue="userId" id="useridoption"/>
+					</form:select><br><br>
+					<form:hidden path="userId" value="1" />
+<%--   <form:label path="userId">使用者編號</form:label> --%>
+<%--   <form:input path="userId" /><br><br> --%>
+<label for="selectstore">店家名稱</label>
+					<form:select id="selectstore" path="storeBean.storeId">
+
+						<form:options items="${orderaddstores}" itemLabel="storeName"
+							itemValue="storeId" />
+					</form:select><br><br>
+					<form:hidden path="storeId" value="1" />
   <form:label path="orderAddress">地&emsp;&emsp;址</form:label>
   <form:input path="orderAddress" /><br><br>
   <form:label path="orderPhone">電&emsp;&emsp;話</form:label>

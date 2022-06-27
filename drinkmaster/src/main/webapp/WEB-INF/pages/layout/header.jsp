@@ -102,7 +102,10 @@ li {
 						<li><a href="${contextRoot}/backend/productanalyze">銷量圖表</a></li>
 
 					</ul></li>
-<li><a class="sidebar-sub-toggle"><i
+					<c:choose>
+					<c:when test="${userBean.role != 'admin' && userBean.role != 'firm' && userBean.role != 'store'}"></c:when>
+					<c:otherwise>
+					<li><a class="sidebar-sub-toggle"><i
 						class="large material-icons">list</i> 訂單管理 <span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
@@ -112,6 +115,7 @@ li {
 						<li><a href="#">刪除</a></li>
 						<li><a href="#">查詢</a></li>
 					</ul></li>
+					</c:otherwise></c:choose>
 				<li><a class="sidebar-sub-toggle"><i
 						class="large material-icons">message</i> 評論管理 <span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
@@ -130,7 +134,7 @@ li {
 						<li><a href="${contextRoot}/backend/service/add">新增意見</a></li>
 
 					</ul></li>
-					<li><a href="${contextRoot}/front/">前台首頁</a></li>
+<%-- 					<li><a href="${contextRoot}/front/">前台首頁</a></li> --%>
 				<li><a href="<c:url value="/backend/login"/>"><i class="ti-close"></i> Logout</a></li>
 
 			</ul>
@@ -155,13 +159,14 @@ li {
 					<div class="dropdown dib">
 						<div class="header-icon" data-toggle="dropdown">
 
-							<span class="user-avatar"><a>Logout</a>
+<!-- 							<span class="user-avatar"><a>Logout</a> -->
 								</li> </span>
 
 						<span class="user-avatar">
 						<a id="frontpage" href="${contextRoot}/front/">前台首頁</a>
 						</span>&emsp;&emsp;
-							<span class="user-avatar">Logout</li> </span>
+							<span class="user-avatar">
+							<a id="logout" href="<c:url value="${contextRoot}/backend/login"/>">Logout</a></span>
 
 
 						</div>
@@ -194,6 +199,14 @@ li {
 $(function(){
 	$('#frontpage').click(function(){
 		location.replace('${contextRoot}/front/');
+	});
+	
+	
+})
+
+$(function(){
+	$('#logout').click(function(){
+		location.replace('${contextRoot}/backend/login/');
 	});
 	
 	

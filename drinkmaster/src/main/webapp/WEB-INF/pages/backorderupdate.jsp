@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <jsp:include page="layout/header.jsp" />
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-
+<c:set var="userId" value="1"></c:set>
 <div class="row justify-content-center">
   <h2>更新訂單</h2>
 </div>
@@ -18,10 +18,24 @@
 <div>
 <form:form class="form" method="post" action="${contextRoot}/backend/order/update" modelAttribute="orderBean">
 <form:hidden path="orderId"/>
-  使用者編號<form:label path="userId"></form:label>
-  <form:input path="userId" /><br><br>
-  店家編號<form:label path="storeId"></form:label>
-  <form:input path="storeId" /><br><br>
+<label for="selectuserId">使用者名稱</label>
+					<form:select id="selectuserId" path="userBean.userId">
+
+						<form:options items="${orderaddusers}" itemLabel="userName"
+							itemValue="userId" />
+					</form:select><br><br>
+					<form:hidden path="userId" value="1" />
+<%--   使用者編號<form:label path="userId"></form:label> --%>
+<%--   <form:input path="userId" /><br><br> --%>
+<label for="selectstore">店家名稱</label>
+					<form:select id="selectstore" path="storeBean.storeId">
+
+						<form:options items="${orderaddstores}" itemLabel="storeName"
+							itemValue="storeId" />
+					</form:select><br><br>
+					<form:hidden path="storeId" value="1" />
+<%--   店家編號<form:label path="storeId"></form:label> --%>
+<%--   <form:input path="storeId" /><br><br> --%>
   產品編號<form:label path="productId"></form:label>
   <form:input path="productId" /><br><br>
   訂單日期<form:label path="createTime"></form:label>
@@ -66,6 +80,14 @@ console.log(valuesta);
 $('#substatus').val(valuesta);	
 	
 })	
+
+$('#selectuserId').click(function() {
+
+		var selected = $('#selectuserId').val()
+		console.log(selected)
+		$('#userId').val(selected);
+
+	})
 	
 });
 

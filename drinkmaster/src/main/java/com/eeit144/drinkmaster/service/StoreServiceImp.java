@@ -62,5 +62,10 @@ public class StoreServiceImp implements StoreService {
 	public FirmBean findFirmBeanByStoreId(Integer storeId) {
 		return storeDao.findFirmBeanByStoreId(storeId);
 	}
+	
+	@Override
+	public List<StoreBean> findAllStores(){
+		return storeDao.findAll();
+	};
 
 }

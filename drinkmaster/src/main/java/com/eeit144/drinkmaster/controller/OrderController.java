@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eeit144.drinkmaster.bean.OrderBean;
@@ -73,7 +74,19 @@ public class OrderController {
 		}
 		
 		@GetMapping("order/findAll")
-		public ModelAndView findView(ModelAndView mav, @RequestParam(name = "o", defaultValue = "1") Integer pageNumber) {
+		public ModelAndView findView(ModelAndView mav, @RequestParam(name = "o", defaultValue = "1") Integer pageNumber,@SessionAttribute("userBean") UserBean user,Model m) {
+			
+			if((user.getRole().equals("user"))) {
+				return mav;			
+			}
+			List<UserBean> users = userService.findAllUsers();
+
+			m.addAttribute("orderaddusers", users);
+			
+			List<StoreBean> stores = storeService.findAllStores();
+
+			m.addAttribute("orderaddstores", stores);
+			
 			Page<OrderBean> page = orderService.findByPage(pageNumber);
 			OrderBean orderBean = new OrderBean();
 			mav.getModel().put("orderBean", orderBean);
@@ -83,7 +96,11 @@ public class OrderController {
 		}
 		
 		@GetMapping("order/delete")
-		public String deleteOrder(@RequestParam("id") Integer id) {
+		public String deleteOrder(@RequestParam("id") Integer id,@SessionAttribute("userBean") UserBean user) {
+			
+			if((user.getRole().equals("user"))) {
+				return "redirect:/backend/login";			
+			}
 			orderService.deleteById(id);
 			return "redirect:/backend/order/findAll";
 		}
@@ -92,10 +109,22 @@ public class OrderController {
 		
 		
 		@PostMapping("order/insert")
-		public String insertOrder(@ModelAttribute("orderBean") OrderBean orderBean, Model model) {
+		public String insertOrder(@ModelAttribute("orderBean") OrderBean orderBean, Model model,@SessionAttribute("userBean") UserBean user) {
 //			
 //			@ModelAttribute("userBean key") UserBean variableName;
 //			 orderBean.setUserbean(variableName);
+			
+			if((user.getRole().equals("user"))) {
+				return "redirect:/backend/login";			
+			}
+			
+			List<UserBean> users = userService.findAllUsers();
+
+			model.addAttribute("orderaddusers", users);
+			
+			List<StoreBean> stores = storeService.findAllStores();
+
+			model.addAttribute("orderaddstores", stores);
 			
 			Date createTime = new Date();
 			orderBean.setCreateTime(createTime);
@@ -115,14 +144,39 @@ public class OrderController {
 			}
 		
 		@GetMapping("order/edit")
-		public String editById(@RequestParam("id") Integer id, Model m) {
+		public String editById(@RequestParam("id") Integer id, Model m,@SessionAttribute("userBean") UserBean user) {
+			if((user.getRole().equals("user"))) {
+				return "redirect:/backend/login";			
+			}
+			
+			List<UserBean> users = userService.findAllUsers();
+
+			m.addAttribute("orderaddusers", users);
+			
+			List<StoreBean> stores = storeService.findAllStores();
+
+			m.addAttribute("orderaddstores", stores);
+			
+			
 			OrderBean orderBean = orderService.findById(id);
 			m.addAttribute("orderBean", orderBean);
 			return "backorderupdate";
 		}
 		
 		@PostMapping("order/update")
-		public String updateOrder(@ModelAttribute("orderBean") OrderBean orderBean, Model m) {
+		public String updateOrder(@ModelAttribute("orderBean") OrderBean orderBean, Model m,@SessionAttribute("userBean") UserBean user) {
+			if((user.getRole().equals("user"))) {
+				return "redirect:/backend/login";			
+			}
+			
+			List<UserBean> users = userService.findAllUsers();
+
+			m.addAttribute("orderaddusers", users);
+			
+			List<StoreBean> stores = storeService.findAllStores();
+
+			m.addAttribute("orderaddstores", stores);
+			
 			StoreBean oldStore = storeService.findById(orderBean.getStoreId()).get();
 			UserBean oldUser = userService.findById(orderBean.getUserId()).get();
 			ProductBean oldProduct = productService.findById(orderBean.getProductId());

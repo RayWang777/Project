@@ -40,5 +40,10 @@ public class OrderItemsServiceImp implements OrderItemsService{
 	public List<OrderItems> findAll() {
 		return null;
 	}
+	
+	@Override
+	public Page<OrderItems> findByPage(Integer pageNumber){
+		return null;
+	}
 
 }

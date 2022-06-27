@@ -91,6 +91,10 @@ public class UserController {
 		String role = user.getRole();
 		if(role.equals("admin")) {
 			
+			
+			List<StoreBean> findAllList = storeService.findAllList();
+			m.addAttribute("canSeeStore", findAllList);
+			
 			return("redirect:/backend/");
 			
 		} else if(role.equals("firm")) {
@@ -106,6 +110,9 @@ public class UserController {
 			}
 			
 			m.addAttribute("canSeeFirm", firmBean);
+				
+			List<StoreBean> findStoreByFirmId = storeService.findStoreByFirmId(firmBean.getFirmId());
+			m.addAttribute("canSeeStore", findStoreByFirmId);
 			
 			return("redirect:/backend/");
 		} else if(role.equals("store")) {

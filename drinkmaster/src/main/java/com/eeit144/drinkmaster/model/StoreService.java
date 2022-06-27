@@ -24,4 +24,8 @@ public interface StoreService {
 	public Page<StoreBean> findStoreByFirmId(Integer firmId,Pageable pab);
 
 	public FirmBean findFirmBeanByStoreId(Integer storeId);
+	
+	public List<StoreBean> findAllList();
+	
+	public List<StoreBean> findStoreByFirmId(Integer firmId);
 }

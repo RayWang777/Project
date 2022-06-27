@@ -19,4 +19,6 @@ public interface StoreRepostiory extends JpaRepository<StoreBean, Integer> {
 	public Page<StoreBean> findByFirmBean_firmId(Integer firmId,Pageable pab);
 
 	public FirmBean findFirmBeanByStoreId(Integer storeId);
+	
+	public List<StoreBean> findByFirmBean_firmId(Integer firmId);
 }

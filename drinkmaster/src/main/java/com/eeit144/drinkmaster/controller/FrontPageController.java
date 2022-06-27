@@ -13,4 +13,8 @@ public class FrontPageController {
 		return "/front/frontview";
 	}
 
+	@GetMapping("test")
+	public String firmserch() {
+		return "/front/fronttest";
+	}
 }

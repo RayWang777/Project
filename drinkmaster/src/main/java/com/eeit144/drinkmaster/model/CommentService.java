@@ -30,7 +30,7 @@ public interface CommentService {
 	
 	public List<CommentBean> getCreateTimeDesc();
 	
-	
+	public List<CommentBean> findCommentByUseridAndStoreid(Integer userId, Integer storeId);
 
 	
 }

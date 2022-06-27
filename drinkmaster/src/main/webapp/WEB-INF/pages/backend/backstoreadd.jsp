@@ -6,6 +6,13 @@
 <jsp:include page="layout/header.jsp" />
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
+<style>
+.error{
+color:red;
+}
+</style>
+
+
 <div class="content">
 
 	<div class="container">
@@ -45,6 +52,7 @@
 					<label for="storeName" class="form-label">店家名稱</label>
 					<form:input path="storeName" class="form-control" type="text"
 						id="storeName" />
+					<form:errors path="storeName" cssClass="error"></form:errors>
 					<span id=storeNameSp></span>
 				</div>
 
@@ -52,6 +60,7 @@
 					<label for="storeAddress" class="form-label">店家地址</label>
 					<form:input path="storeAddress" class="form-control" type="text"
 						id="storeAddress" />
+					<form:errors path="storeAddress" cssClass="error"></form:errors>
 					<span id=storeAddressSp></span>
 				</div>
 
@@ -59,6 +68,7 @@
 					<label for="storePhone" class="form-label">店家電話</label>
 					<form:input path="storePhone" class="form-control" type="text"
 						id="storePhone" />
+					<form:errors path="storePhone" cssClass="error"></form:errors>
 					<span id=storePhoneSp></span>
 				</div>
 
@@ -67,8 +77,9 @@
 					<br/>		
 					<input type="time" accept="number" id="startTime">
 					<input type="time" id="endTime">
-					<form:input path="openTime" class="form-control" 
+					<form:hidden path="openTime" class="form-control" 
 						id="openTime" />
+					<form:errors path="openTime" cssClass="error"></form:errors>
 					<span id=openTimeSp></span>
 				</div>
 				<div class="mb-4">
@@ -76,7 +87,7 @@
 						<form:select id="selectuserId" path="userBean.userId" class="form-control" >
 							<form:options items="${storeaddusers}" itemLabel="userName" itemValue="userId"/>
 						</form:select>
-					<form:input path="userId" value="${originUserId}" />
+					<form:hidden path="userId" value="1" />
 					<span id=firmPhoneSp></span>
 				</div>
 				

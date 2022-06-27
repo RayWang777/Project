@@ -3,6 +3,8 @@ package com.eeit144.drinkmaster.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,6 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +32,8 @@ import com.eeit144.drinkmaster.dto.StoreDTO;
 import com.eeit144.drinkmaster.model.FirmService;
 import com.eeit144.drinkmaster.model.StoreService;
 import com.eeit144.drinkmaster.model.UserService;
+
+import lombok.val;
 
 @Controller
 @RequestMapping("backend/")
@@ -119,8 +126,31 @@ public class StoreController {
 	}
 
 	@PostMapping("store/add")
-	public String addNewStore(@ModelAttribute("store") StoreDTO store,@SessionAttribute("userBean") UserBean user, Model m) {
+	public String addNewStore(@Valid @ModelAttribute("store") StoreDTO store,BindingResult result,@SessionAttribute("userBean") UserBean user, Model m) {
 	
+		if(result.hasErrors()) {
+			String role = user.getRole();
+			if(role.equals("admin")) {
+				
+				List<FirmBean> findAll3 = firmService.findAll3();
+				List<UserBean> users = userService.findAllUsers();
+
+				m.addAttribute("storeaddfirms", findAll3);
+				m.addAttribute("storeaddusers", users);
+				m.addAttribute("store", store);
+				return "/backend/backstoreadd";
+			}
+			
+			FirmBean findFirmByUserId = firmService.findFirmByUserId(user.getUserId()).get(0);
+			List<UserBean> users = userService.findAllUsers();
+			
+			m.addAttribute("storeaddfirms", findFirmByUserId);
+			m.addAttribute("storeaddusers", users);		
+			m.addAttribute("store", store);
+			return "/backend/backstoreadd";
+		}
+		
+		
 		String role = user.getRole();
 		if( !(role.equals("admin"))&& !(role.equals("firm")) ) {
 			return "redirect:/backend/";

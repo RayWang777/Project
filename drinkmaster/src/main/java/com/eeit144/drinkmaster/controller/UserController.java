@@ -71,7 +71,9 @@ public class UserController {
 	@PostMapping("loginGo")
 	public String loginGo(Model m, @RequestParam("userAccount") String userAccount, 
 			@RequestParam("userPassword") String userPassword) {
+		
 		UserBean user = new UserBean();
+			
 		System.out.println("PostMapping:" + userAccount + "  " + userPassword);
 
 		user = userService.findByAccPwd(userAccount, userPassword);
@@ -87,7 +89,14 @@ public class UserController {
 		} else if(role.equals("firm")) {
 			
 			List<FirmBean> firmByUserId = firmService.findFirmByUserId(user.getUserId());
-			FirmBean firmBean = firmByUserId.get(0);
+			FirmBean firmBean = null;
+			
+			try {
+			firmBean = firmByUserId.get(0);
+			}catch (Exception e) {
+				m.addAttribute("errorloginstr", "請聯絡平台獲取權限");
+				return "backlogin";
+			}
 			
 			m.addAttribute("canSeeFirm", firmBean);
 			
@@ -95,6 +104,10 @@ public class UserController {
 		} else if(role.equals("store")) {
 			
 			Optional<StoreBean> StoreByUserId = storeService.findStoreByUserId(user.getUserId());
+			if(StoreByUserId.isEmpty()) {
+				m.addAttribute("errorloginstr", "請聯絡平台廠商獲取權限");
+				return "backlogin";
+			}
 			StoreBean storeBean = StoreByUserId.get();
 			
 			m.addAttribute("canSeeStore", storeBean);

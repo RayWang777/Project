@@ -38,7 +38,7 @@ public class CommentControllerforward {
 	private Integer scoreType = 10;		//測試用
 	
 	
-	
+
 	@GetMapping("/comment")
 	public String CommentaddPage(@SessionAttribute("userBean") UserBean user, Model model) {   // , @PathVariable("storeId") StoreBean storeBean   
 		
@@ -108,7 +108,7 @@ public class CommentControllerforward {
 	
 	
 	
-	@PostMapping("comment/insert")
+	@PostMapping("/comment/insert")
 	public String addcomment(@RequestPart("commentPhoto1") MultipartFile cPhoto, 
 							@ModelAttribute("commentBean") CommentBean comment,
 							@RequestParam("userid") UserBean sessionUser, Model model) throws Exception {
@@ -146,7 +146,7 @@ public class CommentControllerforward {
 	
 	
 	
-//	@GetMapping("/comment/timeasc")
+//	@GetMapping("/front/comment/timeasc")
 	public String viewMessage(Model model) {
 		
 		List<CommentBean> page = commentService.getCreateTimeAsc();
@@ -157,7 +157,7 @@ public class CommentControllerforward {
 		
 	}
 	
-//	@GetMapping("/comment/all")
+//	@GetMapping("/front/comment/all")
 	public String viewtimedesc(Model model) {
 		
 		List<CommentBean> page = commentService.getCreateTimeDesc();
@@ -168,7 +168,7 @@ public class CommentControllerforward {
 		
 	}
 	
-//	@GetMapping("/comment/scoredesc")
+//	@GetMapping("/front/comment/scoredesc")
 	public String viewscoredesc(Model model) {
 		
 		List<CommentBean> page = commentService.getScoreDesc();
@@ -179,7 +179,7 @@ public class CommentControllerforward {
 		
 	}
 	
-//	@GetMapping("/comment/scoreasc")
+//	@GetMapping("/front/comment/scoreasc")
 	public String viewscoreasc(Model model) {
 		
 		List<CommentBean> page = commentService.getScoreAsc();
@@ -192,7 +192,7 @@ public class CommentControllerforward {
 	
 	
 	
-//	@GetMapping("/comment/all")
+//	@GetMapping("/front/comment/all")
 //	public String viewMessage(@RequestParam(name="p",defaultValue = "1") Integer pageNumber,Model model) {
 //		
 //		Page<CommentBean> page = commentService.findByPage(pageNumber);
@@ -204,7 +204,7 @@ public class CommentControllerforward {
 //	}
 	
 	
-//	@GetMapping("comment/editComment")
+//	@GetMapping("/front/comment/editComment")
 	public String editComment(@RequestParam("commentid") Integer id,Model model) {
 		
 		CommentBean comment = commentService.findById(id);
@@ -215,7 +215,7 @@ public class CommentControllerforward {
 	}
 	
 	
-//	@PostMapping("comment/editComment")
+//	@PostMapping("/front/comment/editComment")
 	public String postEditComment(@RequestPart("commentPhoto1") MultipartFile cPhoto,@RequestParam("commentid") Integer id) throws Exception {
 		
 		
@@ -234,7 +234,7 @@ public class CommentControllerforward {
 		return "redirect:/backend/comment/all";	
 	}
 	
-//	@GetMapping("comment/delete")
+//	@GetMapping("/front/comment/delete")
 	public String deletemsg(@RequestParam(name="commentid") Integer id) {
 		commentService.deleteById(id);
 		
@@ -243,7 +243,7 @@ public class CommentControllerforward {
 	
 	
 	
-//	@PostMapping("comment/insert")
+//	@PostMapping("/front/comment/insert")
 //	public String addcomment(@RequestBody CommentBeanDTO commentdto, Model model) {
 //
 //		Integer userId = commentdto.getUserid();

@@ -23,6 +23,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
+
 @Entity
 @Table(name = "orders")
 public class OrderBean {
@@ -30,10 +32,12 @@ public class OrderBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "orderid")
+	@Excel(name="訂單編號", orderNum="1",width = 15)
 	private Integer orderId;
 	
 	@Transient
 	@Column(name = "userid")
+	@Excel(name="使用者編號", orderNum="2",width = 15)
 	private Integer userId;
 	
 	@JsonIgnore
@@ -43,6 +47,7 @@ public class OrderBean {
 
 	@Transient
 	@Column(name = "storeid")
+	@Excel(name="店家編號", orderNum="3",width = 15)
 	private Integer storeId;
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -51,6 +56,7 @@ public class OrderBean {
 	
 	@Transient
 	@Column(name = "productId")
+	@Excel(name="產品編號", orderNum="4",width = 15)
 	private Integer productId;
 	
 	@JsonIgnore
@@ -59,21 +65,26 @@ public class OrderBean {
 	private ProductBean productBean;
 
 	@Column(name = "totalprice",nullable = false)
+	@Excel(name="總金額", orderNum="5",width = 30)
 	private Integer totalPrice;
 
 	@Column(name = "orderstatus",nullable = false, columnDefinition = "nvarchar(10)")
+	@Excel(name="狀態", orderNum="6",width = 15)
 	private String orderStatus;
 
 	@Column(name = "orderphone",nullable = false)
+	@Excel(name="電話", orderNum="7",width = 30)
 	private String orderPhone;
 
 	@Column(name = "orderaddress",nullable = false, columnDefinition = "nvarchar(50)")
+	@Excel(name="地址", orderNum="8",width = 50)
 	private String orderAddress;
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8") // JSP DATE
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") // MVC DATE
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "createtime",nullable = false, columnDefinition = "smalldatetime")
+	@Excel(name="下單時間", orderNum="9",width = 30)
 	private Date createTime;
 
 	public OrderBean() {
@@ -88,7 +99,7 @@ public class OrderBean {
 	}
 
 	public Integer getUserId() {
-		return userId;
+		return userBean.getUserId();
 	}
 
 	public void setUserId(Integer userId) {

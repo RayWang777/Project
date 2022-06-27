@@ -193,7 +193,7 @@
 </table>
 
 <p>
-    <button type="button" class="btn btn-warning btn-sm" >匯出Excel</button>&emsp;
+    <a href="${contextRoot}/backend/order/export"><button type="button" class="btn btn-warning btn-sm" >匯出Excel</button></a>&emsp;
 </p>
 
 <div class="row justify-content-center" style="font-size: x-large;">
@@ -223,21 +223,17 @@
       </div>
   <div class="modal-body">
   <form:form id="orderform" class="form"  method="post" action="${contextRoot}/backend/order/insert" modelAttribute="orderBean">
-<%--   <span><form:label path="createTime">訂單日期</form:label></span> --%>
-<%--   <form:input path="createTime" /><br><br> --%>
-<%--   <form:label path="storeId">店家編號</form:label> --%>
-<%--   <form:input path="storeId" /><br><br> --%>
-  <form:label path="productId">產品編號</form:label>
-  <form:input path="productId" /><br><br>
-  <label for="selectuserId">使用者編號</label>
+
+<%--   <form:label path="productId">產品編號</form:label> --%>
+<%--   <form:input path="productId" /><br><br> --%>
+<label for="selectuserId">使用者編號</label>
 					<form:select id="selectuserId" path="userBean.userId">
 
 						<form:options items="${orderaddusers}" itemLabel="userName"
 							itemValue="userId" id="useridoption"/>
 					</form:select><br><br>
 					<form:hidden path="userId" value="1" />
-<%--   <form:label path="userId">使用者編號</form:label> --%>
-<%--   <form:input path="userId" /><br><br> --%>
+
 <label for="selectstore">店家名稱</label>
 					<form:select id="selectstore" path="storeBean.storeId">
 
@@ -245,6 +241,14 @@
 							itemValue="storeId" />
 					</form:select><br><br>
 					<form:hidden path="storeId" value="1" />
+					
+<label for="selectproducts">商品名稱</label>
+					<form:select id="selectproducts" path="productBean.productId">
+
+						<form:options items="${orderaddproducts}" itemLabel="productName"
+							itemValue="productId" id="productoption"/>
+					</form:select><br><br>
+					<form:hidden path="productId" value="1" />
   <form:label path="orderAddress">地&emsp;&emsp;址</form:label>
   <form:input path="orderAddress" /><br><br>
   <form:label path="orderPhone">電&emsp;&emsp;話</form:label>
@@ -295,29 +299,29 @@
 
 
 
-var ctx = document.getElementById('myChart');
-var myChart = new Chart(ctx, {
-  type: 'pie',
-  data: {
-    labels: ['一月', '二月', '三月'],
-    datasets: [{
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)'
-      ],
-      borderColor: [
-        'rgba(255,99,132,1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)'
-      ],
-      borderWidth: 1,
-      label: '銷售業績(百萬)',
-      data: [60, 49, 72]
-    }]
-  }
-});
+// var ctx = document.getElementById('myChart');
+// var myChart = new Chart(ctx, {
+//   type: 'pie',
+//   data: {
+//     labels: ['一月', '二月', '三月'],
+//     datasets: [{
+//       backgroundColor: [
+//         'rgba(255, 99, 132, 0.2)',
+//         'rgba(54, 162, 235, 0.2)',
+//         'rgba(255, 206, 86, 0.2)'
+//       ],
+//       borderColor: [
+//         'rgba(255,99,132,1)',
+//         'rgba(54, 162, 235, 1)',
+//         'rgba(255, 206, 86, 1)',
+//         'rgba(75, 192, 192, 1)'
+//       ],
+//       borderWidth: 1,
+//       label: '銷售業績(百萬)',
+//       data: [60, 49, 72]
+//     }]
+//   }
+// });
 
 
 
@@ -338,17 +342,45 @@ $('#ordersubmit').click(function() {
 });
 
 
-
 $(function(){
 	
-$('#orderStatus').change(function(){
-var valuesta = $('#orderStatus').val();
-console.log(valuesta);
-$('#substatus').val(valuesta);	
-	
-})	
-	
-});
+	$('#orderStatus').change(function(){
+	var valuesta = $('#orderStatus').val();
+	console.log(valuesta);
+	$('#substatus').val(valuesta);	
+		
+	})	
+
+	$('#selectuserId').click(function() {
+
+			var selected = $('#selectuserId').val()
+			console.log(selected)
+			$('#userId').val(selected);
+
+		})
+		
+	$('#selectstore').click(function() {
+
+			var selected = $('#selectstore').val()
+			console.log(selected)
+			$('#storeId').val(selected);
+
+		})
+
+		
+
+	$('#selectproducts').click(function() {
+
+			var selected = $('#selectproducts').val()
+			console.log(selected)
+			$('#productId').val(selected);
+
+		})
+
+		
+		
+	});
+
 </script>
 
 

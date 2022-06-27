@@ -20,6 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -160,11 +161,19 @@ public class FirmController {
 	}
 
 	@PostMapping("firm/add")
-	public String addNewFirm(@SessionAttribute("userBean") UserBean user,@ModelAttribute("firm") FirmDTO firm, @RequestPart("reallogo") MultipartFile logo,
+	public String addNewFirm(@SessionAttribute("userBean") UserBean user,@ModelAttribute("firm") FirmDTO firm,BindingResult result, @RequestPart("reallogo") MultipartFile logo,
 			Model m) {
 		
 		if(!(user.getRole().equals("admin"))) {
 			return "redirect:/backend/";			
+		}
+		
+		FirmDtoValidator firmDtoValidator = new FirmDtoValidator();
+		firmDtoValidator.validate(firm, result);
+		if(result.hasErrors()) {
+			List<UserBean> users = userService.findAllUsers();
+			m.addAttribute("firmaddusers", users);	
+			return "/backend/backfirmadd";
 		}
 		
 		
@@ -187,7 +196,7 @@ public class FirmController {
 
 			m.addAttribute("errors", errors);
 			m.addAttribute("firm", newFirm);
-			return "backfirmadd";
+			return "/backend/backfirmadd";
 		}
 		UserBean userBean = new UserBean();
 		userBean.setUserId(firm.getUserId());
@@ -199,7 +208,7 @@ public class FirmController {
 			e.printStackTrace();
 			FirmDTO firmDTO = new FirmDTO();
 			m.addAttribute("firm", firmDTO);
-			return "backfirmadd";
+			return "/backend/backfirmadd";
 		}
 		firmService.insertFirm(newFirm);
 		return "redirect:/backend/firm/all";

@@ -8,6 +8,15 @@
 
 <c:set var="userId" value="1"></c:set>
 
+
+<style>
+
+.error{
+color:red;
+}
+
+</style>
+
 <div class="content">
 
 	<div class="container">
@@ -24,6 +33,7 @@
 					<label for="firmName" class="form-label">廠商名稱</label>
 					<form:input path="firmName" class="form-control" type="text"
 						id="firmName" />
+					<form:errors path="firmName" cssClass="error"></form:errors>
 					<span id=firmNameSp></span>
 				</div>
 
@@ -31,6 +41,7 @@
 					<label for="firmAddress" class="form-label">廠商地址</label>
 					<form:input path="firmAddress" class="form-control" type="text"
 						id="firmAddress" />
+					<form:errors path="firmAddress" cssClass="error"></form:errors>
 					<span id=firmAddressSp></span>
 				</div>
 
@@ -38,6 +49,7 @@
 					<label for="firmPhone" class="form-label">廠商電話</label>
 					<form:input path="firmPhone" class="form-control" type="text"
 						id="firmPhone" />
+					<form:errors path="firmPhone" cssClass="error"></form:errors>
 					<span id=firmPhoneSp></span>
 				</div>
 

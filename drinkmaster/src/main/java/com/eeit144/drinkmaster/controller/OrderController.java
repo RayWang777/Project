@@ -50,27 +50,27 @@ public class OrderController {
 		@GetMapping("order/test")
 		public String testView(Model m) {
 
-			return "test";
+			return "/backend/test";
 		}
 		
 		@GetMapping("order/test2")
 		public String test2View(Model m) {
 
-			return "test2";
+			return "/backend/test2";
 		}
 		
 		@GetMapping("order/detail")
 		public String detailView(Model m) {
 			OrderBean orderBean = new OrderBean();
 			m.addAttribute("orderBean", orderBean);
-			return "backorderdetail";
+			return "/backend/backorderdetail";
 		}
 			
 		@GetMapping("order/insertView")
 		public String addView(Model m) {
 			OrderBean orderBean = new OrderBean();
 			m.addAttribute("orderBean", orderBean);
-			return "backorderinsert";
+			return "/backend/backorderinsert";
 		}
 		
 		@GetMapping("order/findAll")
@@ -91,7 +91,7 @@ public class OrderController {
 			OrderBean orderBean = new OrderBean();
 			mav.getModel().put("orderBean", orderBean);
 			mav.getModel().put("page", page);
-			mav.setViewName("backorder");
+			mav.setViewName("/backend/backorder");
 			return mav;
 		}
 		
@@ -160,7 +160,7 @@ public class OrderController {
 			
 			OrderBean orderBean = orderService.findById(id);
 			m.addAttribute("orderBean", orderBean);
-			return "backorderupdate";
+			return "/backend/backorderupdate";
 		}
 		
 		@PostMapping("order/update")

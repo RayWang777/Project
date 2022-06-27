@@ -68,7 +68,7 @@ public class UserController {
 		m.addAttribute("userAccount", userAccount);
 		m.addAttribute("userPassword", userPassword);
 
-		return "backlogin";
+		return "/backend/backlogin";
 	}
 	
 	@PostMapping("loginGo")
@@ -130,7 +130,7 @@ public class UserController {
 		UserBeanDTO user = new UserBeanDTO();
 		m.addAttribute("user", user);
 		m.addAttribute("usersave", "新增用戶");
-		return "backuseradd";
+		return "/backend/backuseradd";
 	}
 
 	@PostMapping("user/insert")
@@ -142,7 +142,7 @@ public class UserController {
 		UserBeanValidator validator = new UserBeanValidator();
 		validator.validate(user, result);
 		if(result.hasErrors()) {
-			return "backuseradd";
+			return "/backend/backuseradd";
 		}
 		
 		// 以下為新增動作
@@ -170,7 +170,7 @@ public class UserController {
 			e.printStackTrace();
 			UserBeanDTO userDTO = new UserBeanDTO();
 			m.addAttribute("user", userDTO);
-			return "backuseradd";
+			return "/backend/backuseradd";
 		}
 		
 		userService.insertUser(user);
@@ -184,7 +184,7 @@ public class UserController {
 		Page<UserBean> page = userService.findAll(pageNumber);
 		
 		mav.getModel().put("page", page);
-		mav.setViewName("backuser");
+		mav.setViewName("/backend/backuser");
 		return mav;
 	}
 	
@@ -196,7 +196,7 @@ public class UserController {
 		Page<UserBean> page = userService.select(pageNumber, "%" + select + "%");
 		mav.getModel().put("page", page);
 		
-		mav.setViewName("backuser");
+		mav.setViewName("/backend/backuser");
 		return mav;
 	}
 	
@@ -226,7 +226,7 @@ public class UserController {
 		m.addAttribute("user",userDTO);
 		m.addAttribute("usersave","修改用戶資料");
 		
-		return "backuserupdate";
+		return "/backend/backuserupdate";
 	}
 	
 	@PostMapping("user/update/{id}")

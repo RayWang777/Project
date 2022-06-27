@@ -79,12 +79,12 @@ public class StoreController {
 		if(role.equals("admin")) {
 			Page<StoreBean> allStore = storeService.findAll(pab);
 			m.addAttribute("stores", allStore);
-			return "backstore";
+			return "/backend/backstore";
 		}
 		Integer userFirmId = firmService.findFirmByUserId(user.getUserId()).get(0).getFirmId();
 		Page<StoreBean> storeByFirmId = storeService.findStoreByFirmId(userFirmId, pab);
 		m.addAttribute("stores", storeByFirmId);
-		return "backstore";
+		return "/backend/backstore";
 	};
 	
 	
@@ -106,7 +106,7 @@ public class StoreController {
 			m.addAttribute("storeaddfirms", findAll3);
 			m.addAttribute("storeaddusers", users);
 			m.addAttribute("store", store);
-			return "backstoreadd";
+			return "/backend/backstoreadd";
 		}
 		
 		FirmBean findFirmByUserId = firmService.findFirmByUserId(user.getUserId()).get(0);
@@ -115,7 +115,7 @@ public class StoreController {
 		m.addAttribute("storeaddfirms", findFirmByUserId);
 		m.addAttribute("storeaddusers", users);		
 		m.addAttribute("store", store);
-		return "backstoreadd";
+		return "/backend/backstoreadd";
 	}
 
 	@PostMapping("store/add")
@@ -173,7 +173,7 @@ public class StoreController {
 			List<FirmBean> findAll3 = firmService.findAll3();
 			m.addAttribute("storeaddfirms", findAll3);
 			m.addAttribute("store", storeDTO);
-			return "backstoreupdate";
+			return "/backend/backstoreupdate";
 		}
 		
 
@@ -181,7 +181,7 @@ public class StoreController {
 			FirmBean findFirmByUserId = firmService.findFirmByUserId(user.getUserId()).get(0);
 			m.addAttribute("storeaddfirms", findFirmByUserId);
 			m.addAttribute("store", storeDTO);
-			return "backstoreupdate";
+			return "/backend/backstoreupdate";
 		}
 		
 		
@@ -191,7 +191,7 @@ public class StoreController {
 			FirmBean oldFirm = firmService.findById(oldFirmId).get();
 			m.addAttribute("storeaddfirms", oldFirm);
 			m.addAttribute("store", storeDTO);
-			return "backstoreupdate";
+			return "/backend/backstoreupdate";
 		}
 		
 		return "redirect:/backend/";

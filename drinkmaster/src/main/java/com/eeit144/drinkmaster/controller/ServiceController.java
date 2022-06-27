@@ -31,7 +31,7 @@ public class ServiceController {
 		Page<ServiceBean> page = sService.findByPage(pageNumber);
 
 		mav.getModel().put("page", page);
-		mav.setViewName("backservicereply");
+		mav.setViewName("/backend/backservicereply");
 		return mav;
 	}
 
@@ -41,7 +41,7 @@ public class ServiceController {
 		Page<ServiceBean> page = sService.findByPage(pageNumber);
 
 		mav.getModel().put("page", page);
-		mav.setViewName("backserviceviewall");
+		mav.setViewName("/backend/backserviceviewall");
 		return mav;
 	}
 
@@ -58,7 +58,7 @@ public class ServiceController {
 		model.addAttribute("workMessages", workMessages);
 		model.addAttribute("latestMsg", latestMsg);
 
-		return "backserviceadd";
+		return "/backend/backserviceadd";
 	}
 
 	// -------------------------------------------------------------------------------
@@ -72,7 +72,7 @@ public class ServiceController {
 		
 		model.addAttribute("msg", msg);
 		
-		return "backservicereplied";
+		return "/backend/backservicereplied";
 	}
 	
 	
@@ -90,7 +90,7 @@ public class ServiceController {
 	public String editMessage(@RequestParam("serviceId") Integer serviceId, Model model) {
 		ServiceBean msg = sService.findById(serviceId);
 		model.addAttribute("msg", msg);
-		return "backserviceedit";
+		return "/backend/backserviceedit";
 	}
 
 	@PostMapping("backend/service/edit")
@@ -117,7 +117,7 @@ public class ServiceController {
 		model.addAttribute("workMessages", newMsg);
 		model.addAttribute("latestMsg", latestMsg);
 
-		return "backserviceadd";
+		return "/backend/backserviceadd";
 	}
 
 	

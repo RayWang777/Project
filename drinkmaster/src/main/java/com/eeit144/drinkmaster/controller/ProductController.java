@@ -47,11 +47,11 @@ public class ProductController {
 		m.addAttribute("productcategory1",productcategory1);
 		m.addAttribute("product", pro);
 		m.addAttribute("insert", "product/insert");
-		return "backproductinsert";
+		return "/backend/backproductinsert";
 	}
 	@GetMapping ("productanalyze")
 	public String analyzeview() {
-		return "productanalyze";
+		return "/backend/productanalyze";
 	}
 
 	@PostMapping("/product/insert")
@@ -78,7 +78,7 @@ public class ProductController {
 			m.addAttribute("status","確定新增");
 			List<ProductCategoryBean> productcategory1 =categoryService.findByStoreBean(storeBean);
 			m.addAttribute("productcategory1",productcategory1);
-			return "backproductinsert";
+			return "/backend/backproductinsert";
 		}
 
 		ProductBean pro = new ProductBean();
@@ -107,7 +107,7 @@ public class ProductController {
 	public ModelAndView findView(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber) {
 		Page<ProductBean> page = proService.findByPage(pageNumber);
 		mav.getModel().put("page", page);
-		mav.setViewName("backproduct");
+		mav.setViewName("/backend/backproduct");
 		return mav;
 	}
 	
@@ -122,12 +122,12 @@ public class ProductController {
 		if (filed.equals("上架中") || filed.equals("已下架")) {
 			Page<ProductBean> page = proService.select(pageNumber, filed, filed);
 			mav.getModel().put("page", page);
-			mav.setViewName("backproduct");
+			mav.setViewName("/backend/backproduct");
 			return mav;
 		}
 		Page<ProductBean> page = proService.select(pageNumber, select, filed);
 		mav.getModel().put("page", page);
-		mav.setViewName("backproduct");
+		mav.setViewName("/backend/backproduct");
 		return mav;
 
 	}
@@ -152,7 +152,7 @@ public class ProductController {
 		m.addAttribute("productcategory1",productcategory1);
 		m.addAttribute("product", proBean);
 		m.addAttribute("insert", "updateproduct");
-		return "backproductinsert";
+		return "/backend/backproductinsert";
 	}
 	
 
@@ -182,7 +182,7 @@ public class ProductController {
 			m.addAttribute("productcategory1",productcategory1);
 			m.addAttribute("product", oldBean);
 			m.addAttribute("insert", "updateproduct");
-			return "backproductinsert";
+			return "/backend/backproductinsert";
 		}
 		ProductBean pro = new ProductBean();
 		ProductBean oldBean = proService.findById(productId);

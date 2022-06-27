@@ -10,6 +10,6 @@ public class FrontPageController {
 
 	@GetMapping("/")
 	public String welcomeFront() {
-		return "frontview";
+		return "/front/frontview";
 	}
 }

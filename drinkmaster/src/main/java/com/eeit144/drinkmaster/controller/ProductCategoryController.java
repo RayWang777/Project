@@ -38,7 +38,7 @@ public class ProductCategoryController {
 		m.addAttribute("now","新增種類");
 		m.addAttribute("category",category);
 		m.addAttribute("insert", "category/add");
-		return "backproductcategoryinsert";
+		return "/backend/backproductcategoryinsert";
 	}
 	@PostMapping("/category/add")
 	public String saveCategory(@ModelAttribute("category") ProductCategoryBean cate ) {
@@ -51,7 +51,7 @@ public class ProductCategoryController {
 		Page<ProductCategoryBean> page = categoryService.findByPage(pageNumber);
 
 		mav.getModel().put("page", page);
-		mav.setViewName("backcategory");
+		mav.setViewName("/backend/backcategory");
 		return mav;
 	}
 	@GetMapping("category/select")
@@ -59,7 +59,7 @@ public class ProductCategoryController {
 			@RequestParam("select") String select, @RequestParam("filed") String filed) {
 
 		
-		mav.setViewName("backcategory");
+		mav.setViewName("/backend/backcategory");
 		return mav;
 	}
 	@GetMapping("deletecategory")
@@ -77,7 +77,7 @@ public class ProductCategoryController {
 		m.addAttribute("now","修改種類");
 		m.addAttribute("category", proBean);
 		m.addAttribute("insert", "updatecategory");
-		return "backproductcategoryinsert";
+		return "/backend/backproductcategoryinsert";
 	}
 	@PostMapping("updatecategory")
 	public String editCategory(@ModelAttribute("category") ProductCategoryBean cate ) {

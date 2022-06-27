@@ -17,46 +17,46 @@ public class PageController {
 
 	@GetMapping("/")
 	public String welcomePage() {
-		return "backindex";
+		return "/backend/backindex";
 	}
 
 	@GetMapping("/user")
 	String userPage() {
-		return "backuser";
+		return "/backend/backuser";
 	}
 	
 	@GetMapping("/firm")
 	public String firmPage() {
-		return "backfirm";
+		return "/backend/backfirm";
 	}
 
 	@GetMapping("/store")
 	public String storePage() {
-		return "backstore";
+		return "/backend/backstore";
 	}
 
 
 	@GetMapping("/product")
 	public String productPage() {
-		return "backproduct";
+		return "/backend/backproduct";
 	}
 	
 
 	@GetMapping("/shoppingcar")
 	public String shoppingcarPage() {
-		return "backshoppingcar";
+		return "/backend/backshoppingcar";
 	}
 
 	@GetMapping("/order")
 	public String orderPage() {
-		return "backorder";
+		return "/backend/backorder";
 	}
 
 	
 	
 	@GetMapping("/service")
 	public String servicePage() {
-		return "backservice";
+		return "/backend/backservice";
 	}
 
 	

@@ -71,7 +71,7 @@ public class FirmController {
 
 		m.addAttribute("firmaddusers", users);
 		m.addAttribute("firm", firmDTO);
-		return "backfirmview";
+		return "/backend/backfirmview";
 	}
 
 	@GetMapping("firm/{id}/photo")
@@ -141,7 +141,7 @@ public class FirmController {
 		m.addAttribute("firmSerch", firmSerch2);
 		m.addAttribute("firms", allFirm);
 
-		return "backfirm";
+		return "/backend/backfirm";
 	};
 
 	@GetMapping("/firm/add")
@@ -156,7 +156,7 @@ public class FirmController {
 
 		m.addAttribute("firmaddusers", users);
 		m.addAttribute("firm", firmDTO);
-		return "backfirmadd";
+		return "/backend/backfirmadd";
 	}
 
 	@PostMapping("firm/add")
@@ -229,7 +229,7 @@ public class FirmController {
 		};
 		
 		m.addAttribute("firm", firmDTO);
-		return "backfirmupdate";
+		return "/backend/backfirmupdate";
 	}
 
 	@PostMapping("firm/edit/{id}")
@@ -260,14 +260,14 @@ public class FirmController {
 			errors.put("firmLogo", "檔案必須為圖片");
 			m.addAttribute("firm", oldFirm);
 			m.addAttribute("errors", errors);
-			return "backfirmupdate";
+			return "/backend/backfirmupdate";
 		}
 		try {
 			oldFirm.setFirmLogo(logo.getBytes());
 		} catch (IOException e) {
 			e.printStackTrace();
 			m.addAttribute("firm", oldFirm);
-			return "backfirmupdate";
+			return "/backend/backfirmupdate";
 		}
 		firmService.insertFirm(oldFirm);
 		return "redirect:/backend/firm/all";

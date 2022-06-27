@@ -59,7 +59,7 @@ public class CommentController {
 		model.addAttribute("commentBean", commentBean);
 //		model.addAttribute("storeBean", storeBean);
 		model.addAttribute("lastestComment", lastComment);
-		return "backcommentadd";
+		return "/backend/backcommentadd";
 	}
 	
 	
@@ -89,7 +89,7 @@ public class CommentController {
 		model.addAttribute("commentBean", commentBean);
 		model.addAttribute("lastestComment", lastComment);
 		
-		return "backcommentadd";
+		return "/backend/backcommentadd";
 		
 	}
 	
@@ -103,7 +103,7 @@ public class CommentController {
 		
 		model.addAttribute("page",page);
 		
-		return "backcommentview";
+		return "/backend/backcommentview";
 		
 	}
 	
@@ -114,7 +114,7 @@ public class CommentController {
 		
 		model.addAttribute("page",page);
 		
-		return "backcommentview";
+		return "/backend/backcommentview";
 		
 	}
 	
@@ -125,7 +125,7 @@ public class CommentController {
 		
 		model.addAttribute("page",page);
 		
-		return "backcommentview";
+		return "/backend/backcommentview";
 		
 	}
 	
@@ -136,7 +136,7 @@ public class CommentController {
 		
 		model.addAttribute("page",page);
 		
-		return "backcommentview";
+		return "/backend/backcommentview";
 		
 	}
 	

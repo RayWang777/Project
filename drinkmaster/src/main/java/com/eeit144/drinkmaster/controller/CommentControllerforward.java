@@ -80,7 +80,7 @@ public class CommentControllerforward {
 //		model.addAttribute("storeBean", storeBean);
 		model.addAttribute("lastestComment", lastComment);
 		
-		return "frontcommentadd";
+		return "/front/frontcommentadd";
 	}
 	
 	
@@ -116,7 +116,7 @@ public class CommentControllerforward {
 		model.addAttribute("commentBean", commentBean);
 		model.addAttribute("lastestComment", lastComment);
 		
-		return "frontcommentadd";
+		return "/front/frontcommentadd";
 		
 	}
 	
@@ -141,7 +141,7 @@ public class CommentControllerforward {
 		
 		model.addAttribute("page",page);
 		
-		return "backcommentview";
+		return "/backend/backcommentview";
 		
 	}
 	
@@ -152,7 +152,7 @@ public class CommentControllerforward {
 		
 		model.addAttribute("page",page);
 		
-		return "backcommentview";
+		return "/backend/backcommentview";
 		
 	}
 	
@@ -163,7 +163,7 @@ public class CommentControllerforward {
 		
 		model.addAttribute("page",page);
 		
-		return "backcommentview";
+		return "/backend/backcommentview";
 		
 	}
 	
@@ -188,7 +188,7 @@ public class CommentControllerforward {
 		
 		model.addAttribute("comment", comment);
 		
-		return "backcommentedit";
+		return "/backend/backcommentedit";
 	}
 	
 	

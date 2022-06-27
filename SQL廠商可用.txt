@@ -1,33 +1,33 @@
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1990-01-01','2021-09-08','male','0954763987','admin','jerry@gmail.com','¥x¥_¥«¤hªL°Ï','³Ç·ç','jerry6666');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1990-01-01','2021-09-08','male','0954763987','firm','mark@gmail.com','¥x¥_¥«¤hªL°Ï','°¨§J','mark1234');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2000-05-18','2022-02-18','female','0953687120','firm','mary@gmail.com','¥x¥_¥«¤hªL°Ï','º¿²ú','mary4317');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1999-10-05','2021-12-18','female','0953639871','firm','cindy@gmail.com','¥x¥_¥«¤hªL°Ï','ªä¸¦','cindy9527');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1990-01-01','2021-09-08','male','0954763987','firm','tom@gmail.com','¥x¥_¥«¤hªL°Ï','´ö©i','tom7777');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1990-01-01','2021-09-08','male','0954763987','store','mark1@gmail.com','¥x¥_¥«¤hªL°Ï','°¨§J1','mark1234');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1990-01-01','2021-09-08','male','0954763987','store','mark2@gmail.com','¥x¥_¥«¤hªL°Ï','°¨§J2','mark1234');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1990-01-01','2021-09-08','male','0954763987','store','mark3@gmail.com','¥x¥_¥«¤hªL°Ï','°¨§J3','mark1234');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1990-01-01','2021-09-08','male','0954763987','store','mark4@gmail.com','¥x¥_¥«¤hªL°Ï','°¨§J4','mark1234');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2000-05-18','2022-02-18','female','0953687120','store','mary1@gmail.com','¥x¥_¥«¤hªL°Ï','º¿²ú','mary4317');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2000-05-18','2022-02-18','female','0953687120','store','mary2@gmail.com','¥x¥_¥«¤hªL°Ï','º¿²ú','mary4317');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2000-05-18','2022-02-18','female','0953687120','store','mary3@gmail.com','¥x¥_¥«¤hªL°Ï','º¿²ú','mary4317');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2000-1-05','2021-12-18','female','0953639871','user','cindy1@gmail.com','¥x¥_¥«¤hªL°Ï','ªä¸¦1','cindy9527');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2003-3-05','2021-12-18','male','0953639871','user','cindy2@gmail.com','¥x¥_¥«¤hªL°Ï','ªä¸¦2','cindy9527');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2004-3-05','2021-12-18','female','0953639871','user','cindy3@gmail.com','¥x¥_¥«¤hªL°Ï','ªä¸¦3','cindy9527');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2006-7-05','2021-12-18','male','0953639871','user','cindy4@gmail.com','¥x¥_¥«¤hªL°Ï','ªä¸¦4','cindy9527');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2008-3-05','2021-12-18','female','0953639871','user','cindy5@gmail.com','¥x¥_¥«¤hªL°Ï','ªä¸¦5','cindy9527');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1990-01-01','2021-09-08','male','0954763987','admin','jerry@gmail.com','å°åŒ—å¸‚å£«æ—å€','å‚‘ç‘','jerry6666');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1990-01-01','2021-09-08','male','0954763987','firm','mark@gmail.com','å°åŒ—å¸‚å£«æ—å€','é¦¬å…‹','mark1234');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2000-05-18','2022-02-18','female','0953687120','firm','mary@gmail.com','å°åŒ—å¸‚å£«æ—å€','ç‘ªè‰','mary4317');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1999-10-05','2021-12-18','female','0953639871','firm','cindy@gmail.com','å°åŒ—å¸‚å£«æ—å€','èŠ¯è’‚','cindy9527');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1990-01-01','2021-09-08','male','0954763987','firm','tom@gmail.com','å°åŒ—å¸‚å£«æ—å€','æ¹¯å§†','tom7777');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1990-01-01','2021-09-08','male','0954763987','store','mark1@gmail.com','å°åŒ—å¸‚å£«æ—å€','é¦¬å…‹1','mark1234');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1990-01-01','2021-09-08','male','0954763987','store','mark2@gmail.com','å°åŒ—å¸‚å£«æ—å€','é¦¬å…‹2','mark1234');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1990-01-01','2021-09-08','male','0954763987','store','mark3@gmail.com','å°åŒ—å¸‚å£«æ—å€','é¦¬å…‹3','mark1234');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1990-01-01','2021-09-08','male','0954763987','store','mark4@gmail.com','å°åŒ—å¸‚å£«æ—å€','é¦¬å…‹4','mark1234');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2000-05-18','2022-02-18','female','0953687120','store','mary1@gmail.com','å°åŒ—å¸‚å£«æ—å€','ç‘ªè‰','mary4317');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2000-05-18','2022-02-18','female','0953687120','store','mary2@gmail.com','å°åŒ—å¸‚å£«æ—å€','ç‘ªè‰','mary4317');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2000-05-18','2022-02-18','female','0953687120','store','mary3@gmail.com','å°åŒ—å¸‚å£«æ—å€','ç‘ªè‰','mary4317');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2000-1-05','2021-12-18','female','0953639871','user','cindy1@gmail.com','å°åŒ—å¸‚å£«æ—å€','èŠ¯è’‚1','cindy9527');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2003-3-05','2021-12-18','male','0953639871','user','cindy2@gmail.com','å°åŒ—å¸‚å£«æ—å€','èŠ¯è’‚2','cindy9527');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2004-3-05','2021-12-18','female','0953639871','user','cindy3@gmail.com','å°åŒ—å¸‚å£«æ—å€','èŠ¯è’‚3','cindy9527');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2006-7-05','2021-12-18','male','0953639871','user','cindy4@gmail.com','å°åŒ—å¸‚å£«æ—å€','èŠ¯è’‚4','cindy9527');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2008-3-05','2021-12-18','female','0953639871','user','cindy5@gmail.com','å°åŒ—å¸‚å£«æ—å€','èŠ¯è’‚5','cindy9527');
 
 
-insert into firm ([firmaddress],[firmlogo],[firmname],[firmPhone],[userId])values('¥x¤¤¥«¥_¤Ù°Ï¤å¤ß¸ô¥|¬q448¸¹', convert(binary,0x4100),'¥Ã¾J¸ÛªÑ¥÷¦³­­¤½¥q','0800-000-961',2);
-insert into firm ([firmaddress],[firmlogo],[firmname],[firmPhone],[userId])values('248009 ·s¥_¥«¤­ªÑ°Ï¦Û±j¸ô43¸¹¤@¼Ó', convert(binary,0x4100),'²`¯Ñ¯ù·~ªÑ¥÷¦³­­¤½¥q','0800-600-150',3);
-insert into firm ([firmaddress],[firmlogo],[firmname],[firmPhone],[userId])values('¥x¥_¥«³Õ·R¸ô53¸¹5¼Ó', convert(binary,0x4100),'COMBUY',' 0800-580-668',4);
-insert into firm ([firmaddress],[firmlogo],[firmname],[firmPhone],[userId])values('»O«n¥«·sÀç°Ï©¾¬F¨½©²¦è¸ô87«Ñ28§Ë2¸¹1¼Ó', convert(binary,0x4100),'Àt°O°Ó¦æ',' 02-2577-1701',5);
+insert into firm ([firmaddress],[firmlogo],[firmname],[firmPhone],[userId])values('å°ä¸­å¸‚åŒ—å±¯å€æ–‡å¿ƒè·¯å››æ®µ448è™Ÿ', convert(binary,0x4100),'æ°¸é†‡èª è‚¡ä»½æœ‰é™å…¬å¸','0800-000-961',2);
+insert into firm ([firmaddress],[firmlogo],[firmname],[firmPhone],[userId])values('248009 æ–°åŒ—å¸‚äº”è‚¡å€è‡ªå¼·è·¯43è™Ÿä¸€æ¨“', convert(binary,0x4100),'æ·±è€•èŒ¶æ¥­è‚¡ä»½æœ‰é™å…¬å¸','0800-600-150',3);
+insert into firm ([firmaddress],[firmlogo],[firmname],[firmPhone],[userId])values('å°åŒ—å¸‚åšæ„›è·¯53è™Ÿ5æ¨“', convert(binary,0x4100),'COMBUY',' 0800-580-668',4);
+insert into firm ([firmaddress],[firmlogo],[firmname],[firmPhone],[userId])values('è‡ºå—å¸‚æ–°ç‡Ÿå€å¿ æ”¿é‡Œåºœè¥¿è·¯87å··28å¼„2è™Ÿ1æ¨“', convert(binary,0x4100),'é¾œè¨˜å•†è¡Œ',' 02-2577-1701',5);
 
 
 
-insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','¥x¥_¥«¥_§ë°Ï¸Î¥Á¤@¸ô11¸¹','¥i¤£¥i¼ô¦¨¬õ¯ù ¥ÛµP¸Î¥Á©±','02-28920707','1','6');
-insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','¥x¥_¥«¥_§ë°Ï¤½À]¸ô9¸¹','¥i¤£¥i¼ô¦¨¬õ¯ù ¥_§ë¤½À]©±','02-28276868','1','7');
-insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','¥x¥_¥«¤hªL°Ï¼w¦æªF¸ô166¸¹1¼Ó','¥i¤£¥i¼ô¦¨¬õ¯ù ¤Ñ¥À¼w¦æªF©±','02-28355255','1','8');
-insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','¥x¥_¥«¤hªL°Ï¤j¥_¸ô5¸¹','¥i¤£¥i¼ô¦¨¬õ¯ù ¤hªL¤j¥_©±','02-28818787','1','9');
-insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','¥x¥_¥«¥_§ë°Ï±R¤¯¸ô¤@¬q70¸¹','50´P ©_©¥©±','02-2891-5291','2','10');
-insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','¥x¥_¥«¥_§ë°Ï¸Î¥Á¤@¸ô23¸¹','50´P ¥ÛµP©±','02-2821-1346','2','11');
-insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','¥x¥_¥«¥_§ë°Ï¥ú©ú¸ô21¸¹','50´P ¥_§ë©±','02-2897-5222','2','12');
+insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','å°åŒ—å¸‚åŒ—æŠ•å€è£•æ°‘ä¸€è·¯11è™Ÿ','å¯ä¸å¯ç†Ÿæˆç´…èŒ¶ çŸ³ç‰Œè£•æ°‘åº—','02-28920707','1','6');
+insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','å°åŒ—å¸‚åŒ—æŠ•å€å…¬é¤¨è·¯9è™Ÿ','å¯ä¸å¯ç†Ÿæˆç´…èŒ¶ åŒ—æŠ•å…¬é¤¨åº—','02-28276868','1','7');
+insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','å°åŒ—å¸‚å£«æ—å€å¾·è¡Œæ±è·¯166è™Ÿ1æ¨“','å¯ä¸å¯ç†Ÿæˆç´…èŒ¶ å¤©æ¯å¾·è¡Œæ±åº—','02-28355255','1','8');
+insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','å°åŒ—å¸‚å£«æ—å€å¤§åŒ—è·¯5è™Ÿ','å¯ä¸å¯ç†Ÿæˆç´…èŒ¶ å£«æ—å¤§åŒ—åº—','02-28818787','1','9');
+insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','å°åŒ—å¸‚åŒ—æŠ•å€å´‡ä»è·¯ä¸€æ®µ70è™Ÿ','50åµ å¥‡å²©åº—','02-2891-5291','2','10');
+insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','å°åŒ—å¸‚åŒ—æŠ•å€è£•æ°‘ä¸€è·¯23è™Ÿ','50åµ çŸ³ç‰Œåº—','02-2821-1346','2','11');
+insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','å°åŒ—å¸‚åŒ—æŠ•å€å…‰æ˜è·¯21è™Ÿ','50åµ åŒ—æŠ•åº—','02-2897-5222','2','12');

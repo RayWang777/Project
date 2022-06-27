@@ -23,13 +23,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
+
 import com.eeit144.drinkmaster.bean.UserBean;
+import com.eeit144.drinkmaster.dto.FirmDTO;
 import com.eeit144.drinkmaster.dto.UserBeanDTO;
 import com.eeit144.drinkmaster.model.FirmService;
 import com.eeit144.drinkmaster.model.StoreService;
@@ -77,9 +80,13 @@ public class UserController {
 		System.out.println("PostMapping:" + userAccount + "  " + userPassword);
 
 		user = userService.findByAccPwd(userAccount, userPassword);
-		
+		if(user != null) {
+			m.addAttribute(user);
+		} else {
+			return "redirect:/backend/login";
+		}
+
 		m.addAttribute("userBean",user);
-		
 		
 		String role = user.getRole();
 		if(role.equals("admin")) {
@@ -142,17 +149,17 @@ public class UserController {
 		String contentType = photo.getContentType();
 		System.out.println(contentType);
 		
-		if(!contentType.startsWith("image")) {
-			
-			Map<String, String> errors = new HashMap<String, String>();
-			errors.put("userPhoto", "檔案必須為圖片");
-			
-			UserBeanDTO userDTO = new UserBeanDTO();
-						
-			m.addAttribute("errors", errors);
-			m.addAttribute("user", userDTO);
-			return "backuseradd";
-		}
+//		if(!contentType.startsWith("image")) {
+//			
+//			Map<String, String> errors = new HashMap<String, String>();
+//			errors.put("userPhoto", "檔案必須為圖片");
+//			
+//			UserBeanDTO userDTO = new UserBeanDTO();
+//						
+//			m.addAttribute("errors", errors);
+//			m.addAttribute("user", userDTO);
+//			return "backuseradd";
+//		}
 		// 把當下的時間加入user內
 		Date createDate = new Date();
 		user.setCreatedate(createDate);
@@ -214,12 +221,55 @@ public class UserController {
 		userDTO.setBirthday(findById.getBirthday());
 		userDTO.setCreatedate(findById.getCreatedate());
 		userDTO.setRole(findById.getRole());
+		userDTO.setPhoto(findById.getPhoto());
 		
 		m.addAttribute("user",userDTO);
 		m.addAttribute("usersave","修改用戶資料");
 		
-		return "backuseradd";
+		return "backuserupdate";
 	}
+	
+	@PostMapping("user/update/{id}")
+	public String updateUser(@ModelAttribute("user") UserBeanDTO user, @RequestPart("reallogo") MultipartFile logo,
+			Model m) {
+
+		UserBean oldUser = userService.findById(user.getUserId()).get();
+		String contentType = logo.getContentType();
+		oldUser.setUserName(user.getUserName());
+		oldUser.setUserAccount(user.getUserAccount());
+		oldUser.setUserPassword(user.getUserPassword());
+		oldUser.setUserAddress(user.getUserAddress());
+		oldUser.setPhone(user.getPhone());
+		oldUser.setGender(user.getGender());
+		oldUser.setCreatedate(user.getCreatedate());
+		oldUser.setRole(user.getRole());
+
+		if (logo.getSize() == 0 || user.getBirthday().equals(null)) {
+			userService.insertUser(oldUser);
+			return "redirect:/backend/user/all";
+		}
+
+		if (!contentType.startsWith("image")) {
+
+			Map<String, String> errors = new HashMap<String, String>();
+			errors.put("firmLogo", "檔案必須為圖片");
+			m.addAttribute("user", oldUser);
+			m.addAttribute("errors", errors);
+			return "backuserupdate";
+		}
+		try {
+			oldUser.setPhoto(logo.getBytes());
+			oldUser.setBirthday(user.getBirthday());
+		} catch (IOException e) {
+			e.printStackTrace();
+			m.addAttribute("user", oldUser);
+			return "backuserupdate";
+		}
+		userService.insertUser(oldUser);
+		return "redirect:/backend/user/all";
+	}
+	
+	
 	
 	@GetMapping("user/{id}")
 	public ResponseEntity<UserBeanDTO> findUserById(@PathVariable Integer id) {

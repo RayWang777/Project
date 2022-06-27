@@ -38,13 +38,20 @@
 		<label for="select" class="form-label">密碼</label>
 		<input type="text" class="form-control" name="userPassword"/>
 	</div>
+	<div>
+		<form:errors path="pass" cssClass="error" />
+	</div>
 	<div class="mb-3">
 	<button type="submit" class="btn btn-primary">登入</button>
 	<a><button type="button" class="btn btn-light" style="margin-top: 10px">註冊</button></a>
 	</div>
+<<<<<<< HEAD
 	<div class="mb-3">
 		<span><c:out value="${errorloginstr}"></c:out></span>
 	</div>
+=======
+	<span>${errorloginstr}</span>
+>>>>>>> 9292168da01704ff0486f369dca618ae949321d6
 </form:form>
 </div>
 

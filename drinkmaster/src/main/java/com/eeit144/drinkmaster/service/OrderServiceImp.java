@@ -15,6 +15,7 @@ import com.eeit144.drinkmaster.bean.OrderBean;
 import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.dao.FirmRepository;
 import com.eeit144.drinkmaster.dao.OrderRepostiory;
+import com.eeit144.drinkmaster.dao.ProductRepostiory;
 import com.eeit144.drinkmaster.model.OrderService;
 
 @Service
@@ -23,6 +24,9 @@ public class OrderServiceImp implements OrderService {
 
 	@Autowired
 	private OrderRepostiory orderDao;
+	
+	@Autowired
+	private ProductRepostiory productDao;
 	
 //	@Autowired
 //	public OrderServiceImp(OrderRepostiory orderDao) {
@@ -87,5 +91,15 @@ public class OrderServiceImp implements OrderService {
 		
 		return page;
 	}
+	
+	@Override
+	public List<ProductBean> findAllProducts(){
+		return productDao.findAll();
+	};
 
+	
+	@Override
+	public List<OrderBean> findAll(){
+		return orderDao.findAll();
+	};
 }

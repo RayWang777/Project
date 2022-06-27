@@ -1,12 +1,27 @@
 package com.eeit144.drinkmaster.controller;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,14 +38,18 @@ import com.eeit144.drinkmaster.bean.OrderBean;
 import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.bean.UserBean;
+import com.eeit144.drinkmaster.dto.OrderBeanxslx;
 import com.eeit144.drinkmaster.model.OrderService;
 import com.eeit144.drinkmaster.model.ProductService;
 import com.eeit144.drinkmaster.model.StoreService;
 import com.eeit144.drinkmaster.model.UserService;
 
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.entity.ExportParams;
+
 @Controller
 @RequestMapping("backend/")
-public class OrderController {
+public class OrderController<E> {
 		
 		@Autowired
 		private OrderService orderService;
@@ -87,6 +106,10 @@ public class OrderController {
 
 			m.addAttribute("orderaddstores", stores);
 			
+			List<ProductBean> products = orderService.findAllProducts();
+
+			m.addAttribute("orderaddproducts", products);
+			
 			Page<OrderBean> page = orderService.findByPage(pageNumber);
 			OrderBean orderBean = new OrderBean();
 			mav.getModel().put("orderBean", orderBean);
@@ -126,6 +149,10 @@ public class OrderController {
 
 			model.addAttribute("orderaddstores", stores);
 			
+			List<ProductBean> products = orderService.findAllProducts();
+
+			model.addAttribute("orderaddproducts", products);
+			
 			Date createTime = new Date();
 			orderBean.setCreateTime(createTime);
 			
@@ -157,6 +184,10 @@ public class OrderController {
 
 			m.addAttribute("orderaddstores", stores);
 			
+			List<ProductBean> products = orderService.findAllProducts();
+
+			m.addAttribute("orderaddproducts", products);
+						
 			
 			OrderBean orderBean = orderService.findById(id);
 			m.addAttribute("orderBean", orderBean);
@@ -176,6 +207,14 @@ public class OrderController {
 			List<StoreBean> stores = storeService.findAllList();
 
 			m.addAttribute("orderaddstores", stores);
+			
+			List<ProductBean> products = orderService.findAllProducts();
+
+			m.addAttribute("orderaddproducts", products);
+			
+			List<OrderBean> orders = orderService.findAll();
+
+			m.addAttribute("orderstatus", orders);
 			
 			StoreBean oldStore = storeService.findById(orderBean.getStoreId()).get();
 			UserBean oldUser = userService.findById(orderBean.getUserId()).get();
@@ -207,7 +246,7 @@ public class OrderController {
 			OrderBean orderBean = new OrderBean();
 			mav.getModel().put("orderBean", orderBean);
 			mav.getModel().put("page", page);
-			mav.setViewName("backorder");
+			mav.setViewName("/backend/backorder");
 			return mav;
 		}
 		
@@ -219,9 +258,66 @@ public class OrderController {
 			OrderBean orderBean = new OrderBean();
 			mav.getModel().put("orderBean", orderBean);
 			mav.getModel().put("page", page);
-			mav.setViewName("backorder");
+			mav.setViewName("/backend/backorder");
 			return mav;
 		}
+		
+		
+		
+		@GetMapping("order/export")
+		public ResponseEntity<byte[]> directExportExcelByObject(HttpServletResponse response) throws IOException {
+			
+			List<OrderBean> list = orderService.findAll();
+			
+			//讓orderBeanxslx可以重複利用
+			OrderBeanxslx orderBeanxslx = null;
+			
+			List<OrderBeanxslx> list2 = new ArrayList<OrderBeanxslx>();
+			
+			//將找到list的所有資料放到list2裡面
+			for(OrderBean order:  list) {
+				orderBeanxslx = new OrderBeanxslx();
+				orderBeanxslx.setOrderId(order.getOrderId());
+				orderBeanxslx.setUserName(order.getUserBean().getUserName());
+				orderBeanxslx.setProductName(order.getProductBean().getProductName());
+				orderBeanxslx.setStoreName(order.getStoreBean().getStoreName());
+				orderBeanxslx.setOrderAddress(order.getOrderAddress());
+				orderBeanxslx.setOrderPhone(order.getOrderPhone());
+				orderBeanxslx.setOrderStatus(order.getOrderStatus());
+				orderBeanxslx.setTotalPrice(order.getTotalPrice());
+				orderBeanxslx.setCreateTime(order.getCreateTime());
+				list2.add(orderBeanxslx);
+			}
+			
+			
+			ExportParams exportParams = new ExportParams();
+			exportParams.setSheetName("訂單列表");
+			
+			Workbook workbook = ExcelExportUtil.exportExcel(exportParams,OrderBeanxslx.class,list2);
+			
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			try {
+			    workbook.write(bos);
+			} finally {
+			    bos.close();
+			}
+			byte[] bytes = bos.toByteArray();
+			
+						
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("content-disposition", "attachment;fileName="+URLEncoder.encode("訂單列表.xls","UTF-8"));
+			
+//			response.setHeader("content-disposition","attachment;fileName="+URLEncoder.encode("訂單列表.xls","UTF-8"));
+//			ServletOutputStream ops = response.getOutputStream();
+//			workbook.write(ops);
+//			workbook.close();
+//			ops.close();
+			return new ResponseEntity<byte[]>(bytes, headers, HttpStatus.OK);
+		}
+		
+
+
+		
 }		
 		
 

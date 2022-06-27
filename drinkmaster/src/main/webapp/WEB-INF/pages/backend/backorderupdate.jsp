@@ -25,8 +25,7 @@
 							itemValue="userId" />
 					</form:select><br><br>
 					<form:hidden path="userId" value="1" />
-<%--   使用者編號<form:label path="userId"></form:label> --%>
-<%--   <form:input path="userId" /><br><br> --%>
+
 <label for="selectstore">店家名稱</label>
 					<form:select id="selectstore" path="storeBean.storeId">
 
@@ -34,16 +33,28 @@
 							itemValue="storeId" />
 					</form:select><br><br>
 					<form:hidden path="storeId" value="1" />
-<%--   店家編號<form:label path="storeId"></form:label> --%>
-<%--   <form:input path="storeId" /><br><br> --%>
-  產品編號<form:label path="productId"></form:label>
-  <form:input path="productId" /><br><br>
+					
+<label for="selectproducts">商品名稱</label>
+					<form:select id="selectproducts" path="productBean.productId">
+
+						<form:options items="${orderaddproducts}" itemLabel="productName"
+							itemValue="productId" id="productoption"/>
+					</form:select><br><br>
+					<form:hidden path="productId" value="1" />
+
   訂單日期<form:label path="createTime"></form:label>
   <form:input path="createTime" /><br><br>
   地&emsp;&emsp;址<form:label path="orderAddress"></form:label>
   <form:input path="orderAddress" /><br><br>
   電&emsp;&emsp;話<form:label path="orderPhone"></form:label>
   <form:input path="orderPhone" /><br><br>
+<!--   <label for="selectstatus">狀&emsp;&emsp;態</label> -->
+<%-- 					<form:select id="selectstatus" path="orderStatus"> --%>
+
+<%-- 						<form:options items="${orderstatus}" itemLabel="orderStatus" --%>
+<%-- 							itemValue="orderId" id="statusoption"/> --%>
+<%-- 					</form:select><br><br> --%>
+<%-- 					<form:hidden path="orderId" value="1" /> --%> 
   狀&emsp;&emsp;態<form:label path="orderStatus"></form:label>
   <select id="orderStatus" style="width: 168px; height: 27px;">
   <option value="-1">請選擇</option>
@@ -89,7 +100,32 @@ $('#selectuserId').click(function() {
 
 	})
 	
+$('#selectstore').click(function() {
+
+		var selected = $('#selectstore').val()
+		console.log(selected)
+		$('#storeId').val(selected);
+
+	})
+
+	
+
+$('#selectproducts').click(function() {
+
+		var selected = $('#selectproducts').val()
+		console.log(selected)
+		$('#productId').val(selected);
+
+	})
+	
+
+
+	
+	
 });
+
+
+
 
 </script>
 

@@ -107,12 +107,7 @@
 <br>
 <p>
 <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="">新增訂單</button></a>&emsp;
-<a href="${contextRoot}/backend/order/findAll"><button type="button" class="btn btn-outline-dark btn-sm">訂單列表</button></a>&emsp;
-<a href="${contextRoot}/backend/order/findStatus?sta=待付款"><button type="button" class="btn btn-outline-dark btn-sm">待付款</button></a>&emsp;
-<a href="${contextRoot}/backend/order/findStatus?sta=待出貨"><button type="button" class="btn btn-outline-dark btn-sm">待出貨</button></a>&emsp;
-<a href="${contextRoot}/backend/order/findStatus?sta=已出貨"><button type="button" class="btn btn-outline-dark btn-sm">已出貨</button></a>&emsp;
-<a href="${contextRoot}/backend/order/findStatus?sta=已取消"><button type="button" class="btn btn-outline-dark btn-sm">已取消</button></a>&emsp;
-</p>
+
 
 <form action="${contextRoot}/backend/order/select" method="get">
 		<div class="mb-3">
@@ -131,55 +126,28 @@
 						<input type="checkbox" class="js-check-all" />
 						<div class="control__indicator"></div>
 	</label></th>
+      <th scope="col">流水號</th>
       <th scope="col">訂單編號</th>
-      <th scope="col">訂購人</th>
-      <th scope="col" style="width: 170px;">訂單時間</th>
-      <th scope="col">地址</th>
-      <th scope="col">電話</th>
-      <th scope="col">狀態</th>
-      <th scope="col">總金額</th>
-      <th scope="col">  </th>
+      <th scope="col">商品編號</th>
+      <th scope="col">數量</th>
+      <th scope="col">價格</th>
     </tr>
   </thead>
   <tbody>
-  <c:forEach var="orderBean" items="${page.content}">
+  <c:forEach var="orderItems" items="${page.content}">
     <tr scope="row">
 					<td class="align-middle"><label
 						class="control control--checkbox"><input type="checkbox"
-							id="check" value="<c:out value='${orderBean.orderId}'/>"
+							id="check" value="<c:out value='${orderItems.orderItemId}'/>"
 							style="margin-top: 20px;" />
 							<div class="control__indicator"></div></label></td>
     
-      <th scope="row"><c:out value="${orderBean.orderId}"/></th>
-      <td><c:out value="${orderBean.userBean.userName}"/></td>
-<%--       <td><c:out value="${orderBean.productId}"/></td> --%>
-      <td><fmt:formatDate  value="${orderBean.createTime}" pattern="yyyy-MM-dd HH:mm"/></td>
-      <td><c:out value="${orderBean.orderAddress}"/></td>
-      <td><c:out value="${orderBean.orderPhone}"/></td>
-      
-      <c:choose>
-			<c:when test="${orderBean.orderStatus=='已出貨'}">
-			<td style="color: green;font-weight: bold;">
-					<c:out value="已出貨" /></td>
-						</c:when>
-			<c:when test="${orderBean.orderStatus=='已取消'}">
-			<td style="color: blue;font-weight: bold;">
-					<c:out value="已取消" /></td>
-						</c:when>
-			<c:when test="${orderBean.orderStatus=='待付款'}">
-			<td style="color: orange;font-weight: bold;">
-					<c:out value="待付款" /></td>
-						</c:when>			
-						<c:otherwise>
-			<td style="color: red;font-weight: bold;" test="${orderBean.orderStatus=='未出貨'}">
-					<c:out value="待出貨" /></td>
-						</c:otherwise>
+      <th scope="row"><c:out value="${orderItems.orderItemId}"/></th>
+      <td><c:out value="${orderItems.orderBean.orderId}"/></td>
+      <td><c:out value="${orderItems.productBean.productId}"/></td>
+      <td><c:out value="${orderItems.quantity}"/></td>
+      <td><c:out value="${orderItems.price}"/></td>
 
-
-						
-					   </c:choose>  
-
-      <td><c:out value="${orderBean.totalPrice}"/></td>
       <td><a href="${contextRoot}/backend/order/findAll"><i class="tiny material-icons">collections</i></a></td>
       <td>
       <a href="${contextRoot}/backend/order/edit?id=${orderBean.orderId}"><button class="btn btn-outline-primary btn-sm">編輯</button></a>

@@ -1,12 +1,14 @@
 package com.eeit144.drinkmaster.model;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.eeit144.drinkmaster.bean.OrderBean;
+import com.eeit144.drinkmaster.bean.ProductBean;
+
 
 
 public interface OrderService {
@@ -33,4 +35,10 @@ public interface OrderService {
 
 	
 	public Page<OrderBean> selectById(Integer pageNumber, Integer orderId);
+	
+	
+	public List<ProductBean> findAllProducts();
+	
+	
+	public List<OrderBean> findAll();
 }

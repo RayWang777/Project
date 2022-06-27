@@ -61,6 +61,10 @@ public class ProductBean {
 
 	@Column(name = "status")
 	private boolean status;
+	
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "productBean",cascade = CascadeType.ALL)
+	private Set<OrderItems> orderItems = new LinkedHashSet<OrderItems>();  
 
 	public ProductBean() {
 		super();

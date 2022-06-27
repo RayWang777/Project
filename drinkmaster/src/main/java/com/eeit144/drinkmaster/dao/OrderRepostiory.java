@@ -26,5 +26,5 @@ public interface OrderRepostiory extends JpaRepository<OrderBean, Integer> {
 	public Page<OrderBean> findByorderStatus1(Pageable pageable,@Param(value="orderstatus") String orderStatus);
 
 	
-
+	public Page<OrderBean> findByorderIdLike(Pageable pageable,@Param(value="orderId") Integer orderId);
 }

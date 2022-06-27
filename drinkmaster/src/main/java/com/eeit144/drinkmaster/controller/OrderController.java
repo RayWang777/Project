@@ -1,6 +1,7 @@
 package com.eeit144.drinkmaster.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,6 +46,17 @@ public class OrderController {
 //			this.orderService = orderService;
 //		}
 		
+		@GetMapping("order/test")
+		public String testView(Model m) {
+
+			return "test";
+		}
+		
+		@GetMapping("order/test2")
+		public String test2View(Model m) {
+
+			return "test2";
+		}
 		
 		@GetMapping("order/detail")
 		public String detailView(Model m) {
@@ -84,6 +96,9 @@ public class OrderController {
 //			
 //			@ModelAttribute("userBean key") UserBean variableName;
 //			 orderBean.setUserbean(variableName);
+			
+			Date createTime = new Date();
+			orderBean.setCreateTime(createTime);
 			
 			//要先找到 store user product 的ID 把資料放到前端
 			StoreBean oldStore = storeService.findById(orderBean.getStoreId()).get();
@@ -143,32 +158,23 @@ public class OrderController {
 		}
 		
 		
+		@GetMapping("order/select")
+		public ModelAndView selectView(ModelAndView mav, @RequestParam(name = "o", defaultValue = "1") Integer pageNumber,
+				@RequestParam(name = "oid", defaultValue = "oid") Integer orderId) {
+			Page<OrderBean> page = orderService.selectById(pageNumber, orderId);
+			OrderBean orderBean = new OrderBean();
+			mav.getModel().put("orderBean", orderBean);
+			mav.getModel().put("page", page);
+			mav.setViewName("backorder");
+			return mav;
+		}
 }		
 		
 
 			
 		
 		
-		//參考作法(未完成)
-//		@PostMapping("order/insert")
-//		public String insertOrder(@RequestParam String orderAddress, @RequestParam String orderPhone,
-//				 @RequestParam String orderStatus, @RequestPart Integer totalPrice,
-//				 @RequestParam Date createTime, Model model) {
-//			
-//			OrderBean orderBean = new OrderBean();
-////			OrderDTO orderDTO = new OrderDTO();
-//			
-//			orderBean.setOrderAddress(orderAddress);
-//			orderBean.setOrderPhone(orderPhone);
-//			orderBean.setOrderStatus(orderStatus);
-//			orderBean.setTotalPrice(totalPrice);
-//			orderBean.setCreateTime(createTime);
-//				
-//			orderService.insertOrder(orderBean);
-//			model.addAttribute("orderBean", orderBean);
-//			
-//			return "backorder";
-//			}
+		
 		
 
 

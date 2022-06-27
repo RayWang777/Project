@@ -1,28 +1,33 @@
 insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1990-01-01','2021-09-08','male','0954763987','admin','jerry@gmail.com','台北市士林區','傑瑞','jerry6666');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1990-01-01','2021-09-08','male','0954763987','user','jerry1@gmail.com','台北市士林區','傑瑞','jerry6666');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1990-01-01','2021-09-08','male','0954763987','firm','jerry2@gmail.com','台北市士林區','傑瑞','jerry6666');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1999-10-05','2021-12-18','female','0953639871','store','cindy@gmail.com','台北市士林區','芯蒂','cindy9527');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2000-05-18','2022-02-18','male','0953687120','firm','mary@gmail.com','台北市士林區','瑪莉','mary4317');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1990-01-01','2021-09-08','male','0954763987','firm','mark@gmail.com','台北市士林區','馬克','mark1234');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2000-05-18','2022-02-18','female','0953687120','firm','mary@gmail.com','台北市士林區','瑪莉','mary4317');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1999-10-05','2021-12-18','female','0953639871','firm','cindy@gmail.com','台北市士林區','芯蒂','cindy9527');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1990-01-01','2021-09-08','male','0954763987','firm','tom@gmail.com','台北市士林區','湯姆','tom7777');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1990-01-01','2021-09-08','male','0954763987','store','mark1@gmail.com','台北市士林區','馬克1','mark1234');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1990-01-01','2021-09-08','male','0954763987','store','mark2@gmail.com','台北市士林區','馬克2','mark1234');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1990-01-01','2021-09-08','male','0954763987','store','mark3@gmail.com','台北市士林區','馬克3','mark1234');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('1990-01-01','2021-09-08','male','0954763987','store','mark4@gmail.com','台北市士林區','馬克4','mark1234');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2000-05-18','2022-02-18','female','0953687120','store','mary1@gmail.com','台北市士林區','瑪莉','mary4317');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2000-05-18','2022-02-18','female','0953687120','store','mary2@gmail.com','台北市士林區','瑪莉','mary4317');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2000-05-18','2022-02-18','female','0953687120','store','mary3@gmail.com','台北市士林區','瑪莉','mary4317');
 insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2000-1-05','2021-12-18','female','0953639871','user','cindy1@gmail.com','台北市士林區','芯蒂1','cindy9527');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2003-3-05','2021-12-18','male','0953639871','store','cindy2@gmail.com','台北市士林區','芯蒂2','cindy9527');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2004-3-05','2021-12-18','female','0953639871','store','cindy3@gmail.com','台北市士林區','芯蒂3','cindy9527');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2006-7-05','2021-12-18','male','0953639871','firm','cindy4@gmail.com','台北市士林區','芯蒂4','cindy9527');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2008-3-05','2021-12-18','female','0953639871','firm','cindy5@gmail.com','台北市士林區','芯蒂5','cindy9527');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2012-9-05','2021-12-18','male','0953639871','store','cindy6@gmail.com','台北市士林區','芯蒂6','cindy9527');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2017-10-05','2021-12-18','female','0953639871','store','cindy7@gmail.com','台北市士林區','芯蒂7','cindy9527');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2019-12-05','2021-12-18','male','0953639871','store','cindy8@gmail.com','台北市士林區','芯蒂8','cindy9527');
-insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2019-12-05','2021-12-18','male','0953639871','store','cindy9@gmail.com','台北市士林區','芯蒂9','cindy9527');
-
-insert into firm ([firmaddress],[firmlogo],[firmname],[firmPhone],[userId])values('永醇誠股份有限公司', convert(binary,0x4100),'可不可','0800-000-961',3);
-insert into firm ([firmaddress],[firmlogo],[firmname],[firmPhone],[userId])values('248009 新北市五股區自強路43號一樓', convert(binary,0x4100),'50藍','7418522593',5);
-insert into firm ([firmaddress],[firmlogo],[firmname],[firmPhone],[userId])values('台北市1234567號123', convert(binary,0x4100),'70藍',' 02-2295-3328',9);
-insert into firm ([firmaddress],[firmlogo],[firmname],[firmPhone],[userId])values('新北市自強路43號一樓', convert(binary,0x4100),'80藍','04-87628',10);
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2003-3-05','2021-12-18','male','0953639871','user','cindy2@gmail.com','台北市士林區','芯蒂2','cindy9527');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2004-3-05','2021-12-18','female','0953639871','user','cindy3@gmail.com','台北市士林區','芯蒂3','cindy9527');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2006-7-05','2021-12-18','male','0953639871','user','cindy4@gmail.com','台北市士林區','芯蒂4','cindy9527');
+insert into users( [birthday],[createdate],[gender],[phone],[role],[useraccount],[useraddress],[username],[userpassword]) values('2008-3-05','2021-12-18','female','0953639871','user','cindy5@gmail.com','台北市士林區','芯蒂5','cindy9527');
 
 
-insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','台北市北投區裕民一路11號','可不可熟成紅茶 石牌裕民店','02-28920707','1','4');
+insert into firm ([firmaddress],[firmlogo],[firmname],[firmPhone],[userId])values('台中市北屯區文心路四段448號', convert(binary,0x4100),'永醇誠股份有限公司','0800-000-961',2);
+insert into firm ([firmaddress],[firmlogo],[firmname],[firmPhone],[userId])values('248009 新北市五股區自強路43號一樓', convert(binary,0x4100),'深耕茶業股份有限公司','0800-600-150',3);
+insert into firm ([firmaddress],[firmlogo],[firmname],[firmPhone],[userId])values('台北市博愛路53號5樓', convert(binary,0x4100),'COMBUY',' 0800-580-668',4);
+insert into firm ([firmaddress],[firmlogo],[firmname],[firmPhone],[userId])values('臺南市新營區忠政里府西路87巷28弄2號1樓', convert(binary,0x4100),'龜記商行',' 02-2577-1701',5);
+
+
+
+insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','台北市北投區裕民一路11號','可不可熟成紅茶 石牌裕民店','02-28920707','1','6');
 insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','台北市北投區公館路9號','可不可熟成紅茶 北投公館店','02-28276868','1','7');
 insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','台北市士林區德行東路166號1樓','可不可熟成紅茶 天母德行東店','02-28355255','1','8');
-insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','台北市士林區大北路5號','可不可熟成紅茶 士林大北店','02-28818787','1','11');
-insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','台北市北投區崇仁路一段70號','50嵐 奇岩店','02-2891-5291','2','12');
-insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','台北市北投區裕民一路23號','50嵐 石牌店','02-2821-1346','2','13');
-insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','台北市北投區光明路21號','50嵐 北投店','02-2897-5222','2','14');
+insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','台北市士林區大北路5號','可不可熟成紅茶 士林大北店','02-28818787','1','9');
+insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','台北市北投區崇仁路一段70號','50嵐 奇岩店','02-2891-5291','2','10');
+insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','台北市北投區裕民一路23號','50嵐 石牌店','02-2821-1346','2','11');
+insert into store([opentime],[storeaddress],[storename],[storephone],[firmId],[userid])values('0800-1800','台北市北投區光明路21號','50嵐 北投店','02-2897-5222','2','12');

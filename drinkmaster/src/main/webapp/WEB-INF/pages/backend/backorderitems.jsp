@@ -106,7 +106,7 @@
 
 <br>
 <p>
-<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="">新增訂單</button></a>&emsp;
+<!-- <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="">新增訂單</button></a>&emsp; -->
 
 
 <form action="${contextRoot}/backend/order/select" method="get">
@@ -128,9 +128,10 @@
 	</label></th>
       <th scope="col">流水號</th>
       <th scope="col">訂單編號</th>
-      <th scope="col">商品編號</th>
+      <th scope="col">商品名稱</th>
       <th scope="col">數量</th>
       <th scope="col">價格</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -144,11 +145,10 @@
     
       <th scope="row"><c:out value="${orderItems.orderItemId}"/></th>
       <td><c:out value="${orderItems.orderBean.orderId}"/></td>
-      <td><c:out value="${orderItems.productBean.productId}"/></td>
+      <td><c:out value="${orderItems.productBean.productName}"/></td>
       <td><c:out value="${orderItems.quantity}"/></td>
       <td><c:out value="${orderItems.price}"/></td>
 
-      <td><a href="${contextRoot}/backend/order/findAll"><i class="tiny material-icons">collections</i></a></td>
       <td>
       <a href="${contextRoot}/backend/order/edit?id=${orderBean.orderId}"><button class="btn btn-outline-primary btn-sm">編輯</button></a>
         <a onclick="return confirm('確定要刪除嗎?')"  href="${contextRoot}/backend/order/delete?id=${orderBean.orderId}"><button class="btn btn-outline-danger btn-sm">刪除</button></a></td>
@@ -180,73 +180,7 @@
    </c:forEach>
 <%--    <canvas id="myChart" width="200" height="200"></canvas> --%>
    
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">新增訂單</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-  <div class="modal-body">
-  <form:form id="orderform" class="form"  method="post" action="${contextRoot}/backend/order/insert" modelAttribute="orderBean">
 
-<%--   <form:label path="productId">產品編號</form:label> --%>
-<%--   <form:input path="productId" /><br><br> --%>
-<label for="selectuserId">使用者編號</label>
-					<form:select id="selectuserId" path="userBean.userId">
-
-						<form:options items="${orderaddusers}" itemLabel="userName"
-							itemValue="userId" id="useridoption"/>
-					</form:select><br><br>
-					<form:hidden path="userId" value="1" />
-
-<label for="selectstore">店家名稱</label>
-					<form:select id="selectstore" path="storeBean.storeId">
-
-						<form:options items="${orderaddstores}" itemLabel="storeName"
-							itemValue="storeId" />
-					</form:select><br><br>
-					<form:hidden path="storeId" value="1" />
-					
-<label for="selectproducts">商品名稱</label>
-					<form:select id="selectproducts" path="productBean.productId">
-
-						<form:options items="${orderaddproducts}" itemLabel="productName"
-							itemValue="productId" id="productoption"/>
-					</form:select><br><br>
-					<form:hidden path="productId" value="1" />
-  <form:label path="orderAddress">地&emsp;&emsp;址</form:label>
-  <form:input path="orderAddress" /><br><br>
-  <form:label path="orderPhone">電&emsp;&emsp;話</form:label>
-  <form:input path="orderPhone" /><br><br>
-  <form:label path="orderStatus">狀&emsp;&emsp;態</form:label>
-  <select id="orderStatus" path="orderStatus">
-  <option value="-1">請選擇</option>
-  <option value="待付款">待付款</option>
-  <option value="待出貨">待出貨</option>
-  <option value="已出貨">已出貨</option>
-  <option value="已取消">已取消</option>
-  </select>
-  <form:hidden id="substatus" path="orderStatus" /><br><br>
-  <form:label path="totalPrice">總&ensp;金&ensp;額</form:label>
-  <form:input path="totalPrice" /><br>
-  
- 
-  <br><br>
-  <div class="row justify-content-center">
-  <a href="${contextRoot}/backend/order/insert">
-  <button type="submit" id="ordersubmit" class="btn btn-primary btn-sm"  name="submit"  onclick="return confirm('確定要新增嗎?')" >確認</button></a>&emsp;  
-  
-  <button type="button" id="closebutton" class="btn btn-outline-dark btn-sm" data-dismiss="modal" aria-label="Close" >取消</button>
-  </div>
-  </form:form>
-      </div>
-      
-    </div>
-  </div>
-</div>
 
 <script type="text/javascript">
 

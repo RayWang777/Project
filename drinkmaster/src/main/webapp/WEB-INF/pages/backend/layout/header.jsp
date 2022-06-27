@@ -112,7 +112,7 @@ li {
 						<li><a href="<c:url value="/backend/order/findAll"/>">訂單列表</a></li>
 						<li><a href="<c:url value="/backend/order/detail"/>">修改</a></li>
 
-						<li><a href="#">刪除</a></li>
+						<li><a href="<c:url value="/backend/orderItems/findAll"/>">訂單細項</a></li>
 						<li><a href="#">查詢</a></li>
 					</ul></li>
 					</c:otherwise></c:choose>

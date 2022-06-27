@@ -186,4 +186,15 @@ public class CommentBean {
 		this.createTime = createTime;
 	}
 
+	@Override
+	public String toString() {
+		return "CommentBean [commentId=" + commentId + ", userId=" + userId + ", userBean=" + userBean + ", storeId="
+				+ storeId + ", storeBean=" + storeBean + ", productId=" + productId + ", productBean=" + productBean
+				+ ", score=" + score + ", content=" + content + ", scoreType=" + scoreType + ", commentPhoto="
+				+ commentPhoto + ", createTime=" + createTime + "]";
+	}
+	
+	
+	
+
 }

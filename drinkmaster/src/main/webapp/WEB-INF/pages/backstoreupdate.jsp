@@ -10,29 +10,34 @@
 
 	<div class="container">
 		<br> <br>
-		<h2 class="mb-4" style="text-align: center;">新增店家</h2>
+		<h2 class="mb-4" style="text-align: center;">修改店家</h2>
 
 		<div class="row justify-content-center">
 
-			<c:url value="/backend/store/add" var="link_url" />
-			<form:form class="form" action="${link_url}" method="post"	modelAttribute="store">
-				
+		
+			<form:form class="form" method="post" modelAttribute="store">
 				<c:choose>
 				<c:when test="${userBean.role == 'admin' }">
 				<div class="mb-3">
 					<label for="selectfirmId" class="form-label">廠商</label>
-					<form:select id="selectfirmId" path="firmId"
-						class="form-control">
-
-						<form:options items="${storeaddfirms}" itemLabel="firmName"
-							itemValue="firmId" />
+					<form:select id="selectfirmId" path="firmId" class="form-control">
+						<c:forEach items="${storeaddfirms}" var="storeaddfirm">  
+						  <c:choose>
+							<c:when test="${ storeaddfirm.firmId == store.firmId }">
+								<option value="${storeaddfirm.firmId}" selected="true">${storeaddfirm.firmName}</option>
+							</c:when>
+							<c:otherwise>
+								<option value="${storeaddfirm.firmId}" >${storeaddfirm.firmName}</option>
+							</c:otherwise>
+						  </c:choose>
+						</c:forEach>
 					</form:select>
-					<form:hidden path="firmId" value="1" />
+					<form:hidden path="firmId" value="${store.firmId}" />
 					<span id=firmIdSp></span>
 				</div>
 				</c:when>
 				<c:otherwise>
-					<form:select path="firmId"	class="form-control">
+					<form:select path="userBean.userId" hidden="true" lass="form-control">
 						<option value="${storeaddfirms.firmId}" selected="true">${storeaddfirms.firmName}</option>
 					</form:select>
 					<form:hidden path="firmId" value="${storeaddfirms.firmId}" />
@@ -40,7 +45,7 @@
 				</c:choose>
 
 
-				<form:hidden path="storeId" id="storeId" />
+				<form:hidden path="storeId" id="storeId" value="${storeBean.storeId}" />
 				<div class="mb-3">
 					<label for="storeName" class="form-label">店家名稱</label>
 					<form:input path="storeName" class="form-control" type="text"
@@ -71,21 +76,37 @@
 						id="openTime" />
 					<span id=openTimeSp></span>
 				</div>
-				<div class="mb-4">
-					<label for="selectuserId" class="form-label">管理者</label>
-						<form:select id="selectuserId" path="userBean.userId" class="form-control" >
-							<form:options items="${storeaddusers}" itemLabel="userName" itemValue="userId"/>
-						</form:select>
-					<form:input path="userId" value="${originUserId}" />
-					<span id=firmPhoneSp></span>
-				</div>
+				
+			<div class="mb-4">
+				<c:choose>
+				<c:when test="${userBean.role =='store'}">
+					<form:select path="userBean.userId" hidden="true" class="form-control">
+					 	<form:option value="${userBean.userId}">${userBean.userName}</form:option>
+					</form:select>
+					<form:hidden path="userId" value="${userBean.userId}" />
+				</c:when>
+				<c:otherwise>
+					<div class="mb-4">
+						<label for="selectuserId" class="form-label">管理者</label>
+							<form:select id="selectuserId" path="userBean.userId" class="form-control" >
+								<form:options items="${storeaddusers}" itemLabel="userName" itemValue="userId"/>	
+							</form:select>
+							<form:hidden path="userId" value="${store.userBean.userId}" />
+						<span id=userIdSp></span>
+					</div>
+				
+				</c:otherwise>						
+				</c:choose>
+			</div>
+				
+				
 				
 
 				<form:hidden path="latitude" class="form-control" id="latitude" />
 				<form:hidden path="longitude" class="form-control" id="longitude" />
 				<div class="mb-3" style="text-align: center;">
 					<input type="submit" class="btn btn-success"
-						value='<c:out value="新增店家"/>'>
+						value='<c:out value="修改店家"/>'>
 				</div>
 			</form:form>
 
@@ -103,6 +124,11 @@
 
 $(function(){
 	
+	var initstartTime = $('#openTime').val().split('-')[0];
+	var initendTime = $('#openTime').val().split('-')[1];
+	
+	$('#startTime').val(initstartTime);
+	$('#endTime').val(initendTime);
 	
 	$('#storeAddress').change(function(){
 		var location = $('#storeAddress').val();

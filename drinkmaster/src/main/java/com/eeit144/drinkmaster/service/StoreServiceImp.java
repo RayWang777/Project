@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.dao.StoreRepostiory;
 import com.eeit144.drinkmaster.model.StoreService;
@@ -55,6 +56,11 @@ public class StoreServiceImp implements StoreService {
 	@Override
 	public Page<StoreBean> findStoreByFirmId(Integer firmId, Pageable pab) {
 		return storeDao.findByFirmBean_firmId(firmId, pab);
+	}
+
+	@Override
+	public FirmBean findFirmBeanByStoreId(Integer storeId) {
+		return storeDao.findFirmBeanByStoreId(storeId);
 	}
 
 }

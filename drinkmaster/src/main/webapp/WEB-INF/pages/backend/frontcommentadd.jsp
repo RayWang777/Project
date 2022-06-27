@@ -41,7 +41,7 @@ div.awesomeRating {
 	<h1>新增訊息頁面</h1>
 <div class="card">
   <div class="card-header">
-   <span style="font-size: 1.5em">評論</span>
+<!--    <span style="font-size: 1.5em">評論</span> -->
   </div>
   <div class="card-body">
   <form:form class="form" method="post" action="${contextRoot}/front/comment/insert" modelAttribute="commentBean" enctype="multipart/form-data">
@@ -50,16 +50,73 @@ div.awesomeRating {
   				登入後可評論~
  	</c:if>
   
-  	<c:choose>
-  	
-  	<c:when test="${empty findusId}">
-  	
-  	
   
 	<c:if test="${not empty userBean}">
 	
- 
-<div class="form-group">
+ <c:choose>
+  	
+  	<c:when test="${not empty findusId}">
+  	
+
+    <c:forEach  var="usercomment" items="${findusId}" >
+  		
+  		<div class="row justify-content-center">
+<div class="col-9">
+
+<div class="card">
+
+<span style="font-size: 1.5em">你的評論</span>
+  <div class="card-header">
+		<c:out value="${usercomment.storeBean.storeName}"></c:out>
+  </div>
+  <div class="card-body">
+  	<c:out value="${usercomment.userBean.userName}"></c:out>
+  	<c:out value="${usercomment.userBean.userId}"></c:out>
+  	<br/>
+  	
+  	
+  	
+  	<div style="pointer-events: none" id="scores${usercomment.commentId}" class="awesomeRating"></div>
+	<div class="awesomeRatingValue"></div>
+	<script type="text/javascript">
+	
+		$("#scores${usercomment.commentId}").awesomeRating({
+			
+			valueInitial: "${usercomment.score}",
+			values: ["1.0", "2.0", "3.0", "4.0", "5.0"],
+			targetSelector: "span.awesomeRatingValue"
+		});
+	
+		console.log(${usercomment.score});
+	</script>
+	
+	<c:out value="${usercomment.content}"></c:out>
+	
+	<br/>
+	
+	<img src="${usercomment.commentPhoto}" style="width: 100px;heiget: 100px" />
+
+	<br/>
+	(時間) <fmt:formatDate pattern="yyyy 年 MM 月 dd 日 a hh:mm:ss EEEE" value="${usercomment.createTime}" />
+  		
+  		
+  		
+<%--   		<c:out value="${usercomment.userBean.userName}" /> --%>
+  		
+  		  </div>
+</div>
+</div>
+</div>
+  		
+  		</c:forEach>
+
+    
+    
+    </c:when>
+  	
+  	<c:otherwise>
+  	
+  		<div class="form-group">
 	
 <!-- 	userid -->
 		<input id=userid name="userid" value="${userBean.userId}" type="hidden" />
@@ -111,19 +168,12 @@ div.awesomeRating {
 </div>    
     
     <input type="submit" name="submit" value="新增評論">
-    
-    </c:if>
-    
-    
-    </c:when>
-  	
-  	<c:otherwise>
-  	
-  		測試
-  	
+  		
   	</c:otherwise>
   	
   	</c:choose>
+  	
+  	    </c:if>
   
   </form:form>
   

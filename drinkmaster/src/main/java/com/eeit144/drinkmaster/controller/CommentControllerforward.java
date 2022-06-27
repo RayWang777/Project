@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,22 +31,22 @@ public class CommentControllerforward {
 	
 	@Autowired
 	private CommentService commentService;
-	private Integer userId = 1;			//測試用
+//	private Integer userId = 1;			//測試用
 	private Integer storeId = 2;		//測試用
-	private Integer productId = 3;		//測試用
+//	private Integer productId = 3;		//測試用
 //	private Double score = 1.0;			//測試用
 	private Integer scoreType = 10;		//測試用
 	
 	
 	
 	@GetMapping("/comment")
-	public String CommentaddPage(Model model) {   // , @PathVariable("storeId") StoreBean storeBean   
+	public String CommentaddPage(@SessionAttribute("userBean") UserBean user, Model model) {   // , @PathVariable("storeId") StoreBean storeBean   
 		
 		
 //		userSession.getUserId();
 //		storeBean.getStoreName();
 		
-//		UserBean ub = new UserBean();
+		UserBean ub = new UserBean();
 		StoreBean sb = new StoreBean();
 //		ProductBean pb = new ProductBean();
 //		ub.setUserId(userSession.getUserId());
@@ -56,11 +57,9 @@ public class CommentControllerforward {
 //		pb.setProductId(productId);
 		
 		
+		System.out.println("000111");
 		
-		List<CommentBean> findusId = commentService.findCommentByUseridAndStoreid(userId, storeId);
-		
-		System.out.println(findusId);
-		
+		List<CommentBean> findsId = commentService.findCommentByStoreid(storeId);
 		
 		
 //		String userName = userid.getUserName();	
@@ -75,6 +74,30 @@ public class CommentControllerforward {
 		CommentBean lastComment = commentService.getLastest();
 		
 		
+//		Object user = model.getAttribute("userBean");
+		
+//		ub.setUserId(user.getUserId());
+		Integer userid = user.getUserId();
+		
+		System.out.println("000000000000" +user.getUserId());
+		
+		List<CommentBean> findusId = commentService.findCommentByUseridAndStoreid(userid, storeId);
+		
+		System.out.println("============1" + findusId);
+//		
+//		for(CommentBean us:findusId) {
+//			us.getUserId();
+//			ub.setUserId(us.getUserId());
+//			System.out.println("=============2"+ub.getUserId());
+//			
+//			
+//		}
+		
+		
+		
+		
+//		model.addAttribute("ub", ub);
+		model.addAttribute("findsId", findsId);
 		model.addAttribute("findusId", findusId);
 		model.addAttribute("commentBean", commentBean);
 //		model.addAttribute("storeBean", storeBean);

@@ -12,4 +12,5 @@ public class FrontPageController {
 	public String welcomeFront() {
 		return "/front/frontview";
 	}
+
 }

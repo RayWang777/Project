@@ -1,12 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<jsp:include page="layout/frontheader.jsp" />
-<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
- <header class="bg-dark py-5">
+        <jsp:include page="layout/header.jsp"></jsp:include>
+
+
+     <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
                     <h1 class="display-4 fw-bolder">Shop in style</h1>
@@ -217,17 +213,7 @@
                 </div>
             </div>
         </section>
-        <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="<c:url value="/js/lib/bootstrap.bundle.min.js"/>"></script>
-        <!-- Core theme JS-->
-      <script src="<c:url value="/js/scripts.js"/>"></script>
-
-
-
-
-
-<jsp:include page="layout/frontfooter.jsp" />
+        
+        
+        
+        <jsp:include page="layout/footer.jsp"></jsp:include>

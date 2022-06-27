@@ -1,6 +1,8 @@
 package com.eeit144.drinkmaster.bean;
 
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -86,6 +88,10 @@ public class OrderBean {
 	@Column(name = "createtime",nullable = false, columnDefinition = "smalldatetime")
 	@Excel(name="下單時間", orderNum="9",width = 30)
 	private Date createTime;
+	
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "orderBean",cascade = CascadeType.ALL)
+	private Set<OrderItems> orderItems = new LinkedHashSet<OrderItems>(); 
 
 	public OrderBean() {
 	}

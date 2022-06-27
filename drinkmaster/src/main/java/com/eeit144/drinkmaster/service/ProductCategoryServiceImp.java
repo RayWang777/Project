@@ -59,10 +59,12 @@ public class ProductCategoryServiceImp implements ProductCategoryService{
 		}
 	
 	public Page<ProductCategoryBean> select(Integer pageNumber, String name, String field) {
-		Pageable page = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "productId");
+		Pageable page = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "productCategoryId");
 		
-		return productCategoryDao.findByproductCategoryNameLike(page, name);
+		return productCategoryDao.findByproductCategoryNameLike(page, "%" + name + "%");
 	}
+	
+	
 }
 
 

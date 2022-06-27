@@ -12,7 +12,7 @@
 
 </head>
 <body>
-	<form action="${contextRoot}/backend/product/select" method="get">
+	<form action="${contextRoot}/backend/category/select" method="get">
 		<div class="mb-3">
 			<label for="select" class="form-label">搜尋</label> <input type="text"name="select" id="select" /> 
 				<select name="filed">

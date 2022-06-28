@@ -10,7 +10,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-
 @Entity
 @Table(name = "firmBanner")
 public class FirmBanner {
@@ -19,15 +18,15 @@ public class FirmBanner {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-	
+
 	@Transient
 	private Integer firmId;
-	
+
 	@OneToOne
-	@JoinColumn(name="firmId")
+	@JoinColumn(name = "firmId")
 	private FirmBean firmBean;
 
-	@Column(name="firmPic", columnDefinition = "varbinary(max)")
+	@Column(name = "firmPic", columnDefinition = "varbinary(max)")
 	private byte[] firmPiic;
 
 	public Integer getFirmId() {
@@ -45,8 +44,6 @@ public class FirmBanner {
 	public void setFirmPiic(byte[] firmPiic) {
 		this.firmPiic = firmPiic;
 	}
-	
-	
 
 	public FirmBean getFirmBean() {
 		return firmBean;
@@ -57,6 +54,14 @@ public class FirmBanner {
 	}
 
 	public FirmBanner() {
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }

@@ -91,6 +91,11 @@ public class FirmServiceImp implements FirmService {
 		return firmDao.findByFirmNameContaining(firmName);
 	}
 
+	@Override
+	public List<FirmBean> findByIdNotIn(List<Integer> firmId) {
+		return firmDao.findByFirmIdNotIn(firmId);
+	}
+
 
 
 }

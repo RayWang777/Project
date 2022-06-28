@@ -20,4 +20,6 @@ public interface FirmRepository extends JpaRepository<FirmBean, Integer> {
 	
 	public List<FirmBean> findByFirmNameContaining(String firmName);
 	
+	public List<FirmBean> findByFirmIdNotIn(List<Integer> firmId);
+	
 }

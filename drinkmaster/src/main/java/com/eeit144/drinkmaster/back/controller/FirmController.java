@@ -305,13 +305,167 @@ public class FirmController {
 	
 	@GetMapping("firm/banner/all")
 	public String AllFirmBanner(@RequestParam(name="p",defaultValue = "1") Integer page,Model m) {
-		PageRequest firmBannerPage = PageRequest.of(page-1, 5, Sort.Direction.ASC, "id");
 		
-		Page<FirmBanner> findAll = firmBannerService.findAll(firmBannerPage);
-		
+		List<FirmBanner> findByFirmIdNull = firmBannerService.findAllList();
+		List<Integer> list = new ArrayList<Integer>();
+		Integer firmId = null;
+		for(FirmBanner one: findByFirmIdNull) {
+			firmId = one.getFirmBean().getFirmId();
+			list.add(firmId);
+		}
+		List<FirmBean> findByIdNotIn = firmService.findByIdNotIn(list);
+		if(findByIdNotIn.isEmpty()) {
+			m.addAttribute("error", "沒有新廠商需要新增Banner");
+		}
+			
+		PageRequest firmBannerPage = PageRequest.of(page-1, 2, Sort.Direction.ASC, "id");		
+		Page<FirmBanner> findAll = firmBannerService.findAll(firmBannerPage);		
 		m.addAttribute("firmBanners", findAll);
 		return "/backend/backfirmBanner";
 	}
+	
+	
+	@GetMapping("firm/banner/{id}")
+	public ResponseEntity<byte[]> getFirmBanner(@PathVariable("id") Integer id) {
+		Optional<FirmBanner> findByfirmId = firmBannerService.findByfirmId(id);
+		
+		if(findByfirmId.isEmpty()) {
+			return new ResponseEntity<byte[]>(HttpStatus.OK);
+		}
+
+		byte[] firmLogo = findByfirmId.get().getFirmPiic();
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.IMAGE_JPEG);
+
+		return new ResponseEntity<byte[]>(firmLogo, headers, HttpStatus.OK);
+	}
+	
+	@GetMapping("firm/banner/add")
+	public String addFirmBanner(Model m) {
+		
+		List<FirmBanner> findByFirmIdNull = firmBannerService.findAllList();
+		List<Integer> list = new ArrayList<Integer>();
+		Integer firmId = null;
+		for(FirmBanner one: findByFirmIdNull) {
+			firmId = one.getFirmBean().getFirmId();
+			list.add(firmId);
+		}
+		
+		List<FirmBean> findByIdNotIn = firmService.findByIdNotIn(list);
+
+		
+		if(findByIdNotIn.isEmpty()) {
+			return "redirect:/backend/firm/banner/all";
+		}
+	
+
+		FirmBanner newFirmBanner = new FirmBanner();
+		m.addAttribute("firms", findByIdNotIn);
+		m.addAttribute("newBanner", newFirmBanner);
+		return "/backend/backfirmbanneradd";
+	}
+	
+
+	
+
+	@PostMapping("firm/banner/add")
+	public String addNewFirmBanner(@ModelAttribute("newBanner") FirmBanner newBanner, @RequestPart("reallogo") MultipartFile logo,
+			Model m) {
+		
+		
+		List<FirmBean> list = firmService.findAll3();
+		m.addAttribute("firms", list);
+		FirmBanner newFirmBanner = new FirmBanner();
+		
+		FirmBean findById = firmService.findById(newBanner.getFirmId()).get();
+		newFirmBanner.setFirmBean(findById);
+
+		String contentType = logo.getContentType();
+
+		if (!contentType.startsWith("image")) {
+
+			Map<String, String> errors = new HashMap<String, String>();
+			errors.put("firmLogo", "檔案必須為圖片");
+
+			m.addAttribute("errors", errors);
+			m.addAttribute("newBanner", newFirmBanner);
+			return "/backend/backfirmbanneradd";
+		}
+		try {
+			newFirmBanner.setFirmPiic(logo.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+
+			m.addAttribute("firm", newFirmBanner);
+			return "/backend/backfirmbanneradd";
+		}
+		firmBannerService.insertBanner(newFirmBanner);
+		return "redirect:/backend/firm/banner/all";
+	}
+
+	
+	
+	
+	@GetMapping("firm/banner/edit/{id}")
+	public String firmBannerUpdatePage(@PathVariable("id") Integer id,Model m) {
+		
+
+		List<FirmBean> list = firmService.findAll3();
+
+		FirmBanner oldBanner = firmBannerService.findByfirmId(id).get();
+		
+		
+		m.addAttribute("firms", list);
+		m.addAttribute("oldBanner", oldBanner);
+
+		return "/backend/backfirmbannerupdate";
+	}
+
+	@PostMapping("firm/banner/edit/{id}")
+	public String updateFirmBanner(@PathVariable("id") Integer id,@ModelAttribute("oldBanner") FirmBanner oldBanner, @RequestPart("reallogo") MultipartFile logo,
+			Model m) {
+	
+		FirmBanner oldFirmBanner = firmBannerService.findById(id).get();
+	
+		String contentType = logo.getContentType();
+		
+		if (logo.getSize() == 0) {
+			firmBannerService.insertBanner(oldFirmBanner);
+			return "redirect:/backend/firm/banner/all";
+		}
+
+		if (!contentType.startsWith("image")) {
+			Map<String, String> errors = new HashMap<String, String>();
+			errors.put("firmLogo", "檔案必須為圖片");
+			m.addAttribute("firm", oldFirmBanner);
+			m.addAttribute("errors", errors);
+			return "/backend/backfirmbannerupdate";
+		}
+		try {
+			oldFirmBanner.setFirmPiic(logo.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+			m.addAttribute("firm", oldFirmBanner);
+			return "/backend/backfirmbannerupdate";
+		}
+		firmBannerService.insertBanner(oldFirmBanner);
+		return "redirect:/backend/firm/banner/all";
+	}
+
+	
+	@GetMapping("firm/banner/delete/{id}")
+	public String deleteFirmBanner(@PathVariable("id") Integer id,@SessionAttribute("userBean") UserBean user) {
+		
+		if(!(user.getRole().equals("admin"))) {
+			return "redirect:/backend/";			
+		}
+		FirmBanner firmBanner = firmBannerService.findByfirmId(id).get();
+		
+		firmBannerService.deleteById(id);
+		return "redirect:/backend/firm/banner/all";
+	}
+	
 	
 
 }

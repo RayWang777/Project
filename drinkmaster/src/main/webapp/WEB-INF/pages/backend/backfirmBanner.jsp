@@ -34,8 +34,10 @@
 <body>
 	<br>
 	<c:url value="/backend/firm/banner/add" var="add_url" />
+	<c:if test="${error == null }">
 	<a href="${add_url}"><button type="button" class="btn btn-success">新增Banner</button></a>
-
+	</c:if>
+	<c:if test="${error != null }"><button type="button" class="btn btn-warning" style="color:blue;"><c:out value="${error}"/></button></c:if>
 
 
 	<table class="table table-hover"
@@ -45,7 +47,9 @@
 				<th style="width: 50px;"><label class="control control--checkbox">
 						<input type="checkbox" class="js-check-all" />
 				</label></th>
-				<th scope="col">Logo</th>
+				<th style="width: 500px;text-align: center;">廠商名稱</th>
+				<th scope="col">Banner</th>
+				
 				<th style="width: 140px;text-align: left;">動作</th>
 			</tr>
 		</thead>
@@ -58,15 +62,17 @@
 							id="check" value="<c:out value='${firmBanner.id}'/>"
 							style="margin-top: 20px;" />
 						</label></td>
+						
+					<td class="align-middle" style="text-align: center;"><c:out value="${firmBanner.firmBean.firmName}"/></td>	
 					
 					<td class="align-middle"><img
-						src="<c:url value="/backend/firm/${firmBanner.id}/photo"/>"
-						style="width: 400px; height: 300px;"></td>
+						src="<c:url value="/backend/firm/banner/${firmBanner.firmBean.firmId}"/>"
+						style="width: 500px; height: 270px;"></td>
 					<td class="align-middle" style="width: 13%;"><c:url
-							value="/backend/firm/edit/${firmBanner.id}" var="edit_url" /> <a
+							value="/backend/firm/banner/edit/${firmBanner.id}" var="edit_url" /> <a
 						href="${edit_url}"><button type="button"
 								class="btn btn-primary">編輯</button></a> <c:url
-							value="/backend/firm/delete/${firmBanner.id}" var="delete_url" />
+							value="/backend/firm/banner/delete/${firmBanner.id}" var="delete_url" />
 						<a href="${delete_url}" onclick="return confirm('真的要刪除嗎')"><button
 								type="button" class="btn btn-danger">刪除</button></a></td>
 				</tr>
@@ -79,7 +85,7 @@
 			<c:choose>
 				<c:when test="${firmBanners.number!=pageNumber-1}">
 				&nbsp;<a
-						href="${contextRoot}/backend/firm/all?sfn=${serchFirm.sfn}&sfp=${serchFirm.sfp}&sfa=${serchFirm.sfa}&sun=${serchFirm.sun}&p=${pageNumber}&s=${serchFirm.s}&c=${serchFirm.c}&d=${serchFirm.d}"><c:out
+						href="${contextRoot}/backend/firm/banner/all?p=${pageNumber}"><c:out
 							value="${pageNumber}" /></a>&nbsp;
 				</c:when>
 				<c:otherwise>

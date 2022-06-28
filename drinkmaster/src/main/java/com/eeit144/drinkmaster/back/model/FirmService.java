@@ -35,6 +35,8 @@ public interface FirmService {
 	public List<FirmBean> findAll3();
 	
 	public List<FirmBean> findByFirmNameContaining(String firmName);
+	
+	public List<FirmBean> findByIdNotIn(List<Integer> firmId);
 
 
 }

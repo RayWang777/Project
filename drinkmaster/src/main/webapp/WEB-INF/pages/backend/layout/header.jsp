@@ -135,7 +135,7 @@ li {
                         <li><a href="${contextRoot}/service/FAQ">前台測試</a></li>
 					</ul></li>
 <%-- 					<li><a href="${contextRoot}/front/">前台首頁</a></li> --%>
-				<li><a href="<c:url value="/backend/login"/>"><i class="ti-close"></i> Logout</a></li>
+				<li><a href="<c:url value="/backend/logout"/>"><i class="ti-close"></i> Logout</a></li>
 
 			</ul>
 		</div>
@@ -166,7 +166,7 @@ li {
 						<a id="frontpage" href="${contextRoot}/front/">前台首頁</a>
 						</span>&emsp;&emsp;
 							<span class="user-avatar">
-							<a id="logout" href="<c:url value="${contextRoot}/backend/logout"/>">Logout</a></span>
+							<a id="logout" href="<c:url value="/backend/logout"/>">Logout</a></span>
 
 
 						</div>

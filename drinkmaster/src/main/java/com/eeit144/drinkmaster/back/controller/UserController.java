@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -60,7 +61,8 @@ public class UserController {
 		this.userService = userService;
 	}
 
-	@PostMapping("logout")
+
+	@GetMapping("logout")
 	public String logout(SessionStatus status) {
 		status.setComplete();
 		return "/backend/backlogin";

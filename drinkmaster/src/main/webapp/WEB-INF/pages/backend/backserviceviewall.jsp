@@ -25,7 +25,7 @@
     </div>
     <div class="card-body">
       <c:out value="${workMessage.answer}" />
-      
+      <br/><br/>
       <div class="edit-link">
         <a href="${contextRoot}/backend/service/edit?serviceId=${workMessage.serviceId}"><button class="btn btn-info">編輯</button></a>
         <a onclick="return confirm('確認要刪除嗎?')"  href="${contextRoot}/backend/service/delete?serviceId=${workMessage.serviceId}"><button type="button" class="btn btn-danger">刪除</button></a>

@@ -14,13 +14,15 @@ $(function(){
 	$("#send").click(function(){
 		var email= $("#to").val();
 		var messageto = $('#message').val();
+		var msgId = $('#msgId').val();
 		
 		var myHeaders = new Headers();
 		myHeaders.append("Content-Type", "application/json");
 
 		var raw = JSON.stringify({
 		  "to": ""+email,
-		  "message": ""+messageto
+		  "message": ""+messageto,
+		  "msgId": ""+msgId
 		});
 
 		var requestOptions = {
@@ -43,11 +45,10 @@ $(function(){
 			  showConfirmButton: false,
 			  timer: 3500
 			}).then((result) => {
-					
 					location.replace('http://localhost:8081/drinkmaster/backend/service/reply')
 			}
-			)
-			
+			);
+		
 	
 		
 	})
@@ -66,16 +67,21 @@ $(function(){
         
 
     </nav>
+<div class="container">
+<div class="row justify-content-center">
+<div class="col-6">
+ <h1>意見回覆</h1>
 
 
+Email :   <input id="to" type="text" value="${msg.userBean.userAccount}" class="form-control" /><br/>
 
-Email :   <input id="to" type="text" value="${msg.userBean.userAccount}" /><br/>
-
-回覆訊息 :<input id="message" type="text"  />
-
+回覆訊息 :<input id="message" type="text"  class="form-control" />
+<input type="hidden" id="msgId" value="${msg.serviceId}">
 <button id="send" type="submit"  class="btn btn-lg btn-primary" >回覆</button>
 	
-
+</div>
+</div>
+</div>
 
 </body>
 </html>

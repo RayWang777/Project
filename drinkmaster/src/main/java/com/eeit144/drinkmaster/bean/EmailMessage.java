@@ -5,6 +5,7 @@ public class EmailMessage {
 	private String to;
 	private String Subject;
 	private String message;
+	private Integer msgId;
 	
 	public EmailMessage() {
 		
@@ -40,6 +41,15 @@ public class EmailMessage {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
+	public Integer getMsgId() {
+		return msgId;
+	}
+
+	public void setMsgId(Integer msgId) {
+		this.msgId = msgId;
+	}
+
 
 	
 }

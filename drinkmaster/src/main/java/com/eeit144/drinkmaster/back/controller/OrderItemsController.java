@@ -1,17 +1,29 @@
 package com.eeit144.drinkmaster.back.controller;
 
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+<<<<<<< HEAD:drinkmaster/src/main/java/com/eeit144/drinkmaster/back/controller/OrderItemsController.java
 import com.eeit144.drinkmaster.back.model.OrderItemsService;
+=======
+import com.eeit144.drinkmaster.bean.OrderBean;
+>>>>>>> b7887b774d8e9631aa1778fcaa12bc0d0f219731:drinkmaster/src/main/java/com/eeit144/drinkmaster/controller/OrderItemsController.java
 import com.eeit144.drinkmaster.bean.OrderItems;
+import com.eeit144.drinkmaster.bean.ProductBean;
+import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.bean.UserBean;
 
 @Controller
@@ -37,4 +49,111 @@ public class OrderItemsController {
 		return mav;
 		
 	}
+	
+//	@PostMapping("order/insert")
+//	public String insertOrder(@ModelAttribute("orderBean") OrderBean orderBean, Model model,@SessionAttribute("userBean") UserBean user) {
+////		
+////		@ModelAttribute("userBean key") UserBean variableName;
+////		 orderBean.setUserbean(variableName);
+//		
+//		if((user.getRole().equals("user"))) {
+//			return "redirect:/backend/login";			
+//		}
+//		
+//		List<UserBean> users = userService.findAllUsers();
+//
+//		model.addAttribute("orderaddusers", users);
+//		
+//		List<StoreBean> stores = storeService.findAllList();
+//
+//		model.addAttribute("orderaddstores", stores);
+//		
+//		List<ProductBean> products = orderService.findAllProducts();
+//
+//		model.addAttribute("orderaddproducts", products);
+//		
+//		Date createTime = new Date();
+//		orderBean.setCreateTime(createTime);
+//		
+//		//要先找到 store user product 的ID 把資料放到前端
+//		StoreBean oldStore = storeService.findById(orderBean.getStoreId()).get();
+//		UserBean oldUser = userService.findById(orderBean.getUserId()).get();
+//		ProductBean oldProduct = productService.findById(orderBean.getProductId());
+//		
+//		orderBean.setUserBean(oldUser);
+//		orderBean.setStoreBean(oldStore);
+//		orderBean.setProductBean(oldProduct);
+//		
+//		orderService.insertOrder(orderBean);
+//		
+//		return "redirect:/backend/order/findAll";
+//		}
+//	
+//	@GetMapping("order/edit")
+//	public String editById(@RequestParam("id") Integer id, Model m,@SessionAttribute("userBean") UserBean user) {
+//		if((user.getRole().equals("user"))) {
+//			return "redirect:/backend/login";			
+//		}
+//		
+//		List<UserBean> users = userService.findAllUsers();
+//
+//		m.addAttribute("orderaddusers", users);
+//		
+//		List<StoreBean> stores = storeService.findAllList();
+//
+//		m.addAttribute("orderaddstores", stores);
+//		
+//		List<ProductBean> products = orderService.findAllProducts();
+//
+//		m.addAttribute("orderaddproducts", products);
+//					
+//		
+//		OrderBean orderBean = orderService.findById(id);
+//		m.addAttribute("orderBean", orderBean);
+//		return "/backend/backorderupdate";
+//	}
+//	
+//	@PostMapping("order/update")
+//	public String updateOrder(@ModelAttribute("orderBean") OrderBean orderBean, Model m,@SessionAttribute("userBean") UserBean user) {
+//		if((user.getRole().equals("user"))) {
+//			return "redirect:/backend/login";			
+//		}
+//		
+//		List<UserBean> users = userService.findAllUsers();
+//
+//		m.addAttribute("orderaddusers", users);
+//		
+//		List<StoreBean> stores = storeService.findAllList();
+//
+//		m.addAttribute("orderaddstores", stores);
+//		
+//		List<ProductBean> products = orderService.findAllProducts();
+//
+//		m.addAttribute("orderaddproducts", products);
+//		
+//		List<OrderBean> orders = orderService.findAll();
+//
+//		m.addAttribute("orderstatus", orders);
+//		
+//		StoreBean oldStore = storeService.findById(orderBean.getStoreId()).get();
+//		UserBean oldUser = userService.findById(orderBean.getUserId()).get();
+//		ProductBean oldProduct = productService.findById(orderBean.getProductId());
+//		
+//		orderBean.setUserBean(oldUser);
+//		orderBean.setStoreBean(oldStore);
+//		orderBean.setProductBean(oldProduct);
+//		
+//		
+//		orderService.insertOrder(orderBean);
+//
+//		return "redirect:/backend/order/findAll";
+//	}
+//	
+//	
+//	
+//	@GetMapping("orderapi")
+//	@ResponseBody
+//	public List<OrderBean> findBystoreId(Integer id) {
+//			return orderService.findBystoreId(id);
+//	}
 }

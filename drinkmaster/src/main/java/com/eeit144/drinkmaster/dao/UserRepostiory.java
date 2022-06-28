@@ -19,5 +19,8 @@ public interface UserRepostiory extends JpaRepository<UserBean, Integer> {
 	
 	@Query(value="select userid from users where username like '%'+:userName+'%'", nativeQuery = true)
 	public String findIdByName(@Param(value="userName") String userName);
+
+	@Query(value="select useraccount from users where useraccount =:userAccount", nativeQuery = true)
+	String findByAccount(@Param(value="userAccount") String userAccount);
 	
 }

@@ -146,6 +146,13 @@ public class UserController {
 	public String insertUserGo(@ModelAttribute("user") UserBean user, BindingResult result,
 			@RequestParam("reallogo") MultipartFile photo,Model m) {
 
+		//確認是否已有帳號
+		if(!userService.findUserByAccount(user.getUserAccount())) {
+			System.out.println("成功進入帳號除錯");
+			m.addAttribute("accErr", "帳號已有人使用");
+			return "/backend/backuseradd";
+		};
+		
 		// 以下為用UserBeanValidator後端識別欄位錯誤格式
 		UserBeanValidator validator = new UserBeanValidator();
 		validator.validate(user, result);
@@ -158,6 +165,9 @@ public class UserController {
 		// 把當下的時間加入user內
 		Date createDate = new Date();
 		user.setCreatedate(createDate);
+		if(user.getBirthday() == null) {
+			user.setBirthday(createDate);
+		}
 		
 		try {
 			user.setPhoto(photo.getBytes());
@@ -224,50 +234,43 @@ public class UserController {
 	}
 	
 	@PostMapping("user/update/{id}")
-	public String updateUser(@ModelAttribute("user") UserBeanDTO user, BindingResult result
-			, @RequestPart("reallogo") MultipartFile logo,	Model m) {
+	public String updateUser(@ModelAttribute("user") UserBean user, BindingResult result
+			, @RequestPart("reallogo") MultipartFile photo,	Model m) {
 
 		// 以下為用UserBeanValidator後端識別欄位錯誤格式
 		UserBeanValidator validator = new UserBeanValidator();
 		validator.validate(user, result);
 		if(result.hasErrors()) {
-			return "/backend/backuseradd";
+			return "/backend/backuserupdate";
 		}
 		
-		// 抓出資料庫資料
-		UserBean oldUser = userService.findById(user.getUserId()).get();
-		String contentType = logo.getContentType();
-		oldUser.setUserName(user.getUserName());
-		oldUser.setUserAccount(user.getUserAccount());
-		oldUser.setUserPassword(user.getUserPassword());
-		oldUser.setUserAddress(user.getUserAddress());
-		oldUser.setPhone(user.getPhone());
-		oldUser.setGender(user.getGender());
-		oldUser.setCreatedate(user.getCreatedate());
-		oldUser.setRole(user.getRole());
-
-		if (logo.getSize() == 0 || user.getBirthday().equals(null)) {
-			userService.insertUser(oldUser);
-			return "redirect:/backend/user/all";
-		}
-
-		if (!contentType.startsWith("image")) {
-
-			Map<String, String> errors = new HashMap<String, String>();
-			errors.put("firmLogo", "檔案必須為圖片");
-			m.addAttribute("user", oldUser);
-			m.addAttribute("errors", errors);
-			return "backuserupdate";
-		}
+		// 以下為新增動作
+		String contentType = photo.getContentType();
+		System.out.println("限定上傳格式用：" + contentType);
+		
 		try {
-			oldUser.setPhoto(logo.getBytes());
-			oldUser.setBirthday(user.getBirthday());
+			user.setPhoto(photo.getBytes());
 		} catch (IOException e) {
 			e.printStackTrace();
-			m.addAttribute("user", oldUser);
-			return "backuserupdate";
+			UserBeanDTO userDTO = new UserBeanDTO();
+			m.addAttribute("user", userDTO);
+			return "/backend/backuserupdate";
 		}
-		userService.insertUser(oldUser);
+		//未新增照片的話將舊資料加入新資料中
+		if (photo.getSize() == 0) {
+			UserBean oldUser = userService.findById(user.getUserId()).get();
+			user.setPhoto(oldUser.getPhoto());
+		}
+		//未選新生日的話將舊資料加入新資料中
+		Date bd = user.getBirthday();
+		String bds = bd.toString();
+		if (bds.equals("null")) {
+			UserBean oldUser = userService.findById(user.getUserId()).get();
+			user.setBirthday(oldUser.getBirthday());
+		}
+		
+		userService.insertUser(user);
+		
 		return "redirect:/backend/user/all";
 	}
 	

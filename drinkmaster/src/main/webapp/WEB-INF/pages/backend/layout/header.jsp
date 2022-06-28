@@ -207,7 +207,7 @@ $(function(){
 
 $(function(){
 	$('#logout').click(function(){
-		location.replace('${contextRoot}/backend/login/');
+		location.replace('${contextRoot}/backend/logout/');
 	});
 	
 	

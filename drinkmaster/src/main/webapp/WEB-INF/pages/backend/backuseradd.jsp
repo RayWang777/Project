@@ -26,7 +26,7 @@
        <form:label path="userAccount">帳&emsp;&emsp;號</form:label>
        <form:input path="userAccount" class="form-control" onblur="checkEmpty()" id="account"/>
        <form:errors path="userAccount" cssClass="error" />
-       <span id="accErr"></span><br><br>
+       <span id="accErr"><c:out value="${accErr}"/></span><br><br>
        
        <form:label path="userPassword">密&emsp;&emsp;碼</form:label>
        <form:input path="userPassword" class="form-control"/>
@@ -52,13 +52,12 @@
        <span id="genderErr"></span>  <br><br>
        
        <form:label path="birthday">生&emsp;&emsp;日</form:label>
-<%--   <form:input path="birthday" class="form-control"/> --%>
-       <input type="date" name="birthday" id="birthday" class="form-control"/>
-       <form:errors path="birthday" cssClass="error" /><br><br>
+	   <form:input type="date" path="birthday" class="form-control" onblur="checkEmpty()"/>
+<!--   <input type="date" name="birthday" id="birthday" class="form-control"/> -->
+       <form:errors path="birthday" cssClass="error" />
+       <span id="bdErr"></span>  <br><br>
        
-       <form:label path="createdate">創建日期</form:label>
-       <form:input path="createdate" class="form-control" disabled="true" />
-       <form:errors path="createdate" cssClass="error" /><br><br>
+       <form:hidden path="createdate" class="form-control" disabled="true" id="createdate"/>
        
        <form:label path="role">職&emsp;&emsp;權</form:label>
        <select name="role" required="required" class="form-control" onblur="checkEmpty()">
@@ -156,7 +155,7 @@ function checkEmpty(){
 	 
 	//validate ok or not
 	if(strEmail.value.search(emailRule)!= -1){
-		theacc.innerHTML="✅";
+		theacc.innerHTML="";
 	}else{
         console.log(strEmail.value.search(emailRule));
 		theacc.innerHTML="須符合email格式";
@@ -204,6 +203,17 @@ function checkEmpty(){
         theRole.innerHTML = "請輸入職權";
     } else {
         theRole.innerHTML = "";
+    }
+    
+    let theBD = document.getElementById("bdErr");
+    let birthday = document.getElementById("birthday");
+    console.log(birthday);
+    let bd = birthday.value;
+    console.log(bd);
+    if (bd == null || bd.length == 0) {
+    	theBD.innerHTML = "請選取生日";
+    } else {
+    	theBD.innerHTML = "";
     }
 
 }

@@ -98,5 +98,8 @@
    </c:if>&nbsp;
 		</c:forEach>
 	</div>
+	
+<script src="<c:url value="/js/lib/popper.min.js"/>"></script>
+<script src="<c:url value="/js/lib/main.js"/>"></script>
 
 <jsp:include page="layout/footer.jsp" />

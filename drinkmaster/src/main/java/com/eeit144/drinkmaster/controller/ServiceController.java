@@ -60,6 +60,14 @@ public class ServiceController {
 
 		return "/backend/backserviceadd";
 	}
+	
+	@GetMapping("service/FAQ")
+	public String showFAQPage(Model model) {
+
+	
+
+		return "/backend/serviceFAQ";
+	}
 
 	// -------------------------------------------------------------------------------
 

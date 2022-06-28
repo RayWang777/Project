@@ -25,8 +25,7 @@
       <c:out value="${workMessage.answer}" />
       <br/><br/>
       <div class="edit-link">
-      <a href="${contextRoot}/backend/service/postreply?serviceId=
-        ${workMessage.serviceId}"><button class="btn btn-lg btn-primary">未回覆</button></a>
+      <a href="${contextRoot}/backend/service/postreply?serviceId=${workMessage.serviceId}"><button class="btn btn-lg btn-primary">未回覆</button></a>
         <button class="btn btn-secondary btn-lg" disabled>已回覆</button>
         
       </div>   

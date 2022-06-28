@@ -1,4 +1,4 @@
-package com.eeit144.drinkmaster.back.controller;
+package com.eeit144.drinkmaster.front.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -7,23 +7,27 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eeit144.drinkmaster.back.model.ServiceService;
 import com.eeit144.drinkmaster.bean.ServiceBean;
+import com.eeit144.drinkmaster.bean.UserBean;
 
 @SessionAttributes(names={"userBean"})
 @Controller
-public class ServiceController {
+@RequestMapping("front/")
+public class FrontServiceController {
 
 	@Autowired
 	private ServiceService sService;
 
 //	private Integer userId = 1;  //測試用
 
-	@GetMapping("/backend/service/reply")
+	@GetMapping("service/reply")
 	public ModelAndView deleteMessagePage(ModelAndView mav,
 			@RequestParam(name = "p", defaultValue = "1") Integer pageNumber) {
 		Page<ServiceBean> page = sService.findByPage(pageNumber);
@@ -33,7 +37,7 @@ public class ServiceController {
 		return mav;
 	}
 
-	@GetMapping("/backend/service/viewall")
+	@GetMapping("service/viewall")
 	public ModelAndView viewMessages(ModelAndView mav,
 			@RequestParam(name = "p", defaultValue = "1") Integer pageNumber) {
 		Page<ServiceBean> page = sService.findByPage(pageNumber);
@@ -43,8 +47,8 @@ public class ServiceController {
 		return mav;
 	}
 
-	@GetMapping("/backend/service/add")
-	public String addMessagePage(Model model) {
+	@GetMapping("service/add") //新增sessionattribute
+	public String addMessagePage(@SessionAttribute("userBean") UserBean user,Model model) {
 
 //		UserBean ub = new UserBean();
 //		ub.setUserId(userId);	
@@ -67,11 +71,10 @@ public class ServiceController {
 		return "/backend/serviceFAQ";
 	}
 
-	//上半部轉頁
 	// -------------------------------------------------------------------------------
 
 	
-	@GetMapping("backend/service/postreply")
+	@GetMapping("service/postreply")
 	public String editReply(@RequestParam("serviceId") Integer serviceId, Model model) {
 		
 		ServiceBean msg = sService.findById(serviceId);
@@ -83,7 +86,7 @@ public class ServiceController {
 	}
 	
 	
-	@PostMapping("backend/service/postreply")
+	@PostMapping("service/postreply")
 	public String postEditReply(@ModelAttribute(name = "msg") ServiceBean msg) {
 		
 		sService.insertService(msg);
@@ -93,28 +96,28 @@ public class ServiceController {
 	
 	
 	
-	@GetMapping("backend/service/edit")
+	@GetMapping("service/edit")
 	public String editMessage(@RequestParam("serviceId") Integer serviceId, Model model) {
 		ServiceBean msg = sService.findById(serviceId);
 		model.addAttribute("msg", msg);
 		return "/backend/backserviceedit";
 	}
 
-	@PostMapping("backend/service/edit")
+	@PostMapping("service/edit")
 	public String postEditMessage(@ModelAttribute(name = "msg") ServiceBean msg) {
 		sService.insertService(msg);
 		return "redirect:/backend/service/viewall";
 
 	}
 
-	@GetMapping("backend/service/delete")
+	@GetMapping("service/delete")
 	public String deleteMessage(@RequestParam("serviceId") Integer serviceId) {
 		sService.deleteById(serviceId);
 		return "redirect:/backend/service/viewall";
 	}
 
 
-	@PostMapping("backend/service/post")
+	@PostMapping("service/post")
 	public String ServiceAdd(@ModelAttribute("workMessages") ServiceBean msg, Model model) {
 		sService.insertService(msg);
 
@@ -126,5 +129,6 @@ public class ServiceController {
 
 		return "/backend/backserviceadd";
 	}
+
 
 }

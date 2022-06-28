@@ -12,13 +12,20 @@
  <h1>新增意見回饋</h1>
 <form:form class="form" method="post" action="${contextRoot}/backend/service/post" modelAttribute="workMessages">
 <div class="form-group">
-    
+    <div class="form-group">
     <label for="exampleFormControlInput1">UserID</label>
     
-  <form:input  path="userBean" class="form-control" />
+<%--   <form:input  path="userBean" class="form-control" /> --%>
    </div>
-  
-  
+    <label for="exampleFormControlInput1">姓名</label>
+    <input id=userid name="userid" value="${userBean.userId}" type="text" class="form-control"  />
+<!--     <input type="text" class="form-control" id="FormControlInput1"> -->
+  </div>
+   
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Email信箱</label>
+    <input type="email" class="form-control" id="FormControlInput2" placeholder="name@example.com">
+  </div>
   
   <div class="form-group">
     <label for="exampleFormControlTextarea1">意見回饋</label>

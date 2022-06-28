@@ -25,8 +25,15 @@
       <c:out value="${workMessage.answer}" />
       <br/><br/>
       <div class="edit-link">
-      <a href="${contextRoot}/backend/service/postreply?serviceId=${workMessage.serviceId}"><button class="btn btn-lg btn-primary">未回覆</button></a>
+      
+      <c:choose>
+    	<c:when test="${workMessage.status=='ok'}">
         <button class="btn btn-secondary btn-lg" disabled>已回覆</button>
+    	</c:when>
+    	<c:otherwise>
+        <a href="${contextRoot}/backend/service/postreply?serviceId=${workMessage.serviceId}"><button id="noreply" class="btn btn-lg btn-primary">未回覆</button></a>
+    	</c:otherwise>
+	  </c:choose>
         
       </div>   
     </div>

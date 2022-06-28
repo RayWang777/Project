@@ -76,7 +76,7 @@ public class ServiceController {
 	public String editReply(@RequestParam("serviceId") Integer serviceId, Model model) {
 		
 		ServiceBean msg = sService.findById(serviceId);
-		
+							
 		
 		model.addAttribute("msg", msg);
 		

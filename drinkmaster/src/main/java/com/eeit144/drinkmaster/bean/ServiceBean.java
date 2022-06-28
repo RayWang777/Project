@@ -47,6 +47,9 @@ public class ServiceBean {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="answertime",nullable = false,columnDefinition = "datetime")
 	private Date answerTime;
+	
+	@Column(name="status")
+	private String status;
 
 	@PrePersist
 	public void onCreate() {
@@ -94,5 +97,12 @@ public class ServiceBean {
 	public void setUserBean(UserBean userBean) {
 		this.userBean = userBean;
 	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
+	
 }

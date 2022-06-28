@@ -136,7 +136,6 @@ public class UserController {
 	public String insertUser(Model m) {
 		UserBeanDTO user = new UserBeanDTO();
 		m.addAttribute("user", user);
-		m.addAttribute("usersave", "新增用戶");
 		return "/backend/backuseradd";
 	}
 
@@ -145,28 +144,15 @@ public class UserController {
 	public String insertUserGo(@ModelAttribute("user") UserBean user, BindingResult result,
 			@RequestParam("reallogo") MultipartFile photo,Model m) {
 
-		// 以下為用UserBeanValidator識別欄位錯誤格式
+		// 以下為用UserBeanValidator後端識別欄位錯誤格式
 		UserBeanValidator validator = new UserBeanValidator();
 		validator.validate(user, result);
 		if(result.hasErrors()) {
 			return "/backend/backuseradd";
 		}
-		
 		// 以下為新增動作
 		String contentType = photo.getContentType();
 		System.out.println(contentType);
-		
-//		if(!contentType.startsWith("image")) {
-//			
-//			Map<String, String> errors = new HashMap<String, String>();
-//			errors.put("userPhoto", "檔案必須為圖片");
-//			
-//			UserBeanDTO userDTO = new UserBeanDTO();
-//						
-//			m.addAttribute("errors", errors);
-//			m.addAttribute("user", userDTO);
-//			return "backuseradd";
-//		}
 		// 把當下的時間加入user內
 		Date createDate = new Date();
 		user.setCreatedate(createDate);
@@ -231,15 +217,22 @@ public class UserController {
 		userDTO.setPhoto(findById.getPhoto());
 		
 		m.addAttribute("user",userDTO);
-		m.addAttribute("usersave","修改用戶資料");
 		
 		return "/backend/backuserupdate";
 	}
 	
 	@PostMapping("user/update/{id}")
-	public String updateUser(@ModelAttribute("user") UserBeanDTO user, @RequestPart("reallogo") MultipartFile logo,
-			Model m) {
+	public String updateUser(@ModelAttribute("user") UserBeanDTO user, BindingResult result
+			, @RequestPart("reallogo") MultipartFile logo,	Model m) {
 
+		// 以下為用UserBeanValidator後端識別欄位錯誤格式
+		UserBeanValidator validator = new UserBeanValidator();
+		validator.validate(user, result);
+		if(result.hasErrors()) {
+			return "/backend/backuseradd";
+		}
+		
+		// 抓出資料庫資料
 		UserBean oldUser = userService.findById(user.getUserId()).get();
 		String contentType = logo.getContentType();
 		oldUser.setUserName(user.getUserName());

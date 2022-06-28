@@ -81,4 +81,22 @@
 	</tbody>
 </table>
 
+<div class="row justify-content-center" style="font-size:23px;">
+		<c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
+			<c:choose>
+				<c:when test="${page.number!=pageNumber-1}">
+					<a href="${contextRoot}/backend/user/all?u=${pageNumber}" style="color:#84C1FF"><b > <c:out
+							value="${pageNumber}" />
+					</b></a>
+				</c:when>
+				<c:otherwise>
+					<c:out value="${pageNumber}"></c:out>
+				</c:otherwise>
+			</c:choose>
+			&nbsp;<c:if test="${pageNumber!= page.totalPages }">
+   |
+   </c:if>&nbsp;
+		</c:forEach>
+	</div>
+
 <jsp:include page="layout/footer.jsp" />

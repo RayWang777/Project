@@ -166,7 +166,7 @@ li {
 						<a id="frontpage" href="${contextRoot}/front/">前台首頁</a>
 						</span>&emsp;&emsp;
 							<span class="user-avatar">
-							<a id="logout" href="<c:url value="${contextRoot}/backend/login"/>">Logout</a></span>
+							<a id="logout" href="<c:url value="${contextRoot}/backend/logout"/>">Logout</a></span>
 
 
 						</div>

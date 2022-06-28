@@ -6,34 +6,58 @@
 <meta charset="UTF-8">
 <title>Search</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
 
-// $("#send").click(function(){
-// 	var email= $("#to").val();
+$(function(){
 	
-// 	var datas = {"email": + email};
-// 	console.log('datas:' + datas);
-// 	console.log(datas);}
+	$("#send").click(function(){
+		var email= $("#to").val();
+		var messageto = $('#message').val();
+		
+		var myHeaders = new Headers();
+		myHeaders.append("Content-Type", "application/json");
 
-var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
+		var raw = JSON.stringify({
+		  "to": ""+email,
+		  "message": ""+messageto
+		});
 
-var raw = JSON.stringify({
-  "to": "cdwewe456@gmail.com",
-  "message": "${message}"
-});
+		var requestOptions = {
+		  method: 'POST',
+		  headers: myHeaders,
+		  body: raw,
+		  redirect: 'follow'
+		};
 
-var requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  body: raw,
-  redirect: 'follow'
-};
+		fetch("http://localhost:8081/drinkmaster/send-email", requestOptions)
+		  .then(response => response.text())
+		  .then(result => console.log(result))
+		  .catch(error => console.log('error', error));
+		
+	
+		
+		Swal.fire({
+			  icon: 'success',
+			  title: '信件已送出',
+			  showConfirmButton: false,
+			  timer: 3500
+			}).then((result) => {
+					
+					location.replace('http://localhost:8081/drinkmaster/backend/service/reply')
+			}
+			)
+			
+	
+		
+	})
+	
+	
+})
 
-fetch("http://localhost:8081/drinkmaster/send-email", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
+
+
+
 </script>
 <body>
 
@@ -45,7 +69,7 @@ fetch("http://localhost:8081/drinkmaster/send-email", requestOptions)
 
 
 
-Email :   <input id="to" type="text"  /><br/>
+Email :   <input id="to" type="text" value="${msg.userBean.userAccount}" /><br/>
 
 回覆訊息 :<input id="message" type="text"  />
 

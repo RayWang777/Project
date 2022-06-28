@@ -32,5 +32,5 @@ public interface CommentService {
 	
 	public List<CommentBean> findCommentByUseridAndStoreid(Integer userId, Integer storeId);
 
-	
+//	public Page<CommentBean> findPageByOrderByScoreAsc(Integer pageNumber);
 }

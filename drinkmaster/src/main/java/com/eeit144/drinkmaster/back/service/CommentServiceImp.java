@@ -95,5 +95,9 @@ public class CommentServiceImp implements CommentService {
 		return commentDao.findCommentByUseridAndStoreid(userId,storeId);
 	}
 	
+//	@Override
+//	public Page<CommentBean> findPageByOrderByScoreAsc(Integer pageNumber){
+//		return commentDao.findPageByOrderByScoreAsc(pageNumber);
+//	}
 	
 }

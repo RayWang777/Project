@@ -4,6 +4,7 @@ import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,7 @@ import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.bean.UserBean;
 
 @Controller
-@RequestMapping("/backend")
+@RequestMapping("backend/")
 public class CommentController {
 	
 	@Autowired
@@ -35,7 +36,7 @@ public class CommentController {
 	
 	
 	
-	@GetMapping("/comment")
+	@GetMapping("comment")
 	public String CommentaddPage(Model model) {   //@ModelAttribute("userId")UserBean userid,
 		
 		UserBean ub = new UserBean();
@@ -96,7 +97,7 @@ public class CommentController {
 	
 	
 	
-	@GetMapping("/comment/timeasc")
+	@GetMapping("comment/timeasc")
 	public String viewMessage(Model model) {
 		
 		List<CommentBean> page = commentService.getCreateTimeAsc();
@@ -107,7 +108,7 @@ public class CommentController {
 		
 	}
 	
-	@GetMapping("/comment/all")
+	@GetMapping("comment/all")
 	public String viewtimedesc(Model model) {
 		
 		List<CommentBean> page = commentService.getCreateTimeDesc();
@@ -118,7 +119,7 @@ public class CommentController {
 		
 	}
 	
-	@GetMapping("/comment/scoredesc")
+	@GetMapping("comment/scoredesc")
 	public String viewscoredesc(Model model) {
 		
 		List<CommentBean> page = commentService.getScoreDesc();
@@ -129,7 +130,7 @@ public class CommentController {
 		
 	}
 	
-	@GetMapping("/comment/scoreasc")
+	@GetMapping("comment/scoreasc")
 	public String viewscoreasc(Model model) {
 		
 		List<CommentBean> page = commentService.getScoreAsc();
@@ -139,6 +140,19 @@ public class CommentController {
 		return "/backend/backcommentview";
 		
 	}
+	
+	
+	
+//	@GetMapping("/comment/scoreasc")
+//	public String pageviewscoreasc(@RequestParam(name="p",defaultValue = "1") Integer pageNumber,Model model) {
+//		
+//		Page<CommentBean> page = commentService.findPageByOrderByScoreAsc(pageNumber);
+//		
+//		model.addAttribute("page",page);
+//		
+//		return "/backend/backcommentview";
+//		
+//	}
 	
 	
 	

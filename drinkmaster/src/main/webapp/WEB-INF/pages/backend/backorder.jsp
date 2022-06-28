@@ -210,6 +210,7 @@
     &thinsp;| &thinsp;
    </c:if>
    </c:forEach>
+   </div>
 <%--    <canvas id="myChart" width="200" height="200"></canvas> --%>
    
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

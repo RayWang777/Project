@@ -175,121 +175,63 @@
     &thinsp;| &thinsp;
    </c:if>
    </c:forEach>
+   </div>
 
-<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
-<!--   <div class="modal-dialog" role="document"> -->
-<!--     <div class="modal-content"> -->
-<!--       <div class="modal-header"> -->
-<!--         <h5 class="modal-title" id="exampleModalLabel">新增</h5> -->
-<!--         <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
-<!--           <span aria-hidden="true">&times;</span> -->
-<!--         </button> -->
-<!--       </div> -->
-<!--   <div class="modal-body"> -->
-<%--   <form:form id="orderform" class="form"  method="post" action="${contextRoot}/backend/order/insert" modelAttribute="orderBean"> --%>
-
-<%-- <%--   <form:label path="productId">產品編號</form:label> --%> --%>
-<%-- <%--   <form:input path="productId" /><br><br> --%> --%>
-<!-- <label for="selectuserId">使用者編號</label> -->
-<%-- 					<form:select id="selectuserId" path="userBean.userId"> --%>
-
-<%-- 						<form:options items="${orderaddusers}" itemLabel="userName" --%>
-<%-- 							itemValue="userId" id="useridoption"/> --%>
-<%-- 					</form:select><br><br> --%>
-<%-- 					<form:hidden path="userId" value="1" /> --%>
-
-<!-- <label for="selectstore">店家名稱</label> -->
-<%-- 					<form:select id="selectstore" path="storeBean.storeId"> --%>
-
-<%-- 						<form:options items="${orderaddstores}" itemLabel="storeName" --%>
-<%-- 							itemValue="storeId" /> --%>
-<%-- 					</form:select><br><br> --%>
-<%-- 					<form:hidden path="storeId" value="1" /> --%>
-					
-<!-- <label for="selectproducts">商品名稱</label> -->
-<%-- 					<form:select id="selectproducts" path="productBean.productId"> --%>
-
-<%-- 						<form:options items="${orderaddproducts}" itemLabel="productName" --%>
-<%-- 							itemValue="productId" id="productoption"/> --%>
-<%-- 					</form:select><br><br> --%>
-<%-- 					<form:hidden path="productId" value="1" /> --%>
-<%--   <form:label path="orderAddress">地&emsp;&emsp;址</form:label> --%>
-<%--   <form:input path="orderAddress" /><br><br> --%>
-<%--   <form:label path="orderPhone">電&emsp;&emsp;話</form:label> --%>
-<%--   <form:input path="orderPhone" /><br><br> --%>
-<%--   <form:label path="orderStatus">狀&emsp;&emsp;態</form:label> --%>
-<!--   <select id="orderStatus" path="orderStatus"> -->
-<!--   <option value="-1">請選擇</option> -->
-<!--   <option value="待付款">待付款</option> -->
-<!--   <option value="待出貨">待出貨</option> -->
-<!--   <option value="已出貨">已出貨</option> -->
-<!--   <option value="已取消">已取消</option> -->
-<!--   </select> -->
-<%--   <form:hidden id="substatus" path="orderStatus" /><br><br> --%>
-<%--   <form:label path="totalPrice">總&ensp;金&ensp;額</form:label> --%>
-<%--   <form:input path="totalPrice" /><br> --%>
-  
- 
-<!--   <br><br> -->
-<!--   <div class="row justify-content-center"> -->
-<%--   <a href="${contextRoot}/backend/order/insert"> --%>
-<!--   <button type="submit" id="ordersubmit" class="btn btn-primary btn-sm"  name="submit"  onclick="return confirm('確定要新增嗎?')" >確認</button></a>&emsp;   -->
-  
-<!--   <button type="button" id="closebutton" class="btn btn-outline-dark btn-sm" data-dismiss="modal" aria-label="Close" >取消</button> -->
-<!--   </div> -->
-<%--   </form:form> --%>
-<!--       </div> -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">新增</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
       
-<!--     </div> -->
-<!--   </div> -->
-<!-- </div> -->
+      <form:form class="form" method="post" action="${contextRoot}/backend/orderItems/insert" modelAttribute="orderItems">
+<form:hidden path="orderItemId"/>
+<label for="selectorderId">訂單編號</label>
+					<form:select id="selectorderId" path="orderBean.orderId">
+
+						<form:options items="${addorders}" itemLabel="orderId"
+							itemValue="orderId" />
+					</form:select><br><br>
+					<form:hidden path="orderId" value="${orderItems.orderBean.orderId}" />
+					
+<label for="selectproducts">商品名稱</label>
+					<form:select id="selectproducts" path="productBean.productId">
+
+						<form:options items="${addproducts}" itemLabel="productName"
+							itemValue="productId" id="productoption"/>
+					</form:select><br><br>
+					<form:hidden path="productId" value="${orderItems.productBean.productId}" />
+
+  金&emsp;&emsp;額<form:label path="price"></form:label>
+  <form:input path="price" /><br><br>
+  數&emsp;&emsp;量<form:label path="quantity"></form:label>
+  <form:input path="quantity" /><br><br>
+
+  
+ <br><br>
+  <div class="row justify-content-center">
+  <a href="${contextRoot}/backend/orderItems/insert">
+  <button type="submit" id="ordersubmit" class="btn btn-primary btn-sm"  name="submit"  onclick="return confirm('確定要新增嗎?')" >確認</button></a>&emsp;  
+  
+  <button type="button" id="closebutton" class="btn btn-outline-dark btn-sm" data-dismiss="modal" aria-label="Close" >取消</button>
+ 
+    </div>
+  </form:form>
+      </div>
+      </div>
+      </div>
+      
+      
+      
+      
+
    
 
 
 <script type="text/javascript">
-
-// $(document).ready(function(){
-	
-// 	$ajax({
-// 		type:"GET",
-// 		url:'order/findStatus',
-// 		contentType:'application/json',
-// 		data: JSON.stringify(),
-// 		success: function(data){
-// 			console.log(data);
-// 		},error: function(e){
-// 			   console.log(e);
-// 		   }
-// 	})
-// })
-
-
-
-// var ctx = document.getElementById('myChart');
-// var myChart = new Chart(ctx, {
-//   type: 'pie',
-//   data: {
-//     labels: ['一月', '二月', '三月'],
-//     datasets: [{
-//       backgroundColor: [
-//         'rgba(255, 99, 132, 0.2)',
-//         'rgba(54, 162, 235, 0.2)',
-//         'rgba(255, 206, 86, 0.2)'
-//       ],
-//       borderColor: [
-//         'rgba(255,99,132,1)',
-//         'rgba(54, 162, 235, 1)',
-//         'rgba(255, 206, 86, 1)',
-//         'rgba(75, 192, 192, 1)'
-//       ],
-//       borderWidth: 1,
-//       label: '銷售業績(百萬)',
-//       data: [60, 49, 72]
-//     }]
-//   }
-// });
-
-
 
 $('#exampleModal').on('show.bs.modal', function (event) {
 	  var button = $(event.relatedTarget) // Button that triggered the modal
@@ -297,7 +239,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 	  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 	  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
 	  var modal = $(this)
-	  modal.find('.modal-title').text('新增訂單 ' + recipient)
+	  modal.find('.modal-title').text('新增 ' + recipient)
 	  modal.find('.modal-body input').val(recipient)
 	})
 
@@ -310,38 +252,27 @@ $('#ordersubmit').click(function() {
 
 $(function(){
 	
-	$('#orderStatus').change(function(){
-	var valuesta = $('#orderStatus').val();
-	console.log(valuesta);
-	$('#substatus').val(valuesta);	
-		
-	})	
+	$('#selectorderId').click(function() {
 
-	$('#selectuserId').click(function() {
+		var selected = $('#selectorderId').val()
+		console.log(selected)
+		$('#orderId').val(selected);
 
-			var selected = $('#selectuserId').val()
-			console.log(selected)
-			$('#userId').val(selected);
+	})
 
-		})
-		
-	$('#selectstore').click(function() {
+	
 
-			var selected = $('#selectstore').val()
-			console.log(selected)
-			$('#storeId').val(selected);
+$('#selectproducts').click(function() {
 
-		})
+		var selected = $('#selectproducts').val()
+		console.log(selected)
+		$('#productId').val(selected);
+
+	})
+	
 
 		
 
-	$('#selectproducts').click(function() {
-
-			var selected = $('#selectproducts').val()
-			console.log(selected)
-			$('#productId').val(selected);
-
-		})
 
 		
 		

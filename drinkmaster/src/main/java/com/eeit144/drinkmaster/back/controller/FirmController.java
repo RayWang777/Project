@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,12 +27,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.eeit144.drinkmaster.back.model.FirmBannerService;
 import com.eeit144.drinkmaster.back.model.FirmService;
 import com.eeit144.drinkmaster.back.model.UserService;
+import com.eeit144.drinkmaster.bean.FirmBanner;
 import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.FirmColumn;
 import com.eeit144.drinkmaster.bean.FirmSerch;
@@ -46,11 +50,14 @@ public class FirmController {
 
 	private UserService userService;
 
+	private FirmBannerService firmBannerService;
+	
 	@Autowired
-	public FirmController(FirmService firmService, UserService userService) {
+	public FirmController(FirmService firmService, UserService userService,FirmBannerService firmBannerService) {
 		super();
 		this.firmService = firmService;
 		this.userService = userService;
+		this.firmBannerService = firmBannerService;
 	}
 
 	@GetMapping("firm/{id}")
@@ -295,5 +302,16 @@ public class FirmController {
 	
 	@GetMapping("firm/minus")
 	public void DeleteFirms(Integer[] ids){}
+	
+	@GetMapping("firm/banner/all")
+	public String AllFirmBanner(@RequestParam(name="p",defaultValue = "1") Integer page,Model m) {
+		PageRequest firmBannerPage = PageRequest.of(page-1, 5, Sort.Direction.ASC, "id");
+		
+		Page<FirmBanner> findAll = firmBannerService.findAll(firmBannerPage);
+		
+		m.addAttribute("firmBanners", findAll);
+		return "/backend/backfirmBanner";
+	}
+	
 
 }

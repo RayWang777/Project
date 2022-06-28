@@ -1,29 +1,17 @@
 package com.eeit144.drinkmaster.back.controller;
 
-import java.util.Date;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
-<<<<<<< HEAD:drinkmaster/src/main/java/com/eeit144/drinkmaster/back/controller/OrderItemsController.java
 import com.eeit144.drinkmaster.back.model.OrderItemsService;
-=======
-import com.eeit144.drinkmaster.bean.OrderBean;
->>>>>>> b7887b774d8e9631aa1778fcaa12bc0d0f219731:drinkmaster/src/main/java/com/eeit144/drinkmaster/controller/OrderItemsController.java
 import com.eeit144.drinkmaster.bean.OrderItems;
-import com.eeit144.drinkmaster.bean.ProductBean;
-import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.bean.UserBean;
 
 @Controller

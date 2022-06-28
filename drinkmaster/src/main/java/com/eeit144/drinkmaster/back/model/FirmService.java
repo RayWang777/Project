@@ -22,7 +22,7 @@ public interface FirmService {
 
 	public FirmDTO change(FirmBean firm);
 	
-	public Page<FirmBean> findAllByFirmNameOrFirmPhone(String FirmName,String FirmPhone,Pageable pab);
+	public Page<FirmBean> findAllByFirmNameOrFirmPhone(String firmName,String firmPhone,Pageable pab);
 	
 	public Page<FirmBean> findAll2(Example<FirmBean> firm,Pageable pab);
 	
@@ -33,6 +33,8 @@ public interface FirmService {
 	public List<FirmBean> findFirmByUserId(Integer userId);
 	
 	public List<FirmBean> findAll3();
+	
+	public List<FirmBean> findByFirmNameContaining(String firmName);
 
 
 }

@@ -133,7 +133,7 @@
 	</label></th>
       <th scope="col">訂單編號</th>
       <th scope="col">訂購人</th>
-      <th scope="col" style="width: 170px;">訂單時間</th>
+      <th scope="col" style="width: 170px;">建立時間</th>
       <th scope="col">地址</th>
       <th scope="col">電話</th>
       <th scope="col">狀態</th>
@@ -180,10 +180,10 @@
 					   </c:choose>  
 
       <td><c:out value="${orderBean.totalPrice}"/></td>
-      <td><a href="${contextRoot}/backend/order/findAll"><i class="tiny material-icons">collections</i></a></td>
+      <td><a href="${contextRoot}/backend/orderItems/findId?id=${orderBean.orderId}"><i class="tiny material-icons">collections</i></a></td>
       <td>
       <a href="${contextRoot}/backend/order/edit?id=${orderBean.orderId}"><button class="btn btn-outline-primary btn-sm">編輯</button></a>
-        <a onclick="return confirm('確定要刪除嗎?')"  href="${contextRoot}/backend/order/delete?id=${orderBean.orderId}"><button class="btn btn-outline-danger btn-sm">刪除</button></a></td>
+      <a onclick="return confirm('確定要刪除嗎?')"  href="${contextRoot}/backend/order/delete?id=${orderBean.orderId}"><button class="btn btn-outline-danger btn-sm">刪除</button></a></td>
       </tr>
     </c:forEach>
     
@@ -242,13 +242,6 @@
 					</form:select><br><br>
 					<form:hidden path="storeId" value="1" />
 					
-<label for="selectproducts">商品名稱</label>
-					<form:select id="selectproducts" path="productBean.productId">
-
-						<form:options items="${orderaddproducts}" itemLabel="productName"
-							itemValue="productId" id="productoption"/>
-					</form:select><br><br>
-					<form:hidden path="productId" value="1" />
   <form:label path="orderAddress">地&emsp;&emsp;址</form:label>
   <form:input path="orderAddress" /><br><br>
   <form:label path="orderPhone">電&emsp;&emsp;話</form:label>
@@ -279,6 +272,63 @@
     </div>
   </div>
 </div>
+
+
+
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+<!--   <div class="modal-dialog" role="document"> -->
+<!--     <div class="modal-content"> -->
+<!--       <div class="modal-header"> -->
+<!--         <h5 class="modal-title" id="exampleModalLabel">新增訂單</h5> -->
+<!--         <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+<!--           <span aria-hidden="true">&times;</span> -->
+<!--         </button> -->
+<!--       </div> -->
+<!--   <div class="modal-body"> -->
+<!-- <table class="table table-hover"style="width:100%;table-layout:fixed;"> -->
+<!--   <thead> -->
+<!--     <tr> -->
+<!--       <th scope="col"><label class="control control--checkbox"> -->
+<!-- 						<input type="checkbox" class="js-check-all" /> -->
+<!-- 						<div class="control__indicator"></div> -->
+<!-- 	</label></th> -->
+<!--       <th scope="col">流水號</th> -->
+<!--       <th scope="col">訂單編號</th> -->
+<!--       <th scope="col">商品名稱</th> -->
+<!--       <th scope="col">數量</th> -->
+<!--       <th scope="col">價格</th> -->
+<!--       <th scope="col"></th> -->
+<!--     </tr> -->
+<!--   </thead> -->
+<!--   <tbody> -->
+<%--   <c:forEach var="orderItems" items="${page.content}"> --%>
+<!--     <tr scope="row"> -->
+<!-- 					<td class="align-middle"><label -->
+<!-- 						class="control control--checkbox"><input type="checkbox" -->
+<%-- 							id="check" value="<c:out value='${orderItems.orderItemId}'/>" --%>
+<!-- 							style="margin-top: 20px;" /> -->
+<!-- 							<div class="control__indicator"></div></label></td> -->
+    
+<%--       <th scope="row"><c:out value="${orderItems.orderItemId}"/></th> --%>
+<%--       <td><c:out value="${orderItems.orderBean.orderId}"/></td> --%>
+<%--       <td><c:out value="${orderItems.productBean.productName}"/></td> --%>
+<%--       <td><c:out value="${orderItems.quantity}"/></td> --%>
+<%--       <td><c:out value="${orderItems.price}"/></td> --%>
+
+<!-- 	</tr> -->
+<%--     </c:forEach> --%>
+    
+ 
+<!--   </tbody> -->
+  
+<!-- </table> -->
+
+<!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->
+
+
 
 <script type="text/javascript">
 

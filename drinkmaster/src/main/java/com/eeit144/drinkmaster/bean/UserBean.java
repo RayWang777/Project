@@ -88,6 +88,7 @@ public class UserBean {
 	@OneToOne(mappedBy = "userBean",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private StoreBean storeBean;
 	
+	
 	public UserBean() {
 	}
 

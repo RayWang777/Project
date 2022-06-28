@@ -10,6 +10,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 //import java.util.Optional;
 //import java.util.Random;
 //
@@ -106,9 +107,6 @@ public class OrderController<E> {
 
 			m.addAttribute("orderaddstores", stores);
 			
-			List<ProductBean> products = orderService.findAllProducts();
-
-			m.addAttribute("orderaddproducts", products);
 			
 			Page<OrderBean> page = orderService.findByPage(pageNumber);
 			OrderBean orderBean = new OrderBean();
@@ -149,9 +147,6 @@ public class OrderController<E> {
 
 			model.addAttribute("orderaddstores", stores);
 			
-			List<ProductBean> products = orderService.findAllProducts();
-
-			model.addAttribute("orderaddproducts", products);
 			
 			Date createTime = new Date();
 			orderBean.setCreateTime(createTime);
@@ -159,11 +154,10 @@ public class OrderController<E> {
 			//要先找到 store user product 的ID 把資料放到前端
 			StoreBean oldStore = storeService.findById(orderBean.getStoreId()).get();
 			UserBean oldUser = userService.findById(orderBean.getUserId()).get();
-			ProductBean oldProduct = productService.findById(orderBean.getProductId());
 			
 			orderBean.setUserBean(oldUser);
 			orderBean.setStoreBean(oldStore);
-			orderBean.setProductBean(oldProduct);
+
 			
 			orderService.insertOrder(orderBean);
 			
@@ -184,11 +178,7 @@ public class OrderController<E> {
 
 			m.addAttribute("orderaddstores", stores);
 			
-			List<ProductBean> products = orderService.findAllProducts();
-
-			m.addAttribute("orderaddproducts", products);
-						
-			
+									
 			OrderBean orderBean = orderService.findById(id);
 			m.addAttribute("orderBean", orderBean);
 			return "/backend/backorderupdate";
@@ -208,9 +198,6 @@ public class OrderController<E> {
 
 			m.addAttribute("orderaddstores", stores);
 			
-			List<ProductBean> products = orderService.findAllProducts();
-
-			m.addAttribute("orderaddproducts", products);
 			
 			List<OrderBean> orders = orderService.findAll();
 
@@ -218,11 +205,9 @@ public class OrderController<E> {
 			
 			StoreBean oldStore = storeService.findById(orderBean.getStoreId()).get();
 			UserBean oldUser = userService.findById(orderBean.getUserId()).get();
-			ProductBean oldProduct = productService.findById(orderBean.getProductId());
 			
 			orderBean.setUserBean(oldUser);
 			orderBean.setStoreBean(oldStore);
-			orderBean.setProductBean(oldProduct);
 			
 			
 			orderService.insertOrder(orderBean);
@@ -279,7 +264,6 @@ public class OrderController<E> {
 				orderBeanxslx = new OrderBeanxslx();
 				orderBeanxslx.setOrderId(order.getOrderId());
 				orderBeanxslx.setUserName(order.getUserBean().getUserName());
-				orderBeanxslx.setProductName(order.getProductBean().getProductName());
 				orderBeanxslx.setStoreName(order.getStoreBean().getStoreName());
 				orderBeanxslx.setOrderAddress(order.getOrderAddress());
 				orderBeanxslx.setOrderPhone(order.getOrderPhone());

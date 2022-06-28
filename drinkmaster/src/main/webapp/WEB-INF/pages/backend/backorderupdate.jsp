@@ -24,7 +24,7 @@
 						<form:options items="${orderaddusers}" itemLabel="userName"
 							itemValue="userId" />
 					</form:select><br><br>
-					<form:hidden path="userId" value="1" />
+					<form:hidden path="userId" value="${ orderBean.userBean.userId}" />
 
 <label for="selectstore">店家名稱</label>
 					<form:select id="selectstore" path="storeBean.storeId">
@@ -32,17 +32,10 @@
 						<form:options items="${orderaddstores}" itemLabel="storeName"
 							itemValue="storeId" />
 					</form:select><br><br>
-					<form:hidden path="storeId" value="1" />
+					<form:hidden path="storeId" value="${orderBean.storeBean.storeId }" />
 					
-<label for="selectproducts">商品名稱</label>
-					<form:select id="selectproducts" path="productBean.productId">
 
-						<form:options items="${orderaddproducts}" itemLabel="productName"
-							itemValue="productId" id="productoption"/>
-					</form:select><br><br>
-					<form:hidden path="productId" value="1" />
-
-  訂單日期<form:label path="createTime"></form:label>
+  建立時間<form:label path="createTime"></form:label>
   <form:input path="createTime" /><br><br>
   地&emsp;&emsp;址<form:label path="orderAddress"></form:label>
   <form:input path="orderAddress" /><br><br>

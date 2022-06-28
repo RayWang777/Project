@@ -54,17 +54,7 @@ public class OrderBean {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "storeid")
-	private StoreBean storeBean;
-	
-	@Transient
-	@Column(name = "productId")
-	@Excel(name="產品編號", orderNum="4",width = 15)
-	private Integer productId;
-	
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "productId",nullable = false)
-	private ProductBean productBean;
+	private StoreBean storeBean;	
 
 	@Column(name = "totalprice",nullable = false)
 	@Excel(name="總金額", orderNum="5",width = 30)
@@ -136,21 +126,6 @@ public class OrderBean {
 		this.storeBean = storeBean;
 	}
 
-	public Integer getProductId() {
-		return productId;
-	}
-
-	public void setProductId(Integer productId) {
-		this.productId = productId;
-	}
-
-	public ProductBean getProductBean() {
-		return productBean;
-	}
-
-	public void setProductBean(ProductBean productBean) {
-		this.productBean = productBean;
-	}
 
 	public Integer getTotalPrice() {
 		return totalPrice;
@@ -190,6 +165,14 @@ public class OrderBean {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public Set<OrderItems> getOrderItems() {
+		return orderItems;
+	}
+
+	public void setOrderItems(Set<OrderItems> orderItems) {
+		this.orderItems = orderItems;
 	}
 
 	

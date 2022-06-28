@@ -1,6 +1,7 @@
 package com.eeit144.drinkmaster.back.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,6 +25,10 @@ public class OrderItemsServiceImp implements OrderItemsService{
 	
 	@Override
 	public OrderItems findById(Integer id) {
+		Optional<OrderItems> orderItems = oitemDao.findById(id);
+		if(orderItems.isPresent()) {
+			 return orderItems.get();
+		 }
 		return null;
 	}
 
@@ -33,13 +38,13 @@ public class OrderItemsServiceImp implements OrderItemsService{
 	}
 
 	@Override
-	public void insertOrder(OrderItems orderItems) {
-		
+	public void insertOrderItems(OrderItems orderItems) {
+		oitemDao.save(orderItems);
 	}
 
 	@Override
 	public void deleteById(Integer id) {
-		
+		oitemDao.deleteById(id);
 	}
 
 	@Override
@@ -56,4 +61,16 @@ public class OrderItemsServiceImp implements OrderItemsService{
 		return page;
 	}
 
+	@Override
+	public Page<OrderItems> findByOrderBean_orderId(Integer orderId,Integer pageNumber){
+		Pageable pgb = PageRequest.of(pageNumber-1, 10 ,Sort.Direction.DESC ,"orderBean_orderId");
+		Page<OrderItems> page = oitemDao.findByOrderBean_orderId(orderId, pgb);
+		return page;
+	}
+
+	@Override
+	public List<OrderItems> findByOrderId(Integer orderId) {
+		return oitemDao.findByOrderBean_orderId(orderId);
+	};
+	
 }

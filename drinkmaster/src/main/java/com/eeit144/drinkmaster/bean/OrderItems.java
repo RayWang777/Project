@@ -1,8 +1,5 @@
 package com.eeit144.drinkmaster.bean;
 
-
-
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,40 +22,32 @@ public class OrderItems {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "orderitemid")
 	private Integer orderItemId;
-	
+
 	@Transient
 	@Column(name = "orderid")
 	private Integer orderId;
-	
+
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "orderid",nullable = false)
-	private OrderBean orderBean ;
-	
+	@JoinColumn(name = "orderid", nullable = false)
+	private OrderBean orderBean;
+
 	@Transient
 	@Column(name = "productid")
 	private Integer productId;
-	
+
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "productid",nullable = false)
-	private ProductBean productBean ;
-	
-	@Column(name = "price",nullable = false)
+	@JoinColumn(name = "productid", nullable = false)
+	private ProductBean productBean;
+
+	@Column(name = "price", nullable = false)
 	private Integer price;
-	
-	@Column(name = "quantity",nullable = false)
+
+	@Column(name = "quantity", nullable = false)
 	private Integer quantity;
-	
+
 	public OrderItems() {
-	}
-
-	public Integer getOrderItemId() {
-		return orderItemId;
-	}
-
-	public void setOrderItemId(Integer orderItemId) {
-		this.orderItemId = orderItemId;
 	}
 
 	public Integer getOrderId() {
@@ -67,6 +56,14 @@ public class OrderItems {
 
 	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
+	}
+
+	public Integer getOrderItemId() {
+		return orderItemId;
+	}
+
+	public void setOrderItemId(Integer orderItemId) {
+		this.orderItemId = orderItemId;
 	}
 
 	public OrderBean getOrderBean() {

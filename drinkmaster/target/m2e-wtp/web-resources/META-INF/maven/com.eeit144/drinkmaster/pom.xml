@@ -90,7 +90,6 @@
 			<version>2.11.0</version>
 		</dependency>
 
-<<<<<<< HEAD
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -118,7 +117,7 @@
 			<artifactId>easypoi-annotation</artifactId>
 			<version>4.2.0</version>
 		</dependency>
-=======
+
 <dependency>
     <groupId>org.projectlombok</groupId>
     <artifactId>lombok</artifactId>
@@ -126,13 +125,10 @@
     <scope>provided</scope>
 </dependency>
 <dependency>
-
 <groupId>org.springframework.boot</groupId>
-
 <artifactId>spring-boot-starter-mail</artifactId>
-
 </dependency>
->>>>>>> 1c9ef7aeb8a4ebf8071f630a06a41b28c3681cc9
+
 
 <!-- valid -->
 		<dependency>

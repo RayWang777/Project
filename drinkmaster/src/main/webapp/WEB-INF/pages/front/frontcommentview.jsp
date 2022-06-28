@@ -76,7 +76,7 @@ div.awesomeRating {
   </div>
   <div class="card-body">
   	<c:out value="${usercomment.userBean.userName}"></c:out>
-  	<c:out value="${usercomment.userBean.userId}"></c:out>
+<%--   	<c:out value="${usercomment.userBean.userId}"></c:out> --%>
   	<br/>
   	
   	
@@ -244,15 +244,15 @@ div.awesomeRating {
   	
   	
   	
-  	<div style="pointer-events: none" id="scores${comment.commentId}" class="awesomeRating"></div>
-	<div class="awesomeRatingValue"></div>
+  	<div style="pointer-events: none" id="scores2${comment.commentId}" class="awesomeRating"></div>
+	<input class="awesomeRatingValue" style="display:none" required></input>
 	<script type="text/javascript">
 	
-		$("#scores${comment.commentId}").awesomeRating({
+		$("#scores2${comment.commentId}").awesomeRating({
 			
 			valueInitial: "${comment.score}",
 			values: ["1.0", "2.0", "3.0", "4.0", "5.0"],
-			targetSelector: "span.awesomeRatingValue"
+			targetSelector: "input.awesomeRatingValue"
 		});
 	
 		console.log(${comment.score});

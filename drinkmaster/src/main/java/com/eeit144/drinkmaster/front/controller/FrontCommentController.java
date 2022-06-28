@@ -115,29 +115,29 @@ public class FrontCommentController {
 	
 	
 	
-//	@PostMapping("comment/insert")
-//	public String addcomment(@RequestPart("commentPhoto1") MultipartFile cPhoto, 
-//							@ModelAttribute("commentBean") CommentBean comment,
-//							@RequestParam("userid") UserBean sessionUser, Model model) throws Exception {
-//
-//		
-//		if(!cPhoto.isEmpty()) {
-//			String temp=new String(Base64.getEncoder().encode(cPhoto.getBytes()));
-//			String profile="data:image/png;base64,"+temp;
-//			
-//			comment.setCommentPhoto(profile);
-//		}
-//		
-//		
-//		comment.setUserBean(sessionUser);
-//		
-//		commentService.insertComment(comment);
-//		
-//
-//		
-//		return "redirect:/front/comment/all";
-//		
-//	}
+	@PostMapping("comment/insert")
+	public String addcomment(@RequestPart("commentPhoto1") MultipartFile cPhoto, 
+							@ModelAttribute("commentBean") CommentBean comment,
+							@RequestParam("userid") UserBean sessionUser, Model model) throws Exception {
+
+		
+		if(!cPhoto.isEmpty()) {
+			String temp=new String(Base64.getEncoder().encode(cPhoto.getBytes()));
+			String profile="data:image/png;base64,"+temp;
+			
+			comment.setCommentPhoto(profile);
+		}
+		
+		
+		comment.setUserBean(sessionUser);
+		
+		commentService.insertComment(comment);
+		
+
+		
+		return "redirect:/front/comment/all";
+		
+	}
 	
 	
 	

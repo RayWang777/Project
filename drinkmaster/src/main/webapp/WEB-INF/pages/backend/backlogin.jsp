@@ -43,7 +43,7 @@
 	</div>
 	<div class="mb-3">
 	<button type="submit" class="btn btn-primary">登入</button>
-	<a><button type="button" class="btn btn-light" style="margin-top: 10px">註冊</button></a>
+	<a href="${contextRoot}/backend/register"><button type="button" class="btn btn-light" style="margin-top: 10px">註冊</button></a>
 	</div>
 	<div class="mb-3">
 		<span><c:out value="${errorloginstr}"></c:out></span>

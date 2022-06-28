@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -57,6 +58,12 @@ public class UserController {
 	public UserController(UserService userService) {
 		super();
 		this.userService = userService;
+	}
+
+	@PostMapping("logout")
+	public String logout(SessionStatus status) {
+		status.setComplete();
+		return "/backend/backlogin";
 	}
 	
 	@GetMapping("login")

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,11 +22,15 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.eeit144.drinkmaster.back.model.FirmService;
 import com.eeit144.drinkmaster.back.service.ProductCategoryServiceImp;
 import com.eeit144.drinkmaster.back.service.ProductServiceImp;
+import com.eeit144.drinkmaster.back.service.StoreServiceImp;
+import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.bean.ProductCategoryBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
+import com.eeit144.drinkmaster.bean.UserBean;
 
 @Controller
 @Transactional
@@ -36,6 +41,10 @@ public class ProductController {
 	private ProductServiceImp proService;
 	@Autowired
 	ProductCategoryServiceImp categoryService;
+	@Autowired
+	private StoreServiceImp storeService;
+	@Autowired
+	private FirmService firmService;
 
 	@GetMapping("product/insertview")
 	public String addView(Model m, @SessionAttribute("canSeeStore") StoreBean storeBean) {
@@ -106,27 +115,60 @@ public class ProductController {
 	}
 
 	@GetMapping("product/all")
-	public ModelAndView findView(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber) {
-		Page<ProductBean> page = proService.findByPage(pageNumber);
-		mav.getModel().put("page", page);
+	public ModelAndView findView(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber,
+			@SessionAttribute("userBean") UserBean userBean) {
+		if (userBean.getRole().equals("admin")) {
+			Page<ProductBean> page = proService.findByPage(pageNumber);
+			mav.getModel().put("page", page);
+		} else if (userBean.getRole().equals("store")) {
+			Optional<StoreBean> StoreByUserId = storeService.findStoreByUserId(userBean.getUserId());
+			StoreBean store = StoreByUserId.get();
+			Page<ProductBean> page = proService.findByPage2(pageNumber, store.getStoreId());
+			mav.getModel().put("page", page);
+		} else if (userBean.getRole().equals("firm")) {
+			List<FirmBean> firmByUserId = firmService.findFirmByUserId(userBean.getUserId());
+			FirmBean firm = firmByUserId.get(0);
+			Page<ProductBean> page = proService.findByPage3(pageNumber, firm.getFirmId());
+			mav.getModel().put("page", page);
+		}
 		mav.setViewName("/backend/backproduct");
 		return mav;
 	}
 
 	@GetMapping("product/select")
 	public ModelAndView selectLike(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber,
-			@RequestParam("select") String select, @RequestParam("filed") String filed) {
-
-		System.out.println(select);
-		System.out.println(filed);
-		if (filed.equals("上架中") || filed.equals("已下架")) {
-			Page<ProductBean> page = proService.select(pageNumber, filed, filed);
-			mav.getModel().put("page", page);
-			mav.setViewName("/backend/backproduct");
-			return mav;
+			@RequestParam("select") String select, @RequestParam("filed") String filed,
+			@SessionAttribute("userBean") UserBean userBean) {
+		if (userBean.getRole().equals("admin")) {
+			if (filed.equals("上架中") || filed.equals("已下架")) {
+				Page<ProductBean> page = proService.select(pageNumber, filed, filed);
+				mav.getModel().put("page", page);
+			} else {
+				Page<ProductBean> page = proService.select(pageNumber, select, filed);
+				mav.getModel().put("page", page);
+			}
+		} else if (userBean.getRole().equals("store")) {
+			Optional<StoreBean> StoreByUserId = storeService.findStoreByUserId(userBean.getUserId());
+			StoreBean store = StoreByUserId.get();
+			if (filed.equals("上架中") || filed.equals("已下架")) {
+				Page<ProductBean> page = proService.select2(pageNumber, filed, filed, store.getStoreId());
+				mav.getModel().put("page", page);
+			} else {
+				Page<ProductBean> page = proService.select2(pageNumber, select, filed, store.getStoreId());
+				mav.getModel().put("page", page);
+			}
+		} else if (userBean.getRole().equals("firm")) {
+			List<FirmBean> firmByUserId = firmService.findFirmByUserId(userBean.getUserId());
+			FirmBean firm = firmByUserId.get(0);
+			if (filed.equals("上架中") || filed.equals("已下架")) {
+				Page<ProductBean> page = proService.select3(pageNumber, filed, filed, firm.getFirmId());
+				mav.getModel().put("page", page);
+			} else {
+				Page<ProductBean> page = proService.select3(pageNumber, select, filed, firm.getFirmId());
+				mav.getModel().put("page", page);
+			}
 		}
-		Page<ProductBean> page = proService.select(pageNumber, select, filed);
-		mav.getModel().put("page", page);
+
 		mav.setViewName("/backend/backproduct");
 		return mav;
 

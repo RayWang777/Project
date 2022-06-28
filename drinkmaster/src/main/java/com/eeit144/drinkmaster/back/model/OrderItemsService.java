@@ -20,7 +20,7 @@ public interface OrderItemsService {
 	public Page<OrderItems> findAll(Pageable pageNumber);
 
 	
-	public void insertOrder(OrderItems orderItems);
+	public void insertOrderItems(OrderItems orderItems);
 
 	
 	public void deleteById(Integer id);
@@ -30,4 +30,9 @@ public interface OrderItemsService {
 	
 	
 	public List<OrderItems> findAll();
+	
+	
+	public Page<OrderItems> findByOrderBean_orderId(Integer orderId,Integer pageNumber);
+	
+	public List<OrderItems> findByOrderId(Integer orderId);
 }

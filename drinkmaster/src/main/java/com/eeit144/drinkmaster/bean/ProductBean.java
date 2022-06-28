@@ -53,10 +53,6 @@ public class ProductBean {
 	
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "productBean",cascade = CascadeType.ALL)
-	private Set<OrderBean> orders = new LinkedHashSet<OrderBean>(); 
-	
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "productBean",cascade = CascadeType.ALL)
 	private Set<CommentBean> comments = new LinkedHashSet<CommentBean>();
 
 	@Column(name = "status")
@@ -126,13 +122,6 @@ public class ProductBean {
 		this.productCategoryBean = productCategoryBean;
 	}
 
-	public Set<OrderBean> getOrders() {
-		return orders;
-	}
-
-	public void setOrders(Set<OrderBean> orders) {
-		this.orders = orders;
-	}
 
 	public Set<CommentBean> getComments() {
 		return comments;

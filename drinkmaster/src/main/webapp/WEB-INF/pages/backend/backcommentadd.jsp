@@ -55,7 +55,7 @@ div.awesomeRating {
 	score<form:input id="score1" path="score" class="form-control" style="pointer-events: none" />
 	
 	<div id="scores" class="awesomeRating"></div>
-	<div class="awesomeRatingValue" style="display:none"></div>
+	<input class="awesomeRatingValue" style="display:none" required></input>
 	<script type="text/javascript">
 	
 		$("#scores").click(function(){
@@ -95,7 +95,7 @@ div.awesomeRating {
 	
 </div>    
     
-    <input type="submit" name="submit" value="新增訊息	">
+    <input type="submit" name="submit" value="新增訊息">
   
   </form:form>
   

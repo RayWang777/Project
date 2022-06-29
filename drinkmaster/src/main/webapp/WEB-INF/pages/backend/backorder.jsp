@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <jsp:include page="layout/header.jsp" />
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<html>
+<!-- <html> -->
 <head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 
@@ -55,6 +55,18 @@
 	font-size: 16px;
  } 
  
+ #orderform #selectuserId{ 
+	height: 25px; 
+	width: 150px;
+	font-size: 16px;
+ } 
+ 
+ #orderform #selectstore{ 
+	height: 25px; 
+	width: 150px;
+	font-size: 16px;
+ } 
+  
  #orderform #ordersubmit{ 
  	height: 30px; 
  	width: 60px; 
@@ -106,7 +118,7 @@
 
 <br>
 <p>
-<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="">新增訂單</button></a>&emsp;
+<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="">新增訂單</button>&emsp;
 <a href="${contextRoot}/backend/order/findAll"><button type="button" class="btn btn-outline-dark btn-sm">訂單列表</button></a>&emsp;
 <a href="${contextRoot}/backend/order/findStatus?sta=待付款"><button type="button" class="btn btn-outline-dark btn-sm">待付款</button></a>&emsp;
 <a href="${contextRoot}/backend/order/findStatus?sta=待出貨"><button type="button" class="btn btn-outline-dark btn-sm">待出貨</button></a>&emsp;
@@ -138,6 +150,7 @@
       <th scope="col">電話</th>
       <th scope="col">狀態</th>
       <th scope="col">總金額</th>
+      <th scope="col">詳細</th>
       <th scope="col">  </th>
     </tr>
   </thead>
@@ -152,7 +165,6 @@
     
       <th scope="row"><c:out value="${orderBean.orderId}"/></th>
       <td><c:out value="${orderBean.userBean.userName}"/></td>
-<%--       <td><c:out value="${orderBean.productId}"/></td> --%>
       <td><fmt:formatDate  value="${orderBean.createTime}" pattern="yyyy-MM-dd HH:mm"/></td>
       <td><c:out value="${orderBean.orderAddress}"/></td>
       <td><c:out value="${orderBean.orderPhone}"/></td>
@@ -171,7 +183,7 @@
 					<c:out value="待付款" /></td>
 						</c:when>			
 						<c:otherwise>
-			<td style="color: red;font-weight: bold;" test="${orderBean.orderStatus=='未出貨'}">
+			<td style="color: red;font-weight: bold;" test="${orderBean.orderStatus=='待出貨'}">
 					<c:out value="待出貨" /></td>
 						</c:otherwise>
 
@@ -180,7 +192,9 @@
 					   </c:choose>  
 
       <td><c:out value="${orderBean.totalPrice}"/></td>
-      <td><a href="${contextRoot}/backend/orderItems/findId?id=${orderBean.orderId}"><i class="tiny material-icons">collections</i></a></td>
+      <td>
+      <a href="${contextRoot}/backend/orderItems/findId?id=${orderBean.orderId}">
+      <i class="tiny material-icons" >collections</i></a></td>
       <td>
       <a href="${contextRoot}/backend/order/edit?id=${orderBean.orderId}"><button class="btn btn-outline-primary btn-sm">編輯</button></a>
       <a onclick="return confirm('確定要刪除嗎?')"  href="${contextRoot}/backend/order/delete?id=${orderBean.orderId}"><button class="btn btn-outline-danger btn-sm">刪除</button></a></td>
@@ -211,7 +225,7 @@
    </c:if>
    </c:forEach>
    </div>
-<%--    <canvas id="myChart" width="200" height="200"></canvas> --%>
+
    
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -225,8 +239,7 @@
   <div class="modal-body">
   <form:form id="orderform" class="form"  method="post" action="${contextRoot}/backend/order/insert" modelAttribute="orderBean">
 
-<%--   <form:label path="productId">產品編號</form:label> --%>
-<%--   <form:input path="productId" /><br><br> --%>
+
 <label for="selectuserId">使用者編號</label>
 					<form:select id="selectuserId" path="userBean.userId">
 
@@ -275,26 +288,23 @@
 </div>
 
 
-
 <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
 <!--   <div class="modal-dialog" role="document"> -->
 <!--     <div class="modal-content"> -->
 <!--       <div class="modal-header"> -->
-<!--         <h5 class="modal-title" id="exampleModalLabel">新增訂單</h5> -->
+<!--         <h5 class="modal-title" id="exampleModalLabel">New message</h5> -->
 <!--         <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
 <!--           <span aria-hidden="true">&times;</span> -->
 <!--         </button> -->
 <!--       </div> -->
-<!--   <div class="modal-body"> -->
+<!--       <div class="modal-body">       -->
+<!-- <div style="text-align:center;"> -->
 <!-- <table class="table table-hover"style="width:100%;table-layout:fixed;"> -->
 <!--   <thead> -->
 <!--     <tr> -->
-<!--       <th scope="col"><label class="control control--checkbox"> -->
-<!-- 						<input type="checkbox" class="js-check-all" /> -->
-<!-- 						<div class="control__indicator"></div> -->
-<!-- 	</label></th> -->
+
 <!--       <th scope="col">流水號</th> -->
-<!--       <th scope="col">訂單編號</th> -->
+<!-- <!--       <th scope="col">訂單編號</th> -->
 <!--       <th scope="col">商品名稱</th> -->
 <!--       <th scope="col">數量</th> -->
 <!--       <th scope="col">價格</th> -->
@@ -304,30 +314,29 @@
 <!--   <tbody> -->
 <%--   <c:forEach var="orderItems" items="${page.content}"> --%>
 <!--     <tr scope="row"> -->
-<!-- 					<td class="align-middle"><label -->
-<!-- 						class="control control--checkbox"><input type="checkbox" -->
-<%-- 							id="check" value="<c:out value='${orderItems.orderItemId}'/>" --%>
-<!-- 							style="margin-top: 20px;" /> -->
-<!-- 							<div class="control__indicator"></div></label></td> -->
+
     
 <%--       <th scope="row"><c:out value="${orderItems.orderItemId}"/></th> --%>
-<%--       <td><c:out value="${orderItems.orderBean.orderId}"/></td> --%>
+<%-- <%--       <td><c:out value="${orderItems.orderBean.orderId}"/></td> --%>
 <%--       <td><c:out value="${orderItems.productBean.productName}"/></td> --%>
 <%--       <td><c:out value="${orderItems.quantity}"/></td> --%>
 <%--       <td><c:out value="${orderItems.price}"/></td> --%>
 
-<!-- 	</tr> -->
+<!--       <td> -->
+<!--       </tr> -->
 <%--     </c:forEach> --%>
     
  
 <!--   </tbody> -->
   
 <!-- </table> -->
+<!-- </div>       -->
+<!-- </div> -->
+      
+<!--     </div> -->
+<!--   </div> -->
+<!-- </div>       -->
 
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
 
 
 
@@ -447,7 +456,7 @@ $(function(){
 
 </body>
 
-</html>
+<!-- </html> -->
 <script src="<c:url value="/js/lib/popper.min.js"/>"></script>
 <script src="<c:url value="/js/lib/main.js"/>"></script>
 

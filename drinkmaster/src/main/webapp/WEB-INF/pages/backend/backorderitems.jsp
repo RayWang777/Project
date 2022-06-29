@@ -106,7 +106,7 @@
 
 <br>
 <p>
-<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="">新增</button></a>&emsp;
+<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="">新增</button>&emsp;
 </p>
 
 <form action="${contextRoot}/backend/order/select" method="get">
@@ -187,7 +187,7 @@
         </button>
       </div>
       
-      <form:form class="form" method="post" action="${contextRoot}/backend/orderItems/insert" modelAttribute="orderItems">
+<form:form class="form" method="post" id="orderform" action="${contextRoot}/backend/orderItems/insert" modelAttribute="orderItems">
 <form:hidden path="orderItemId"/>
 <label for="selectorderId">訂單編號</label>
 					<form:select id="selectorderId" path="orderBean.orderId">
@@ -224,6 +224,8 @@
       </div>
       </div>
       
+
+
       
       
       
@@ -243,6 +245,16 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 	  modal.find('.modal-body input').val(recipient)
 	})
 
+	
+	$('#exampleModal').on('show.bs.modal', function (event) {
+	  var button = $(event.relatedTarget) // Button that triggered the modal
+	  var recipient = button.data('whatever') // Extract info from data-* attributes
+	  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+	  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+	  var modal = $(this)
+	  modal.find('.modal-title').text('新增 ' + recipient)
+	  modal.find('.modal-body input').val(recipient)
+	})
 
 
 $('#ordersubmit').click(function() {

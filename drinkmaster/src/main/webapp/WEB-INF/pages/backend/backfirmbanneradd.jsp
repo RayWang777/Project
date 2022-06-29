@@ -36,7 +36,7 @@ color:red;
 
 						<form:options items="${firms}" itemLabel="firmName"	itemValue="firmId" />
 					</form:select>
-					<form:hidden path="firmId" value="1" />
+					<form:hidden path="firmId" value="${firms[0].firmId}" />
 					<span id=firmIdSp></span>
 				</div>
 							

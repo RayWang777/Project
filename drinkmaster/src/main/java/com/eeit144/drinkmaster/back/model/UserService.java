@@ -25,5 +25,9 @@ public interface UserService {
 	public UserBean findByAccPwd(String userAccount, String userPassword);
 
 	public String findIdByName(String userName);
+	
+	public Boolean findUserByAccount(String userAccount);
+	
+	public List<UserBean> findNullFirmUsers(List<Integer> userIds);
 
 }

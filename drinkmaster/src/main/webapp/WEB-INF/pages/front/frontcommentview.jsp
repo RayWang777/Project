@@ -30,10 +30,7 @@ div.awesomeRating {
 </head>
 <body>
 
-
-
-
-<h1>新增評價</h1>
+<h1>全部評價</h1>
 
 
 <div class="container">
@@ -41,7 +38,7 @@ div.awesomeRating {
 
 <div class="row justify-content-center">
 <div class="col-9">
-	<h1>新增訊息頁面</h1>
+	<h1>全部訊息頁面</h1>
 <div class="card">
   <div class="card-header">
 <!--    <span style="font-size: 1.5em">評論</span> -->
@@ -50,10 +47,15 @@ div.awesomeRating {
   
   
   	<c:if test="${empty userBean}">
-  				登入後可評論~
+  	
+  	<br/>
+  				<h3>登入後可評論~</h3>
+  	
+  	
  	</c:if>
   
-  
+ 	 <br/>
+ 	 
 	<c:if test="${not empty userBean}">
 	
  <c:choose>
@@ -74,7 +76,7 @@ div.awesomeRating {
   </div>
   <div class="card-body">
   	<c:out value="${usercomment.userBean.userName}"></c:out>
-  	<c:out value="${usercomment.userBean.userId}"></c:out>
+<%--   	<c:out value="${usercomment.userBean.userId}"></c:out> --%>
   	<br/>
   	
   	
@@ -119,10 +121,20 @@ div.awesomeRating {
   	
   	<c:otherwise>
   	
-  	<form:form class="form" method="post" action="${contextRoot}/front/comment/insert" modelAttribute="commentBean" enctype="multipart/form-data">
-  	
-  		<div class="form-group">
-		<span style="font-size: 1.5em">撰寫評論</span>
+
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">撰寫評論</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">新增評論</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form:form class="form" method="post" action="${contextRoot}/front/comment/insert" modelAttribute="commentBean" enctype="multipart/form-data">
+          <div class="form-group">
 <!-- 	userid -->
 		<input id=userid name="userid" value="${userBean.userId}" type="hidden" />
 <!-- 	storeid -->
@@ -132,7 +144,7 @@ div.awesomeRating {
 	<form:input id="score1" path="score" class="form-control" style="pointer-events: none" type="hidden"/>
 	
 	<div id="scores" class="awesomeRating"></div>
-	<div class="awesomeRatingValue" style="display:none"></div>
+	<input class="awesomeRatingValue" style="display:none" required></input>
 	<script type="text/javascript">
 	
 		$("#scores").click(function(){
@@ -148,7 +160,7 @@ div.awesomeRating {
 			
 			valueInitial: "",
 			values: ["1.0", "2.0", "3.0", "4.0", "5.0"],
-			targetSelector: "div.awesomeRatingValue"
+			targetSelector: "input.awesomeRatingValue"
 			
 		});
 	
@@ -170,12 +182,21 @@ div.awesomeRating {
 	</c:if>
 	
 	
-</div>    
-    
-    <input type="submit" name="submit" value="新增評論">
+</div>
+
+<!-- 			<button type="submit" name="submit" class="btn btn-primary">新增評論</button> -->
+        
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" name="submit" class="btn btn-primary">新增評論</button>
+      </div>
+      </form:form>
+      </div>
+    </div>
+  </div>
+</div>
   		
-  		
-  	</form:form>
   	</c:otherwise>
   	
   	</c:choose>
@@ -205,21 +226,75 @@ div.awesomeRating {
 </div>
 </div>
 
+
+
+<c:forEach  var="comment" items="${page}" >
+<%-- <c:forEach  var="comment" items="${page.content}" > --%>
+
 <div class="row justify-content-center">
 <div class="col-9">
 
 <div class="card">
   <div class="card-header">
-    最新留言(時間) <fmt:formatDate pattern="yyyy 年 MM 月 dd 日 a hh:mm:ss EEEE" value="${lastestComment.createTime}" />
+		<c:out value="${comment.storeBean.storeName}"></c:out>
   </div>
   <div class="card-body">
-  
-	<c:out value="${lastestComment.content}"></c:out>
+  	<c:out value="${comment.userBean.userName}"></c:out>
+  	<br/>
+  	
+  	
+  	
+  	<div style="pointer-events: none" id="scores2${comment.commentId}" class="awesomeRating"></div>
+	<input class="awesomeRatingValue" style="display:none" required></input>
+	<script type="text/javascript">
+	
+		$("#scores2${comment.commentId}").awesomeRating({
+			
+			valueInitial: "${comment.score}",
+			values: ["1.0", "2.0", "3.0", "4.0", "5.0"],
+			targetSelector: "input.awesomeRatingValue"
+		});
+	
+		console.log(${comment.score});
+	</script>
+	
+	<c:out value="${comment.content}"></c:out>
+	
+	<br/>
+	
+	<img src="${comment.commentPhoto}" style="width: 100px;heiget: 100px" />
+
+	<br/>
+	(時間) <fmt:formatDate pattern="yyyy 年 MM 月 dd 日 a hh:mm:ss EEEE" value="${comment.createTime}" />
+	
+	
   
   </div>
 </div>
 </div>
 </div>
+
+</c:forEach>
+
+
+
+
+
+<!-- <div class="row justify-content-center"> -->
+<!-- <div class="col-9"> -->
+
+<!-- <div class="card"> -->
+<!--   <div class="card-header"> -->
+<%--     最新留言(時間) <fmt:formatDate pattern="yyyy 年 MM 月 dd 日 a hh:mm:ss EEEE" value="${lastestComment.createTime}" /> --%>
+<!--   </div> -->
+<!--   <div class="card-body"> -->
+  
+<%-- 	<c:out value="${lastestComment.content}"></c:out> --%>
+  
+<!--   </div> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->
 
 
 </div>

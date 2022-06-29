@@ -14,7 +14,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -97,7 +96,6 @@ public class FirmController {
 	@GetMapping("firm/all")
 	public String findAllPages(@ModelAttribute("firmSerch") FirmSerch firmSerch,@SessionAttribute("userBean") UserBean user, Model m) {
 		
-		
 		if(!(user.getRole().equals("admin"))) {
 			return "redirect:/backend/";			
 		}
@@ -158,9 +156,19 @@ public class FirmController {
 		if(!(user.getRole().equals("admin"))) {
 			return "redirect:/backend/";			
 		}
+
+		
+		List<Integer> findUserNullFirmBean = firmService.findUserNullFirmBean();
+	
+		if(findUserNullFirmBean.isEmpty()) {
+			
+			return "redirect:/backend/firm/all";
+		}
 		
 		FirmDTO firmDTO = new FirmDTO();
-		List<UserBean> users = userService.findAllUsers();
+		List<UserBean> users = userService.findNullFirmUsers(findUserNullFirmBean);
+		
+	
 
 		m.addAttribute("firmaddusers", users);
 		m.addAttribute("firm", firmDTO);
@@ -175,17 +183,16 @@ public class FirmController {
 			return "redirect:/backend/";			
 		}
 		
+		List<Integer> findUserNullFirmBean = firmService.findUserNullFirmBean();
+		List<UserBean> users = userService.findNullFirmUsers(findUserNullFirmBean);
+		m.addAttribute("firmaddusers", users);
+		
 		FirmDtoValidator firmDtoValidator = new FirmDtoValidator();
 		firmDtoValidator.validate(firm, result);
 		if(result.hasErrors()) {
-			List<UserBean> users = userService.findAllUsers();
-			m.addAttribute("firmaddusers", users);	
+	
 			return "/backend/backfirmadd";
 		}
-		
-		
-		List<UserBean> users = userService.findAllUsers();
-		m.addAttribute("firmaddusers", users);
 
 		FirmBean newFirm = new FirmBean();
 
@@ -307,6 +314,17 @@ public class FirmController {
 	public String AllFirmBanner(@RequestParam(name="p",defaultValue = "1") Integer page,Model m) {
 		
 		List<FirmBanner> findByFirmIdNull = firmBannerService.findAllList();
+		System.out.println(findByFirmIdNull);
+		if(findByFirmIdNull.isEmpty()) {
+
+			PageRequest firmBannerPage = PageRequest.of(page-1, 2, Sort.Direction.ASC, "id");		
+			Page<FirmBanner> findAll = firmBannerService.findAll(firmBannerPage);		
+			m.addAttribute("firmBanners", findAll);
+			return "/backend/backfirmBanner";
+		
+		}
+		
+		
 		List<Integer> list = new ArrayList<Integer>();
 		Integer firmId = null;
 		for(FirmBanner one: findByFirmIdNull) {
@@ -345,28 +363,28 @@ public class FirmController {
 	public String addFirmBanner(Model m) {
 		
 		List<FirmBanner> findByFirmIdNull = firmBannerService.findAllList();
+		FirmBanner newFirmBanner = new FirmBanner();
+		m.addAttribute("newBanner", newFirmBanner);
+
+		if(findByFirmIdNull.isEmpty()) {
+			List<FirmBean> findAll3 = firmService.findAll3();
+			m.addAttribute("firms", findAll3);
+			return "/backend/backfirmbanneradd";
+		}
+
 		List<Integer> list = new ArrayList<Integer>();
 		Integer firmId = null;
 		for(FirmBanner one: findByFirmIdNull) {
 			firmId = one.getFirmBean().getFirmId();
 			list.add(firmId);
 		}
-		
 		List<FirmBean> findByIdNotIn = firmService.findByIdNotIn(list);
-
-		
-		if(findByIdNotIn.isEmpty()) {
+			if(findByIdNotIn.isEmpty()) {
 			return "redirect:/backend/firm/banner/all";
 		}
-	
-
-		FirmBanner newFirmBanner = new FirmBanner();
 		m.addAttribute("firms", findByIdNotIn);
-		m.addAttribute("newBanner", newFirmBanner);
 		return "/backend/backfirmbanneradd";
 	}
-	
-
 	
 
 	@PostMapping("firm/banner/add")
@@ -413,7 +431,7 @@ public class FirmController {
 
 		List<FirmBean> list = firmService.findAll3();
 
-		FirmBanner oldBanner = firmBannerService.findByfirmId(id).get();
+		FirmBanner oldBanner = firmBannerService.findById(id).get();
 		
 		
 		m.addAttribute("firms", list);
@@ -425,7 +443,7 @@ public class FirmController {
 	@PostMapping("firm/banner/edit/{id}")
 	public String updateFirmBanner(@PathVariable("id") Integer id,@ModelAttribute("oldBanner") FirmBanner oldBanner, @RequestPart("reallogo") MultipartFile logo,
 			Model m) {
-	
+
 		FirmBanner oldFirmBanner = firmBannerService.findById(id).get();
 	
 		String contentType = logo.getContentType();
@@ -460,9 +478,9 @@ public class FirmController {
 		if(!(user.getRole().equals("admin"))) {
 			return "redirect:/backend/";			
 		}
-		FirmBanner firmBanner = firmBannerService.findByfirmId(id).get();
-		
-		firmBannerService.deleteById(id);
+		FirmBanner firmBanner = firmBannerService.findById(id).get();
+			
+		firmBannerService.deleteById(firmBanner.getId());
 		return "redirect:/backend/firm/banner/all";
 	}
 	

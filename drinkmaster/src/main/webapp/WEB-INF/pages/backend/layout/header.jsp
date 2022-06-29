@@ -51,16 +51,17 @@ li {
 						<span>飲君子後台</span>
 					</a>
 				</div>
+				<c:choose>
+				<c:when test="${userBean.role != 'admin'}"></c:when>
+				<c:otherwise>
 				<li><a class="sidebar-sub-toggle"><i
 						class="large material-icons md-48">account_circle</i> 會員管理<span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
-						<li><a href="${contextRoot}/backend/user/insert">新增</a></li>
-						<li><a href="${contextRoot}/backend/user/update">修改</a></li>
-
-						<li><a href="#">刪除</a></li>
-						<li><a href="${contextRoot}/backend/user/all">查詢</a></li>
+						<li><a href="${contextRoot}/backend/user/all">會員列表</a></li>
+						<li><a href="${contextRoot}/backend/user/insert">新增會員</a></li>
 					</ul></li>
+				</c:otherwise></c:choose>
 				<c:choose>
 				<c:when test="${userBean.role != 'admin' && userBean.role != 'firm'}"></c:when>
 				<c:otherwise>
@@ -75,12 +76,13 @@ li {
 						</c:if>
 						<c:if test="${userBean.role == 'firm'}">
 						<li><a href="<c:url value="/backend/firm/edit/${canSeeFirm.firmId}"/>">修改資料</a></li>
-						<li><a href="<c:url value="/backend/firm/banner/${canSeeFirm.firmId}"/>">修改Banner</a></li>
+						<li><a href="<c:url value="/backend/firm/banner/edit/${canSeeFirm.firmId}"/>">修改Banner</a></li>
 						</c:if>
 						<li><a href="#">資料圖表</a></li>
 					</ul></li>
 				</c:otherwise></c:choose>
-				<li><a class="sidebar-sub-toggle"><i
+				<c:if test="${userBean.role == 'admin'or userBean.role == 'firm' or userBean.role == 'store'}">
+					<li><a class="sidebar-sub-toggle"><i
 						class="large material-icons">store</i> 店家管理 <span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
@@ -93,6 +95,8 @@ li {
 						<li><a href="#">刪除</a></li>
 						<li><a href="#">查詢</a></li>
 					</ul></li>
+				</c:if>
+				<c:if test="${userBean.role == 'admin'or userBean.role == 'firm' or userBean.role == 'store'}">
 				<li><a class="sidebar-sub-toggle"><i
 						class="large material-icons">local_cafe</i> 商品管理 <span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
@@ -106,6 +110,7 @@ li {
 						<li><a href="${contextRoot}/backend/productanalyze">銷量圖表</a></li>
 
 					</ul></li>
+					</c:if>
 					<c:choose>
 					<c:when test="${userBean.role != 'admin' && userBean.role != 'firm' && userBean.role != 'store'}"></c:when>
 					<c:otherwise>
@@ -126,7 +131,7 @@ li {
 					<ul>
 						<li><a href="${contextRoot}/backend/comment">新增</a></li>
 						<li><a href="${contextRoot}/front/comment">前台</a></li>
-						<li><a href="#">刪除</a></li>
+						<li><a href="${contextRoot}/front/comment/all">刪除</a></li>
 						<li><a href="${contextRoot}/backend/comment/all">查詢</a></li>
 					</ul></li>
 				<li><a class="sidebar-sub-toggle"><i
@@ -210,7 +215,7 @@ $(function(){
 
 $(function(){
 	$('#logout').click(function(){
-		location.replace('${contextRoot}/backend/login/');
+		location.replace('${contextRoot}/backend/logout/');
 	});
 	
 	

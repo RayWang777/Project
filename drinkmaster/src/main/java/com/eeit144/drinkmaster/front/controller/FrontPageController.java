@@ -21,4 +21,10 @@ public class FrontPageController {
 	public String menu() {
 		return "/front/productmenu";
 	}
+	
+	@GetMapping("userMessage")
+	public String userserch() {
+		return "/front/frontuser";
+	}
+	
 }

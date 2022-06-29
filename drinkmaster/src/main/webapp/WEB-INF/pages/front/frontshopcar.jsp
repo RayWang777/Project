@@ -60,10 +60,11 @@
 	<table id="cart" class="table table-hover table-condensed">
     				<thead>
 						<tr>
-							<th style="width:50%">Product</th>
-							<th style="width:10%">Price</th>
-							<th style="width:8%">Quantity</th>
-							<th style="width:22%" class="text-center">Subtotal</th>
+							<th style="width:150px">商品</th>
+							<th style="width:100px"></th>
+							<th style="width:10%">單價</th>
+							<th style="width:8%">數量</th>
+							<th style="width:22%" class="text-center">總金額</th>
 							<th style="width:10%"></th>
 						</tr>
 					</thead>
@@ -71,18 +72,20 @@
 						<tr>
 							<td data-th="Product">
 								<div class="row">
-									<div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div>
+									<div class="col-sm-2 hidden-xs"><img style="width: 200px;" src="<c:url value="/images/珍奶.jpg"/>" alt="..." class="img-responsive"/></div>
 									<div class="col-sm-10">
-										<h4 class="nomargin">Product 1</h4>
-										<p>我是一杯飲料</p>
+										
+										
 									</div>
 								</div>
 							</td>
-							<td data-th="Price">$1.99</td>
+							<td><h4 class="nomargin">珍珠奶茶</h4></td>
+							
+							<td data-th="Price">$70</td>
 							<td data-th="Quantity">
 								<input type="number" class="form-control text-center" value="1">
 							</td>
-							<td data-th="Subtotal" class="text-center">1.99</td>
+							<td data-th="Subtotal" class="text-center">70</td>
 							<td class="actions" data-th="">
 								<button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
 								<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>								
@@ -91,13 +94,19 @@
 					</tbody>
 					<tfoot>
 						<tr class="visible-xs">
-							<td class="text-center"><strong>Total 1.99</strong></td>
+<!-- 						備註:折扣碼前的價格 -->
+							<td class="text-center"><strong>Total 70</strong></td>
 						</tr>
 						<tr>
-							<td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+							<td><a href="#" class="btn btn-warning">
+							<i class="fa fa-angle-left"></i> 
+							&thinsp;繼續購買</a></td>
+							<td>折扣碼:&thinsp;<input type="text" ></td>
 							<td colspan="2" class="hidden-xs"></td>
-							<td class="hidden-xs text-center"><strong>Total $1.99</strong></td>
-							<td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+							
+<!-- 							備註:折扣碼後的價格 -->
+							<td class="hidden-xs text-center"><span style="color:red;font-weight: bold;">折扣後&ensp;</span><strong>Total $60</strong></td>
+							<td><a href="#" class="btn btn-success btn-block">結帳&thinsp;<i class="fa fa-angle-right"></i></a></td>
 						</tr>
 					</tfoot>
 				</table>

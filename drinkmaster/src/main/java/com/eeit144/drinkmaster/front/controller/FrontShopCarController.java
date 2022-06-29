@@ -10,9 +10,9 @@ public class FrontShopCarController {
 
 	
 	
-	@GetMapping("shopcar/test")
+	@GetMapping("shopcar/")
 	public String carView() {
-		return "/front/frontshopcartest";
+		return "/front/frontshopcar";
 	}
 	
 

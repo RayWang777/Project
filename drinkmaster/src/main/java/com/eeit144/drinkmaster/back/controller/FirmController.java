@@ -237,15 +237,17 @@ public class FirmController {
 			return "redirect:/backend/";			
 		}
 		List<Integer> findUserNullFirmBean = firmService.findUserNullFirmBean();
-		
 		if(findUserNullFirmBean.isEmpty()) {
 			
 			return "redirect:/backend/firm/all";
 		}
-		m.addAttribute("firmaddusers", findUserNullFirmBean);
+		
+		List<UserBean> users = userService.findNullFirmUsers(findUserNullFirmBean);
 
 		Integer originUserId = firmService.findById(id).get().getUserBean().getUserId();
-		
+		UserBean findById2 = userService.findById(originUserId).get();
+		users.add(findById2);
+		m.addAttribute("firmaddusers", users);
 		m.addAttribute("originUserId", originUserId);
 		
 		if(user.getRole().equals("firm")) {

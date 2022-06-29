@@ -34,7 +34,7 @@ color:red;
 						<form:options items="${storeaddfirms}" itemLabel="firmName"
 							itemValue="firmId" />
 					</form:select>
-					<form:hidden path="firmId" value="1" />
+					<form:hidden path="firmId" value="${store.FirmBean.firmId}" />
 					<span id=firmIdSp></span>
 				</div>
 				</c:when>

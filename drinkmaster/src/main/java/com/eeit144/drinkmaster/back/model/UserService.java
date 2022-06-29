@@ -28,6 +28,6 @@ public interface UserService {
 	
 	public Boolean findUserByAccount(String userAccount);
 	
-	public List<UserBean> findNullFirmUsers(List<Integer> userIds);
+	public List<UserBean> findNullTypeUsers(List<Integer> userIds);
 
 }

@@ -1,5 +1,6 @@
 package com.eeit144.drinkmaster.back.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -188,6 +189,8 @@ public class StoreController {
 	public String storeUpdatePage(@PathVariable("id") Integer id,@SessionAttribute("userBean") UserBean user, Model m) {
 		
 		String role = user.getRole();
+		
+		List<Integer> findStoreUserNull = storeService.findStoreUserNull();
 
 		StoreBean findById = storeService.findById(id).get();
 		
@@ -203,7 +206,21 @@ public class StoreController {
 		storeDTO.setLatitude(findById.getLatitude());
 		storeDTO.setLongitude(findById.getLongitude());
 		
-		List<UserBean> users = userService.findAllUsers();
+		
+		UserBean orginUser = findById.getUserBean();
+		if(findStoreUserNull.isEmpty()) {
+			List<UserBean> list = new ArrayList<UserBean>();
+			list.add(orginUser);
+			m.addAttribute("storeaddusers", list);
+			m.addAttribute("store", storeDTO);
+			
+			return "/backend/backstoreupdate";
+		}
+		
+		
+		List<UserBean> users = userService.findNullTypeUsers(findStoreUserNull);
+		users.add(orginUser);
+		
 		m.addAttribute("storeaddusers", users);
 		
 		if(role.equals("admin")) {

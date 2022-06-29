@@ -15,7 +15,7 @@ public class FrontPageController {
 
 	@GetMapping("test")
 	public String firmserch() {
-		return "/front/fronttest";
+		return "/front/frontfirmtest";
 	}
 	@GetMapping("test1")
 	public String menu() {

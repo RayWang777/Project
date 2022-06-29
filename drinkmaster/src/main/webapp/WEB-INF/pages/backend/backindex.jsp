@@ -9,6 +9,7 @@
 
 <h1>後台首頁</h1>
 <p>你好, ${userBean.userName}</p>
+<span style="color:red;">${error}</span>
 
 <c:out value="role: ${userBean.role}" />&nbsp;&nbsp;<c:out value="userID: ${userBean.userId}" />
 <c:out value="firmId: ${canSeeFirm.firmId}" />&nbsp;&nbsp;<c:out value="firmName: ${canSeeFirm.firmName}" />

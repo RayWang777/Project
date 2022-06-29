@@ -45,6 +45,15 @@ public class OrderItemsController {
 			return mav;			
 		}
 		
+		List<ProductBean> products = orderService.findAllProducts();
+
+		m.addAttribute("addproducts", products);
+		
+		List<OrderBean> orders = orderService.findAll();
+
+		m.addAttribute("addorders", orders);
+		
+		
 		Page<OrderItems> page = oiService.findByPage(pageNumber);
 		OrderItems orderItems = new OrderItems();
 		mav.getModel().put("orderItems", orderItems);

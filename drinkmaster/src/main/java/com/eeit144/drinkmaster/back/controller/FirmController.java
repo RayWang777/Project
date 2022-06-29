@@ -14,7 +14,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -40,7 +39,6 @@ import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.FirmColumn;
 import com.eeit144.drinkmaster.bean.FirmSerch;
 import com.eeit144.drinkmaster.bean.UserBean;
-import com.eeit144.drinkmaster.dto.FirmAddUserDto;
 import com.eeit144.drinkmaster.dto.FirmDTO;
 
 @Controller
@@ -158,9 +156,19 @@ public class FirmController {
 		if(!(user.getRole().equals("admin"))) {
 			return "redirect:/backend/";			
 		}
+
+		
+		List<Integer> findUserNullFirmBean = firmService.findUserNullFirmBean();
+	
+		if(findUserNullFirmBean.isEmpty()) {
+			
+			return "redirect:/backend/firm/all";
+		}
 		
 		FirmDTO firmDTO = new FirmDTO();
-		List<UserBean> users = userService.findAllUsers();
+		List<UserBean> users = userService.findNullFirmUsers(findUserNullFirmBean);
+		
+	
 
 		m.addAttribute("firmaddusers", users);
 		m.addAttribute("firm", firmDTO);
@@ -175,17 +183,16 @@ public class FirmController {
 			return "redirect:/backend/";			
 		}
 		
+		List<Integer> findUserNullFirmBean = firmService.findUserNullFirmBean();
+		List<UserBean> users = userService.findNullFirmUsers(findUserNullFirmBean);
+		m.addAttribute("firmaddusers", users);
+		
 		FirmDtoValidator firmDtoValidator = new FirmDtoValidator();
 		firmDtoValidator.validate(firm, result);
 		if(result.hasErrors()) {
-			List<UserBean> users = userService.findAllUsers();
-			m.addAttribute("firmaddusers", users);	
+	
 			return "/backend/backfirmadd";
 		}
-		
-		
-		List<UserBean> users = userService.findAllUsers();
-		m.addAttribute("firmaddusers", users);
 
 		FirmBean newFirm = new FirmBean();
 

@@ -86,4 +86,9 @@ public class UserServiceImp implements UserService {
 		}
 		return true;
 	}
+	
+	@Override
+	public List<UserBean> findNullFirmUsers(List<Integer> userIds){
+		return userDao.findAllById(userIds);
+	}
 }

@@ -61,7 +61,7 @@ color:red;
 						<form:options items="${firmaddusers}" itemLabel="userName"
 							itemValue="userId" />
 					</form:select>
-					<form:hidden path="userId" value="1" />
+					<form:hidden path="userId" value="${firmaddusers[0].userId}" />
 					<span id=firmUserIdSp></span>
 				</div>
 

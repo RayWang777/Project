@@ -6,6 +6,9 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -142,25 +145,34 @@ public class FrontCommentController {
 	
 	
 	
-//	@GetMapping("comment/timeasc")
-	public String viewMessage(Model model) {
+	@GetMapping("comment/timeasc")
+	public String viewMessage(@RequestParam(name = "p", defaultValue = "1") Integer pageNumber, Model model) {
 		
-		List<CommentBean> page = commentService.getCreateTimeAsc();
+		Pageable pageable = PageRequest.of(pageNumber-1,3,Sort.Direction.ASC,"createTime");
+		
+		Page<CommentBean> page = commentService.findCommentByStoreidPage(storeId,pageable);		
 		
 		model.addAttribute("page",page);
 		
-		return "backcommentview";
+		return "/front/frontcommentview";
 		
 	}
 	
 	@GetMapping("comment/all")
-	public String viewtimedesc(Model model) {
+	public String viewtimedesc(@RequestParam(name = "p", defaultValue = "1") Integer pageNumber, Model model) {      //, @RequestParam("storeId") Integer storeId
 		
 		StoreBean sb = new StoreBean();
 		
 		sb.setStoreId(storeId);	
 		
-		List<CommentBean> findsId = commentService.findCommentByStoreid(storeId);
+//		List<CommentBean> findCommentById = commentService.findCommentByStoreid(storeId);
+		
+		
+		Pageable pageable = PageRequest.of(pageNumber-1,3,Sort.Direction.DESC,"createTime");
+		
+		Page<CommentBean> page = commentService.findCommentByStoreidPage(storeId,pageable);
+		
+		
 		
 		CommentBean commentBean = new CommentBean();
 		
@@ -182,12 +194,15 @@ public class FrontCommentController {
 		}
 		
 		
-		List<CommentBean> page = commentService.getCreateTimeDesc();
+//		List<CommentBean> page = commentService.getCreateTimeDesc();
 		
+//		Pageable pageable = PageRequest.of(pageNumber-1,3,Sort.Direction.DESC,"createTime");
+//		
+//		Page<CommentBean> page = commentService.findCommentByStoreidPage(storeId, pageable);
 		
 		model.addAttribute("commentBean", commentBean);
 		
-		model.addAttribute("findsId", findsId);
+//		model.addAttribute("findCommentById", findCommentById);
 		model.addAttribute("findusId", findusId);
 		model.addAttribute("page",page);
 		
@@ -195,25 +210,33 @@ public class FrontCommentController {
 		
 	}
 	
-//	@GetMapping("comment/scoredesc")
-	public String viewscoredesc(Model model) {
+
+
+
+
+	@GetMapping("comment/scoredesc")
+	public String viewscoredesc(@RequestParam(name = "p", defaultValue = "1") Integer pageNumber, Model model) {
 		
-		List<CommentBean> page = commentService.getScoreDesc();
+		Pageable pageable = PageRequest.of(pageNumber-1,3,Sort.Direction.DESC,"score");
+		
+		Page<CommentBean> page = commentService.findCommentByStoreidPage(storeId,pageable);
 		
 		model.addAttribute("page",page);
 		
-		return "/backend/backcommentview";
+		return "/front/frontcommentview";
 		
 	}
 	
-//	@GetMapping("comment/scoreasc")
-	public String viewscoreasc(Model model) {
+	@GetMapping("comment/scoreasc")
+	public String viewscoreasc(@RequestParam(name = "p", defaultValue = "1") Integer pageNumber, Model model) {
 		
-		List<CommentBean> page = commentService.getScoreAsc();
+		Pageable pageable = PageRequest.of(pageNumber-1,3,Sort.Direction.ASC,"score");
+		
+		Page<CommentBean> page = commentService.findCommentByStoreidPage(storeId,pageable);
 		
 		model.addAttribute("page",page);
 		
-		return "/backend/backcommentview";
+		return "/front/frontcommentview";
 		
 	}
 	

@@ -1,6 +1,7 @@
 package com.eeit144.drinkmaster.back.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,33 +52,27 @@ public class CommentServiceImp implements CommentService {
 		commentDao.deleteById(id);
 	}
 	
-	@Override
-	public Page<CommentBean> findByPageTimeDesc(Integer storeId, Pageable pageable){
-		
-		return commentDao.findCommentByStoreidPage(storeId, pageable);
-	}
+//	@Override
+//	public Page<CommentBean> findAllByOrderByCreateTimeDesc(Integer storeId, Pageable pageable){
+//		return commentDao.findAllByOrderByCreateTimeDesc(storeId, pageable);
+//	}
+//	
+//	
+//	@Override
+//	public Page<CommentBean> findAllByOrderByCreateTimeAsc(Integer storeId, Pageable pageable){
+//		return commentDao.findAllByOrderByCreateTimeAsc(storeId, pageable);
+//	}
+//	
+//	@Override
+//	public Page<CommentBean> findAllByOrderByScoreDesc(Integer storeId, Pageable pageable){
+//		return commentDao.findAllByOrderByScoreDesc(storeId, pageable);
+//	}
+//	
+//	@Override
+//	public Page<CommentBean> findAllByOrderByScoreAsc(Integer storeId, Pageable pageable){
+//		return commentDao.findAllByOrderByScoreAsc(storeId, pageable);
+//	}
 	
-	
-	@Override
-	public Page<CommentBean> findByPageTimeAsc(Integer storeId, Pageable pageable){
-		
-		
-		return commentDao.findCommentByStoreidPage(storeId, pageable);
-	}
-	
-	@Override
-	public Page<CommentBean> findByPageScoreDesc(Integer storeId, Pageable pageable){
-		
-		
-		return commentDao.findCommentByStoreidPage(storeId, pageable);
-	}
-	
-	@Override
-	public Page<CommentBean> findByPageScoreAsc(Integer storeId, Pageable pageable){
-		
-		
-		return commentDao.findCommentByStoreidPage(storeId, pageable);
-	}
 	
 	
 	public CommentBean getLastest() {
@@ -113,8 +108,7 @@ public class CommentServiceImp implements CommentService {
 
 	@Override
 	public Page<CommentBean> findCommentByStoreidPage(Integer storeId, Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
+		return commentDao.findCommentByStoreidPage(storeId,pageable);
 	}
 	
 //	@Override
@@ -129,5 +123,13 @@ public class CommentServiceImp implements CommentService {
 	public Integer countScoreByStoreidScore(Integer storeId, Integer score) {
 		return commentDao.countScoreByStoreidScore(storeId, score);
 	}
+
+	
+
+	public Double avgScoreByStoreid(Integer storeId) {
+		return commentDao.avgScoreByStoreid(storeId);
+	}
+
+	
 	
 }

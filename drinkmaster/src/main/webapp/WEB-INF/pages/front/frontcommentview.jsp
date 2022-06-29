@@ -24,13 +24,19 @@ div.awesomeRating {
 	font-size: 2em;
 }
 
+#dropdownMenuButton1{
+	background-color: white;
+	border: 1px solid gray;
+	float:right;
+}
+
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 
-<h1>全部評價</h1>
+
 
 
 <div class="container">
@@ -38,11 +44,9 @@ div.awesomeRating {
 
 <div class="row justify-content-center">
 <div class="col-9">
-	<h1>全部訊息頁面</h1>
+<h1 style="text-align:center">評論區</h1>
 <div class="card">
-  <div class="card-header">
-<!--    <span style="font-size: 1.5em">評論</span> -->
-  </div>
+ 
   <div class="card-body">
   
   
@@ -123,9 +127,9 @@ div.awesomeRating {
   	
 
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">撰寫評論</button>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal0" data-bs-whatever="@mdo">撰寫評論</button>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal0" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -227,8 +231,28 @@ div.awesomeRating {
 </div>
 
 
+<br/>
 
-<c:forEach  var="comment" items="${page}" >
+<div class="row justify-content-center">
+	<div class="col-9">
+
+<div class="dropdown" style="text-align:right">
+  <button class="btn btn-black dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    排序
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" href="${contextRoot}/front/comment/all">最新</a></li>
+    <li><a class="dropdown-item" href="${contextRoot}/front/comment/scoredesc">評分最高</a></li>
+    <li><a class="dropdown-item" href="${contextRoot}/front/comment/scoreasc">評分最低</a></li>
+    <li><a class="dropdown-item" href="${contextRoot}/front/comment/timeasc">最早</a></li>
+  </ul>
+</div>
+
+</div>
+</div>
+
+<br/>
+<c:forEach  var="comment" items="${page.content}" >
 <%-- <c:forEach  var="comment" items="${page.content}" > --%>
 
 <div class="row justify-content-center">
@@ -276,7 +300,32 @@ div.awesomeRating {
 
 </c:forEach>
 
+<div class="row justify-content-center">
+	<div class="col-9">
+		<c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
+		
+		<c:choose>
+			<c:when test="${page.number != pageNumber-1}" >
+			
+				<a href="${contextRoot}/front/comment/all/?p=${pageNumber}" > <c:out value="${pageNumber}" /></a>
+			
+			</c:when>
+		
+			<c:otherwise>
+				<c:out value="${pageNumber}" />
+			</c:otherwise>	
+		
+		</c:choose>
+		
+		<c:if test="${page.totalPages != pageNumber}">
+			|
+		</c:if>
+			
+		
+		</c:forEach>
 
+	</div>
+</div>
 
 
 

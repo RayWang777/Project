@@ -1,6 +1,7 @@
 package com.eeit144.drinkmaster.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -40,6 +41,16 @@ public interface CommentRepostiory extends JpaRepository<CommentBean, Integer> {
 	public List<CommentBean> findAllByOrderByCreateTimeDesc();
 	
 	
+	
+//	public Page<CommentBean> findAllByOrderByScoreAsc(Integer storeId, Pageable pageable);
+//	
+//	public Page<CommentBean> findAllByOrderByScoreDesc(Integer storeId, Pageable pageable);
+//	
+//	public Page<CommentBean> findAllByOrderByCreateTimeAsc(Integer storeId, Pageable pageable);
+//	
+//	public Page<CommentBean> findAllByOrderByCreateTimeDesc(Integer storeId, Pageable pageable);
+	
+	
 	@Query(value="select * from comment where userid = :userId and storeid = :storeId",nativeQuery = true)
 	public List<CommentBean> findCommentByUseridAndStoreid(@Param(value="userId")Integer userId, @Param(value="storeId")Integer storeId);
 	
@@ -51,7 +62,10 @@ public interface CommentRepostiory extends JpaRepository<CommentBean, Integer> {
 	
 	@Query(value="SELECT COUNT(score) FROM comment WHERE storeid = :storeId and score = :score",nativeQuery = true)
 	public Integer countScoreByStoreidScore(@Param(value="storeId")Integer storeId,@Param(value="score")Integer score);
+
 	
-	
+	@Query(value="SELECT ROUND(avg(score),1) FROM comment where storeid = :storeId",nativeQuery = true)
+	public Double avgScoreByStoreid(@Param(value="storeId")Integer storeId);
+
 	
 }

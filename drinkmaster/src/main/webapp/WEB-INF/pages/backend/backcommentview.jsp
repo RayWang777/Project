@@ -151,7 +151,11 @@ console.log(average(rating));
 </div>
 </div>
 
+
+
+
 </c:forEach>
+
 
 
 

@@ -87,7 +87,7 @@ public class FrontFirmController {
 	
 	@PostMapping("firm/serch")
 	@ResponseBody
-	public List<FirmVo> findByFirmName(@RequestBody Map key){
+	public List<FirmVo> findByFirmName(@RequestBody Map<String,String> key){
 		String firmkey = (String)key.get("key");
 	 List<FirmBean> findByFirmNameContaining = firmService.findByFirmNameContaining(firmkey);
 	 List<FirmVo> list = new ArrayList<FirmVo>();

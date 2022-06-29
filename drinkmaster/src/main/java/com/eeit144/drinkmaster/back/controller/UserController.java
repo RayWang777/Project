@@ -146,19 +146,22 @@ public class UserController {
 	public String insertUserGo(@ModelAttribute("user") UserBean user, BindingResult result,
 			@RequestParam("reallogo") MultipartFile photo,Model m) {
 
+		System.out.println("成功進入insert postmapping");
+		System.out.println("user account：" + user.getUserAccount());
 		//確認是否已有帳號
 		if(!userService.findUserByAccount(user.getUserAccount())) {
 			System.out.println("成功進入帳號除錯");
 			m.addAttribute("accErr", "帳號已有人使用");
 			return "/backend/backuseradd";
 		};
-		
+		System.out.println("準備進入後端識別格式");
 		// 以下為用UserBeanValidator後端識別欄位錯誤格式
 		UserBeanValidator validator = new UserBeanValidator();
 		validator.validate(user, result);
 		if(result.hasErrors()) {
 			return "/backend/backuseradd";
 		}
+		System.out.println("完成後端識別格式");
 		// 以下為新增動作
 		String contentType = photo.getContentType();
 		System.out.println(contentType);
@@ -168,7 +171,7 @@ public class UserController {
 		if(user.getBirthday() == null) {
 			user.setBirthday(createDate);
 		}
-		
+		System.out.println("完成塞入日期");
 		try {
 			user.setPhoto(photo.getBytes());
 		} catch (IOException e) {
@@ -177,9 +180,9 @@ public class UserController {
 			m.addAttribute("user", userDTO);
 			return "/backend/backuseradd";
 		}
-		
+		System.out.println("完成圖片塞入user");
 		userService.insertUser(user);
-		
+		System.out.println("完成新增");
 		return "redirect:/backend/user/all";
 	}
 

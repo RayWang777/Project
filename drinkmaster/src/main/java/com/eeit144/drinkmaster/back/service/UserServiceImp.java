@@ -76,9 +76,12 @@ public class UserServiceImp implements UserService {
 		return user;
 	}
 	
+	@Override
 	public Boolean findUserByAccount(String userAccount) {
+		System.out.println("(service)user account 1: " + userAccount);
+		System.out.println("(service)user account 2: " + userDao.findByAccount(userAccount));
 		String user = userDao.findByAccount(userAccount);
-		if(!user.isEmpty()) {
+		if(!(user == null)) {
 			return false;
 		}
 		return true;

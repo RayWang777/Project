@@ -210,7 +210,7 @@ function checkEmpty(){
     let birthday = document.getElementById("birthday");
     let bd = birthday.value;
     if (bd == "" || bd.length == 0) {
-    	theBD.innerHTML = "請輸入職權";
+    	theBD.innerHTML = "請選取生日";
     } else {
     	theBD.innerHTML = "";
     }

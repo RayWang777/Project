@@ -14,8 +14,8 @@
 }
 
 .circle--square img{
-    width: 60%;
-    height:60%;
+    width: 100%;
+    vertical-align : middle;
 }
 
 </style>

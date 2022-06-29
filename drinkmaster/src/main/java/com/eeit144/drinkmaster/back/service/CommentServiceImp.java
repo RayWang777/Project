@@ -5,9 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.eeit144.drinkmaster.back.model.CommentService;
@@ -54,13 +52,31 @@ public class CommentServiceImp implements CommentService {
 	}
 	
 	@Override
-	public Page<CommentBean> findByPage(Integer pageNumber){
+	public Page<CommentBean> findByPageTimeDesc(Integer storeId, Pageable pageable){
 		
-		Pageable pgb = PageRequest.of(pageNumber-1, 3 , Sort.Direction.DESC ,"createTime");
+		return commentDao.findCommentByStoreidPage(storeId, pageable);
+	}
+	
+	
+	@Override
+	public Page<CommentBean> findByPageTimeAsc(Integer storeId, Pageable pageable){
 		
-		Page<CommentBean> page = commentDao.findAll(pgb);
 		
-		return page;
+		return commentDao.findCommentByStoreidPage(storeId, pageable);
+	}
+	
+	@Override
+	public Page<CommentBean> findByPageScoreDesc(Integer storeId, Pageable pageable){
+		
+		
+		return commentDao.findCommentByStoreidPage(storeId, pageable);
+	}
+	
+	@Override
+	public Page<CommentBean> findByPageScoreAsc(Integer storeId, Pageable pageable){
+		
+		
+		return commentDao.findCommentByStoreidPage(storeId, pageable);
 	}
 	
 	
@@ -94,6 +110,16 @@ public class CommentServiceImp implements CommentService {
 	public List<CommentBean> findCommentByUseridAndStoreid(Integer userId, Integer storeId){
 		return commentDao.findCommentByUseridAndStoreid(userId,storeId);
 	}
+
+	@Override
+	public Page<CommentBean> findCommentByStoreidPage(Integer storeId, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
+//	@Override
+//	public Page<CommentBean> findPageByOrderByScoreAsc(Integer pageNumber){
+//		return commentDao.findPageByOrderByScoreAsc(pageNumber);
+//	}
 	
 }

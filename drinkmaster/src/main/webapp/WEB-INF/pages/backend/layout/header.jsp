@@ -126,7 +126,7 @@ li {
 					<ul>
 						<li><a href="${contextRoot}/backend/comment">新增</a></li>
 						<li><a href="${contextRoot}/front/comment">前台</a></li>
-						<li><a href="#">刪除</a></li>
+						<li><a href="${contextRoot}/front/comment/all">刪除</a></li>
 						<li><a href="${contextRoot}/backend/comment/all">查詢</a></li>
 					</ul></li>
 				<li><a class="sidebar-sub-toggle"><i

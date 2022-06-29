@@ -30,10 +30,7 @@ div.awesomeRating {
 </head>
 <body>
 
-
-
-
-<h1>新增評價</h1>
+<h1>全部評價</h1>
 
 
 <div class="container">
@@ -41,7 +38,7 @@ div.awesomeRating {
 
 <div class="row justify-content-center">
 <div class="col-9">
-	<h1>新增訊息頁面</h1>
+	<h1>全部訊息頁面</h1>
 <div class="card">
   <div class="card-header">
 <!--    <span style="font-size: 1.5em">評論</span> -->
@@ -119,61 +116,10 @@ div.awesomeRating {
   	
   	<c:otherwise>
   	
-  	<form:form class="form" method="post" action="${contextRoot}/front/comment/insert" modelAttribute="commentBean" enctype="multipart/form-data">
+  	<form:form class="form" method="post" action="${contextRoot}/front/comment" modelAttribute="commentBean" enctype="multipart/form-data">
   	
-  		<div class="form-group">
-		<span style="font-size: 1.5em">撰寫評論</span>
-<!-- 	userid -->
-		<input id=userid name="userid" value="${userBean.userId}" type="hidden" />
-<!-- 	storeid -->
-	<form:input path="storeBean" class="form-control" type="hidden" />
-<%-- 	productid<form:input path="productBean" class="form-control" /> --%>
-<!-- 	score -->
-	<form:input id="score1" path="score" class="form-control" style="pointer-events: none" type="hidden"/>
-	
-	<div id="scores" class="awesomeRating"></div>
-	<div class="awesomeRatingValue" style="display:none"></div>
-	<script type="text/javascript">
-	
-		$("#scores").click(function(){
-			
-			var test = $(".awesomeRatingValue").val();
-			console.log(test);
-			$("#score1").attr("value",test);
-			
-		});
-		
-	
-		$(".awesomeRating").awesomeRating({
-			
-			valueInitial: "",
-			values: ["1.0", "2.0", "3.0", "4.0", "5.0"],
-			targetSelector: "div.awesomeRatingValue"
-			
-		});
-	
-		
-	</script>
-	
-	
-	<form:input path="scoreType" class="form-control" type="hidden"/>
-	content<form:textarea path="content" class="form-control" />
-	
-	<br/>
-	
-	<input id="commentPhoto1" name="commentPhoto1"  type="file" class="form-control" onchange="preview()" />
-
-		<img id="image" src="" width="100px" height="100px" />
-	<c:if test="${comment.commentId!=null}">
-					<img id="oldImage" src="${comment.commentPhoto}" width="100px"
-						height="100px" />
-	</c:if>
-	
-	
-</div>    
-    
-    <input type="submit" name="submit" value="新增評論">
   		
+  		 <input type="submit" name="submit" value="撰寫評論">
   		
   	</form:form>
   	</c:otherwise>

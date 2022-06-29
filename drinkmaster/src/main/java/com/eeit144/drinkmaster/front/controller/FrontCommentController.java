@@ -2,8 +2,10 @@ package com.eeit144.drinkmaster.front.controller;
 
 import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +28,7 @@ import com.eeit144.drinkmaster.bean.UserBean;
 
 @Controller
 @SessionAttributes(names= {"userBean"})
-@RequestMapping("/front")
+@RequestMapping("front/")
 public class FrontCommentController {
 	
 	@Autowired
@@ -38,77 +40,82 @@ public class FrontCommentController {
 	private Integer scoreType = 10;		//測試用
 	
 	
-
-	@GetMapping("/comment")
-	public String CommentaddPage(@SessionAttribute("userBean") UserBean user, Model model) {   // , @PathVariable("storeId") StoreBean storeBean   
+	public String CommentStorePage(@PathVariable("storeid") StoreBean store, Model model) {
+		
+		Integer storeid = store.getStoreId();		
+		
+		commentService.findCommentByStoreid(storeid);
 		
 		
-//		userSession.getUserId();
-//		storeBean.getStoreName();
-		
-		UserBean ub = new UserBean();
-		StoreBean sb = new StoreBean();
-//		ProductBean pb = new ProductBean();
-//		ub.setUserId(userSession.getUserId());
-		
-		sb.setStoreId(storeId);
-//		sb.setStoreName(storeBean.getStoreName());    store
-		
-//		pb.setProductId(productId);
-		
-		
-		System.out.println("000111");
-		
-		List<CommentBean> findsId = commentService.findCommentByStoreid(storeId);
-		
-		
-//		String userName = userid.getUserName();	
-		CommentBean commentBean = new CommentBean();
-	
-//		commentBean.setUserBean(ub);
-		commentBean.setStoreBean(sb);
-//		commentBean.setProductBean(pb);
-//		commentBean.setScore(score);
-		commentBean.setScoreType(scoreType);	
-//		StoreBean storeBean = new StoreBean();
-		CommentBean lastComment = commentService.getLastest();
-		
-		
-//		Object user = model.getAttribute("userBean");
-		
-//		ub.setUserId(user.getUserId());
-		Integer userid = user.getUserId();
-		
-		System.out.println("000000000000" +user.getUserId());
-		
-		List<CommentBean> findusId = commentService.findCommentByUseridAndStoreid(userid, storeId);
-		
-		System.out.println("============1" + findusId);
-//		
-//		for(CommentBean us:findusId) {
-//			us.getUserId();
-//			ub.setUserId(us.getUserId());
-//			System.out.println("=============2"+ub.getUserId());
-//			
-//			
-//		}
-		
-		
-		
-		
-//		model.addAttribute("ub", ub);
-		model.addAttribute("findsId", findsId);
-		model.addAttribute("findusId", findusId);
-		model.addAttribute("commentBean", commentBean);
-//		model.addAttribute("storeBean", storeBean);
-		model.addAttribute("lastestComment", lastComment);
-		
-		return "/front/frontcommentadd";
+		return "frontcomment";
 	}
 	
 	
+
+//	@GetMapping("comment")
+//	public String CommentaddPage(Model model) {   // , @PathVariable("storeId") StoreBean storeBean   @SessionAttribute("userBean") UserBean user, 
+//		
+//		
+//		
+////		userSession.getUserId();
+////		storeBean.getStoreName();
+//		
+////		UserBean ub = new UserBean();
+////		ProductBean pb = new ProductBean();
+////		ub.setUserId(userSession.getUserId());
+//		
+//		StoreBean sb = new StoreBean();
+//		
+//		sb.setStoreId(storeId);
+////		sb.setStoreName(storeBean.getStoreName());    store
+//		
+////		pb.setProductId(productId);
+//		
+//		
+//		System.out.println("000111");
+//		
+//		List<CommentBean> findsId = commentService.findCommentByStoreid(storeId);
+//		
+//		
+////		String userName = userid.getUserName();	
+//		CommentBean commentBean = new CommentBean();
+//	
+////		commentBean.setUserBean(ub);
+//		commentBean.setStoreBean(sb);
+////		commentBean.setProductBean(pb);
+////		commentBean.setScore(score);
+//		commentBean.setScoreType(scoreType);	
+////		StoreBean storeBean = new StoreBean();
+//		CommentBean lastComment = commentService.getLastest();
+//		
+//		
+//		
+//		UserBean usertest = (UserBean)model.getAttribute("userBean");
+//		
+//		List<CommentBean> findusId = null;
+//		
+//		if(usertest != null) {
+//			
+//		Integer userId = usertest.getUserId();
+//		
+//		findusId = commentService.findCommentByUseridAndStoreid(userId, storeId);
+//		
+//		}
+//		
+//		
+////		model.addAttribute("ub", ub);
+//		model.addAttribute("findsId", findsId);
+//		model.addAttribute("findusId", findusId);
+//		model.addAttribute("commentBean", commentBean);
+////		model.addAttribute("storeBean", storeBean);
+//		model.addAttribute("lastestComment", lastComment);
+//		
+//		return "/front/frontcommentadd";
+//	}
 	
-	@PostMapping("/comment/insert")
+	
+	
+	@PostMapping("comment/insert")
 	public String addcomment(@RequestPart("commentPhoto1") MultipartFile cPhoto, 
 							@ModelAttribute("commentBean") CommentBean comment,
 							@RequestParam("userid") UserBean sessionUser, Model model) throws Exception {
@@ -122,31 +129,20 @@ public class FrontCommentController {
 		}
 		
 		
-//		List<CommentBean> findusId = commentService.findCommentByUseridAndStoreid(userId, storeId);
-//		
-//		System.out.println(findusId);
-		
 		comment.setUserBean(sessionUser);
 		
 		commentService.insertComment(comment);
 		
-		CommentBean commentBean = new CommentBean();
-		
-		CommentBean lastComment = commentService.getLastest();
 
 		
-//		model.addAttribute("findusId", findusId);
-		model.addAttribute("commentBean", commentBean);
-		model.addAttribute("lastestComment", lastComment);
-		
-		return "/front/frontcommentadd";
+		return "redirect:/front/comment/all";
 		
 	}
 	
 	
 	
 	
-//	@GetMapping("/front/comment/timeasc")
+//	@GetMapping("comment/timeasc")
 	public String viewMessage(Model model) {
 		
 		List<CommentBean> page = commentService.getCreateTimeAsc();
@@ -157,18 +153,49 @@ public class FrontCommentController {
 		
 	}
 	
-//	@GetMapping("/front/comment/all")
+	@GetMapping("comment/all")
 	public String viewtimedesc(Model model) {
+		
+		StoreBean sb = new StoreBean();
+		
+		sb.setStoreId(storeId);	
+		
+		List<CommentBean> findsId = commentService.findCommentByStoreid(storeId);
+		
+		CommentBean commentBean = new CommentBean();
+		
+		commentBean.setStoreBean(sb);
+		
+		commentBean.setScoreType(scoreType);
+		
+		
+		UserBean usertest = (UserBean)model.getAttribute("userBean");
+		
+		List<CommentBean> findusId = null;
+		
+		if(usertest != null) {
+			
+		Integer userId = usertest.getUserId();
+		
+		findusId = commentService.findCommentByUseridAndStoreid(userId, storeId);
+		
+		}
+		
 		
 		List<CommentBean> page = commentService.getCreateTimeDesc();
 		
+		
+		model.addAttribute("commentBean", commentBean);
+		
+		model.addAttribute("findsId", findsId);
+		model.addAttribute("findusId", findusId);
 		model.addAttribute("page",page);
 		
-		return "/backend/backcommentview";
+		return "/front/frontcommentview";
 		
 	}
 	
-//	@GetMapping("/front/comment/scoredesc")
+//	@GetMapping("comment/scoredesc")
 	public String viewscoredesc(Model model) {
 		
 		List<CommentBean> page = commentService.getScoreDesc();
@@ -179,7 +206,7 @@ public class FrontCommentController {
 		
 	}
 	
-//	@GetMapping("/front/comment/scoreasc")
+//	@GetMapping("comment/scoreasc")
 	public String viewscoreasc(Model model) {
 		
 		List<CommentBean> page = commentService.getScoreAsc();
@@ -191,8 +218,18 @@ public class FrontCommentController {
 	}
 	
 	
+//	@GetMapping("comment/scoreasc")
+//	public String pageviewscoreasc(@RequestParam(name="p",defaultValue = "1") Integer pageNumber,Model model) {
+//		
+//		Page<CommentBean> page = commentService.findPageByOrderByScoreAsc(pageNumber);
+//		
+//		model.addAttribute("page",page);
+//		
+//		return "/backend/backcommentview";
+//		
+//	}
 	
-//	@GetMapping("/front/comment/all")
+//	@GetMapping("comment/all")
 //	public String viewMessage(@RequestParam(name="p",defaultValue = "1") Integer pageNumber,Model model) {
 //		
 //		Page<CommentBean> page = commentService.findByPage(pageNumber);
@@ -204,7 +241,7 @@ public class FrontCommentController {
 //	}
 	
 	
-//	@GetMapping("/front/comment/editComment")
+//	@GetMapping("comment/editComment")
 	public String editComment(@RequestParam("commentid") Integer id,Model model) {
 		
 		CommentBean comment = commentService.findById(id);
@@ -215,7 +252,7 @@ public class FrontCommentController {
 	}
 	
 	
-//	@PostMapping("/front/comment/editComment")
+//	@PostMapping("comment/editComment")
 	public String postEditComment(@RequestPart("commentPhoto1") MultipartFile cPhoto,@RequestParam("commentid") Integer id) throws Exception {
 		
 		
@@ -234,7 +271,7 @@ public class FrontCommentController {
 		return "redirect:/backend/comment/all";	
 	}
 	
-//	@GetMapping("/front/comment/delete")
+//	@GetMapping("comment/delete")
 	public String deletemsg(@RequestParam(name="commentid") Integer id) {
 		commentService.deleteById(id);
 		
@@ -243,7 +280,7 @@ public class FrontCommentController {
 	
 	
 	
-//	@PostMapping("/front/comment/insert")
+//	@PostMapping("comment/insert")
 //	public String addcomment(@RequestBody CommentBeanDTO commentdto, Model model) {
 //
 //		Integer userId = commentdto.getUserid();

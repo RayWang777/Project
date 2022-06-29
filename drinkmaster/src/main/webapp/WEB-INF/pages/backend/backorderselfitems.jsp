@@ -139,7 +139,7 @@
   
 </table>
 </div>
-
+<input type ="button" onclick="history.back()" value="回到上一頁"></input><br>
 <div class="row justify-content-center" style="font-size: x-large;">
   <c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
    <c:choose>
@@ -154,7 +154,7 @@
     &thinsp;| &thinsp;
    </c:if>
    </c:forEach>
-
+</div>
    
 
 

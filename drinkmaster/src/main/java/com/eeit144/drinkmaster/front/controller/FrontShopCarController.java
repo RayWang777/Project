@@ -15,5 +15,10 @@ public class FrontShopCarController {
 		return "/front/frontshopcar";
 	}
 	
+	@GetMapping("shopcar/before")
+	public String carBeforeView() {
+		return "/front/frontbeforeshop";
+	}
+	
 
 }

@@ -2,7 +2,7 @@ package com.eeit144.drinkmaster.dao;
 
 import org.springframework.data.domain.Pageable;
 
-
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -33,5 +33,6 @@ public interface ProductRepostiory extends JpaRepository<ProductBean, Integer> {
 	 Page<ProductBean> findByProductCategoryBean_productCategoryNameLikeAndProductCategoryBean_storeBean_firmBean_firmId(Pageable pageable,String categoryName,Integer firmId);
 	 Page<ProductBean> findBystatusAndProductCategoryBean_StoreBean_FirmBean_firmId(Pageable pageable,boolean status,Integer firmId);
 	 Page<ProductBean> findByProductCategoryBean_StoreBean_storeNameLikeAndProductCategoryBean_storeBean_FirmBean_firmId(Pageable pageable,String storeName,Integer firmId);
+	 List<ProductBean> findByproductCategoryBean(ProductCategoryBean categoryBean); 
 }
 

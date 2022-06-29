@@ -7,23 +7,22 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
 <section class="py-5">
+<c:forEach var="category" items="${category}">
 	<div class="container px-4 px-lg-5 mt-5">
 		<div
 			class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 			<div class="col mb-5">
 				<div class="card h-100">
-					<!-- Product image-->
-
-					<!-- Product details-->
 					<div class="card-body p-8">
-						<!-- 種類-->
-		<h5 class="fw-bolder" style="color: navy;">奶茶系列</h5>
-								<!-- 商品-->					</div>
+						<h5 class="fw-bolder" style="color: navy;"><c:out value="${category.productCategoryName }"></c:out></h5>
+					</div>
+					<div><b>紅茶</b></div>
 				</div>
 			</div>
 			
 	</div>
 	</div>
+	</c:forEach>
 </section>
 
 

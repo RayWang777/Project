@@ -71,7 +71,7 @@ div.awesomeRating {
 			
 			valueInitial: "",
 			values: ["1.0", "2.0", "3.0", "4.0", "5.0"],
-			targetSelector: "div.awesomeRatingValue"
+			targetSelector: "input.awesomeRatingValue"
 			
 		});
 	
@@ -79,7 +79,7 @@ div.awesomeRating {
 	</script>
 	
 	
-	<form:input path="scoreType" class="form-control" />
+	<form:input path="scoreType" class="form-control" type="hidden"/>
 	content<form:input path="content" class="form-control" />
 	
 	<br/>
@@ -120,21 +120,21 @@ div.awesomeRating {
 </div>
 </div>
 
-<div class="row justify-content-center">
-<div class="col-9">
+<!-- <div class="row justify-content-center"> -->
+<!-- <div class="col-9"> -->
 
-<div class="card">
-  <div class="card-header">
-    最新留言(時間) <fmt:formatDate pattern="yyyy 年 MM 月 dd 日 a hh:mm:ss EEEE" value="${lastestComment.createTime}" />
-  </div>
-  <div class="card-body">
+<!-- <div class="card"> -->
+<!--   <div class="card-header"> -->
+<%--     最新留言(時間) <fmt:formatDate pattern="yyyy 年 MM 月 dd 日 a hh:mm:ss EEEE" value="${lastestComment.createTime}" /> --%>
+<!--   </div> -->
+<!--   <div class="card-body"> -->
   
-	<c:out value="${lastestComment.content}"></c:out>
+<%-- 	<c:out value="${lastestComment.content}"></c:out> --%>
   
-  </div>
-</div>
-</div>
-</div>
+<!--   </div> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->
 
 
 </div>

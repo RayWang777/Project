@@ -51,9 +51,9 @@ div.awesomeRating {
   <form:input path="createTime" type="hidden"/>
   
   
-  userid<form:input path="userBean" class="form-control" />
-	storeid<form:input path="storeBean" class="form-control" />
-	productid<form:input path="productBean" class="form-control" />
+  userid<form:input path="userBean" class="form-control" style="pointer-events: none" />
+	storeid<form:input path="storeBean" class="form-control" style="pointer-events: none" />
+	productid<form:input path="productBean" class="form-control" type="hidden" />
 	score<form:input id="score1" path="score" class="form-control" style="pointer-events: none" />
 	
 	<div id="scores" class="awesomeRating"></div>
@@ -86,7 +86,7 @@ div.awesomeRating {
 	</script>
 	
 	
-	<form:input path="scoreType" class="form-control" />
+	<form:input path="scoreType" class="form-control" type="hidden"/>
 	content<form:input path="content" class="form-control" />
   
   	<input id="commentPhoto1" name="commentPhoto1"  type="file" class="form-control" onchange="preview()"/>

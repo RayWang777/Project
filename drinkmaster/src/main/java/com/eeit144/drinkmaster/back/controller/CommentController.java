@@ -177,7 +177,7 @@ public class CommentController {
 		
 		model.addAttribute("comment", comment);
 		
-		return "backcommentedit";
+		return "/backend/backcommentedit";
 	}
 	
 	

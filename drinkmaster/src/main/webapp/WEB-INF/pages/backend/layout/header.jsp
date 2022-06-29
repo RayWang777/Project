@@ -130,9 +130,8 @@ li {
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
 						<li><a href="${contextRoot}/backend/comment">新增</a></li>
-						<li><a href="${contextRoot}/front/comment">前台</a></li>
-						<li><a href="${contextRoot}/front/comment/all">刪除</a></li>
-						<li><a href="${contextRoot}/backend/comment/all">查詢</a></li>
+						<li><a href="${contextRoot}/front/comment/all">前台</a></li>
+						<li><a href="${contextRoot}/backend/comment/all">所有評論</a></li>
 					</ul></li>
 				<li><a class="sidebar-sub-toggle"><i
 						class="large material-icons">room_service</i> 客服管理 <span

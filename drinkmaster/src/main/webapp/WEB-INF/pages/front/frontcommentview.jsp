@@ -83,7 +83,8 @@ div.awesomeRating {
 <%--   	<c:out value="${usercomment.userBean.userId}"></c:out> --%>
   	<br/>
   	
-  	
+<!--   	commentid -->
+  	<input id="usercommentid" type="hidden" value="${usercomment.commentId}"/>    
   	
   	<div style="pointer-events: none" id="scores${usercomment.commentId}" class="awesomeRating"></div>
 	<div class="awesomeRatingValue"></div>
@@ -97,7 +98,69 @@ div.awesomeRating {
 		});
 	
 		console.log(${usercomment.score});
-	</script>
+		
+		</script>
+		
+		
+		
+		
+		
+		
+		<script type="text/javascript">
+		
+		
+		$(document).ready(function(){
+			  $('#edit01').click(function(){
+			    var inputText = document.getElementById('usercommentid').value;
+			    var dtoObject = {"commentId" : inputText};
+			    var dtoJsonString= JSON.stringify(dtoObject)
+		
+		
+		
+		$(function(){
+			
+			
+			
+			
+			
+			
+			$.ajax({
+				url:'http://localhost:8081/drinkmaster/front/comment/editComment',
+	     		method:'GET',
+	     		contentType:"application/json",
+	     		dataType: 'json',
+	     		data: dtoJsonString,
+	     	    success: function(result){
+	     	    	
+		     	    comment_data = ""
+		     	    $.each(result, function(index, value){
+		     	    	comment_data +=
+		     	    	comment_data +=
+		     	    	comment_data +=
+		     	    	comment_data +=
+		     	    	comment_data +=	
+		     	    		
+		     	    		
+		     	    		
+		     	    		
+		     	    });
+	     	    	
+	     	    
+	     	    });
+				
+			});
+			
+		});
+		
+		
+		
+		
+	</script>	
+		
+		
+	
+		
+	
 	
 	<c:out value="${usercomment.content}"></c:out>
 	
@@ -110,37 +173,22 @@ div.awesomeRating {
   		
   		
   		
-<%--   		<c:out value="${usercomment.userBean.userName}" /> --%>
+<!--   		======================================== -->
   		
-  		  </div>
-</div>
-</div>
-</div>
-  		
-  		</c:forEach>
+<button id="edit01" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal01" data-bs-whatever="@mdo">編輯</button>
 
-    
-    
-    </c:when>
-  	
-  	<c:otherwise>
-  	
-
-
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal0" data-bs-whatever="@mdo">撰寫評論</button>
-
-<div class="modal fade" id="exampleModal0" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal01" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">新增評論</h5>
+        <h5 class="modal-title" id="exampleModalLabel">修改評論</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form:form class="form" method="post" action="${contextRoot}/front/comment/insert" modelAttribute="commentBean" enctype="multipart/form-data">
+        <form:form class="form" method="post" action="${contextRoot}/front/comment/editComment" modelAttribute="commentBean" enctype="multipart/form-data">
           <div class="form-group">
 <!-- 	userid -->
-		<input id=userid name="userid" value="${userBean.userId}" type="hidden" />
+		<input id="sessionuserid1" name="sessionuserid1" value="${userBean.userId}" type="hidden" />
 <!-- 	storeid -->
 	<form:input path="storeBean" class="form-control" type="hidden" />
 <%-- 	productid<form:input path="productBean" class="form-control" /> --%>
@@ -192,7 +240,103 @@ div.awesomeRating {
         
       
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary">更新</button>
+      </div>
+      </form:form>
+      </div>
+      
+    </div>
+  </div>
+</div>   
+<!--   		======================================= -->
+
+<a onclick="return confirm('真的要刪除嗎?')" href="${contextRoot}/front/comment/delete?commentid=${usercomment.commentId}"><button class="btn btn-danger">刪除</button></a>
+
+  		
+<%--   		<c:out value="${usercomment.userBean.userName}" /> --%>
+  		
+  		  </div>
+</div>
+</div>
+</div>
+  		
+  		</c:forEach>
+
+    
+    
+    </c:when>
+  	
+  	<c:otherwise>
+  	
+
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal0" data-bs-whatever="@mdo">撰寫評論</button>
+
+<div class="modal fade" id="exampleModal0" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">新增評論</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form:form class="form" method="post" action="${contextRoot}/front/comment/insert" modelAttribute="commentBean" enctype="multipart/form-data">
+          <div class="form-group">
+<!-- 	userid -->
+		<input id=sessionuserid name="sessionuserid" value="${userBean.userId}" type="hidden" />
+<!-- 	storeid -->
+	<form:input path="storeBean" class="form-control" type="hidden" />
+<%-- 	productid<form:input path="productBean" class="form-control" /> --%>
+<!-- 	score -->
+	<form:input id="score1" path="score" class="form-control" style="pointer-events: none" type="hidden"/>
+	
+	<div id="scores" class="awesomeRating"></div>
+	<input class="awesomeRatingValue" style="display:none" required></input>
+	<script type="text/javascript">
+	
+		$("#scores").click(function(){
+			
+			var test = $(".awesomeRatingValue").val();
+			console.log(test);
+			$("#score1").attr("value",test);
+			
+		});
+		
+	
+		$(".awesomeRating").awesomeRating({
+			
+			valueInitial: "",
+			values: ["1.0", "2.0", "3.0", "4.0", "5.0"],
+			targetSelector: "input.awesomeRatingValue"
+			
+		});
+	
+		
+	</script>
+	
+	
+	<form:input path="scoreType" class="form-control" type="hidden"/>
+	content<form:textarea path="content" class="form-control" />
+	
+	<br/>
+	
+	<input id="commentPhoto1" name="commentPhoto1"  type="file" class="form-control" onchange="preview()" />
+
+		<img id="image" src="" width="100px" height="100px" />
+	<c:if test="${comment.commentId!=null}">
+					<img id="oldImage" src="${comment.commentPhoto}" width="100px"
+						height="100px" />
+	</c:if>
+	
+	
+</div>
+
+<!-- 			<button type="submit" name="submit" class="btn btn-primary">新增評論</button> -->
+        
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
         <button type="submit" name="submit" class="btn btn-primary">新增評論</button>
       </div>
       </form:form>
@@ -253,7 +397,6 @@ div.awesomeRating {
 
 <br/>
 <c:forEach  var="comment" items="${page.content}" >
-<%-- <c:forEach  var="comment" items="${page.content}" > --%>
 
 <div class="row justify-content-center">
 <div class="col-9">
@@ -326,24 +469,6 @@ div.awesomeRating {
 
 	</div>
 </div>
-
-
-
-<!-- <div class="row justify-content-center"> -->
-<!-- <div class="col-9"> -->
-
-<!-- <div class="card"> -->
-<!--   <div class="card-header"> -->
-<%--     最新留言(時間) <fmt:formatDate pattern="yyyy 年 MM 月 dd 日 a hh:mm:ss EEEE" value="${lastestComment.createTime}" /> --%>
-<!--   </div> -->
-<!--   <div class="card-body"> -->
-  
-<%-- 	<c:out value="${lastestComment.content}"></c:out> --%>
-  
-<!--   </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
 
 
 </div>

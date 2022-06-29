@@ -75,4 +75,12 @@ public class UserServiceImp implements UserService {
 		}
 		return user;
 	}
+	
+	public Boolean findUserByAccount(String userAccount) {
+		String user = userDao.findByAccount(userAccount);
+		if(!user.isEmpty()) {
+			return false;
+		}
+		return true;
+	}
 }

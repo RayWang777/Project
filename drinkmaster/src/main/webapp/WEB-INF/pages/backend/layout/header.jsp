@@ -51,16 +51,17 @@ li {
 						<span>飲君子後台</span>
 					</a>
 				</div>
+				<c:choose>
+				<c:when test="${userBean.role != 'admin'}"></c:when>
+				<c:otherwise>
 				<li><a class="sidebar-sub-toggle"><i
 						class="large material-icons md-48">account_circle</i> 會員管理<span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
-						<li><a href="${contextRoot}/backend/user/insert">新增</a></li>
-						<li><a href="${contextRoot}/backend/user/update">修改</a></li>
-
-						<li><a href="#">刪除</a></li>
-						<li><a href="${contextRoot}/backend/user/all">查詢</a></li>
+						<li><a href="${contextRoot}/backend/user/all">會員列表</a></li>
+						<li><a href="${contextRoot}/backend/user/insert">新增會員</a></li>
 					</ul></li>
+				</c:otherwise></c:choose>
 				<c:choose>
 				<c:when test="${userBean.role != 'admin' && userBean.role != 'firm'}"></c:when>
 				<c:otherwise>
@@ -210,7 +211,7 @@ $(function(){
 
 $(function(){
 	$('#logout').click(function(){
-		location.replace('${contextRoot}/backend/login/');
+		location.replace('${contextRoot}/backend/logout/');
 	});
 	
 	

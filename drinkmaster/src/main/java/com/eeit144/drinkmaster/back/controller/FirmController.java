@@ -307,6 +307,17 @@ public class FirmController {
 	public String AllFirmBanner(@RequestParam(name="p",defaultValue = "1") Integer page,Model m) {
 		
 		List<FirmBanner> findByFirmIdNull = firmBannerService.findAllList();
+		System.out.println(findByFirmIdNull);
+		if(findByFirmIdNull.isEmpty()) {
+
+			PageRequest firmBannerPage = PageRequest.of(page-1, 2, Sort.Direction.ASC, "id");		
+			Page<FirmBanner> findAll = firmBannerService.findAll(firmBannerPage);		
+			m.addAttribute("firmBanners", findAll);
+			return "/backend/backfirmBanner";
+		
+		}
+		
+		
 		List<Integer> list = new ArrayList<Integer>();
 		Integer firmId = null;
 		for(FirmBanner one: findByFirmIdNull) {
@@ -345,28 +356,28 @@ public class FirmController {
 	public String addFirmBanner(Model m) {
 		
 		List<FirmBanner> findByFirmIdNull = firmBannerService.findAllList();
+		FirmBanner newFirmBanner = new FirmBanner();
+		m.addAttribute("newBanner", newFirmBanner);
+
+		if(findByFirmIdNull.isEmpty()) {
+			List<FirmBean> findAll3 = firmService.findAll3();
+			m.addAttribute("firms", findAll3);
+			return "/backend/backfirmbanneradd";
+		}
+
 		List<Integer> list = new ArrayList<Integer>();
 		Integer firmId = null;
 		for(FirmBanner one: findByFirmIdNull) {
 			firmId = one.getFirmBean().getFirmId();
 			list.add(firmId);
 		}
-		
 		List<FirmBean> findByIdNotIn = firmService.findByIdNotIn(list);
-
-		
-		if(findByIdNotIn.isEmpty()) {
+			if(findByIdNotIn.isEmpty()) {
 			return "redirect:/backend/firm/banner/all";
 		}
-	
-
-		FirmBanner newFirmBanner = new FirmBanner();
 		m.addAttribute("firms", findByIdNotIn);
-		m.addAttribute("newBanner", newFirmBanner);
 		return "/backend/backfirmbanneradd";
 	}
-	
-
 	
 
 	@PostMapping("firm/banner/add")
@@ -426,7 +437,8 @@ public class FirmController {
 	public String updateFirmBanner(@PathVariable("id") Integer id,@ModelAttribute("oldBanner") FirmBanner oldBanner, @RequestPart("reallogo") MultipartFile logo,
 			Model m) {
 	
-		FirmBanner oldFirmBanner = firmBannerService.findById(id).get();
+		FirmBean firmBean = firmService.findById(id).get();
+		FirmBanner oldFirmBanner = firmBannerService.findByfirmId(firmBean.getFirmId()).get();
 	
 		String contentType = logo.getContentType();
 		
@@ -462,7 +474,7 @@ public class FirmController {
 		}
 		FirmBanner firmBanner = firmBannerService.findByfirmId(id).get();
 		
-		firmBannerService.deleteById(id);
+		firmBannerService.deleteById(firmBanner.getId());
 		return "redirect:/backend/firm/banner/all";
 	}
 	

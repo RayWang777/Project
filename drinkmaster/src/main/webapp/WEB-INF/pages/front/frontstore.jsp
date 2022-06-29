@@ -28,7 +28,7 @@
 				<div class="card h-100">
 					<!-- Product image-->
 					<img class="card-img-top"
-						src="http://localhost:8081/drinkmaster/backend/firm/banner/${store.firmBean.firmId}" alt="..." />
+						src="http://localhost:8081/drinkmaster/front/productmenu?id=${store.firmBean.firmId}" alt="..." />
 					<!-- Product details-->
 					<div class="card-body p-4">
 						<div class="text-center">

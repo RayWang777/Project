@@ -1,6 +1,7 @@
 package com.eeit144.drinkmaster.back.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.eeit144.drinkmaster.back.model.FirmService;
 import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.dao.FirmRepository;
+import com.eeit144.drinkmaster.dto.FirmAddUserDto;
 import com.eeit144.drinkmaster.dto.FirmDTO;
 
 @Service
@@ -96,6 +98,10 @@ public class FirmServiceImp implements FirmService {
 		return firmDao.findByFirmIdNotIn(firmId);
 	}
 
+	@Override
+	public List<FirmAddUserDto> findUserNullFirmBean() {
+		return firmDao.findUserNullFirmBean();
+	}
 
 
 }

@@ -1,6 +1,7 @@
 package com.eeit144.drinkmaster.back.model;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.data.domain.Example;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.eeit144.drinkmaster.bean.FirmBean;
+import com.eeit144.drinkmaster.dto.FirmAddUserDto;
 import com.eeit144.drinkmaster.dto.FirmDTO;
 
 public interface FirmService {
@@ -37,6 +39,8 @@ public interface FirmService {
 	public List<FirmBean> findByFirmNameContaining(String firmName);
 	
 	public List<FirmBean> findByIdNotIn(List<Integer> firmId);
+
+	public List<FirmAddUserDto> findUserNullFirmBean();
 
 
 }

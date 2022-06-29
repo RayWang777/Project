@@ -122,4 +122,12 @@ public class CommentServiceImp implements CommentService {
 //		return commentDao.findPageByOrderByScoreAsc(pageNumber);
 //	}
 	
+	public Integer countStoreidByStoreid(Integer storeId) {
+		return commentDao.countStoreidByStoreid(storeId);
+	}
+	
+	public Integer countScoreByStoreidScore(Integer storeId, Integer score) {
+		return commentDao.countScoreByStoreidScore(storeId, score);
+	}
+	
 }

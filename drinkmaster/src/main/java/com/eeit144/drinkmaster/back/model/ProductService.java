@@ -16,5 +16,7 @@ public interface ProductService {
 	public void insertProduct(ProductBean product);
 
 	public void deleteById(Integer id);
+
+	public Page<ProductBean> select(Integer pageNumber, String name, String field) ;
 }
 

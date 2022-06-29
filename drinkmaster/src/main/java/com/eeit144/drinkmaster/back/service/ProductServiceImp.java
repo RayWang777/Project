@@ -42,7 +42,7 @@ public class ProductServiceImp implements ProductService {
 	public void insertProduct(ProductBean product) {
 		productDao.save(product);
 }
-
+	@Override
 	public Page<ProductBean> findByPage(Integer pageNumber) {
 		Pageable page = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "status");
 		return productDao.findAll(page);
@@ -57,7 +57,7 @@ public class ProductServiceImp implements ProductService {
 		Pageable page = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "status");
 		return productDao.findByproductCategoryBean_storeBean_firmBean_firmId(page, frimId);
 	}
-
+	@Override
 	public Page<ProductBean> select(Integer pageNumber, String name, String field) {
 		Pageable page = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "status");
 		if (field.equals("品項")) {

@@ -51,9 +51,11 @@ div.awesomeRating {
   <form:input path="createTime" type="hidden"/>
   
   
-  userid<form:input path="userBean" class="form-control" style="pointer-events: none" />
-	storeid<form:input path="storeBean" class="form-control" style="pointer-events: none" />
-	productid<form:input path="productBean" class="form-control" type="hidden" />
+  username<form:input path="userBean.userName" class="form-control" style="pointer-events: none" />
+  <form:input path="userBean" class="form-control" style="pointer-events: none" type="hidden" />
+	storename<form:input path="storeBean.storeName" class="form-control" style="pointer-events: none" />
+	<form:input path="storeBean" class="form-control" style="pointer-events: none" type="hidden" />
+	<form:input path="productBean" class="form-control" type="hidden" />
 	score<form:input id="score1" path="score" class="form-control" style="pointer-events: none" />
 	
 	<div id="scores" class="awesomeRating"></div>

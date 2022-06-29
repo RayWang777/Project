@@ -7,13 +7,14 @@ public class CommentBeanDTO {
 
 	
 	private Integer commentId;	
-	private Integer userid;
+	private Integer userId;
 	private Integer storeId;
 	private Integer productId;
 	private Double score;
 	private String content;
 	private Integer scoreType;
 	private Date createTime;
+	private String commentPhoto;
 
 	public CommentBeanDTO() {
 	}
@@ -26,14 +27,13 @@ public class CommentBeanDTO {
 		this.commentId = commentId;
 	}
 
-	public Integer getUserid() {
-		return userid;
+	public Integer getUserId() {
+		return userId;
 	}
 
-	public void setUserid(Integer userid) {
-		this.userid = userid;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
-
 
 	public Integer getStoreId() {
 		return storeId;
@@ -81,6 +81,14 @@ public class CommentBeanDTO {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public String getCommentPhoto() {
+		return commentPhoto;
+	}
+
+	public void setCommentPhoto(String commentPhoto) {
+		this.commentPhoto = commentPhoto;
 	}
 
 

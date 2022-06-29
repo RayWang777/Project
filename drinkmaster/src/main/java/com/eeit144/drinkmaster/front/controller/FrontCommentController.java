@@ -1,6 +1,7 @@
 package com.eeit144.drinkmaster.front.controller;
 
 import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -155,6 +156,17 @@ public class FrontCommentController {
 		Page<CommentBean> page = commentService.findCommentByStoreidPage(storeId,pageable);	
 		
 		
+		StoreBean sb = new StoreBean();
+		
+		sb.setStoreId(storeId);	
+		
+		CommentBean commentBean = new CommentBean();
+		
+		commentBean.setStoreBean(sb);
+		
+		commentBean.setScoreType(scoreType);
+		
+		
 		UserBean usertest = (UserBean)model.getAttribute("userBean");
 		
 		List<CommentBean> findusId = null;
@@ -167,6 +179,7 @@ public class FrontCommentController {
 		
 		}
 		
+		model.addAttribute("commentBean", commentBean);
 		
 		model.addAttribute("findusId", findusId);
 		model.addAttribute("page",page);
@@ -178,9 +191,7 @@ public class FrontCommentController {
 	@GetMapping("comment/all")
 	public String viewtimedesc(@RequestParam(name = "p", defaultValue = "1") Integer pageNumber, Model model) {      //, @RequestParam("storeId") Integer storeId
 		
-		StoreBean sb = new StoreBean();
 		
-		sb.setStoreId(storeId);	
 		
 //		List<CommentBean> findCommentById = commentService.findCommentByStoreid(storeId);
 		
@@ -189,7 +200,9 @@ public class FrontCommentController {
 		
 		Page<CommentBean> page = commentService.findCommentByStoreidPage(storeId,pageable);
 		
+		StoreBean sb = new StoreBean();
 		
+		sb.setStoreId(storeId);	
 		
 		CommentBean commentBean = new CommentBean();
 		
@@ -239,6 +252,17 @@ public class FrontCommentController {
 		Page<CommentBean> page = commentService.findCommentByStoreidPage(storeId,pageable);
 		
 		
+		StoreBean sb = new StoreBean();
+		
+		sb.setStoreId(storeId);	
+		
+		CommentBean commentBean = new CommentBean();
+		
+		commentBean.setStoreBean(sb);
+		
+		commentBean.setScoreType(scoreType);
+		
+		
 		UserBean usertest = (UserBean)model.getAttribute("userBean");
 		
 		List<CommentBean> findusId = null;
@@ -251,6 +275,7 @@ public class FrontCommentController {
 		
 		}
 		
+		model.addAttribute("commentBean", commentBean);
 		
 		model.addAttribute("findusId", findusId);
 		model.addAttribute("page",page);
@@ -266,6 +291,16 @@ public class FrontCommentController {
 		
 		Page<CommentBean> page = commentService.findCommentByStoreidPage(storeId,pageable);
 		
+		StoreBean sb = new StoreBean();
+		
+		sb.setStoreId(storeId);	
+		
+		CommentBean commentBean = new CommentBean();
+		
+		commentBean.setStoreBean(sb);
+		
+		commentBean.setScoreType(scoreType);		
+		
 		UserBean usertest = (UserBean)model.getAttribute("userBean");
 		
 		List<CommentBean> findusId = null;
@@ -278,6 +313,7 @@ public class FrontCommentController {
 		
 		}
 		
+		model.addAttribute("commentBean", commentBean);
 		
 		model.addAttribute("findusId", findusId);
 		model.addAttribute("page",page);
@@ -338,11 +374,21 @@ public class FrontCommentController {
 		CommentBean findById = commentService.findById(newId);
 		
 		Integer uid = findById.getUserBean().getUserId();
-		
 		Integer sid = findById.getStoreBean().getStoreId();
+		Integer st = findById.getScoreType();
+		Double score = findById.getScore();
+		Date createTime = findById.getCreateTime();
+		String content = findById.getContent();
+		String commentPhoto = findById.getCommentPhoto();
 		
-		dto.setUserid(uid);
-		dto.setUserid(sid);
+		dto.setUserId(uid);
+		dto.setStoreId(sid);
+		dto.setScoreType(st);
+		dto.setScore(score);
+		dto.setCreateTime(createTime);
+		dto.setContent(content);
+		dto.setCommentPhoto(commentPhoto);
+		
 		
 		return dto;
 	}

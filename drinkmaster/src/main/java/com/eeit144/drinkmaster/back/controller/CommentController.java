@@ -182,18 +182,21 @@ public class CommentController {
 	
 	
 	@PostMapping("comment/editComment")
-	public String postEditComment(@RequestPart("commentPhoto1") MultipartFile cPhoto,@RequestParam("commentid") Integer id) throws Exception {
+	public String postEditComment(@RequestPart("commentPhoto1") MultipartFile cPhoto,@RequestParam("commentid") Integer id,@ModelAttribute("comment") CommentBean comment) throws Exception {
 		
 		
-		CommentBean comment = commentService.findById(id);
+		CommentBean oldcomment = commentService.findById(id);
 		
 		if(!cPhoto.isEmpty()) {
 			String temp=new String(Base64.getEncoder().encode(cPhoto.getBytes()));
 			String profile="data:image/png;base64,"+temp;
 			
 			comment.setCommentPhoto(profile);
-		}
+		}else {
+		String commentPhoto = oldcomment.getCommentPhoto();
 		
+		comment.setCommentPhoto(commentPhoto);
+		}
 		
 		commentService.insertComment(comment);
 		

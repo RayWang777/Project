@@ -77,14 +77,15 @@ div.awesomeRating {
 <span style="font-size: 1.5em">你的評論</span>
   <div class="card-header">
 		<c:out value="${usercomment.storeBean.storeName}"></c:out>
+		<input id="commentstoreid" type="hidden" value="${usercomment.storeBean.storeId}"/>
   </div>
   <div class="card-body">
   	<c:out value="${usercomment.userBean.userName}"></c:out>
-<%--   	<c:out value="${usercomment.userBean.userId}"></c:out> --%>
+	<input id="commentuserid" type="hidden" value="${usercomment.userBean.userId}"/> 
   	<br/>
   	
 <!--   	commentid -->
-  	<input id="usercommentid" type="hidden" value="${usercomment.commentId}"/>    
+  	<input id="newcommentid" type="hidden" value="${usercomment.commentId}"/>    
   	
   	<div style="pointer-events: none" id="scores${usercomment.commentId}" class="awesomeRating"></div>
 	<div class="awesomeRatingValue"></div>
@@ -111,7 +112,7 @@ div.awesomeRating {
 		
 		$(document).ready(function(){
 			  $('#edit01').click(function(){
-			    var inputText = document.getElementById('usercommentid').value;
+			    var inputText = document.getElementById('newcommentid').value;
 			    var dtoObject = {"commentId" : inputText};
 			    var dtoJsonString= JSON.stringify(dtoObject)
 		
@@ -119,11 +120,7 @@ div.awesomeRating {
 		
 		$(function(){
 			
-			
-			
-			
-			
-			
+		
 			$.ajax({
 				url:'http://localhost:8081/drinkmaster/front/comment/editComment',
 	     		method:'GET',
@@ -134,11 +131,37 @@ div.awesomeRating {
 	     	    	
 		     	    comment_data = ""
 		     	    $.each(result, function(index, value){
-		     	    	comment_data +=
-		     	    	comment_data +=
-		     	    	comment_data +=
-		     	    	comment_data +=
-		     	    	comment_data +=	
+		     	    	
+		     	    	comment_data += '<input id="newcommentid" type="hidden" value="' + value.commentid + '"/>'
+		     	    	comment_data +=	'<input id="commentuserid" type="hidden" value="' + value.userid + '"/>'
+		     	    	comment_data +=	'<input id="commentstoreid" type="hidden" value="' + value.storeid + '"/>'
+		     	    	
+		     	    	
+		     	    	comment_data +=	'<div style="pointer-events: none" id="scores${' + value.commentId + '}" class="awesomeRating"></div>'
+		     	    	comment_data +=	'<div class="awesomeRatingValue"></div>'
+		     	    	comment_data +=	'<script type="text/javascript">'
+		     	   	
+		     	    	comment_data +=	'$("#scores${' + value.commentId + '} ").awesomeRating({'
+		     	   			
+		     	    	comment_data +=		'valueInitial: "' + ${value.score} + '" ,'
+		     	    	comment_data +=		'values: ["1.0", "2.0", "3.0", "4.0", "5.0"],'
+		     	    	comment_data +=		'targetSelector: "span.awesomeRatingValue"'
+		     	    	comment_data +=	'});'
+		     	 	  	comment_data += '</'+'script>'
+		     	   		
+		     	    	
+		     	    	comment_data += '<textarea id="commentcontent" class="form-control" value="' + value.content + '"/>'
+		     	    	comment_data += '<input id="commentPhoto1" name="commentPhoto1"  type="file" class="form-control" onchange="preview()" />'value.commentPhoto
+		     	    	
+		     	    	comment_data += '<img id="image" src="" width="100px" height="100px" />'
+		     	    	comment_data +=	'<c:if test="${' + value.commentId!=null + '}">'
+		     	    	comment_data +=	'<img id="oldImage" src="${' + value.commentPhoto + '}" width="100px" height="100px" />'
+						comment_data += '</c:if>'
+		     	    	
+		     	    	comment_data += value.scoreType
+		     	    	comment_data +=	value.createTime
+		     	    	
+		     	    	
 		     	    		
 		     	    		
 		     	    		

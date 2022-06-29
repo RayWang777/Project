@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <jsp:include page="layout/header.jsp" />
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<html>
+<!-- <html> -->
 <head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 
@@ -55,6 +55,18 @@
 	font-size: 16px;
  } 
  
+ #orderform #selectuserId{ 
+	height: 25px; 
+	width: 150px;
+	font-size: 16px;
+ } 
+ 
+ #orderform #selectstore{ 
+	height: 25px; 
+	width: 150px;
+	font-size: 16px;
+ } 
+  
  #orderform #ordersubmit{ 
  	height: 30px; 
  	width: 60px; 
@@ -138,6 +150,7 @@
       <th scope="col">電話</th>
       <th scope="col">狀態</th>
       <th scope="col">總金額</th>
+      <th scope="col">詳細</th>
       <th scope="col">  </th>
     </tr>
   </thead>
@@ -291,7 +304,7 @@
 <!--     <tr> -->
 
 <!--       <th scope="col">流水號</th> -->
-<!-- <!--       <th scope="col">訂單編號</th> --> -->
+<!-- <!--       <th scope="col">訂單編號</th> -->
 <!--       <th scope="col">商品名稱</th> -->
 <!--       <th scope="col">數量</th> -->
 <!--       <th scope="col">價格</th> -->
@@ -304,7 +317,7 @@
 
     
 <%--       <th scope="row"><c:out value="${orderItems.orderItemId}"/></th> --%>
-<%-- <%--       <td><c:out value="${orderItems.orderBean.orderId}"/></td> --%> --%>
+<%-- <%--       <td><c:out value="${orderItems.orderBean.orderId}"/></td> --%>
 <%--       <td><c:out value="${orderItems.productBean.productName}"/></td> --%>
 <%--       <td><c:out value="${orderItems.quantity}"/></td> --%>
 <%--       <td><c:out value="${orderItems.price}"/></td> --%>
@@ -443,7 +456,7 @@ $(function(){
 
 </body>
 
-</html>
+<!-- </html> -->
 <script src="<c:url value="/js/lib/popper.min.js"/>"></script>
 <script src="<c:url value="/js/lib/main.js"/>"></script>
 

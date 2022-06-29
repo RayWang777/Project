@@ -17,4 +17,10 @@ public class FrontPageController {
 	public String firmserch() {
 		return "/front/fronttest";
 	}
+	
+	@GetMapping("userMessage")
+	public String userserch() {
+		return "/front/frontuser";
+	}
+	
 }

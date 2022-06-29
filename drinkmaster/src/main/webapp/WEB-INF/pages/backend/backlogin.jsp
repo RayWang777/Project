@@ -57,7 +57,7 @@
 </form:form>
 </div>
 
-<<script type="text/javascript">
+<script type="text/javascript">
 function admin() {
 	let acc = document.getElementById("userAccount");
 	let pwd = document.getElementById("userPassword");
@@ -67,20 +67,20 @@ function admin() {
 function firm() {
 	let acc = document.getElementById("userAccount");
 	let pwd = document.getElementById("userPassword");
-	acc.value=("jerry2@gmail.com");
-	pwd.value=("jerry6666");
+	acc.value=("mary@gmail.com");
+	pwd.value=("mary4317");
 }
 function store() {
 	let acc = document.getElementById("userAccount");
 	let pwd = document.getElementById("userPassword");
-	acc.value=("cindy@gmail.com");
-	pwd.value=("cindy9527");
+	acc.value=("mark1@gmail.com");
+	pwd.value=("mark1234");
 }
 function user() {
 	let acc = document.getElementById("userAccount");
 	let pwd = document.getElementById("userPassword");
-	acc.value=("jerry1@gmail.com");
-	pwd.value=("jerry6666");
+	acc.value=("cindy1@gmail.com");
+	pwd.value=("cindy9527");
 }
 
 function checkEmpty(){

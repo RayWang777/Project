@@ -46,6 +46,17 @@ public class OrderItems {
 
 	@Column(name = "quantity", nullable = false)
 	private Integer quantity;
+	
+	@Column(name = "remark")
+	private String remark;
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 
 	public OrderItems() {
 	}

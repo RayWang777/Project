@@ -98,7 +98,9 @@ li {
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
 						<li><a href="${contextRoot}/backend/product/all">商品列表</a></li>
+						<c:if test="${userBean.role == 'store' || userBean.role == 'admin'}">
 						<li><a href="${contextRoot}/backend/product/insertview">新增商品</a></li>
+						</c:if>
 						<li><a href="${contextRoot}/backend/category/all">種類列表</a></li>
 
 						<li><a href="${contextRoot}/backend/productanalyze">銷量圖表</a></li>

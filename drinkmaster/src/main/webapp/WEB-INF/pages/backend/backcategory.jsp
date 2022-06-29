@@ -17,10 +17,15 @@
 			<label for="select" class="form-label">搜尋</label> <input type="text"name="select" id="select" /> 
 				<select name="filed">
 				<option>種類</option>
+				<c:if test="${userBean.role != 'store'}">
 				<option>店家</option>
+				</c:if>
 			</select>
 		<button type="submit" class="btn btn  btn-sm" style="font-style:italic;color:blue;">查詢</button>
-		<c:out value="查到 ${page.totalElements }筆資料"></c:out>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-link btn-sm" href="${contextRoot}/backend/prodcuct/insertcategory" role="button">新增商品種類</a>
+		<c:out value="查到 ${page.totalElements }筆資料"></c:out>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<c:if test="${userBean.role == 'store'}">
+		<a class="btn btn-link btn-sm" href="${contextRoot}/backend/prodcuct/insertcategory" role="button">新增商品種類</a>
+		</c:if>
 		</div >
 		
 	</form>
@@ -30,7 +35,9 @@
 			<tr>
 				<th scope="col"style="text-align:center;">商品種類</th>				
 				<th scope="col"style="text-align:center;">店家</th>
+				<c:if test="${userBean.role != 'firm'}">
 				<th scope="col" style="text-align: center;">功能</th>
+				</c:if>
 			</tr>
 		</thead>
 		<tbody>
@@ -39,12 +46,17 @@
 					<th scope="row" style="text-align:center;"><b><c:out value="${productCategoryBean.productCategoryName}"  /></b></th>
 					
 					<td style="text-align:center;"><c:out value="${productCategoryBean.storeBean.storeName}" /></td>
-					<td style="text-align:center;"><a
-						href="${contextRoot}/backend/editcategory?id=${productCategoryBean.productCategoryId}"><button
-								class="btn btn-outline-primary btn-sm">編輯</button></a> <a
+					
+					<td style="text-align:center;">
+					<c:if test="${userBean.role == 'store'}">
+							<a
+								href="${contextRoot}/backend/editcategory?id=${productCategoryBean.productCategoryId}"><button
+									class="btn btn-outline-primary btn-sm">編輯</button></a>
+						</c:if><a
 						onclick="return confirm('真的要刪除嗎')"
 						href="${contextRoot}/backend/deletecategory?id=${productCategoryBean.productCategoryId}"><button
 								class="btn btn-outline-danger btn-sm">刪除</button></a></td>
+								
 				</tr>
 			</c:forEach>
 

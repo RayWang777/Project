@@ -21,4 +21,5 @@ public interface StoreRepostiory extends JpaRepository<StoreBean, Integer> {
 	public FirmBean findFirmBeanByStoreId(Integer storeId);
 	
 	public List<StoreBean> findByFirmBean_firmId(Integer firmId);
+	
 }

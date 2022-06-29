@@ -1,5 +1,8 @@
 package com.eeit144.drinkmaster.back.controller;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -13,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
-
+import com.eeit144.drinkmaster.back.model.FirmService;
 import com.eeit144.drinkmaster.back.service.ProductCategoryServiceImp;
 import com.eeit144.drinkmaster.back.service.StoreServiceImp;
-import com.eeit144.drinkmaster.bean.ProductBean;
+import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.ProductCategoryBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.bean.UserBean;
@@ -26,9 +29,10 @@ import com.eeit144.drinkmaster.bean.UserBean;
 @RequestMapping("/backend")
 @SessionAttributes (names= {"userBean","canSeeStore"})
 public class ProductCategoryController {
-	@Autowired ProductCategoryServiceImp categoryService;
+	@Autowired private ProductCategoryServiceImp categoryService;
+	@Autowired private StoreServiceImp storeService;
 	@Autowired
-	StoreServiceImp storeService;
+	private FirmService firmService;
 	@GetMapping("prodcuct/insertcategory")
 	public String addCategoryView(Model m ,@SessionAttribute("canSeeStore") StoreBean storeBean ) {
 		ProductCategoryBean category=new ProductCategoryBean();
@@ -48,10 +52,26 @@ public class ProductCategoryController {
 		return "redirect:/backend/category/all";
 	} 
 	@GetMapping("category/all")
-	public ModelAndView categoryView(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber) {
+	public ModelAndView categoryView(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber
+			,@SessionAttribute("userBean") UserBean userBean) {
+		if(userBean.getRole().equals("admin")) {
 		Page<ProductCategoryBean> page = categoryService.findByPage(pageNumber);
-
 		mav.getModel().put("page", page);
+		}
+		else if(userBean.getRole().equals("store")) {
+			Optional<StoreBean> StoreByUserId = storeService.findStoreByUserId(userBean.getUserId());
+			 StoreBean store= StoreByUserId.get();
+			 
+			 Page<ProductCategoryBean> page =categoryService.findByPage2(pageNumber, store.getStoreId());
+			 mav.getModel().put("page", page);
+		}
+		else if(userBean.getRole().equals("firm")) {
+			List<FirmBean> firmByUserId = firmService.findFirmByUserId(userBean.getUserId());
+			FirmBean firm= firmByUserId.get(0);
+			 
+			 Page<ProductCategoryBean> page =categoryService.findByPage3(pageNumber, firm.getFirmId());
+			 mav.getModel().put("page", page);
+		}
 		mav.setViewName("/backend/backcategory");
 		return mav;
 	}
@@ -59,12 +79,23 @@ public class ProductCategoryController {
 	
 	@GetMapping("category/select")
 	public ModelAndView selectLike(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber,
-			@RequestParam("select") String select, @RequestParam("filed") String filed) {
-
-		System.out.println(select);
-		System.out.println(filed);
+			@RequestParam("select") String select, @RequestParam("filed") String filed,@SessionAttribute("userBean") UserBean userBean) {
+		if(userBean.getRole().equals("admin")){
 		Page<ProductCategoryBean> page = categoryService.select(pageNumber, select, filed);
 		mav.getModel().put("page", page);
+		}
+		else if(userBean.getRole().equals("firm")) {
+			List<FirmBean> firmByUserId = firmService.findFirmByUserId(userBean.getUserId());
+			FirmBean firm= firmByUserId.get(0);
+			Page<ProductCategoryBean> page = categoryService.select2(pageNumber, select, filed,firm.getFirmId());
+			mav.getModel().put("page", page);
+		}
+		else if(userBean.getRole().equals("store")) {
+			Optional<StoreBean> StoreByUserId = storeService.findStoreByUserId(userBean.getUserId());
+			 StoreBean store= StoreByUserId.get();
+			Page<ProductCategoryBean> page = categoryService.select3(pageNumber, select, filed,store.getStoreId());
+			mav.getModel().put("page", page);
+		}
 		mav.setViewName("/backend/backcategory");
 		return mav;
 

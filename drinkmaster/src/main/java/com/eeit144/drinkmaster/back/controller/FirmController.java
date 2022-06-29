@@ -424,7 +424,7 @@ public class FirmController {
 
 		List<FirmBean> list = firmService.findAll3();
 
-		FirmBanner oldBanner = firmBannerService.findByfirmId(id).get();
+		FirmBanner oldBanner = firmBannerService.findById(id).get();
 		
 		
 		m.addAttribute("firms", list);
@@ -436,9 +436,8 @@ public class FirmController {
 	@PostMapping("firm/banner/edit/{id}")
 	public String updateFirmBanner(@PathVariable("id") Integer id,@ModelAttribute("oldBanner") FirmBanner oldBanner, @RequestPart("reallogo") MultipartFile logo,
 			Model m) {
-	
-		FirmBean firmBean = firmService.findById(id).get();
-		FirmBanner oldFirmBanner = firmBannerService.findByfirmId(firmBean.getFirmId()).get();
+
+		FirmBanner oldFirmBanner = firmBannerService.findById(id).get();
 	
 		String contentType = logo.getContentType();
 		
@@ -472,8 +471,8 @@ public class FirmController {
 		if(!(user.getRole().equals("admin"))) {
 			return "redirect:/backend/";			
 		}
-		FirmBanner firmBanner = firmBannerService.findByfirmId(id).get();
-		
+		FirmBanner firmBanner = firmBannerService.findById(id).get();
+			
 		firmBannerService.deleteById(firmBanner.getId());
 		return "redirect:/backend/firm/banner/all";
 	}

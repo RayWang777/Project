@@ -49,7 +49,7 @@
 			<form:input path="sun" class="form-control" value="${serchFirm.sun}"
 				placeholder="管理者" />
 		</div>
-		<div class="mb-3 input-group">
+		<div class="mb-3 input-group" hidden="true">
 			<form:input path="p" class="form-control" value="${serchFirm.p}"
 				placeholder="頁數" />
 			<form:input path="s" class="form-control" value="${serchFirm.s}"

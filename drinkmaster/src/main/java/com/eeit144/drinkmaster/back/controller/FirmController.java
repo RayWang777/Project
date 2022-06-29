@@ -40,6 +40,7 @@ import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.FirmColumn;
 import com.eeit144.drinkmaster.bean.FirmSerch;
 import com.eeit144.drinkmaster.bean.UserBean;
+import com.eeit144.drinkmaster.dto.FirmAddUserDto;
 import com.eeit144.drinkmaster.dto.FirmDTO;
 
 @Controller
@@ -96,7 +97,6 @@ public class FirmController {
 
 	@GetMapping("firm/all")
 	public String findAllPages(@ModelAttribute("firmSerch") FirmSerch firmSerch,@SessionAttribute("userBean") UserBean user, Model m) {
-		
 		
 		if(!(user.getRole().equals("admin"))) {
 			return "redirect:/backend/";			

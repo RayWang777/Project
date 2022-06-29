@@ -29,5 +29,7 @@ public interface StoreService {
 	public List<StoreBean> findAllList();
 	
 	public List<StoreBean> findStoreByFirmId(Integer firmId);
+	
+	public List<Integer> findStoreUserNull();
 
 }

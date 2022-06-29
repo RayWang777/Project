@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.eeit144.drinkmaster.bean.OrderItems;
+import com.eeit144.drinkmaster.bean.ProductBean;
 
 @Repository
 public interface OrderItemsRepostiory extends JpaRepository<OrderItems, Integer> {
@@ -15,5 +16,7 @@ public interface OrderItemsRepostiory extends JpaRepository<OrderItems, Integer>
 	public Page<OrderItems> findByOrderBean_orderId(Integer orderId, Pageable pageable);
 
 	public List<OrderItems> findByOrderBean_orderId(Integer orderId);
+	
+	public Long countByproductBean(ProductBean productBean);
 
 }

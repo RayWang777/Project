@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.eeit144.drinkmaster.back.model.OrderItemsService;
 import com.eeit144.drinkmaster.bean.OrderItems;
+import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.dao.OrderItemsRepostiory;
 
 @Service
@@ -72,5 +73,10 @@ public class OrderItemsServiceImp implements OrderItemsService{
 	public List<OrderItems> findByOrderId(Integer orderId) {
 		return oitemDao.findByOrderBean_orderId(orderId);
 	};
+	
+	@Override
+	public Long countByProductBean(ProductBean productBean) {
+		return oitemDao.countByproductBean(productBean);
+	}
 	
 }

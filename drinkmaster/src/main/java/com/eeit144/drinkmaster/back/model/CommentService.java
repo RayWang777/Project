@@ -42,4 +42,10 @@ public interface CommentService {
 	public List<CommentBean> findCommentByUseridAndStoreid(Integer userId, Integer storeId);
 
 //	public Page<CommentBean> findPageByOrderByScoreAsc(Integer pageNumber);
+	
+	public Integer countStoreidByStoreid(Integer storeId);
+	
+	public Integer countScoreByStoreidScore(Integer storeId, Integer score);
+	
+	
 }

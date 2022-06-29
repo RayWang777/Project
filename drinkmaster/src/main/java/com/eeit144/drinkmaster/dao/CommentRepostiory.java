@@ -46,5 +46,12 @@ public interface CommentRepostiory extends JpaRepository<CommentBean, Integer> {
 //	public Page<CommentBean> findByStoreBean_storeId(Integer storeId, Pageable pageable);
 	
 	
+	@Query(value="SELECT COUNT(storeid) FROM comment WHERE storeid = :storeId",nativeQuery = true)
+	public Integer countStoreidByStoreid(@Param(value="storeId")Integer storeId);
+	
+	@Query(value="SELECT COUNT(score) FROM comment WHERE storeid = :storeId and score = :score",nativeQuery = true)
+	public Integer countScoreByStoreidScore(@Param(value="storeId")Integer storeId,@Param(value="score")Integer score);
+	
+	
 	
 }

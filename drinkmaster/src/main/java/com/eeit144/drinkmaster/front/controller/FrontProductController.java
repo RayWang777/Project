@@ -17,7 +17,7 @@ import com.eeit144.drinkmaster.bean.ProductCategoryBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
 
 @Controller
-@RequestMapping("front")
+@RequestMapping("front/")
 public class FrontProductController {
 	@Autowired
 	private ProductCategoryService categoryService;
@@ -40,7 +40,7 @@ private StoreService storeService;
 		 m.addAttribute("category",category);
 		
 		
-		return "/front/productmenu";
+		return "front/productmenu";
 	}
 	
 }

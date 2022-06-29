@@ -1,6 +1,10 @@
 package com.eeit144.drinkmaster.bean;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -15,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -38,7 +43,7 @@ public class ProductCategoryBean {
 	
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "productCategoryBean",cascade =CascadeType.ALL)
-	private Set<ProductBean> products = new LinkedHashSet<ProductBean>();
+	private List<ProductBean> products = new LinkedList<ProductBean>();
 	
 	public ProductCategoryBean() {
 		super();
@@ -76,11 +81,11 @@ public class ProductCategoryBean {
 		this.productCategoryName = productCategoryName;
 	}
 
-	public Set<ProductBean> getProducts() {
+	public List<ProductBean> getProducts() {
 		return products;
 	}
 
-	public void setProducts(Set<ProductBean> products) {
+	public void setProducts(List<ProductBean> products) {
 		this.products = products;
 	}
 	

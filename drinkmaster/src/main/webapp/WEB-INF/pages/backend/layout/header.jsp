@@ -81,7 +81,8 @@ li {
 						<li><a href="#">資料圖表</a></li>
 					</ul></li>
 				</c:otherwise></c:choose>
-				<li><a class="sidebar-sub-toggle"><i
+				<c:if test="${userBean.role == 'admin'or userBean.role == 'firm' or userBean.role == 'store'}">
+					<li><a class="sidebar-sub-toggle"><i
 						class="large material-icons">store</i> 店家管理 <span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
@@ -94,6 +95,8 @@ li {
 						<li><a href="#">刪除</a></li>
 						<li><a href="#">查詢</a></li>
 					</ul></li>
+				</c:if>
+				<c:if test="${userBean.role == 'admin'or userBean.role == 'firm' or userBean.role == 'store'}">
 				<li><a class="sidebar-sub-toggle"><i
 						class="large material-icons">local_cafe</i> 商品管理 <span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
@@ -107,6 +110,7 @@ li {
 						<li><a href="${contextRoot}/backend/productanalyze">銷量圖表</a></li>
 
 					</ul></li>
+					</c:if>
 					<c:choose>
 					<c:when test="${userBean.role != 'admin' && userBean.role != 'firm' && userBean.role != 'store'}"></c:when>
 					<c:otherwise>

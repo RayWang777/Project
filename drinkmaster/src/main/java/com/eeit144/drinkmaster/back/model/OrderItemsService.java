@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 
 
 import com.eeit144.drinkmaster.bean.OrderItems;
+import com.eeit144.drinkmaster.bean.ProductBean;
 
 
 
@@ -35,4 +36,8 @@ public interface OrderItemsService {
 	public Page<OrderItems> findByOrderBean_orderId(Integer orderId,Integer pageNumber);
 	
 	public List<OrderItems> findByOrderId(Integer orderId);
+	
+	public Long countByProductBean(ProductBean productBean);
+	
+	
 }

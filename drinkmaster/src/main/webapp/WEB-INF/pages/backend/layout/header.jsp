@@ -202,6 +202,7 @@ li {
 			<script src="<c:url value="/js/scripts.js"/>"></script>
 
 			<!-- bootstrap -->
+			<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 			<!-- bootstrap -->
 <script type="text/javascript">

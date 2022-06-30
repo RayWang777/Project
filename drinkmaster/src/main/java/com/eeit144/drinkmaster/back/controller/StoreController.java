@@ -102,20 +102,19 @@ public class StoreController {
 		}
 		
 		StoreDTO store = new StoreDTO();
+		
+		List<Integer> findStoreUserNull = storeService.findStoreUserNull();
+		List<UserBean> users = userService.findNullTypeUsers(findStoreUserNull);
+
+		if(findStoreUserNull.isEmpty()) {
+			
+			return "redirect:/backend/store/all";
+		}		
+
 		if(role.equals("admin")) {
 			
 			List<FirmBean> findAll3 = firmService.findAll3();
-			
-			List<Integer> findStoreUserNull = storeService.findStoreUserNull();
-			
-			if(findStoreUserNull.isEmpty()) {
-				
-				return "redirect:/backend/store/all";
-			}
-			
-			
-			
-			List<UserBean> users = userService.findNullTypeUsers(findStoreUserNull);
+
 
 			m.addAttribute("storeaddfirms", findAll3);
 			m.addAttribute("storeaddusers", users);
@@ -124,7 +123,6 @@ public class StoreController {
 		}
 		
 		FirmBean findFirmByUserId = firmService.findFirmByUserId(user.getUserId()).get(0);
-		List<UserBean> users = userService.findAllUsers();
 		
 		m.addAttribute("storeaddfirms", findFirmByUserId);
 		m.addAttribute("storeaddusers", users);		

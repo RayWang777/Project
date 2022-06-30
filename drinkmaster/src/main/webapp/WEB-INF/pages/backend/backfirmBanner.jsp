@@ -47,7 +47,7 @@
 				<th style="width: 50px;"><label class="control control--checkbox">
 						<input type="checkbox" class="js-check-all" />
 				</label></th>
-				<th style="width: 500px;text-align: center;">廠商名稱</th>
+				<th style="width: 300px;text-align: center;">廠商名稱</th>
 				<th scope="col">Banner</th>
 				
 				<th style="width: 140px;text-align: left;">動作</th>

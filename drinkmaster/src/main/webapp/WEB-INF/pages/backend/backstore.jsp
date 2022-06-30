@@ -70,7 +70,7 @@
 								<c:url value="/backend/store/edit/${store.storeId}" var="edit_url"/>
 								<a href="${edit_url}"><button	type="button" class="btn btn-primary">編輯</button></a>
 								<c:url value="/backend/store/delete/${store.storeId}" var="delete_url"/>
-								<button type="button" class="btn btn-danger" onclick="return del(event)">刪除</button>
+								<button type="button" class="btn btn-danger" id="${store.storeId}" onclick="return del(event)">刪除</button>
 							</td>
 						</tr>
 					</c:forEach>

@@ -18,6 +18,21 @@
   <div class="col-6">
    
   <div class="card">
+   <div class="card-header">
+					UserID:
+					 <c:out value="${workMessage.userBean.userId}" />
+				</div>
+				<br/>
+				<div class="card-header">
+					姓名 :
+					 <c:out value="${workMessage.userBean.userName}" />
+				</div>
+				<br/>
+				<div class="card-header">
+					Email信箱 :
+					<c:out value="${workMessage.userBean.userAccount}" />
+				</div>
+				<br/>
     <div class="card-header">
       最新意見回饋(時間)  <fmt:formatDate pattern="yyyy 年 MM 月 dd 日 hh:mm:ss a EEEE" value="${workMessage.answerTime}" />
     </div>
@@ -28,10 +43,10 @@
       
       <c:choose>
     	<c:when test="${workMessage.status=='ok'}">
-        <button class="btn btn-secondary btn-lg" disabled>已回覆</button>
+        <button class="btn btn-secondary btn-sm" disabled>已回覆</button>
     	</c:when>
     	<c:otherwise>
-        <a href="${contextRoot}/backend/service/postreply?serviceId=${workMessage.serviceId}"><button id="noreply" class="btn btn-lg btn-primary">未回覆</button></a>
+        <a href="${contextRoot}/backend/service/postreply?serviceId=${workMessage.serviceId}"><button id="noreply" class="btn btn-sm btn-primary">未回覆</button></a>
     	</c:otherwise>
 	  </c:choose>
         

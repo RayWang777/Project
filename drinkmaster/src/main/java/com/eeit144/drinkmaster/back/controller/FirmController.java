@@ -166,7 +166,7 @@ public class FirmController {
 		}
 		
 		FirmDTO firmDTO = new FirmDTO();
-		List<UserBean> users = userService.findNullFirmUsers(findUserNullFirmBean);
+		List<UserBean> users = userService.findNullTypeUsers(findUserNullFirmBean);
 		
 	
 
@@ -184,7 +184,7 @@ public class FirmController {
 		}
 		
 		List<Integer> findUserNullFirmBean = firmService.findUserNullFirmBean();
-		List<UserBean> users = userService.findNullFirmUsers(findUserNullFirmBean);
+		List<UserBean> users = userService.findNullTypeUsers(findUserNullFirmBean);
 		m.addAttribute("firmaddusers", users);
 		
 		FirmDtoValidator firmDtoValidator = new FirmDtoValidator();
@@ -237,15 +237,17 @@ public class FirmController {
 			return "redirect:/backend/";			
 		}
 		List<Integer> findUserNullFirmBean = firmService.findUserNullFirmBean();
-		
 		if(findUserNullFirmBean.isEmpty()) {
 			
 			return "redirect:/backend/firm/all";
 		}
-		m.addAttribute("firmaddusers", findUserNullFirmBean);
+		
+		List<UserBean> users = userService.findNullTypeUsers(findUserNullFirmBean);
 
 		Integer originUserId = firmService.findById(id).get().getUserBean().getUserId();
-		
+		UserBean findById2 = userService.findById(originUserId).get();
+		users.add(findById2);
+		m.addAttribute("firmaddusers", users);
 		m.addAttribute("originUserId", originUserId);
 		
 		if(user.getRole().equals("firm")) {

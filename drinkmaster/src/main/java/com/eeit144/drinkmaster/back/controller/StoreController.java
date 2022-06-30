@@ -1,5 +1,6 @@
 package com.eeit144.drinkmaster.back.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,8 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,8 +31,6 @@ import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.bean.UserBean;
 import com.eeit144.drinkmaster.dto.StoreDTO;
-
-import lombok.val;
 
 @Controller
 @RequestMapping("backend/")
@@ -108,7 +105,17 @@ public class StoreController {
 		if(role.equals("admin")) {
 			
 			List<FirmBean> findAll3 = firmService.findAll3();
-			List<UserBean> users = userService.findAllUsers();
+			
+			List<Integer> findStoreUserNull = storeService.findStoreUserNull();
+			
+			if(findStoreUserNull.isEmpty()) {
+				
+				return "redirect:/backend/store/all";
+			}
+			
+			
+			
+			List<UserBean> users = userService.findNullTypeUsers(findStoreUserNull);
 
 			m.addAttribute("storeaddfirms", findAll3);
 			m.addAttribute("storeaddusers", users);
@@ -133,7 +140,8 @@ public class StoreController {
 			if(role.equals("admin")) {
 				
 				List<FirmBean> findAll3 = firmService.findAll3();
-				List<UserBean> users = userService.findAllUsers();
+				List<Integer> findStoreUserNull = storeService.findStoreUserNull();
+				List<UserBean> users = userService.findNullTypeUsers(findStoreUserNull);
 
 				m.addAttribute("storeaddfirms", findAll3);
 				m.addAttribute("storeaddusers", users);
@@ -181,6 +189,8 @@ public class StoreController {
 	public String storeUpdatePage(@PathVariable("id") Integer id,@SessionAttribute("userBean") UserBean user, Model m) {
 		
 		String role = user.getRole();
+		
+		List<Integer> findStoreUserNull = storeService.findStoreUserNull();
 
 		StoreBean findById = storeService.findById(id).get();
 		
@@ -196,7 +206,21 @@ public class StoreController {
 		storeDTO.setLatitude(findById.getLatitude());
 		storeDTO.setLongitude(findById.getLongitude());
 		
-		List<UserBean> users = userService.findAllUsers();
+		
+		UserBean orginUser = findById.getUserBean();
+		if(findStoreUserNull.isEmpty()) {
+			List<UserBean> list = new ArrayList<UserBean>();
+			list.add(orginUser);
+			m.addAttribute("storeaddusers", list);
+			m.addAttribute("store", storeDTO);
+			
+			return "/backend/backstoreupdate";
+		}
+		
+		
+		List<UserBean> users = userService.findNullTypeUsers(findStoreUserNull);
+		users.add(orginUser);
+		
 		m.addAttribute("storeaddusers", users);
 		
 		if(role.equals("admin")) {

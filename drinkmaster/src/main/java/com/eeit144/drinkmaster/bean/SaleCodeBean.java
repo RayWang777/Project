@@ -46,8 +46,8 @@ public class SaleCodeBean {
 	@Column(name = "salecode")
 	private String saleCode;
 
-	@Column(name = "discount")
-	private Float discount;
+	@Column(name = "discount", columnDefinition = "Decimal(5,4)")
+	private Double discount;
 
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8") // JSP DATE
 	@DateTimeFormat(pattern = "yyyy-MM-dd") // MVC DATE
@@ -95,11 +95,11 @@ public class SaleCodeBean {
 		this.saleCode = saleCode;
 	}
 
-	public Float getDiscount() {
+	public Double getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(Float discount) {
+	public void setDiscount(Double discount) {
 		this.discount = discount;
 	}
 

@@ -33,76 +33,45 @@
 
 <body>
 	<br>
+	
+	<c:if test="${salecodes!=null}">	
+	<a href="<c:url value="/backend/salecode/xlsx"/>"><button id="downloadexcel" type="button" class="btn btn-success">下載清單</button></a>
+	</c:if>
+	
 	<c:url value="/backend/salecode/add" var="add_url" />
 	<c:if test="${error == null }">
 	<a href="${add_url}"><button type="button" class="btn btn-success">產生折扣碼</button></a>
 	</c:if>
 	<c:if test="${error != null }"><button type="button" class="btn btn-warning" style="color:blue;"><c:out value="${error}"/></button></c:if>
-
-
-	<table class="table table-hover"
-		style="width: 100%; table-layout: fixed;">
-		<thead>
-			<tr>
-				<th style="width: 50px;"><label class="control control--checkbox">
-						<input type="checkbox" class="js-check-all" />
-				</label></th>
-				<th style="width: 300px;text-align: center;">廠商名稱</th>
-				<th scope="col">Banner</th>
-				
-				<th style="width: 140px;text-align: left;">動作</th>
-			</tr>
-		</thead>
-		<tbody>
-
-			<c:forEach items="" var="firmBanner">
-				<tr scope="row">
-					<td class="align-middle"><label
-						class="control control--checkbox"><input type="checkbox"
-							id="check" value="<c:out value=''/>"
-							style="margin-top: 20px;" />
-						</label></td>
-						
-					<td class="align-middle" style="text-align: center;"><c:out value=""/></td>	
-					
-					<td class="align-middle"><img
-						src="<c:url value="/backend/salecode/"/>"
-						style="width: 500px; height: 270px;"></td>
-					<td class="align-middle" style="width: 13%;"><c:url
-							value="/backend/salecode/edit/" var="edit_url" /> <a
-						href=""><button type="button"
-								class="btn btn-primary">編輯</button></a> <c:url
-							value="/backend/salecode/delete/" var="delete_url" />
-						<a href="" onclick="return confirm('真的要刪除嗎')"><button
-								type="button" class="btn btn-danger">刪除</button></a></td>
-				</tr>
-			</c:forEach>
-
-		</tbody>
-	</table>
-	<div class="row justify-content-center" style="font-size: x-large;">
-		<c:forEach var="pageNumber" begin="1" end="${firmBanners.totalPages}">
-			<c:choose>
-				<c:when test="${firmBanners.number!=pageNumber-1}">
-				&nbsp;<a
-						href="${contextRoot}/backend/salecode/all?p=${pageNumber}"><c:out
-							value="${pageNumber}" /></a>&nbsp;
-				</c:when>
-				<c:otherwise>
-					&nbsp;<c:out value="${pageNumber}"></c:out>&nbsp;
-				</c:otherwise>
-			</c:choose>
-			&nbsp;<c:if test="${pageNumber!= firmBanners.totalPages }">|</c:if>&nbsp;
-		</c:forEach>
+	<div class="mb-3 input-group"></div>
+	
+	
+	<form action="" method="post">
+	<div class="mb-3 input-group">
+			<input name="salecode" class="form-control" type="text" id="salecode" />
+				<input type="submit" class="input-group-text btn btn-primary" value="折扣碼確認">
+			<span id=salecodeSp></span>
 	</div>
-	<div class="row justify-content-center"
-		style="font-size: large; color: black;">
-		<c:out value="總共有 ${firmBanners.totalElements} 筆資料"></c:out>
+	<div class="mb-3 input-group">
+			<label class="input-group-text" for="status">折扣碼狀態</label>
+			<input name="status" readonly="true" class="form-control" type="text" id="status" />
+			<label class="input-group-text" for="discount">&nbsp&nbsp折&nbsp&nbsp&nbsp&nbsp扣&nbsp&nbsp</label>
+			<input name="discount" readonly="true" class="form-control" type="text" id="status" />			
 	</div>
-
+	</form>
 </body>
 
 <script src="<c:url value="/js/lib/popper.min.js"/>"></script>
 <script src="<c:url value="/js/lib/main.js"/>"></script>
+<script type="text/javascript">
+$(function(){
+	
+	$('#downloadexcel').click(function(){
+		$('#downloadexcel').hide();
+	})
+	
+})
+
+</script>
 
 <jsp:include page="layout/footer.jsp" />

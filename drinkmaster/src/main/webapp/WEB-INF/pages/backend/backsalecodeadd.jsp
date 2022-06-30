@@ -40,9 +40,9 @@ color:red;
 				</c:when>
 				<c:otherwise>
 					<form:select path="firmId"	class="form-control">
-						<option value="${firms.firmId}" selected="true">${firms.firmName}</option>
+						<option value="${firms[0].firmId}" selected="true">${firms[0].firmName}</option>
 					</form:select>
-					<form:hidden path="firmId" value="${firms.firmId}" />
+					<form:hidden path="firmId" value="${firms[0].firmId}" />
 				</c:otherwise>
 				</c:choose>
 

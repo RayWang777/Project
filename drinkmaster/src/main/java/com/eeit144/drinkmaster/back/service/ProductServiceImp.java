@@ -19,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.eeit144.drinkmaster.back.model.ProductService;
 import com.eeit144.drinkmaster.bean.ProductBean;
+import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.dao.ProductRepostiory;
 
 @Service
@@ -48,6 +49,10 @@ public class ProductServiceImp implements ProductService {
 	public void insertProduct(ProductBean product) {
 		productDao.save(product);
 }
+	@Override
+	public  List<ProductBean> findByproduuctCategoryBean_storeBean(StoreBean storeBean){
+		return productDao.findByproductCategoryBean_storeBean(storeBean);
+	}
 	@Override
 	public Page<ProductBean> findByPage(Integer pageNumber) {
 		Pageable page = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "status");

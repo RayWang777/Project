@@ -20,5 +20,7 @@ public interface OrderItemsRepostiory extends JpaRepository<OrderItems, Integer>
 	
 	@Query(value = "select top(3) [productid] from [orderitems] group by [productid] order by  sum([quantity]) DESC ;",nativeQuery = true)
 	public List<Integer> countByproductBean();
+	
+	public List<OrderItems> findByproductBean(ProductBean productBean);
 
 }

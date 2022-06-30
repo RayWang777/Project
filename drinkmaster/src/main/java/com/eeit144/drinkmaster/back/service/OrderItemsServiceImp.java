@@ -32,7 +32,11 @@ public class OrderItemsServiceImp implements OrderItemsService{
 		 }
 		return null;
 	}
-
+	@Override
+	public List<OrderItems> findByproductBean(ProductBean productBean){
+		return oitemDao.findByproductBean(productBean);
+	}
+	
 	@Override
 	public Page<OrderItems> findAll(Pageable pageNumber) {
 		return oitemDao.findAll(pageNumber);

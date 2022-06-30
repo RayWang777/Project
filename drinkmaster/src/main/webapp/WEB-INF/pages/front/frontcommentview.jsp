@@ -74,7 +74,7 @@ div.awesomeRating {
 
 <div class="card">
 
-<span style="font-size: 1.5em">你的評論</span>
+<span style="font-size: 1.5em ; text-align:center ">你的評論</span>
   <div class="card-header">
 		<c:out value="${usercomment.storeBean.storeName}"></c:out>
 		<input id="commentstoreid" type="hidden" value="${usercomment.storeBean.storeId}"/>

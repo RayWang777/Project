@@ -45,20 +45,23 @@ public class FrontCommentController {
 	@Autowired
 	private StoreService storeService;
 //	private Integer userId = 1;			//測試用
-	private Integer storeId = 2;		//測試用
+//	private Integer storeId = 2;		//測試用
 //	private Integer productId = 3;		//測試用
 //	private Double score = 1.0;			//測試用
 	private Integer scoreType = 10;		//測試用
 	
 	
+	@GetMapping("comment/storecomment")
 	public String CommentStorePage(Model model) {
 		
 		List<StoreBean> commentStore = storeService.findAllList();
 		
+		
 		model.addAttribute("commentStore", commentStore);
 		
-		return "frontcomment";
+		return "front/frontcomment";
 	}
+	
 	
 	
 
@@ -153,16 +156,16 @@ public class FrontCommentController {
 	
 	
 	@GetMapping("comment/timeasc")
-	public String viewMessage(@RequestParam(name = "p", defaultValue = "1") Integer pageNumber, Model model) {
+	public String viewMessage(@RequestParam(name = "p", defaultValue = "1") Integer pageNumber, @RequestParam("storeid") Integer storeid, Model model) {
 		
 		Pageable pageable = PageRequest.of(pageNumber-1,3,Sort.Direction.ASC,"createTime");
 		
-		Page<CommentBean> page = commentService.findCommentByStoreidPage(storeId,pageable);	
+		Page<CommentBean> page = commentService.findCommentByStoreidPage(storeid,pageable);	
 		
 		
 		StoreBean sb = new StoreBean();
 		
-		sb.setStoreId(storeId);	
+		sb.setStoreId(storeid);	
 		
 		CommentBean commentBean = new CommentBean();
 		
@@ -179,7 +182,7 @@ public class FrontCommentController {
 			
 		Integer userId = usertest.getUserId();
 		
-		findusId = commentService.findCommentByUseridAndStoreid(userId, storeId);
+		findusId = commentService.findCommentByUseridAndStoreid(userId, storeid);
 		
 		}
 		
@@ -193,7 +196,7 @@ public class FrontCommentController {
 	}
 	
 	@GetMapping("comment/all")
-	public String viewtimedesc(@RequestParam(name = "p", defaultValue = "1") Integer pageNumber, Model model) {      //, @RequestParam("storeId") Integer storeId
+	public String viewtimedesc(@RequestParam(name = "p", defaultValue = "1") Integer pageNumber, @RequestParam("storeid") Integer storeid, Model model) {      //, @RequestParam("storeId") Integer storeId
 		
 		
 		
@@ -202,11 +205,11 @@ public class FrontCommentController {
 		
 		Pageable pageable = PageRequest.of(pageNumber-1,3,Sort.Direction.DESC,"createTime");
 		
-		Page<CommentBean> page = commentService.findCommentByStoreidPage(storeId,pageable);
+		Page<CommentBean> page = commentService.findCommentByStoreidPage(storeid,pageable);
 		
 		StoreBean sb = new StoreBean();
 		
-		sb.setStoreId(storeId);	
+		sb.setStoreId(storeid);	
 		
 		CommentBean commentBean = new CommentBean();
 		
@@ -223,7 +226,7 @@ public class FrontCommentController {
 			
 		Integer userId = usertest.getUserId();
 		
-		findusId = commentService.findCommentByUseridAndStoreid(userId, storeId);
+		findusId = commentService.findCommentByUseridAndStoreid(userId, storeid);
 		
 		}
 		
@@ -249,16 +252,16 @@ public class FrontCommentController {
 
 
 	@GetMapping("comment/scoredesc")
-	public String viewscoredesc(@RequestParam(name = "p", defaultValue = "1") Integer pageNumber, Model model) {
+	public String viewscoredesc(@RequestParam(name = "p", defaultValue = "1") Integer pageNumber, @RequestParam("storeid") Integer storeid, Model model) {
 		
 		Pageable pageable = PageRequest.of(pageNumber-1,3,Sort.Direction.DESC,"score");
 		
-		Page<CommentBean> page = commentService.findCommentByStoreidPage(storeId,pageable);
+		Page<CommentBean> page = commentService.findCommentByStoreidPage(storeid,pageable);
 		
 		
 		StoreBean sb = new StoreBean();
 		
-		sb.setStoreId(storeId);	
+		sb.setStoreId(storeid);	
 		
 		CommentBean commentBean = new CommentBean();
 		
@@ -275,7 +278,7 @@ public class FrontCommentController {
 			
 		Integer userId = usertest.getUserId();
 		
-		findusId = commentService.findCommentByUseridAndStoreid(userId, storeId);
+		findusId = commentService.findCommentByUseridAndStoreid(userId, storeid);
 		
 		}
 		
@@ -289,15 +292,15 @@ public class FrontCommentController {
 	}
 	
 	@GetMapping("comment/scoreasc")
-	public String viewscoreasc(@RequestParam(name = "p", defaultValue = "1") Integer pageNumber, Model model) {
+	public String viewscoreasc(@RequestParam(name = "p", defaultValue = "1") Integer pageNumber, @RequestParam("storeid") Integer storeid, Model model) {
 		
 		Pageable pageable = PageRequest.of(pageNumber-1,3,Sort.Direction.ASC,"score");
 		
-		Page<CommentBean> page = commentService.findCommentByStoreidPage(storeId,pageable);
+		Page<CommentBean> page = commentService.findCommentByStoreidPage(storeid,pageable);
 		
 		StoreBean sb = new StoreBean();
 		
-		sb.setStoreId(storeId);	
+		sb.setStoreId(storeid);	
 		
 		CommentBean commentBean = new CommentBean();
 		
@@ -313,7 +316,7 @@ public class FrontCommentController {
 			
 		Integer userId = usertest.getUserId();
 		
-		findusId = commentService.findCommentByUseridAndStoreid(userId, storeId);
+		findusId = commentService.findCommentByUseridAndStoreid(userId, storeid);
 		
 		}
 		

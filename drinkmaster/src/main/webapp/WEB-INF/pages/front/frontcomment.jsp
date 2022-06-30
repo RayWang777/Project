@@ -30,7 +30,7 @@ div.awesomeRating {
 </head>
 <body>
 
-<h1>全部評價</h1>
+<h1 style="text-align:center">評論區</h1>
 
 
 <div class="container">
@@ -38,39 +38,32 @@ div.awesomeRating {
 
 <div class="row justify-content-center">
 <div class="col-9">
-	<h1>全部訊息頁面</h1>
-<div class="card">
-  <div class="card-header">
 <!--    <span style="font-size: 1.5em">評論</span> -->
   </div>
-  <div class="card-body">
   
+  			<div class="row row-cols-3 row-cols-md-3 g-4">
+  				<c:forEach var="storecomment" items="${commentStore}" >
+  			
+  				
+				<div class="col">
+					<div class="card h-100">
+  						<div class="card-body">
+						    <c:out value="${storecomment.storeName}"></c:out>
+						    <input value="${storecomment.storeId}" style="display: none">
+						    <h6 class="card-subtitle mb-2 text-muted">-------------------</h6>
+						    <a href="${contextRoot}/front/comment/all?storeid=${storecomment.storeId}" class="card-link">去評分</a>
+						    <a href="#" class="card-link">去購買</a>
+						</div>
+					</div>
+				</div>
+  				
+  		
+  				</c:forEach>
+  			
+  			</div>
   
-  	
-  
-	<script type="text/javascript">
 	
-	$(function() {
-		$('#image').hide();
-	});
-
-	function preview() {
-		image.src = URL.createObjectURL(event.target.files[0]);
-		if ((event.target.files[0].type).startsWith("image")) {
-			$('#oldImage').hide();
-			$('#image').show();
-		}
-	}
-	
-	</script>
-  
   </div>
-</div>
-</div>
-</div>
-
-
-
 </div>
 
 

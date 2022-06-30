@@ -50,6 +50,20 @@ public class OrderItems {
 	@Column(name = "remark", columnDefinition = "nvarchar(30)")
 	private String remark;
 
+	
+	public OrderItems(Integer orderItemId, Integer productId,
+			 Integer price, Integer quantity, String remark) {
+		super();
+		this.orderItemId = orderItemId;
+//		this.orderId = orderId;
+//		this.orderBean = orderBean;
+		this.productId = productId;
+//		this.productBean = productBean;
+		this.price = price;
+		this.quantity = quantity;
+		this.remark = remark;
+	}
+
 	public String getRemark() {
 		return remark;
 	}

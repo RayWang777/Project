@@ -36,11 +36,11 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eeit144.drinkmaster.back.model.OrderService;
-import com.eeit144.drinkmaster.back.model.ProductService;
+//import com.eeit144.drinkmaster.back.model.ProductService;
 import com.eeit144.drinkmaster.back.model.StoreService;
 import com.eeit144.drinkmaster.back.model.UserService;
 import com.eeit144.drinkmaster.bean.OrderBean;
-import com.eeit144.drinkmaster.bean.ProductBean;
+
 import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.bean.UserBean;
 import com.eeit144.drinkmaster.dto.OrderBeanxslx;
@@ -58,8 +58,8 @@ public class OrderController<E> {
 		private StoreService storeService;
 		@Autowired
 		private UserService userService;
-		@Autowired
-		private ProductService productService;
+//		@Autowired
+//		private ProductService productService;
 		
 //		@Autowired
 //		public OrderController(OrderService orderService) {

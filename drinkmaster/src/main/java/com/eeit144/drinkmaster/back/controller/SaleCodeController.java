@@ -7,13 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eeit144.drinkmaster.back.model.FirmService;
 import com.eeit144.drinkmaster.back.model.SaleCodeService;
 import com.eeit144.drinkmaster.bean.FirmBanner;
 import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.SaleCodeBean;
+import com.eeit144.drinkmaster.bean.SaleCodeDto;
 
 @Controller
 @RequestMapping("backend/salecode/")
@@ -42,7 +45,7 @@ public class SaleCodeController {
 		
 		
 		List<SaleCodeBean> findByFirmIdNull = saleCodeService.findAllList();
-		SaleCodeBean newSaleCode = new SaleCodeBean();
+		SaleCodeDto newSaleCode = new SaleCodeDto();
 		m.addAttribute("newSaleCode", newSaleCode);
 
 		if(findByFirmIdNull.isEmpty()) {
@@ -64,6 +67,17 @@ public class SaleCodeController {
 		m.addAttribute("firms", findByIdNotIn);
 		return "/backend/backsalecodeadd";
 	
+	}
+	
+	@PostMapping("add")
+	public  String createSaleCode(@RequestParam("newSaleCode") SaleCodeDto saleCode,Model m) {
+		saleCode.getDiscount();
+		saleCode.getFirmId();
+	
+		
+		
+		
+		return "/backend/backsalecode";
 	}
 
 }

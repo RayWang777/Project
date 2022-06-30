@@ -21,8 +21,8 @@ color:red;
 
 		<div class="row justify-content-center">
 
-			<c:url value="/backend/store/add" var="link_url" />
-			<form:form class="form" action="${link_url}" method="post"	modelAttribute="newSaleCode">
+
+			<form:form class="form" method="post"	modelAttribute="newSaleCode">
 				
 				<c:choose>
 				<c:when test="${userBean.role == 'admin' }">
@@ -34,7 +34,7 @@ color:red;
 						<form:options items="${firms}" itemLabel="firmName"
 							itemValue="firmId" />
 					</form:select>
-					<form:hidden path="firmId" value="${firms[0].firmId}" />
+					<form:input path="firmId" value="${firms[0].firmId}" />
 					<span id=firmIdSp></span>
 				</div>
 				</c:when>
@@ -69,7 +69,16 @@ color:red;
 	</div>
 </div>
 
+<script type="text/javascript">
 
+$('#selectfirmId').click(function() {
+
+	var selected = $('#selectfirmId').val()
+	console.log(selected)
+	$('#firmId').val(selected);
+})
+
+</script>
 
 
 

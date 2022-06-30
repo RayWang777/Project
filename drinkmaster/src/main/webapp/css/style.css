@@ -2806,15 +2806,12 @@ tbody tr td:last-child {
   margin: 100px 0;
 }
 .login-form {
-  background: #ffffff;
+  background: rgba(100,100,100,0.7);
   padding: 30px 30px 20px;
-  border-radius: 30px;
-  border-width: 3px;
-  border-style: solid;
-  border-color: #FFAC55;
+  box-shadow: 12px 12px 12px gray;
   
   width: 500px;
-  position: absolute;
+  position: relative;
   top: 50%;
   left: 50%;
   margin: -200px 0 0 -250px;
@@ -2831,7 +2828,6 @@ tbody tr td:last-child {
   text-transform: none;
 }
 .login-form .btn {
-  width: 100%;
   text-transform: uppercase;
   font-size: 14px;
   padding: 15px;

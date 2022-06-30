@@ -26,9 +26,4 @@ public class FrontPageController {
 		return "/front/productmenu";
 	}
 	
-	@GetMapping("userMessage")
-	public String userserch() {
-		return "/front/frontuser";
-	}
-	
 }

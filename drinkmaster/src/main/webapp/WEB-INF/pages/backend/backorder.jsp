@@ -197,7 +197,7 @@
       <i class="tiny material-icons" >collections</i></a></td>
       <td>
       <a href="${contextRoot}/backend/order/edit?id=${orderBean.orderId}"><button class="btn btn-outline-primary btn-sm">編輯</button></a>
-      <a onclick="return confirm('確定要刪除嗎?')"  href="${contextRoot}/backend/order/delete?id=${orderBean.orderId}"><button class="btn btn-outline-danger btn-sm">刪除</button></a></td>
+      <a href="${contextRoot}/backend/order/delete?id=${orderBean.orderId}"><button id="${orderBean.orderId}" class="btn btn-outline-danger btn-sm" onclick="return del(event)">刪除</button></a></td>
       </tr>
     </c:forEach>
     
@@ -288,100 +288,17 @@
 </div>
 
 
-<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
-<!--   <div class="modal-dialog" role="document"> -->
-<!--     <div class="modal-content"> -->
-<!--       <div class="modal-header"> -->
-<!--         <h5 class="modal-title" id="exampleModalLabel">New message</h5> -->
-<!--         <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
-<!--           <span aria-hidden="true">&times;</span> -->
-<!--         </button> -->
-<!--       </div> -->
-<!--       <div class="modal-body">       -->
-<!-- <div style="text-align:center;"> -->
-<!-- <table class="table table-hover"style="width:100%;table-layout:fixed;"> -->
-<!--   <thead> -->
-<!--     <tr> -->
 
-<!--       <th scope="col">流水號</th> -->
-<!-- <!--       <th scope="col">訂單編號</th> -->
-<!--       <th scope="col">商品名稱</th> -->
-<!--       <th scope="col">數量</th> -->
-<!--       <th scope="col">價格</th> -->
-<!--       <th scope="col"></th> -->
-<!--     </tr> -->
-<!--   </thead> -->
-<!--   <tbody> -->
-<%--   <c:forEach var="orderItems" items="${page.content}"> --%>
-<!--     <tr scope="row"> -->
-
-    
-<%--       <th scope="row"><c:out value="${orderItems.orderItemId}"/></th> --%>
-<%-- <%--       <td><c:out value="${orderItems.orderBean.orderId}"/></td> --%>
-<%--       <td><c:out value="${orderItems.productBean.productName}"/></td> --%>
-<%--       <td><c:out value="${orderItems.quantity}"/></td> --%>
-<%--       <td><c:out value="${orderItems.price}"/></td> --%>
-
-<!--       <td> -->
-<!--       </tr> -->
-<%--     </c:forEach> --%>
-    
- 
-<!--   </tbody> -->
-  
-<!-- </table> -->
-<!-- </div>       -->
-<!-- </div> -->
-      
-<!--     </div> -->
-<!--   </div> -->
-<!-- </div>       -->
 
 
 
 
 <script type="text/javascript">
 
-// $(document).ready(function(){
-	
-// 	$ajax({
-// 		type:"GET",
-// 		url:'order/findStatus',
-// 		contentType:'application/json',
-// 		data: JSON.stringify(),
-// 		success: function(data){
-// 			console.log(data);
-// 		},error: function(e){
-// 			   console.log(e);
-// 		   }
-// 	})
-// })
 
 
 
-// var ctx = document.getElementById('myChart');
-// var myChart = new Chart(ctx, {
-//   type: 'pie',
-//   data: {
-//     labels: ['一月', '二月', '三月'],
-//     datasets: [{
-//       backgroundColor: [
-//         'rgba(255, 99, 132, 0.2)',
-//         'rgba(54, 162, 235, 0.2)',
-//         'rgba(255, 206, 86, 0.2)'
-//       ],
-//       borderColor: [
-//         'rgba(255,99,132,1)',
-//         'rgba(54, 162, 235, 1)',
-//         'rgba(255, 206, 86, 1)',
-//         'rgba(75, 192, 192, 1)'
-//       ],
-//       borderWidth: 1,
-//       label: '銷售業績(百萬)',
-//       data: [60, 49, 72]
-//     }]
-//   }
-// });
+
 
 
 
@@ -450,6 +367,39 @@ $(function(){
 		
 		
 	});
+	
+function del(event){
+	  console.log(event.target.id)
+var local = event.target.id;
+Swal.fire({
+title: '確認要刪除嗎?',
+icon: 'warning',
+showCancelButton: true,
+confirmButtonColor: '#dc3545',
+cancelButtonColor: '#28a745',
+confirmButtonText: '確認刪除',
+cancelButtonText: '&nbsp&nbsp取&nbsp&nbsp&nbsp&nbsp消&nbsp&nbsp',
+reverseButtons: true
+
+}).then((result) => {
+if (result.isConfirmed) {
+	  
+
+	Swal.fire({
+	  icon: 'success',
+	  title: '資料已移除',
+	  showConfirmButton: false,
+	  timer: 5000
+	}).then( ()=>{
+		
+		document.location.href='${contextRoot}/backend/order/delete/'+local;
+		
+	})
+}else if (result.isDenied) {
+	    return false;
+	  }
+});
+}	
 
 </script>
 

@@ -151,7 +151,7 @@
 
       <td>
       <a href="${contextRoot}/backend/orderItems/edit?id=${orderItems.orderItemId}"><button class="btn btn-outline-primary btn-sm">編輯</button></a>
-        <a onclick="return confirm('確定要刪除嗎?')"  href="${contextRoot}/backend/orderItems/delete?id=${orderItems.orderItemId}"><button class="btn btn-outline-danger btn-sm">刪除</button></a></td>
+        <a href="${contextRoot}/backend/orderItems/delete?id=${orderItems.orderItemId}"><button onclick="return del(event)" id="${orderItems.orderItemId}" class="btn btn-outline-danger btn-sm">刪除</button></a></td>
       </tr>
     </c:forEach>
     
@@ -234,6 +234,39 @@
 
 
 <script type="text/javascript">
+
+function del(event){
+	  console.log(event.target.id)
+var local = event.target.id;
+Swal.fire({
+title: '確認要刪除嗎?',
+icon: 'warning',
+showCancelButton: true,
+confirmButtonColor: '#dc3545',
+cancelButtonColor: '#28a745',
+confirmButtonText: '確認刪除',
+cancelButtonText: '&nbsp&nbsp取&nbsp&nbsp&nbsp&nbsp消&nbsp&nbsp',
+reverseButtons: true
+
+}).then((result) => {
+if (result.isConfirmed) {
+	  
+
+	Swal.fire({
+	  icon: 'success',
+	  title: '資料已移除',
+	  showConfirmButton: false,
+	  timer: 5000
+	}).then( ()=>{
+		
+		document.location.href='${contextRoot}/backend/orderItems/delete/'+local;
+		
+	})
+}else if (result.isDenied) {
+	    return false;
+	  }
+});
+}	
 
 $('#exampleModal').on('show.bs.modal', function (event) {
 	  var button = $(event.relatedTarget) // Button that triggered the modal

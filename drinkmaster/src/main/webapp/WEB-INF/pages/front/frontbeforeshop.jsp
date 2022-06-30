@@ -85,7 +85,7 @@
 <!-- 								</div> -->
 							</td>
 							<td style="font-size: 18px;">
-							<form:input id="productname" path="productName" value="${productBean.productName}" style="border-style:none;text-align: center;"  readonly="true"/>
+							<form:input id="productname" path="productName"  style="border-style:none;text-align: center;"  readonly="true"/>
 <%-- 							<c:out value="${productBean.productName}"/> --%>
 							</td>
 							

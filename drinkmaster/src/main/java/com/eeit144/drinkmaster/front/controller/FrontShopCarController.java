@@ -50,8 +50,8 @@ public class FrontShopCarController {
 	public String carView(Model m) {
 		testUserSession(m);
 		
-		
-		return "/front/frontshopcar";
+//		return "/front/frontshopcar";
+		return "/front/shoptest";
 	}
 	
 	@GetMapping("shopcar/before")
@@ -60,15 +60,30 @@ public class FrontShopCarController {
 	}
 	
 	
+//	@GetMapping("shopcar/before/editproduct")
+//	public String updateById(@RequestParam("id") Integer id, Model m) {
+//		ProductBean productBean = proService.findById(id);
+//		
+//		
+//		m.addAttribute("productBean", productBean);
+//		m.addAttribute("insert", "updateproduct");
+//		return "/front/frontbeforeshop";
+//	}
+	
+	
 	@GetMapping("shopcar/before/editproduct")
 	public String updateById(@RequestParam("id") Integer id, Model m) {
 		ProductBean productBean = proService.findById(id);
 		
 		
 		m.addAttribute("productBean", productBean);
+		m.addAttribute("userBean", productBean);
 		m.addAttribute("insert", "updateproduct");
 		return "/front/frontbeforeshop";
 	}
+	
+	
+	
 	
 	@GetMapping("shopcar/before/deleteproduct")
 	public String deleteById(@RequestParam("id") Integer id) {
@@ -105,8 +120,10 @@ public class FrontShopCarController {
 	}
 	
 	@PostMapping("shopcar/test")
-	public String addShopcar(Model m) {
+	public String addShopcar(Model m,@RequestParam("id") Integer id) {
+//		ProductBean productBean = proService.findById(id);
 		
+		m.getAttribute("userBean");
 		ShopcarBean shop = new ShopcarBean();
 		m.addAttribute("userBean", shop);
 		

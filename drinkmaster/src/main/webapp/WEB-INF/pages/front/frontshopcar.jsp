@@ -101,8 +101,8 @@
 							<td><a href="#" class="btn btn-warning">
 							<i class="fa fa-angle-left"></i> 
 							&thinsp;繼續購買</a></td>
-							<td>折扣碼:&thinsp;<input type="text" ></td>
-							<td colspan="2" class="hidden-xs"></td>
+							<td colspan="2">折扣碼:&thinsp;<input type="text" ></td>
+							<td  class="hidden-xs"></td>
 							
 <!-- 							備註:折扣碼後的價格 -->
 							<td class="hidden-xs text-center"><span style="color:red;font-weight: bold;">折扣後&ensp;</span><strong>Total $60</strong></td>

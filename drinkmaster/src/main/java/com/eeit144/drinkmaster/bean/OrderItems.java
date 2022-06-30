@@ -47,7 +47,7 @@ public class OrderItems {
 	@Column(name = "quantity", nullable = false)
 	private Integer quantity;
 	
-	@Column(name = "remark")
+	@Column(name = "remark", columnDefinition = "nvarchar(30)")
 	private String remark;
 
 	public String getRemark() {

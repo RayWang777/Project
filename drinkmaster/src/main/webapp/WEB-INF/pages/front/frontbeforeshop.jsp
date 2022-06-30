@@ -57,46 +57,46 @@
 
 <body>
 <div class="container" id="container">
-<form:form class="form" method="post" action="${contextRoot}/front/editproduct" modelAttribute="productBean">
+<form:form class="form" method="post" action="${contextRoot}/front/shopcar/test" modelAttribute="productBean">
 <form:hidden path="productId"/>
 	<table id="cart" class="table table-hover table-condensed">
     				<thead>
 						<tr>
-							<th style="width:150px">商品</th>
-							<th style="width:80px"></th>
-							<th style="width:30px">單價</th>
-							<th style="width:100px">數量</th>
-							<th style="width:30px">甜度</th>
-							<th style="width:30px">冷熱</th>
-							<th style="width:70px" class="text-center">總金額</th>
+							<th style="width:150px;text-align: center;" colspan="2">商品</th>
+<!-- 							<th style="width:80px;text-align: center;"></th> -->
+							<th style="width:30px;text-align: center;">單價</th>
+							<th style="width:100px;text-align: center;">數量</th>
+							<th style="width:30px;text-align: center;">甜度</th>
+							<th style="width:30px;text-align: center;">冷熱</th>
+							<th style="width:80px;text-align: center;" class="text-center">總金額</th>
 							<th style="width:20px"></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td data-th="Product">
-								<div class="row">
-									<div class="col-sm-2 hidden-xs"><img
-						src="${productBean.productImage}" style="width: 150px" /></div>
+<!-- 								<div class="row"> -->
+									<div class="col-sm-2 hidden-xs">
+									<img src="${productBean.productImage}" style="width: 300px;text-align: center;" /></div>
 									<div class="col-sm-10">
 										
 										
 									</div>
-								</div>
+<!-- 								</div> -->
 							</td>
 							<td style="font-size: 18px;">
-							<c:out value="${productBean.productName}"/>
-<%-- 							<form:input path="productName"  readonly="true"/> --%>
+							<form:input id="productname" path="productName" value="${productBean.productName}" style="border-style:none;text-align: center;"  readonly="true"/>
+<%-- 							<c:out value="${productBean.productName}"/> --%>
 							</td>
 							
 							<td data-th="Price" >
 <%-- 							<c:out value="${productBean.price}"/> --%>
-							<form:input id="price" path="price" value="${productBean.price}" style="width:50px"  readonly="true"/>
+							<form:input id="price" path="price" value="${productBean.price}" style="width:50px; border-style:none;text-align: center;"  readonly="true"/>
 							</td>
 							<td data-th="Quantity">
 								<input type="number" id="number" name="number" class="form-control text-center" value="1" min="1">
 							</td> 
-							<td data-th="Product">
+							<td data-th="Product" style="text-align: center;">
 							<select id="sugar">
 							<option value="無糖">無糖</option>
 							<option value="微糖">微糖</option>
@@ -106,13 +106,13 @@
 							</select>							
 							</td>
 							
-							<td data-th="Product">
+							<td data-th="Product" style="text-align: center;">
 							<select id="coldhot">
 							<option value="冷">冷</option>
 							<option value="熱">熱</option>
 							</select>							
 							</td>
-							<td data-th="Subtotal" class="text-center" id="totalprice">
+							<td data-th="Subtotal" class="text-center" id="totalprice" style="text-align: center;">
 							<c:out value="${productBean.price}"/>
 <%-- 							<form:input path="price" style="width:100px" readonly="true"/> --%>
 							</td>
@@ -136,7 +136,7 @@
 							
 <!-- 							備註:折扣碼後的價格 -->
 							<td colspan="2">
-							<input type="submit" name="submit" value="加到購物車 >" class="btn btn-success btn-block">
+							<input type="submit" name="submit" value="加入購物車 >" class="btn btn-success btn-block">
 <!-- 							<a href="#" class="btn btn-success btn-block"> -->
 <!-- 							<i class="fa fa-angle-right"></i> -->
 <!-- 							</a> -->
@@ -153,6 +153,14 @@ $(function(){
 
 	
 	$('#number').click(function(){				
+        var price = $('#price').val();      
+        var number = $('#number').val();
+        var totalprice = price*number;
+
+        $('#totalprice').html(totalprice);       	
+    })
+    
+    $('#number').keyup(function(){				
         var price = $('#price').val();      
         var number = $('#number').val();
         var totalprice = price*number;

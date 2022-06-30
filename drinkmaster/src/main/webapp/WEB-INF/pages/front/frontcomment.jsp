@@ -46,89 +46,7 @@ div.awesomeRating {
   <div class="card-body">
   
   
-  	<c:if test="${empty userBean}">
-  				登入後可評論~
- 	</c:if>
-  
-  
-	<c:if test="${not empty userBean}">
-	
- <c:choose>
   	
-  	<c:when test="${not empty findusId}">
-  	
-
-    <c:forEach  var="usercomment" items="${findusId}" >
-  		
-  		<div class="row justify-content-center">
-<div class="col-9">
-
-<div class="card">
-
-<span style="font-size: 1.5em">你的評論</span>
-  <div class="card-header">
-		<c:out value="${usercomment.storeBean.storeName}"></c:out>
-  </div>
-  <div class="card-body">
-  	<c:out value="${usercomment.userBean.userName}"></c:out>
-  	<c:out value="${usercomment.userBean.userId}"></c:out>
-  	<br/>
-  	
-  	
-  	
-  	<div style="pointer-events: none" id="scores${usercomment.commentId}" class="awesomeRating"></div>
-	<div class="awesomeRatingValue"></div>
-	<script type="text/javascript">
-	
-		$("#scores${usercomment.commentId}").awesomeRating({
-			
-			valueInitial: "${usercomment.score}",
-			values: ["1.0", "2.0", "3.0", "4.0", "5.0"],
-			targetSelector: "span.awesomeRatingValue"
-		});
-	
-		console.log(${usercomment.score});
-	</script>
-	
-	<c:out value="${usercomment.content}"></c:out>
-	
-	<br/>
-	
-	<img src="${usercomment.commentPhoto}" style="width: 100px;heiget: 100px" />
-
-	<br/>
-	(時間) <fmt:formatDate pattern="yyyy 年 MM 月 dd 日 a hh:mm:ss EEEE" value="${usercomment.createTime}" />
-  		
-  		
-  		
-<%--   		<c:out value="${usercomment.userBean.userName}" /> --%>
-  		
-  		  </div>
-</div>
-</div>
-</div>
-  		
-  		</c:forEach>
-
-    
-    
-    </c:when>
-  	
-  	<c:otherwise>
-  	
-  	<form:form class="form" method="post" action="${contextRoot}/front/comment" modelAttribute="commentBean" enctype="multipart/form-data">
-  	
-  		
-  		 <input type="submit" name="submit" value="撰寫評論">
-  		
-  	</form:form>
-  	</c:otherwise>
-  	
-  	</c:choose>
-  	
-  	    </c:if>
-  
-
   
 	<script type="text/javascript">
 	
@@ -151,21 +69,6 @@ div.awesomeRating {
 </div>
 </div>
 
-<div class="row justify-content-center">
-<div class="col-9">
-
-<div class="card">
-  <div class="card-header">
-    最新留言(時間) <fmt:formatDate pattern="yyyy 年 MM 月 dd 日 a hh:mm:ss EEEE" value="${lastestComment.createTime}" />
-  </div>
-  <div class="card-body">
-  
-	<c:out value="${lastestComment.content}"></c:out>
-  
-  </div>
-</div>
-</div>
-</div>
 
 
 </div>

@@ -4,6 +4,7 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eeit144.drinkmaster.back.model.CommentService;
+import com.eeit144.drinkmaster.back.model.StoreService;
 import com.eeit144.drinkmaster.bean.CommentBean;
 import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
@@ -39,6 +41,9 @@ public class FrontCommentController {
 	
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private StoreService storeService;
 //	private Integer userId = 1;			//測試用
 	private Integer storeId = 2;		//測試用
 //	private Integer productId = 3;		//測試用
@@ -46,12 +51,11 @@ public class FrontCommentController {
 	private Integer scoreType = 10;		//測試用
 	
 	
-	public String CommentStorePage(@PathVariable("storeid") StoreBean store, Model model) {
+	public String CommentStorePage(Model model) {
 		
-		Integer storeid = store.getStoreId();		
+		List<StoreBean> commentStore = storeService.findAllList();
 		
-		commentService.findCommentByStoreid(storeid);
-		
+		model.addAttribute("commentStore", commentStore);
 		
 		return "frontcomment";
 	}

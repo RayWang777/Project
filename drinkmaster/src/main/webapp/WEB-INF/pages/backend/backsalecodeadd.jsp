@@ -34,7 +34,7 @@ color:red;
 						<form:options items="${firms}" itemLabel="firmName"
 							itemValue="firmId" />
 					</form:select>
-					<form:input path="firmId" value="${firms[0].firmId}" />
+					<form:hidden path="firmId" value="${firms[0].firmId}" />
 					<span id=firmIdSp></span>
 				</div>
 				</c:when>
@@ -48,15 +48,34 @@ color:red;
 
 
 			
-				<div class="mb-3">
-					<label for="discount" class="form-label">折扣</label>
+				<label for="discount" class="form-label">折扣</label>
+				<div class="mb-3 input-group">
 					<form:input path="discount" class="form-control" type="text"
 						id="storeName" />
+					<span class="input-group-text">折(%)</span>
 					<form:errors path="discount" cssClass="error"></form:errors>
 					<span id=discountSp></span>
 				</div>
-
 				
+				<label for="count" class="form-label">數量</label>
+				<div class="mb-3 input-group">
+					<input name="count" class="form-control" type="text"
+						id="count" />
+					<span class="input-group-text">筆</span>
+					<input hidden="true" name="counterror" class="error"/>
+					<span id=countSp></span>
+				</div>
+				
+				
+				
+				
+				<div class="mb-3">
+				<label for="validDate" class="form-label">有效時間</label>
+					<form:input path="validDate" class="form-control" type="date"
+						id="validDate" value="${now}" />
+				<form:errors path="validDate" cssClass="error"></form:errors>
+					<span id=validDateSp></span>
+				</div>
 				<div class="mb-3" style="text-align: center;">
 					<input type="submit" class="btn btn-success"
 						value='<c:out value="產生折扣碼"/>'>

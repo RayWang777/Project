@@ -49,10 +49,10 @@ public class SaleCodeBean {
 	@Column(name = "discount")
 	private Float discount;
 
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8") // JSP DATE
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") // MVC DATE
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8") // JSP DATE
+	@DateTimeFormat(pattern = "yyyy-MM-dd") // MVC DATE
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "validdate", nullable = false, columnDefinition = "smalldatetime")
+	@Column(name = "validdate", nullable = false, columnDefinition = "date")
 	private Date validDate;
 
 	// 檢查是否有時間，沒有的話依照現在時間產生

@@ -79,6 +79,7 @@ li {
 						<li><a href="<c:url value="/backend/firm/banner/edit/${canSeeFirm.firmId}"/>">修改Banner</a></li>
 						</c:if>
 						<li><a href="#">資料圖表</a></li>
+						<li><a href="<c:url value="/backend/salecode/all"/>">折扣碼</a></li>
 					</ul></li>
 				</c:otherwise></c:choose>
 				<c:if test="${userBean.role == 'admin'or userBean.role == 'firm' or userBean.role == 'store'}">

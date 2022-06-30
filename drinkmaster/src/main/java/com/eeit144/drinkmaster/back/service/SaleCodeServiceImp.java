@@ -1,10 +1,14 @@
 package com.eeit144.drinkmaster.back.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.eeit144.drinkmaster.back.model.SaleCodeService;
+import com.eeit144.drinkmaster.bean.FirmBanner;
+import com.eeit144.drinkmaster.bean.SaleCodeBean;
 import com.eeit144.drinkmaster.dao.SaleCodeRepository;
 
 @Service
@@ -13,14 +17,14 @@ public class SaleCodeServiceImp  implements SaleCodeService {
 
 	private final String salecode="hellosales";
 	
-	private SaleCodeRepository saleCodeRepository;
+	private SaleCodeRepository saleCodeDao;
 	
 	
 	
 	@Autowired
-	public SaleCodeServiceImp(SaleCodeRepository saleCodeRepository) {
+	public SaleCodeServiceImp(SaleCodeRepository saleCodeDao) {
 		super();
-		this.saleCodeRepository = saleCodeRepository;
+		this.saleCodeDao = saleCodeDao;
 	}
 	
 
@@ -33,6 +37,12 @@ public class SaleCodeServiceImp  implements SaleCodeService {
 	
 	public void createSaleCode(String Key) {
 		
+	}
+
+
+	@Override
+	public List<SaleCodeBean> findAllList() {
+		return saleCodeDao.findAll();
 	}
 
 	

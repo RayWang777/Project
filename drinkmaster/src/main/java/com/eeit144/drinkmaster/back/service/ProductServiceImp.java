@@ -3,6 +3,7 @@ package com.eeit144.drinkmaster.back.service;
 import java.io.IOException;
 
 import java.util.Base64;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,11 @@ public class ProductServiceImp implements ProductService {
 	public void deleteById(Integer id) {
 		productDao.deleteById(id);
 }
+	@Override
+	public List<ProductBean> findAll(){
+		return productDao.findAll();
+	}
+	
 	@Override
 	public void insertProduct(ProductBean product) {
 		productDao.save(product);
@@ -151,6 +157,11 @@ public class ProductServiceImp implements ProductService {
 		} catch (NumberFormatException e) {
 			return false;
 		}
+	}
+	
+	@Override
+	public List<ProductBean> findAll(List<Integer> ids){
+		return productDao.findAllById(ids);
 	}
 
 }

@@ -74,9 +74,16 @@ public class OrderItemsServiceImp implements OrderItemsService{
 		return oitemDao.findByOrderBean_orderId(orderId);
 	};
 	
+	
+	/**
+	 * 
+	 * @return top 3 producyid
+	 * 
+	 * 
+	 */
 	@Override
-	public Long countByProductBean(ProductBean productBean) {
-		return oitemDao.countByproductBean(productBean);
+	public List<Integer> countByProductBean() {
+		return oitemDao.countByproductBean();
 	}
 	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.eeit144.drinkmaster.bean.OrderItems;
@@ -17,6 +18,7 @@ public interface OrderItemsRepostiory extends JpaRepository<OrderItems, Integer>
 
 	public List<OrderItems> findByOrderBean_orderId(Integer orderId);
 	
-	public Long countByproductBean(ProductBean productBean);
+	@Query(value = "select top(3) [productid] from [orderitems] group by [productid] order by  sum([quantity]) DESC ;",nativeQuery = true)
+	public List<Integer> countByproductBean();
 
 }

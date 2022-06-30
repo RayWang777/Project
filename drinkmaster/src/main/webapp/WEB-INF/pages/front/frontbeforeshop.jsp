@@ -56,13 +56,13 @@
 
 
 <body>
-<div class="container">
+<div class="container" id="container">
 <form:form class="form" method="post" action="${contextRoot}/front/editproduct" modelAttribute="productBean">
 <form:hidden path="productId"/>
 	<table id="cart" class="table table-hover table-condensed">
     				<thead>
 						<tr>
-							<th style="width:50px">商品</th>
+							<th style="width:150px">商品</th>
 							<th style="width:80px"></th>
 							<th style="width:30px">單價</th>
 							<th style="width:100px">數量</th>
@@ -76,51 +76,58 @@
 						<tr>
 							<td data-th="Product">
 								<div class="row">
-									<div class="col-sm-2 hidden-xs"><img style="width: 150px;" src="<c:url value="/images/珍奶.jpg"/>" alt="..." class="img-responsive"/></div>
+									<div class="col-sm-2 hidden-xs"><img
+						src="${productBean.productImage}" style="width: 150px" /></div>
 									<div class="col-sm-10">
 										
 										
 									</div>
 								</div>
 							</td>
-							<td style="font-size: 18px;"><form:input path="productName" /></td>
-							
-							<td data-th="Price"><form:input path="price" style="width:50px"/></td>
-							<td data-th="Quantity">
-								<input type="number" class="form-control text-center" value="1">
+							<td style="font-size: 18px;">
+							<c:out value="${productBean.productName}"/>
+<%-- 							<form:input path="productName"  readonly="true"/> --%>
 							</td>
+							
+							<td data-th="Price" >
+<%-- 							<c:out value="${productBean.price}"/> --%>
+							<form:input id="price" path="price" value="${productBean.price}" style="width:50px"  readonly="true"/>
+							</td>
+							<td data-th="Quantity">
+								<input type="number" id="number" name="number" class="form-control text-center" value="1" min="1">
+							</td> 
 							<td data-th="Product">
 							<select id="sugar">
-							<option>無糖</option>
-							<option>微糖</option>
-							<option>少糖</option>
-							<option>半糖</option>
-							<option>正常</option>
+							<option value="無糖">無糖</option>
+							<option value="微糖">微糖</option>
+							<option value="少糖">少糖</option>
+							<option value="半糖">半糖</option>
+							<option value="正常">正常</option>
 							</select>							
 							</td>
 							
 							<td data-th="Product">
 							<select id="coldhot">
-							<option>冷</option>
-							<option>熱</option>
+							<option value="冷">冷</option>
+							<option value="熱">熱</option>
 							</select>							
 							</td>
-							<td data-th="Subtotal" class="text-center"><form:input path="price" style="width:100px" /></td>
+							<td data-th="Subtotal" class="text-center" id="totalprice">
+							<c:out value="${productBean.price}"/>
+<%-- 							<form:input path="price" style="width:100px" readonly="true"/> --%>
+							</td>
+							
 							<td class="actions" data-th="">
 <!-- 								<button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button> -->
 <%-- 								<a onclick="return confirm('確定要刪除嗎?')"  href="${contextRoot}/shopcar/before/deleteproduct?id=${productBean.productId}"> --%>
-								<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+								<button id="delete" class="btn btn-danger btn-sm" onclick="return confirm('確定要刪除嗎?')"><i class="fa fa-trash-o"></i></button>
 <!-- 								</a>								 -->
 							</td>
 						</tr>
 					</tbody>
 					<tfoot>
-						<tr class="visible-xs">
-<!-- 						備註:折扣碼前的價格 -->
-							<td class="text-center"><strong>Total <form:input path="price" style="width:100px" /></strong></td>
-						</tr>
 						<tr>
-							<td><a href="#" class="btn btn-warning">
+							<td><a href="#" class="btn btn-warning" onclick="history.back()">
 							<i class="fa fa-angle-left"></i> 
 							&thinsp;回上一頁</a></td>
 							<td></td>
@@ -128,8 +135,12 @@
 							<td colspan="2" class="hidden-xs"></td>
 							
 <!-- 							備註:折扣碼後的價格 -->
-							<td class="hidden-xs text-center"><strong>Total $<form:input path="price" style="width:100px" /></strong></td>
-							<td colspan="2"><a href="#" class="btn btn-success btn-block">加到購物車&thinsp;<i class="fa fa-angle-right"></i></a></td>
+							<td colspan="2">
+							<input type="submit" name="submit" value="加到購物車 >" class="btn btn-success btn-block">
+<!-- 							<a href="#" class="btn btn-success btn-block"> -->
+<!-- 							<i class="fa fa-angle-right"></i> -->
+<!-- 							</a> -->
+							</td>
 						</tr>
 					</tfoot>
 				</table>
@@ -139,6 +150,22 @@
 <script type="text/javascript">
 $(function(){
 	
+
+	
+	$('#number').click(function(){				
+        var price = $('#price').val();      
+        var number = $('#number').val();
+        var totalprice = price*number;
+
+        $('#totalprice').html(totalprice);       	
+    })
+    
+    $('#delete').click(function(){				
+
+
+        $('#cart').remove();    
+        $(window).attr('location','${contextRoot}/front/');
+    })
 	
 })
 </script>

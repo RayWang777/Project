@@ -27,7 +27,7 @@
      
      <div class="form-group">
     
-     <input type="submit" name="submit" value="送出">
+     <input type="submit" name="submit" class="btn btn-success" value="送出">
     
  </div>
 </form:form>

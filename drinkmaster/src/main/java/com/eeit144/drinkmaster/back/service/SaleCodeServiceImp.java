@@ -45,5 +45,8 @@ public class SaleCodeServiceImp  implements SaleCodeService {
 		return saleCodeDao.findAll();
 	}
 
-	
+	@Override
+	public List<SaleCodeBean> insertSaleCodeToDB(List<SaleCodeBean> saleCodeBean) {
+		return saleCodeDao.saveAll(saleCodeBean);
+	}
 }

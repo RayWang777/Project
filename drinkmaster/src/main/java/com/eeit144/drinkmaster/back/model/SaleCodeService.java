@@ -9,5 +9,5 @@ public interface SaleCodeService {
 
 	List<SaleCodeBean> findAllList();
 
-
+	public List<SaleCodeBean> insertSaleCodeToDB(List<SaleCodeBean> saleCodeBean);
 }

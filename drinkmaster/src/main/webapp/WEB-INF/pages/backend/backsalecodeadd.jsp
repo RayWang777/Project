@@ -21,8 +21,8 @@ color:red;
 
 		<div class="row justify-content-center">
 
-			<c:url value="/backend/store/add" var="link_url" />
-			<form:form class="form" action="${link_url}" method="post"	modelAttribute="newSaleCode">
+
+			<form:form class="form" method="post"	modelAttribute="newSaleCode">
 				
 				<c:choose>
 				<c:when test="${userBean.role == 'admin' }">
@@ -48,15 +48,34 @@ color:red;
 
 
 			
-				<div class="mb-3">
-					<label for="discount" class="form-label">折扣</label>
+				<label for="discount" class="form-label">折扣</label>
+				<div class="mb-3 input-group">
 					<form:input path="discount" class="form-control" type="text"
 						id="storeName" />
+					<span class="input-group-text">折(%)</span>
 					<form:errors path="discount" cssClass="error"></form:errors>
 					<span id=discountSp></span>
 				</div>
-
 				
+				<label for="count" class="form-label">數量</label>
+				<div class="mb-3 input-group">
+					<input name="count" class="form-control" type="text"
+						id="count" />
+					<span class="input-group-text">筆</span>
+					<input hidden="true" name="counterror" class="error"/>
+					<span id=countSp></span>
+				</div>
+				
+				
+				
+				
+				<div class="mb-3">
+				<label for="validDate" class="form-label">有效時間</label>
+					<form:input path="validDate" class="form-control" type="date"
+						id="validDate" value="${now}" />
+				<form:errors path="validDate" cssClass="error"></form:errors>
+					<span id=validDateSp></span>
+				</div>
 				<div class="mb-3" style="text-align: center;">
 					<input type="submit" class="btn btn-success"
 						value='<c:out value="產生折扣碼"/>'>
@@ -69,7 +88,16 @@ color:red;
 	</div>
 </div>
 
+<script type="text/javascript">
 
+$('#selectfirmId').click(function() {
+
+	var selected = $('#selectfirmId').val()
+	console.log(selected)
+	$('#firmId').val(selected);
+})
+
+</script>
 
 
 

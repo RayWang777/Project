@@ -1,0 +1,42 @@
+body { 
+  background-color: #e1efbb;
+  font-family: verdana;
+  font-size: 15pt;
+}
+.center { margin-left: auto;
+          margin-right: auto;
+          margin-top: 30px;
+          margin-left: 10px;
+          margin-right: 10px;
+          text-align: center; 
+}
+.center > div, .center > table /* insert any other block-level elements here */ {
+    margin-left: auto;
+    margin-right: auto;
+}   
+.servlet { 
+  background-color: #ECFAFD;
+  font-family: verdana;
+  font-size: 16pt;
+}  
+
+td, select, input { 
+  font-family: verdana;
+  font-size: 14pt;
+} 
+
+legend {
+	font-weight: bold;
+	color: black;
+	background-color: white;
+	border: 1px solid #cccccc;
+	padding: 4px 2px;
+}
+
+fieldset legend {
+	background: #369;
+	color: #FFF;
+	font-weight: 700;
+	text-align: left;
+	white-space:nowrap;
+}

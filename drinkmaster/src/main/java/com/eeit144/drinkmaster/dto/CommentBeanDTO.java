@@ -2,6 +2,13 @@ package com.eeit144.drinkmaster.dto;
 
 import java.util.Date;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 public class CommentBeanDTO {
 
@@ -10,7 +17,7 @@ public class CommentBeanDTO {
 	private Integer userId;
 	private Integer storeId;
 	private Integer productId;
-	private Double score;
+	private String score;
 	private String content;
 	private Integer scoreType;
 	private Date createTime;
@@ -51,11 +58,11 @@ public class CommentBeanDTO {
 		this.productId = productId;
 	}
 
-	public Double getScore() {
+	public String getScore() {
 		return score;
 	}
 
-	public void setScore(Double score) {
+	public void setScore(String score) {
 		this.score = score;
 	}
 
@@ -89,6 +96,13 @@ public class CommentBeanDTO {
 
 	public void setCommentPhoto(String commentPhoto) {
 		this.commentPhoto = commentPhoto;
+	}
+
+	@Override
+	public String toString() {
+		return "CommentBeanDTO [commentId=" + commentId + ", userId=" + userId + ", storeId=" + storeId + ", productId="
+				+ productId + ", score=" + score + ", content=" + content + ", scoreType=" + scoreType + ", createTime="
+				+ createTime + ", commentPhoto=" + commentPhoto + "]";
 	}
 
 

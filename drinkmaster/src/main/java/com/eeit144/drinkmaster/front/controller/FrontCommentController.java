@@ -357,7 +357,7 @@ public class FrontCommentController {
 //	}
 	
 	
-	@GetMapping("comment/editComment")
+	@PostMapping("comment/editComment")
 	@ResponseBody
 	public CommentBeanDTO editComment(@RequestBody CommentBeanDTO dto) {   //, @RequestParam("usercommentid") Integer usercommentid
 		
@@ -381,10 +381,14 @@ public class FrontCommentController {
 		String content = findById.getContent();
 		String commentPhoto = findById.getCommentPhoto();
 		
+		
+		score.toString();
+		
+		dto.setCommentId(commentid);
 		dto.setUserId(uid);
 		dto.setStoreId(sid);
 		dto.setScoreType(st);
-		dto.setScore(score);
+		dto.setScore(score.toString());
 		dto.setCreateTime(createTime);
 		dto.setContent(content);
 		dto.setCommentPhoto(commentPhoto);
@@ -396,8 +400,11 @@ public class FrontCommentController {
 	
 	
 	
-	@PostMapping("comment/editComment")
-	public String postEditComment(@RequestPart("commentPhoto1") MultipartFile cPhoto,@RequestParam("commentid") Integer id) throws Exception {
+	@PostMapping("comment/editNewComment")
+	public String postEditComment(@RequestPart("commentPhoto1") MultipartFile cPhoto,
+			@RequestParam("newcommentid") Integer id,
+			@RequestParam("score1") Double score,
+			@RequestParam("commentcontent") String content) throws Exception {
 		
 		
 		CommentBean comment = commentService.findById(id);
@@ -408,7 +415,8 @@ public class FrontCommentController {
 			
 			comment.setCommentPhoto(profile);
 		}
-		
+		comment.setScore(score);
+		comment.setContent(content);
 		
 		commentService.insertComment(comment);
 		

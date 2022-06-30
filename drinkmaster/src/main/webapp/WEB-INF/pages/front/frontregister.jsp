@@ -3,20 +3,49 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<jsp:include page="layout/header.jsp" />
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<jsp:include page="layout/header.jsp"></jsp:include>
+
+<head>
+<meta charset="UTF-8">
+<title>飲君子 註冊</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+
+
+
+<link href="<c:url value="/css/lib/themify-icons.css"/>"
+	rel="stylesheet">
+<link href="<c:url value="/css/lib/menubar/sidebar.css"/>"
+	rel="stylesheet">
+<link href="<c:url value="/css/lib/bootstrap.min.css"/>"
+	rel="stylesheet">
+<link href="<c:url value="/css/style.css"/>" rel="stylesheet">
+
+<link
+	href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
+	rel="stylesheet" />
+
+
+
+<style>
+li {
+	font-size: large;
+}
+</style>
+</head>
 
 <div class="row justify-content-center">
 </div>
 
 <div class="container">
 
-<h2 class="mb-4" style="text-align: center; margin-top: 20px" >修改會員資料</h2>
+<h2 class="mb-4" style="text-align: center; margin-top: 20px" >註冊</h2>
 
 <div class="row justify-content-center">
 
 <div>
-   <form:form class="form" method="post" action="${contextRoot}/backend/user/update/${user.userId}" modelAttribute="user" enctype="multipart/form-data">
+   <form:form class="form" method="post" action="${contextRoot}/backend/register" modelAttribute="user" enctype="multipart/form-data">
    	<form:hidden path="userId" id="userId"/>
        <form:label path="userName">名&emsp;&emsp;稱</form:label>
        <form:input path="userName" class="form-control" onblur="checkEmpty()" id="userName"/>
@@ -24,7 +53,7 @@
        <span id="nameError"></span><br><br>
        
        <form:label path="userAccount">帳&emsp;&emsp;號</form:label>
-       <form:input path="userAccount" class="form-control"  onblur="checkEmpty()" id="account"/>
+       <form:input path="userAccount" class="form-control" onblur="checkEmpty()" id="account"/>
        <form:errors path="userAccount" cssClass="error" />
        <span id="accErr"></span><br><br>
        
@@ -52,18 +81,14 @@
        <span id="genderErr"></span>  <br><br>
        
        <form:label path="birthday">生&emsp;&emsp;日</form:label>
-  		<form:input type="date" path="birthday" class="form-control" onblur="checkEmpty()"/>
-<!--        <input type="date" name="birthday" id="birthday" class="form-control"/> -->
-       <form:errors path="birthday" cssClass="error" />
-       <span id="bdErr"></span>  <br><br>
+<%--   <form:input path="birthday" class="form-control"/> --%>
+       <input type="date" name="birthday" id="birthday" class="form-control"/>
+       <form:errors path="birthday" cssClass="error" /><br><br>
        
-       <form:label path="createdate">創建日期</form:label>
-       <form:input path="createdate" class="form-control" id="createdate" readonly="true"/>
-       <form:errors path="createdate" cssClass="error" /><br><br>
+       <form:hidden path="createdate" class="form-control" disabled="true" />
        
        <form:label path="role">職&emsp;&emsp;權</form:label>
        <select name="role" required="required" class="form-control" onblur="checkEmpty()">
-       		<option value="admin">管理者</option>
        		<option value="firm">廠商</option>
        		<option value="store">店家</option>
        		<option value="user">一般會員</option>
@@ -146,8 +171,8 @@ function checkPwd(){
     }     
 }
 
-
 function checkEmpty(){
+	
 	//please input the test email to see is valid
 	let strEmail = document.getElementById("account");
 	let theacc = document.getElementById("accErr");
@@ -162,6 +187,7 @@ function checkEmpty(){
         console.log(strEmail.value.search(emailRule));
 		theacc.innerHTML="須符合email格式";
 	}
+	
 	
     let thename = document.getElementById("nameError");
     let userName = document.getElementById("userName");
@@ -204,15 +230,6 @@ function checkEmpty(){
         theRole.innerHTML = "請輸入職權";
     } else {
         theRole.innerHTML = "";
-    }
-    
-    let theBD = document.getElementById("bdErr");
-    let birthday = document.getElementById("birthday");
-    let bd = birthday.value;
-    if (bd == "" || bd.length == 0) {
-    	theBD.innerHTML = "請選取生日";
-    } else {
-    	theBD.innerHTML = "";
     }
 
 }

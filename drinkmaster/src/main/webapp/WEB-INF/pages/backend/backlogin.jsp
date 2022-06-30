@@ -22,40 +22,70 @@
 
 
 <style>
-    li{
-        font-size: large;
-    }
+    .backend-background{
+    	background-image:url("http://localhost:8081/drinkmaster/images/back_BG.jpg");
+    	background-size: cover;
+	}
+	.form-label{
+		font-size:x-large;
+		font-weight: bold;
+	}
+	.login-title {
+	  background: rgba(0,0,0,0.9);
+	  padding: 30px 30px 20px;
+	  color: white;
+	  font-size:x-large;
+	  
+	  width: 500px;
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  margin: -185px 0 0 -250px;
+	}
 </style>
 </head>
 
+
+<body class="backend-background">
+
+<div class="login-title">
+	飲君子廠商管理後台登入
+</div>
+
 <div class="login-form">
  <form:form class="form" method="post" action="${contextRoot}/backend/loginGo">
-	<div class="mb-3">
-		<label for="select" class="form-label">帳號</label>
-		<input type="text" class="form-control" name="userAccount" id="userAccount" onblur="checkEmpty()"/>
+	<div class="mb-3" style="text-align: center;">
+		<label for="select" class="form-label" style="color:white;">帳號</label>
+		<input type="text" class="form-control" name="userAccount" id="userAccount" 
+		placeholder="請輸入電子信箱" onblur="checkEmpty()"/>
 		<span id="accErr"></span>
 	</div>
-	<div class="mb-3">
-		<label for="select" class="form-label">密碼</label>
-		<input type="text" class="form-control" name="userPassword" id="userPassword"/>
+	<div class="mb-3" style="text-align: center;">
+		<label for="select" class="form-label" style="color:white;">密碼</label>
+		<input type="password" class="form-control" name="userPassword" id="userPassword" placeholder="請輸入密碼"/>
 	</div>
 	<div>
 		<form:errors path="pass" cssClass="error" />
 	</div>
 	<div class="mb-3">
 	<button type="submit" class="btn btn-primary">登入</button>
-	<a href="${contextRoot}/backend/register"><button type="button" class="btn btn-light" style="margin-top: 10px">註冊</button></a>
+	<a href="${contextRoot}/backend/register"><button type="button" class="btn btn-light" style="margin-left: 10px">註冊</button></a>
 	</div>
-	<button onclick="admin()">admin帳密</button>
-	<button onclick="firm()">firm帳密</button>
-	<button onclick="store()">store帳密</button>
-	<button onclick="user()">user帳密</button>
+
 	<div class="mb-3">
 		<span><c:out value="${errorloginstr}"></c:out></span>
 	</div>
 	
 </form:form>
+
+	<button onclick="admin()">admin帳密</button>
+	<button onclick="firm()">firm帳密</button>
+	<button onclick="store()">store帳密</button>
+	<button onclick="user()">user帳密</button>
+	
 </div>
+</body>
+
 
 <script type="text/javascript">
 function admin() {

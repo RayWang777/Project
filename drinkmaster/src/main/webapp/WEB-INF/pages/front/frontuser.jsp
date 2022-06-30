@@ -1,34 +1,67 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <jsp:include page="layout/header.jsp"></jsp:include>
+
+
 <style>
-.circle--square{
-	width:200px;
-	height:200px;
-	display: flex;
-	justify-content: center;
+.shape-ex6{
+    width: 200px;
+    height: 200px;
+    max-width:  100%;
     
-	display:inline-block;
-    overflow:hidden;
+    display: block;
+    position: relative;
+    font-size: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -10%);
+    
     border-radius:50%;
     border: 2px solid;
+    overflow:hidden;
 }
-
-.circle--square img{
-    width: 100%;
-    vertical-align : middle;
+.shape-ex6-block{
+    width: 100%; 
+    height: 100%;
+    position: absolute;
+    text-align: center;
+    overflow:hidden;
+    
+    margin: 0 auto;
 }
-
+.shape-ex6-block:before{
+    content: ''; 
+    display: inline-block;
+    height: 100%;
+    width: 0;
+    vertical-align: middle;
+    overflow:hidden;
+}
+.shape-ex6-img{
+    max-width: 100%; 
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: inline-block;
+    vertical-align: middle;
+    overflow:hidden;
+}
 </style>
 
 <header class="bg-dark py-5">
 	<div class="container px-4 px-lg-5 my-5">
 		<div class="text-center text-white">
-			<div class="circle--square">
-				<img src="http://blog.bni168.com/wp-content/uploads/2018/11/%E9%80%8F%E9%81%8E%E4%B9%9D%E5%AE%AE%E6%A0%BC%E7%94%A2%E6%A5%AD%E5%90%88%E4%BD%9C%E6%8B%BC%E5%9C%96%E6%89%93%E9%80%A0%E4%BD%A0%E7%9A%84%E5%A4%A2%E5%B9%BB%E5%9C%98%E9%9A%8A-2-1024x768.jpg" />
+			<div class="shape-ex6">
+			<div class="shape-ex6-block">
+				<img class="shape-ex6-img" src="data:image/jpg;base64,<c:out value='${canSeeUser.byteArrayString}'/>"/>
 			</div>
-			<h1 class="display-4 fw-bolder">Shop in style</h1>
-			<p class="lead fw-normal text-white-50 mb-0">With this shop
-				hompeage template</p>
+			</div>
+			<h1 class="display-4 fw-bolder">${canSeeUser.userName}</h1>
+			<p class="lead fw-normal text-white-50 mb-0">${canSeeUser.userAccount}</p>
 		</div>
 	</div>
 </header>
@@ -46,7 +79,7 @@
 					<div class="card-body p-4">
 						<div class="text-center">
 							<!-- Product name-->
-							<h5 class="fw-bolder">嗨嗨嗨</h5>
+							<h5 class="fw-bolder">安安</h5>
 							<!-- Product price-->
 							$40.00 - $80.00
 						</div>

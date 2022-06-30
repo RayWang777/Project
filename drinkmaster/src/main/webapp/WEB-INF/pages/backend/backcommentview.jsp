@@ -77,9 +77,9 @@ console.log(average(rating));
 <div id="ratingBarTwo" class="ratingBar"></div>
 <div id="ratingBarOne" class="ratingBar"></div>
 
+<br/>
 
-
-<div class="dropdown">
+<div class="dropdown" style="text-align:right">
   <button class="btn btn-black dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">
     排序
   </button>
@@ -92,7 +92,7 @@ console.log(average(rating));
 </div>
 
 
-
+<br/>
 
 
 <script type="text/javascript">

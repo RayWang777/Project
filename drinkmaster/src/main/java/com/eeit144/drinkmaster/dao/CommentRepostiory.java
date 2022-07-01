@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.eeit144.drinkmaster.bean.CommentBean;
+import com.eeit144.drinkmaster.bean.StoreBean;
 
 
 @Repository
@@ -64,8 +65,10 @@ public interface CommentRepostiory extends JpaRepository<CommentBean, Integer> {
 	public Integer countScoreByStoreidScore(@Param(value="storeId")Integer storeId,@Param(value="score")Integer score);
 
 	
-	@Query(value="SELECT ROUND(avg(score),1) FROM comment where storeid = :storeId",nativeQuery = true)
+	@Query(value="SELECT ROUND(avg(score),0) FROM comment where storeid = :storeId",nativeQuery = true)
 	public Double avgScoreByStoreid(@Param(value="storeId")Integer storeId);
 
+	
+	public List<CommentBean> findByStoreBean_storeId(Integer storeId);
 	
 }

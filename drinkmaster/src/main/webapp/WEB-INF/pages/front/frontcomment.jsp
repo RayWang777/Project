@@ -30,7 +30,7 @@ div.awesomeRating {
 </head>
 <body>
 
-<h1>全部評價</h1>
+<h1 style="text-align:center">評論區</h1>
 
 
 <div class="container">
@@ -38,137 +38,62 @@ div.awesomeRating {
 
 <div class="row justify-content-center">
 <div class="col-9">
-	<h1>全部訊息頁面</h1>
-<div class="card">
-  <div class="card-header">
 <!--    <span style="font-size: 1.5em">評論</span> -->
   </div>
-  <div class="card-body">
   
-  
-  	<c:if test="${empty userBean}">
-  				登入後可評論~
- 	</c:if>
-  
-  
-	<c:if test="${not empty userBean}">
-	
- <c:choose>
-  	
-  	<c:when test="${not empty findusId}">
-  	
-
-    <c:forEach  var="usercomment" items="${findusId}" >
+  			<div class="row row-cols-3 row-cols-md-3 g-4">
+  				<c:forEach var="storecomment" items="${listcsdto}" >
+  			
+  				
+				<div class="col">
+					<div class="card h-100">
+  						<div class="card-body">
+						    <c:out value="${storecomment.storeName}"></c:out>
+						    <input value="${storecomment.storeId}" style="display: none">
+						    <h3 class="card-subtitle mb-2 text-muted">-------------------</h3>
+						    <c:out value="${storecomment.avgScore}"></c:out>
+						    
+						    
+						    <div style="pointer-events:none" id="scores${storecomment.storeId}" class="awesomeRating"></div>
+							<div class="awesomeRatingValue" style="display:none"></div>
+								<script type="text/javascript">
+								
+								
+								
+							
+								$("#scores${storecomment.storeId}").awesomeRating({
+									
+									valueInitial: "${storecomment.avgScore}",
+									values: ["1.0", "2.0", "3.0", "4.0", "5.0"],
+									targetSelector: "div.awesomeRatingValue"
+								});
+							
+								console.log(${usercomment.score});
+								
+								</script>
+						    <br/>
+						    <a href="${contextRoot}/front/comment/all?storeid=${storecomment.storeId}" class="card-link">去評分</a>
+						    <a href="#" class="card-link">去購買</a>
+						</div>
+					</div>
+				</div>
+  				
   		
-  		<div class="row justify-content-center">
-<div class="col-9">
-
-<div class="card">
-
-<span style="font-size: 1.5em">你的評論</span>
-  <div class="card-header">
-		<c:out value="${usercomment.storeBean.storeName}"></c:out>
+  				</c:forEach>
+  				</div>
+  			
+  
+	
   </div>
-  <div class="card-body">
-  	<c:out value="${usercomment.userBean.userName}"></c:out>
-  	<c:out value="${usercomment.userBean.userId}"></c:out>
-  	<br/>
-  	
-  	
-  	
-  	<div style="pointer-events: none" id="scores${usercomment.commentId}" class="awesomeRating"></div>
-	<div class="awesomeRatingValue"></div>
-	<script type="text/javascript">
-	
-		$("#scores${usercomment.commentId}").awesomeRating({
-			
-			valueInitial: "${usercomment.score}",
-			values: ["1.0", "2.0", "3.0", "4.0", "5.0"],
-			targetSelector: "span.awesomeRatingValue"
-		});
-	
-		console.log(${usercomment.score});
-	</script>
-	
-	<c:out value="${usercomment.content}"></c:out>
-	
-	<br/>
-	
-	<img src="${usercomment.commentPhoto}" style="width: 100px;heiget: 100px" />
-
-	<br/>
-	(時間) <fmt:formatDate pattern="yyyy 年 MM 月 dd 日 a hh:mm:ss EEEE" value="${usercomment.createTime}" />
-  		
-  		
-  		
-<%--   		<c:out value="${usercomment.userBean.userName}" /> --%>
-  		
-  		  </div>
 </div>
-</div>
-</div>
-  		
-  		</c:forEach>
 
-    
-    
-    </c:when>
-  	
-  	<c:otherwise>
-  	
-  	<form:form class="form" method="post" action="${contextRoot}/front/comment" modelAttribute="commentBean" enctype="multipart/form-data">
-  	
-  		
-  		 <input type="submit" name="submit" value="撰寫評論">
-  		
-  	</form:form>
-  	</c:otherwise>
-  	
-  	</c:choose>
-  	
-  	    </c:if>
-  
-
-  
-	<script type="text/javascript">
+<script type="text/javascript">
 	
-	$(function() {
-		$('#image').hide();
+	$(function(){
+		
 	});
 
-	function preview() {
-		image.src = URL.createObjectURL(event.target.files[0]);
-		if ((event.target.files[0].type).startsWith("image")) {
-			$('#oldImage').hide();
-			$('#image').show();
-		}
-	}
-	
-	</script>
-  
-  </div>
-</div>
-</div>
-</div>
-
-<div class="row justify-content-center">
-<div class="col-9">
-
-<div class="card">
-  <div class="card-header">
-    最新留言(時間) <fmt:formatDate pattern="yyyy 年 MM 月 dd 日 a hh:mm:ss EEEE" value="${lastestComment.createTime}" />
-  </div>
-  <div class="card-body">
-  
-	<c:out value="${lastestComment.content}"></c:out>
-  
-  </div>
-</div>
-</div>
-</div>
-
-
-</div>
+</script>
 
 
 <jsp:include page="layout/footer.jsp" />

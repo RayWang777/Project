@@ -51,7 +51,7 @@ public class SaleCodeBean {
 
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8") // JSP DATE
 	@DateTimeFormat(pattern = "yyyy-MM-dd") // MVC DATE
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name = "validdate", nullable = false, columnDefinition = "date")
 	private Date validDate;
 

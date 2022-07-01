@@ -4,8 +4,6 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import cn.afterturn.easypoi.excel.annotation.Excel;
 
 public class SaleCodeExcel {
@@ -17,7 +15,7 @@ public class SaleCodeExcel {
 	private Double discount;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd") // MVC DATE
-	@Excel(name="有效時間", orderNum="3",width = 30)
+	@Excel(name="有效時間", orderNum="3",width = 30,exportFormat = "yyyy-MM-dd")
 	private Date validDate;
 
 	public SaleCodeExcel() {

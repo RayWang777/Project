@@ -201,8 +201,9 @@ li {
 			<script src="<c:url value="/js/lib/bootstrap.bundle.min.js"/>"></script>
 			<script src="<c:url value="/js/scripts.js"/>"></script>
 
-			<!-- bootstrap -->
-			<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+			<!-- sweetalert2 -->
+<!-- 			<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+			<script src="<c:url value="/js/lib/sweetalert2@11.js"/>"></script>
 
 			<!-- bootstrap -->
 <script type="text/javascript">

@@ -70,7 +70,7 @@
 								<c:url value="/backend/store/edit/${store.storeId}" var="edit_url"/>
 								<a href="${edit_url}"><button	type="button" class="btn btn-primary">編輯</button></a>
 								<c:url value="/backend/store/delete/${store.storeId}" var="delete_url"/>
-								<a href="${delete_url}" onclick="return confirm('真的要刪除嗎')"><button type="button" class="btn btn-danger">刪除</button></a>
+								<button type="button" class="btn btn-danger" id="${store.storeId}" onclick="return del(event)">刪除</button>
 							</td>
 						</tr>
 					</c:forEach>
@@ -101,5 +101,44 @@
 </body>
 <script src="<c:url value="/js/lib/popper.min.js"/>"></script>
 <script src="<c:url value="/js/lib/main.js"/>"></script>
+<script type="text/javascript">
+
+
+function del(event){
+			  console.log(event.target.id)
+	var local = event.target.id;
+	 Swal.fire({
+		  title: '確認要刪除嗎?',
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#dc3545',
+		  cancelButtonColor: '#28a745',
+		  confirmButtonText: '確認刪除',
+		  cancelButtonText: '&nbsp&nbsp取&nbsp&nbsp&nbsp&nbsp消&nbsp&nbsp',
+		  reverseButtons: true
+		  
+		}).then((result) => {
+		  if (result.isConfirmed) {
+			  
+	
+			Swal.fire({
+			  icon: 'success',
+			  title: '資料已移除',
+			  showConfirmButton: false,
+			  timer: 2000
+			}).then( ()=>{
+				
+				document.location.href='${contextRoot}/backend/store/delete/'+local;
+				
+			})
+		  }else if (result.isDenied) {
+			    return false;
+			  }
+		});
+}
+
+</script>
+
+
 
 <jsp:include page="layout/footer.jsp" />

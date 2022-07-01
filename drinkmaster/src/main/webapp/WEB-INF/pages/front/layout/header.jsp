@@ -183,6 +183,7 @@
         <script src="${contextRoot}/js/lib/front/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="${contextRoot}/js/lib/front/scripts.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript">
 

@@ -1,6 +1,7 @@
 package com.eeit144.drinkmaster.back.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,18 +18,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eeit144.drinkmaster.back.model.FirmService;
+import com.eeit144.drinkmaster.back.model.OrderItemsService;
+import com.eeit144.drinkmaster.back.service.FirmServiceImp;
+import com.eeit144.drinkmaster.back.service.OrderItemsServiceImp;
 import com.eeit144.drinkmaster.back.service.ProductCategoryServiceImp;
 import com.eeit144.drinkmaster.back.service.ProductServiceImp;
 import com.eeit144.drinkmaster.back.service.StoreServiceImp;
 import com.eeit144.drinkmaster.bean.FirmBean;
+import com.eeit144.drinkmaster.bean.OrderItems;
 import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.bean.ProductCategoryBean;
+import com.eeit144.drinkmaster.bean.ProductMaterial;
 import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.bean.UserBean;
 
@@ -44,7 +51,10 @@ public class ProductController {
 	@Autowired
 	private StoreServiceImp storeService;
 	@Autowired
-	private FirmService firmService;
+	private FirmServiceImp firmService;
+	
+	@Autowired
+	private OrderItemsServiceImp itemsService;
 
 	@GetMapping("product/insertview")
 	public String addView(Model m, @SessionAttribute("canSeeStore") StoreBean storeBean) {
@@ -59,8 +69,31 @@ public class ProductController {
 	}
 
 	@GetMapping("productanalyze")
-	public String analyzeview() {
+	public String analyzeview(@SessionAttribute("canSeeStore") StoreBean storeBean,Model m) {
+		
+		List<ProductMaterial> sales = sales(storeBean);
+		m.addAttribute("list", sales);
 		return "/backend/productanalyze";
+	}
+	
+	@GetMapping ("material")
+	@ResponseBody
+	public  List<ProductMaterial> sales(@SessionAttribute("canSeeStore") StoreBean storeBean){
+		List<ProductMaterial> list =new ArrayList<ProductMaterial>();
+		 List<ProductBean> product= proService.findByproduuctCategoryBean_storeBean(storeBean);
+		for(ProductBean pro: product ) {
+			ProductMaterial material =new ProductMaterial();
+			material.setProductName(pro.getProductName());
+		List<OrderItems> items= itemsService.findByproductBean(pro);
+		int sum=0;
+		for(OrderItems items2:items) {
+			sum+=items2.getQuantity();
+		}
+		material.setSales(sum);
+		list.add(material);
+		}
+		
+		return list;
 	}
 
 	@PostMapping("/product/insert")
@@ -117,6 +150,7 @@ public class ProductController {
 	@GetMapping("product/all")
 	public ModelAndView findView(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber,
 			@SessionAttribute("userBean") UserBean userBean) {
+		mav.getModel().put("past", "1");
 		if (userBean.getRole().equals("admin")) {
 			Page<ProductBean> page = proService.findByPage(pageNumber);
 			mav.getModel().put("page", page);
@@ -139,6 +173,9 @@ public class ProductController {
 	public ModelAndView selectLike(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber,
 			@RequestParam("select") String select, @RequestParam("filed") String filed,
 			@SessionAttribute("userBean") UserBean userBean) {
+		mav.getModel().put("past", "2");
+		mav.getModel().put("select", select);
+		mav.getModel().put("filed",filed);
 		if (userBean.getRole().equals("admin")) {
 			if (filed.equals("上架中") || filed.equals("已下架")) {
 				Page<ProductBean> page = proService.select(pageNumber, filed, filed);

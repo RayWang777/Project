@@ -37,7 +37,7 @@ public interface OrderItemsService {
 	
 	public List<OrderItems> findByOrderId(Integer orderId);
 	
-	public Long countByProductBean(ProductBean productBean);
+	public List<Integer> countByProductBean();
 	
-	
+	public List<OrderItems> findByproductBean(ProductBean productBean);	
 }

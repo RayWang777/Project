@@ -79,6 +79,7 @@ li {
 						<li><a href="<c:url value="/backend/firm/banner/edit/${canSeeFirm.firmId}"/>">修改Banner</a></li>
 						</c:if>
 						<li><a href="#">資料圖表</a></li>
+						<li><a href="<c:url value="/backend/salecode/all"/>">折扣碼</a></li>
 					</ul></li>
 				</c:otherwise></c:choose>
 				<c:if test="${userBean.role == 'admin'or userBean.role == 'firm' or userBean.role == 'store'}">
@@ -102,7 +103,7 @@ li {
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
 						<li><a href="${contextRoot}/backend/product/all">商品列表</a></li>
-						<c:if test="${userBean.role == 'store' || userBean.role == 'admin'}">
+						<c:if test="${userBean.role == 'store'}">
 						<li><a href="${contextRoot}/backend/product/insertview">新增商品</a></li>
 						</c:if>
 						<li><a href="${contextRoot}/backend/category/all">種類列表</a></li>
@@ -130,9 +131,8 @@ li {
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
 						<li><a href="${contextRoot}/backend/comment">新增</a></li>
-						<li><a href="${contextRoot}/front/comment">前台</a></li>
-						<li><a href="${contextRoot}/front/comment/all">刪除</a></li>
-						<li><a href="${contextRoot}/backend/comment/all">查詢</a></li>
+						<li><a href="${contextRoot}/front/comment/all">前台</a></li>
+						<li><a href="${contextRoot}/backend/comment/all">所有評論</a></li>
 					</ul></li>
 				<li><a class="sidebar-sub-toggle"><i
 						class="large material-icons">room_service</i> 客服管理 <span
@@ -202,6 +202,7 @@ li {
 			<script src="<c:url value="/js/scripts.js"/>"></script>
 
 			<!-- bootstrap -->
+			<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 			<!-- bootstrap -->
 <script type="text/javascript">

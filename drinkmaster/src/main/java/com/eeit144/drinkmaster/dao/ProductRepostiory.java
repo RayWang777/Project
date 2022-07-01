@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.bean.ProductCategoryBean;
+import com.eeit144.drinkmaster.bean.StoreBean;
 
 
 
@@ -34,5 +35,6 @@ public interface ProductRepostiory extends JpaRepository<ProductBean, Integer> {
 	 Page<ProductBean> findBystatusAndProductCategoryBean_StoreBean_FirmBean_firmId(Pageable pageable,boolean status,Integer firmId);
 	 Page<ProductBean> findByProductCategoryBean_StoreBean_storeNameLikeAndProductCategoryBean_storeBean_FirmBean_firmId(Pageable pageable,String storeName,Integer firmId);
 	 List<ProductBean> findByproductCategoryBean(ProductCategoryBean categoryBean); 
+	 List<ProductBean> findByproductCategoryBean_storeBean(StoreBean storeBean);
 }
 

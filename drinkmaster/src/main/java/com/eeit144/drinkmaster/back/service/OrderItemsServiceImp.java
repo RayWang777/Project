@@ -32,7 +32,11 @@ public class OrderItemsServiceImp implements OrderItemsService{
 		 }
 		return null;
 	}
-
+	@Override
+	public List<OrderItems> findByproductBean(ProductBean productBean){
+		return oitemDao.findByproductBean(productBean);
+	}
+	
 	@Override
 	public Page<OrderItems> findAll(Pageable pageNumber) {
 		return oitemDao.findAll(pageNumber);
@@ -74,9 +78,16 @@ public class OrderItemsServiceImp implements OrderItemsService{
 		return oitemDao.findByOrderBean_orderId(orderId);
 	};
 	
+	
+	/**
+	 * 
+	 * @return top 3 producyid
+	 * 
+	 * 
+	 */
 	@Override
-	public Long countByProductBean(ProductBean productBean) {
-		return oitemDao.countByproductBean(productBean);
+	public List<Integer> countByProductBean() {
+		return oitemDao.countByproductBean();
 	}
 	
 }

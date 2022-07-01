@@ -1,6 +1,8 @@
 package com.eeit144.drinkmaster.front.controller;
 
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 //import java.util.Optional;
 
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.eeit144.drinkmaster.back.model.UserService;
@@ -27,7 +30,7 @@ import com.eeit144.drinkmaster.bean.UserBean;
 
 @Controller
 @RequestMapping("front/")
-@SessionAttributes(names= {"userBean","buy"})
+@SessionAttributes(names= {"orderuserBean","shopcarBuy","product"})
 @SuppressWarnings("unchecked")
 public class FrontShopCarController {
 
@@ -42,7 +45,7 @@ public class FrontShopCarController {
 	
 	public void testUserSession(Model m){
 		UserBean user = userService.findById(1).get();
-		m.addAttribute("userBean", user);
+		m.addAttribute("orderuserBean", user);
 	}
 	
 		
@@ -50,8 +53,8 @@ public class FrontShopCarController {
 	public String carView(Model m) {
 		testUserSession(m);
 		
-		
 		return "/front/frontshopcar";
+//		return "/front/shoptest";
 	}
 	
 	@GetMapping("shopcar/before")
@@ -60,15 +63,30 @@ public class FrontShopCarController {
 	}
 	
 	
+//	@GetMapping("shopcar/before/editproduct")
+//	public String updateById(@RequestParam("id") Integer id, Model m) {
+//		ProductBean productBean = proService.findById(id);
+//		
+//		
+//		m.addAttribute("productBean", productBean);
+//		m.addAttribute("insert", "updateproduct");
+//		return "/front/frontbeforeshop";
+//	}
+	
+	
 	@GetMapping("shopcar/before/editproduct")
-	public String updateById(@RequestParam("id") Integer id, Model m) {
+	public String editById(@SessionAttribute(name="product",required = false) OrderItems orderItems,@RequestParam("id") Integer id, Model m) {
 		ProductBean productBean = proService.findById(id);
 		
 		
+		
 		m.addAttribute("productBean", productBean);
-		m.addAttribute("insert", "updateproduct");
+		m.addAttribute("product", productBean);
 		return "/front/frontbeforeshop";
 	}
+	
+	
+	
 	
 	@GetMapping("shopcar/before/deleteproduct")
 	public String deleteById(@RequestParam("id") Integer id) {
@@ -79,34 +97,73 @@ public class FrontShopCarController {
 	}
 	
 	
+//	@PostMapping("shopcar/buy")
+//	public String addShopcar(Model m,
+//			@RequestParam("productId") Integer productId,@RequestParam("number") Integer number) {
+//		
+////		ProductBean productBean = proService.findById(productId);		
+//		
+//		UserBean userBean = (UserBean) m.getAttribute("canSeeUser");
+//		if(userBean == null) {
+//			return "redirect:/front/";
+//		}
+//		
+//		// 取出存放在session物件內的shopcarBuy物件
+//		ShopcarBuy shopcarBuy = (ShopcarBuy) m.getAttribute("shopcarBuy");
+//		if(shopcarBuy == null) {
+//			//沒有的話建立一個
+//			shopcarBuy = new ShopcarBuy();
+//			m.addAttribute("shopcarBuy",shopcarBuy);
+//		}
+//		
+//		
+//		Map<Integer, ProductBean> productMap = (Map<Integer, ProductBean>) m.getAttribute("product");
+//		ProductBean productBean = productMap.get(productId);
+//		
+//				
+//		
+//		OrderItems oi = new OrderItems(null,productId,productBean.getPrice(),number,productBean.getColdHot());
+//		shopcarBuy.addToCart(productId, oi);
+//		
+//		return "/front/frontshopcar";
+//	}
+	
+	
 	@PostMapping("shopcar/buy")
-	public String addShopcar(Model m,
-			@RequestParam("productId") Integer productId,@RequestParam("number") Integer qty) {
+	public String addShopcar(@SessionAttribute(name="product",required = false) OrderItems orderItems,Model m,@RequestParam("productId") Integer productId) {
 		
-		UserBean userBean = (UserBean) m.getAttribute("userBean");
+		OrderItems product = (OrderItems) m.getAttribute("product");
+		System.out.println(product.getProductId());
+		
+//		ProductBean productBean = proService.findById(productId);		
+		
+		UserBean userBean = (UserBean) m.getAttribute("orderuserBean");
 		if(userBean == null) {
 			return "redirect:/front/";
 		}
+		System.out.println(userBean.getUserName());
 		
-		ShopcarBuy shopcarBuy = (ShopcarBuy) m.getAttribute("buy");
+		
+		
+		// 取出存放在session物件內的shopcarBuy物件
+		ShopcarBuy shopcarBuy = (ShopcarBuy) m.getAttribute("shopcarBuy");
 		if(shopcarBuy == null) {
+			//沒有的話建立一個
 			shopcarBuy = new ShopcarBuy();
 			m.addAttribute("shopcarBuy",shopcarBuy);
 		}
 		
 		
-		Map<Integer, ProductBean> productMap = (Map<Integer, ProductBean>) m.getAttribute("userBean");
-		ProductBean productBean = productMap.get(productId);
 		
-		OrderItems oi = new OrderItems(null,productId,productBean.getPrice(),qty,productBean.getColdHot());
-		shopcarBuy.addToCart(productId, oi);
 		
 		return "/front/frontshopcar";
 	}
 	
 	@PostMapping("shopcar/test")
-	public String addShopcar(Model m) {
+	public String addShopcartest(Model m,@RequestParam("id") Integer id) {
+//		ProductBean productBean = proService.findById(id);
 		
+		m.getAttribute("userBean");
 		ShopcarBean shop = new ShopcarBean();
 		m.addAttribute("userBean", shop);
 		

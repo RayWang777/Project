@@ -57,7 +57,7 @@
 
 <body>
 <div class="container" id="container">
-<form:form class="form" method="post" action="${contextRoot}/front/shopcar/test" modelAttribute="productBean">
+<form:form class="form" method="post" action="${contextRoot}/front/shopcar/buy" modelAttribute="productBean">
 <form:hidden path="productId"/>
 	<table id="cart" class="table table-hover table-condensed">
     				<thead>
@@ -85,19 +85,19 @@
 <!-- 								</div> -->
 							</td>
 							<td style="font-size: 18px;">
-							<form:input id="productname" path="productName" value="${productBean.productName}" style="border-style:none;text-align: center;"  readonly="true"/>
-<%-- 							<c:out value="${productBean.productName}"/> --%>
+<%-- 							<form:input id="productname" path="productName"  style="border-style:none;text-align: center;"  readonly="true"/> --%>
+							<c:out value="${productBean.productName}"/>
 							</td>
 							
 							<td data-th="Price" >
-<%-- 							<c:out value="${productBean.price}"/> --%>
+<%-- 							<c:out value="${productBean.price}" /> --%>
 							<form:input id="price" path="price" value="${productBean.price}" style="width:50px; border-style:none;text-align: center;"  readonly="true"/>
 							</td>
 							<td data-th="Quantity">
 								<input type="number" id="number" name="number" class="form-control text-center" value="1" min="1">
 							</td> 
 							<td data-th="Product" style="text-align: center;">
-							<select id="sugar">
+							<select id="sugar" name="sugar">
 							<option value="無糖">無糖</option>
 							<option value="微糖">微糖</option>
 							<option value="少糖">少糖</option>
@@ -107,7 +107,7 @@
 							</td>
 							
 							<td data-th="Product" style="text-align: center;">
-							<select id="coldhot">
+							<select id="coldhot" name="coldhot">
 							<option value="冷">冷</option>
 							<option value="熱">熱</option>
 							</select>							

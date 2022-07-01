@@ -27,14 +27,15 @@
 						<h3 class="fw-bolder" style="color: #3C6FA1;"><c:out value="${categoryBean.productCategoryName }"></c:out></h3>
 					</div>
 					<c:forEach var="productBean" items="${categoryBean.products}">
-<<<<<<< HEAD
-					<div style="font-size: large; border-bottom : 1px outset #C0C0C0; height: 50px "class="align-middle">
-					<a href="${contextRoot}/front/shopcar/before/editproduct?id=${productBean.productId}" style="color: black;text-decoration:none;">
-=======
+
+					<div style="font-size: large; border-bottom : 2px inset #C0C0C0; height: 52px ;"class="align-middle">
+					<a href="#" style="color: black;text-decoration:none;">
+					<c:if test="${productBean.productImage!=null}"/>
+
 					<div style="font-size: large; border-bottom : 2px inset #C0C0C0; height: 52px ;"class="align-middle">
 					<a href="#" style="color: black;text-decoration:none;">
 					<c:if test="${productBean.productImage!=null}">
->>>>>>> a11946453a9640dc33da89a0023ffcce71e9056f
+
 					<img
 						src="${productBean.productImage}" style="width: 60px " height="50px" /></c:if>&nbsp;&nbsp;
 						<b><c:out value="${productBean.productName}"></c:out></b>

@@ -32,6 +32,7 @@ import com.eeit144.drinkmaster.back.model.SaleCodeService;
 import com.eeit144.drinkmaster.back.util.Util;
 import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.SaleCodeBean;
+import com.eeit144.drinkmaster.bean.SaleCodeVO;
 import com.eeit144.drinkmaster.bean.UserBean;
 import com.eeit144.drinkmaster.dto.SaleCodeDTO;
 import com.eeit144.drinkmaster.dto.SaleCodeExcel;
@@ -127,7 +128,7 @@ public class SaleCodeController {
 
 	@GetMapping("valied")
 	@ResponseBody
-	public String CheckSaleCodeValied(String saleCode) {
+	public Double CheckSaleCodeValied(String saleCode) {
 		String code = Util.saleCode(saleCode);
 		Optional<SaleCodeBean> saleCodeBeanOp = saleCodeService.findBySaleCode(code);
 
@@ -140,11 +141,43 @@ public class SaleCodeController {
 		boolean after = date.after(validDate);
 
 		if (after) {
-			return "失效";
+			return 1.0;
 		}
 
-		return "有效";
+		return saleCodeBean.getDiscount();
 	}
+	
+	@PostMapping("check")
+	public String CheckSaleCodeStatus(@RequestParam(name ="salecode") String saleCode,Model m) {
+		String code = Util.saleCode(saleCode);
+		System.out.println(saleCode);
+		System.out.println(code);
+		Optional<SaleCodeBean> saleCodeBeanOp = saleCodeService.findBySaleCode(code);
+
+		SaleCodeVO saleCodeVO = new SaleCodeVO();
+		if (saleCodeBeanOp.isEmpty()) {
+			saleCodeVO.setSaleCode("無此序號");
+			saleCodeVO.setDiscount(null);
+			m.addAttribute("status", saleCodeVO);
+			return "/backend/backsalecode";
+		}
+		SaleCodeBean saleCodeBean = saleCodeBeanOp.get();
+		Date validDate = saleCodeBean.getValidDate();
+		Date date = new Date(System.currentTimeMillis());
+		boolean after = date.after(validDate);
+
+		if (after) {
+			saleCodeVO.setSaleCode("已過期");
+			saleCodeVO.setDiscount(null);
+			m.addAttribute("status", saleCodeVO);
+			return "/backend/backsalecode";
+			}
+		saleCodeVO.setSaleCode("可使用");
+		saleCodeVO.setDiscount(saleCodeBeanOp.get().getDiscount());
+		m.addAttribute("status", saleCodeVO);
+		return "/backend/backsalecode";
+	}
+	
 
 	private String createSaleCode() {
 		String str = "zxcvbnmlkjhgfdsaqwertyuiopQWERTYUIOPASDFGHJKLZXCVBNM1234567890";
@@ -176,7 +209,7 @@ public class SaleCodeController {
 		}
 
 		ExportParams exportParams = new ExportParams();
-		exportParams.setSheetName("訂單列表");
+		exportParams.setSheetName("折扣碼清單");
 
 		Workbook workbook = ExcelExportUtil.exportExcel(exportParams, SaleCodeExcel.class, list);
 

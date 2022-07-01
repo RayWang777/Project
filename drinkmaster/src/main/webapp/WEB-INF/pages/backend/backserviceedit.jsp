@@ -12,7 +12,7 @@
 <div class="col-6">
   <h1>更新意見回饋頁面</h1>
 <div class="card">
-  <div class="card-header">
+  <div class="btn btn-info">
     請輸入想更新的訊息
   </div>
   <div class="card-body">

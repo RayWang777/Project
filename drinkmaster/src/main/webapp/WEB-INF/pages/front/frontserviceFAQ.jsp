@@ -12,34 +12,52 @@
 
 <style>
 .div1{
- border:1px solid #acd6ff;
+ border:1px solid #F0F0F0;
             border-radius:20px;
-             padding:10px 10px;
+            padding-left:140px;
+            padding-top:20px;
+            padding-bottom:20px;
+            width:1200px;
+            margin:40px;
+            margin-bottom:10px;
+
 }
 
 .div2{
-  border:1px solid #acd6ff;
+  border:1px solid #F0F0F0;
             border-radius:20px;
-            padding-top:10px;
-             padding-left:30px;
+            padding-top:20px;
+            padding-left:140px;
             padding-right:30px;
-            padding-bottom:10px;
+            padding-bottom:20px;
+            width:1200px;
+            margin-left:40px;
+            margin-bottom:20px;
+            margin-top:5px;
             
 }
 
 	.fixed1	{
 				position:fixed;
 				width:400px;				
-				bottom:0;
+				bottom:120px;
 				right:0;
 				}
+				
+				
+ #qrcode{
+ text-align:center;
+ padding:auto;
+ }
+ 
+ 
 </style>
 </head>
 <body>
 <div class="div1">
     <h4>常見問題 FAQ</h4>
     <div class="row justify-content-right">
-<div class="col-7">
+<div class="col-10">
             <ul class="list-group">
  
   <li class="list-group-item list-group-item-dark">Q1 : 想變更或取消訂單</li>
@@ -62,7 +80,7 @@
 </div>
 </div>
 </div>
-<br/>
+
 
 <div class="div2">
  <div class="row justify-content-right">
@@ -70,7 +88,7 @@
  </div>
  <div class="row justify-content-left">
 <div class="col-7">
-  <img src="/QRCODE.png" alt="QRCODE圖片顯示有誤" title="LINE QRCODE" width="300">
+  <img src="<c:url value="/images/QRCODE.png"/>" alt="QRCODE圖片顯示有誤" title="LINE QRCODE" width="200">
   <br/><br/>
   ID : @198qvjif
   <br/><br/>
@@ -78,13 +96,40 @@
 2. 掃描上方行動條碼或輸入ID「@198qvjif」<br/>
 3. 將飲君子加入好友獲得更即時的服務<br/>
 <br/>
-<button class="btn btn-lg btn-success">快登入LINE加我好友</button>
+<!-- <button class="btn btn-lg btn-success">快登入LINE加我好友</button> -->
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#linebtn">
+  快登入LINE加入好友
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="linebtn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">掃描行動條碼即可將官方帳號加入好友</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="qrcode">
+        請先點選LINE程式搜尋欄位旁的掃描圖示，再掃描此行動條碼。
+        <img src="<c:url value="/images/QRCODE.png"/>" alt="QRCODE圖片顯示有誤" title="LINE QRCODE" width="250" id="qrcode">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉視窗</button>
+<!--         <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
 </div>
 </div>
 </div>
 
 <div class="fixed1">
-			<span style="background-color:#9999CC;"></span><br><iframe width="350" height="430" allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/1db68bad-fcf7-404b-9dea-6dc6b52894b7"></iframe><br>
+			<span style="background-color:#9999CC;"></span><br><iframe width="350" height="500" allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/1db68bad-fcf7-404b-9dea-6dc6b52894b7"></iframe><br>
 			<span style="background-color:#9999CC;"></span>
 		</div>
 </body>

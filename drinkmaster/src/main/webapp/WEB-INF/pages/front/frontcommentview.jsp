@@ -148,7 +148,7 @@ div.awesomeRating {
 
 <!--   		======================================= -->
 
-<a onclick="return confirm('真的要刪除嗎?')" href="${contextRoot}/front/comment/delete?commentid=${usercomment.commentId}"><button class="btn btn-danger">刪除</button></a>
+<a onclick="return confirm('真的要刪除嗎?')" href="${contextRoot}/front/comment/delete?commentid=${usercomment.commentId}&storeid=${usercomment.storeBean.storeId}"><button class="btn btn-danger">刪除</button></a>
 
   		
 <%--   		<c:out value="${usercomment.userBean.userName}" /> --%>
@@ -201,7 +201,7 @@ div.awesomeRating {
 		     	    	comment_data += '<form method="post" action="http://localhost:8081/drinkmaster/front/comment/editNewComment" enctype="multipart/form-data">'
 		     	    	comment_data += '<input id="newcommentid" name="newcommentid" type="hidden" value="' + result.commentId + '"/>'
 		     	    	comment_data +=	'<input id="commentuserid" type="hidden" value="' + result.userId + '"/>'
-		     	    	comment_data +=	'<input id="commentstoreid" type="hidden" value="' + result.storeId + '"/>'
+		     	    	comment_data +=	'<input id="commentstoreid" name="commentstoreid" type="hidden" value="' + result.storeId + '"/>'
 		     	    	
 		     	    	
 		     	    	
@@ -314,7 +314,7 @@ div.awesomeRating {
 <!-- 	userid -->
 		<input id=sessionuserid name="sessionuserid" value="${userBean.userId}" type="hidden" />
 <!-- 	storeid -->
-	<form:input path="storeBean" class="form-control" type="hidden" />
+	<form:input path="storeBean" name="storeBean" class="form-control" type="hidden" />
 <%-- 	productid<form:input path="productBean" class="form-control" /> --%>
 <!-- 	score -->
 	<form:input id="score1" path="score" class="form-control" style="pointer-events: none" type="hidden"/>

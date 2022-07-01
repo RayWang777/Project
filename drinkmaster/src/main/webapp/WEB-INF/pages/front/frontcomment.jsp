@@ -42,7 +42,7 @@ div.awesomeRating {
   </div>
   
   			<div class="row row-cols-3 row-cols-md-3 g-4">
-  				<c:forEach var="storecomment" items="${commentStore}" >
+  				<c:forEach var="storecomment" items="${listcsdto}" >
   			
   				
 				<div class="col">
@@ -50,7 +50,28 @@ div.awesomeRating {
   						<div class="card-body">
 						    <c:out value="${storecomment.storeName}"></c:out>
 						    <input value="${storecomment.storeId}" style="display: none">
-						    <h6 class="card-subtitle mb-2 text-muted">-------------------</h6>
+						    <h3 class="card-subtitle mb-2 text-muted">-------------------</h3>
+						    <c:out value="${storecomment.avgScore}"></c:out>
+						    
+						    
+						    <div style="pointer-events:none" id="scores${storecomment.storeId}" class="awesomeRating"></div>
+							<div class="awesomeRatingValue" style="display:none"></div>
+								<script type="text/javascript">
+								
+								
+								
+							
+								$("#scores${storecomment.storeId}").awesomeRating({
+									
+									valueInitial: "${storecomment.avgScore}",
+									values: ["1.0", "2.0", "3.0", "4.0", "5.0"],
+									targetSelector: "div.awesomeRatingValue"
+								});
+							
+								console.log(${usercomment.score});
+								
+								</script>
+						    <br/>
 						    <a href="${contextRoot}/front/comment/all?storeid=${storecomment.storeId}" class="card-link">去評分</a>
 						    <a href="#" class="card-link">去購買</a>
 						</div>
@@ -59,12 +80,20 @@ div.awesomeRating {
   				
   		
   				</c:forEach>
+  				</div>
   			
-  			</div>
   
 	
   </div>
 </div>
+
+<script type="text/javascript">
+	
+	$(function(){
+		
+	});
+
+</script>
 
 
 <jsp:include page="layout/footer.jsp" />

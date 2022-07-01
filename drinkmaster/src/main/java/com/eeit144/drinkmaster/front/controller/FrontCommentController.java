@@ -1,10 +1,9 @@
 package com.eeit144.drinkmaster.front.controller;
 
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,23 +14,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eeit144.drinkmaster.back.model.CommentService;
 import com.eeit144.drinkmaster.back.model.StoreService;
 import com.eeit144.drinkmaster.bean.CommentBean;
-import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.bean.UserBean;
+import com.eeit144.drinkmaster.dto.CommentAvgScoreBeanDTO;
 import com.eeit144.drinkmaster.dto.CommentBeanDTO;
 
 @Controller
@@ -54,9 +51,46 @@ public class FrontCommentController {
 	@GetMapping("comment/storecomment")
 	public String CommentStorePage(Model model) {
 		
+		
+		
+		List<CommentAvgScoreBeanDTO> listcsdto = new ArrayList<>();
+		
 		List<StoreBean> commentStore = storeService.findAllList();
+//		
+//		HashMap<Integer,Double> intmap = new HashMap<>();
+//		
+//		for(StoreBean sid:commentStore) {
+//			intmap.put(sid.getStoreId(),commentService.avgScoreByStoreid(sid.getStoreId()));
+//		}
 		
 		
+		
+		
+//		for(StoreBean sid:commentStore) {
+//			csdto.setStoreId(sid.getStoreId());
+//			csdto.setStoreName(sid.getStoreName());
+////			commentService.avgScoreByStoreid(sid.getStoreId());
+//			csdto.setAvgScore(commentService.avgScoreByStoreid(sid.getStoreId()));
+//			listcsdto.add(csdto);
+//		}
+		
+		
+		for(int i=0 ; i<commentStore.size(); i++) {
+			CommentAvgScoreBeanDTO csdto = new CommentAvgScoreBeanDTO();
+			csdto.setStoreId(commentStore.get(i).getStoreId());
+			csdto.setStoreName(commentStore.get(i).getStoreName());
+			csdto.setAvgScore(commentService.avgScoreByStoreid(commentStore.get(i).getStoreId()));
+			listcsdto.add(csdto);
+		}
+		
+			
+		
+//		Double avg = commentService.avgScoreByStoreid(csdto.getStoreId());
+		
+		
+		
+		model.addAttribute("listcsdto", listcsdto);
+//		model.addAttribute("intmap", intmap);
 		model.addAttribute("commentStore", commentStore);
 		
 		return "front/frontcomment";
@@ -131,7 +165,8 @@ public class FrontCommentController {
 	@PostMapping("comment/insert")
 	public String addcomment(@RequestPart("commentPhoto1") MultipartFile cPhoto, 
 							@ModelAttribute("commentBean") CommentBean comment,
-							@RequestParam("sessionuserid") UserBean sessionUser, Model model) throws Exception {
+							@RequestParam("sessionuserid") UserBean sessionUser,
+							@RequestParam("storeBean") Integer storeid, Model model) throws Exception {
 
 		
 		if(!cPhoto.isEmpty()) {
@@ -141,14 +176,15 @@ public class FrontCommentController {
 			comment.setCommentPhoto(profile);
 		}
 		
+//		comment.setStoreId(storeid);
 		
 		comment.setUserBean(sessionUser);
 		
 		commentService.insertComment(comment);
 		
-
+		String url = "redirect:http://localhost:8081/drinkmaster/front/comment/all?storeid=" + storeid;
 		
-		return "redirect:/front/comment/all";
+		return url;
 		
 	}
 	
@@ -236,6 +272,9 @@ public class FrontCommentController {
 //		Pageable pageable = PageRequest.of(pageNumber-1,3,Sort.Direction.DESC,"createTime");
 //		
 //		Page<CommentBean> page = commentService.findCommentByStoreidPage(storeId, pageable);
+		
+		
+		
 		
 		model.addAttribute("commentBean", commentBean);
 		
@@ -411,7 +450,8 @@ public class FrontCommentController {
 	public String postEditComment(@RequestPart("commentPhoto1") MultipartFile cPhoto,
 			@RequestParam("newcommentid") Integer id,
 			@RequestParam("score1") Double score,
-			@RequestParam("commentcontent") String content) throws Exception {
+			@RequestParam("commentcontent") String content,
+			@RequestParam("commentstoreid") Integer storeid)throws Exception {
 		
 		
 		CommentBean comment = commentService.findById(id);
@@ -427,14 +467,19 @@ public class FrontCommentController {
 		
 		commentService.insertComment(comment);
 		
-		return "redirect:/front/comment/all";	
+		String url = "redirect:http://localhost:8081/drinkmaster/front/comment/all?storeid=" + storeid;
+		
+		return url;	
 	}
 	
 	@GetMapping("comment/delete")
-	public String deletemsg(@RequestParam(name="commentid") Integer id) {
+	public String deletemsg(@RequestParam(name="commentid") Integer id,
+							@RequestParam("storeid") Integer storeid) {
 		commentService.deleteById(id);
 		
-		return "redirect:/front/comment/all";
+		String url = "redirect:http://localhost:8081/drinkmaster/front/comment/all?storeid=" + storeid;
+		
+		return url;
 	}
 	
 	

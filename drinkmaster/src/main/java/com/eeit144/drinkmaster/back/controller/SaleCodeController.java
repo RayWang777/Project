@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import org.apache.poi.ss.usermodel.Workbook;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -80,7 +82,7 @@ public class SaleCodeController {
 
 			FirmBean firmBean = firmService.findFirmByUserId(user.getUserId()).get(0);
 
-			List<FirmBean> firmOne = new ArrayList();
+			List<FirmBean> firmOne = new ArrayList<FirmBean>();
 			firmOne.add(firmBean);
 			m.addAttribute("firms", firmOne);
 		}
@@ -112,21 +114,37 @@ public class SaleCodeController {
 
 		m.addAttribute("createNum", count);
 		List<SaleCodeBean> insertSaleCodeToDB = saleCodeService.insertSaleCodeToDB(list);
-		
+
 		String salecode = null;
-		for(int i = 0; i < count; i++) {
-			salecode  =  Util.DeSaleCode(insertSaleCodeToDB.get(i).getSaleCode());
+		for (int i = 0; i < count; i++) {
+			salecode = Util.DeSaleCode(insertSaleCodeToDB.get(i).getSaleCode());
 			insertSaleCodeToDB.get(i).setSaleCode(salecode);
 		}
-		
+
 		m.addAttribute("salecodes", insertSaleCodeToDB);
 		return "/backend/backsalecode";
 	}
 
-//	@GetMapping("valied")
-//	public CheckSaleCodeValied(String saleCode) {
-//		
-//	}
+	@GetMapping("valied")
+	@ResponseBody
+	public String CheckSaleCodeValied(String saleCode) {
+		String code = Util.saleCode(saleCode);
+		Optional<SaleCodeBean> saleCodeBeanOp = saleCodeService.findBySaleCode(code);
+
+		if (saleCodeBeanOp.isEmpty()) {
+			return null;
+		}
+		SaleCodeBean saleCodeBean = saleCodeBeanOp.get();
+		Date validDate = saleCodeBean.getValidDate();
+		Date date = new Date(System.currentTimeMillis());
+		boolean after = date.after(validDate);
+
+		if (after) {
+			return "失效";
+		}
+
+		return "有效";
+	}
 
 	private String createSaleCode() {
 		String str = "zxcvbnmlkjhgfdsaqwertyuiopQWERTYUIOPASDFGHJKLZXCVBNM1234567890";

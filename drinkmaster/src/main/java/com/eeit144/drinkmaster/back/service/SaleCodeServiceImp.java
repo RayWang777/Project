@@ -1,6 +1,7 @@
 package com.eeit144.drinkmaster.back.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,5 +49,10 @@ public class SaleCodeServiceImp  implements SaleCodeService {
 	@Override
 	public List<SaleCodeBean> insertSaleCodeToDB(List<SaleCodeBean> saleCodeBean) {
 		return saleCodeDao.saveAll(saleCodeBean);
+	}
+	
+	@Override
+	public Optional<SaleCodeBean> findBySaleCode(String salecode){
+		return saleCodeDao.findBySaleCode(salecode);
 	}
 }

@@ -68,7 +68,7 @@
 		<form:errors path="pass" cssClass="error" />
 	</div>
 	<div class="mb-3">
-	<button type="submit" class="btn btn-primary">登入</button>
+	<button id="buttonsubmit" type="submit" class="btn btn-primary">登入</button>
 	<a href="${contextRoot}/backend/register"><button type="button" class="btn btn-light" style="margin-left: 10px">註冊</button></a>
 	</div>
 
@@ -86,31 +86,85 @@
 </div>
 </body>
 
-
+<script src="<c:url value="/js/lib/jquery.min.js"/>"></script>
+<script src="<c:url value="/js/lib/sweetalert2@11.js"/>"></script>
 <script type="text/javascript">
+
+$(function(){
+	
+	
+	
+})
+
+
 function admin() {
 	let acc = document.getElementById("userAccount");
 	let pwd = document.getElementById("userPassword");
 	acc.value=("jerry@gmail.com");
 	pwd.value=("jerry6666");
+	
+	Swal.fire({
+		  icon: 'success',
+		  title: '管理者登入成功',
+		  showConfirmButton: false,
+		  timer: 2000
+		}).then( ()=>{
+			
+			console.log('123')
+			$('#buttonsubmit').trigger('click');
+		})
+		
 }
 function firm() {
 	let acc = document.getElementById("userAccount");
 	let pwd = document.getElementById("userPassword");
 	acc.value=("mary@gmail.com");
 	pwd.value=("mary4317");
+	
+	Swal.fire({
+		  icon: 'success',
+		  title: '廠商登入成功',
+		  showConfirmButton: false,
+		  timer: 2000
+		}).then( ()=>{
+			
+			console.log('123')
+			$('#buttonsubmit').trigger('click');
+		})
+	
 }
 function store() {
 	let acc = document.getElementById("userAccount");
 	let pwd = document.getElementById("userPassword");
 	acc.value=("mark1@gmail.com");
 	pwd.value=("mark1234");
+	
+	Swal.fire({
+		  icon: 'success',
+		  title: '店家登入成功',
+		  showConfirmButton: false,
+		  timer: 2000
+		}).then( ()=>{
+			
+			console.log('123')
+			$('#buttonsubmit').trigger('click');
+		})
 }
 function user() {
 	let acc = document.getElementById("userAccount");
 	let pwd = document.getElementById("userPassword");
 	acc.value=("cindy1@gmail.com");
 	pwd.value=("cindy9527");
+	Swal.fire({
+		  icon: 'false',
+		  title: '一般使用者無法登入',
+		  showConfirmButton: false,
+		  timer: 2000
+		}).then( ()=>{
+			
+			console.log('123')
+			$('#buttonsubmit').trigger('click');
+		})
 }
 
 function checkEmpty(){
@@ -133,4 +187,3 @@ function checkEmpty(){
 </script>
 
 
-<jsp:include page="layout/footer.jsp" />

@@ -46,13 +46,13 @@ public class SaleCodeBean {
 	@Column(name = "salecode")
 	private String saleCode;
 
-	@Column(name = "discount")
-	private Float discount;
+	@Column(name = "discount", columnDefinition = "Decimal(5,4)")
+	private Double discount;
 
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8") // JSP DATE
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") // MVC DATE
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "validdate", nullable = false, columnDefinition = "smalldatetime")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8") // JSP DATE
+	@DateTimeFormat(pattern = "yyyy-MM-dd") // MVC DATE
+	@Temporal(TemporalType.DATE)
+	@Column(name = "validdate", nullable = false, columnDefinition = "date")
 	private Date validDate;
 
 	// 檢查是否有時間，沒有的話依照現在時間產生
@@ -95,11 +95,11 @@ public class SaleCodeBean {
 		this.saleCode = saleCode;
 	}
 
-	public Float getDiscount() {
+	public Double getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(Float discount) {
+	public void setDiscount(Double discount) {
 		this.discount = discount;
 	}
 

@@ -21,8 +21,8 @@ public class SaleCodeDTO {
 
 	private Float discount;
 
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8") // JSP DATE
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") // MVC DATE
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8") // JSP DATE
+	@DateTimeFormat(pattern = "yyyy-MM-dd") // MVC DATE
 	private Date validDate;
 
 	public SaleCodeDTO() {
@@ -76,4 +76,5 @@ public class SaleCodeDTO {
 		this.validDate = validDate;
 	}
 
+	
 }

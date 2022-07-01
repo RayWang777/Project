@@ -1,11 +1,11 @@
 <style>
 
-.set-bottom{
-        width: 100%;
-        position: fixed;
-        bottom: 0;
-        margin: 0;
-}
+/* .set-bottom{ */
+/*         width: 100%; */
+/*         position: fixed; */
+/*         bottom: 0; */
+/*         margin: 0; */
+/* } */
 
 </style>
         

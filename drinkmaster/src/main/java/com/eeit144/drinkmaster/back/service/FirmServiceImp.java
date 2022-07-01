@@ -100,6 +100,11 @@ public class FirmServiceImp implements FirmService {
 	public List<Integer> findUserNullFirmBean() {
 		return firmDao.findUserNullFirmBean();
 	}
+	
+	@Override
+	public List<Integer> findAllIds(){
+		return firmDao.findAllIds();
+	};
 
 
 }

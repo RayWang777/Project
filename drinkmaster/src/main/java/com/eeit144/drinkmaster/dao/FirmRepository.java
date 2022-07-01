@@ -26,4 +26,7 @@ public interface FirmRepository extends JpaRepository<FirmBean, Integer> {
 	@Query(value="select  u.userid from firm as f right join users as u ON f.userid=u.userid where f.userid is null and u.role ='firm';", nativeQuery = true)
 	public List<Integer> findUserNullFirmBean();
 	
+	@Query(value = "select firmid from firm ;",nativeQuery = true)
+	public List<Integer> findAllIds();
+	
 }

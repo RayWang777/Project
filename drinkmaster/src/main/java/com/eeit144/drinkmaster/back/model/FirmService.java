@@ -39,6 +39,8 @@ public interface FirmService {
 	public List<FirmBean> findByIdNotIn(List<Integer> firmId);
 
 	public List<Integer> findUserNullFirmBean();
+	
+	public List<Integer> findAllIds();
 
 
 }

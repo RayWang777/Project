@@ -10,10 +10,22 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+
+
+
+
+
+
+
         <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <link href="${contextRoot}/css/lib/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="${contextRoot}/css/lib/front/styles.css" rel="stylesheet" />
+		<!-- swiper -->
+        <link rel="stylesheet" href="${contextRoot}/css/lib/swiper/swiper-bundle.css">
+		<link rel="stylesheet" href="${contextRoot}/css/lib/swiper/swiper-bundle.min.css">
+        
+        
 </head>
 
 <body>  
@@ -61,6 +73,8 @@
 <!--         <h5 class="modal-title" id="exampleModalLabel">請輸入廠商名稱</h5> -->
 <!--         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
 <!--       </div> -->
+
+<!-- 找廠商本體 -->
       <div class="modal-body">
 
           <div class="mb-3" style="text-align: center;">
@@ -68,9 +82,7 @@
             <input type="text" class="form-control" id="recipient-name">
           </div>
           
-          <div class="mb-3">
-          
-          
+     <div class="mb-3">
           <div id="showfirm"
 			class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
           
@@ -97,6 +109,10 @@
 					</div>
 				</div>
 			</div>
+			
+			
+			
+			
 			
 			
 			 
@@ -184,6 +200,10 @@
         <!-- Core theme JS-->
         <script src="${contextRoot}/js/lib/front/scripts.js"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<!--swiper -->
+		<script src="${contextRoot}/js/lib/swiper/swiper-bundle.js"></script>
+		<script src="${contextRoot}/js/lib/swiper/swiper-bundle.min.js"></script>
+
 
 <script type="text/javascript">
 

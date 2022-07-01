@@ -179,7 +179,7 @@ public class SaleCodeController {
 	
 	@PostMapping("destroy")
 	@ResponseBody
-	public ResponseEntity<String> disableSaleCode(@RequestBody String saleCode,Model m) {
+	public ResponseEntity<String> disableSaleCode(@RequestParam(name="s") String saleCode,Model m) {
 		
 		String code = Util.saleCode(saleCode);
 		Optional<SaleCodeBean> saleCodeBeanOp = saleCodeService.findBySaleCode(code);

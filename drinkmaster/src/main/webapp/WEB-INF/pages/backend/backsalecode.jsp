@@ -73,10 +73,7 @@
 				<input type="text" class="input-group-text btn btn-primary" id="destroybutton" value="註銷折扣碼">
 			<span id="destroySp"></span>
 	</div>
-	<div class="mb-3 input-group">
-		<label id="destroystatuslb" class="input-group-text" for="destroystatus"></label>
-			<input name="destroystatus" readonly="true" class="form-control" type="text" id="destroystatus" value=""/>
-	</div>
+
 </body>
 
 <script src="<c:url value="/js/lib/popper.min.js"/>"></script>
@@ -121,17 +118,43 @@ $(function(){
 		$.ajax({
 			url:'http://localhost:8081/drinkmaster/backend/salecode/destroy',
     		method:'POST',
-    		contentType: 'application/json', // 送過去的
+    		contentType: 'application/x-www-form-urlencoded', // 送過去的
     		dataType: 'json',
-    		data: saleString,
-    	    success: function(result){
-
- 
-    	           console.log(result[0].status)
-        	      	 
+    		data: 's='+saleCode,
+    	    success: function(responseText){
+			
     	     },
     	     error:function(err){
-    	       console.log(err)
+    	    	
+     	        if(err.responseText=="註銷成功"){
+	    			Swal.fire({
+	    			  icon: 'success',
+	    			  title: '註銷成功',
+	    			  showConfirmButton: false,
+	    			  timer: 1500
+	    			})
+
+	    		}
+    	    	 
+    	    	 
+
+    	       if(err.responseText == "已過期" ){
+    	    	   Swal.fire({
+  	    			  icon: 'warning',
+  	    			  title: '序號已無效',
+  	    			  showConfirmButton: false,
+  	    			  timer: 1500
+  	    			})
+   	    		}
+    	       
+    	       if(err.responseText== "無此序號"){
+   	    		Swal.fire({
+ 	    			  icon: 'error',
+ 	    			  title: '無此序號',
+ 	    			  showConfirmButton: false,
+ 	    			  timer: 1500
+ 	    			})
+   	    		}
     	     }
     	})
 		

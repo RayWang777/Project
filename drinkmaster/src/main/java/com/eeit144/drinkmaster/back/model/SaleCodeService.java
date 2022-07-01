@@ -11,5 +11,7 @@ public interface SaleCodeService {
 
 	public List<SaleCodeBean> insertSaleCodeToDB(List<SaleCodeBean> saleCodeBean);
 	
+	public SaleCodeBean insertSaleCode(SaleCodeBean saleCodeBean);
+	
 	public Optional<SaleCodeBean> findBySaleCode(String salecode);
 }

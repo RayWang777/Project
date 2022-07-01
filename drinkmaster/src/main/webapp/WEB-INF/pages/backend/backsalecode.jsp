@@ -50,30 +50,33 @@
 	<div class="mb-3 input-group">
 			<input name="salecode" class="form-control" type="text" id="salecode" />
 				<input type="submit" class="input-group-text btn btn-primary" value="折扣碼確認">
-			<span id=salecodeSp></span>
+			<span id="salecodeSp"></span>
 	</div>
 	<div class="mb-3 input-group">
 			<label id="statuslb" class="input-group-text" for="status">折扣碼狀態</label>
 			<input name="status" readonly="true" class="form-control" type="text" id="status" value="${status.saleCode}"/>
 			<label class="input-group-text" for="discount">&nbsp&nbsp折&nbsp&nbsp&nbsp&nbsp扣&nbsp&nbsp</label>
-			<input name="discount" readonly="true" class="form-control" type="text" id="status" value='<c:choose>
+			<input name="discount" readonly="true" class="form-control" type="text" id="status" value="<c:if test="${status.discount < 1}">
+			<fmt:formatNumber type="number" value="${(status.discount*100)}"/>折</c:if>"/>
+	<c:choose>
 	<c:when test="${status!=null}">
-	<c:if test="${status.discount < 1}">
 	
-	<c:out value="${(status.discount*100)/1}折"></c:out></c:if>
 	</c:when>
 	<c:otherwise>
 	</c:otherwise>
-	</c:choose>'/>
+	</c:choose>
 	</div>
 	</form>
 	
-	
-	
-	
-	<fmt:formatNumber></fmt:formatNumber>
-	
-	
+	<div class="mb-3 input-group">
+			<input name="destroy" class="form-control" type="text" id="destroy" />
+				<input type="text" class="input-group-text btn btn-primary" id="destroybutton" value="註銷折扣碼">
+			<span id="destroySp"></span>
+	</div>
+	<div class="mb-3 input-group">
+		<label id="destroystatuslb" class="input-group-text" for="destroystatus"></label>
+			<input name="destroystatus" readonly="true" class="form-control" type="text" id="destroystatus" value=""/>
+	</div>
 </body>
 
 <script src="<c:url value="/js/lib/popper.min.js"/>"></script>
@@ -83,13 +86,12 @@ $(function(){
 	
 	var status =$('#status').val();
 	
-	console.log(status)
 	if(status=='已過期'){
 		$('#statuslb').attr('style','background-color:#dc3545;color:#F9F900');
 		$('#status').attr('style','background-color:#dc3545;color:#F9F900');
 	}
-	
-	console.log(status)
+
+
 	if(status=='無此序號'){
 		$('#statuslb').attr('style','background-color:#dc3545;color:#F9F900');
 		$('#status').attr('style','background-color:#dc3545;color:#F9F900');
@@ -100,7 +102,42 @@ $(function(){
 		$('#downloadexcel').hide();
 	})
 	
+	
+	$('#destroystatuslb').hide();
+	
 })
+
+
+	$('#destroybutton').click(function(){
+		
+		
+		var saleCode = $('#destroy').val();
+		var saleCodeJson = {"saleCode": saleCode};
+		var saleString= JSON.stringify(saleCodeJson)
+// 		console.log(saleCode)
+// 		console.log(saleCodeJson)
+// 		console.log(saleString)
+		
+		$.ajax({
+			url:'http://localhost:8081/drinkmaster/backend/salecode/destroy',
+    		method:'POST',
+    		contentType: 'application/json', // 送過去的
+    		dataType: 'json',
+    		data: saleString,
+    	    success: function(result){
+
+ 
+    	           console.log(result[0].status)
+        	      	 
+    	     },
+    	     error:function(err){
+    	       console.log(err)
+    	     }
+    	})
+		
+		
+		
+	})
 
 </script>
 

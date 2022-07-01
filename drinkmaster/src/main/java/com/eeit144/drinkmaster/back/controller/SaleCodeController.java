@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -150,8 +151,6 @@ public class SaleCodeController {
 	@PostMapping("check")
 	public String CheckSaleCodeStatus(@RequestParam(name ="salecode") String saleCode,Model m) {
 		String code = Util.saleCode(saleCode);
-		System.out.println(saleCode);
-		System.out.println(code);
 		Optional<SaleCodeBean> saleCodeBeanOp = saleCodeService.findBySaleCode(code);
 
 		SaleCodeVO saleCodeVO = new SaleCodeVO();
@@ -178,6 +177,32 @@ public class SaleCodeController {
 		return "/backend/backsalecode";
 	}
 	
+	@PostMapping("destroy")
+	@ResponseBody
+	public ResponseEntity<String> disableSaleCode(@RequestBody String saleCode,Model m) {
+		
+		String code = Util.saleCode(saleCode);
+		Optional<SaleCodeBean> saleCodeBeanOp = saleCodeService.findBySaleCode(code);
+
+		System.out.println(saleCode);
+		if (saleCodeBeanOp.isEmpty()) {
+
+			return new ResponseEntity<String>("無此序號", HttpStatus.OK);
+		}
+		SaleCodeBean saleCodeBean = saleCodeBeanOp.get();
+			
+		Date validDate = saleCodeBean.getValidDate();
+		Date date = new Date(System.currentTimeMillis());
+		boolean after = date.after(validDate);
+
+		if (after) {
+			return new ResponseEntity<String>("已過期", HttpStatus.OK);
+			}
+		saleCodeBean.setValidDate(date);
+		saleCodeService.insertSaleCode(saleCodeBean);
+		return new ResponseEntity<String>("註銷成功", HttpStatus.OK);
+	}
+	
 
 	private String createSaleCode() {
 		String str = "zxcvbnmlkjhgfdsaqwertyuiopQWERTYUIOPASDFGHJKLZXCVBNM1234567890";
@@ -194,12 +219,10 @@ public class SaleCodeController {
 	public ResponseEntity<byte[]> OutputExcel(@SessionAttribute("salecodes") List<SaleCodeBean> salecodes,
 			SessionStatus status) throws IOException {
 
-		// 讓orderBeanxslx可以重複利用
 		SaleCodeExcel saleCodeExcel = null;
 
 		List<SaleCodeExcel> list = new ArrayList<SaleCodeExcel>();
 
-		// 將找到list的所有資料放到list2裡面
 		for (SaleCodeBean salecode : salecodes) {
 			saleCodeExcel = new SaleCodeExcel();
 			saleCodeExcel.setSaleCode(salecode.getSaleCode());

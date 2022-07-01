@@ -72,6 +72,7 @@ public class ProductController {
 	public String analyzeview(@SessionAttribute("canSeeStore") StoreBean storeBean,Model m) {
 		
 		List<ProductMaterial> sales = sales(storeBean);
+		m.addAttribute("store",storeBean);
 		m.addAttribute("list", sales);
 		return "/backend/productanalyze";
 	}

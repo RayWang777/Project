@@ -6,7 +6,7 @@
 <jsp:include page="layout/header.jsp"></jsp:include>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-<body style="background-color: #ECECEC;">
+<body style="background-color: #F2FCFF;">
  <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
@@ -15,22 +15,23 @@
                 </div>
             </div>
         </header>
-<section class="py-5"><div class="container px-4 px-lg-5 mt-5" >
+<section class="py-5"><div class="container px-4 px-lg-0 mt-5" >
 	<div
 			class="row gx-4 gx-lg-10 row-cols-2 row-cols-md-3 row-cols-xl-3 j">
 <c:forEach var="categoryBean" items="${category}">
 	
 		
 			<div class="col mb-5" >
-				<div class="card h-100" style=" border:#ECECEC; padding: 10px ;background-color: #ECECEC; ">
+				<div class="card h-100" style=" border:#ECECEC; padding: 10px ;background-color: #F2FCFF; ">
 					<div >
-						<h3 class="fw-bolder" style="color: #003E52;"><c:out value="${categoryBean.productCategoryName }"></c:out></h3>
+						<h3 class="fw-bolder" style="color: #3C6FA1;"><c:out value="${categoryBean.productCategoryName }"></c:out></h3>
 					</div>
 					<c:forEach var="productBean" items="${categoryBean.products}">
 					<div style="font-size: large; border-bottom : 2px inset #C0C0C0; height: 52px ;"class="align-middle">
 					<a href="#" style="color: black;text-decoration:none;">
+					<c:if test="${productBean.productImage!=null}">
 					<img
-						src="${productBean.productImage}" style="width: 60px " height="50px" />&nbsp;&nbsp;
+						src="${productBean.productImage}" style="width: 60px " height="50px" /></c:if>&nbsp;&nbsp;
 						<b><c:out value="${productBean.productName}"></c:out></b>
 						&nbsp;&nbsp;
 						<c:if test="${productBean.status=='false' }">

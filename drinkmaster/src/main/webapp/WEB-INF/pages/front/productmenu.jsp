@@ -22,12 +22,12 @@
 	
 		
 			<div class="col mb-5" >
-				<div class="card h-100" style="border-radius: 15px 15px 0px 0px;padding: 10px; ">
+				<div class="card h-100" style=" border:#ECECEC; padding: 10px ;background-color: #ECECEC; ">
 					<div >
 						<h3 class="fw-bolder" style="color: #003E52;"><c:out value="${categoryBean.productCategoryName }"></c:out></h3>
 					</div>
 					<c:forEach var="productBean" items="${categoryBean.products}">
-					<div style="font-size: large; border-bottom : 1px outset #C0C0C0; height: 50px "class="align-middle">
+					<div style="font-size: large; border-bottom : 2px inset #C0C0C0; height: 52px ;"class="align-middle">
 					<a href="#" style="color: black;text-decoration:none;">
 					<img
 						src="${productBean.productImage}" style="width: 60px " height="50px" />&nbsp;&nbsp;
@@ -43,10 +43,11 @@
 						<i class="fa-brands fa-hotjar" style="color: #FF4D00; "></i>
 						<c:out value="${productBean.price}"/></span></c:if>
 						<c:if test="${productBean.coldHot=='冷' || productBean.coldHot=='冷熱'}">
-						<span style="position: absolute; right: 10px; margin-top: 10px;color: #00FFFF"><i class="fa-regular fa-snowflake" style="color: #00FFFF"></i>
+						<span style="position: absolute; right: 10px; margin-top: 10px;color: #2894FF"><i class="fa-regular fa-snowflake" style="color: #2894FF"></i>
 						<c:out value="${productBean.price}"></c:out></span></c:if>
 						</a>
 						</div>
+						
 						
 					</c:forEach>
 				</div>
@@ -61,7 +62,7 @@
 
 
 
-
+<br><br><br><br>
 
 
 

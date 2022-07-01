@@ -8,24 +8,26 @@
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
-   <body>  
-   <br>
+<body>
+	<br>
 
-                          
-                                <div class="card mb-8">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-area me-1"></i>
-                                        Area Chart Example <c:out value="${list[0].productName}"/> 
-                                    </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="200%" height="80%"></canvas></div>
-                                </div>
 
-	
-	
+	<div class="card mb-8">
+		<div class="card-header">
+			<i class="fas fa-chart-area me-1"></i> Area Chart Example
+			<c:out value="${list[0].productName}" />
+		</div>
+		<div class="card-body">
+			<canvas id="myAreaChart" width="200%" height="80%"></canvas>
+		</div>
+	</div>
+
+
+
 	<script src="<c:url value="/js/lib/Chart.min.js"/>"></script>
 
 
-<script type="text/javascript">
+	<script type="text/javascript">
 var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',

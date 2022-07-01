@@ -107,10 +107,10 @@ li {
 						<li><a href="${contextRoot}/backend/product/insertview">新增商品</a></li>
 						</c:if>
 						<li><a href="${contextRoot}/backend/category/all">種類列表</a></li>
-
-						<li><a href="${contextRoot}/backend/productanalyze">銷量圖表</a></li>
-
-					</ul></li>
+							<c:if test="${userBean.role=='store' }">
+								<li><a href="${contextRoot}/backend/productanalyze">銷量圖表</a></li>
+							</c:if>
+						</ul></li>
 					</c:if>
 					<c:choose>
 					<c:when test="${userBean.role != 'admin' && userBean.role != 'firm' && userBean.role != 'store'}"></c:when>

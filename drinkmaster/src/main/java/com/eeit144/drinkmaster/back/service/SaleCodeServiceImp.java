@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.eeit144.drinkmaster.back.model.SaleCodeService;
-import com.eeit144.drinkmaster.bean.FirmBanner;
 import com.eeit144.drinkmaster.bean.SaleCodeBean;
 import com.eeit144.drinkmaster.dao.SaleCodeRepository;
 
@@ -54,5 +53,9 @@ public class SaleCodeServiceImp  implements SaleCodeService {
 	@Override
 	public Optional<SaleCodeBean> findBySaleCode(String salecode){
 		return saleCodeDao.findBySaleCode(salecode);
+	}
+	@Override
+	public SaleCodeBean insertSaleCode(SaleCodeBean saleCodeBean) {
+		return saleCodeDao.save(saleCodeBean);
 	}
 }

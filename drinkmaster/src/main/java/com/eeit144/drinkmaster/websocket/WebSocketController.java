@@ -8,6 +8,6 @@ public class WebSocketController {
 
 	@GetMapping("index06")
 	public String stompws5() {
-		return "front/WebSocketChatroom";
+		return "front/frontWebSocketChatroom";
 	}
 }

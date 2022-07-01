@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    	
+
+<jsp:include page="layout/header.jsp" />
+
 <!DOCTYPE html>
 <html>
 <head>
 <title>Chat WebSocket</title>
-<link  rel='stylesheet' href="<c:url value='/css/chatStyle.css' />" />
+<link  rel='stylesheet' href="<c:url value='/css/websocket/chatStyle.css' />" />
 <!-- <script src="/websocket/webjars/sockjs-client/sockjs.min.js"></script> -->
 <!-- <script src="/websocket/webjars/stomp-websocket/stomp.min.js"></script> -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script> -->
@@ -57,7 +60,7 @@ window.addEventListener('load', function() {
 // 				showMessageOutput(JSON.parse(messageOutput.body));
            
              var result = JSON.parse(messageOutput.body);  //設全域變數
-            showMessageOutput(''+ result.from +' 說 : '+ result.text);   //更改此處
+            showMessageOutput(''+'(發送訊息時間:'+ result.time+')'+ result.from +' 說 : '+ result.text);   //更改此處
 			});
 		});
 	};
@@ -129,30 +132,50 @@ window.addEventListener('load', function() {
 </script>
 </head>
 <body>
+<div  id="chat1" class="card border-primary mb-3" style="max-width: 18rem;">
 <div align='center'>
-    <h2>飲君子聊天室</h2>
-    <hr>
+ <div class="card-header">飲君子客服聊天室</div>
+<!--     <h2>飲君子聊天室</h2> -->
+<div class="card-body text-primary">
+    <h5 class="card-title">	聊天名稱：</h5>
+    <div>
+		<input type="text" id="chatId" placeholder="請輸入名稱：" />
+		</div>   
+		<div style="height: 30px;" id='promptArea'>&nbsp;</div>
+
+  </div>
+</div>
+   
 	<div>
-		<div>
-			聊天代號：<input type="text" id="chatId" placeholder="請輸入一個代號：" />
-		</div>
-       <div style="height: 30px;" id='promptArea'>&nbsp;</div>
+<!-- 		<div> -->
+<!-- 		<input type="text" id="chatId" placeholder="請輸入一個代號：" /> -->
+<!-- 		</div> -->
+<!--        <div style="height: 30px;" id='promptArea'>&nbsp;</div> -->
 		
 		
 		<div>
 			<button id="btnConnect" class="btn btn-outline-success">加入聊天室</button>
-			<button id="btnDisconnect" disabled="disabled" class="btn btn-outline-warning" >
+			<button id="btnDisconnect" disabled="disabled" class="btn btn-outline-danger" >
 				退出聊天室</button>
+		</div>
 		</div>
 		<br />
 		<div id="conversationDiv">
 			<input type="text" id="inputMessageArea" placeholder="輸入聊天訊息..."  />
-			<button id="sendToChatRoom2">傳送</button>
+			<button id="sendToChatRoom2"  class="btn btn-outline-warning">傳送</button>
 			<hr>
-		    <textarea id="responseArea" cols="90" rows="12" readonly></textarea>
-		</div>
+			
+			</div>
+			</div>
+			<div id=chat2>
+		    <textarea id="responseArea" cols="70" rows="10" readonly></textarea>
+		    </div>
 		
-	</div>
-</div>
+		
+
+
+
 </body>
 </html>
+
+<jsp:include page="layout/footer.jsp" />

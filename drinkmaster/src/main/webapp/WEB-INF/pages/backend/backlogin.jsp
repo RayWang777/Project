@@ -58,7 +58,7 @@
 		<label for="select" class="form-label" style="color:white;">帳號</label>
 		<input type="text" class="form-control" name="userAccount" id="userAccount" 
 		placeholder="請輸入電子信箱" onblur="checkEmpty()"/>
-		<span id="accErr"></span>
+		<span id="accErr" style="color: white;"></span>
 	</div>
 	<div class="mb-3" style="text-align: center;">
 		<label for="select" class="form-label" style="color:white;">密碼</label>
@@ -181,7 +181,7 @@ function checkEmpty(){
 		theacc.innerHTML="";
 	}else{
         console.log(strEmail.value.search(emailRule));
-		theacc.innerHTML="須符合email格式";
+		theacc.innerHTML="⛔須符合email格式";
 	}
 }
 </script>

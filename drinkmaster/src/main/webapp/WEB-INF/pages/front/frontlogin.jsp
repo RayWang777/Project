@@ -46,7 +46,7 @@
 		height: 500px;
 		float: right;
 		
-		padding: 7% 140px 20px;
+		padding: 7% 120px 20px;
 	}
 	
 </style>
@@ -76,8 +76,10 @@
 			<form:errors path="pass" cssClass="error" />
 		</div>
 		<div class="mb-3">
-		<button type="submit" class="btn btn-primary">登入</button>
-		<a href="${contextRoot}/front/register"><button type="button" class="btn btn-light" style="margin-left: 10px">註冊</button></a>
+		<button type="submit" class="btn btn-success">登入</button>
+		<a href="${contextRoot}/front/register">
+			<button type="button" class="btn btn-secondary" style="margin-left: 10px">註冊</button>
+		</a>
 		</div>
 
 		<div class="mb-3">
@@ -86,10 +88,10 @@
 		
 	</form:form>
 	
-		<button onclick="admin()">admin帳密</button>
-		<button onclick="firm()">firm帳密</button>
-		<button onclick="store()">store帳密</button>
-		<button onclick="user()">user帳密</button>
+		<button class="btn btn-light" onclick="admin()">admin帳密</button>
+		<button class="btn btn-light" onclick="firm()">firm帳密</button>
+		<button class="btn btn-light" onclick="store()">store帳密</button>
+		<button class="btn btn-light" onclick="user()">user帳密</button>
 		
 	</div>
 	

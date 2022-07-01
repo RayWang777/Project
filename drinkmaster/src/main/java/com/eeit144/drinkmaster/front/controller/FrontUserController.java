@@ -47,11 +47,14 @@ public class FrontUserController {
 		return "/front/frontuser";
 	}
 	
-	@GetMapping("logout")
-	public String logout(SessionStatus status) {
-		status.setComplete();
-		return "/front/frontlogin";
-	}
+//	@GetMapping("logout")
+//	public String logout(WebRequest request, SessionStatus status) {
+//		status.setComplete();
+//		request.removeAttribute("canSeeUser", WebRequest.SCOPE_SESSION);
+//		request.removeAttribute("canSeeFirm", WebRequest.SCOPE_SESSION);
+//		request.removeAttribute("canSeeStore", WebRequest.SCOPE_SESSION);
+//		return "/front/frontlogin";
+//	}
 	
 	@GetMapping("login")
 	public String login(Model m) {

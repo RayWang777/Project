@@ -3,29 +3,77 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="layout/header.jsp" />
 
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
-   <body>  
-   <br>
+<body>
+	<br>
 
-                          
-                                <div class="card mb-8">
+
+<div >
+                                <div class="card mb-4">
                                     <div class="card-header">
-                                        <i class="fas fa-chart-area me-1"></i>
-                                        Area Chart Example <c:out value="${list[0].productName}"/> 
+                                        <i class="fas fa-chart-bar me-1"></i>
+                                        <c:out value="${store.storeName}"></c:out> 商品銷售量
                                     </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="200%" height="80%"></canvas></div>
+                                    <div class="card-body"><canvas id="myBarChart" width="200%" height="80%"></canvas></div>
                                 </div>
+                            </div>
 
-	
-	
+
 	<script src="<c:url value="/js/lib/Chart.min.js"/>"></script>
 
-
 <script type="text/javascript">
+
+var ctx = document.getElementById("myBarChart");
+var myLineChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: [ <c:forEach items="${list}" var="one" varStatus="sta">"<c:out value="${one.productName}"/>"<c:if test="${!(sta.last)}">,</c:if>
+    </c:forEach>  ],
+    datasets: [{
+      label: "Revenue",
+      backgroundColor: "rgba(2,117,216,1)",
+      borderColor: "rgba(2,117,216,1)",
+      data: [<c:forEach items="${list}" var="one" varStatus="sta">"<c:out value="${one.sales}"/>"<c:if test="${!(sta.last)}">,</c:if>
+      </c:forEach>],
+    }],
+  },
+  options: {
+    scales: {
+      xAxes: [{
+        time: {
+          unit: 'month'
+        },
+        gridLines: {
+          display: false
+        },
+        ticks: {
+          maxTicksLimit: <c:out value="${fn:length(list)}"></c:out>
+        }
+      }],
+      yAxes: [{
+        ticks: {
+          min: 0,
+          max: 5000,
+          maxTicksLimit: 5
+        },
+        gridLines: {
+          display: true
+        }
+      }],
+    },
+    legend: {
+      display: false
+    }
+  }
+});
+
+</script>
+	<script type="text/javascript">
 var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',

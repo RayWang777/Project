@@ -49,7 +49,7 @@
 				<form:input path="productImage" id="productImage"
 					name="productImage" type="file" onchange="preview()" />
 				<img id="image" src="" width="100px" height="100px" />
-				<c:if test="${product.productId!=null}">
+				<c:if test="${product.productId!=null&&product.productImage!=null}">
 					<img id="oldImage" src="${product.productImage}" width="100px"
 						height="100px" />
 				</c:if>

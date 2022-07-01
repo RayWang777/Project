@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<jsp:include page="layout/header.jsp"></jsp:include>
+
 
 <head>
 <meta charset="UTF-8">
@@ -21,7 +21,7 @@
 		
 		display: block;
 	    position: relative;
-	    top: 50%;
+	    top: 0%;
 	    left: 50%;
 	    transform: translate(-50%, 0%);
 	    
@@ -49,7 +49,14 @@
 		padding: 7% 140px 20px;
 	}
 	
+
+	
 </style>
+
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="${contextRoot}/css/lib/front/styles.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -76,7 +83,7 @@
 			<form:errors path="pass" cssClass="error" />
 		</div>
 		<div class="mb-3">
-		<button type="submit" class="btn btn-primary">登入</button>
+		<button type="submit" id="buttonsubmitlogin" class="btn btn-primary">登入</button>
 		<a href="${contextRoot}/front/register"><button type="button" class="btn btn-light" style="margin-left: 10px">註冊</button></a>
 		</div>
 
@@ -94,32 +101,92 @@
 	</div>
 	
 </div>
-</body>
+
+
+  <script src="${contextRoot}/js/lib/jquery.min.js"></script>
+		<script src="${contextRoot}/js/lib/jquery.nanoscroller.min.js"></script>
+		<!-- nano scroller -->
+		<script src="${contextRoot}/js/lib/menubar/sidebar.js"></script>
+		<script src="${contextRoot}/js/lib/preloader/pace.min.js"></script>
+        
+        <!-- Bootstrap core JS-->
+        <script src="${contextRoot}/js/lib/front/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="${contextRoot}/js/lib/front/scripts.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 
 <script type="text/javascript">
+$(function(){
+	
+})
+
 function admin() {
 	let acc = document.getElementById("userAccount");
 	let pwd = document.getElementById("userPassword");
 	acc.value=("jerry@gmail.com");
 	pwd.value=("jerry6666");
+	
+	Swal.fire({
+		  icon: 'success',
+		  title: '管理者登入成功',
+		  showConfirmButton: false,
+		  timer: 2000
+		}).then( ()=>{
+			
+			$('#buttonsubmitlogin').trigger('click');
+		})
 }
 function firm() {
 	let acc = document.getElementById("userAccount");
 	let pwd = document.getElementById("userPassword");
 	acc.value=("mary@gmail.com");
 	pwd.value=("mary4317");
+	
+	Swal.fire({
+		  icon: 'success',
+		  title: '廠商登入成功',
+		  showConfirmButton: false,
+		  timer: 2000
+		}).then( ()=>{
+
+			$('#buttonsubmitlogin').trigger('click');
+		})
 }
 function store() {
 	let acc = document.getElementById("userAccount");
 	let pwd = document.getElementById("userPassword");
 	acc.value=("mark1@gmail.com");
 	pwd.value=("mark1234");
+	
+	Swal.fire({
+		  icon: 'success',
+		  title: '店家登入成功',
+		  showConfirmButton: false,
+		  timer: 2000
+		}).then( ()=>{
+			
+			console.log('123')
+			$('#buttonsubmitlogin').trigger('click');
+		})
 }
 function user() {
 	let acc = document.getElementById("userAccount");
 	let pwd = document.getElementById("userPassword");
 	acc.value=("cindy1@gmail.com");
 	pwd.value=("cindy9527");
+	
+	Swal.fire({
+		  icon: 'success',
+		  title: '使用者登入成功',
+		  showConfirmButton: false,
+		  timer: 2000
+		}).then( ()=>{
+			
+			console.log('123')
+			$('#buttonsubmitlogin').trigger('click');
+		})
 }
 
 function checkEmpty(){
@@ -141,5 +208,4 @@ function checkEmpty(){
 }
 </script>
 
-
-<jsp:include page="layout/footer.jsp"></jsp:include>
+</body>

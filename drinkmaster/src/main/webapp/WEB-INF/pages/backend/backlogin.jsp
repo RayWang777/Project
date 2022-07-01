@@ -43,6 +43,7 @@
 	  margin: -185px 0 0 -250px;
 	}
 </style>
+
 </head>
 
 
@@ -110,7 +111,6 @@ function admin() {
 		  timer: 2000
 		}).then( ()=>{
 			
-			console.log('123')
 			$('#buttonsubmit').trigger('click');
 		})
 		
@@ -127,8 +127,7 @@ function firm() {
 		  showConfirmButton: false,
 		  timer: 2000
 		}).then( ()=>{
-			
-			console.log('123')
+
 			$('#buttonsubmit').trigger('click');
 		})
 	

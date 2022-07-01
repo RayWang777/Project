@@ -52,7 +52,7 @@ public class OrderItems {
 
 	
 	public OrderItems(Integer orderItemId, Integer productId,
-			 Integer price, Integer quantity, String remark) {
+			 Integer price, String remark) {
 		super();
 		this.orderItemId = orderItemId;
 //		this.orderId = orderId;
@@ -60,7 +60,7 @@ public class OrderItems {
 		this.productId = productId;
 //		this.productBean = productBean;
 		this.price = price;
-		this.quantity = quantity;
+//		this.quantity = quantity;
 		this.remark = remark;
 	}
 

@@ -151,7 +151,7 @@
 
       <td>
       <a href="${contextRoot}/backend/orderItems/edit?id=${orderItems.orderItemId}"><button class="btn btn-outline-primary btn-sm">編輯</button></a>
-        <a href="${contextRoot}/backend/orderItems/delete?id=${orderItems.orderItemId}"><button onclick="return del(event)" id="${orderItems.orderItemId}" class="btn btn-outline-danger btn-sm">刪除</button></a></td>
+      <button onclick="return del(event)" id="${orderItems.orderItemId}" class="btn btn-outline-danger btn-sm">刪除</button></td>
       </tr>
     </c:forEach>
     
@@ -256,10 +256,10 @@ if (result.isConfirmed) {
 	  icon: 'success',
 	  title: '資料已移除',
 	  showConfirmButton: false,
-	  timer: 5000
+	  timer: 2000
 	}).then( ()=>{
 		
-		document.location.href='${contextRoot}/backend/orderItems/delete/'+local;
+		document.location.href='${contextRoot}/backend/orderItems/delete?id='+local;
 		
 	})
 }else if (result.isDenied) {

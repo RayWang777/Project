@@ -28,7 +28,7 @@
 					</div>
 					<c:forEach var="productBean" items="${categoryBean.products}">
 					<div style="font-size: large; border-bottom : 1px outset #C0C0C0; height: 50px "class="align-middle">
-					<a href="#" style="color: black;text-decoration:none;">
+					<a href="${contextRoot}/front/shopcar/before/editproduct?id=${productBean.productId}" style="color: black;text-decoration:none;">
 					<img
 						src="${productBean.productImage}" style="width: 60px " height="50px" />&nbsp;&nbsp;
 						<b><c:out value="${productBean.productName}"></c:out></b>

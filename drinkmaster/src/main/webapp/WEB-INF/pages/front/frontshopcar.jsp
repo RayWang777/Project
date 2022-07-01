@@ -57,8 +57,7 @@
 
 <body>
 <div class="container">
-<form:form class="form" method="post" action="${contextRoot}/front/shopcar/test" modelAttribute="productBean">
-<form:hidden path="productId"/>
+
 	<table id="cart" class="table table-hover table-condensed">
     				<thead>
 						<tr>
@@ -73,24 +72,26 @@
 						</tr>
 					</thead>
 					<tbody>
+					<c:forEach varStatus="vs" var="shopcarItems" items="">
 						<tr>
 							<td data-th="Product">
-<!-- 								<div class="row"> -->
 									<div class="col-sm-2 hidden-xs">
-									<img src="${productBean.productImage}" style="width: 300px;text-align: center;" /></div>
+									<img src="" style="width: 300px;text-align: center;" /></div>
 									<div class="col-sm-10">
-										
+									
 										
 									</div>
 							</td>
 							<td style="font-size: 18px;">
-							<form:input id="productname" path="productName" value="${productBean.productName}" style="border-style:none;text-align: center;"  readonly="true"/>
+								
+							珍奶
 <%-- 							<c:out value="${productBean.productName}"/> --%>
 							</td>
 							
 							<td data-th="Price" >
+							
+							70
 <%-- 							<c:out value="${productBean.price}"/> --%>
-							<form:input id="price" path="price" value="${productBean.price}" style="width:50px; border-style:none;text-align: center;"  readonly="true"/>
 							</td>
 							<td data-th="Quantity">
 								<input type="number" id="number" name="number" class="form-control text-center" value="1" min="1">
@@ -111,7 +112,8 @@
 							</select>							
 							</td>
 							<td data-th="Subtotal" class="text-center" id="totalprice" style="text-align: center;">
-							<c:out value="${productBean.price}"/>
+								70
+<%-- 							<c:out value="${productBean.price}"/> --%>
 <%-- 							<form:input path="price" style="width:100px" readonly="true"/> --%>
 							</td>
 							<td class="actions" data-th="">
@@ -119,6 +121,7 @@
 								<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>								
 							</td>
 						</tr>
+						</c:forEach>
 					</tbody>
 					<tfoot>
 						<tr class="visible-xs">
@@ -134,11 +137,10 @@
 							
 <!-- 							備註:折扣碼後的價格 -->
 							<td class="hidden-xs text-center"><span style="color:red;font-weight: bold;">折扣後&ensp;</span><strong>Total $60</strong></td>
-							<td><a href="#" class="btn btn-success btn-block">結帳&thinsp;<i class="fa fa-angle-right"></i></a></td>
+							<td colspan="2"><a href="#" class="btn btn-success btn-block">確認訂單&thinsp;<i class="fa fa-angle-right"></i></a></td>
 						</tr>
 					</tfoot>
 				</table>
-				</form:form>
 </div>
 </body>
 

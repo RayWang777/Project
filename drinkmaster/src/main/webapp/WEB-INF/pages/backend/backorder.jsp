@@ -197,7 +197,7 @@
       <i class="tiny material-icons" >collections</i></a></td>
       <td>
       <a href="${contextRoot}/backend/order/edit?id=${orderBean.orderId}"><button class="btn btn-outline-primary btn-sm">編輯</button></a>
-      <a href="${contextRoot}/backend/order/delete?id=${orderBean.orderId}"><button id="${orderBean.orderId}" class="btn btn-outline-danger btn-sm" onclick="return del(event)">刪除</button></a></td>
+      <button id="${orderBean.orderId}" class="btn btn-outline-danger btn-sm" onclick="return del(event)">刪除</button></td>
       </tr>
     </c:forEach>
     
@@ -278,7 +278,7 @@
   <a href="${contextRoot}/backend/order/insert">
   <button type="submit" id="ordersubmit" class="btn btn-primary btn-sm"  name="submit"  onclick="return confirm('確定要新增嗎?')" >確認</button></a>&emsp;  
   
-  <button type="button" id="closebutton" class="btn btn-outline-dark btn-sm" data-dismiss="modal" aria-label="Close" >取消</button>
+  <button type="button" id="${orderBean.orderId}" class="btn btn-outline-dark btn-sm" data-dismiss="modal" aria-label="Close" >取消</button>
   </div>
   </form:form>
       </div>
@@ -371,6 +371,8 @@ $(function(){
 function del(event){
 	  console.log(event.target.id)
 var local = event.target.id;
+	  
+	 
 Swal.fire({
 title: '確認要刪除嗎?',
 icon: 'warning',
@@ -389,10 +391,10 @@ if (result.isConfirmed) {
 	  icon: 'success',
 	  title: '資料已移除',
 	  showConfirmButton: false,
-	  timer: 5000
+	  timer: 2000
 	}).then( ()=>{
 		
-		document.location.href='${contextRoot}/backend/order/delete/'+local;
+		document.location.href='${contextRoot}/backend/order/delete?id='+local;
 		
 	})
 }else if (result.isDenied) {

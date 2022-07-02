@@ -67,14 +67,13 @@
                                         <div class="badge text-white position-absolute"
                                             style="top: 0.5rem; right: 0.5rem"><img alt="" src="<c:url value="/images/top3/top2.png"/>" style="width: 50px;height: 50px;background-color: transparent;" ></div>
                                         <!-- Product image-->
-                                        <a href="<c:url value="/front/productmenu?id=${top3[1].storeId}"/>"><img class="card-img-top" src="<c:url value="/backend/firm/${top3[1].firmBean.firmId}/photo"/>" alt="..." style="width: 250px;height: 250px;"/></a>
+                                        <a href="<c:url value="/front/firm/2?id=${top3[1].firmBean.firmId}"/>"><img class="card-img-top" src="<c:url value="/backend/firm/${top3[1].firmBean.firmId}/photo"/>" alt="..." style="width: 250px;height: 250px;"/></a>
                                         <!-- Product details-->
                                         <div class="card-body p-4">
                                             <div class="text-center">
                                                 <!-- firmName-->
                                                 <h5 class="fw-bolder">${top3[1].firmBean.firmName}</h5>
                                                 <!-- storeName-->
-                                                ${top3[1].storeName}
                                             </div>
                                         </div>
 	                                    </div>
@@ -86,14 +85,13 @@
                                         <div class="badge text-white position-absolute"
                                             style="top: 0.5rem; right: 0.5rem"><img alt="" src="<c:url value="/images/top3/top1.png"/>" style="width: 50px;height: 50px;background-color: transparent;" ></div>
                                         <!-- Product image-->
-                                        <a href="<c:url value="/front/productmenu?id=${top3[0].storeId}"/>"><img class="card-img-top" src="<c:url value="/backend/firm/${top3[0].firmBean.firmId}/photo"/>" alt="..." style="width: 250px;height: 250px;"/></a>
+                                        <a href="<c:url value="/front/firm/2?id=${top3[0].firmBean.firmId}"/>"><img class="card-img-top" src="<c:url value="/backend/firm/${top3[0].firmBean.firmId}/photo"/>" alt="..." style="width: 250px;height: 250px;"/></a>
                                         <!-- Product details-->
                                         <div class="card-body p-4">
                                             <div class="text-center">
                                                 <!-- firmName-->
                                                 <h5 class="fw-bolder">${top3[0].firmBean.firmName}</h5>
                                                 <!-- storeName-->
-                                                ${top3[0].storeName}
                                             </div>
                                         </div>
 	                                    </div>
@@ -107,14 +105,13 @@
                                         <div class="badge text-white position-absolute"
                                             style="top: 0.5rem; right: 0.5rem"><img alt="" src="<c:url value="/images/top3/top3.png"/>" style="width: 50px;height: 50px;background-color: transparent;" ></div>
                                         <!-- Product image-->
-                                        <a href="<c:url value="/front/productmenu?id=${top3[2].storeId}"/>"><img class="card-img-top" src="<c:url value="/backend/firm/${top3[2].firmBean.firmId}/photo"/>" alt="..." style="width: 250px;height: 250px;"/></a>
+                                        <a href="<c:url value="/front/firm/2?id=${top3[2].firmBean.firmId}"/>"><img class="card-img-top" src="<c:url value="/backend/firm/${top3[2].firmBean.firmId}/photo"/>" alt="..." style="width: 250px;height: 250px;"/></a>
                                         <!-- Product details-->
                                         <div class="card-body p-4">
                                             <div class="text-center">
                                                 <!-- firmName-->
                                                 <h5 class="fw-bolder">${top3[2].firmBean.firmName}</h5>
                                                 <!-- storeName-->
-                                                ${top3[2].storeName}
                                             </div>
                                         </div>
 	                                    </div>

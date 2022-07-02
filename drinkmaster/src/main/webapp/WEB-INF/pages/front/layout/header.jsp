@@ -24,20 +24,27 @@
 		<!-- swiper -->
         <link rel="stylesheet" href="${contextRoot}/css/lib/swiper/swiper-bundle.css">
 		<link rel="stylesheet" href="${contextRoot}/css/lib/swiper/swiper-bundle.min.css">
-        
+       <style type="text/css">
+       
+       .nav{
+       color:yellow;
+       }
+       
+       
+       </style> 
         
 </head>
 
 <body>  
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="${contextRoot}/front/">飲君子DrinkMaster</a>
+<nav class="navbar navbar-expand-lg navbar-light"> <!-- bg-light -->
+            <div class="container px-4 px-lg-5" >
+                <a class="navbar-brand" href="${contextRoot}/front/" style="color:#DD5D71;"><b style="font-size: xx-large;">飲君子DrinkMaster</b></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">首頁</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!" style="color:#5A5AAD;"><b style="font-size: large;">首頁</b></a></li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false" style="color:#5A5AAD;"><b style="font-size: large;">Shop</b></a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#!">All Products</a></li>
                                 <li><hr class="dropdown-divider" /></li>
@@ -47,13 +54,13 @@
                          </li>
                         
                         
-                        <li class="nav-item"><button type="button" id="iwantserchfirm" class="nav-link active btn btn-white" data-bs-toggle="modal" data-bs-target="#serchfirmlocal" data-bs-whatever="@getbootstrap"><c:out value="找廠商"/></button></li>
+                        <li class="nav-item"><button type="button" id="iwantserchfirm" class="nav-link active btn btn-white" data-bs-toggle="modal" data-bs-target="#serchfirmlocal" data-bs-whatever="@getbootstrap" style="color:#5A5AAD;"><b style="font-size: large;"><c:out value="找廠商"/></b></button></li>
                         
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">找附近</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!" style="color:#5A5AAD;"><b style="font-size: large;">找附近</b></a></li>
                         
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">評論</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!" style="color:#5A5AAD;"><b style="font-size: large;">評論</b></a></li>
                         
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">客服</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!" style="color:#5A5AAD;"><b style="font-size: large;">客服</b></a></li>
                         
                         
                     </ul>
@@ -68,7 +75,7 @@
                         </a>
                         
 						<c:if test="${canSeeUser.userAccount == null}">
-								<a href="${contextRoot}/front/login" style="color:black;" class="nav-link active" aria-current="page">登入</a>
+								<a href="${contextRoot}/front/login" style="color:black;" class="nav-link active" aria-current="page"><b style="font-size: large;">登入</b></a>
 						</c:if>
 						<c:if test="${canSeeUser.userAccount != null}">
 <%-- 							<a href="${contextRoot}/front/userMessage" style="color:black;" class="nav-link active" aria-current="page">Hi, ${canSeeUser.userName}</a> --%>

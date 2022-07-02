@@ -26,4 +26,5 @@ public interface StoreRepostiory extends JpaRepository<StoreBean, Integer> {
 	@Query(value = "select u.userid from store as s right join users as u on s.userid=u.userid where s.userid is null and u.role = 'store';",nativeQuery = true)
 	public List<Integer> findStoreUserNull();
 	
+	
 }

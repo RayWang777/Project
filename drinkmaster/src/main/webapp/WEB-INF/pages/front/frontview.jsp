@@ -49,19 +49,30 @@
 
                     <!-- Section-->
                     <section class="">
+                    
+                    
+                    <!-- TOP3 -->
                       <div class="container px-4 px-lg-5 mt-0">
                             <div  class="row gx-4 gx-lg-10 row-cols-1 row-cols-md-1 row-cols-xl-1 justify-content-center">
-                        		 <img alt="" src="<c:url value="/images/top3/salebest.png"/>" style="width: 1000px;height: 200px;" >
+                        		 <img alt="" src="<c:url value="/images/top3/besttop3.png"/>" style="width: 1000px;height: 200px;" >
                         	</div>	 
                         	
                         	
                         	<div  class="row gx-4 gx-lg-10 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
+<<<<<<< HEAD
                         		  <div class="col mb-5">
                                     <div >
+=======
+                        	
+                        	<!-- card one -->
+                        		  <div class="col mb-5" >
+                                    <div class="card h-70" style="width: 250px;margin: auto;">
+>>>>>>> f43f95b53b7e34146b18448f8bac7ad73ee074ea
                                         <!-- Sale badge-->
                                         <div class="badge text-white position-absolute"
                                             style="top: 0.5rem; right: 0.5rem"><img alt="" src="<c:url value="/images/top3/top2.png"/>" style="width: 50px;height: 50px;background-color: transparent;" ></div>
                                         <!-- Product image-->
+<<<<<<< HEAD
                                         <a href="http://localhost:8081/drinkmaster/front/firm/${top3[0].firmBean.firmId}">
                                         <img  src="<c:url value="/backend/firm/${top3[0].firmBean.firmId}/photo"/>"
                                             alt="..." /></a>
@@ -105,39 +116,69 @@
                                 
                                 <div class="col mb-5">
                                     <div class="card h-100">
-                                        <!-- Sale badge-->
-                                        <div class="badge bg-dark text-white position-absolute"
-                                            style="top: 0.5rem; right: 0.5rem">Sale</div>
-                                        <!-- Product image-->
-                                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                                            alt="..." />
+=======
+                                        <img class="card-img-top" src="<c:url value="/backend/firm/${top3[1].firmBean.firmId}/photo"/>" alt="..." style="width: 250px;height: 250px;"/>
                                         <!-- Product details-->
                                         <div class="card-body p-4">
                                             <div class="text-center">
-                                                <!-- Product name-->
-                                                <h5 class="fw-bolder">Sale Item</h5>
-                                                <!-- Product price-->
-                                                <span class="text-muted text-decoration-line-through">$50.00</span>
-                                                $25.00
+                                                <!-- firmName-->
+                                                <h5 class="fw-bolder">${top3[1].firmBean.firmName}</h5>
+                                                <!-- storeName-->
+                                                ${top3[1].storeName}
                                             </div>
                                         </div>
-                                        <!-- Product actions-->
-                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                            <div class="text-center"><a class="btn btn-outline-dark mt-auto"
-                                                    href="#">Add to cart</a></div>
+	                                    </div>
+    	                            </div>
+                               <!-- card two --> 
+                   					  <div class="col mb-5">
+                                    <div class="card h-70" style="width: 250px;margin: auto;">
+>>>>>>> f43f95b53b7e34146b18448f8bac7ad73ee074ea
+                                        <!-- Sale badge-->
+                                        <div class="badge text-white position-absolute"
+                                            style="top: 0.5rem; right: 0.5rem"><img alt="" src="<c:url value="/images/top3/top1.png"/>" style="width: 50px;height: 50px;background-color: transparent;" ></div>
+                                        <!-- Product image-->
+                                        <img class="card-img-top" src="<c:url value="/backend/firm/${top3[0].firmBean.firmId}/photo"/>" alt="..." style="width: 250px;height: 250px;"/>
+                                        <!-- Product details-->
+                                        <div class="card-body p-4">
+                                            <div class="text-center">
+                                                <!-- firmName-->
+                                                <h5 class="fw-bolder">${top3[0].firmBean.firmName}</h5>
+                                                <!-- storeName-->
+                                                ${top3[0].storeName}
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
+	                                    </div>
+    	                            </div>
                         		 
                         		 
-                        		 
+                        		<!-- card three -->
+                        		  <div class="col mb-5">
+                                    <div class="card h-70" style="width: 250px;margin: auto;">
+                                        <!-- Sale badge-->
+                                        <div class="badge text-white position-absolute"
+                                            style="top: 0.5rem; right: 0.5rem"><img alt="" src="<c:url value="/images/top3/top3.png"/>" style="width: 50px;height: 50px;background-color: transparent;" ></div>
+                                        <!-- Product image-->
+                                        <img class="card-img-top" src="<c:url value="/backend/firm/${top3[2].firmBean.firmId}/photo"/>" alt="..." style="width: 250px;height: 250px;"/>
+                                        <!-- Product details-->
+                                        <div class="card-body p-4">
+                                            <div class="text-center">
+                                                <!-- firmName-->
+                                                <h5 class="fw-bolder">${top3[2].firmBean.firmName}</h5>
+                                                <!-- storeName-->
+                                                ${top3[2].storeName}
+                                            </div>
+                                        </div>
+	                                    </div>
+    	                            </div>
+                        		
+                        		
+                        		<!-- card end --> 
                         	</div>	 
-                        
-                       </div>
+	                    </div>
+ 					  <!-- TOP3 END-->    
                     
                     
-                    
-                    
+                    <!-- 附近店家 -->
                         <div class="container px-4 px-lg-5 mt-0">
                             <div  class="row gx-4 gx-lg-10 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
                             
@@ -146,7 +187,7 @@
                                 <div class="col mb-5">
                                     <div class="card h-100">
                                         <!-- Product image-->
-                                        <img class="card-img-top" src="<c:url value="/images/top3/salebest.png"/>"  alt="..." />
+                                        <img class="card-img-top" src="<c:url value="/images/top3/besttop3.png"/>"  alt="..." />
                                         <!-- Product details-->
                                         <div class="card-body p-4">
                                             <div class="text-center">
@@ -339,7 +380,20 @@
                             </div>
                         </div>
                     </section>
-
+  <!-- 附近店家 -->
+  
+<script>  
+  window.onload=  navigator.geolocation.getCurrentPosition(successCallback);  
+    function successCallback(position){  
+        var lat = position.coords.latitude;  
+        var long1 = position.coords.longitude;  
+        console.log(lat);
+        console.log(long1);
+  
+    }  
+    
+</script>  
+  
 
 
 <!-- 輪播 -->

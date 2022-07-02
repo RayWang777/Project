@@ -57,7 +57,7 @@
 
 <body>
 <div class="container">
-
+<%-- <form:form class="form" method="post" action="${contextRoot}/front/shopcar/buy" modelAttribute="shopcarBean"> --%>
 	<table id="cart" class="table table-hover table-condensed">
     				<thead>
 						<tr>
@@ -72,56 +72,50 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:forEach varStatus="vs" var="shopcarItems" items="">
+<%-- 					<c:forEach varStatus="vs" var="shopcarItems" items=""> --%>
 						<tr>
 							<td data-th="Product">
 									<div class="col-sm-2 hidden-xs">
-									<img src="" style="width: 300px;text-align: center;" /></div>
+									<img src="${shopcarBuy.productImage}" style="width: 300px;text-align: center;" /></div>
 									<div class="col-sm-10">
 									
 										
 									</div>
 							</td>
 							<td style="font-size: 18px;">
-								
-							珍奶
-<%-- 							<c:out value="${productBean.productName}"/> --%>
+								<input type="text" value="${shopcarBuy.productName}" style="text-align: center;">
 							</td>
 							
 							<td data-th="Price" >
-							
-							70
-<%-- 							<c:out value="${productBean.price}"/> --%>
+							<input type="text" value="${shopcarBuy.price}" style="width:50px;text-align: center;">
 							</td>
 							<td data-th="Quantity">
-								<input type="number" id="number" name="number" class="form-control text-center" value="1" min="1">
+								<input type="number" id="number" name="number" class="form-control text-center" value="${shopcarBuy.quantity}" min="1">
 							</td> 
-							<td data-th="Product" style="text-align: center;">
-							<select id="sugar">
-							<option value="無糖">無糖</option>
-							<option value="微糖">微糖</option>
-							<option value="少糖">少糖</option>
-							<option value="半糖">半糖</option>
-							<option value="正常">正常</option>
-							</select>							
+							<td data-th="Product" style="text-align: center;" >
+							<form:select id="sugar" path="shopcarBuy.sweet">
+							<form:option value="無糖">無糖</form:option>
+							<form:option value="微糖">微糖</form:option>
+							<form:option value="少糖">少糖</form:option>
+							<form:option value="半糖">半糖</form:option>
+							<form:option value="正常">正常</form:option>
+							</form:select>							
 							</td>
 							<td data-th="Product" style="text-align: center;">
-							<select id="coldhot">
-							<option value="冷">冷</option>
-							<option value="熱">熱</option>
-							</select>							
+							<form:select id="coldhot" path="shopcarBuy.coldhot">
+							<form:option value="冷">冷</form:option>
+							<form:option value="熱">熱</form:option>
+							</form:select>							
 							</td>
-							<td data-th="Subtotal" class="text-center" id="totalprice" style="text-align: center;">
-								70
-<%-- 							<c:out value="${productBean.price}"/> --%>
-<%-- 							<form:input path="price" style="width:100px" readonly="true"/> --%>
+							<td data-th="Subtotal" class="text-center" id="totalprice" >
+								<input type="text" value="${shopcarBuy.totalPrice}" style="width:100px;text-align: center;">
 							</td>
 							<td class="actions" data-th="">
 
 								<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>								
 							</td>
 						</tr>
-						</c:forEach>
+<%-- 						</c:forEach> --%>
 					</tbody>
 					<tfoot>
 						<tr class="visible-xs">
@@ -141,6 +135,7 @@
 						</tr>
 					</tfoot>
 				</table>
+<%-- 				</form:form> --%>
 </div>
 </body>
 

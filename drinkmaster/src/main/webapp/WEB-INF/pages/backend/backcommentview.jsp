@@ -58,24 +58,19 @@
 </head>
 <body>
 
-<h1>所有評價</h1>
+<h1 style="text-align:center">所有評論</h1>
 
 
 <div class="container">
 
 
-<script>
-const rating = [134055, 57472, 143135, 365957, 1448459]
-average(rating)
 
-console.log(average(rating));
-</script>
 
-<div id="ratingBarFive" class="ratingBar"></div>
-<div id="ratingBarFour" class="ratingBar"></div>
-<div id="ratingBarThree" class="ratingBar"></div>
-<div id="ratingBarTwo" class="ratingBar"></div>
-<div id="ratingBarOne" class="ratingBar"></div>
+<!-- <div id="ratingBarFive" class="ratingBar"></div> -->
+<!-- <div id="ratingBarFour" class="ratingBar"></div> -->
+<!-- <div id="ratingBarThree" class="ratingBar"></div> -->
+<!-- <div id="ratingBarTwo" class="ratingBar"></div> -->
+<!-- <div id="ratingBarOne" class="ratingBar"></div> -->
 
 <br/>
 
@@ -95,96 +90,70 @@ console.log(average(rating));
 <br/>
 
 
-<script type="text/javascript">
+<table class="table table-hover"
+		style="width: 100%; table-layout: fixed;">
+		<thead>
+			<tr>
+				<th style="width: 50px;">
+				<label class="control control--checkbox">
+						<input type="checkbox" class="js-check-all" />
+				</label></th>
+				<th scope="col">店名</th>
+				<th scope="col" style="width: 80px">使用者</th>
+				<th scope="col" style="width: 180px ; text-align:center">評分</th>
+				<th scope="col">評論內容</th>
+				<th scope="col">圖片</th>
+				<th scope="col">時間</th>
+				<th style="width: 140px;text-align: left;">動作</th>
+			</tr>
+		</thead>
+		<tbody>
 
-	$()
+			<c:forEach  var="comment" items="${page}" >
+				<tr scope="row">
+					<td class="align-middle"><label
+						class="control control--checkbox"><input type="checkbox"
+							id="check" value="<c:out value='${comment.commentId}'/>"
+							style="margin-top: 20px;" />
+						</label></td>
+					<td class="align-middle">
+						<div class="d-flex align-items-center">
+							<c:out value="${comment.storeBean.storeName}"></c:out>
+						</div>
+					</td>
+					<td class="align-middle"><c:out value="${comment.userBean.userName}"></c:out>
+					</td>
+					<td class="align-middle"><div style="pointer-events: none; width: 150px;" id="scores${comment.commentId}" class="awesomeRating"></div>
+					
+					<div class="awesomeRatingValue"></div>
+						<script type="text/javascript">
+						
+							$("#scores${comment.commentId}").awesomeRating({
+								
+								valueInitial: "${comment.score}",
+								values: ["1.0", "2.0", "3.0", "4.0", "5.0"],
+								targetSelector: "span.awesomeRatingValue"
+							});
+						
+							console.log(${comment.score});
+						</script>
 
-</script>
+					<td class="align-middle"><c:out value="${comment.content}"></c:out></td>
 
+					<td class="align-middle"><img src="${comment.commentPhoto}" style="width: 100px;heiget: 100px" /></td>
+					<td class="align-middle">(時間) <fmt:formatDate pattern="yyyy 年 MM 月 dd 日 a hh:mm:ss EEEE" value="${comment.createTime}" /></td>
+					
+					<td class="align-middle" style="width: 13%;"><a href="${contextRoot}/backend/comment/editComment?commentid=${comment.commentId}"><button class="btn btn-primary">編輯</button></a>
+					<a onclick="return confirm('真的要刪除嗎?')" href="${contextRoot}/backend/comment/delete?commentid=${comment.commentId}"><button class="btn btn-danger">刪除</button></a>
+					</td>
+				</tr>
+			</c:forEach>
 
-<c:forEach  var="comment" items="${page}" >
-<%-- <c:forEach  var="comment" items="${page.content}" > --%>
-
-<div class="row justify-content-center">
-<div class="col-9">
-
-<div class="card">
-  <div class="card-header">
-		<c:out value="${comment.storeBean.storeName}"></c:out>
-  </div>
-  <div class="card-body">
-  	<c:out value="${comment.userBean.userName}"></c:out>
-  	<br/>
-  	
-  	
-  	
-  	<div style="pointer-events: none" id="scores${comment.commentId}" class="awesomeRating"></div>
-	<div class="awesomeRatingValue"></div>
-	<script type="text/javascript">
-	
-		$("#scores${comment.commentId}").awesomeRating({
-			
-			valueInitial: "${comment.score}",
-			values: ["1.0", "2.0", "3.0", "4.0", "5.0"],
-			targetSelector: "span.awesomeRatingValue"
-		});
-	
-		console.log(${comment.score});
-	</script>
-	
-	<c:out value="${comment.content}"></c:out>
-	
-	<br/>
-	
-	<img src="${comment.commentPhoto}" style="width: 100px;heiget: 100px" />
-
-	<br/>
-	(時間) <fmt:formatDate pattern="yyyy 年 MM 月 dd 日 a hh:mm:ss EEEE" value="${comment.createTime}" />
-	<div class="edit-link">
-		<a href="${contextRoot}/backend/comment/editComment?commentid=${comment.commentId}"><button class="btn btn-primary">編輯</button></a>
-		<a onclick="return confirm('真的要刪除嗎?')" href="${contextRoot}/backend/comment/delete?commentid=${comment.commentId}"><button class="btn btn-danger">刪除</button></a>
-	</div>
-	
-  
-  </div>
-</div>
-</div>
-</div>
+		</tbody>
+	</table>
 
 
 
-
-</c:forEach>
-
-
-
-
-<div class="row justify-content-center">
-	<div class="col-9">
-<%-- 		<c:forEach var="pageNumber" begin="1" end="${page.totalPages}"> --%>
-		
-<%-- 		<c:choose> --%>
-<%-- 			<c:when test="${page.number != pageNumber-1}" > --%>
-			
-<%-- 				<a href="${contextRoot}/backend/comment/all/?p=${pageNumber}" > <c:out value="${pageNumber}" /></a> --%>
-			
-<%-- 			</c:when> --%>
-		
-<%-- 			<c:otherwise> --%>
-<%-- 				<c:out value="${pageNumber}" /> --%>
-<%-- 			</c:otherwise>	 --%>
-		
-<%-- 		</c:choose> --%>
-		
-<%-- 		<c:if test="${page.totalPages != pageNumber}"> --%>
-<!-- 			| -->
-<%-- 		</c:if> --%>
-			
-		
-<%-- 		</c:forEach> --%>
-
-	</div>
-</div>
 
 
 </div>

@@ -30,7 +30,6 @@ div.awesomeRating {
 </head>
 <body>
 
-<h1>新增評價</h1>
 
 
 <div class="container">
@@ -38,10 +37,10 @@ div.awesomeRating {
 
 <div class="row justify-content-center">
 <div class="col-9">
-	<h1>新增訊息頁面</h1>
+	<h1 style="text-align:center">新增評論</h1>
 <div class="card">
   <div class="card-header">
-    請輸入新留言
+    請輸入新評論
   </div>
   <div class="card-body">
   
@@ -120,21 +119,7 @@ div.awesomeRating {
 </div>
 </div>
 
-<!-- <div class="row justify-content-center"> -->
-<!-- <div class="col-9"> -->
 
-<!-- <div class="card"> -->
-<!--   <div class="card-header"> -->
-<%--     最新留言(時間) <fmt:formatDate pattern="yyyy 年 MM 月 dd 日 a hh:mm:ss EEEE" value="${lastestComment.createTime}" /> --%>
-<!--   </div> -->
-<!--   <div class="card-body"> -->
-  
-<%-- 	<c:out value="${lastestComment.content}"></c:out> --%>
-  
-<!--   </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
 
 
 </div>

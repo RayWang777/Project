@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -8,38 +7,26 @@
 
        
                 <style>
-=======
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<jsp:include page="layout/header.jsp"></jsp:include>
-
-<meta>
-<style>
->>>>>>> 7224a67bd5a758d173742aba1aa11840d821290e
 /*                背景滿版     */
-html {
-	height: 100%;
-}
-
-body {
-	background-image: url("<c:url value="/ images/ cold_drink_juice_promotion_image.jpg "/>");
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-position: 50% 40%;
-	background-size: 100% 120%;
-}
+                    html { 
+            			height: 100%; 
+     					} 
+                    body {
+                        background-image: url("<c:url value="/images/cold_drink_juice_promotion_image.jpg"/>");
+                        background-repeat: no-repeat;
+                        background-attachment:fixed;
+                        background-position: 50% 40%;
+                        background-size: 100% 120%;
+                    }
 /*                背景滿版    */
-.swiper-container {
-	width: 830px;
-	height: 370px;
-}
-</style>
 
-  
+                    .swiper-container {
+                        width: 830px;
+                        height: 370px;
+                    }
+                </style>
+
+        
 
  <body>
  <header class="py-2"> 
@@ -333,45 +320,44 @@ body {
                         </div>
                     </section>
 
-			</div>
-		</div>
-	</section>
 
 
+<!-- 輪播 -->
+                    <script>
+                    
+                    var swiper = new Swiper(".mySwiper", {
+                    	 direction: 'horizontal',
+                    	 autoplay : {
+                    		 delay:2000,
+                    		 stopOnLastSlide:false,
+                    		 disableOnInteraction: false,
+                    	 },
+                    	 loop:true,
+                    	 spaceBetween : '10px',
 
-	<!-- 輪播 -->
-	<script>
-		var swiper = new Swiper(".mySwiper", {
-			direction : 'horizontal',
-			autoplay : {
-				delay : 2000,
-				stopOnLastSlide : false,
-				disableOnInteraction : false,
-			},
-			loop : true,
-			spaceBetween : '10px',
+                    	 pagination:".swiper-pagination",
+                    	 speed:100,
+//                     	 effect:'fade',
+                    	 effect:'flip',
+                    	 
+                    	 observer:true,//修改swiper自己或子元素時，自動初始化swiper
+                    	 observeParents:true,//修改swiper的父元素時，自動初始化swiper
+                    	 
+                        pagination: {
+                          el: ".swiper-pagination",
+                          type: 'bullets',
+                          clickable:true,
+                        },
+                        navigation: {
+                          nextEl: ".swiper-button-next",
+                          prevEl: ".swiper-button-prev",
+                        },
+                      });
+                    
 
-			pagination : ".swiper-pagination",
-			speed : 100,
-			//                     	 effect:'fade',
-			effect : 'flip',
+                    </script> 
+                  <!-- 輪播結束 -->
 
-			observer : true,//修改swiper自己或子元素時，自動初始化swiper
-			observeParents : true,//修改swiper的父元素時，自動初始化swiper
+                </body>
 
-			pagination : {
-				el : ".swiper-pagination",
-				type : 'bullets',
-				clickable : true,
-			},
-			navigation : {
-				nextEl : ".swiper-button-next",
-				prevEl : ".swiper-button-prev",
-			},
-		});
-	</script>
-	<!-- 輪播結束 -->
-
-</body>
-
-<jsp:include page="layout/footer.jsp"></jsp:include>
+                <jsp:include page="layout/footer.jsp"></jsp:include>

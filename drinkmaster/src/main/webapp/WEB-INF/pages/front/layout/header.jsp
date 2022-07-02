@@ -44,10 +44,17 @@
                                 <li><a class="dropdown-item" href="#!">Popular Items</a></li>
                                 <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
                             </ul>
-                        </li>
+                         </li>
                         
                         
-                        <button type="button" id="iwantserchfirm" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"><c:out value="找廠商"/></button>
+                        <li class="nav-item"><button type="button" id="iwantserchfirm" class="nav-link active btn btn-white" data-bs-toggle="modal" data-bs-target="#serchfirmlocal" data-bs-whatever="@getbootstrap"><c:out value="找廠商"/></button></li>
+                        
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">找附近</a></li>
+                        
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">評論</a></li>
+                        
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">客服</a></li>
+                        
                         
                     </ul>
 <%--                     <form class="d-flex"> --%>
@@ -88,11 +95,11 @@
         <!-- Header-->
    <!-- -找廠商 -->
    
-   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal fade" id="serchfirmlocal" tabindex="-1" aria-labelledby="serchfirmlocalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 <!--       <div class="modal-header"> -->
-<!--         <h5 class="modal-title" id="exampleModalLabel">請輸入廠商名稱</h5> -->
+<!--         <h5 class="modal-title" id="serchfirmlocalLabel">請輸入廠商名稱</h5> -->
 <!--         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
 <!--       </div> -->
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,6 +31,7 @@ import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.bean.UserBean;
 import com.eeit144.drinkmaster.dto.CommentAvgScoreBeanDTO;
 import com.eeit144.drinkmaster.dto.CommentBeanDTO;
+import com.eeit144.drinkmaster.dto.UserBeanDTO;
 
 @Controller
 @SessionAttributes(names= {"userBean"})
@@ -95,6 +97,22 @@ public class FrontCommentController {
 		
 		return "front/frontcomment";
 	}
+	
+	
+//	@GetMapping("comment/login")
+//	public String login(@RequestParam("storeid") Integer storeid, Model m) {
+//		UserBeanDTO user = new UserBeanDTO();
+//		String userAccount = user.getUserAccount();
+//		String userPassword = user.getUserPassword();
+//		
+//		m.addAttribute("userAccount", userAccount);
+//		m.addAttribute("userPassword", userPassword);
+//
+//		
+//		String url = "redirect:http://localhost:8081/drinkmaster/front/comment/all?storeid=" + storeid;
+//		
+//		return "/front/frontlogin";
+//	}
 	
 	
 	
@@ -222,7 +240,16 @@ public class FrontCommentController {
 		
 		}
 		
+		ArrayList<Object> arrayList = new ArrayList<>();
+		
+		Optional<StoreBean> newstore = storeService.findById(storeid);
+		
+		if(newstore.isPresent()) {
+			arrayList.add(newstore.get());
+		}
+		
 		model.addAttribute("commentBean", commentBean);
+		model.addAttribute("arrayList", arrayList);
 		
 		model.addAttribute("findusId", findusId);
 		model.addAttribute("page",page);
@@ -273,14 +300,23 @@ public class FrontCommentController {
 //		
 //		Page<CommentBean> page = commentService.findCommentByStoreidPage(storeId, pageable);
 		
+		ArrayList<Object> arrayList = new ArrayList<>();
 		
+		Optional<StoreBean> newstore = storeService.findById(storeid);
+		
+		if(newstore.isPresent()) {
+			arrayList.add(newstore.get());
+		}
 		
 		
 		model.addAttribute("commentBean", commentBean);
+		model.addAttribute("arrayList", arrayList);
 		
 //		model.addAttribute("findCommentById", findCommentById);
 		model.addAttribute("findusId", findusId);
 		model.addAttribute("page",page);
+		
+//		String url = "http://localhost:8081/drinkmaster/front/comment/all?storeid=" + storeid;
 		
 		return "/front/frontcommentview";
 		
@@ -321,7 +357,16 @@ public class FrontCommentController {
 		
 		}
 		
+		ArrayList<Object> arrayList = new ArrayList<>();
+		
+		Optional<StoreBean> newstore = storeService.findById(storeid);
+		
+		if(newstore.isPresent()) {
+			arrayList.add(newstore.get());
+		}
+		
 		model.addAttribute("commentBean", commentBean);
+		model.addAttribute("arrayList", arrayList);
 		
 		model.addAttribute("findusId", findusId);
 		model.addAttribute("page",page);
@@ -359,7 +404,16 @@ public class FrontCommentController {
 		
 		}
 		
+		ArrayList<Object> arrayList = new ArrayList<>();
+		
+		Optional<StoreBean> newstore = storeService.findById(storeid);
+		
+		if(newstore.isPresent()) {
+			arrayList.add(newstore.get());
+		}
+		
 		model.addAttribute("commentBean", commentBean);
+		model.addAttribute("arrayList", arrayList);
 		
 		model.addAttribute("findusId", findusId);
 		model.addAttribute("page",page);

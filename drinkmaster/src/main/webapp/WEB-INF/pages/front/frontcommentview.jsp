@@ -49,11 +49,43 @@ div.awesomeRating {
  
   <div class="card-body">
   
-  
+ 
+  				<c:forEach var="store" items="${arrayList}">
+  				
+  					<div class="row justify-content-center">
+						<div class="col-9">
+  						<span style="font-size: 1.5em ; text-align:center ">店家資訊</span><br/>
+  						<input id="storeid" name="storeid" value="${store.storeId}" type="hidden" />
+  						
+  						店家 : <c:out value="${store.storeName}"  /><br/>
+  						地址 : <c:out value="${store.storeAddress}"  /><br/>
+  						電話 : <c:out value="${store.storePhone}"  /><br/>
+  						營業時間 : <c:out value="${store.openTime}"  /><br/>
+  		
+  		
+  		
+  		
+  				
+  						</div>
+  					</div>
+  				
+  				</c:forEach>
+  				
+  				
   	<c:if test="${empty userBean}">
   	
   	<br/>
-  				<h3>登入後可評論~</h3>
+  	
+  				<div class="row justify-content-center">
+				<div class="col-9">
+  				
+<%--   				<a href="${contextRoot}/front/comment/login?storeid=${store.storeId}"></a> --%>
+  				<h3 style="color: blue">登入後可評論~</h3>
+				</div>
+				</div>
+  				
+  	
+  	
   	
   	
  	</c:if>
@@ -197,6 +229,8 @@ div.awesomeRating {
 // 	     	    	return;
 	     	    	
 		     	    comment_data = ""
+		     	    
+		     	    	comment_data += '<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>'
 		     	    	
 		     	    	comment_data += '<form method="post" action="http://localhost:8081/drinkmaster/front/comment/editNewComment" enctype="multipart/form-data">'
 		     	    	comment_data += '<input id="newcommentid" name="newcommentid" type="hidden" value="' + result.commentId + '"/>'
@@ -215,9 +249,9 @@ div.awesomeRating {
 		     	    	comment_data += '<input id="commentPhoto1" name="commentPhoto1"  type="file" class="form-control" onchange="preview()" />'
 		     	    	
 		     	    	comment_data += '<img id="image" src="'+result.commentPhoto+'" width="100px" height="100px" />'
-		     	    	comment_data +=	'<c:if test="' + result.commentPhoto + '!=null">'
-		     	    	comment_data +=	'<img id="oldImage" src="' + result.commentPhoto + '" width="100px" height="100px" />'
-						comment_data += '</c:if>'
+// 		     	    	comment_data +=	'<c:if test="' + result.commentPhoto + '!=null">'
+		     	    	comment_data +=	'<img id="oldImage" src="' + result.commentPhoto + '" width="100px" height="100px"/>'
+// 						comment_data += '</c:if>'
 						
 		     	    	
 		     	    	comment_data +=	'<fmt:formatDate pattern="yyyy 年 MM 月 dd 日 a hh:mm:ss EEEE" value="${result.createTime}" />'
@@ -260,9 +294,13 @@ div.awesomeRating {
 	     	   		
 	     	    	});
 	     	    	
-// 	     	    	$(function() {
-// 	     	   		$('#image').hide();
-// 	     	   	});
+	     	    	$(function() {
+// 	     	    	$('#oldImage').show();
+// 					if ($("#oldImage") != null){
+// 						$('#oldImage').show();
+// 					}
+	     	   		$('#image').hide();
+	     	   	});
 
 	     	   	function preview() {
 	     	   		image.src = URL.createObjectURL(event.target.files[0]);
@@ -412,12 +450,17 @@ div.awesomeRating {
   <button class="btn btn-black dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
     排序
   </button>
+  
+  <c:forEach var="store" items="${arrayList}">
+  
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="${contextRoot}/front/comment/all">最新</a></li>
-    <li><a class="dropdown-item" href="${contextRoot}/front/comment/scoredesc">評分最高</a></li>
-    <li><a class="dropdown-item" href="${contextRoot}/front/comment/scoreasc">評分最低</a></li>
-    <li><a class="dropdown-item" href="${contextRoot}/front/comment/timeasc">最早</a></li>
+    <li><a class="dropdown-item" href="${contextRoot}/front/comment/all?storeid=${store.storeId}">最新</a></li>
+    <li><a class="dropdown-item" href="${contextRoot}/front/comment/scoredesc?storeid=${store.storeId}" >評分最高</a></li>
+    <li><a class="dropdown-item" href="${contextRoot}/front/comment/scoreasc?storeid=${store.storeId}">評分最低</a></li>
+    <li><a class="dropdown-item" href="${contextRoot}/front/comment/timeasc?storeid=${store.storeId}">最早</a></li>
   </ul>
+  
+  </c:forEach>
 </div>
 
 </div>
@@ -478,7 +521,9 @@ div.awesomeRating {
 		<c:choose>
 			<c:when test="${page.number != pageNumber-1}" >
 			
-				<a href="${contextRoot}/front/comment/all/?p=${pageNumber}" > <c:out value="${pageNumber}" /></a>
+				<c:forEach var="store" items="${arrayList}">
+				<a href="${contextRoot}/front/comment/all/?p=${pageNumber}&storeid=${store.storeId}" > <c:out value="${pageNumber}" /></a>
+				</c:forEach>
 			
 			</c:when>
 		

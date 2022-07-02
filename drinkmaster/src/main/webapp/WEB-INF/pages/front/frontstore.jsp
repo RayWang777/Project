@@ -29,7 +29,7 @@
 					<!-- Product image-->
 					<a href="http://localhost:8081/drinkmaster/front/productmenu?id=${store.storeId}">
 					<img class="card-img-top"
-						src="http://localhost:8081/drinkmaster/backend/firm/banner/${store.firmBean.firmId}" alt="..." />
+						src="http://localhost:8081/drinkmaster/backend/firm/${store.firmBean.firmId}/photo" alt="..." />
 					</a>
 					<!-- Product details-->
 					<div class="card-body p-4">

@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-            <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-                <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
                 <jsp:include page="layout/header.jsp"></jsp:include>
 
-                <meta>
+       
                 <style>
 /*                背景滿版     */
                     html { 
@@ -26,18 +26,9 @@
                     }
                 </style>
 
-                </meta>
+        
 
-                <body>
-<!--                     <header class="bg-dark py-5"> -->
-<!--                       <div class="container px-4 px-lg-5 my-5">  -->
-<!--                            <div class="text-center text-white"> -->
-<!--                                 <h1 class="display-4 fw-bolder">Shop in style</h1> -->
-<!--                              <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>  -->
-<!--                           </div> -->
-<!--                        </div>  -->
-<!--                     </header>   -->
-
+ <body>
  <header class="py-2"> 
     <div class="swiper mySwiper">
       <div class="swiper-wrapper">
@@ -56,20 +47,27 @@
                     
 </header>
 
-
-
-
-
                     <!-- Section-->
                     <section class="">
+                      <div class="container px-4 px-lg-5 mt-0">
+                            <div  class="row gx-4 gx-lg-10 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
+                            
+                           		 <img alt="" src="<c:url value="/images/top3/salebest.png"/>" width="1000">
+                            </div>
+                            </div>
+                    
+                    
+                    
+                    
                         <div class="container px-4 px-lg-5 mt-0">
-                            <div
-                                class="row gx-4 gx-lg-10 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
+                            <div  class="row gx-4 gx-lg-10 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
+                            
+                            
+                            
                                 <div class="col mb-5">
                                     <div class="card h-100">
                                         <!-- Product image-->
-                                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                                            alt="..." />
+                                        <img class="card-img-top" src="<c:url value="/images/top3/salebest.png"/>"  alt="..." />
                                         <!-- Product details-->
                                         <div class="card-body p-4">
                                             <div class="text-center">
@@ -219,6 +217,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                
+                                
+                                
+                                
                                 <div class="col mb-5">
                                     <div class="card h-100">
                                         <!-- Sale badge-->

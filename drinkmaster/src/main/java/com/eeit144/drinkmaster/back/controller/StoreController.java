@@ -191,7 +191,6 @@ public class StoreController {
 		List<Integer> findStoreUserNull = storeService.findStoreUserNull();
 
 		StoreBean findById = storeService.findById(id).get();
-		
 		StoreDTO storeDTO = new StoreDTO();		
 		storeDTO.setStoreId(findById.getStoreId());
 		storeDTO.setUserBean(findById.getUserBean());
@@ -204,19 +203,12 @@ public class StoreController {
 		storeDTO.setLatitude(findById.getLatitude());
 		storeDTO.setLongitude(findById.getLongitude());
 		
-		
 		UserBean orginUser = findById.getUserBean();
-		if(findStoreUserNull.isEmpty()) {
-			List<UserBean> list = new ArrayList<UserBean>();
-			list.add(orginUser);
-			m.addAttribute("storeaddusers", list);
-			m.addAttribute("store", storeDTO);
-			
-			return "/backend/backstoreupdate";
-		}
-		
-		
-		List<UserBean> users = userService.findNullTypeUsers(findStoreUserNull);
+		List<UserBean> users =null;
+		if(!(findStoreUserNull.isEmpty())) {
+			 users = userService.findNullTypeUsers(findStoreUserNull);
+		}	
+		users = new ArrayList<UserBean>();
 		users.add(orginUser);
 		
 		m.addAttribute("storeaddusers", users);

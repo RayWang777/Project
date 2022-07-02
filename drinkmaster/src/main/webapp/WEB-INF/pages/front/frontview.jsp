@@ -136,7 +136,7 @@
                                 <div class="col mb-5">
                                     <div class="card h-100">
                                         <!-- Product image-->
-                                        <img class="card-img-top" src="<c:url value="/images/top3/salebest.png"/>"  alt="..." />
+                                        <img class="card-img-top" src="<c:url value="/images/top3/besttop3.png"/>"  alt="..." />
                                         <!-- Product details-->
                                         <div class="card-body p-4">
                                             <div class="text-center">
@@ -330,6 +330,19 @@
                         </div>
                     </section>
   <!-- 附近店家 -->
+  
+<script>  
+  window.onload=  navigator.geolocation.getCurrentPosition(successCallback);  
+    function successCallback(position){  
+        var lat = position.coords.latitude;  
+        var long1 = position.coords.longitude;  
+        console.log(lat);
+        console.log(long1);
+  
+    }  
+    
+</script>  
+  
 
 
 <!-- 輪播 -->

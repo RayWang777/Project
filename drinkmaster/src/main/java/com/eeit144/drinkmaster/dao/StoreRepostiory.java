@@ -26,5 +26,7 @@ public interface StoreRepostiory extends JpaRepository<StoreBean, Integer> {
 	@Query(value = "select u.userid from store as s right join users as u on s.userid=u.userid where s.userid is null and u.role = 'store';",nativeQuery = true)
 	public List<Integer> findStoreUserNull();
 	
-	
+	@Query(value = "SELECT * FROM ( SELECT *,( 6371 * acos( cos( radians( :latitude ) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians( :longitude ) ) "
+			+ "+ sin( radians( :latitude ) ) * sin( radians( latitude ) ) ) ) AS distance FROM  STORE ) AS B WHERE distance > 0 ORDER BY distance ASC",nativeQuery = true)
+	public List<StoreBean> findStoreByLocal(Double latitude,Double longitude); 
 }

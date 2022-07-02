@@ -82,4 +82,9 @@ public class StoreServiceImp implements StoreService {
 		return storeDao.findAllById(ids);
 	}
 	
+	@Override
+	public List<StoreBean> findStoreByLocal(Double lat,Double lng){
+		return storeDao.findStoreByLocal(lat, lng);
+	}
+	
 }

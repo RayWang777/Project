@@ -34,5 +34,7 @@ public interface StoreService {
 	public List<Integer> findStoreUserNull();
 	
 	public List<StoreBean> findAll(List<Integer> ids);
+	
+	public List<StoreBean> findStoreByLocal(Double lat,Double lng);
 
 }

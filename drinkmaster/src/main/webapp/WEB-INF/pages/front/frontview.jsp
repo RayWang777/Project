@@ -126,224 +126,27 @@
                     
                     <!-- 附近店家 -->
                         <div class="container px-4 px-lg-5 mt-0">
-                            <div  class="row gx-4 gx-lg-10 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
+                        	<div class="col mb-5" style="text-align: center;">
+								<h5><b style="font-size: xx-large;">附近店家</b></h5>                        	
+                        	</div>
+                            <div id="showstore"  class="row gx-4 gx-lg-10 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
                             
                             
                             
                                 <div class="col mb-5">
                                     <div class="card h-100">
                                         <!-- Product image-->
-                                        <img class="card-img-top" src="<c:url value="/images/top3/besttop3.png"/>"  alt="..." />
+                                        <img class="card-img-top" src="<c:url value="/images/top3/please.jpg"/>"  alt="..." />
                                         <!-- Product details-->
-                                        <div class="card-body p-4">
-                                            <div class="text-center">
-                                                <!-- Product name-->
-                                                <h5 class="fw-bolder">Fancy Product</h5>
-                                                <!-- Product price-->
-                                                $40.00 - $80.00
-                                            </div>
-                                        </div>
-                                        <!-- Product actions-->
-                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                            <div class="text-center"><a class="btn btn-outline-dark mt-auto"
-                                                    href="#">View options</a></div>
-                                        </div>
                                     </div>
                                 </div>
-                                <div class="col mb-5">
-                                    <div class="card h-100">
-                                        <!-- Sale badge-->
-                                        <div class="badge bg-dark text-white position-absolute"
-                                            style="top: 0.5rem; right: 0.5rem">Sale</div>
-                                        <!-- Product image-->
-                                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                                            alt="..." />
-                                        <!-- Product details-->
-                                        <div class="card-body p-4">
-                                            <div class="text-center">
-                                                <!-- Product name-->
-                                                <h5 class="fw-bolder">Special Item</h5>
-                                                <!-- Product reviews-->
-                                                <div class="d-flex justify-content-center small text-warning mb-2">
-                                                    <div class="bi-star-fill"></div>
-                                                    <div class="bi-star-fill"></div>
-                                                    <div class="bi-star-fill"></div>
-                                                    <div class="bi-star-fill"></div>
-                                                    <div class="bi-star-fill"></div>
-                                                </div>
-                                                <!-- Product price-->
-                                                <span class="text-muted text-decoration-line-through">$20.00</span>
-                                                $18.00
-                                            </div>
-                                        </div>
-                                        <!-- Product actions-->
-                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                            <div class="text-center"><a class="btn btn-outline-dark mt-auto"
-                                                    href="#">Add to cart</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col mb-5">
-                                    <div class="card h-100">
-                                        <!-- Sale badge-->
-                                        <div class="badge bg-dark text-white position-absolute"
-                                            style="top: 0.5rem; right: 0.5rem">Sale</div>
-                                        <!-- Product image-->
-                                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                                            alt="..." />
-                                        <!-- Product details-->
-                                        <div class="card-body p-4">
-                                            <div class="text-center">
-                                                <!-- Product name-->
-                                                <h5 class="fw-bolder">Sale Item</h5>
-                                                <!-- Product price-->
-                                                <span class="text-muted text-decoration-line-through">$50.00</span>
-                                                $25.00
-                                            </div>
-                                        </div>
-                                        <!-- Product actions-->
-                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                            <div class="text-center"><a class="btn btn-outline-dark mt-auto"
-                                                    href="#">Add to cart</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col mb-5">
-                                    <div class="card h-100">
-                                        <!-- Product image-->
-                                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                                            alt="..." />
-                                        <!-- Product details-->
-                                        <div class="card-body p-4">
-                                            <div class="text-center">
-                                                <!-- Product name-->
-                                                <h5 class="fw-bolder">Popular Item</h5>
-                                                <!-- Product reviews-->
-                                                <div class="d-flex justify-content-center small text-warning mb-2">
-                                                    <div class="bi-star-fill"></div>
-                                                    <div class="bi-star-fill"></div>
-                                                    <div class="bi-star-fill"></div>
-                                                    <div class="bi-star-fill"></div>
-                                                    <div class="bi-star-fill"></div>
-                                                </div>
-                                                <!-- Product price-->
-                                                $40.00
-                                            </div>
-                                        </div>
-                                        <!-- Product actions-->
-                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                            <div class="text-center"><a class="btn btn-outline-dark mt-auto"
-                                                    href="#">Add to cart</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col mb-5">
-                                    <div class="card h-100">
-                                        <!-- Sale badge-->
-                                        <div class="badge bg-dark text-white position-absolute"
-                                            style="top: 0.5rem; right: 0.5rem">Sale</div>
-                                        <!-- Product image-->
-                                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                                            alt="..." />
-                                        <!-- Product details-->
-                                        <div class="card-body p-4">
-                                            <div class="text-center">
-                                                <!-- Product name-->
-                                                <h5 class="fw-bolder">Sale Item</h5>
-                                                <!-- Product price-->
-                                                <span class="text-muted text-decoration-line-through">$50.00</span>
-                                                $25.00
-                                            </div>
-                                        </div>
-                                        <!-- Product actions-->
-                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                            <div class="text-center"><a class="btn btn-outline-dark mt-auto"
-                                                    href="#">Add to cart</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col mb-5">
-                                    <div class="card h-100">
-                                        <!-- Product image-->
-                                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                                            alt="..." />
-                                        <!-- Product details-->
-                                        <div class="card-body p-4">
-                                            <div class="text-center">
-                                                <!-- Product name-->
-                                                <h5 class="fw-bolder">Fancy Product</h5>
-                                                <!-- Product price-->
-                                                $120.00 - $280.00
-                                            </div>
-                                        </div>
-                                        <!-- Product actions-->
-                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                            <div class="text-center"><a class="btn btn-outline-dark mt-auto"
-                                                    href="#">View options</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                
-                                
-                                
-                                <div class="col mb-5">
-                                    <div class="card h-100">
-                                        <!-- Sale badge-->
-                                        <div class="badge bg-dark text-white position-absolute"
-                                            style="top: 0.5rem; right: 0.5rem">Sale</div>
-                                        <!-- Product image-->
-                                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                                            alt="..." />
-                                        <!-- Product details-->
-                                        <div class="card-body p-4">
-                                            <div class="text-center">
-                                                <!-- Product name-->
-                                                <h5 class="fw-bolder">Special Item</h5>
-                                                <!-- Product reviews-->
-                                                <div class="d-flex justify-content-center small text-warning mb-2">
-                                                    <div class="bi-star-fill"></div>
-                                                    <div class="bi-star-fill"></div>
-                                                    <div class="bi-star-fill"></div>
-                                                    <div class="bi-star-fill"></div>
-                                                    <div class="bi-star-fill"></div>
-                                                </div>
-                                                <!-- Product price-->
-                                                <span class="text-muted text-decoration-line-through">$20.00</span>
-                                                $18.00
-                                            </div>
-                                        </div>
-                                        <!-- Product actions-->
-                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                            <div class="text-center"><a class="btn btn-outline-dark mt-auto"
-                                                    href="#">Add to cart</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
                                
-                                
                             </div>
                         </div>
                     </section>
   <!-- 附近店家 -->
   
 <script src="<c:url value="/js/key.js"/>"></script>
-<script>  
-console.log(key)
-
-  window.onload=  navigator.geolocation.getCurrentPosition(successCallback);  
-    function successCallback(position){  
-        var lat = position.coords.latitude;  
-        var long1 = position.coords.longitude;  
-        console.log(lat);
-        console.log(long1);
-  
-    }  
-    
-</script>  
-  
-
 
 <!-- 輪播 -->
                     <script>
@@ -380,7 +183,86 @@ console.log(key)
 
                     </script> 
                   <!-- 輪播結束 -->
+                  <!-- 附近店家 -->
+                  
+                  <script type="text/javascript">
+                  
+                  window.onload=  navigator.geolocation.getCurrentPosition(successCallback);
+                  
+                  function localstores1(lat,lng){
+                	  
+             		 console.log(lat)
+             		 console.log(lng)
+             		 
+             		 
+             	 $('#showstore').children().remove(); 
+             		 
+             			var serchLocalStoreStr = {"lat": lat , "lng": lng};
+                  		var storeJsonString= JSON.stringify(serchLocalStoreStr);
+             		 
+             		 
+             		 
+                  	 
+                  	$.ajax({
+                  		url:'http://localhost:8081/drinkmaster/front/localstore',
+                  		method:'POST',
+                  		contentType: 'application/json',
+                  		dataType: 'json',
+                  		data: storeJsonString,
+                  	    success: function(result){
 
+                 	           
+                  	    	   msg_data = ''
+                  	           $.each(result, function(index, value){
+                  	        	   
+                  	        	   console.log(index);
+                  	        	   console.log(value);
+                  	        	   
+                  	        	msg_data +=    '<div class="col mb-5">'
+                  	        	msg_data +=  '<div class="card h-100">'
+                                       <!-- Product image-->
+                  	        	msg_data +='<a href="http://localhost:8081/drinkmaster/front/productmenu?id='+value.storeId+'">'
+                                msg_data +=      '<img class="card-img-top" src="http://localhost:8081/drinkmaster/backend/firm/'+value.firmId+'/photo" alt="..." />'
+                                msg_data += '</a>'
+                                
+                                       <!-- Product details-->
+                                msg_data +=       '<div class="card-body p-4">'
+                                msg_data +=           '<div class="text-center">'
+                                               <!-- Product name-->
+                                msg_data +=    '<h5 class="fw-bolder">'+value.storeName+'</h5>'
+                                               <!-- Product price-->
+                                msg_data +=           '</div>'
+                                msg_data +=       '</div>'
+                                       <!-- Product actions-->
+                                msg_data +=       '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">'
+                                msg_data +=           '<div class="text-center">'+value.storeAddress+'</div>'
+                                msg_data +=           '<div class="text-center">'+value.storePhone+'</div>'
+                                msg_data +=       '</div>'
+                                msg_data +=   '</div>'
+                                msg_data += '</div>'                  	        	   
+                             })
+                  	         $('#showstore').append(msg_data)    	
+                  	      	 
+                  	     },
+                  	     error:function(err){
+                  	       console.log(err)
+                  	     }
+                  	})
+                  	
+                      		 
+             		 
+             	 }
+                  
+                  function successCallback(position){  
+                      var lat = position.coords.latitude;  
+                      var lng = position.coords.longitude;  
+                    	 localstores1(lat,lng);
+                  } 
+                  
+                              
+                  
+              </script>
+      <!-- 附近店家 -->
                 </body>
 
                 <jsp:include page="layout/footer.jsp"></jsp:include>

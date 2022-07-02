@@ -33,7 +33,7 @@
 					<c:if test="${productBean.productImage!=null}"/>
 
 					<div style="font-size: large; border-bottom : 2px inset #C0C0C0; height: 52px ;"class="align-middle">
-					<a href="#" style="color: black;text-decoration:none;">
+					<a href="${contextRoot}/front/shopcar/before/editproduct?id=${productBean.productId}" style="color: black;text-decoration:none;">
 					<c:if test="${productBean.productImage!=null}">
 
 					<img

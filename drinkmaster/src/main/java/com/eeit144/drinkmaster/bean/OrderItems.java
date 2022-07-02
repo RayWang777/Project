@@ -49,8 +49,31 @@ public class OrderItems {
 	
 	@Column(name = "remark", columnDefinition = "nvarchar(30)")
 	private String remark;
+	
+	@Column(name = "coldhot", columnDefinition = "nvarchar(30)")
+	private String coldhot;
+	
+	@Column(name = "sweet", columnDefinition = "nvarchar(30)")
+	private String sweet;
 
 	
+
+	public String getColdhot() {
+		return coldhot;
+	}
+
+	public void setColdhot(String coldhot) {
+		this.coldhot = coldhot;
+	}
+
+	public String getSweet() {
+		return sweet;
+	}
+
+	public void setSweet(String sweet) {
+		this.sweet = sweet;
+	}
+
 	public OrderItems(Integer orderItemId, Integer productId,
 			 Integer price, String remark) {
 		super();

@@ -58,14 +58,14 @@
 <body>
 <div class="container" id="container">
 <form:form class="form" method="post" action="${contextRoot}/front/shopcar/buy" modelAttribute="productBean">
-<form:hidden path="productId"/>
+<input type="text" value="${productBean.productId}" name="shopcarproductId">
 	<table id="cart" class="table table-hover table-condensed">
     				<thead>
 						<tr>
 							<th style="width:150px;text-align: center;" colspan="2">商品</th>
 <!-- 							<th style="width:80px;text-align: center;"></th> -->
 							<th style="width:30px;text-align: center;">單價</th>
-							<th style="width:100px;text-align: center;">數量</th>
+							<th style="width:150px;text-align: center;">數量</th>
 							<th style="width:30px;text-align: center;">甜度</th>
 							<th style="width:30px;text-align: center;">冷熱</th>
 							<th style="width:80px;text-align: center;" class="text-center">總金額</th>
@@ -77,7 +77,7 @@
 							<td data-th="Product">
 <!-- 								<div class="row"> -->
 									<div class="col-sm-2 hidden-xs">
-									<img src="${productBean.productImage}" style="width: 300px;text-align: center;" /></div>
+									<img src="${productBean.productImage}" style="width: 300px;text-align: center;" name="shopcarimg" /></div>
 									<div class="col-sm-10">
 										
 										
@@ -85,8 +85,8 @@
 <!-- 								</div> -->
 							</td>
 							<td style="font-size: 18px;">
-<%-- 							<form:input id="productname" path="productName"  style="border-style:none;text-align: center;"  readonly="true"/> --%>
-							<c:out value="${productBean.productName}"/>
+							<form:input id="productname" path="productName"  style="border-style:none;text-align: center;"  readonly="true"/>
+<%-- 							<c:out value="${productBean.productName}"/> --%>
 							</td>
 							
 							<td data-th="Price" >
@@ -97,7 +97,7 @@
 								<input type="number" id="number" name="number" class="form-control text-center" value="1" min="1">
 							</td> 
 							<td data-th="Product" style="text-align: center;">
-							<select id="sugar" name="sugar">
+							<select id="sugar" name="sugar" >
 							<option value="無糖">無糖</option>
 							<option value="微糖">微糖</option>
 							<option value="少糖">少糖</option>
@@ -112,9 +112,10 @@
 							<option value="熱">熱</option>
 							</select>							
 							</td>
-							<td data-th="Subtotal" class="text-center" id="totalprice" style="text-align: center;">
-							<c:out value="${productBean.price}"/>
+							<td data-th="Subtotal" class="text-center"  style="text-align: center;">
+<%-- 							<c:out value="${productBean.price}"/> --%>
 <%-- 							<form:input path="price" style="width:100px" readonly="true"/> --%>
+								<input name="totalprice" id="totalprice" style="width:100px" readonly="true"/>
 							</td>
 							
 							<td class="actions" data-th="">
@@ -148,16 +149,28 @@
 </div>
 </body>
 <script type="text/javascript">
+
+
 $(function(){
 	
+// 	var number = $('#number').val();
+// 	$('#number').form-control(function(){				
+//         var price = $('#price').val();      
+//         var number = $('#number').val();
+//         var totalprice = price*number;
 
+// //         $('#totalprice').html(totalprice);  
+//         $('#totalprice').attr('value',totalprice);
+//     })
+	
 	
 	$('#number').click(function(){				
         var price = $('#price').val();      
         var number = $('#number').val();
         var totalprice = price*number;
 
-        $('#totalprice').html(totalprice);       	
+//         $('#totalprice').html(totalprice);  
+        $('#totalprice').attr('value',totalprice);
     })
     
     $('#number').keyup(function(){				
@@ -165,7 +178,7 @@ $(function(){
         var number = $('#number').val();
         var totalprice = price*number;
 
-        $('#totalprice').html(totalprice);       	
+        $('#totalprice').attr('value',totalprice);       	
     })
     
     $('#delete').click(function(){				

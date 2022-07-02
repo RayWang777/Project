@@ -1,6 +1,7 @@
 package com.eeit144.drinkmaster.front.controller;
 
 
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -130,18 +131,19 @@ public class FrontShopCarController {
 	
 	
 	@PostMapping("shopcar/buy")
-	public String addShopcar(@SessionAttribute(name="product",required = false) OrderItems orderItems,Model m,@RequestParam("productId") Integer productId) {
+	public String addShopcar(@SessionAttribute(name="product",required = false) OrderItems orderItems,Model m,@RequestParam("shopcarproductId") Integer productId
+			,@RequestParam("sugar") String sugar,@RequestParam("coldhot") String coldhot,@RequestParam("number") Integer number,
+			@RequestParam("totalprice") Integer totalprice,@ModelAttribute("productBean") ProductBean productBean) {
 		
-		OrderItems product = (OrderItems) m.getAttribute("product");
-		System.out.println(product.getProductId());
-		
-//		ProductBean productBean = proService.findById(productId);		
-		
-		UserBean userBean = (UserBean) m.getAttribute("orderuserBean");
-		if(userBean == null) {
-			return "redirect:/front/";
-		}
-		System.out.println(userBean.getUserName());
+//		OrderItems product = (OrderItems) m.getAttribute("product");
+//		System.out.println(product.getProductId());
+//		
+////		ProductBean productBean = proService.findById(productId);		
+//		
+//		UserBean userBean = (UserBean) m.getAttribute("orderuserBean");
+//		if(userBean == null) {
+//			return "redirect:/front/";
+//		}
 		
 		
 		
@@ -152,6 +154,24 @@ public class FrontShopCarController {
 			shopcarBuy = new ShopcarBuy();
 			m.addAttribute("shopcarBuy",shopcarBuy);
 		}
+		
+		
+		
+		
+		
+		ShopcarBean shopcarBean = new ShopcarBean();
+		shopcarBean.setProductImage(productBean.getProductImage());
+		shopcarBean.setProductId(productId);
+		shopcarBean.setProductName(productBean.getProductName());
+		shopcarBean.setPrice(productBean.getPrice());
+		shopcarBean.setColdhot(coldhot);
+		shopcarBean.setQuantity(number);
+		shopcarBean.setSweet(sugar);
+		shopcarBean.setTotalPrice(totalprice);
+		
+
+		
+		m.addAttribute("shopcarBuy", shopcarBean);
 		
 		
 		

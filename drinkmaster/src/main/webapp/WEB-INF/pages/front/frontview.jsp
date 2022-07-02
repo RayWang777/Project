@@ -67,7 +67,7 @@
                                         <div class="badge text-white position-absolute"
                                             style="top: 0.5rem; right: 0.5rem"><img alt="" src="<c:url value="/images/top3/top2.png"/>" style="width: 50px;height: 50px;background-color: transparent;" ></div>
                                         <!-- Product image-->
-                                        <img class="card-img-top" src="<c:url value="/backend/firm/${top3[1].firmBean.firmId}/photo"/>" alt="..." style="width: 250px;height: 250px;"/>
+                                        <a href="<c:url value="/front/productmenu?id=${top3[1].firmBean.firmId}"/>"><img class="card-img-top" src="<c:url value="/backend/firm/${top3[1].firmBean.firmId}/photo"/>" alt="..." style="width: 250px;height: 250px;"/></a>
                                         <!-- Product details-->
                                         <div class="card-body p-4">
                                             <div class="text-center">
@@ -86,7 +86,7 @@
                                         <div class="badge text-white position-absolute"
                                             style="top: 0.5rem; right: 0.5rem"><img alt="" src="<c:url value="/images/top3/top1.png"/>" style="width: 50px;height: 50px;background-color: transparent;" ></div>
                                         <!-- Product image-->
-                                        <img class="card-img-top" src="<c:url value="/backend/firm/${top3[0].firmBean.firmId}/photo"/>" alt="..." style="width: 250px;height: 250px;"/>
+                                        <a href="<c:url value="/front/productmenu?id=${top3[1].firmBean.firmId}"/>"><img class="card-img-top" src="<c:url value="/backend/firm/${top3[0].firmBean.firmId}/photo"/>" alt="..." style="width: 250px;height: 250px;"/></a>
                                         <!-- Product details-->
                                         <div class="card-body p-4">
                                             <div class="text-center">
@@ -107,7 +107,7 @@
                                         <div class="badge text-white position-absolute"
                                             style="top: 0.5rem; right: 0.5rem"><img alt="" src="<c:url value="/images/top3/top3.png"/>" style="width: 50px;height: 50px;background-color: transparent;" ></div>
                                         <!-- Product image-->
-                                        <img class="card-img-top" src="<c:url value="/backend/firm/${top3[2].firmBean.firmId}/photo"/>" alt="..." style="width: 250px;height: 250px;"/>
+                                        <a href="<c:url value="/front/productmenu?id=${top3[1].firmBean.firmId}"/>"><img class="card-img-top" src="<c:url value="/backend/firm/${top3[2].firmBean.firmId}/photo"/>" alt="..." style="width: 250px;height: 250px;"/></a>
                                         <!-- Product details-->
                                         <div class="card-body p-4">
                                             <div class="text-center">

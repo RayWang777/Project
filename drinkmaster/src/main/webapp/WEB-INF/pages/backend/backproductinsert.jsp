@@ -12,7 +12,7 @@
 <div class="container">
 
 
-	<div class="row justify-content-center">
+	<div style="margin-left: 420px">
 
 		<div>
 			<form:form class="form" method="post" enctype="multipart/form-data"
@@ -22,7 +22,7 @@
 				<label for="productName">商品</label>
 				<form:input type="text" path="productName" id="productName"
 					name="productName" onblur="check()" />
-				<span id="name">${errors.name}</span>
+				<span style="color: red" id="name">${errors.name}</span>
 				<br>
 				<br>
 				<label for="productCategoryBean">商品種類</label>
@@ -41,8 +41,8 @@
 					<br>
 					<br>
 				<label for="price"> 價格</label>
-				<form:input path="price" id="price" name="price" onblur="check()" />
-				<span id="price1">${errors.price1}</span>
+				<form:input path="price" id="price" name="price" onblur="check1()" />
+				<span id="price1" style="color: red">${errors.price1}</span>
 				<br>
 				<br>
 				<label for="productImage"> 圖片</label>
@@ -73,9 +73,12 @@
 
 				<br>
 				<br>
-				<div class="row justify-content-center">
+				<div style="margin-left: 75px">
 					<input type="submit" name="submit" value="${status}"
 						onclick="checkname()">
+						<c:if test="${now=='新增商品'}">
+						<a  href="${contextRoot}/backend/autoinput" style="margin-left: 30px">一鍵輸入</a>
+						</c:if>
 				</div>
 			</form:form>
 
@@ -101,22 +104,32 @@
 <script>
 	function check() {
 		let thename = document.getElementById("name");
+		
+		let productName = document.getElementById("productName");
+		
+		let nname = productName.value;
+	
+		
+		if (nname == "" || nname.length == 0) {
+			thename.innerHTML = "請輸入商品";
+		} else {
+			thename.innerHTML = "";
+		}
+	}
+</script>
+<script>
+	function check1() {
+	
 		let theprice = document.getElementById("price1");
 		let price = document.getElementById("price");
-		let productName = document.getElementById("productName");
+		
 		let pprice = price.value;
-		let nname = productName.value;
+		
 		if (pprice < 0 || pprice == "") {
 			theprice.innerHTML = "請輸入正確金額"
 		} else {
 			theprice.innerHTML = "";
 
-		}
-		console.log(pprice);
-		if (nname == "" || nname.length == 0) {
-			thename.innerHTML = "請輸入商品";
-		} else {
-			thename.innerHTML = "";
 		}
 	}
 </script>

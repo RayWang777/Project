@@ -232,7 +232,22 @@ public class ProductController {
 		m.addAttribute("insert", "updateproduct");
 		return "/backend/backproductinsert";
 	}
-
+	
+	@GetMapping("autoinput")
+	public String autoInput(Model m,@SessionAttribute("canSeeStore") StoreBean storeBean) {
+		ProductBean proBean=new ProductBean();
+		proBean.setColdHot("冷熱");
+		proBean.setPrice(60);
+		proBean.setStatus(true);
+		List<ProductCategoryBean> productcategory1 = categoryService.findByStoreBean(storeBean);
+		m.addAttribute("productcategory1", productcategory1);
+		proBean.setProductName("西瓜汁");
+		m.addAttribute("product", proBean);
+		m.addAttribute("now", "新增商品");
+		m.addAttribute("status", "確定新增");
+		m.addAttribute("insert", "product/insert");
+		return "/backend/backproductinsert";
+		}
 	@PostMapping("updateproduct")
 	public String postUpdate(@RequestParam Integer productId, @RequestParam Integer select,
 			@RequestParam String productName, @RequestParam String price, @RequestParam String coldHot,

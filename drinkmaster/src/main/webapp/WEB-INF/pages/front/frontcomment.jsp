@@ -51,8 +51,11 @@ div.awesomeRating {
 						    <c:out value="${storecomment.storeName}"></c:out>
 						    <input value="${storecomment.storeId}" style="display: none">
 						    <h3 class="card-subtitle mb-2 text-muted">-------------------</h3>
-						    <c:out value="${storecomment.avgScore}"></c:out>
 						    
+						    <c:out value="${storecomment.avgScore}"></c:out>
+						    <c:if test="${storecomment.avgScore == null}">
+						    	目前沒有評論~
+						    </c:if>
 						    
 						    <div style="pointer-events:none" id="scores${storecomment.storeId}" class="awesomeRating"></div>
 							<div class="awesomeRatingValue" style="display:none"></div>

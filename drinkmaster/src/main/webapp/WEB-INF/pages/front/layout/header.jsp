@@ -51,7 +51,7 @@
                         
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">找附近</a></li>
                         
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">評論</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="${contextRoot}/front/comment/storecomment">評論區</a></li>
                         
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">客服</a></li>
                         

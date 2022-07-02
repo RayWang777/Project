@@ -72,7 +72,7 @@ div.awesomeRating {
   				</c:forEach>
   				
   				
-  	<c:if test="${empty userBean}">
+  	<c:if test="${empty canSeeUser}">
   	
   	<br/>
   	
@@ -92,7 +92,7 @@ div.awesomeRating {
   
  	 <br/>
  	 
-	<c:if test="${not empty userBean}">
+	<c:if test="${not empty canSeeUser}">
 	
  <c:choose>
   	
@@ -249,9 +249,9 @@ div.awesomeRating {
 		     	    	comment_data += '<input id="commentPhoto1" name="commentPhoto1"  type="file" class="form-control" onchange="preview()" />'
 		     	    	
 		     	    	comment_data += '<img id="image" src="'+result.commentPhoto+'" width="100px" height="100px" />'
-// 		     	    	comment_data +=	'<c:if test="' + result.commentPhoto + '!=null">'
+		     	    	comment_data +=	'<c:if test="${' + result.commentPhoto + '!=null}">'
 		     	    	comment_data +=	'<img id="oldImage" src="' + result.commentPhoto + '" width="100px" height="100px"/>'
-// 						comment_data += '</c:if>'
+						comment_data += '</c:if>'
 						
 		     	    	
 		     	    	comment_data +=	'<fmt:formatDate pattern="yyyy 年 MM 月 dd 日 a hh:mm:ss EEEE" value="${result.createTime}" />'
@@ -295,10 +295,7 @@ div.awesomeRating {
 	     	    	});
 	     	    	
 	     	    	$(function() {
-// 	     	    	$('#oldImage').show();
-// 					if ($("#oldImage") != null){
-// 						$('#oldImage').show();
-// 					}
+	     	    		
 	     	   		$('#image').hide();
 	     	   	});
 
@@ -350,7 +347,7 @@ div.awesomeRating {
         <form:form class="form" method="post" action="${contextRoot}/front/comment/insert" modelAttribute="commentBean" enctype="multipart/form-data">
           <div class="form-group">
 <!-- 	userid -->
-		<input id=sessionuserid name="sessionuserid" value="${userBean.userId}" type="hidden" />
+		<input id=sessionuserid name="sessionuserid" value="${canSeeUser.userId}" type="hidden" />
 <!-- 	storeid -->
 	<form:input path="storeBean" name="storeBean" class="form-control" type="hidden" />
 <%-- 	productid<form:input path="productBean" class="form-control" /> --%>

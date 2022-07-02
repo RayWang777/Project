@@ -34,7 +34,7 @@ import com.eeit144.drinkmaster.dto.CommentBeanDTO;
 import com.eeit144.drinkmaster.dto.UserBeanDTO;
 
 @Controller
-@SessionAttributes(names= {"userBean"})
+@SessionAttributes(names= {"canSeeUser"})
 @RequestMapping("front/")
 public class FrontCommentController {
 	
@@ -228,7 +228,7 @@ public class FrontCommentController {
 		commentBean.setScoreType(scoreType);
 		
 		
-		UserBean usertest = (UserBean)model.getAttribute("userBean");
+		UserBean usertest = (UserBean)model.getAttribute("canSeeUser");
 		
 		List<CommentBean> findusId = null;
 		
@@ -281,7 +281,7 @@ public class FrontCommentController {
 		commentBean.setScoreType(scoreType);
 		
 		
-		UserBean usertest = (UserBean)model.getAttribute("userBean");
+		UserBean usertest = (UserBean)model.getAttribute("canSeeUser");
 		
 		List<CommentBean> findusId = null;
 		
@@ -345,7 +345,7 @@ public class FrontCommentController {
 		commentBean.setScoreType(scoreType);
 		
 		
-		UserBean usertest = (UserBean)model.getAttribute("userBean");
+		UserBean usertest = (UserBean)model.getAttribute("canSeeUser");
 		
 		List<CommentBean> findusId = null;
 		
@@ -392,7 +392,7 @@ public class FrontCommentController {
 		
 		commentBean.setScoreType(scoreType);		
 		
-		UserBean usertest = (UserBean)model.getAttribute("userBean");
+		UserBean usertest = (UserBean)model.getAttribute("canSeeUser");
 		
 		List<CommentBean> findusId = null;
 		

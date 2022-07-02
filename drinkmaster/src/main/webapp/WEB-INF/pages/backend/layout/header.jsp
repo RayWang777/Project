@@ -126,15 +126,17 @@ li {
 						<li><a href="#">查詢</a></li>
 					</ul></li>
 					</c:otherwise></c:choose>
+					<c:choose>
+				<c:when test="${userBean.role != 'admin'}"></c:when>
+				<c:otherwise>
 				<li><a class="sidebar-sub-toggle"><i
 						class="large material-icons">message</i> 評論管理 <span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
 					<ul>
 						<li><a href="${contextRoot}/backend/comment">新增</a></li>
-						<li><a href="${contextRoot}/front/comment/all">前台</a></li>
-						<li><a href="${contextRoot}/front/comment/storecomment">找店家</a></li>
 						<li><a href="${contextRoot}/backend/comment/all">所有評論</a></li>
 					</ul></li>
+				</c:otherwise></c:choose>
 				<li><a class="sidebar-sub-toggle"><i
 						class="large material-icons">room_service</i> 客服管理 <span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>

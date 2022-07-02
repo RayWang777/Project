@@ -247,6 +247,8 @@ public class FrontShopCarController {
 		}
 		ob.setOrderItems(items);
 		
+		oitemService.insertOrderItems(items);
+		
 		return "/front/frontorder";
 	}
 	

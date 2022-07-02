@@ -357,14 +357,18 @@
         
         
         
-//         $(document).ready(function(){
-//   $('#submitBtn').click(function(){
-//     var inputText = document.getElementById('myMessage').value;
-//     var dtoObject = {"msg" : inputText};
-//     var dtoJsonString= JSON.stringify(dtoObject)
-
         
         </script>
         
 <!--   以上廠商部分 -->
+<script>  
+  window.onload=  navigator.geolocation.getCurrentPosition(successCallback);  
+    function successCallback(position){  
+        var lat = position.coords.latitude;  
+        var long1 = position.coords.longitude;  
+    }  
+    
+</script>  
+
+<!--  要求地理位置 -->
 

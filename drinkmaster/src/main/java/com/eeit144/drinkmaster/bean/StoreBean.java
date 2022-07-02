@@ -49,10 +49,10 @@ public class StoreBean {
 	@Column(name = "opentime", nullable = false)
 	private String openTime;
 
-	@Column(name = "longitude")
+	@Column(name = "longitude",columnDefinition = "decimal(19,16)")
 	private Double longitude;
 
-	@Column(name = "latitude")
+	@Column(name = "latitude",columnDefinition = "decimal(19,17)")
 	private Double latitude;
 	
 	@JsonIgnore

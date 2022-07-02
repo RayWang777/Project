@@ -328,7 +328,10 @@
                     </section>
   <!-- 附近店家 -->
   
+<script src="<c:url value="/js/key.js"/>"></script>
 <script>  
+console.log(key)
+
   window.onload=  navigator.geolocation.getCurrentPosition(successCallback);  
     function successCallback(position){  
         var lat = position.coords.latitude;  

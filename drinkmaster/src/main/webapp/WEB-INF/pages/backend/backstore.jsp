@@ -65,7 +65,8 @@
 							<td class="align-middle"><c:out value='${store.userBean.userName}'/></td>
 							<input type="text" hidden="true" id="latitude" value="${store.latitude}"/>
 							<input type="text" hidden="true" id="longitude" value="${store.longitude}"/>
-							<td class="align-middle">詳細</td>
+							<td class="align-middle"><button name="mapgo${store.storeId}" type="button" style="border: none;background: none;" onclick="map(event)">詳細</button></td>
+						<a id="mapgo${store.storeId}" href='<c:url value="https://www.google.com/maps/place/${store.storeAddress}/@${store.latitude},${store.longitude},17z/"/>' target="_blank"></a>
 							<td class="align-middle">
 								<c:url value="/backend/store/edit/${store.storeId}" var="edit_url"/>
 								<a href="${edit_url}"><button	type="button" class="btn btn-primary">編輯</button></a>
@@ -102,6 +103,54 @@
 <script src="<c:url value="/js/lib/popper.min.js"/>"></script>
 <script src="<c:url value="/js/lib/main.js"/>"></script>
 <script type="text/javascript">
+
+
+
+function map(event){
+	var mapopena = event.target.name;
+// 	console.log(mapopena)
+	
+	Swal.fire({
+		  title: '即將離開網站，確定嗎?',
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: '確認',
+		  cancelButtonText: '取消',
+		}).then((result) => {
+		  if (result.isConfirmed) {
+			  
+			  let timerInterval
+			  Swal.fire({
+			    title: '正在轉跳',
+			    timer: 500,
+			    timerProgressBar: true,
+			    didOpen: () => {
+			      Swal.showLoading()
+			    },
+			    willClose: () => {
+			      clearInterval(timerInterval)
+			    }
+			  }).then((result) => {
+// 				  console.log(mapopena)
+				  var query = '#'+mapopena;
+				
+				  			
+				 $(query)[0].click();
+//	 			  <c:url value="https://www.google.com/maps/place/${store.storeAddress}/@${store.latitude},${store.longitude},17z/"/>
+			    /* Read more about handling dismissals below */
+			    if (result.dismiss === Swal.DismissReason.timer) {
+			      console.log('I was closed by the timer')
+			    }
+			  })
+		  }
+		})
+	
+	
+	return false;
+}
+
 
 
 function del(event){

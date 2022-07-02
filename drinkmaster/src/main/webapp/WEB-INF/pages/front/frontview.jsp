@@ -39,21 +39,20 @@
 <!--                     </header>   -->
 
  <header class="py-2"> 
- <div style="position: relative; width: 60%;margin: auto;">
     <div class="swiper mySwiper">
       <div class="swiper-wrapper">
+        <div class="swiper-button-next" style="margin-right: 15%"></div>
+      <div class="swiper-button-prev" style="margin-left: 15%"></div>
        <c:forEach items="${swiperPic}" var="one">
                   <div class="swiper-slide" style="text-align: center;">
 						<a href="http://localhost:8081/drinkmaster/front/firm/${one}"><img alt="" src="<c:url value="/backend/firm/banner/${one}"/>" width="1000" height="370"/></a>
 				</div>
         </c:forEach>
       </div>
-        <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
+    
       <div class="swiper-pagination"></div>
 <!--       <div class="swiper-scrollbar"></div> -->
     </div>
- </div>                 
                     
 </header>
 

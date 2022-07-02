@@ -149,11 +149,7 @@ public class FrontShopCarController {
 			,@RequestParam("sugar") String sugar,@RequestParam("coldhot") String coldhot,@RequestParam("number") Integer number,
 			@RequestParam("totalprice") Integer totalprice,@ModelAttribute("productBean") ProductBean productBean) {
 		
-//		OrderItems product = (OrderItems) m.getAttribute("product");
-//		System.out.println(product.getProductId());
-//		
-////		ProductBean productBean = proService.findById(productId);		
-//		
+	
 		UserBean userBean = (UserBean) m.getAttribute("canSeeUser");
 		if(userBean == null) {
 			return "redirect:/front/login";
@@ -170,7 +166,6 @@ public class FrontShopCarController {
 //		}
 //		
 		
-//		Map<Integer, ShopcarBean> shopcarMap = (Map<Integer, ShopcarBean>) m.getAttribute("shopcarBuy");
 		
 		
 		ShopcarBean shopcarBean = new ShopcarBean();
@@ -183,12 +178,13 @@ public class FrontShopCarController {
 		shopcarBean.setSweet(sugar);
 		shopcarBean.setTotalPrice(totalprice);
 		
-//		shopcarMap.put(productId, shopcarBean);
+
 		
 		m.addAttribute("shopcarBuy", shopcarBean);
 		
-		
-		
+//		Map<Integer, ShopcarBean> shopcarMap = (Map<Integer, ShopcarBean>) m.getAttribute("shopcarBuy");
+
+//		shopcarMap.put(productId, shopcarBean);
 		
 		return "/front/frontshopcar";
 	}

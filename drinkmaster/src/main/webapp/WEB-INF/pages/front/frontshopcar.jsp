@@ -73,7 +73,7 @@
 							<th style="width:20px"></th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="tbody">
 <%-- 					<c:forEach varStatus="vs" var="shopcarItems" items="${shopcarBuy.content}"> --%>
 						<tr>
 							<td data-th="Product">
@@ -85,11 +85,11 @@
 									</div>
 							</td>
 							<td style="font-size: 18px;">
-								<input type="text" value="${shopcarBuy.productName}" style="text-align: center;">
+								<input type="text" id="productname" value="${shopcarBuy.productName}" style="text-align: center;border-style:none;" readonly="true">
 							</td>
 							
 							<td data-th="Price" >
-							<input type="text" id="price" value="${shopcarBuy.price}" style="width:50px;text-align: center;">
+							<input type="text" id="price" value="${shopcarBuy.price}" style="width:50px;text-align: center;border-style:none;" readonly="true">
 							</td>
 							<td data-th="Quantity">
 								<input type="number" id="number" name="number" class="form-control text-center" value="${shopcarBuy.quantity}" min="1">
@@ -110,7 +110,7 @@
 							</form:select>							
 							</td>
 							<td data-th="Subtotal" class="text-center" >
-								<input type="text" id="totalprice" value="${shopcarBuy.totalPrice}" style="width:100px;text-align: center;">
+								<input type="text" id="totalprice" value="${shopcarBuy.totalPrice}" style="width:100px;text-align: center;border-style:none;" readonly="true">
 							</td>
 							<td class="actions" data-th="">
 
@@ -134,7 +134,7 @@
 <!-- 							備註:折扣碼後的價格 -->
 							<td class="hidden-xs text-center" colspan="2">
 							<span style="color:red;font-weight: bold;">折扣後&ensp;</span>
-							<strong>Total <input type="text" id="totalprice2" value="${shopcarBuy.totalPrice}" style="width:100px;text-align: center;"></strong></td>
+							<strong>Total <input type="text" id="totalprice2" value="${shopcarBuy.totalPrice}" style="width:100px;text-align: center;border-style:none;" readonly="true"></strong></td>
 							<td colspan="2"><button type="submit" class="btn btn-success btn-block">結帳&thinsp;><i class="fa fa-angle-right"></i></button></td>
 						</tr>
 					</tfoot>
@@ -148,6 +148,19 @@
 $(function(){
 	
 
+	$('#tbody').mouseover(function(){
+		$('#totalprice').css("background-color","rgb(218, 218, 218)");
+		$('#price').css("background-color","rgb(218, 218, 218)");
+		$('#productname').css("background-color","rgb(218, 218, 218)");
+	})
+
+	
+	$('#tbody').mouseout(function(){
+		$('#totalprice').css("background-color","white");
+		$('#price').css("background-color","white");
+		$('#productname').css("background-color","white");
+	})
+	
 	
 	$('#number').click(function(){				
         var price = $('#price').val();      

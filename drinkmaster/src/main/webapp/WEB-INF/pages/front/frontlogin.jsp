@@ -4,7 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<jsp:include page="layout/header.jsp"></jsp:include>
 
 <head>
 <meta charset="UTF-8">
@@ -82,7 +81,7 @@
 		<div>
 			<form:errors path="pass" cssClass="error" />
 		</div>
-		<div class="mb-3">
+		<div class="mb-3 text-center">
 
 		<button type="submit" id="buttonsubmitlogin" class="btn btn-success">登入</button>
 		<a href="${contextRoot}/front/register">
@@ -97,10 +96,13 @@
 		
 	</form:form>
 	
-		<button class="btn btn-light" onclick="admin()">admin帳密</button>
-		<button class="btn btn-light" onclick="firm()">firm帳密</button>
-		<button class="btn btn-light" onclick="store()">store帳密</button>
-		<button class="btn btn-light" onclick="user()">user帳密</button>
+<!-- 		<button class="btn btn-light" onclick="admin()">admin帳密</button> -->
+<!-- 		<button class="btn btn-light" onclick="firm()">firm帳密</button> -->
+<!-- 		<button class="btn btn-light" onclick="store()">store帳密</button> -->
+		<button class="btn btn-light text-white bg-white border-0" >admi帳密帳密密</button>
+		<button class="btn btn-light" onclick="user()">使用者帳密</button>
+		<button class="btn btn-light text-white bg-white border-0" >firmn</button>
+		<button class="btn btn-light text-white bg-white border-0" >store帳</button>
 		
 	</div>
 	
@@ -214,5 +216,3 @@ function checkEmpty(){
 
 </body>
 
-
-<jsp:include page="layout/footer.jsp"></jsp:include>

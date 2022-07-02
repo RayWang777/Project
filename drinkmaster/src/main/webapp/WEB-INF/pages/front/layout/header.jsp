@@ -70,7 +70,7 @@
                         <button class="btn btn-outline-dark" >
                         
                             <i class="bi-cart-fill me-1"></i>                         
-                            購物車
+                            <b style="color:#5A5AAD;font-size: large;">購物車</b>
                             <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                         </button>
                         </a>
@@ -82,7 +82,7 @@
 <%-- 							<a href="${contextRoot}/front/userMessage" style="color:black;" class="nav-link active" aria-current="page">Hi, ${canSeeUser.userName}</a> --%>
 							<ul class="navbar-nav mb-2 mb-lg-0 ms-lg-4">
 							<li class="nav-item dropdown">
-	                            <a class="nav-link dropdown-toggle" style="margin-right: 0;" id="navbarDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">Hi, ${canSeeUser.userName}</a>
+	                            <a class="nav-link dropdown-toggle" style="margin-right: 0;" id="navbarDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false" style="color:#5A5AAD;"><b style="font-size: large;">Hi, ${canSeeUser.userName}</b></a>
 	                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 	                                <li><a class="dropdown-item" href="${contextRoot}/front/userMessage">關於</a></li>
 	                                <li><hr class="dropdown-divider" /></li>
@@ -145,71 +145,9 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			
-			
-			
-			
-			
-			
-			 
-            <div class="col mb-5">
-				<div class="card h-100" style="width: 234px;">
-					<!-- Product image-->
-					<img class="card-img-top"
-						src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-					<!-- Product details-->
-					<div class="card-body p-4">
-						<div class="text-center">
-							<!-- Product name-->
-							<h5 class="fw-bolder">Fancy Product</h5>
-							<!-- Product price-->
-							$40.00 - $80.00
-						</div>
-					</div>
-					<!-- Product actions-->
-					<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-						<div class="text-center">
-							<a class="btn btn-outline-dark mt-auto" href="#">View options</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			
-			 
-            <div class="col mb-5">
-				<div class="card h-100" style="width: 234px;">
-					<!-- Product image-->
-					<img class="card-img-top"
-						src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-					<!-- Product details-->
-					<div class="card-body p-4">
-						<div class="text-center">
-							<!-- Product name-->
-							<h5 class="fw-bolder">Fancy Product</h5>
-							<!-- Product price-->
-							$40.00 - $80.00
-						</div>
-					</div>
-					<!-- Product actions-->
-					<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-						<div class="text-center">
-							<a class="btn btn-outline-dark mt-auto" href="#">View options</a>
-						</div>
-					</div>
-				</div>
-			</div>
-            
-            
-            
-        			
-	
+		  	   </div>
            </div> 
-            
-            
           </div>
- 
       </div>
 <!--       <div class="modal-footer"> -->
 <!--         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->

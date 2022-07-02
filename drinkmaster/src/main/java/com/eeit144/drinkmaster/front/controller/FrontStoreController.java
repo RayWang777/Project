@@ -3,6 +3,7 @@ package com.eeit144.drinkmaster.front.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,20 +36,29 @@ public class FrontStoreController {
 	@PostMapping("localstore")
 	@ResponseBody
 	public List<StoreBean> findLocalStoreByLatLng(@RequestBody MapDto map) {
-		List<StoreBean> findStoreByLocal = storeService.findStoreByLocal(map.getLat(), map.getLng());
-		StoreBean storeBean = null;
-		int number = 8;
-		int size = findStoreByLocal.size();
-		for (int i = 0; i < size; i++) {
-			if (i < number) {
-				storeBean = findStoreByLocal.get(i);
-				Integer firmId = storeBean.getFirmBean().getFirmId();
-				storeBean.setFirmId(firmId);
-				findStoreByLocal.set(i, storeBean);
-			}else {
-				findStoreByLocal.remove(number);
-			}
+		
+		PageRequest page = PageRequest.of(map.getCounts()-1, 4);
+		List<StoreBean> findStoreByLocal = storeService.findStoreByLocal(map.getLat(), map.getLng(),page);
+		for(StoreBean one : findStoreByLocal) {
+			Integer firmId = one.getFirmBean().getFirmId();
+			one.setFirmId(firmId);
 		}
+		
+		
+//		StoreBean storeBean = null;
+//
+//		int number = map.getCounts() * 4;
+//		int size = findStoreByLocal.size();
+//		for (int i = 0; i < size; i++) {
+//			if (i < number) {
+//				storeBean = findStoreByLocal.get(i);
+//				Integer firmId = storeBean.getFirmBean().getFirmId();
+//				storeBean.setFirmId(firmId);
+//				findStoreByLocal.set(i, storeBean);
+//			} else {
+//				findStoreByLocal.remove(number);
+//			}
+//		}
 		return findStoreByLocal;
 	}
 

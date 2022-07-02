@@ -35,6 +35,6 @@ public interface StoreService {
 	
 	public List<StoreBean> findAll(List<Integer> ids);
 	
-	public List<StoreBean> findStoreByLocal(Double lat,Double lng);
+	public List<StoreBean> findStoreByLocal(Double lat,Double lng,Pageable pab);
 
 }

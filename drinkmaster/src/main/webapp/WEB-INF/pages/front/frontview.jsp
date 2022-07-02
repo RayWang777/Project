@@ -50,7 +50,7 @@
                     <!-- Section-->
                     <section class="">
                     
-                    
+                    <input type="text" id="localcounts" hidden="true" value="0">
                     <!-- TOP3 -->
                       <div class="container px-4 px-lg-5 mt-0">
                             <div  class="row gx-4 gx-lg-10 row-cols-1 row-cols-md-1 row-cols-xl-1 justify-content-center">
@@ -186,22 +186,30 @@
                   <!-- 附近店家 -->
                   
                   <script type="text/javascript">
-                  
+//                   var localcounts = $('#localcounts').val();
                   window.onload=  navigator.geolocation.getCurrentPosition(successCallback);
+                  $('#showstore').children().remove(); 
+                  //最外層給全域變數讓經緯度能使用
+                  var lat = 0;
+                  var lng = 0;  
+                  function successCallback(position){  
+                		  lat = position.coords.latitude;  
+                    	  lng = position.coords.longitude;  
+                    	  localstores1(lat,lng);
+                  } 
+                  
                   
                   function localstores1(lat,lng){
-                	  
-             		 console.log(lat)
-             		 console.log(lng)
+                	  //利用input控制數量
+                	    var localcounts = $('#localcounts').val();
+                	 		localcounts++;
+//              		 console.log(lat)
+//              		 console.log(lng)
              		 
-             		 
-             	 $('#showstore').children().remove(); 
-             		 
-             			var serchLocalStoreStr = {"lat": lat , "lng": lng};
+             			var serchLocalStoreStr = {"lat": lat , "lng": lng ,"counts" : localcounts};
                   		var storeJsonString= JSON.stringify(serchLocalStoreStr);
-             		 
-             		 
-             		 
+                  		//回填input
+                  		$('#localcounts').val(localcounts);
                   	 
                   	$.ajax({
                   		url:'http://localhost:8081/drinkmaster/front/localstore',
@@ -210,30 +218,19 @@
                   		dataType: 'json',
                   		data: storeJsonString,
                   	    success: function(result){
-
-                 	           
                   	    	   msg_data = ''
                   	           $.each(result, function(index, value){
-                  	        	   
-                  	        	   console.log(index);
-                  	        	   console.log(value);
-                  	        	   
+
                   	        	msg_data +=    '<div class="col mb-5">'
                   	        	msg_data +=  '<div class="card h-100">'
-                                       <!-- Product image-->
                   	        	msg_data +='<a href="http://localhost:8081/drinkmaster/front/productmenu?id='+value.storeId+'">'
                                 msg_data +=      '<img class="card-img-top" src="http://localhost:8081/drinkmaster/backend/firm/'+value.firmId+'/photo" alt="..." />'
                                 msg_data += '</a>'
-                                
-                                       <!-- Product details-->
                                 msg_data +=       '<div class="card-body p-4">'
                                 msg_data +=           '<div class="text-center">'
-                                               <!-- Product name-->
                                 msg_data +=    '<h5 class="fw-bolder">'+value.storeName+'</h5>'
-                                               <!-- Product price-->
                                 msg_data +=           '</div>'
                                 msg_data +=       '</div>'
-                                       <!-- Product actions-->
                                 msg_data +=       '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">'
                                 msg_data +=           '<div class="text-center">'+value.storeAddress+'</div>'
                                 msg_data +=           '<div class="text-center">'+value.storePhone+'</div>'
@@ -242,26 +239,32 @@
                                 msg_data += '</div>'                  	        	   
                              })
                   	         $('#showstore').append(msg_data)    	
-                  	      	 
                   	     },
                   	     error:function(err){
                   	       console.log(err)
                   	     }
                   	})
-                  	
-                      		 
-             		 
              	 }
                   
-                  function successCallback(position){  
-                      var lat = position.coords.latitude;  
-                      var lng = position.coords.longitude;  
-                    	 localstores1(lat,lng);
-                  } 
-                  
-                              
+        <!-- 到底觸發事件 -->          
+                  window.onscroll = function(localcounts){
+                	  
+                	  var scrollTop = document.documentElement.scrollTop;
+                	  
+                	  var windowHeight = document.documentElement.clientHeight;
+                	  
+                	  var scrollHeight = document.documentElement.scrollHeight;
+                	  
+                	  if(scrollTop+windowHeight ===scrollHeight){
+
+                		 navigator.geolocation.getCurrentPosition(successCallback);
+                		  
+                	  }
+                  }
+        <!-- 到底觸發事件 -->                     
                   
               </script>
+              
       <!-- 附近店家 -->
                 </body>
 

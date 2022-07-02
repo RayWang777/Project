@@ -28,5 +28,5 @@ public interface StoreRepostiory extends JpaRepository<StoreBean, Integer> {
 	
 	@Query(value = "SELECT * FROM ( SELECT *,( 6371 * acos( cos( radians( :latitude ) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians( :longitude ) ) "
 			+ "+ sin( radians( :latitude ) ) * sin( radians( latitude ) ) ) ) AS distance FROM  STORE ) AS B WHERE distance > 0 ORDER BY distance ASC",nativeQuery = true)
-	public List<StoreBean> findStoreByLocal(Double latitude,Double longitude); 
+	public List<StoreBean> findStoreByLocal(Double latitude,Double longitude,Pageable pab); 
 }

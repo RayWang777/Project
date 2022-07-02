@@ -18,7 +18,7 @@
 
 
         <!-- Bootstrap icons-->
-        <link href="${contextRoot}/css/lib/bootstrap-icons.css" rel="stylesheet" />
+<%--         <link href="${contextRoot}/css/lib/bootstrap-icons.css" rel="stylesheet" /> --%>
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="${contextRoot}/css/lib/front/styles.css" rel="stylesheet" />
 		<!-- swiper -->
@@ -227,10 +227,11 @@
 		<script src="${contextRoot}/js/lib/swiper/swiper-bundle.min.js"></script>
 
 
+<!--   以下廠商部分 -->
+
 <script type="text/javascript">
 
-	
-	
+		
         $(function(){
         	
         	$('#showfirm').children().remove(); 
@@ -242,11 +243,14 @@
         	    success: function(result){
 
         	    	   $('#list_table_json tr td').remove()
-        	           console.log(result)
-        	           msg_data = ''
+
+        	    	   //         	           console.log(result)
+        	           
+        	    	   msg_data = ''
         	           $.each(result, function(index, value){
-        	        	   console.log(index);
-        	        	   console.log(value);
+        	        	   
+//         	        	   console.log(index);
+//         	        	   console.log(value);
       
         	        	   msg_data += ' <div class="col mb-5">'
         	        	   msg_data += '  <div class="card h-100">'
@@ -298,11 +302,14 @@
             	    success: function(result){
 
             	    	   $('#list_table_json tr td').remove()
-            	           console.log(result)
+            	    	   
+//             	           console.log(result)
+            	           
             	           msg_data = ''
             	           $.each(result, function(index, value){
-            	        	   console.log(index);
-            	        	   console.log(value);
+            	        	   
+//             	        	   console.log(index);
+//             	        	   console.log(value);
           
             	        	   msg_data += ' <div class="col mb-5">'
             	        	   msg_data += '  <div class="card h-100">'
@@ -329,25 +336,7 @@
             	     }
             	})
         		
-        		
-            	
-        		
         	})
-        	
-        	
-			
-	
-	
-			
-        	
-        	
-        	
-        	
-        	
-        	
-        	
-        	
-        	
         	
         })
         
@@ -359,12 +348,8 @@
 //     var dtoObject = {"msg" : inputText};
 //     var dtoJsonString= JSON.stringify(dtoObject)
 
-  
         
         </script>
         
-        <!-- Bootstrap core JS-->
-<!--         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> -->
-        <!-- Core theme JS-->
-<!--         <script src="js/scripts.js"></script> -->
+<!--   以上廠商部分 -->
 

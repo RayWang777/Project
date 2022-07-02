@@ -86,7 +86,7 @@ public class FrontUserController {
 		m.addAttribute("canSeeUser",user);
 		
 		
-		return "/front/frontuser";
+		return "redirect:/front/";
 	}
 
 }

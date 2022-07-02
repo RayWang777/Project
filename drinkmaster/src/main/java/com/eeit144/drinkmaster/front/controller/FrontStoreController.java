@@ -37,15 +37,16 @@ public class FrontStoreController {
 	public List<StoreBean> findLocalStoreByLatLng(@RequestBody MapDto map) {
 		List<StoreBean> findStoreByLocal = storeService.findStoreByLocal(map.getLat(), map.getLng());
 		StoreBean storeBean = null;
+		int number = 8;
 		int size = findStoreByLocal.size();
 		for (int i = 0; i < size; i++) {
-			if (i < 6) {
+			if (i < number) {
 				storeBean = findStoreByLocal.get(i);
 				Integer firmId = storeBean.getFirmBean().getFirmId();
 				storeBean.setFirmId(firmId);
 				findStoreByLocal.set(i, storeBean);
 			}else {
-				findStoreByLocal.remove(6);
+				findStoreByLocal.remove(number);
 			}
 		}
 		return findStoreByLocal;

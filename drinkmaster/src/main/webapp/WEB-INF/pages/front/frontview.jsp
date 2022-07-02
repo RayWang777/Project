@@ -129,7 +129,7 @@
                         	<div class="col mb-5" style="text-align: center;">
 								<h5><b style="font-size: xx-large;">附近店家</b></h5>                        	
                         	</div>
-                            <div id="showstore"  class="row gx-4 gx-lg-10 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
+                            <div id="showstore"  class="row gx-4 gx-lg-10 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                             
                             
                             

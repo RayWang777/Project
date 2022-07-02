@@ -117,7 +117,7 @@
 </div>
 
 <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=APIKEY">
+  src="https://maps.googleapis.com/maps/api/js?key=API_KEY">
 </script>
 
 <script type="text/javascript">

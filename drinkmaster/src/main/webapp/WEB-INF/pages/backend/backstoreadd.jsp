@@ -87,7 +87,7 @@ color:red;
 						<form:select id="selectuserId" path="userBean.userId" class="form-control" >
 							<form:options items="${storeaddusers}" itemLabel="userName" itemValue="userId"/>
 						</form:select>
-					<form:hidden path="userId" value="1" />
+					<form:hidden path="userId" value="${storeaddusers[0].userId}" />
 					<span id=firmPhoneSp></span>
 				</div>
 				
@@ -107,7 +107,7 @@ color:red;
 </div>
 
 <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=APIKEY">
+  src="https://maps.googleapis.com/maps/api/js?key=API_KEY">
 </script>
 
 <script type="text/javascript">

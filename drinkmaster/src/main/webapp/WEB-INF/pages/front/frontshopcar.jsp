@@ -57,7 +57,9 @@
 
 <body>
 <div class="container">
+<form action="${contextRoot}/front/shopcar/writeData" method="post">
 <%-- <form:form class="form" method="post" action="${contextRoot}/front/shopcar/buy" modelAttribute="shopcarBean"> --%>
+<%-- 	<input type="text" value="${canSeeUser.userName}"> --%>
 	<table id="cart" class="table table-hover table-condensed">
     				<thead>
 						<tr>
@@ -72,7 +74,7 @@
 						</tr>
 					</thead>
 					<tbody>
-<%-- 					<c:forEach varStatus="vs" var="shopcarItems" items=""> --%>
+<%-- 					<c:forEach varStatus="vs" var="shopcarItems" items="${shopcarBuy.content}"> --%>
 						<tr>
 							<td data-th="Product">
 									<div class="col-sm-2 hidden-xs">
@@ -87,7 +89,7 @@
 							</td>
 							
 							<td data-th="Price" >
-							<input type="text" value="${shopcarBuy.price}" style="width:50px;text-align: center;">
+							<input type="text" id="price" value="${shopcarBuy.price}" style="width:50px;text-align: center;">
 							</td>
 							<td data-th="Quantity">
 								<input type="number" id="number" name="number" class="form-control text-center" value="${shopcarBuy.quantity}" min="1">
@@ -107,8 +109,8 @@
 							<form:option value="熱">熱</form:option>
 							</form:select>							
 							</td>
-							<td data-th="Subtotal" class="text-center" id="totalprice" >
-								<input type="text" value="${shopcarBuy.totalPrice}" style="width:100px;text-align: center;">
+							<td data-th="Subtotal" class="text-center" >
+								<input type="text" id="totalprice" value="${shopcarBuy.totalPrice}" style="width:100px;text-align: center;">
 							</td>
 							<td class="actions" data-th="">
 
@@ -120,7 +122,7 @@
 					<tfoot>
 						<tr class="visible-xs">
 <!-- 						備註:折扣碼前的價格 -->
-							<td class="text-center"><strong>Total 70</strong></td>
+							<td class="text-center" id="total"><strong>Total <c:out value="${shopcarBuy.totalPrice}"></c:out></strong></td>
 						</tr>
 						<tr>
 							<td><a href="#" class="btn btn-warning">
@@ -130,14 +132,73 @@
 							<td  class="hidden-xs"></td>
 							
 <!-- 							備註:折扣碼後的價格 -->
-							<td class="hidden-xs text-center"><span style="color:red;font-weight: bold;">折扣後&ensp;</span><strong>Total $60</strong></td>
-							<td colspan="2"><a href="#" class="btn btn-success btn-block">確認訂單&thinsp;<i class="fa fa-angle-right"></i></a></td>
+							<td class="hidden-xs text-center" colspan="2">
+							<span style="color:red;font-weight: bold;">折扣後&ensp;</span>
+							<strong>Total <input type="text" id="totalprice2" value="${shopcarBuy.totalPrice}" style="width:100px;text-align: center;"></strong></td>
+							<td colspan="2"><button type="submit" class="btn btn-success btn-block">結帳&thinsp;><i class="fa fa-angle-right"></i></button></td>
 						</tr>
 					</tfoot>
 				</table>
+				</form>
 <%-- 				</form:form> --%>
 </div>
 </body>
+
+<script type="text/javascript">
+$(function(){
+	
+
+	
+	$('#number').click(function(){				
+        var price = $('#price').val();      
+        var number = $('#number').val();
+        var totalprice = price*number;
+
+        $('#totalprice').attr('value',totalprice);
+    })
+    
+    $('#number').keyup(function(){				
+        var price = $('#price').val();      
+        var number = $('#number').val();
+        var totalprice = price*number;
+
+        $('#totalprice').attr('value',totalprice);       	
+    })
+    
+    $('#number').click(function(){				
+        var price = $('#price').val();      
+        var number = $('#number').val();
+        var totalprice = price*number;
+
+        $('#totalprice2').attr('value',totalprice);
+    })
+    
+    $('#number').keyup(function(){				
+        var price = $('#price').val();      
+        var number = $('#number').val();
+        var totalprice = price*number;
+
+        $('#totalprice2').attr('value',totalprice);       	
+    })
+    
+	$('#number').click(function(){				
+        var price = $('#price').val();      
+        var number = $('#number').val();
+        var totalprice = price*number;
+
+        $('#total').html("<strong>Total " + totalprice + "</strong>");
+    })
+    
+    $('#number').keyup(function(){				
+        var price = $('#price').val();      
+        var number = $('#number').val();
+        var totalprice = price*number;
+
+        $('#total').html(totalprice);      	
+    })
+	
+})
+</script>
 
 <script src="<c:url value="/js/lib/bootstrap.min.js"/>"></script>
 <script src="<c:url value="/js/lib/jquery.min.js"/>"></script>

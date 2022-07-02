@@ -9,7 +9,7 @@
 
 <head>
 <meta charset="utf-8" />
-<title>購物車</title>
+<title>訂購</title>
 <link rel="stylesheet" href="<c:url value="/css/lib/bootstrap.min.css"/>"/>
 <link rel="stylesheet" href="<c:url value="/css/lib/font-awesome.min.css"/>"/>
 
@@ -58,7 +58,8 @@
 <body>
 <div class="container" id="container">
 <form:form class="form" method="post" action="${contextRoot}/front/shopcar/buy" modelAttribute="productBean">
-<input type="text" value="${productBean.productId}" name="shopcarproductId">
+<input type="hidden" value="${productBean.productId}" name="shopcarproductId">
+<input type="text" value="${productCategoryBean.storeId}" name="shopcarstoreId">
 	<table id="cart" class="table table-hover table-condensed">
     				<thead>
 						<tr>

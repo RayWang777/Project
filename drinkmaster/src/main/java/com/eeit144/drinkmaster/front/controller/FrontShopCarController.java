@@ -1,11 +1,14 @@
 package com.eeit144.drinkmaster.front.controller;
 
 
+import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 //import java.util.Optional;
+import java.util.Set;
 
 //import javax.servlet.http.HttpSession;
 
@@ -20,9 +23,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.eeit144.drinkmaster.back.model.OrderItemsService;
 import com.eeit144.drinkmaster.back.model.UserService;
 //import com.eeit144.drinkmaster.back.service.ProductCategoryServiceImp;
 import com.eeit144.drinkmaster.back.service.ProductServiceImp;
+import com.eeit144.drinkmaster.bean.OrderBean;
 import com.eeit144.drinkmaster.bean.OrderItems;
 import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.bean.ShopcarBean;
@@ -31,7 +36,7 @@ import com.eeit144.drinkmaster.bean.UserBean;
 
 @Controller
 @RequestMapping("front/")
-@SessionAttributes(names= {"orderuserBean","shopcarBuy","product"})
+@SessionAttributes(names= {"orderuserBean","shopcarBuy","product","canSeeUser"})
 @SuppressWarnings("unchecked")
 public class FrontShopCarController {
 
@@ -44,6 +49,9 @@ public class FrontShopCarController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private OrderItemsService oitemService;
+	
 	public void testUserSession(Model m){
 		UserBean user = userService.findById(1).get();
 		m.addAttribute("orderuserBean", user);
@@ -52,15 +60,21 @@ public class FrontShopCarController {
 		
 	@GetMapping("shopcar/")
 	public String carView(Model m) {
-		testUserSession(m);
+//		testUserSession(m);
 		
 		return "/front/frontshopcar";
-//		return "/front/shoptest";
 	}
 	
 	@GetMapping("shopcar/before")
 	public String carBeforeView() {
 		return "/front/frontbeforeshop";
+	}
+	
+	@GetMapping("shopcar/order")
+	public String orderView(Model m) {
+//		testUserSession(m);
+		
+		return "/front/frontorder";
 	}
 	
 	
@@ -140,23 +154,23 @@ public class FrontShopCarController {
 //		
 ////		ProductBean productBean = proService.findById(productId);		
 //		
-//		UserBean userBean = (UserBean) m.getAttribute("orderuserBean");
-//		if(userBean == null) {
-//			return "redirect:/front/";
-//		}
-		
-		
-		
-		// 取出存放在session物件內的shopcarBuy物件
-		ShopcarBuy shopcarBuy = (ShopcarBuy) m.getAttribute("shopcarBuy");
-		if(shopcarBuy == null) {
-			//沒有的話建立一個
-			shopcarBuy = new ShopcarBuy();
-			m.addAttribute("shopcarBuy",shopcarBuy);
+		UserBean userBean = (UserBean) m.getAttribute("canSeeUser");
+		if(userBean == null) {
+			return "redirect:/front/login";
 		}
 		
 		
 		
+//		// 取出存放在session物件內的shopcarBuy物件
+//		ShopcarBuy shopcarBuy = (ShopcarBuy) m.getAttribute("shopcarBuy");
+//		if(shopcarBuy == null) {
+//			//沒有的話建立一個
+//			shopcarBuy = new ShopcarBuy();
+//			m.addAttribute("shopcarBuy",shopcarBuy);
+//		}
+//		
+		
+//		Map<Integer, ShopcarBean> shopcarMap = (Map<Integer, ShopcarBean>) m.getAttribute("shopcarBuy");
 		
 		
 		ShopcarBean shopcarBean = new ShopcarBean();
@@ -169,7 +183,7 @@ public class FrontShopCarController {
 		shopcarBean.setSweet(sugar);
 		shopcarBean.setTotalPrice(totalprice);
 		
-
+//		shopcarMap.put(productId, shopcarBean);
 		
 		m.addAttribute("shopcarBuy", shopcarBean);
 		
@@ -178,6 +192,65 @@ public class FrontShopCarController {
 		
 		return "/front/frontshopcar";
 	}
+	
+	
+	
+	@PostMapping("shopcar/writeData")
+	public String orderData(Model m) {
+		
+//		ShopcarBean shopcarBean = new ShopcarBean();
+//		m.addAttribute("shopcarBuy", shopcarBean);
+		
+		return "/front/frontshopcardata";
+	}
+	
+	
+	@PostMapping("shopcar/confirmOrder")
+	public String confirmOrder(Model m,
+			@RequestParam("shopcarphone") String shopcarphone,@RequestParam("shopcaraddress") String shopcaraddress
+			,@RequestParam("shopcarname") String shopcarname
+			,@RequestParam("shopcarprice") Integer shopcarprice
+			,@RequestParam("shopcarquantity") Integer shopcarquantity
+			,@RequestParam("shopcarsweet") String shopcarsweet
+			,@RequestParam("shopcarcoldhot") String shopcarcoldhot
+			,@RequestParam("shopcartotalPrice") Integer shopcartotalPrice) {
+		
+		ShopcarBean shopcarBean = new ShopcarBean();
+		shopcarBean.setAddress(shopcaraddress);
+		shopcarBean.setPhone(shopcarphone);
+		shopcarBean.setProductName(shopcarname);
+		shopcarBean.setPrice(shopcarprice);
+		shopcarBean.setColdhot(shopcarcoldhot);
+		shopcarBean.setQuantity(shopcarquantity);
+		shopcarBean.setSweet(shopcarsweet);
+		shopcarBean.setTotalPrice(shopcartotalPrice);
+		
+		
+		
+		m.addAttribute("shopcarBuy", shopcarBean);
+		
+		
+		
+		ShopcarBean cart = (ShopcarBean) m.getAttribute("shopcarBuy");
+		
+		Date today = new Date();
+		OrderBean ob = new OrderBean(null,shopcartotalPrice,shopcarphone,
+				shopcaraddress,today,null);
+		
+		Map<Integer, OrderItems> content = cart.getContent();
+		Set<OrderItems> items = new LinkedHashSet<>();
+		Set<Integer> set = content.keySet();
+		for(Integer i : set) {
+			OrderItems oib = content.get(i);
+			oib.setOrderBean(ob);
+			items.add(oib);
+		}
+		ob.setOrderItems(items);
+		
+		return "/front/frontorder";
+	}
+	
+	
 	
 	@PostMapping("shopcar/test")
 	public String addShopcartest(Model m,@RequestParam("id") Integer id) {

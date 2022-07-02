@@ -1,7 +1,7 @@
 package com.eeit144.drinkmaster.back.model;
 
 import java.util.List;
-
+import java.util.Set;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.eeit144.drinkmaster.bean.OrderItems;
 import com.eeit144.drinkmaster.bean.ProductBean;
+import com.eeit144.drinkmaster.bean.ShopcarBean;
 
 
 
@@ -40,4 +41,7 @@ public interface OrderItemsService {
 	public List<Integer> countByProductBean();
 	
 	public List<OrderItems> findByproductBean(ProductBean productBean);	
+
+
+	public void insertOrderItems(Set<OrderItems> items);	
 }

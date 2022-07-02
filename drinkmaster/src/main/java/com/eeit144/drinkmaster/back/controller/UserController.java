@@ -2,9 +2,7 @@ package com.eeit144.drinkmaster.back.controller;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +20,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -33,11 +30,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.eeit144.drinkmaster.back.model.FirmService;
 import com.eeit144.drinkmaster.back.model.StoreService;
 import com.eeit144.drinkmaster.back.model.UserService;
+import com.eeit144.drinkmaster.back.util.Util;
 import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
-
 import com.eeit144.drinkmaster.bean.UserBean;
-import com.eeit144.drinkmaster.dto.FirmDTO;
 import com.eeit144.drinkmaster.dto.UserBeanDTO;
 
 
@@ -85,10 +81,15 @@ public class UserController {
 			@RequestParam("userPassword") String userPassword) {
 		
 		UserBean user = new UserBean();
-			
+		
+		//將密碼加密才能跟資料庫比對
+//		String encryptPwd = Util.saleCode(userPassword);
+		
 		System.out.println("PostMapping:" + userAccount + "  " + userPassword);
 
+//		user = userService.findByAccPwd(userAccount, encryptPwd);
 		user = userService.findByAccPwd(userAccount, userPassword);
+
 		if(user != null) {
 			m.addAttribute(user);
 		} else {
@@ -181,6 +182,17 @@ public class UserController {
 			return "/backend/backuseradd";
 		}
 		System.out.println("完成圖片塞入user");
+		
+		// 密碼加密
+		
+//		String pwd= user.getUserPassword();
+//		
+//		String encryptPwd = Util.saleCode(pwd);
+//		System.out.println(encryptPwd);
+//		
+//		user.setUserPassword(encryptPwd);
+		
+		//存入資料庫
 		userService.insertUser(user);
 		System.out.println("完成新增");
 		return "redirect:/backend/user/all";
@@ -311,6 +323,22 @@ public class UserController {
 		headers.setContentType(MediaType.IMAGE_JPEG);
 
 		return new ResponseEntity<byte[]>(userPhoto, headers, HttpStatus.OK);
+	}
+	
+	// 加解密測試
+	@GetMapping("test")
+	public void test(){
+		
+		String text="test";
+		String text2="test";
+		
+		String saleCode = Util.saleCode(text);
+		System.out.println(saleCode);
+		String saleCode2 = Util.saleCode(text2);
+		System.out.println(saleCode2);
+		
+		String deSaleCode = Util.DeSaleCode(saleCode);
+		System.out.println(deSaleCode);
 	}
 	
 }

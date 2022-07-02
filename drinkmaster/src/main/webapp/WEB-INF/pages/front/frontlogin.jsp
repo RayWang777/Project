@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-
+<jsp:include page="layout/header.jsp"></jsp:include>
 
 <head>
 <meta charset="UTF-8">
@@ -26,7 +26,7 @@
 	    transform: translate(-50%, 0%);
 	    
 	    margin-top: 100px;
-	    margin-bottom: 300px;
+	    margin-bottom: 100px;
 	    border: 1px solid gray;
 	    box-shadow: 12px 12px 12px gray;
 	}
@@ -213,3 +213,6 @@ function checkEmpty(){
 </script>
 
 </body>
+
+
+<jsp:include page="layout/footer.jsp"></jsp:include>

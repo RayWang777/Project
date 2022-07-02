@@ -47,6 +47,11 @@ public class FrontUserController {
 		return "/front/frontuser";
 	}
 	
+	@GetMapping("userUpdate")
+	public String userupdate() {
+		return "/front/frontuserupdate";
+	}
+	
 //	@GetMapping("logout")
 //	public String logout(WebRequest request, SessionStatus status) {
 //		status.setComplete();

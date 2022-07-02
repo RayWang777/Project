@@ -79,7 +79,7 @@ div.awesomeRating {
 	</script>
 	
 	
-	<form:input path="scoreType" class="form-control" type="hidden"/>
+	<form:input path="scoreType" class="form-control"/>
 	content<form:input path="content" class="form-control" />
 	
 	<br/>

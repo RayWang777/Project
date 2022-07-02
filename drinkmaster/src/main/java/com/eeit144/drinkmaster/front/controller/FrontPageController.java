@@ -1,6 +1,6 @@
 package com.eeit144.drinkmaster.front.controller;
 
-
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,54 +8,89 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.eeit144.drinkmaster.back.model.FirmService;
-import com.eeit144.drinkmaster.back.model.OrderItemsService;
+import com.eeit144.drinkmaster.back.model.OrderService;
 import com.eeit144.drinkmaster.back.model.ProductService;
+import com.eeit144.drinkmaster.back.model.StoreService;
 import com.eeit144.drinkmaster.bean.ProductBean;
-
-
+import com.eeit144.drinkmaster.bean.StoreBean;
+import com.eeit144.drinkmaster.bean.StoreTop;
 
 @Controller
 @RequestMapping("front")
 public class FrontPageController {
-	
+
 	private FirmService firmService;
-	
-	private ProductService productService; 
-	
-	private OrderItemsService orderItemsService; 
-	
+
+	private ProductService productService;
+
+	private OrderService orderService;
+
+	private StoreService storeService;
+
 	@Autowired
-	public FrontPageController(FirmService firmService,ProductService productService, OrderItemsService orderItemsService) {
+	public FrontPageController(FirmService firmService, ProductService productService, OrderService orderService,
+			StoreService storeService) {
 		super();
 		this.firmService = firmService;
 		this.productService = productService;
-		this.orderItemsService = orderItemsService;
+		this.orderService = orderService;
+		this.storeService = storeService;
 	}
 
 	@GetMapping("/")
-	public String welcomeFront(Model m){
-		
+	public String welcomeFront(Model m) {
+		List<StoreTop> top3 = findTop3();
 		List<Integer> findAllIds = firmService.findAllIds();
 		m.addAttribute("swiperPic", findAllIds);
-		List<Integer> list = orderItemsService.countByProductBean();
-		List<ProductBean> productList = productService.findAll(list);
-		m.addAttribute("top3", productList);
-		
-		System.out.println(list);
-		
-			
+
+		m.addAttribute("top3", top3);
+
 		return "/front/frontview";
+	}
+
+	@GetMapping("top3")
+	@ResponseBody
+	public List<StoreTop> findTop3() {
+		List<Integer> count = orderService.countBystoreId();
+		List<StoreBean> allstore = storeService.findAll(count);
+		List<StoreTop> topList = new ArrayList<StoreTop>();
+		String firmName = allstore.get(0).getFirmBean().getFirmName();
+		StoreTop top1 = new StoreTop();
+		top1.setFirmBean(allstore.get(0).getFirmBean());
+		top1.setStoreId(allstore.get(0).getStoreId());
+		top1.setStoreName(allstore.get(0).getStoreName());
+		topList.add(top1);
+		for (StoreBean store : allstore) {
+			if (topList.size() == 3) {
+				break;
+			}
+			if (!store.getFirmBean().getFirmName().equals(firmName)) {
+				StoreTop top = new StoreTop();
+				top.setFirmBean(store.getFirmBean());
+				top.setStoreId(store.getStoreId());
+//			top.setProductImage(product.getProductImage());
+//			top.setProductImage(null);
+//			System.out.println(product.getProductImage());
+				top.setStoreName(store.getStoreName());
+				topList.add(top);
+			}
+			firmName = store.getFirmBean().getFirmName();
+		}
+//		topList.sort(Comparator.comparing(ProductTop::getCount));
+		return topList;
 	}
 
 	@GetMapping("test")
 	public String firmserch() {
 		return "/front/frontfirmtest";
 	}
+
 	@GetMapping("test1")
 	public String menu() {
 		return "/front/productmenu";
 	}
-	
+
 }

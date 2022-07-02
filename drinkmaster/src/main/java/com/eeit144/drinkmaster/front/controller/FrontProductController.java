@@ -22,7 +22,7 @@ import com.eeit144.drinkmaster.bean.FirmVo;
 import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.bean.ProductCategoryBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
-import com.eeit144.drinkmaster.bean.ProductTop;
+import com.eeit144.drinkmaster.bean.StoreTop;
 
 @Controller
 @RequestMapping("front/")
@@ -49,35 +49,6 @@ private OrderItemsService itemsService;
 		 m.addAttribute("category",category);
 		return "front/productmenu";
 	}
-	@GetMapping( "top3")
-	@ResponseBody
-	public List<ProductTop> findTop3(){
-		List<Integer> count = itemsService.countByProductBean();
-		
-		
-		List<ProductBean> allProduct=  productService.findAll(count);
-		List<ProductTop> topList =new ArrayList<ProductTop>();
-		
-		for(ProductBean product:allProduct) {
-	
-			ProductTop top =new ProductTop();
-			
-			System.out.println();
-			Integer firmId = product.getProductCategoryBean().getStoreBean().getFirmBean().getFirmId();
-			StoreBean storeBean = product.getProductCategoryBean().getStoreBean();
-			storeBean.setFirmId(firmId);
-			top.setStoreBean(storeBean);
-			top.setProductId(product.getProductId());
-//			top.setProductImage(product.getProductImage());
-//			top.setProductImage(null);
-//			System.out.println(product.getProductImage());
-			top.setProductName(product.getProductName());
-			topList.add(top);
-		}
-		
-//		topList.sort(Comparator.comparing(ProductTop::getCount));
-		
-		return topList;
-	}
+
 	
 }

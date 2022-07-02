@@ -36,7 +36,7 @@ public class StoreServiceImp implements StoreService {
 	public Page<StoreBean> findAll(Pageable pab) {
 		return storeDao.findAll(pab);
 	}
-
+	
 
 	@Override
 	public void deleteById(Integer id) {
@@ -76,6 +76,10 @@ public class StoreServiceImp implements StoreService {
 	@Override
 	public List<Integer> findStoreUserNull(){
 		return storeDao.findStoreUserNull();
+	}
+	@Override
+	public List<StoreBean> findAll(List<Integer> ids){
+		return storeDao.findAllById(ids);
 	}
 	
 }

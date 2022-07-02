@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.eeit144.drinkmaster.bean.FirmBean;
+import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
 
 
@@ -31,5 +32,7 @@ public interface StoreService {
 	public List<StoreBean> findStoreByFirmId(Integer firmId);
 	
 	public List<Integer> findStoreUserNull();
+	
+	public List<StoreBean> findAll(List<Integer> ids);
 
 }

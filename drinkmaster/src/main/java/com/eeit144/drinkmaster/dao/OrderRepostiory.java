@@ -27,4 +27,7 @@ public interface OrderRepostiory extends JpaRepository<OrderBean, Integer> {
 
 	
 	public Page<OrderBean> findByorderIdLike(Pageable pageable,@Param(value="orderId") Integer orderId);
+	
+	@Query(value = "select top(20) [storeid] from [orders] group by [storeid] order by  sum([totalprice]) DESC ;",nativeQuery = true)
+	public List<Integer> countBystoreId();
 }

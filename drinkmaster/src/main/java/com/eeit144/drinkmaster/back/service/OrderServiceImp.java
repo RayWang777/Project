@@ -61,6 +61,11 @@ public class OrderServiceImp implements OrderService {
 	}
 	
 	@Override
+	public List<Integer> countBystoreId(){
+		return orderDao.countBystoreId();
+	}
+	
+	@Override
 	public Page<OrderBean> findByPage(Integer pageNumber){
 		Pageable pgb = PageRequest.of(pageNumber-1, 10 ,Sort.Direction.DESC ,"orderId");
 		

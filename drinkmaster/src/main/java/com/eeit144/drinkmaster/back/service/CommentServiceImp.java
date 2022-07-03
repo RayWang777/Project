@@ -131,5 +131,8 @@ public class CommentServiceImp implements CommentService {
 	}
 
 	
+	public List<CommentBean> findCommentByUserid(Integer storeId) {
+		return commentDao.findCommentByUserid(storeId);
+	}
 	
 }

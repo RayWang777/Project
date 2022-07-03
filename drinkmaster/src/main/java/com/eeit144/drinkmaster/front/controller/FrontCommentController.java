@@ -58,23 +58,7 @@ public class FrontCommentController {
 		List<CommentAvgScoreBeanDTO> listcsdto = new ArrayList<>();
 		
 		List<StoreBean> commentStore = storeService.findAllList();
-//		
-//		HashMap<Integer,Double> intmap = new HashMap<>();
-//		
-//		for(StoreBean sid:commentStore) {
-//			intmap.put(sid.getStoreId(),commentService.avgScoreByStoreid(sid.getStoreId()));
-//		}
-		
-		
-		
-		
-//		for(StoreBean sid:commentStore) {
-//			csdto.setStoreId(sid.getStoreId());
-//			csdto.setStoreName(sid.getStoreName());
-////			commentService.avgScoreByStoreid(sid.getStoreId());
-//			csdto.setAvgScore(commentService.avgScoreByStoreid(sid.getStoreId()));
-//			listcsdto.add(csdto);
-//		}
+
 		
 		
 		for(int i=0 ; i<commentStore.size(); i++) {
@@ -99,21 +83,15 @@ public class FrontCommentController {
 	}
 	
 	
-//	@GetMapping("comment/login")
-//	public String login(@RequestParam("storeid") Integer storeid, Model m) {
-//		UserBeanDTO user = new UserBeanDTO();
-//		String userAccount = user.getUserAccount();
-//		String userPassword = user.getUserPassword();
-//		
-//		m.addAttribute("userAccount", userAccount);
-//		m.addAttribute("userPassword", userPassword);
-//
-//		
-//		String url = "redirect:http://localhost:8081/drinkmaster/front/comment/all?storeid=" + storeid;
-//		
-//		return "/front/frontlogin";
-//	}
-	
+	@GetMapping("comment/usercomment")
+	public String usercomment(@RequestParam("commentuserid") Integer userid, Model model) {
+		
+		List<CommentBean> userComment = commentService.findCommentByUserid(userid);
+		
+		model.addAttribute("userComment", userComment);
+		
+		return "front/frontcommentusercomment";
+	}
 	
 	
 

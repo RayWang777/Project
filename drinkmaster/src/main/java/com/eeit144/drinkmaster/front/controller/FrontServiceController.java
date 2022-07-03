@@ -13,7 +13,8 @@ import com.eeit144.drinkmaster.back.model.ServiceService;
 import com.eeit144.drinkmaster.bean.ServiceBean;
 import com.eeit144.drinkmaster.bean.UserBean;
 
-@SessionAttributes(names={"userBean"})
+
+@SessionAttributes(names={"canSeeUser"})
 @Controller
 @RequestMapping("front/")
 public class FrontServiceController {
@@ -44,7 +45,7 @@ public class FrontServiceController {
 //	}
 //
 	@GetMapping("service/add") //新增sessionattribute
-	public String addFrontMessagePage(@SessionAttribute("userBean") UserBean user,Model model) {
+	public String addFrontMessagePage(@SessionAttribute("canSeeUser") UserBean user,Model model) {
 //		UserBean ub = new UserBean();
 //		ub.setUserId(userId);	
 
@@ -52,6 +53,7 @@ public class FrontServiceController {
 		ServiceBean latestMsg = sService.getLatest();
 //		workMessages.setUserBean(ub);
 	
+		model.addAttribute("canSeeUser", user);
 		model.addAttribute("workMessages", workMessages);
 		model.addAttribute("latestMsg", latestMsg);
 

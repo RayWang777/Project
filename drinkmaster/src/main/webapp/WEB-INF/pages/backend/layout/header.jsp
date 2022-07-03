@@ -135,7 +135,14 @@ li {
 						<li><a href="${contextRoot}/backend/comment">新增</a></li>
 						<li><a href="${contextRoot}/backend/comment/all">所有評論</a></li>
 					</ul></li>
+
 				</c:otherwise></c:choose>
+
+					
+						<c:choose>
+				<c:when test="${userBean.role != 'admin'}"></c:when>
+				<c:otherwise>
+
 				<li><a class="sidebar-sub-toggle"><i
 						class="large material-icons">room_service</i> 客服管理 <span
 						class="sidebar-collapse-icon ti-angle-down"></span></a>
@@ -143,8 +150,19 @@ li {
 						<li><a href="${contextRoot}/backend/service/reply">意見回覆</a></li>
 						<li><a href="${contextRoot}/backend/service/viewall">意見總覽</a></li>
 						<li><a href="${contextRoot}/backend/service/add">新增意見</a></li>
-                        
 					</ul></li>
+				</c:otherwise></c:choose>
+					
+					
+<!-- 				<li><a class="sidebar-sub-toggle"><i -->
+<!-- 						class="large material-icons">room_service</i> 客服管理 <span -->
+<!-- 						class="sidebar-collapse-icon ti-angle-down"></span></a> -->
+<!-- 					<ul> -->
+<%-- 						<li><a href="${contextRoot}/backend/service/reply">意見回覆</a></li> --%>
+<%-- 						<li><a href="${contextRoot}/backend/service/viewall">意見總覽</a></li> --%>
+<%-- 						<li><a href="${contextRoot}/backend/service/add">新增意見</a></li> --%>
+                        
+<!-- 					</ul></li> -->
 <%-- 					<li><a href="${contextRoot}/front/">前台首頁</a></li> --%>
 				<li><a href="<c:url value="/backend/logout"/>"><i class="ti-close"></i> Logout</a></li>
 

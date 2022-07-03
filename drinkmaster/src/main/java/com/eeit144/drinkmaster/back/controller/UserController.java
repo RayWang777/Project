@@ -97,12 +97,12 @@ public class UserController {
 		
 		System.out.println("UserBean的password = " + user.getUserPassword());
 
-		
+		m.addAttribute("userBean", user);
 		String role = user.getRole();
 
 		System.out.println("嗨嗨!!" + role);
 		if(role.equals("admin")) {
-			m.addAttribute("userBean", user);
+			
 			return("redirect:/backend/");
 			
 		} else if(role.equals("firm")) {
@@ -352,7 +352,8 @@ public class UserController {
 		System.out.println(saleCode4);
 		String saleCode5 = Util.saleCode("tom7777");
 		System.out.println(saleCode5);
-
+		String saleCode6 = Util.saleCode("123");
+		System.out.println(saleCode6);
 		
 		String deSaleCode = Util.DeSaleCode(saleCode);
 		System.out.println(deSaleCode);

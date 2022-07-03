@@ -44,6 +44,9 @@
 	font-size: 14px;
 }
 
+#orderform{
+	margin-left: 25px;
+}
 
 #orderform label {
 	font-size: 16px;
@@ -85,7 +88,14 @@
 	border-radius: 2px;
 }
 
-#orderform #selectuserId{
+#orderform #selectorderId{
+	height: 20px;
+	width: 80px;
+	border-color: black;
+	border-radius: 2px;
+}
+
+#orderform #selectproduct{
 	height: 20px;
 	width: 80px;
 	border-color: black;
@@ -132,7 +142,7 @@
       <th scope="col">數量</th>
       <th scope="col">甜度</th>
       <th scope="col">冷熱</th>
-      <th scope="col">價格</th>
+      <th scope="col">金額</th>
       <th scope="col"></th>
     </tr>
   </thead>
@@ -190,10 +200,10 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      
+      <br>
 <form:form class="form" method="post" id="orderform" action="${contextRoot}/backend/orderItems/insert" modelAttribute="orderItems">
 <form:hidden path="orderItemId"/>
-<label for="selectorderId">訂單編號</label>
+		<label >訂單編號</label>
 					<form:select id="selectorderId" path="orderBean.orderId">
 
 						<form:options items="${addorders}" itemLabel="orderId"
@@ -201,18 +211,34 @@
 					</form:select><br><br>
 					<form:hidden path="orderId" value="${orderItems.orderBean.orderId}" />
 					
-<label for="selectproducts">商品名稱</label>
+		<label >商品名稱</label>
 					<form:select id="selectproducts" path="productBean.productId">
 
 						<form:options items="${addproducts}" itemLabel="productName"
 							itemValue="productId" id="productoption"/>
 					</form:select><br><br>
 					<form:hidden path="productId" value="${orderItems.productBean.productId}" />
-
-  金&emsp;&emsp;額<form:label path="price"></form:label>
-  <form:input path="price" /><br><br>
-  數&emsp;&emsp;量<form:label path="quantity"></form:label>
+  <form:label path="quantity">數&emsp;&emsp;量</form:label>
   <form:input path="quantity" /><br><br>
+  
+  <form:label path="sweet">甜&emsp;&emsp;度</form:label>
+  <form:select path="sweet" >
+  <form:option value="無糖">無糖</form:option>
+  <form:option value="微糖">微糖</form:option>
+  <form:option value="少糖">少糖</form:option>
+  <form:option value="半糖">半糖</form:option>
+  <form:option value="正常">正常</form:option>
+  </form:select><br><br>
+ 
+  <form:label path="coldhot">冷&emsp;&emsp;熱</form:label>
+  <form:select path="coldhot" >
+  <form:option value="冷">冷</form:option>
+  <form:option value="熱">熱</form:option>
+  </form:select><br><br>
+
+  <form:label path="price">金&emsp;&emsp;額</form:label>
+  <form:input path="price" /><br><br>
+  
 
   
  <br><br>
@@ -221,9 +247,10 @@
   <button type="submit" id="ordersubmit" class="btn btn-primary btn-sm"  name="submit"  onclick="return confirm('確定要新增嗎?')" >確認</button></a>&emsp;  
   
   <button type="button" id="closebutton" class="btn btn-outline-dark btn-sm" data-dismiss="modal" aria-label="Close" >取消</button>
- 
+  <br>
     </div>
   </form:form>
+  <br>
       </div>
       </div>
       </div>

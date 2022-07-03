@@ -34,9 +34,9 @@ public class OrderBeanxslx {
 	@Excel(name="使用者", orderNum="2",width = 15)
 	private String userName;
 	
-
-	@Excel(name="店家", orderNum="3",width = 30)
-	private String storeName;
+//要改
+//	@Excel(name="店家", orderNum="3",width = 30)
+//	private String storeName;
 	
 
 	@Excel(name="總金額", orderNum="4",width = 30)
@@ -73,13 +73,13 @@ public class OrderBeanxslx {
 		this.userName = userName;
 	}
 
-	public String getStoreName() {
-		return storeName;
-	}
-
-	public void setStoreName(String storeName) {
-		this.storeName = storeName;
-	}
+//	public String getStoreName() {
+//		return storeName;
+//	}
+//
+//	public void setStoreName(String storeName) {
+//		this.storeName = storeName;
+//	}
 
 
 	public Integer getTotalPrice() {

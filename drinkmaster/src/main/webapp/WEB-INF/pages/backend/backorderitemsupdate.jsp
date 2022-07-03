@@ -7,7 +7,7 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <c:set var="userId" value="1"></c:set>
 <div class="row justify-content-center">
-  <h2>更新</h2>
+  <h2>更新訂單細項</h2>
 </div>
 <br>
 <div class="container">
@@ -33,11 +33,28 @@
 							itemValue="productId" id="productoption"/>
 					</form:select><br><br>
 					<form:hidden path="productId" value="${orderItems.productBean.productId}" />
-
-  金&emsp;&emsp;額<form:label path="price"></form:label>
-  <form:input path="price" /><br><br>
+ 
+ 
   數&emsp;&emsp;量<form:label path="quantity"></form:label>
   <form:input path="quantity" /><br><br>
+  
+  <form:label path="sweet">甜&emsp;&emsp;度</form:label>
+  <form:select path="sweet" >
+  <form:option value="無糖">無糖</form:option>
+  <form:option value="微糖">微糖</form:option>
+  <form:option value="少糖">少糖</form:option>
+  <form:option value="半糖">半糖</form:option>
+  <form:option value="正常">正常</form:option>
+  </form:select><br><br>
+ 
+  <form:label path="coldhot">冷&emsp;&emsp;熱</form:label>
+  <form:select path="coldhot" >
+  <form:option value="冷">冷</form:option>
+  <form:option value="熱">熱</form:option>
+  </form:select><br><br>
+  金&emsp;&emsp;額<form:label path="price"></form:label>
+  <form:input path="price" /><br><br>
+  
 
   
  

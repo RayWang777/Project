@@ -186,7 +186,7 @@ public class OrderController<E> {
 		
 		@PostMapping("order/update")
 		public String updateOrder(@ModelAttribute("orderBean") OrderBean orderBean, Model m,@SessionAttribute("userBean") UserBean user) {
-			if((user.getRole().equals("user"))) {
+			if((user.getRole().equals("user"))) {//從前台傳進來的資料需要重新選select才能編輯
 				return "redirect:/backend/login";			
 			}
 			
@@ -206,9 +206,13 @@ public class OrderController<E> {
 			StoreBean oldStore = storeService.findById(orderBean.getStoreId()).get();
 			UserBean oldUser = userService.findById(orderBean.getUserId()).get();
 			
+			
+			
 			orderBean.setUserBean(oldUser);
 			orderBean.setStoreBean(oldStore);
 			
+			System.out.println("stroeid:"+oldStore.getStoreId());
+			System.out.println("userid:"+oldUser.getUserId());
 			
 			orderService.insertOrder(orderBean);
 
@@ -264,7 +268,7 @@ public class OrderController<E> {
 				orderBeanxslx = new OrderBeanxslx();
 				orderBeanxslx.setOrderId(order.getOrderId());
 				orderBeanxslx.setUserName(order.getUserBean().getUserName());
-				orderBeanxslx.setStoreName(order.getStoreBean().getStoreName());
+//				orderBeanxslx.setStoreName(order.getStoreBean().getStoreName());
 				orderBeanxslx.setOrderAddress(order.getOrderAddress());
 				orderBeanxslx.setOrderPhone(order.getOrderPhone());
 				orderBeanxslx.setOrderStatus(order.getOrderStatus());

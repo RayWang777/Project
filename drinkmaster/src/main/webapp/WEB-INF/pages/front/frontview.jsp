@@ -203,8 +203,8 @@
                 	  //利用input控制數量
                 	    var localcounts = $('#localcounts').val();
                 	 		localcounts++;
-//              		 console.log(lat)
-//              		 console.log(lng)
+             		 console.log(lat)
+             		 console.log(lng)
              		 
              			var serchLocalStoreStr = {"lat": lat , "lng": lng ,"counts" : localcounts};
                   		var storeJsonString= JSON.stringify(serchLocalStoreStr);

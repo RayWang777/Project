@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class WebSocketController {
 
-	@GetMapping("index06")
+	@GetMapping("front/chatroom")
 	public String stompws5() {
 		return "front/frontWebSocketChatroom";
 	}

@@ -11,6 +11,12 @@
 <title>Insert title here</title>
 
 <style>
+body{
+background-image:url(../../images/cold_drink_juice_promotion_image.jpg);
+  background-repeat:no-repeat;
+   background-size: 100% 120%;
+   }
+   
 .div1{
  border:1px solid #F0F0F0;
             border-radius:20px;
@@ -40,7 +46,7 @@
 	.fixed1	{
 				position:fixed;
 				width:400px;				
-				bottom:120px;
+				bottom:30px;
 				right:0;
 				}
 				
@@ -55,7 +61,7 @@
 </head>
 <body>
 <div class="div1">
-    <h4>常見問題 FAQ</h4>
+    <h2 style="color:white">常見問題 FAQ</h2>
     <div class="row justify-content-right">
 <div class="col-10">
             <ul class="list-group">
@@ -84,7 +90,7 @@
 
 <div class="div2">
  <div class="row justify-content-right">
- <h4>官方客服</h4>
+ <h2>官方客服</h2>
  </div>
  <div class="row justify-content-left">
 <div class="col-7">

@@ -1,5 +1,7 @@
 body { 
-  background-color:#F0F0F0;
+  background-image:url(../../images/cold_drink_juice_promotion_image.jpg);
+  background-repeat:no-repeat;
+   background-size: 100% 90%;
   font-family: verdana;
   font-size: 15pt;
 }

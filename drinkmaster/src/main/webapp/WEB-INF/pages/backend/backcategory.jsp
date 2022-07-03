@@ -62,7 +62,40 @@
 
 		</tbody>
 	</table>
-	
+	<c:if test="${past=='2' }">
+	<div class="row justify-content-center" style="font-size: 23px;">
+		<c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
+			
+				<c:if test="${page.number!=pageNumber-1 && page.number>=pageNumber-5}">
+					<a href="${contextRoot}/backend/category/select?p=${pageNumber}&select=${select}&filed=${filed}"
+						style="color: #84C1FF"><b> <c:out value="${pageNumber}" />
+					</b></a>
+				</c:if>
+				<c:if test="${page.number==pageNumber-1 }">
+				<c:out value="${pageNumber}"></c:out>
+					</c:if>
+			
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		</c:forEach>
+	</div>
+</c:if>
+<c:if test="${past=='1' }">
+	<div class="row justify-content-center col mb-5" style="font-size: 23px;">
+		<c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
+			
+				<c:if test="${page.number!=pageNumber-1 && page.number>=pageNumber-5}">
+					<a href="${contextRoot}/backend/category/all?p=${pageNumber}"
+						style="color: #84C1FF"><b> <c:out value="${pageNumber}" />
+					</b></a>
+				</c:if>
+				<c:if test="${page.number==pageNumber-1 }">
+					<c:out value="${pageNumber}"></c:out>
+				</c:if>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		</c:forEach>
+	</div>
+</c:if>
 
 	
 </body>

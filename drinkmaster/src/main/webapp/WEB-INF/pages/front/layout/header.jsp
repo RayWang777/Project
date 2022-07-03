@@ -8,14 +8,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 
+<link rel=”icon” href="<c:url value="/images/title_favicon .ico"/>" type=”image/x-icon”>
 
-
-
-
-
-
+<link rel="shortcut icon" href="<c:url value="/images/title_favicon .ico"/>" type="image/x-icon">
 
         <!-- Bootstrap icons-->
 <%--         <link href="${contextRoot}/css/lib/bootstrap-icons.css" rel="stylesheet" /> --%>

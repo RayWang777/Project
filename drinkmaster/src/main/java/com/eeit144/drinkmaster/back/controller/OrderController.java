@@ -278,7 +278,7 @@ public class OrderController<E> {
 				orderBeanxslx = new OrderBeanxslx();
 				orderBeanxslx.setOrderId(order.getOrderId());
 				orderBeanxslx.setUserName(order.getUserBean().getUserName());
-//				orderBeanxslx.setStoreName(order.getStoreBean().getStoreName());
+//有問題			orderBeanxslx.setStoreName(order.getStoreBean().getStoreName());
 				orderBeanxslx.setOrderAddress(order.getOrderAddress());
 				orderBeanxslx.setOrderPhone(order.getOrderPhone());
 				orderBeanxslx.setOrderStatus(order.getOrderStatus());
@@ -305,11 +305,7 @@ public class OrderController<E> {
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("content-disposition", "attachment;fileName="+URLEncoder.encode("訂單列表.xls","UTF-8"));
 			
-//			response.setHeader("content-disposition","attachment;fileName="+URLEncoder.encode("訂單列表.xls","UTF-8"));
-//			ServletOutputStream ops = response.getOutputStream();
-//			workbook.write(ops);
-//			workbook.close();
-//			ops.close();
+
 			return new ResponseEntity<byte[]>(bytes, headers, HttpStatus.OK);
 		}
 		

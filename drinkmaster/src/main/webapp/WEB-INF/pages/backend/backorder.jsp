@@ -145,7 +145,7 @@
 	</label></th>
       <th scope="col">訂單編號</th>
       <th scope="col">訂購人</th>
-      <th scope="col">店名</th>
+<!--       <th scope="col">店名</th> -->
       <th scope="col" style="width: 170px;">建立時間</th>
       <th scope="col">地址</th>
       <th scope="col">電話</th>

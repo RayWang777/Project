@@ -141,7 +141,7 @@
       <th scope="col">商品名稱</th>
       <th scope="col">數量</th>
       <th scope="col">甜度</th>
-      <th scope="col">冷熱</th>
+      <th scope="col">溫度</th>
       <th scope="col">金額</th>
       <th scope="col"></th>
     </tr>

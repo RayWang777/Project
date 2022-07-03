@@ -54,6 +54,17 @@
   padding-top: 10px !important;
   padding-bottom: 10px !important;
 }
+.information{
+	width: 500px;
+    max-width:  100%;
+    
+    display: block;
+    position: relative;
+    font-size: 15px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 2%);
+}
 </style>
 
 <header class="bg-dark py-555" style="padding-bottom: 5px">
@@ -70,58 +81,78 @@
 	</div>
 </header>
 <body>
-
-    <table class="table table-striped" style="width: 70%; transform: translate(25%, 0%);
-    margin-top: 15px; border: 1px solid gray;">
-        <tbody>
-          <tr>
-            <td hidden="${canSeeUser.userId}" id="${canSeeUser.userId}"></td>
-          </tr>
-          <tr>
-            <td scope="row">姓名</td>
-            <td>${canSeeUser.userName}</td>
-          </tr>
-            <tr>
-            <td scope="row">電子信箱</td>
-            <td>${canSeeUser.userAccount}</td>
-          </tr>
-            <tr>
-            <td scope="row">密碼</td>
-            <td>*******</td>
-          </tr>
-          <tr>
-            <td scope="row">地址</td>
-            <td>${canSeeUser.userAddress}</td>
-          </tr>
-          <tr>
-            <td scope="row">連絡電話</td>
-            <td>${canSeeUser.phone}</td>
-          </tr>
-          <tr>
-            <td scope="row">性別</td>
-            <td>${canSeeUser.gender}</td>
-          </tr>
-          <tr>
-            <td scope="row">權限</td>
-            <td>${canSeeUser.role}</td>
-          </tr>
-          <tr>
-            <td scope="row">生日</td>
-            <td>${canSeeUser.birthday}</td>
-          </tr>
-          <tr>
-            <td scope="row">創建日期</td>
-            <td>${canSeeUser.createdate}</td>
-          </tr>
-          <tr>
-          	<td colspan="2" style="text-align: center;">
-          	<a href="${contextRoot}/front/userUpdate">
-				<button type="button" class="btn btn-light">修改</button>
-			</a>
-          	</td>
-          </tr>
-        </tbody>
-      </table>
+	<div class="information">
+    <form:form class="form" method="post" action="${contextRoot}/front/userUpdate/${user.userId}" modelAttribute="user" enctype="multipart/form-data">
+   	<form:hidden path="userId" id="userId"/>
+       <form:label path="userName">名&emsp;&emsp;稱</form:label>
+       <form:input path="userName" class="form-control" onblur="checkEmpty()" id="userName"/>
+       <form:errors path="userName" cssClass="error" />
+       <span id="nameError"></span><br>
+       
+       <form:label path="userAccount">帳&emsp;&emsp;號</form:label>
+       <form:input path="userAccount" class="form-control" id="account" readonly="true"/>
+       <form:errors path="userAccount" cssClass="error" />
+       <span id="accErr"></span><br>
+       
+       <form:label path="userPassword">密&emsp;&emsp;碼</form:label>
+       <form:input path="userPassword" class="form-control"/>
+       <form:errors path="userPassword" cssClass="error" />
+       <span id="passwordSp"></span><br/>  <br>
+       
+       <form:label path="userAddress">地&emsp;&emsp;址</form:label>
+       <form:input path="userAddress" class="form-control" onblur="checkEmpty()" id="address"/>
+       <form:errors path="userAddress" cssClass="error" />
+       <span id="addErr"></span>  <br>
+            
+       <form:label path="phone">電&emsp;&emsp;話</form:label>
+       <form:input path="phone" class="form-control" onblur="checkEmpty()" id="phone"/>
+       <form:errors path="phone" cssClass="error" />
+       <span id="phoneErr"></span>  <br>
+       
+       <form:label path="gender">性&emsp;&emsp;別</form:label>
+       <select name="gender" required="required" class="form-control" onblur="checkEmpty()">
+       		<option>男</option>
+       		<option>女</option>
+       </select>
+       <form:errors path="gender" cssClass="error" />
+       <span id="genderErr"></span>  <br>
+       
+       <form:label path="birthday">生&emsp;&emsp;日</form:label>
+  	   <form:input type="date" path="birthday" class="form-control" onblur="checkEmpty()"/>
+<!--        <input type="date" name="birthday" id="birthday" class="form-control"/> -->
+       <form:errors path="birthday" cssClass="error" />
+       <span id="bdErr"></span>  <br>
+       
+       <form:label path="createdate">創建日期</form:label>
+       <form:input path="createdate" class="form-control" id="createdate" readonly="true"/>
+       <form:errors path="createdate" cssClass="error" /><br>
+       
+       <form:label path="role">職&emsp;&emsp;權</form:label>
+       <form:input path="role" class="form-control" id="role" readonly="true"/>
+       <br>
+       
+       
+		<div class="mb-4">
+			<label for="reallogo" class="form-label">大&ensp;頭&ensp;貼</label>
+			<input name="reallogo" class="form-control" type="file"
+				id="photo" onchange="preview()" />
+			<span id=firmLogoSp><c:url value="${errors.userPhoto}"/></span><br>
+		</div>
+	
+		<div class="mb-3"style="text-align: center;">
+			<img id="logo" src="<c:url value="/backend/user/${user.userId}/photo"/>" width="100px" height="100px" />
+			<c:if test="${user.userId!=null}">
+			<img id="oldlogo" src="<c:url value="/backend/user/${user.userId}/photo"/>"width="100px" height="100px"/>
+			</c:if>
+		</div>
+		<br>
+       
+       
+       <div class="row justify-content-center" style="margin-bottom: 100px">
+       	<input type="submit" class="btn btn-success" value='<c:out value="送出"/>'>
+       </div>
+   </form:form>
+   </div>
 	
 	
 	
@@ -129,6 +160,20 @@
 	
 </body>
 
+<script type="text/javascript">
 
+$(function(){
+	$('#logo').hide();
+});
+
+function preview() {
+	logo.src=URL.createObjectURL(event.target.files[0]);
+	if ( (event.target.files[0].type).startsWith("image")){
+		$('#oldlogo').hide();
+		$('#logo').show();
+	} 
+}
+
+</script>
 
 <jsp:include page="layout/footer.jsp"></jsp:include>

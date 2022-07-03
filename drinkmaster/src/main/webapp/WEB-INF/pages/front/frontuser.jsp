@@ -115,9 +115,13 @@
           </tr>
           <tr>
           	<td colspan="2" style="text-align: center;">
-          	<a href="${contextRoot}/front/userUpdate">
-				<button type="button" class="btn btn-light">修改</button>
-			</a>
+<%--           	<a href="${contextRoot}/front/userUpdate"> --%>
+<!-- 				<button type="button" class="btn btn-light">修改</button> -->
+<!-- 			</a> -->
+			<div style="margin: 5px"><c:url value="/front/userUpdate/${canSeeUser.userId}" var="update_url" />
+				<a href="${update_url}">
+					<button type="button" class="btn btn-light">編輯</button>
+				</a></div>
           	</td>
           </tr>
         </tbody>

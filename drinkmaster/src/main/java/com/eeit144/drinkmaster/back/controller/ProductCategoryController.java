@@ -54,6 +54,7 @@ public class ProductCategoryController {
 	@GetMapping("category/all")
 	public ModelAndView categoryView(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber
 			,@SessionAttribute("userBean") UserBean userBean) {
+		mav.getModel().put("past", "1");
 		if(userBean.getRole().equals("admin")) {
 		Page<ProductCategoryBean> page = categoryService.findByPage(pageNumber);
 		mav.getModel().put("page", page);
@@ -80,6 +81,7 @@ public class ProductCategoryController {
 	@GetMapping("category/select")
 	public ModelAndView selectLike(ModelAndView mav, @RequestParam(name = "p", defaultValue = "1") Integer pageNumber,
 			@RequestParam("select") String select, @RequestParam("filed") String filed,@SessionAttribute("userBean") UserBean userBean) {
+		mav.getModel().put("past", "2");
 		if(userBean.getRole().equals("admin")){
 		Page<ProductCategoryBean> page = categoryService.select(pageNumber, select, filed);
 		mav.getModel().put("page", page);

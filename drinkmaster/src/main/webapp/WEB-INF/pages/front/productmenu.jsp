@@ -7,6 +7,8 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+	
+	<title>店家菜單</title>
 <body style="background-color: #F2FCFF;">
 
  <header class="bg-dark py-5">

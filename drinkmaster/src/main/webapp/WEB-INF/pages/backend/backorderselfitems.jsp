@@ -131,7 +131,16 @@
       <td><c:out value="${orderItems.productBean.productName}"/></td>
       <td><c:out value="${orderItems.quantity}"/></td>
       <td><c:out value="${orderItems.sweet}"/></td>
-      <td><c:out value="${orderItems.quantity}"/></td>
+      <c:choose>
+      <c:when test="${orderItems.coldhot=='冷'}">
+      <td style="color: blue;font-weight: bold;">
+      <c:out value="冷"/></td>
+      </c:when>
+      <c:when test="${orderItems.coldhot=='熱'}">
+      <td style="color: red;font-weight: bold;">
+      <c:out value="熱"/></td>
+      </c:when>
+      </c:choose>
       <td><c:out value="${orderItems.price}"/></td>
 
       <td>

@@ -235,6 +235,16 @@ public class OrderController<E> {
 			OrderBean orderBean = new OrderBean();
 			mav.getModel().put("orderBean", orderBean);
 			mav.getModel().put("page", page);
+			
+//			if(orderStatus.equals("待付款") || orderStatus.equals("待出貨")) {
+//				Page<OrderBean> page = orderService.findByorderStatus(pageNumber, orderStatus);
+//				mav.getModel().put("page", page);
+//			}else {
+//				Page<OrderBean> page = orderService.findByorderStatus(pageNumber, orderStatus);
+//				mav.getModel().put("page", page);			
+//			}
+//			
+			
 			mav.setViewName("/backend/backorder");
 			return mav;
 		}

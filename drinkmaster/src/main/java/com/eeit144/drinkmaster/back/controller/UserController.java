@@ -101,11 +101,13 @@ public class UserController {
 		String role = user.getRole();
 
 		System.out.println("嗨嗨!!" + role);
+		m.addAttribute("userBean", user);
 		if(role.equals("admin")) {
-			m.addAttribute("userBean", user);
 			return("redirect:/backend/");
 			
-		} else if(role.equals("firm")) {
+		} 
+		
+		if(role.equals("firm")) {
 			List<FirmBean> firmByUserId = firmService.findFirmByUserId(user.getUserId());
 			FirmBean firmBean = null;
 			

@@ -9,68 +9,128 @@
 <head>
 <meta charset="UTF-8">
 <title>飲君子 註冊</title>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-	rel="stylesheet">
-
-
-
-<link href="<c:url value="/css/lib/themify-icons.css"/>"
-	rel="stylesheet">
-<link href="<c:url value="/css/lib/menubar/sidebar.css"/>"
-	rel="stylesheet">
-<link href="<c:url value="/css/lib/bootstrap.min.css"/>"
-	rel="stylesheet">
-<link href="<c:url value="/css/style.css"/>" rel="stylesheet">
-
-<link
-	href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
-	rel="stylesheet" />
-
 
 
 <style>
-li {
-	font-size: large;
+.shape-ex6{
+    width: 200px;
+    height: 200px;
+    max-width:  100%;
+    
+    display: block;
+    position: relative;
+    font-size: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -10%);
+    
+    border-radius:50%;
+    border: 2px solid;
+    overflow:hidden;
+}
+.shape-ex6-block{
+    width: 100%; 
+    height: 100%;
+    position: absolute;
+    text-align: center;
+    overflow:hidden;
+    
+    margin: 0 auto;
+}
+.shape-ex6-block:before{
+    content: ''; 
+    display: inline-block;
+    height: 100%;
+    width: 0;
+    vertical-align: middle;
+    overflow:hidden;
+}
+.shape-ex6-img{
+    max-width: 100%; 
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: inline-block;
+    vertical-align: middle;
+    overflow:hidden;
+}
+.py-555 {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+.information{
+	width: 500px;
+    max-width:  100%;
+    
+    display: block;
+    position: relative;
+    font-size: 15px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 2%);
+}
+span{
+	color: #ae0000;
 }
 </style>
-</head>
 
-<div class="row justify-content-center">
-</div>
-
-<div class="container">
-
-<h2 class="mb-4" style="text-align: center; margin-top: 20px" >註冊</h2>
-
-<div class="row justify-content-center">
-
-<div>
-   <form:form class="form" method="post" action="${contextRoot}/backend/register" modelAttribute="user" enctype="multipart/form-data">
+<header class="bg-dark py-555" style="padding-bottom: 5px">
+	<div class="container px-4 px-lg-5 my-5">
+		<div class="text-center text-white">
+			<div class="shape-ex6">
+			<div class="shape-ex6-block">
+					
+				<img class="shape-ex6-img" id="logo" src="data:image/jpg;base64,<c:out value='${canSeeUser.byteArrayString}'/>" 
+				width="100px" height="100px" />
+				<c:if test="${user.userId==null}">
+				<img class="shape-ex6-img" id="oldlogo" src="data:image/jpg;base64,<c:out value='${canSeeUser.byteArrayString}'/>" 
+				onerror="nofind()"/>
+				</c:if>
+				
+			</div>
+			</div>
+			   
+			<form:form class="form" method="post" action="${contextRoot}/front/register" modelAttribute="user" enctype="multipart/form-data">
+				
+			</form:form>
+		</div>
+	</div>
+</header>
+<body>
+	<div class="information">
+    <form:form class="form" method="post" action="${contextRoot}/front/register" modelAttribute="user" enctype="multipart/form-data">
    	<form:hidden path="userId" id="userId"/>
+   	
+   	   <div class="mb-4">
+			<label for="reallogo" class="form-label">大&ensp;頭&ensp;貼</label>
+			<input name="reallogo" class="form-control" type="file" id="photo" onchange="preview()" />
+			<span id=firmLogoSp><c:url value="${errors.userPhoto}"/></span>
+	   </div>
+	   
        <form:label path="userName">名&emsp;&emsp;稱</form:label>
        <form:input path="userName" class="form-control" onblur="checkEmpty()" id="userName"/>
        <form:errors path="userName" cssClass="error" />
-       <span id="nameError"></span><br><br>
+       <span id="nameError"></span><br>
        
        <form:label path="userAccount">帳&emsp;&emsp;號</form:label>
        <form:input path="userAccount" class="form-control" onblur="checkEmpty()" id="account"/>
        <form:errors path="userAccount" cssClass="error" />
-       <span id="accErr"></span><br><br>
+       <span id="accErr"></span><br>
        
        <form:label path="userPassword">密&emsp;&emsp;碼</form:label>
-       <form:input path="userPassword" class="form-control"/>
+       <form:password value="${user.userPassword}" path="userPassword" class="form-control"/>
        <form:errors path="userPassword" cssClass="error" />
-       <span id="passwordSp"></span><br/>  <br><br>
+       <span id="passwordSp"></span><br/>  <br>
        
        <form:label path="userAddress">地&emsp;&emsp;址</form:label>
        <form:input path="userAddress" class="form-control" onblur="checkEmpty()" id="address"/>
        <form:errors path="userAddress" cssClass="error" />
-       <span id="addErr"></span>  <br><br>
+       <span id="addErr"></span>  <br>
             
        <form:label path="phone">電&emsp;&emsp;話</form:label>
        <form:input path="phone" class="form-control" onblur="checkEmpty()" id="phone"/>
        <form:errors path="phone" cssClass="error" />
-       <span id="phoneErr"></span>  <br><br>
+       <span id="phoneErr"></span>  <br>
        
        <form:label path="gender">性&emsp;&emsp;別</form:label>
        <select name="gender" required="required" class="form-control" onblur="checkEmpty()">
@@ -78,53 +138,41 @@ li {
        		<option>女</option>
        </select>
        <form:errors path="gender" cssClass="error" />
-       <span id="genderErr"></span>  <br><br>
+       <span id="genderErr"></span>  <br>
        
        <form:label path="birthday">生&emsp;&emsp;日</form:label>
-<%--   <form:input path="birthday" class="form-control"/> --%>
-       <input type="date" name="birthday" id="birthday" class="form-control"/>
-       <form:errors path="birthday" cssClass="error" /><br><br>
+  	   <form:input type="date" path="birthday" class="form-control" onblur="checkEmpty()"/>
+<!--        <input type="date" name="birthday" id="birthday" class="form-control"/> -->
+       <form:errors path="birthday" cssClass="error" />
+       <span id="bdErr"></span>  <br>
        
-       <form:hidden path="createdate" class="form-control" disabled="true" />
+       <form:label path="createdate">創建日期</form:label>
+       <form:input path="createdate" class="form-control" id="createdate" readonly="true"/>
+       <form:errors path="createdate" cssClass="error" /><br>
        
        <form:label path="role">職&emsp;&emsp;權</form:label>
-       <select name="role" required="required" class="form-control" onblur="checkEmpty()">
-       		<option value="firm">廠商</option>
-       		<option value="store">店家</option>
-       		<option value="user">一般會員</option>
-       </select>
-       <form:errors path="role" cssClass="error" />
-       <span id="roleErr"></span>  <br><br>
-       
-       
-		<div class="mb-4">
-			<label for="reallogo" class="form-label">大&ensp;頭&ensp;貼</label>
-			<input name="reallogo" class="form-control" type="file"
-				id="photo" onchange="preview()" />
-			<span id=firmLogoSp><c:url value="${errors.userPhoto}"/></span><br>
-		</div>
-	
-		<div class="mb-3"style="text-align: center;">
-			<img id="logo" src="<c:url value="/backend/user/${user.userId}/photo"/>" width="100px" height="100px" />
-			<c:if test="${user.userId!=null}">
-			<img id="oldlogo" src="<c:url value="/backend/user/${user.userId}/photo"/>"width="100px" height="100px"/>
-			</c:if>
-		</div>
-       
+       <form:input path="role" class="form-control" id="role" value="user" readonly="true"/>
+       <br>
        
        <div class="row justify-content-center" style="margin-bottom: 100px">
        	<input type="submit" class="btn btn-success" value='<c:out value="送出"/>'>
        </div>
    </form:form>
-</div>
-</div>
-</div>
+   </div>
+</body>
+
 
 <script type="text/javascript">
 
 $(function(){
 	$('#logo').hide();
 });
+
+function nofind(){
+	  var img=event.srcElement;
+	  img.src="http://localhost:8081/drinkmaster/images/user.png"; //替換的圖片
+	  img.onerror=null; //控制不要一直觸發錯誤
+}
 
 function preview() {
 	logo.src=URL.createObjectURL(event.target.files[0]);

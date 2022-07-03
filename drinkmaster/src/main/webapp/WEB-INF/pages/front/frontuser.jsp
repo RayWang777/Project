@@ -54,6 +54,9 @@
   padding-top: 10px !important;
   padding-bottom: 10px !important;
 }
+span{
+	color: #ae0000;
+}
 </style>
 
 <header class="bg-dark py-555" style="padding-bottom: 5px">
@@ -61,7 +64,8 @@
 		<div class="text-center text-white">
 			<div class="shape-ex6">
 			<div class="shape-ex6-block">
-				<img class="shape-ex6-img" src="data:image/jpg;base64,<c:out value='${canSeeUser.byteArrayString}'/>"/>
+				<img class="shape-ex6-img" src="data:image/jpg;base64,<c:out value='${canSeeUser.byteArrayString}'/>"
+					onerror="nofind()"/>
 			</div>
 			</div>
 			<h1 class="display-4 fw-bolder">${canSeeUser.userName}</h1>
@@ -133,6 +137,13 @@
 	
 </body>
 
+<script type="text/javascript">
+function nofind(){
+  var img=event.srcElement;
+  img.src="http://localhost:8081/drinkmaster/images/user.png"; //替換的圖片
+  img.onerror=null; //控制不要一直觸發錯誤
+}
+</script>
 
 
 <jsp:include page="layout/footer.jsp"></jsp:include>

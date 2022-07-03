@@ -83,28 +83,29 @@ public class UserController {
 		UserBean user = new UserBean();
 		
 		//將密碼加密才能跟資料庫比對
-//		String encryptPwd = Util.saleCode(userPassword);
+		String encryptPwd = Util.saleCode(userPassword);
 		
 		System.out.println("PostMapping:" + userAccount + "  " + userPassword);
 
-//		user = userService.findByAccPwd(userAccount, encryptPwd);
-		user = userService.findByAccPwd(userAccount, userPassword);
-
-		if(user != null) {
-			m.addAttribute(user);
-		} else {
+		try {
+			user = userService.findByAccPwd(userAccount, encryptPwd);
+		} catch (Exception e) {
+			m.addAttribute("errorloginstr", "帳號或密碼錯誤!");
 			return "redirect:/backend/login";
 		}
+//		user = userService.findByAccPwd(userAccount, userPassword);
+		
+		System.out.println("UserBean的password = " + user.getUserPassword());
 
-		m.addAttribute("userBean",user);
 		
 		String role = user.getRole();
+
+		System.out.println("嗨嗨!!" + role);
 		if(role.equals("admin")) {
-			
+			m.addAttribute("userBean", user);
 			return("redirect:/backend/");
 			
 		} else if(role.equals("firm")) {
-			
 			List<FirmBean> firmByUserId = firmService.findFirmByUserId(user.getUserId());
 			FirmBean firmBean = null;
 			
@@ -130,8 +131,11 @@ public class UserController {
 			m.addAttribute("canSeeStore", storeBean);
 			
 			return("redirect:/backend/");
-		}
+		} 
+		System.out.println("程式跑到這邊惹");
+		m.addAttribute("errorloginstr", "請聯絡平台廠商獲取權限");
 		return "redirect:/backend/login";
+		
 	}
 	
 	
@@ -185,12 +189,12 @@ public class UserController {
 		
 		// 密碼加密
 		
-//		String pwd= user.getUserPassword();
-//		
-//		String encryptPwd = Util.saleCode(pwd);
-//		System.out.println(encryptPwd);
-//		
-//		user.setUserPassword(encryptPwd);
+		String pwd= user.getUserPassword();
+		
+		String encryptPwd = Util.saleCode(pwd);
+		System.out.println(encryptPwd);
+		
+		user.setUserPassword(encryptPwd);
 		
 		//存入資料庫
 		userService.insertUser(user);
@@ -234,7 +238,8 @@ public class UserController {
 		userDTO.setUserId(id);
 		userDTO.setUserName(findById.getUserName());
 		userDTO.setUserAccount(findById.getUserAccount());
-		userDTO.setUserPassword(findById.getUserPassword());
+		//將資料庫密碼解密回傳view
+		userDTO.setUserPassword(Util.DeSaleCode(findById.getUserPassword()));
 		userDTO.setUserAddress(findById.getUserAddress());
 		userDTO.setPhone(findById.getPhone());
 		userDTO.setGender(findById.getGender());
@@ -284,6 +289,14 @@ public class UserController {
 			user.setBirthday(oldUser.getBirthday());
 		}
 		
+		//密碼加密
+		String pwd= user.getUserPassword();
+		
+		String encryptPwd = Util.saleCode(pwd);
+		System.out.println(encryptPwd);
+		
+		user.setUserPassword(encryptPwd);
+		//存入資料庫
 		userService.insertUser(user);
 		
 		return "redirect:/backend/user/all";
@@ -329,13 +342,17 @@ public class UserController {
 	@GetMapping("test")
 	public void test(){
 		
-		String text="test";
-		String text2="test";
-		
-		String saleCode = Util.saleCode(text);
+		String saleCode = Util.saleCode("jerry6666");
 		System.out.println(saleCode);
-		String saleCode2 = Util.saleCode(text2);
+		String saleCode2 = Util.saleCode("mark1234");
 		System.out.println(saleCode2);
+		String saleCode3 = Util.saleCode("mary4317");
+		System.out.println(saleCode3);
+		String saleCode4 = Util.saleCode("cindy9527");
+		System.out.println(saleCode4);
+		String saleCode5 = Util.saleCode("tom7777");
+		System.out.println(saleCode5);
+
 		
 		String deSaleCode = Util.DeSaleCode(saleCode);
 		System.out.println(deSaleCode);

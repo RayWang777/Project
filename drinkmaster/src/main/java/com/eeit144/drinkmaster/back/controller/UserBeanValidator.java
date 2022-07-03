@@ -31,7 +31,6 @@ public class UserBeanValidator implements Validator{
 			errors.rejectValue("userAccount","", "帳號不能小於6個字元");
 		}
 		
-		
 	}
 
 }

@@ -31,6 +31,9 @@
 li {
 	font-size: large;
 }
+span{
+	color: #ae0000;
+}
 </style>
 </head>
 

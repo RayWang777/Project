@@ -6,6 +6,11 @@
 <jsp:include page="layout/header.jsp" />
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
+<style>
+span{
+	color: #ae0000;
+}
+</style>
 <div class="row justify-content-center">
 </div>
 

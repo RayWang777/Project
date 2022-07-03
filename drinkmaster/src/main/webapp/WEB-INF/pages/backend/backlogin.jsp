@@ -42,6 +42,9 @@
 	  left: 50%;
 	  margin: -185px 0 0 -250px;
 	}
+	span{
+		color: #ae0000;
+	}
 </style>
 
 </head>
@@ -66,16 +69,17 @@
 		<input type="password" class="form-control" name="userPassword" id="userPassword" placeholder="請輸入密碼"/>
 	</div>
 	<div>
-		<form:errors path="pass" cssClass="error" />
+		<form:errors path="errorloginstr" cssClass="error" />
+	</div>
+	<div style="color: white; font-weight:bold; text-align: center;">
+		<span id="errorloginstr"><c:out value="${errorloginstr}" /></span>
 	</div>
 	<div class="mb-3">
 	<button id="buttonsubmit" type="submit" class="btn btn-primary">登入</button>
 	<a href="${contextRoot}/backend/register"><button type="button" class="btn btn-light" style="margin-left: 10px">註冊</button></a>
 	</div>
 
-	<div class="mb-3">
-		<span><c:out value="${errorloginstr}"></c:out></span>
-	</div>
+	
 	
 </form:form>
 

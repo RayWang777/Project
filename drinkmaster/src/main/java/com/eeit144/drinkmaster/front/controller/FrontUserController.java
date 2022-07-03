@@ -25,6 +25,7 @@ import com.eeit144.drinkmaster.back.controller.UserBeanValidator;
 import com.eeit144.drinkmaster.back.model.FirmService;
 import com.eeit144.drinkmaster.back.model.StoreService;
 import com.eeit144.drinkmaster.back.model.UserService;
+import com.eeit144.drinkmaster.back.util.Util;
 import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.bean.UserBean;
@@ -83,18 +84,24 @@ public class FrontUserController {
 		
 		UserBean user = new UserBean();
 			
+		//將密碼加密才能跟資料庫比對
+		String encryptPwd = Util.saleCode(userPassword);
+		
 		System.out.println("PostMapping:" + userAccount + "  " + userPassword);
 
-		user = userService.findByAccPwd(userAccount, userPassword);
+		try {
+			user = userService.findByAccPwd(userAccount, encryptPwd);
+		} catch (Exception e) {
+			m.addAttribute("errorloginstr", "帳號或密碼錯誤!");
+			return "redirect:/backend/login";
+		}
+
+//		user = userService.findByAccPwd(userAccount, userPassword);
 		if(user != null) {
-			m.addAttribute(user);
+			m.addAttribute("canSeeUser",user);
 		} else {
 			return "/front/login";
 		}
-
-		m.addAttribute("canSeeUser",user);
-		
-		
 		return "redirect:/front/";
 	}
 	
@@ -102,13 +109,15 @@ public class FrontUserController {
 	
 	@GetMapping("userUpdate/{id}")
 	public String updateById(@PathVariable("id") Integer id, Model m) {
+		
 		UserBean findById = userService.findById(id).get();
 		UserBeanDTO userDTO = new UserBeanDTO();
 		
 		userDTO.setUserId(id);
 		userDTO.setUserName(findById.getUserName());
 		userDTO.setUserAccount(findById.getUserAccount());
-		userDTO.setUserPassword(findById.getUserPassword());
+		//將資料庫密碼解密回傳view
+		userDTO.setUserPassword(Util.DeSaleCode(findById.getUserPassword()));
 		userDTO.setUserAddress(findById.getUserAddress());
 		userDTO.setPhone(findById.getPhone());
 		userDTO.setGender(findById.getGender());
@@ -158,10 +167,81 @@ public class FrontUserController {
 			user.setBirthday(oldUser.getBirthday());
 		}
 		
+		//密碼加密
+		String pwd= user.getUserPassword();
+		
+		String encryptPwd = Util.saleCode(pwd);
+		System.out.println(encryptPwd);
+		
+		user.setUserPassword(encryptPwd);
+		
+		//回傳view & DB資料
 		m.addAttribute("canSeeUser",user);
 		userService.insertUser(user);
 		
 		return "/front/frontuser";
 	}
 
+	@GetMapping("register")
+	public String insertUser(Model m) {
+		UserBeanDTO user = new UserBeanDTO();
+		m.addAttribute("user", user);
+		return "/front/frontregister";
+	}
+
+	@PostMapping("register")
+	// 前端會提供UserBean user 跟 MultipartFile photo這兩個物件
+	public String insertUserGo(@ModelAttribute("user") UserBean user, BindingResult result,
+			@RequestParam("reallogo") MultipartFile photo,Model m) {
+
+		System.out.println("user account：" + user.getUserAccount());
+		//確認是否已有帳號
+		if(!userService.findUserByAccount(user.getUserAccount())) {
+			System.out.println("成功進入帳號除錯");
+			m.addAttribute("accErr", "帳號已有人使用");
+			return "/front/frontregister";
+		};
+		System.out.println("準備進入後端識別格式");
+		// 以下為用UserBeanValidator後端識別欄位錯誤格式
+		UserBeanValidator validator = new UserBeanValidator();
+		validator.validate(user, result);
+		if(result.hasErrors()) {
+			return "/front/frontregister";
+		}
+		System.out.println("完成後端識別格式");
+		// 以下為新增動作
+		String contentType = photo.getContentType();
+		System.out.println(contentType);
+		// 把當下的時間加入user內
+		Date createDate = new Date();
+		user.setCreatedate(createDate);
+		if(user.getBirthday() == null) {
+			user.setBirthday(createDate);
+		}
+		System.out.println("完成塞入日期");
+		try {
+			user.setPhoto(photo.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+			UserBeanDTO userDTO = new UserBeanDTO();
+			m.addAttribute("user", userDTO);
+			return "/front/frontregister";
+		}
+		System.out.println("完成圖片塞入user");
+		
+		// 密碼加密
+		
+		String pwd= user.getUserPassword();
+		
+		String encryptPwd = Util.saleCode(pwd);
+		System.out.println(encryptPwd);
+		
+		user.setUserPassword(encryptPwd);
+		
+		//存入資料庫
+		userService.insertUser(user);
+		System.out.println("完成新增");
+		return "redirect:/front/login";
+	}
+	
 }

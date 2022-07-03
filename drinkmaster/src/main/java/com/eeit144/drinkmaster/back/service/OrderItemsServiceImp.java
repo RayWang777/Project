@@ -2,6 +2,7 @@ package com.eeit144.drinkmaster.back.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.eeit144.drinkmaster.back.model.OrderItemsService;
 import com.eeit144.drinkmaster.bean.OrderItems;
 import com.eeit144.drinkmaster.bean.ProductBean;
+import com.eeit144.drinkmaster.bean.ShopcarBean;
 import com.eeit144.drinkmaster.dao.OrderItemsRepostiory;
 
 @Service
@@ -89,5 +91,11 @@ public class OrderItemsServiceImp implements OrderItemsService{
 	public List<Integer> countByProductBean() {
 		return oitemDao.countByproductBean();
 	}
+	@Override
+	public void insertOrderItems(Set<OrderItems> items) {
+		oitemDao.saveAll(items);
+	}
+	
+
 	
 }

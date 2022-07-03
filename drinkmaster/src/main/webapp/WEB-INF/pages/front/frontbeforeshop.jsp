@@ -9,7 +9,7 @@
 
 <head>
 <meta charset="utf-8" />
-<title>購物車</title>
+<title>訂購</title>
 <link rel="stylesheet" href="<c:url value="/css/lib/bootstrap.min.css"/>"/>
 <link rel="stylesheet" href="<c:url value="/css/lib/font-awesome.min.css"/>"/>
 
@@ -58,26 +58,28 @@
 <body>
 <div class="container" id="container">
 <form:form class="form" method="post" action="${contextRoot}/front/shopcar/buy" modelAttribute="productBean">
-<input type="text" value="${productBean.productId}" name="shopcarproductId">
+<input type="hidden" value="${productBean.productId}" name="shopcarproductId">
+<input type="text" value="${productCategoryBean.storeId}" name="shopcarstoreId">
 	<table id="cart" class="table table-hover table-condensed">
     				<thead>
 						<tr>
-							<th style="width:150px;text-align: center;" colspan="2">商品</th>
+							<th style="width:120px;text-align: center;" colspan="2">商品</th>
 <!-- 							<th style="width:80px;text-align: center;"></th> -->
-							<th style="width:30px;text-align: center;">單價</th>
+							<th style="width:80px;text-align: center;">單價</th>
 							<th style="width:150px;text-align: center;">數量</th>
 							<th style="width:30px;text-align: center;">甜度</th>
 							<th style="width:30px;text-align: center;">冷熱</th>
-							<th style="width:80px;text-align: center;" class="text-center">總金額</th>
+							<th style="width:70px;text-align: center;" class="text-center">總金額</th>
 							<th style="width:20px"></th>
+							
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="tbody">
 						<tr>
 							<td data-th="Product">
 <!-- 								<div class="row"> -->
 									<div class="col-sm-2 hidden-xs">
-									<img src="${productBean.productImage}" style="width: 300px;text-align: center;" name="shopcarimg" /></div>
+									<img src="${productBean.productImage}" style="width: 250px;height: 200px;text-align: center;" name="shopcarimg" /></div>
 									<div class="col-sm-10">
 										
 										
@@ -112,10 +114,10 @@
 							<option value="熱">熱</option>
 							</select>							
 							</td>
-							<td data-th="Subtotal" class="text-center"  style="text-align: center;">
+							<td data-th="Subtotal" class="text-center"  >
 <%-- 							<c:out value="${productBean.price}"/> --%>
 <%-- 							<form:input path="price" style="width:100px" readonly="true"/> --%>
-								<input name="totalprice" id="totalprice" style="width:100px" readonly="true"/>
+								<input name="totalprice" id="totalprice" style="width:100px;text-align: center;border-style:none;" readonly="true"/>
 							</td>
 							
 							<td class="actions" data-th="">
@@ -162,7 +164,29 @@ $(function(){
 // //         $('#totalprice').html(totalprice);  
 //         $('#totalprice').attr('value',totalprice);
 //     })
+
+
+	$(document).ready(function(){
+		var price = $('#price').val();      
+        var number = $('#number').val();
+        var totalprice = price*number;
+
+        $('#totalprice').attr('value',totalprice);
+		
+	})	
 	
+	$('#tbody').mouseover(function(){
+		$('#totalprice').css("background-color","rgb(218, 218, 218)");
+		$('#price').css("background-color","rgb(218, 218, 218)");
+		$('#productname').css("background-color","rgb(218, 218, 218)");
+	})
+
+	
+	$('#tbody').mouseout(function(){
+		$('#totalprice').css("background-color","white");
+		$('#price').css("background-color","white");
+		$('#productname').css("background-color","white");
+	})
 	
 	$('#number').click(function(){				
         var price = $('#price').val();      

@@ -1,5 +1,8 @@
 package com.eeit144.drinkmaster.bean;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class ShopcarBean {
 
 	private Integer productId;
@@ -10,8 +13,43 @@ public class ShopcarBean {
 	private String sweet;
 	private String coldhot;
 	private Integer totalPrice;
+	private String phone;
+	private String address;
 	
+	private Map<Integer, OrderItems> cart = new LinkedHashMap< >();
 	
+	public Map<Integer, OrderItems>  getContent() { 
+		return cart;
+	}
+	
+	public String getPhone() {
+		return phone;
+	}
+
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+
+	public Map<Integer, OrderItems> getCart() {
+		return cart;
+	}
+
+	public void setCart(Map<Integer, OrderItems> cart) {
+		this.cart = cart;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+
 	public ShopcarBean() {
 	}
 

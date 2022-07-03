@@ -71,4 +71,9 @@ public interface CommentRepostiory extends JpaRepository<CommentBean, Integer> {
 	
 	public List<CommentBean> findByStoreBean_storeId(Integer storeId);
 	
+	
+	@Query(value="select * from comment where userid = :userId",nativeQuery = true)
+	public List<CommentBean> findCommentByUserid(@Param(value="userId")Integer storeId);
+	
+	
 }

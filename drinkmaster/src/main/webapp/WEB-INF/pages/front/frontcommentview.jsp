@@ -30,9 +30,30 @@ div.awesomeRating {
 	float:right;
 }
 
-</style>
+
+
+/*                背景滿版     */
+                    html { 
+            			height: 100%; 
+     					} 
+                    body {
+                        background-image: url("<c:url value="/images/cold_drink_juice_promotion_image.jpg"/>");
+                        background-repeat: no-repeat;
+                        background-attachment:fixed;
+                        background-position: 50% 40%;
+                        background-size: 100% 120%;
+                    }
+/*                背景滿版    */
+
+                    .swiper-container {
+                        width: 830px;
+                        height: 370px;
+                    }
+                </style>
+
+
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>comment</title>
 </head>
 <body>
 
@@ -44,8 +65,8 @@ div.awesomeRating {
 
 <div class="row justify-content-center">
 <div class="col-9">
-<h1 style="text-align:center">評論區</h1>
-<div class="card">
+<h1 style="text-align:center">評論</h1>
+<div class="card border-warning">
  
   <div class="card-body">
   
@@ -79,8 +100,9 @@ div.awesomeRating {
   				<div class="row justify-content-center">
 				<div class="col-9">
   				
-<%--   				<a href="${contextRoot}/front/comment/login?storeid=${store.storeId}"></a> --%>
-  				<h3 style="color: blue">登入後可評論~</h3>
+  				<a href="${contextRoot}/front/login" style="text-decoration:none">
+  				<h3 style="color: red">登入後可評論~</h3>
+  				</a>
 				</div>
 				</div>
   				
@@ -249,9 +271,9 @@ div.awesomeRating {
 		     	    	comment_data += '<input id="commentPhoto1" name="commentPhoto1"  type="file" class="form-control" onchange="preview()" />'
 		     	    	
 		     	    	comment_data += '<img id="image" src="'+result.commentPhoto+'" width="100px" height="100px" />'
-		     	    	comment_data +=	'<c:if test="${' + result.commentPhoto + '!=null}">'
+// 		     	    	comment_data +=	'<c:if test="${' + result.commentPhoto + '!=null}">'
 		     	    	comment_data +=	'<img id="oldImage" src="' + result.commentPhoto + '" width="100px" height="100px"/>'
-						comment_data += '</c:if>'
+// 						comment_data += '</c:if>'
 						
 		     	    	
 		     	    	comment_data +=	'<fmt:formatDate pattern="yyyy 年 MM 月 dd 日 a hh:mm:ss EEEE" value="${result.createTime}" />'
@@ -295,8 +317,11 @@ div.awesomeRating {
 	     	    	});
 	     	    	
 	     	    	$(function() {
+	     	    		if(result.commentPhoto == null){
+	     	    			$('#oldImage').hide();
+	     	    		}
 	     	    		
-	     	   		$('#image').hide();
+	     	   			$('#image').hide();
 	     	   	});
 
 	     	   	function preview() {
@@ -469,7 +494,7 @@ div.awesomeRating {
 <div class="row justify-content-center">
 <div class="col-9">
 
-<div class="card">
+<div class="card border-warning">
   <div class="card-header">
 		<c:out value="${comment.storeBean.storeName}"></c:out>
   </div>
@@ -511,15 +536,16 @@ div.awesomeRating {
 
 </c:forEach>
 
-<div class="row justify-content-center">
+<div class="row justify-content-center" style="text-align: center;font-size:x-large; ;" >
 	<div class="col-9">
+	<span style=" background-color: white;">
 		<c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
 		
 		<c:choose>
 			<c:when test="${page.number != pageNumber-1}" >
 			
 				<c:forEach var="store" items="${arrayList}">
-				<a href="${contextRoot}/front/comment/all/?p=${pageNumber}&storeid=${store.storeId}" > <c:out value="${pageNumber}" /></a>
+				<a href="${contextRoot}/front/comment/all/?p=${pageNumber}&storeid=${store.storeId}"> <c:out value="${pageNumber}" /></a>
 				</c:forEach>
 			
 			</c:when>
@@ -536,7 +562,7 @@ div.awesomeRating {
 			
 		
 		</c:forEach>
-
+	</span>
 	</div>
 </div>
 

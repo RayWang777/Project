@@ -29,10 +29,10 @@ public class LoginInterceptor implements HandlerInterceptor {
 			throws Exception {
 		String uri = request.getRequestURI();
 		
-		if(uri.equals("/drinkmaster/front/loginGo") || uri.equals("/drinkmaster/front/login") || uri.equals("/drinkmaster/front/")) {
-//			System.out.println("123");
-			return true;
-		}
+//		if(uri.equals("/drinkmaster/front/loginGo") || uri.equals("/drinkmaster/front/login") || uri.equals("/drinkmaster/front/")) {
+////			System.out.println("123");
+//			return true;
+//		}
 //		System.out.println(uri);
 		HttpSession session = request.getSession();
 		UserBean user = (UserBean) session.getAttribute("canSeeUser");

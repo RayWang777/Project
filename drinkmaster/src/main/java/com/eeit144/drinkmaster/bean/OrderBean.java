@@ -87,14 +87,16 @@ public class OrderBean {
 
 	
 	public OrderBean(Integer orderId, Integer totalPrice, String orderPhone, String orderAddress, Date createTime,
-			Set<OrderItems> orderItems) {
+			String orderStatus) {
 		super();
 		this.orderId = orderId;
 		this.totalPrice = totalPrice;
 		this.orderPhone = orderPhone;
 		this.orderAddress = orderAddress;
 		this.createTime = createTime;
-		this.orderItems = orderItems;
+//		this.orderItems = orderItems;
+		this.orderStatus = orderStatus;
+//		this.userId = userId;
 	}
 
 

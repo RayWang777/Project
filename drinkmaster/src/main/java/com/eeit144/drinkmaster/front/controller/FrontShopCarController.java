@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.eeit144.drinkmaster.back.model.OrderItemsService;
+import com.eeit144.drinkmaster.back.model.OrderService;
 import com.eeit144.drinkmaster.back.model.UserService;
 //import com.eeit144.drinkmaster.back.service.ProductCategoryServiceImp;
 import com.eeit144.drinkmaster.back.service.ProductServiceImp;
@@ -51,6 +52,10 @@ public class FrontShopCarController {
 	
 	@Autowired
 	private OrderItemsService oitemService;
+	
+	@Autowired
+	private OrderService orderService;
+	
 	
 	public void testUserSession(Model m){
 		UserBean user = userService.findById(1).get();
@@ -166,8 +171,10 @@ public class FrontShopCarController {
 //		}
 //		
 		
+//		Map<Integer, ShopcarBean> cart = new LinkedHashMap<>();
 		
-		
+	
+				
 		ShopcarBean shopcarBean = new ShopcarBean();
 		shopcarBean.setProductImage(productBean.getProductImage());
 		shopcarBean.setProductId(productId);
@@ -178,13 +185,13 @@ public class FrontShopCarController {
 		shopcarBean.setSweet(sugar);
 		shopcarBean.setTotalPrice(totalprice);
 		
+//		cart.put(productId, shopcarBean);
+//		m.addAttribute("shopcarBuy", cart);
 
+		
 		
 		m.addAttribute("shopcarBuy", shopcarBean);
 		
-//		Map<Integer, ShopcarBean> shopcarMap = (Map<Integer, ShopcarBean>) m.getAttribute("shopcarBuy");
-
-//		shopcarMap.put(productId, shopcarBean);
 		
 		return "/front/frontshopcar";
 	}
@@ -209,7 +216,9 @@ public class FrontShopCarController {
 			,@RequestParam("shopcarquantity") Integer shopcarquantity
 			,@RequestParam("shopcarsweet") String shopcarsweet
 			,@RequestParam("shopcarcoldhot") String shopcarcoldhot
-			,@RequestParam("shopcartotalPrice") Integer shopcartotalPrice) {
+			,@RequestParam("shopcartotalPrice") Integer shopcartotalPrice
+			,@RequestParam("userId") Integer userId
+			,@RequestParam("productId") Integer productId) {//@RequestParam("storeId") Integer storeId
 		
 		ShopcarBean shopcarBean = new ShopcarBean();
 		shopcarBean.setAddress(shopcaraddress);
@@ -224,26 +233,63 @@ public class FrontShopCarController {
 		
 		
 		m.addAttribute("shopcarBuy", shopcarBean);
+//		UserBean userBean = (UserBean) m.getAttribute("canSeeUser");
 		
 		
-		
-		ShopcarBean cart = (ShopcarBean) m.getAttribute("shopcarBuy");
+//		ShopcarBean cart = (ShopcarBean) m.getAttribute("shopcarBuy");
 		
 		Date today = new Date();
-		OrderBean ob = new OrderBean(null,shopcartotalPrice,shopcarphone,
-				shopcaraddress,today,null);
 		
-		Map<Integer, OrderItems> content = cart.getContent();
-		Set<OrderItems> items = new LinkedHashSet<>();
-		Set<Integer> set = content.keySet();
-		for(Integer i : set) {
-			OrderItems oib = content.get(i);
-			oib.setOrderBean(ob);
-			items.add(oib);
-		}
-		ob.setOrderItems(items);
+
+		UserBean user = new UserBean();
+		user.setUserId(userId);
 		
-		oitemService.insertOrderItems(items);
+		OrderBean ob = new OrderBean();
+		ob.setCreateTime(today);
+		ob.setOrderAddress(shopcaraddress);
+		ob.setOrderPhone(shopcarphone);
+		ob.setOrderStatus("待付款");
+//		ob.setUserId(userId);
+		ob.setTotalPrice(shopcartotalPrice);
+		ob.setUserBean(user);
+		
+		orderService.insertOrder(ob);
+		
+		List<OrderBean> order = orderService.findAll();
+
+		
+		
+		
+		ProductBean product = new ProductBean();
+		product.setProductId(productId);
+
+		OrderItems oi = new OrderItems();
+		oi.setPrice(shopcartotalPrice);
+		oi.setQuantity(shopcarquantity);
+		oi.setSweet(shopcarsweet);
+		oi.setColdhot(shopcarcoldhot);
+		oi.setProductBean(product);
+		oi.setOrderBean(ob);
+		
+		oitemService.insertOrderItems(oi);
+		
+//		OrderBean ob = new OrderBean(null,shopcartotalPrice,shopcarphone,
+//				shopcaraddress,today,"待付款");
+		
+		
+		
+		
+//		Map<Integer, OrderItems> content = cart.getContent();
+//		Set<OrderItems> items = new LinkedHashSet<>();
+//		Set<Integer> set = content.keySet();
+//		for(Integer i : set) {
+//			OrderItems oib = content.get(i);
+//			oib.setOrderBean(ob);
+//			items.add(oib);
+//		}
+//		ob.setOrderItems(items);
+//		
+//		oitemService.insertOrderItems(items);
 		
 		return "/front/frontorder";
 	}

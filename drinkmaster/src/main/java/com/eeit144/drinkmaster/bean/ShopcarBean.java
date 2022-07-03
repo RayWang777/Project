@@ -18,6 +18,16 @@ public class ShopcarBean {
 	
 	private Map<Integer, OrderItems> cart = new LinkedHashMap< >();
 	
+	private Map<Integer, ShopcarBean> shopcart = new LinkedHashMap< >();
+	
+	public Map<Integer, ShopcarBean> getShopcart() {
+		return shopcart;
+	}
+
+	public void setShopcart(Map<Integer, ShopcarBean> shopcart) {
+		this.shopcart = shopcart;
+	}
+
 	public Map<Integer, OrderItems>  getContent() { 
 		return cart;
 	}
@@ -104,15 +114,15 @@ public class ShopcarBean {
 	}
 
 
+
+
 	public String getSweet() {
 		return sweet;
 	}
 
-
 	public void setSweet(String sweet) {
 		this.sweet = sweet;
 	}
-
 
 	public String getColdhot() {
 		return coldhot;

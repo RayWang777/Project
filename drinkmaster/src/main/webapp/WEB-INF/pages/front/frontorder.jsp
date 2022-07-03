@@ -224,8 +224,8 @@ table {
                 <span>NT$ <input type="text" value="${shopcarBuy.totalPrice}" readonly="readonly" style="border:none"></span>
             </div>
         </div>
-        <div class="bottom">
-            <h3>購物清單</h3>
+<!--         <div class="bottom"> -->
+<!--             <h3>購物清單</h3> -->
 <!--             <div class="list"> -->
 <!--                 <img src="https://i.postimg.cc/zB7qtwdD/pic.png" alt="pciture of cake"> -->
 <!--                 <div class="item"> -->
@@ -248,7 +248,7 @@ table {
 <!--                         <p class="item-price">NT$ 900</p> -->
 <!--                 </div> -->
             </div>    
-        </div>
+<!--         </div> -->
 <br>
     
 </body>

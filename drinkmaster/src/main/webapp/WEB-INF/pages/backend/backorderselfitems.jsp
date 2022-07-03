@@ -115,6 +115,8 @@
 <!--       <th scope="col">訂單編號</th> -->
       <th scope="col">商品名稱</th>
       <th scope="col">數量</th>
+      <th scope="col">甜度</th>
+      <th scope="col">冷熱</th>
       <th scope="col">價格</th>
       <th scope="col"></th>
     </tr>
@@ -127,6 +129,8 @@
       <th scope="row"><c:out value="${orderItems.orderItemId}"/></th>
 <%--       <td><c:out value="${orderItems.orderBean.orderId}"/></td> --%>
       <td><c:out value="${orderItems.productBean.productName}"/></td>
+      <td><c:out value="${orderItems.quantity}"/></td>
+      <td><c:out value="${orderItems.sweet}"/></td>
       <td><c:out value="${orderItems.quantity}"/></td>
       <td><c:out value="${orderItems.price}"/></td>
 

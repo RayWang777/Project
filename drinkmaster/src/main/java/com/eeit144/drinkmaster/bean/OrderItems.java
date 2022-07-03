@@ -47,8 +47,8 @@ public class OrderItems {
 	@Column(name = "quantity", nullable = false)
 	private Integer quantity;
 	
-	@Column(name = "remark", columnDefinition = "nvarchar(30)")
-	private String remark;
+//	@Column(name = "remark", columnDefinition = "nvarchar(30)")
+//	private String remark;
 	
 	@Column(name = "coldhot", columnDefinition = "nvarchar(30)")
 	private String coldhot;
@@ -84,16 +84,16 @@ public class OrderItems {
 //		this.productBean = productBean;
 		this.price = price;
 //		this.quantity = quantity;
-		this.remark = remark;
+//		this.remark = remark;
 	}
 
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+//	public String getRemark() {
+//		return remark;
+//	}
+//
+//	public void setRemark(String remark) {
+//		this.remark = remark;
+//	}
 
 	public OrderItems() {
 	}

@@ -7,6 +7,7 @@ import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 //import java.util.Optional;
 import java.util.Set;
 
@@ -22,9 +23,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.eeit144.drinkmaster.back.model.OrderItemsService;
 import com.eeit144.drinkmaster.back.model.OrderService;
+import com.eeit144.drinkmaster.back.model.StoreService;
 import com.eeit144.drinkmaster.back.model.UserService;
 //import com.eeit144.drinkmaster.back.service.ProductCategoryServiceImp;
 import com.eeit144.drinkmaster.back.service.ProductServiceImp;
@@ -33,6 +36,7 @@ import com.eeit144.drinkmaster.bean.OrderItems;
 import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.bean.ShopcarBean;
 import com.eeit144.drinkmaster.bean.ShopcarBuy;
+import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.bean.UserBean;
 
 @Controller
@@ -55,6 +59,9 @@ public class FrontShopCarController {
 	
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private StoreService storeService;
 	
 	
 	public void testUserSession(Model m){
@@ -95,26 +102,18 @@ public class FrontShopCarController {
 	
 	
 	@GetMapping("shopcar/before/editproduct")
-	public String editById(@SessionAttribute(name="product",required = false) OrderItems orderItems,@RequestParam("id") Integer id, Model m) {
+	public String editById(@RequestParam("id") Integer id, Model m) {
 		ProductBean productBean = proService.findById(id);
-		
+
+
 		
 		
 		m.addAttribute("productBean", productBean);
-		m.addAttribute("product", productBean);
+		m.addAttribute("shopcarBuy", productBean);
+
 		return "/front/frontbeforeshop";
 	}
 	
-	
-	
-	
-	@GetMapping("shopcar/before/deleteproduct")
-	public String deleteById(@RequestParam("id") Integer id) {
-
-		proService.deleteById(id);
-		return "/front/frontbeforeshop";
-
-	}
 	
 	
 //	@PostMapping("shopcar/buy")
@@ -229,15 +228,10 @@ public class FrontShopCarController {
 		shopcarBean.setQuantity(shopcarquantity);
 		shopcarBean.setSweet(shopcarsweet);
 		shopcarBean.setTotalPrice(shopcartotalPrice);
-		
-		
-		
+				
 		m.addAttribute("shopcarBuy", shopcarBean);
-//		UserBean userBean = (UserBean) m.getAttribute("canSeeUser");
-		
-		
-//		ShopcarBean cart = (ShopcarBean) m.getAttribute("shopcarBuy");
-		
+			
+				
 		Date today = new Date();
 		
 
@@ -249,16 +243,16 @@ public class FrontShopCarController {
 		ob.setOrderAddress(shopcaraddress);
 		ob.setOrderPhone(shopcarphone);
 		ob.setOrderStatus("待付款");
-//		ob.setUserId(userId);
 		ob.setTotalPrice(shopcartotalPrice);
 		ob.setUserBean(user);
 		
 		orderService.insertOrder(ob);
 		
-		List<OrderBean> order = orderService.findAll();
+		OrderBean ob2 = orderService.findFirstByOrderByCreateTimeDesc();
+		
+		Integer newOrderId = ob2.getOrderId();
 
-		
-		
+			
 		
 		ProductBean product = new ProductBean();
 		product.setProductId(productId);
@@ -269,16 +263,12 @@ public class FrontShopCarController {
 		oi.setSweet(shopcarsweet);
 		oi.setColdhot(shopcarcoldhot);
 		oi.setProductBean(product);
-		oi.setOrderBean(ob);
+		oi.setOrderBean(ob2);
 		
 		oitemService.insertOrderItems(oi);
-		
-//		OrderBean ob = new OrderBean(null,shopcartotalPrice,shopcarphone,
-//				shopcaraddress,today,"待付款");
-		
-		
-		
-		
+								
+//		ShopcarBean cart = (ShopcarBean) m.getAttribute("shopcarBuy");
+//		
 //		Map<Integer, OrderItems> content = cart.getContent();
 //		Set<OrderItems> items = new LinkedHashSet<>();
 //		Set<Integer> set = content.keySet();
@@ -293,6 +283,8 @@ public class FrontShopCarController {
 		
 		return "/front/frontorder";
 	}
+	
+	
 	
 	
 	

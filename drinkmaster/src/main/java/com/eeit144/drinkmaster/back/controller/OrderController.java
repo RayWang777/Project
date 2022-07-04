@@ -186,7 +186,7 @@ public class OrderController<E> {
 		
 		@PostMapping("order/update")
 		public String updateOrder(@ModelAttribute("orderBean") OrderBean orderBean, Model m,@SessionAttribute("userBean") UserBean user) {
-			if((user.getRole().equals("user"))) {
+			if((user.getRole().equals("user"))) {//從前台傳進來的資料需要重新選select才能編輯
 				return "redirect:/backend/login";			
 			}
 			
@@ -206,9 +206,13 @@ public class OrderController<E> {
 			StoreBean oldStore = storeService.findById(orderBean.getStoreId()).get();
 			UserBean oldUser = userService.findById(orderBean.getUserId()).get();
 			
+			
+			
 			orderBean.setUserBean(oldUser);
 			orderBean.setStoreBean(oldStore);
 			
+			System.out.println("stroeid:"+oldStore.getStoreId());
+			System.out.println("userid:"+oldUser.getUserId());
 			
 			orderService.insertOrder(orderBean);
 
@@ -231,6 +235,16 @@ public class OrderController<E> {
 			OrderBean orderBean = new OrderBean();
 			mav.getModel().put("orderBean", orderBean);
 			mav.getModel().put("page", page);
+			
+//			if(orderStatus.equals("待付款") || orderStatus.equals("待出貨")) {
+//				Page<OrderBean> page = orderService.findByorderStatus(pageNumber, orderStatus);
+//				mav.getModel().put("page", page);
+//			}else {
+//				Page<OrderBean> page = orderService.findByorderStatus(pageNumber, orderStatus);
+//				mav.getModel().put("page", page);			
+//			}
+//			
+			
 			mav.setViewName("/backend/backorder");
 			return mav;
 		}
@@ -264,7 +278,7 @@ public class OrderController<E> {
 				orderBeanxslx = new OrderBeanxslx();
 				orderBeanxslx.setOrderId(order.getOrderId());
 				orderBeanxslx.setUserName(order.getUserBean().getUserName());
-				orderBeanxslx.setStoreName(order.getStoreBean().getStoreName());
+//有問題			orderBeanxslx.setStoreName(order.getStoreBean().getStoreName());
 				orderBeanxslx.setOrderAddress(order.getOrderAddress());
 				orderBeanxslx.setOrderPhone(order.getOrderPhone());
 				orderBeanxslx.setOrderStatus(order.getOrderStatus());
@@ -291,11 +305,7 @@ public class OrderController<E> {
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("content-disposition", "attachment;fileName="+URLEncoder.encode("訂單列表.xls","UTF-8"));
 			
-//			response.setHeader("content-disposition","attachment;fileName="+URLEncoder.encode("訂單列表.xls","UTF-8"));
-//			ServletOutputStream ops = response.getOutputStream();
-//			workbook.write(ops);
-//			workbook.close();
-//			ops.close();
+
 			return new ResponseEntity<byte[]>(bytes, headers, HttpStatus.OK);
 		}
 		

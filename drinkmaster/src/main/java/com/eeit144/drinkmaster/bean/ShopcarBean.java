@@ -15,11 +15,34 @@ public class ShopcarBean {
 	private Integer totalPrice;
 	private String phone;
 	private String address;
+	private String storeName;
+	private Integer storeId;
 	
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+
+
 	private Map<Integer, OrderItems> cart = new LinkedHashMap< >();
 	
 	private Map<Integer, ShopcarBean> shopcart = new LinkedHashMap< >();
 	
+	
+	
+
+
+	public String getStoreName() {
+		return storeName;
+	}
+
+	public void setStoreName(String storeName) {
+		this.storeName = storeName;
+	}
+
 	public Map<Integer, ShopcarBean> getShopcart() {
 		return shopcart;
 	}

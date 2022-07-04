@@ -112,5 +112,11 @@ public class OrderServiceImp implements OrderService {
 	@Override
 	public OrderBean findFirstByOrderByCreateTimeDesc() {
 		return orderDao.findFirstByOrderByCreateTimeDesc();
+	}
+
+
+	@Override
+	public List<OrderBean> findOrdersByUserid(Integer userId) {
+		return orderDao.findOrdersByUserid(userId);
 	};
 }

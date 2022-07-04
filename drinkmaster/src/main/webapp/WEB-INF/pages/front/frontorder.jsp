@@ -10,8 +10,8 @@
 <head>
 <meta charset="utf-8" />
 <title>訂單明細</title>
-<link rel="stylesheet" href="<c:url value="/css/lib/bootstrap.min.css"/>"/>
-<link rel="stylesheet" href="<c:url value="/css/lib/font-awesome.min.css"/>"/>
+
+<%-- <link rel="stylesheet" href="<c:url value="/css/lib/font-awesome.min.css"/>"/> --%>
 
 <style type="text/css">
 /* .table>tbody>tr>td, .table>tfoot>tr>td{ */
@@ -124,18 +124,24 @@ table {
     color: #829886;
 }
 
-.total{
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 20px;
-    padding-bottom: 13px;
-    display: flex;
-    justify-content: space-between;
-}
+/* .total{ */
+/*     padding-left: 15px; */
+/*     padding-right: 15px; */
+/*     padding-top: 20px; */
+/*     padding-bottom: 13px; */
+/*     display: flex; */
+/*     justify-content: space-between; */
+/* } */
 .total span{
     font-size: 20px;
     color: #829886;
     font-weight: bold;
+}
+
+
+.total #totalprice{
+
+	padding-left: 240px;
 }
 
 .bottom{
@@ -171,7 +177,9 @@ table {
     margin-bottom: 5px;
     color: #829886;
 }
+
 </style>
+<link rel="stylesheet" href="<c:url value="/css/lib/bootstrap.min.css"/>"/>
 </head>
 
 
@@ -187,6 +195,11 @@ table {
                 <span>訂購人</span>
                 
                 <span><input type="text" value="${canSeeUser.userName}" readonly="readonly" style="border:none"></span>
+            </div>
+            <div class="price">
+                <span>商店名稱</span>
+                
+                <span><input type="text" value="${shopcarBuy.storeName}" readonly="readonly" style="border:none"></span>
             </div>
             <div class="price">
                 <span>商品名稱</span>
@@ -220,40 +233,23 @@ table {
             </div>
             <br>
             <div class="total">
+            
                 <span>總金額</span>
-                <span>NT$ <input type="text" value="${shopcarBuy.totalPrice}" readonly="readonly" style="border:none"></span>
+                
+                <span id="totalprice">NT$ <input type="text" value="${shopcarBuy.totalPrice}" readonly="readonly" style="border:none"></span>
+            	
             </div>
         </div>
+        <div style="text-align: center;">
         <a href="${contextRoot}/front/">
-        <button type="button" class="btn btn-success btn-block">繼續購買<i class="fa fa-angle-right"></i></button>
+        <button type="button" class="btn btn-success">繼續購買</button>
 		</a>
-
-
-<!--         <div class="bottom"> -->
-<!--             <h3>購物清單</h3> -->
-<!--             <div class="list"> -->
-<!--                 <img src="https://i.postimg.cc/zB7qtwdD/pic.png" alt="pciture of cake"> -->
-<!--                 <div class="item"> -->
-<!--                         <h4>焦糖馬卡龍 (2)</h4> -->
-<!--                         <p class="item-price">NT$ 900</p> -->
-<!--                 </div> -->
-<!--             </div> -->
-<!--             <div class="list"> -->
-<!--                 <img src="https://i.postimg.cc/zB7qtwdD/pic.png" alt="pciture of cake"> -->
-<!--                 <div class="item"> -->
-<!--                        <h4>焦糖馬卡龍 (2)</h4> -->
-<!--                         <p class="item-price">NT$ 900</p> -->
-<!--                 </div> -->
-<!--             </div>   -->
-<!--             <div class="list"> -->
-<!--                 <img src="https://i.postimg.cc/zB7qtwdD/pic.png" alt="pciture of cake"> -->
-<!--                 <div class="item"> -->
-<!--                     <ul> -->
-<!--                        <h4>焦糖馬卡龍 (2)</h4> -->
-<!--                         <p class="item-price">NT$ 900</p> -->
-<!--                 </div> -->
+		&ensp;&ensp;&ensp;
+		<a href="${contextRoot}/front/order/userOrder?orderuserid=${canSeeUser.userId}">
+		<button type="button" class="btn btn-warning">查看訂單</button>
+		</a>
+		</div>
             </div>    
-<!--         </div> -->
 <br>
     
 </body>
@@ -262,7 +258,7 @@ table {
 
 </script>
 
-<script src="<c:url value="/js/lib/bootstrap.min.js"/>"></script>
-<script src="<c:url value="/js/lib/jquery.min.js"/>"></script>
+<%-- <script src="<c:url value="/js/lib/bootstrap.min.js"/>"></script> --%>
+<%-- <script src="<c:url value="/js/lib/jquery.min.js"/>"></script> --%>
 
 <jsp:include page="layout/footer.jsp"></jsp:include>

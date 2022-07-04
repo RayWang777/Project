@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.eeit144.drinkmaster.bean.CommentBean;
 import com.eeit144.drinkmaster.bean.OrderBean;
 
 @Repository
@@ -33,4 +34,7 @@ public interface OrderRepostiory extends JpaRepository<OrderBean, Integer> {
 	
 	
 	public OrderBean findFirstByOrderByCreateTimeDesc();
+	
+	@Query(value="select * from orders where userid = :userId order by createtime desc",nativeQuery = true)
+	public List<OrderBean> findOrdersByUserid(@Param(value="userId")Integer userId);
 }

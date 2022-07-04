@@ -73,7 +73,7 @@
                         
                             <i class="bi-cart-fill me-1"></i>                         
                             <b style="color:#5A5AAD;font-size: large;">購物車</b>
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                            <span class="badge bg-dark text-white ms-1 rounded-pill"></span>
                         </button>
                         </a>
                         
@@ -88,7 +88,7 @@
 	                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 	                                <li><a class="dropdown-item" href="${contextRoot}/front/userMessage">關於</a></li>
 	                                <li><hr class="dropdown-divider" /></li>
-	                                <li><a class="dropdown-item" href="#!">歷史訂單</a></li>
+	                                <li><a class="dropdown-item" href="${contextRoot}/front/order/userOrder?orderuserid=${canSeeUser.userId}">歷史訂單</a></li>
 	                                <li><a class="dropdown-item" href="${contextRoot}/front/comment/usercomment?commentuserid=${canSeeUser.userId}">評論</a></li>
 	                                <li><a class="dropdown-item" href="${contextRoot}/front/chatroom">客服中心</a></li>
 	                                <li><hr class="dropdown-divider" /></li>

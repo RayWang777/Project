@@ -59,7 +59,8 @@
 <div class="container" id="container">
 <form:form class="form" method="post" action="${contextRoot}/front/shopcar/buy" modelAttribute="productBean">
 <input type="hidden" value="${productBean.productId}" name="shopcarproductId">
-<input type="hidden" value="${productCategoryBean.storeId}" name="shopcarstoreId">
+<input type=hidden value="${storeBean.storeId}" name="storeId">
+<input type=hidden value="${storeBean.storeName}" name="storeName">
 	<table id="cart" class="table table-hover table-condensed">
     				<thead>
 						<tr>
@@ -141,7 +142,7 @@
 							
 <!-- 							備註:折扣碼後的價格 -->
 							<td colspan="2">
-							<input type="submit" name="submit" value="加入購物車 >" class="btn btn-success btn-block">
+							<input type="submit" name="submit" value="加入購物車 >" onclick="return confirm('確定要加入購物車嗎?')" class="btn btn-success btn-block">
 <!-- 							<a href="#" class="btn btn-success btn-block"> -->
 <!-- 							<i class="fa fa-angle-right"></i> -->
 <!-- 							</a> -->

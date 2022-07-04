@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.eeit144.drinkmaster.bean.FirmBean;
@@ -29,4 +30,7 @@ public interface StoreRepostiory extends JpaRepository<StoreBean, Integer> {
 	@Query(value = "SELECT * FROM ( SELECT *,( 6371 * acos( cos( radians( :latitude ) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians( :longitude ) ) "
 			+ "+ sin( radians( :latitude ) ) * sin( radians( latitude ) ) ) ) AS distance FROM  STORE ) AS B WHERE distance > 0 ORDER BY distance ASC",nativeQuery = true)
 	public List<StoreBean> findStoreByLocal(Double latitude,Double longitude,Pageable pab); 
+	
+	@Query(value = "select * from store where storename Like %:storeName%",nativeQuery = true)
+	public List<StoreBean> findStoreByStoreNameLike(@Param(value="storeName")String storeName);
 }

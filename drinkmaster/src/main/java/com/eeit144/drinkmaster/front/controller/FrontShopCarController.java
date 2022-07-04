@@ -1,6 +1,7 @@
 package com.eeit144.drinkmaster.front.controller;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -163,7 +164,7 @@ public class FrontShopCarController {
 			return "redirect:/front/login";
 		}
 		
-		
+		System.out.println("123");
 		
 //		// 取出存放在session物件內的shopcarBuy物件
 //		ShopcarBuy shopcarBuy = (ShopcarBuy) m.getAttribute("shopcarBuy");
@@ -176,29 +177,53 @@ public class FrontShopCarController {
 		
 //		Map<Integer, ShopcarBean> cart = new LinkedHashMap<>();
 		
-	
-				
-		ShopcarBean shopcarBean = new ShopcarBean();
-		shopcarBean.setProductImage(productBean.getProductImage());
-		shopcarBean.setProductId(productId);
-		shopcarBean.setProductName(productBean.getProductName());
-		shopcarBean.setPrice(productBean.getPrice());
-		shopcarBean.setColdhot(coldhot);
-		shopcarBean.setQuantity(number);
-		shopcarBean.setSweet(sugar);
-		shopcarBean.setTotalPrice(totalprice);
-		shopcarBean.setStoreName(storeName);
-		shopcarBean.setStoreId(storeId);
+		List<ShopcarBean> cart = new ArrayList<ShopcarBean>();
+			
+		for(ShopcarBean shopcarBean:cart) {
+//			ShopcarBean shopcarBean = new ShopcarBean();
+			shopcarBean.setProductImage(productBean.getProductImage());
+			shopcarBean.setProductId(productId);
+			shopcarBean.setProductName(productBean.getProductName());
+			System.out.println(productBean.getProductName());
+			shopcarBean.setPrice(productBean.getPrice());
+			shopcarBean.setColdhot(coldhot);
+			shopcarBean.setQuantity(number);
+			shopcarBean.setSweet(sugar);
+			shopcarBean.setTotalPrice(totalprice);
+			shopcarBean.setStoreName(storeName);
+			shopcarBean.setStoreId(storeId);
+			
+			cart.add(shopcarBean);
+		}
+		
+		m.addAttribute("shopcarBuy", cart);
+		
+		
+		
+		
+//		ShopcarBean shopcarBean = new ShopcarBean();
+//		shopcarBean.setProductImage(productBean.getProductImage());
+//		shopcarBean.setProductId(productId);
+//		shopcarBean.setProductName(productBean.getProductName());
+//		shopcarBean.setPrice(productBean.getPrice());
+//		shopcarBean.setColdhot(coldhot);
+//		shopcarBean.setQuantity(number);
+//		shopcarBean.setSweet(sugar);
+//		shopcarBean.setTotalPrice(totalprice);
+//		shopcarBean.setStoreName(storeName);
+//		shopcarBean.setStoreId(storeId);
 		
 //		cart.put(productId, shopcarBean);
 //		m.addAttribute("shopcarBuy", cart);
 
+
+		
+//		m.addAttribute("shopcarBuy", shopcarBean);
 		
 		
-		m.addAttribute("shopcarBuy", shopcarBean);
+
 		
-		
-		return "/front/frontshopcar";
+		return "/front/frontshopcar2";
 	}
 	
 	

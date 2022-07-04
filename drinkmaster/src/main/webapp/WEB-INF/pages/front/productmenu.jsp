@@ -5,36 +5,30 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <jsp:include page="layout/header.jsp"></jsp:include>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<head>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
 <title>店家菜單</title>
-<style>
- a:link
-        {
-        font-family:monospace;
-        text-decoration:none;
-            color: black;
-        }
-        a:visited
-        {  text-decoration:none;
-            font-family:monospace;
-            color: black;
-        }
-        a:hover
-        {
-            color: red;
-        }
-        a:active
-        {
-            color: black;
-        }
-li{
-    list-style-type:circle;
+
+<style type="text/css" >
+
+.aclass{
+text-decoration: none;
+color: black;
+
+
+}
+        
+.liclass{
+    list-style-type:none;
     font-family: monospace;
+    font-size: x-large;
 }
 
 </style>
+ 
+</head>
 <body style="background-color: #F2FCFF;">
 
 	<header class="py-2"> 
@@ -45,11 +39,11 @@ li{
                   <div   style=" float: left; width: 330px; height:350px   ">
                   <img alt="" src="<c:url value="/backend/firm/${store.firmBean.firmId}/photo"/>" style="width: 150px;height: 150px; margin-left: 100px; border-radius: 100px">
                   <div style="font-size: x-large; width: 400px; height: 200px; margin-top: 10px  ">
-                  <ul ><li style="font-family:sans-serif;list-style-type:none; "> <b>店家名稱:</b>  <c:out value="${store.firmBean.firmName}"></c:out> <c:out value="${store.storeName}"></c:out> </li>
-                  <li>電話:&nbsp; <a  href="<c:out value='tel:${store.storePhone }'/>"><c:out value="${store.storePhone }"></c:out></a> </li>
-                 <li>地址:&nbsp;<a href='<c:url value="https://www.google.com/maps/place/${store.storeAddress}/@${store.latitude},${store.longitude},17z/"/>' target="_blank">${store.storeAddress}</a></li>
-                 <li>評分:<i class="fa-solid fa-star" style="color: #FCFF9C"></i></li>
-                 <li >營業時間:&nbsp;<c:out value="${store.openTime}"></c:out></li>
+                  <ul ><li class="liclass" style="font-family:sans-serif;list-style-type:none; "> <b>店家名稱:</b>  <c:out value="${store.firmBean.firmName}"></c:out> <c:out value="${store.storeName}"></c:out> </li>
+                  <li class="liclass">電話:&nbsp; <a class="aclass"  href="<c:out value='tel:${store.storePhone }'/>"><c:out value="${store.storePhone }"></c:out></a> </li>
+                 <li class="liclass">地址:&nbsp;<a class="aclass" href='<c:url value="https://www.google.com/maps/place/${store.storeAddress}/@${store.latitude},${store.longitude},17z/"/>' target="_blank">${store.storeAddress}</a></li>
+                 <li class="liclass">評分:<i class="fa-solid fa-star" style="color: #FCFF9C"></i></li>
+                 <li class="liclass">營業時間:&nbsp;<c:out value="${store.openTime}"></c:out></li>
                   </ul>
                   
                   </div>
@@ -83,14 +77,8 @@ li{
 								<div
 									style="font-size: large; border-bottom: 2px inset #C0C0C0; height: 52px;"
 									class="align-middle">
-<<<<<<< HEAD
-									<a  href="${contextRoot}/front/shopcar/before/editproduct?id=${productBean.productId}&sid=${store.storeId}" style="color: black; text-decoration: none;"> <c:if
-=======
-									<a
-										href="${contextRoot}/front/shopcar/before/editproduct?id=${productBean.productId}&sid=${store.storeId}"
-										style="color: black; text-decoration: none;"> <c:if
->>>>>>> fcc304f412f503e4068c1d3aca5582c328f491c0
-											test="${productBean.productImage!=null}">
+									<a  href="${contextRoot}/front/shopcar/before/editproduct?id=${productBean.productId}&sid=${store.storeId}" style="color: black; text-decoration: none;"> 
+									<c:if test="${productBean.productImage!=null}">
 											<img src="${productBean.productImage}" style="width: 60px"
 												height="50px" />
 										</c:if>&nbsp;&nbsp; <b><c:out value="${productBean.productName}"></c:out></b>

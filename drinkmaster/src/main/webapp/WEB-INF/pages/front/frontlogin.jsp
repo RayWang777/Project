@@ -5,6 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
+                <jsp:include page="layout/header.jsp"></jsp:include>
 <head>
 <meta charset="UTF-8">
 <title>飲君子 登入</title>

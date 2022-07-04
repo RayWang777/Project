@@ -34,7 +34,7 @@ public class ServiceServiceImp implements ServiceService {
 
 	@Override
 	public Page<ServiceBean> findByPage(Integer pageNumber) {
-		Pageable pgb = PageRequest.of(pageNumber-1,3,Sort.Direction.DESC,"answerTime");
+		Pageable pgb = PageRequest.of(pageNumber-1,10,Sort.Direction.DESC,"answerTime");
 		Page<ServiceBean> findAll = serviceDao.findAll(pgb);
 		return findAll;
 	}

@@ -39,22 +39,22 @@
 		<div class="col-6">
 
 			<div class="card">
-			<div class="btn btn-info">
+			<div class="btn btn-light">
 					UserID:
 					 <c:out value="${latestMsg.userBean.userId}" />
 				</div>
 				<br/>
-				<div class="btn btn-info">
+				<div class="btn btn-light">
 					姓名 :
 					 <c:out value="${latestMsg.userBean.userName}" />
 				</div>
 				<br/>
-				<div class="btn btn-info">
+				<div class="btn btn-light">
 					Email信箱 :
 					<c:out value="${latestMsg.userBean.userAccount}" />
 				</div>
 				<br/>
-				<div class="btn btn-info">
+				<div class="btn btn-light">
 					最新意見回饋
 					(時間) <fmt:formatDate pattern="yyyy年MM月dd日 a hh:mm:ss EEEE"
 						value="${latestMsg.answerTime}"/>

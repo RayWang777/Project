@@ -92,4 +92,10 @@ public class StoreServiceImp implements StoreService {
 		return storeDao.findStoreByStoreNameLike(storeName);
 	}
 	
+	@Override
+	public List<Integer> findStoreLocalByFirmNameLike(String firmName){
+		String firmNameLike = "%"+firmName+"%";
+		return storeDao.findStoreLocalFirmNameLike(firmNameLike);
+	}
+	
 }

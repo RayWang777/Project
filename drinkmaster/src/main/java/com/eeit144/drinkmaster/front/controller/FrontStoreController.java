@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.eeit144.drinkmaster.back.model.FirmService;
@@ -43,23 +44,24 @@ public class FrontStoreController {
 			Integer firmId = one.getFirmBean().getFirmId();
 			one.setFirmId(firmId);
 		}
-		
-		
-//		StoreBean storeBean = null;
-//
-//		int number = map.getCounts() * 4;
-//		int size = findStoreByLocal.size();
-//		for (int i = 0; i < size; i++) {
-//			if (i < number) {
-//				storeBean = findStoreByLocal.get(i);
-//				Integer firmId = storeBean.getFirmBean().getFirmId();
-//				storeBean.setFirmId(firmId);
-//				findStoreByLocal.set(i, storeBean);
-//			} else {
-//				findStoreByLocal.remove(number);
-//			}
-//		}
 		return findStoreByLocal;
+	}
+	
+	@PostMapping("localstorelike")
+	@ResponseBody
+	public List<StoreBean> findLocalStoreByFirmNameLike(@RequestParam("firmName") String firmName
+			,@RequestParam(name="p",defaultValue = "1") Integer page){
+		
+		System.out.println(firmName);
+		
+		PageRequest pages = PageRequest.of(page-1, 4);
+		List<Integer> storeLocalByFirmNameLike = storeService.findStoreLocalByFirmNameLike(firmName);
+		List<StoreBean> findAll = storeService.findAll(storeLocalByFirmNameLike);
+		for(StoreBean one:findAll) {
+			Integer firmId = one.getFirmBean().getFirmId();
+			one.setFirmId(firmId);
+		}
+		return findAll;
 	}
 
 //	@GetMapping("store/{id}")

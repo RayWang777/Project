@@ -38,5 +38,7 @@ public interface StoreService {
 	public List<StoreBean> findStoreByLocal(Double lat,Double lng,Pageable pab);
 	
 	public List<StoreBean> findStoreByStoreNameLike(String storeName);
+	
+	public List<Integer> findStoreLocalByFirmNameLike(String firmName);
 
 }

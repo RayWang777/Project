@@ -33,4 +33,7 @@ public interface StoreRepostiory extends JpaRepository<StoreBean, Integer> {
 	
 	@Query(value = "select * from store where storename Like %:storeName%",nativeQuery = true)
 	public List<StoreBean> findStoreByStoreNameLike(@Param(value="storeName")String storeName);
+	
+	@Query(value = "  select s.storeid from store as s right join firm as f on s.firmId = f.firmid where f.firmname like :firmName ",nativeQuery = true)
+	public List<Integer> findStoreLocalFirmNameLike(@Param(value="firmName") String firmName);
 }

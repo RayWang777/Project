@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 
-<link rel=”icon” href="<c:url value="/images/title_favicon .ico"/>" type=”image/x-icon”>
+<link rel="icon" href="<c:url value="/images/title_favicon.ico"/>" type="image/x-icon">
 
 <link rel="shortcut icon" href="<c:url value="/images/title_favicon .ico"/>" type="image/x-icon">
 
@@ -58,7 +58,7 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="${contextRoot}/front/comment/storecomment" style="color:#5A5AAD;"><b style="font-size: large;">評論區</b></a></li>
 
 						<li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false" href="#" style="color:#5A5AAD;"><b style="font-size: large;">客服</b></a>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="color:#5A5AAD;"><b style="font-size: large;">客服</b></a>
 <!--                        	<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false" style="color:#5A5AAD;"><b style="font-size: large;">Shop</b></a> -->
                        	<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="${contextRoot}/front/service/FAQ">常見問題</a></li>

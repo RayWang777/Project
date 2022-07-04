@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.apache.poi.hpsf.Array;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -237,12 +238,14 @@ public class FirmController {
 			return "redirect:/backend/";			
 		}
 		List<Integer> findUserNullFirmBean = firmService.findUserNullFirmBean();
+		
+		List<UserBean> users=null;
 		if(findUserNullFirmBean.isEmpty()) {
 			
-			return "redirect:/backend/firm/all";
+			users = new ArrayList<UserBean>();
+		}else {		
+			users = userService.findNullTypeUsers(findUserNullFirmBean);
 		}
-		
-		List<UserBean> users = userService.findNullTypeUsers(findUserNullFirmBean);
 
 		Integer originUserId = firmService.findById(id).get().getUserBean().getUserId();
 		UserBean findById2 = userService.findById(originUserId).get();

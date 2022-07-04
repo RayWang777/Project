@@ -186,7 +186,7 @@
                   <!-- 附近店家 -->
                   
                   <script type="text/javascript">
-//                   var localcounts = $('#localcounts').val();
+                  var localcounts = $('#localcounts').val();
                   window.onload=  navigator.geolocation.getCurrentPosition(successCallback);
                   $('#showstore').children().remove(); 
                   //最外層給全域變數讓經緯度能使用
@@ -195,11 +195,12 @@
                   function successCallback(position){  
                 		  lat = position.coords.latitude;  
                     	  lng = position.coords.longitude;  
-                    	  localstores1(lat,lng);
+                    	
                   } 
                   
                   
-                  function localstores1(lat,lng){
+                  function localstores1(){
+//                   function localstores1(lat,lng){
                 	  //利用input控制數量
                 	    var localcounts = $('#localcounts').val();
                 	 		localcounts++;
@@ -249,19 +250,28 @@
         <!-- 到底觸發事件 -->          
                   window.onscroll = function(localcounts){
                 	  
-                	  var scrollTop = document.documentElement.scrollTop;
+
+                	  var scrollTop =  document.documentElement.scrollTop+0.5;
                 	  
-                	  var windowHeight = document.documentElement.clientHeight;
+
+                	  var windowHeight =  document.documentElement.clientHeight;
                 	  
+
                 	  var scrollHeight = document.documentElement.scrollHeight;
                 	  
-                	  if(scrollTop+windowHeight ===scrollHeight){
+                	  
+                      console.log(scrollTop)
+                      console.log(windowHeight)
+                      console.log(scrollHeight)
+                	  
+                	  if(scrollTop+windowHeight >= scrollHeight){
 
-                		 navigator.geolocation.getCurrentPosition(successCallback);
+                		  localstores1();
                 		  
                 	  }
                   }
-        <!-- 到底觸發事件 -->                     
+        <!-- 到底觸發事件 -->     
+
                   
               </script>
               

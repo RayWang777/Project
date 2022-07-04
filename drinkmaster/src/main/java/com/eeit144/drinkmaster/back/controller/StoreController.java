@@ -78,7 +78,7 @@ public class StoreController {
 			return "redirect:/backend/";
 		}
 
-		Pageable pab = PageRequest.of(page - 1, 5, Sort.Direction.ASC, "storeId");
+		Pageable pab = PageRequest.of(page - 1, 8, Sort.Direction.ASC, "storeId");
 
 		if(role.equals("admin")) {
 			Page<StoreBean> allStore = storeService.findAll(pab);
@@ -207,8 +207,9 @@ public class StoreController {
 		List<UserBean> users =null;
 		if(!(findStoreUserNull.isEmpty())) {
 			 users = userService.findNullTypeUsers(findStoreUserNull);
-		}	
+		}else {	
 		users = new ArrayList<UserBean>();
+		}
 		users.add(orginUser);
 		
 		m.addAttribute("storeaddusers", users);

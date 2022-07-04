@@ -109,17 +109,7 @@
 </div>
 
 
-  <script src="${contextRoot}/js/lib/jquery.min.js"></script>
-		<script src="${contextRoot}/js/lib/jquery.nanoscroller.min.js"></script>
-		<!-- nano scroller -->
-		<script src="${contextRoot}/js/lib/menubar/sidebar.js"></script>
-		<script src="${contextRoot}/js/lib/preloader/pace.min.js"></script>
-        
-        <!-- Bootstrap core JS-->
-        <script src="${contextRoot}/js/lib/front/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="${contextRoot}/js/lib/front/scripts.js"></script>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 
 

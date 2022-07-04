@@ -52,7 +52,7 @@
                         
                         <li class="nav-item"><button type="button" id="iwantserchfirm" class="nav-link active btn btn-white" data-bs-toggle="modal" data-bs-target="#serchfirmlocal" data-bs-whatever="@getbootstrap" style="color:#5A5AAD;"><b style="font-size: large;"><c:out value="找廠商"/></b></button></li>
                         
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!" style="color:#5A5AAD;"><b style="font-size: large;">找附近</b></a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="${contextRoot}/front/localstoreScore" style="color:#5A5AAD;"><b style="font-size: large;">找附近</b></a></li>
                         
 
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="${contextRoot}/front/comment/firmcomment" style="color:#5A5AAD;"><b style="font-size: large;">評論區</b></a></li>

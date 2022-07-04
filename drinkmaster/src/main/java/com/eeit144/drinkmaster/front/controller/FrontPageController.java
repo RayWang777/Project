@@ -8,12 +8,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.eeit144.drinkmaster.back.model.FirmService;
 import com.eeit144.drinkmaster.back.model.OrderService;
 import com.eeit144.drinkmaster.back.model.ProductService;
 import com.eeit144.drinkmaster.back.model.StoreService;
+import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.bean.StoreTop;
@@ -83,9 +85,15 @@ public class FrontPageController {
 		return topList;
 	}
 
-	@GetMapping("test")
-	public String firmserch() {
-		return "/front/frontfirmtest";
+	@GetMapping("localstoreScore")
+	public String firmserch(@RequestParam(name="selectValue",defaultValue = "") String firmName,Model m) {
+		List<FirmBean> findAll = firmService.findAll3();
+		
+		m.addAttribute("firms", findAll);
+		m.addAttribute("selectValue", firmName);
+		
+		System.out.println(firmName);
+		return "/front/frontlocalscore";
 	}
 
 	@GetMapping("test1")

@@ -17,6 +17,7 @@ import com.eeit144.drinkmaster.back.model.FirmService;
 import com.eeit144.drinkmaster.back.model.StoreService;
 import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
+import com.eeit144.drinkmaster.dto.Map2Dto;
 import com.eeit144.drinkmaster.dto.MapDto;
 
 @Controller
@@ -49,19 +50,25 @@ public class FrontStoreController {
 	
 	@PostMapping("localstorelike")
 	@ResponseBody
-	public List<StoreBean> findLocalStoreByFirmNameLike(@RequestParam("firmName") String firmName
-			,@RequestParam(name="p",defaultValue = "1") Integer page){
+	public List<StoreBean> findLocalStoreByFirmNameLike(@RequestBody Map2Dto map){
 		
-		System.out.println(firmName);
+		Float score = map.getScore();
 		
-		PageRequest pages = PageRequest.of(page-1, 4);
-		List<Integer> storeLocalByFirmNameLike = storeService.findStoreLocalByFirmNameLike(firmName);
-		List<StoreBean> findAll = storeService.findAll(storeLocalByFirmNameLike);
-		for(StoreBean one:findAll) {
+		PageRequest page = PageRequest.of(map.getCounts()-1, 3);
+		List<StoreBean> LocalByFirmNameLike = storeService.findStoreLocalByFirmNameLike(map.getLat(), map.getLng(),map.getFirmName(),page);
+	
+		
+		if(score==null) score =0.0F;
+//		System.out.println(score);
+	
+//		List<StoreBean> LocalByFirmNameLike = storeService.findStoreLocalByFirmNameLikeAndScoreUpThan(map.getLat(), map.getLng(),map.getFirmName(),score,page);
+		
+		
+		for(StoreBean one : LocalByFirmNameLike) {
 			Integer firmId = one.getFirmBean().getFirmId();
 			one.setFirmId(firmId);
 		}
-		return findAll;
+		return LocalByFirmNameLike;
 	}
 
 //	@GetMapping("store/{id}")

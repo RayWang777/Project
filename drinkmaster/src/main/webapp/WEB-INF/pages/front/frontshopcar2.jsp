@@ -79,8 +79,8 @@
 					<c:forEach varStatus="vs" var="shopcarItems" items="${shopcarBuy}">
 						<tr>
 
-							<td style="font-size: 18px;text-align: center;" colspan="2">${shopcarItems.productName }
-								<input type="text" id="productname" value="${shopcarItems.productName }" style="text-align: center;border-style:none;" readonly="true">
+							<td style="font-size: 18px;text-align: center;" colspan="2">${shopcarItems.productId }
+								<input type="text" id="productname" value="${shopcarItems.price}" style="text-align: center;border-style:none;" readonly="true">
 							</td>
 							<td></td>
 <!-- 							<td data-th="Price" > -->

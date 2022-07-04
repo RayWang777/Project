@@ -164,7 +164,7 @@ public class FrontShopCarController {
 			return "redirect:/front/login";
 		}
 		
-		System.out.println("123");
+		
 		
 //		// 取出存放在session物件內的shopcarBuy物件
 //		ShopcarBuy shopcarBuy = (ShopcarBuy) m.getAttribute("shopcarBuy");
@@ -178,12 +178,17 @@ public class FrontShopCarController {
 //		Map<Integer, ShopcarBean> cart = new LinkedHashMap<>();
 		
 		List<ShopcarBean> cart = new ArrayList<ShopcarBean>();
-			
-		for(ShopcarBean shopcarBean:cart) {
+		ShopcarBean shopcarBean2 = new ShopcarBean();
+		shopcarBean2.setTotalPrice(totalprice);
+		cart.add(shopcarBean2);
+		System.out.println(cart.size());
+		for(ShopcarBean shopcarBean : cart) {
+			System.out.println("123");
 //			ShopcarBean shopcarBean = new ShopcarBean();
 			shopcarBean.setProductImage(productBean.getProductImage());
 			shopcarBean.setProductId(productId);
 			shopcarBean.setProductName(productBean.getProductName());
+			System.out.println("999");
 			System.out.println(productBean.getProductName());
 			shopcarBean.setPrice(productBean.getPrice());
 			shopcarBean.setColdhot(coldhot);
@@ -192,12 +197,14 @@ public class FrontShopCarController {
 			shopcarBean.setTotalPrice(totalprice);
 			shopcarBean.setStoreName(storeName);
 			shopcarBean.setStoreId(storeId);
-			
+			System.out.println("000");
 			cart.add(shopcarBean);
 		}
-		
+//		System.out.println(cart.size());
+//		System.out.println(cart.isEmpty());
+		System.out.println("456");
 		m.addAttribute("shopcarBuy", cart);
-		
+		System.out.println("789");
 		
 		
 		

@@ -9,19 +9,64 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
 <title>店家菜單</title>
+<style>
+ a:link
+        {
+        font-family:monospace;
+        text-decoration:none;
+            color: black;
+        }
+        a:visited
+        {  text-decoration:none;
+            font-family:monospace;
+            color: black;
+        }
+        a:hover
+        {
+            color: red;
+        }
+        a:active
+        {
+            color: black;
+        }
+li{
+    list-style-type:circle;
+    font-family: monospace;
+}
+
+</style>
 <body style="background-color: #F2FCFF;">
 
-	<header class="bg-dark py-5">
-		<div class="container px-4 px-lg-5 my-5">
-			<div class="text-center text-white">
-				<h1 class="display-4 fw-bolder">商家介紹</h1>
-				<p class="lead fw-normal text-white-50 mb-0">With this shop
-					hompeage template</p>
-			</div>
-		</div>
-	</header>
+	<header class="py-2"> 
+    <div class="swiper mySwiper" style=" background-color: #F1F7F6; margin-left: 100px; margin-right: 200px ; border-radius: 20px 20px 20px 20px; width: 90% ;height: 350px">
+     				
+      
+       
+                  <div   style=" float: left; width: 330px; height:350px   ">
+                  <img alt="" src="<c:url value="/backend/firm/${store.firmBean.firmId}/photo"/>" style="width: 150px;height: 150px; margin-left: 100px; border-radius: 100px">
+                  <div style="font-size: x-large; width: 400px; height: 200px; margin-top: 10px  ">
+                  <ul ><li style="font-family:sans-serif;list-style-type:none; "> <b>店家名稱:</b>  <c:out value="${store.firmBean.firmName}"></c:out> <c:out value="${store.storeName}"></c:out> </li>
+                  <li>電話:&nbsp; <a  href="<c:out value='tel:${store.storePhone }'/>"><c:out value="${store.storePhone }"></c:out></a> </li>
+                 <li>地址:&nbsp;<a href='<c:url value="https://www.google.com/maps/place/${store.storeAddress}/@${store.latitude},${store.longitude},17z/"/>' target="_blank">${store.storeAddress}</a></li>
+                 <li>評分:<i class="fa-solid fa-star" style="color: #FCFF9C"></i></li>
+                 <li >營業時間:&nbsp;<c:out value="${store.openTime}"></c:out></li>
+                  </ul>
+                  
+                  </div>
+                  </div>
+                  <div style="">
+						<a href="http://localhost:8081/drinkmaster/front/firm/${store.firmBean.firmId}"><img style="float: right;" alt="" src="<c:url value="/backend/firm/banner/${store.firmBean.firmId}"/>" width="800px" height="370px"/></a>
+				
+        </div>
+     
+    
+      
+<!--       <div class="swiper-scrollbar"></div> -->
+    </div>
+                    
+</header>
 
-	<section class="py-5">
+	<section class="py-2">
 		<div class="container px-4 px-lg-0 mt-5">
 			<div
 				class="row gx-4 gx-lg-10 row-cols-2 row-cols-md-3 row-cols-xl-3 j">	
@@ -39,7 +84,7 @@
 									style="font-size: large; border-bottom: 2px inset #C0C0C0; height: 52px;"
 									class="align-middle">
 									<a
-										href="${contextRoot}/front/shopcar/before/editproduct?id=${productBean.productId}"
+										href="${contextRoot}/front/shopcar/before/editproduct?id=${productBean.productId}&sid=${store.storeId}"
 										style="color: black; text-decoration: none;"> <c:if
 											test="${productBean.productImage!=null}">
 											<img src="${productBean.productImage}" style="width: 60px"

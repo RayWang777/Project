@@ -43,5 +43,7 @@ public interface OrderItemsService {
 	public List<OrderItems> findByproductBean(ProductBean productBean);	
 
 
-	public void insertOrderItems(Set<OrderItems> items);	
+	public void insertOrderItems(Set<OrderItems> items);
+	
+	public List<OrderItems> findOrderOrderitems();
 }

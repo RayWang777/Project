@@ -44,7 +44,7 @@
 
 
 <br/>
-
+<%-- <c:out value="有 ${page.totalElements } 筆資料"></c:out> --%>
 <br/>
 
 
@@ -71,7 +71,7 @@
 				<tr scope="row">
 					<td class="align-middle">
 						<input type="hidden" value="<c:out value="${order.orderId}"/>">
-						<input type="hidden" value="<c:out value="${canSeeUser.userId}"/>">
+						<input type="hidden" value="<c:out value="${canSeeUser.userId}"/>" name="orderuserid">
 <%-- 						<input type="hidden" vaule="${order.orderId}" name="id"> --%>
 						</td>
 					<td class="align-middle" style="text-align: center;">
@@ -125,10 +125,24 @@
 
 		</tbody>
 	</table>
+<div>
+<!-- <div class="row justify-content-center" style="font-size: x-large;"> -->
+<%--   <c:forEach var="pageNumber" begin="1" end="${page.totalPages}"> --%>
+<%--    <c:choose> --%>
+<%--    <c:when test="${page.number!=pageNumber-1}"> --%>
+<%--    <a href="${contextRoot}/front/order/userOrder?o=${pageNumber}"> <c:out value="${pageNumber}" /> </a> --%>
+<%--    </c:when> --%>
+<%--    <c:otherwise> --%>
+<%--    <c:out value="${pageNumber}"></c:out> --%>
+<%--    </c:otherwise> --%>
+<%--    </c:choose>  --%>
+<%--    <c:if test="${pageNumber!= page.totalPages }"> --%>
+<!--     &thinsp;| &thinsp; -->
+<%--    </c:if> --%>
+<%--    </c:forEach> --%>
+<!--    </div> -->
 
-
-
-
+</div>
 
 </div>
 <script type="text/javascript">

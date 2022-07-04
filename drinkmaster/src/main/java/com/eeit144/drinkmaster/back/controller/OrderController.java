@@ -35,12 +35,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.eeit144.drinkmaster.back.model.OrderItemsService;
 import com.eeit144.drinkmaster.back.model.OrderService;
 //import com.eeit144.drinkmaster.back.model.ProductService;
 import com.eeit144.drinkmaster.back.model.StoreService;
 import com.eeit144.drinkmaster.back.model.UserService;
 import com.eeit144.drinkmaster.bean.OrderBean;
-
+import com.eeit144.drinkmaster.bean.OrderItems;
 import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.bean.UserBean;
 import com.eeit144.drinkmaster.dto.OrderBeanxslx;
@@ -58,6 +59,8 @@ public class OrderController<E> {
 		private StoreService storeService;
 		@Autowired
 		private UserService userService;
+		@Autowired
+		private OrderItemsService oiService;
 //		@Autowired
 //		private ProductService productService;
 		
@@ -266,7 +269,10 @@ public class OrderController<E> {
 		@GetMapping("order/export")
 		public ResponseEntity<byte[]> directExportExcelByObject(HttpServletResponse response) throws IOException {
 			
-			List<OrderBean> list = orderService.findAll();
+//			List<OrderBean> list = orderService.findAll();
+			
+			
+			List<OrderItems> list = oiService.findOrderOrderitems();
 			
 			//讓orderBeanxslx可以重複利用
 			OrderBeanxslx orderBeanxslx = null;
@@ -274,18 +280,27 @@ public class OrderController<E> {
 			List<OrderBeanxslx> list2 = new ArrayList<OrderBeanxslx>();
 			
 			//將找到list的所有資料放到list2裡面
-			for(OrderBean order:  list) {
+			
+			for(OrderItems oi:  list) {
 				orderBeanxslx = new OrderBeanxslx();
-				orderBeanxslx.setOrderId(order.getOrderId());
-				orderBeanxslx.setUserName(order.getUserBean().getUserName());
-				orderBeanxslx.setStoreName(order.getStoreBean().getStoreName());
-				orderBeanxslx.setOrderAddress(order.getOrderAddress());
-				orderBeanxslx.setOrderPhone(order.getOrderPhone());
-				orderBeanxslx.setOrderStatus(order.getOrderStatus());
-				orderBeanxslx.setTotalPrice(order.getTotalPrice());
-				orderBeanxslx.setCreateTime(order.getCreateTime());
+				orderBeanxslx.setOrderId(oi.getOrderBean().getOrderId());
+				orderBeanxslx.setUserName(oi.getOrderBean().getUserBean().getUserName());				
+				orderBeanxslx.setStoreName(oi.getOrderBean().getStoreBean().getStoreName());
+				orderBeanxslx.setOrderAddress(oi.getOrderBean().getOrderAddress());
+				orderBeanxslx.setOrderPhone(oi.getOrderBean().getOrderPhone());
+				orderBeanxslx.setOrderStatus(oi.getOrderBean().getOrderStatus());
+				orderBeanxslx.setTotalPrice(oi.getOrderBean().getTotalPrice());
+				orderBeanxslx.setCreateTime(oi.getOrderBean().getCreateTime());
+				orderBeanxslx.setColdhot(oi.getColdhot());
+				orderBeanxslx.setQuantity(oi.getQuantity());
+				orderBeanxslx.setSweet(oi.getSweet());
+				orderBeanxslx.setProductName(oi.getProductBean().getProductName());
+				
 				list2.add(orderBeanxslx);
 			}
+			
+			
+			
 			
 			
 			ExportParams exportParams = new ExportParams();

@@ -37,4 +37,7 @@ public interface OrderRepostiory extends JpaRepository<OrderBean, Integer> {
 	
 	@Query(value="select * from orders where userid = :userId order by createtime desc",nativeQuery = true)
 	public List<OrderBean> findOrdersByUserid(@Param(value="userId")Integer userId);
+	
+	@Query(value="select * from orders as o right join orderitems as oi on o.orderid = oi.orderid ",nativeQuery = true)
+	public List<OrderBean> findOrderOrderitems();
 }

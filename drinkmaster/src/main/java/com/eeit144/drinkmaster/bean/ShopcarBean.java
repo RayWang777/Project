@@ -1,7 +1,9 @@
 package com.eeit144.drinkmaster.bean;
 
+import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class ShopcarBean {
 
@@ -18,6 +20,68 @@ public class ShopcarBean {
 	private String storeName;
 	private Integer storeId;
 	
+	private Map<Integer, OrderItems> shopcart = new LinkedHashMap<Integer, OrderItems>();
+	
+	
+	
+	public void additem(Integer productId,OrderItems orderItems) {
+		
+		if(shopcart.get(productId) == null) {
+			shopcart.put(productId, orderItems);
+	}else {
+		OrderItems oiBean = shopcart.get(productId);
+		oiBean.setQuantity(orderItems.getQuantity() + oiBean.getQuantity());
+	}
+}
+	
+	public boolean modifyQty(Integer productId, Integer newQty) {
+		if ( shopcart.get(productId) != null ) {
+			OrderItems  oibean = shopcart.get(productId);
+		   oibean.setQuantity(newQty);
+	       return true;
+		} else {
+		   return false;
+		}
+	}
+
+	
+	public Integer deleteBook(Integer productId) {
+		if ( shopcart.get(productId) != null ) {
+			shopcart.remove(productId);  
+	       return 1;
+		} else {
+		   return 0;
+		}
+	}
+	public int getItemNumber(){   // ShoppingCart.itemNumber
+		return shopcart.size();
+	}
+	
+	//計算購物車內所有商品的合計金額(每項商品的單價*數量的總和)
+	public double getSubtotal(){
+		double subTotal = 0 ;
+		Set<Integer> set = shopcart.keySet();
+		for(int n : set){
+			OrderItems oi = shopcart.get(n);
+			double price    = oi.getPrice();
+//			double discount = oi.getDiscount();
+			Integer qty      = oi.getQuantity();
+			subTotal +=  price * qty;
+		}
+		return subTotal;
+	}
+	
+	
+	
+	
+	public Map<Integer, OrderItems> getShopcart() {
+		return shopcart;
+	}
+
+	public void setShopcart(Map<Integer, OrderItems> shopcart) {
+		this.shopcart = shopcart;
+	}
+
 	public Integer getStoreId() {
 		return storeId;
 	}
@@ -26,11 +90,6 @@ public class ShopcarBean {
 		this.storeId = storeId;
 	}
 
-
-	private Map<Integer, OrderItems> cart = new LinkedHashMap< >();
-	
-	private Map<Integer, ShopcarBean> shopcart = new LinkedHashMap< >();
-	
 	
 	
 
@@ -43,17 +102,9 @@ public class ShopcarBean {
 		this.storeName = storeName;
 	}
 
-	public Map<Integer, ShopcarBean> getShopcart() {
-		return shopcart;
-	}
 
-	public void setShopcart(Map<Integer, ShopcarBean> shopcart) {
-		this.shopcart = shopcart;
-	}
 
-	public Map<Integer, OrderItems>  getContent() { 
-		return cart;
-	}
+
 	
 	public String getPhone() {
 		return phone;
@@ -65,13 +116,7 @@ public class ShopcarBean {
 	}
 
 
-	public Map<Integer, OrderItems> getCart() {
-		return cart;
-	}
 
-	public void setCart(Map<Integer, OrderItems> cart) {
-		this.cart = cart;
-	}
 
 	public String getAddress() {
 		return address;

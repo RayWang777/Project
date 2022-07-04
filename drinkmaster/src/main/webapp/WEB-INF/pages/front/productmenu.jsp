@@ -83,13 +83,11 @@ li{
 								<div
 									style="font-size: large; border-bottom: 2px inset #C0C0C0; height: 52px;"
 									class="align-middle">
-<<<<<<< HEAD
-									<a  href="${contextRoot}/front/shopcar/before/editproduct?id=${productBean.productId}&sid=${store.storeId}" style="color: black; text-decoration: none;"> <c:if
-=======
+
 									<a
 										href="${contextRoot}/front/shopcar/before/editproduct?id=${productBean.productId}&sid=${store.storeId}"
 										style="color: black; text-decoration: none;"> <c:if
->>>>>>> fcc304f412f503e4068c1d3aca5582c328f491c0
+
 											test="${productBean.productImage!=null}">
 											<img src="${productBean.productImage}" style="width: 60px"
 												height="50px" />

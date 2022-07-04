@@ -3,9 +3,9 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+                <jsp:include page="layout/header.jsp"></jsp:include>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
-                <jsp:include page="layout/header.jsp"></jsp:include>
 <head>
 <meta charset="UTF-8">
 <title>飲君子 登入</title>
@@ -48,13 +48,12 @@
 		
 		padding: 7% 120px 20px;
 	}
-	
 
 	
 </style>
 
         <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+<!--         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" /> -->
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="${contextRoot}/css/lib/front/styles.css" rel="stylesheet" />
 </head>
@@ -121,6 +120,10 @@
         <!-- Core theme JS-->
         <script src="${contextRoot}/js/lib/front/scripts.js"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+
 
 
 
@@ -217,3 +220,4 @@ function checkEmpty(){
 
 </body>
 
+                <jsp:include page="layout/footer.jsp"></jsp:include>

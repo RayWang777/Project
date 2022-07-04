@@ -224,6 +224,11 @@ table {
                 <span>NT$ <input type="text" value="${shopcarBuy.totalPrice}" readonly="readonly" style="border:none"></span>
             </div>
         </div>
+        <a href="${contextRoot}/front/">
+        <button type="button" class="btn btn-success btn-block">繼續購買<i class="fa fa-angle-right"></i></button>
+		</a>
+
+
 <!--         <div class="bottom"> -->
 <!--             <h3>購物清單</h3> -->
 <!--             <div class="list"> -->

@@ -145,6 +145,7 @@
 	</label></th>
       <th scope="col">訂單編號</th>
       <th scope="col">訂購人</th>
+<!--       <th scope="col">店名</th> -->
       <th scope="col" style="width: 170px;">建立時間</th>
       <th scope="col">地址</th>
       <th scope="col">電話</th>
@@ -165,6 +166,7 @@
     
       <th scope="row"><c:out value="${orderBean.orderId}"/></th>
       <td><c:out value="${orderBean.userBean.userName}"/></td>
+      <td><c:out value="${orderBean.storeBean.storeName}"/></td>
       <td><fmt:formatDate  value="${orderBean.createTime}" pattern="yyyy-MM-dd HH:mm"/></td>
       <td><c:out value="${orderBean.orderAddress}"/></td>
       <td><c:out value="${orderBean.orderPhone}"/></td>
@@ -236,7 +238,9 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      
   <div class="modal-body">
+  
   <form:form id="orderform" class="form"  method="post" action="${contextRoot}/backend/order/insert" modelAttribute="orderBean">
 
 
@@ -312,15 +316,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 	  modal.find('.modal-body input').val(recipient)
 	})
 	
-// $('#exampleModal').on('show.bs.modal', function (event) {
-// 	  var button = $(event.relatedTarget) // Button that triggered the modal
-// 	  var recipient = button.data('whatever') // Extract info from data-* attributes
-// 	  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-// 	  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-// 	  var modal = $(this)
-// 	  modal.find('.modal-title').text('新增訂單 ' + recipient)
-// 	  modal.find('.modal-body input').val(recipient)
-// 	})	
+
 
 
 

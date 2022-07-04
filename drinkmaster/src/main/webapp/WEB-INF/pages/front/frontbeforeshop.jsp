@@ -59,7 +59,7 @@
 <div class="container" id="container">
 <form:form class="form" method="post" action="${contextRoot}/front/shopcar/buy" modelAttribute="productBean">
 <input type="hidden" value="${productBean.productId}" name="shopcarproductId">
-<input type="text" value="${productCategoryBean.storeId}" name="shopcarstoreId">
+<input type="hidden" value="${productCategoryBean.storeId}" name="shopcarstoreId">
 	<table id="cart" class="table table-hover table-condensed">
     				<thead>
 						<tr>
@@ -79,7 +79,9 @@
 							<td data-th="Product">
 <!-- 								<div class="row"> -->
 									<div class="col-sm-2 hidden-xs">
+									<c:if test="${productBean.productImage!=null}">
 									<img src="${productBean.productImage}" style="width: 250px;height: 200px;text-align: center;" name="shopcarimg" /></div>
+									</c:if>
 									<div class="col-sm-10">
 										
 										

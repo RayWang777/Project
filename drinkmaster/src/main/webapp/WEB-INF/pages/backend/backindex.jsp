@@ -20,13 +20,7 @@
 		<th scope="col">姓名</th>
 		<th scope="col">帳號</th>
 		<th scope="col">密碼</th>
-		<th scope="col">電話</th>
 		<th scope="col">地址</th>
-		<th scope="col">性別</th>
-		<th scope="col">權限</th>
-		<th scope="col">生日</th>
-		<th scope="col">創建日期</th>
-		<th scope="col">大頭貼</th>
 	</tr>
 	<tr>
 		<td class="align-middle"><div class="d-flex align-items-center">
@@ -42,10 +36,20 @@
 			<c:out value="${userBean.userPassword}"/>
 		</div></td>
 		<td class="align-middle"><div class="d-flex align-items-center">
-			<c:out value="${userBean.phone}"/>
-		</div></td>
-		<td class="align-middle"><div class="d-flex align-items-center">
 			<c:out value="${userBean.userAddress}"/>
+		</div></td>		
+	</tr>	
+	<tr>
+		<th scope="col">電話</th>
+		<th scope="col">性別</th>
+		<th scope="col">權限</th>
+		<th scope="col">生日</th>
+		<th scope="col">創建日期</th>
+		<th scope="col">大頭貼</th>
+	</tr>
+	<tr>
+		<td class="align-middle"><div class="d-flex align-items-center">
+			<c:out value="${userBean.phone}"/>
 		</div></td>
 		<td class="align-middle"><div class="d-flex align-items-center">
 			<c:out value="${userBean.gender}"/>
@@ -62,8 +66,7 @@
 		
 		<td class="align-middle"><img src="<c:url value="/backend/user/${userBean.userId}/photo"/>"
 						style="width: 100px; height: 100px;"></td>
-		
-	</tr>	
+	</tr>
 </table>
 
 <jsp:include page="layout/footer.jsp" />

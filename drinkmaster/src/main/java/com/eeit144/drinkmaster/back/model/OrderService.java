@@ -43,4 +43,6 @@ public interface OrderService {
 	public List<OrderBean> findAll();
 	
 	public List<Integer> countBystoreId();
+	
+	public OrderBean findFirstByOrderByCreateTimeDesc();
 }

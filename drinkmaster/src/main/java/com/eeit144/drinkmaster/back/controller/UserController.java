@@ -97,12 +97,14 @@ public class UserController {
 		
 		System.out.println("UserBean的password = " + user.getUserPassword());
 
-		
-		String role = user.getRole();
 
-		System.out.println("嗨嗨!!" + role);
+		String role = user.getRole();
 		m.addAttribute("userBean", user);
+		
+		//System.out.println("嗨嗨!!" + role);
+
 		if(role.equals("admin")) {
+
 			return("redirect:/backend/");
 			
 		} 
@@ -121,7 +123,8 @@ public class UserController {
 			m.addAttribute("canSeeFirm", firmBean);
 			
 			return("redirect:/backend/");
-		} else if(role.equals("store")) {
+		} 
+		 if(role.equals("store")) {
 			
 			Optional<StoreBean> StoreByUserId = storeService.findStoreByUserId(user.getUserId());
 			if(StoreByUserId.isEmpty()) {
@@ -354,7 +357,8 @@ public class UserController {
 		System.out.println(saleCode4);
 		String saleCode5 = Util.saleCode("tom7777");
 		System.out.println(saleCode5);
-
+		String saleCode6 = Util.saleCode("123");
+		System.out.println(saleCode6);
 		
 		String deSaleCode = Util.DeSaleCode(saleCode);
 		System.out.println(deSaleCode);

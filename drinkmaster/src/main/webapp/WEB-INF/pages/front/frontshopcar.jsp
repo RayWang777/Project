@@ -76,15 +76,15 @@
 					<tbody id="tbody">
 <%-- 					<c:forEach varStatus="vs" var="shopcarItems" items="${shopcarBuy.content}"> --%>
 						<tr>
-							<td data-th="Product">
-									<div class="col-sm-2 hidden-xs">
-									<img src="${shopcarBuy.productImage}" style="width: 300px;text-align: center;" /></div>
-									<div class="col-sm-10">
+<!-- 							<td data-th="Product"> -->
+<!-- 									<div class="col-sm-2 hidden-xs"> -->
+<%-- 									<img src="${shopcarBuy.productImage}" style="width: 300px;text-align: center;" /></div> --%>
+<!-- 									<div class="col-sm-10"> -->
 									
 										
-									</div>
-							</td>
-							<td style="font-size: 18px;">
+<!-- 									</div> -->
+<!-- 							</td> -->
+							<td style="font-size: 18px;text-align: center;" colspan="2">
 								<input type="text" id="productname" value="${shopcarBuy.productName}" style="text-align: center;border-style:none;" readonly="true">
 							</td>
 							
@@ -114,7 +114,9 @@
 							</td>
 							<td class="actions" data-th="">
 
-								<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>								
+							<a href="${contextRoot}/front/shopcar/deleteCar/">
+							<button type="button"  id="delete" class="btn btn-danger btn-sm" onclick="return confirm('確定要刪除嗎?')"><i class="fa fa-trash-o"></i></button>								
+							</a>
 							</td>
 						</tr>
 <%-- 						</c:forEach> --%>
@@ -129,10 +131,10 @@
 							<i class="fa fa-angle-left"></i> 
 							&thinsp;繼續購買</a></td>
 							<td colspan="2">折扣碼:&thinsp;<input type="text" ></td>
-							<td  class="hidden-xs"></td>
+							
 							
 <!-- 							備註:折扣碼後的價格 -->
-							<td class="hidden-xs text-center" colspan="2">
+							<td class="hidden-xs text-center" colspan="3">
 							<span style="color:red;font-weight: bold;">折扣後&ensp;</span>
 							<strong>Total <input type="text" id="totalprice2" value="${shopcarBuy.totalPrice}" style="width:100px;text-align: center;border-style:none;" readonly="true"></strong></td>
 							<td colspan="2"><button type="submit" class="btn btn-success btn-block">結帳&thinsp;><i class="fa fa-angle-right"></i></button></td>
@@ -209,6 +211,13 @@ $(function(){
 
         $('#total').html(totalprice);      	
     })
+    
+//     $('#delete').click(function(){				
+
+
+//         $('#cart').remove();    
+//         $(window).attr('location','${contextRoot}/front/');
+//     })
 	
 })
 </script>

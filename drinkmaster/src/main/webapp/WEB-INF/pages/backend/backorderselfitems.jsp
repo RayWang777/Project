@@ -116,7 +116,7 @@
       <th scope="col">商品名稱</th>
       <th scope="col">數量</th>
       <th scope="col">甜度</th>
-      <th scope="col">冷熱</th>
+      <th scope="col">溫度</th>
       <th scope="col">價格</th>
       <th scope="col"></th>
     </tr>
@@ -131,7 +131,16 @@
       <td><c:out value="${orderItems.productBean.productName}"/></td>
       <td><c:out value="${orderItems.quantity}"/></td>
       <td><c:out value="${orderItems.sweet}"/></td>
-      <td><c:out value="${orderItems.quantity}"/></td>
+      <c:choose>
+      <c:when test="${orderItems.coldhot=='冷'}">
+      <td style="color: blue;font-weight: bold;">
+      <c:out value="冷"/></td>
+      </c:when>
+      <c:when test="${orderItems.coldhot=='熱'}">
+      <td style="color: red;font-weight: bold;">
+      <c:out value="熱"/></td>
+      </c:when>
+      </c:choose>
       <td><c:out value="${orderItems.price}"/></td>
 
       <td>

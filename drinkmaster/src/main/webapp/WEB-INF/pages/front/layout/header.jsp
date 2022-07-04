@@ -32,7 +32,7 @@
 </head>
 
 <body>  
-<nav class="navbar navbar-expand-lg navbar-light"> <!-- bg-light -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light"> <!-- bg-light -->
             <div class="container px-4 px-lg-5" >
                 <a class="navbar-brand" href="${contextRoot}/front/" style="color:#DD5D71;"><b style="font-size: xx-large;">飲君子DrinkMaster</b></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>

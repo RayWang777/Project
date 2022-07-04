@@ -55,7 +55,7 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!" style="color:#5A5AAD;"><b style="font-size: large;">找附近</b></a></li>
                         
 
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="${contextRoot}/front/comment/storecomment" style="color:#5A5AAD;"><b style="font-size: large;">評論區</b></a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="${contextRoot}/front/comment/firmcomment" style="color:#5A5AAD;"><b style="font-size: large;">評論區</b></a></li>
 
 						<li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="color:#5A5AAD;"><b style="font-size: large;">客服</b></a>

@@ -31,10 +31,14 @@
 
 </style>
 
+
 <meta charset="UTF-8">
 <title>使用者評論</title>
 </head>
 <body>
+<br>
+<br>
+<br>
 
 <h1 style="text-align:center">我的評論</h1>
 
@@ -128,8 +132,19 @@
 			
 			</c:when>
 			<c:otherwise>
+			<br>
+			<br>
+			<br>
+			<br><br><br><br><br><br><br>
+			<br>
+			<br>
 				<h3 style="text-align:center ; color: red">您目前沒有任何評論~</h3>
-			
+			<br>
+			<br>
+			<br>
+			<br><br><br><br><br><br><br>
+			<br>
+			<br>
 			</c:otherwise>
 			
 			</c:choose>

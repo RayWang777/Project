@@ -49,7 +49,9 @@ div.awesomeRating {
 <title>評論區</title>
 </head>
 <body>
-
+<br>
+<br>
+<br>
 <h1 style="text-align:center">評論區</h1>
 
 
@@ -87,6 +89,7 @@ div.awesomeRating {
 	
   </div>
 </div>
+<br><br><br>
 
 <script type="text/javascript">
 	

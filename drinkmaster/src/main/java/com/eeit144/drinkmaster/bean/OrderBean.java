@@ -74,7 +74,7 @@ public class OrderBean {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8") // JSP DATE
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") // MVC DATE
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "createtime",nullable = false, columnDefinition = "smalldatetime")
+	@Column(name = "createtime",nullable = false, columnDefinition = "datetime")
 	@Excel(name="下單時間", orderNum="9",width = 30)
 	private Date createTime;
 	

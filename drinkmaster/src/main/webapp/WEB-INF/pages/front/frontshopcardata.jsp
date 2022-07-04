@@ -71,6 +71,8 @@
 <form action="${contextRoot}/front/shopcar/confirmOrder" method="post">
 <p style="text-align: center;"> 
 <input type="hidden" value="${canSeeUser.userId}" name="userId">
+<input type="hidden" value="${shopcarBuy.storeId}" name="storeId">
+<input type="hidden" value="${shopcarBuy.storeName}" name="storeName">
 <input type="hidden" value="${shopcarBuy.productId}" name="productId">
 姓名:&thinsp;<input type="text" value="${canSeeUser.userName}" ><br><br>
 電話:&thinsp;<input type="text" name="shopcarphone"><br><br>
@@ -81,7 +83,7 @@
 <input type="hidden" value="${shopcarBuy.sweet}" name="shopcarsweet">
 <input type="hidden" value="${shopcarBuy.coldhot}" name="shopcarcoldhot">
 <input type="hidden" value="${shopcarBuy.totalPrice}" name="shopcartotalPrice">
-<button type="submit">送出訂單</button> 
+<button type="submit" onclick="return confirm('確定要送出嗎?')">送出訂單</button> 
 
 </p>
 </form>

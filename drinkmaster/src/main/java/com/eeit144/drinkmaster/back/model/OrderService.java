@@ -45,4 +45,6 @@ public interface OrderService {
 	public List<Integer> countBystoreId();
 	
 	public OrderBean findFirstByOrderByCreateTimeDesc();
+	
+	public List<OrderBean> findOrdersByUserid(Integer userId);
 }

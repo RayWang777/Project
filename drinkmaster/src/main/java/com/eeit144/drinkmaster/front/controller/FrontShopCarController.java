@@ -102,14 +102,17 @@ public class FrontShopCarController {
 	
 	
 	@GetMapping("shopcar/before/editproduct")
-	public String editById(@RequestParam("id") Integer id, Model m) {
+	public String editById(@RequestParam("id") Integer id, Model m,@RequestParam("sid") Integer storeId) {
 		ProductBean productBean = proService.findById(id);
-
-
+		StoreBean storeBean = storeService.findById(storeId).get();
+		
 		
 		
 		m.addAttribute("productBean", productBean);
 		m.addAttribute("shopcarBuy", productBean);
+		
+		m.addAttribute("storeBean", storeBean);
+		m.addAttribute("shopcarBuy", storeBean);
 
 		return "/front/frontbeforeshop";
 	}
@@ -151,7 +154,8 @@ public class FrontShopCarController {
 	@PostMapping("shopcar/buy")
 	public String addShopcar(@SessionAttribute(name="product",required = false) OrderItems orderItems,Model m,@RequestParam("shopcarproductId") Integer productId
 			,@RequestParam("sugar") String sugar,@RequestParam("coldhot") String coldhot,@RequestParam("number") Integer number,
-			@RequestParam("totalprice") Integer totalprice,@ModelAttribute("productBean") ProductBean productBean) {
+			@RequestParam("totalprice") Integer totalprice,@RequestParam("storeName") String storeName,
+			@RequestParam("storeId") Integer storeId,@ModelAttribute("productBean") ProductBean productBean) {
 		
 	
 		UserBean userBean = (UserBean) m.getAttribute("canSeeUser");
@@ -183,6 +187,8 @@ public class FrontShopCarController {
 		shopcarBean.setQuantity(number);
 		shopcarBean.setSweet(sugar);
 		shopcarBean.setTotalPrice(totalprice);
+		shopcarBean.setStoreName(storeName);
+		shopcarBean.setStoreId(storeId);
 		
 //		cart.put(productId, shopcarBean);
 //		m.addAttribute("shopcarBuy", cart);
@@ -217,7 +223,9 @@ public class FrontShopCarController {
 			,@RequestParam("shopcarcoldhot") String shopcarcoldhot
 			,@RequestParam("shopcartotalPrice") Integer shopcartotalPrice
 			,@RequestParam("userId") Integer userId
-			,@RequestParam("productId") Integer productId) {//@RequestParam("storeId") Integer storeId
+			,@RequestParam("productId") Integer productId
+			,@RequestParam("storeName") String storeName
+			,@RequestParam("storeId") Integer storeId) {//@RequestParam("storeId") Integer storeId
 		
 		ShopcarBean shopcarBean = new ShopcarBean();
 		shopcarBean.setAddress(shopcaraddress);
@@ -228,15 +236,18 @@ public class FrontShopCarController {
 		shopcarBean.setQuantity(shopcarquantity);
 		shopcarBean.setSweet(shopcarsweet);
 		shopcarBean.setTotalPrice(shopcartotalPrice);
-				
+		shopcarBean.setStoreName(storeName);
+		shopcarBean.setStoreId(storeId);
+		
 		m.addAttribute("shopcarBuy", shopcarBean);
-			
-				
+							
 		Date today = new Date();
 		
-
 		UserBean user = new UserBean();
 		user.setUserId(userId);
+		
+		StoreBean store = new StoreBean();
+		store.setStoreId(storeId);
 		
 		OrderBean ob = new OrderBean();
 		ob.setCreateTime(today);
@@ -245,15 +256,12 @@ public class FrontShopCarController {
 		ob.setOrderStatus("待付款");
 		ob.setTotalPrice(shopcartotalPrice);
 		ob.setUserBean(user);
+		ob.setStoreBean(store);
 		
 		orderService.insertOrder(ob);
 		
 		OrderBean ob2 = orderService.findFirstByOrderByCreateTimeDesc();
-		
-		Integer newOrderId = ob2.getOrderId();
-
-			
-		
+							
 		ProductBean product = new ProductBean();
 		product.setProductId(productId);
 
@@ -281,23 +289,13 @@ public class FrontShopCarController {
 //		
 //		oitemService.insertOrderItems(items);
 		
-		return "/front/frontorder";
+		return "redirect:/front/shopcar/deleteCar";
 	}
 	
 	
 	
 	
 	
-	@PostMapping("shopcar/test")
-	public String addShopcartest(Model m,@RequestParam("id") Integer id) {
-//		ProductBean productBean = proService.findById(id);
-		
-		m.getAttribute("userBean");
-		ShopcarBean shop = new ShopcarBean();
-		m.addAttribute("userBean", shop);
-		
-		return "/front/frontshopcar";
-	}
 	
 
 }

@@ -249,13 +249,18 @@
         <!-- 到底觸發事件 -->          
                   window.onscroll = function(localcounts){
                 	  
-                	  var scrollTop = document.documentElement.scrollTop;
+                	  var scrollTop = document.documentElement.scrollTop+0.5;
                 	  
                 	  var windowHeight = document.documentElement.clientHeight;
                 	  
                 	  var scrollHeight = document.documentElement.scrollHeight;
+                	  console.log(scrollTop)
+                	  console.log(windowHeight)
+                	  console.log(scrollHeight)
+          
                 	  
-                	  if(scrollTop+windowHeight ===scrollHeight){
+                	  
+                	  if(scrollTop+windowHeight >= scrollHeight){
 
                 		 navigator.geolocation.getCurrentPosition(successCallback);
                 		  

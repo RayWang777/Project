@@ -45,6 +45,7 @@ private OrderItemsService itemsService;
 	public String productMenu(@RequestParam("id") Integer id, Model m) {
 		Optional<StoreBean> storeBean= storeService.findById(id);
 		StoreBean  store=storeBean.get();
+		m.addAttribute("store", store);
 		 List<ProductCategoryBean> category=categoryService.findByStoreBean(store);
 		 m.addAttribute("category",category);
 		return "front/productmenu";

@@ -278,7 +278,7 @@ public class OrderController<E> {
 				orderBeanxslx = new OrderBeanxslx();
 				orderBeanxslx.setOrderId(order.getOrderId());
 				orderBeanxslx.setUserName(order.getUserBean().getUserName());
-//有問題			orderBeanxslx.setStoreName(order.getStoreBean().getStoreName());
+				orderBeanxslx.setStoreName(order.getStoreBean().getStoreName());
 				orderBeanxslx.setOrderAddress(order.getOrderAddress());
 				orderBeanxslx.setOrderPhone(order.getOrderPhone());
 				orderBeanxslx.setOrderStatus(order.getOrderStatus());

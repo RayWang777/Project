@@ -15,6 +15,6 @@ public class FrontRemoveShopcar {
 	@GetMapping("shopcar/deleteCar")
 	public String deleteShopcar(Model m,SessionStatus session) {
 		session.setComplete();
-		return "/front/frontshopcar";
+		return "/front/frontorder";
 	}
 }

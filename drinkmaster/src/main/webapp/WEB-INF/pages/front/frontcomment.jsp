@@ -57,19 +57,9 @@ div.awesomeRating {
 
 
 <div class="row justify-content-center">
-<!-- <div class="col-9"> -->
+<div class="col-9">
 <!--    <span style="font-size: 1.5em">評論</span> -->
-<form method="get" action="${contextRoot}/front/comment/storenamelike">
-
-<div style="text-align:right">
-
-<%-- <a href="${contextRoot}/front/comment/storecomment?commentfirmid=${commentStore.firmId}"><button class="btn btn-outline-success">全部</button></a> --%>
-
-<input type="text" name="commentstorename"/><button type="submit" class="btn btn-outline-success">搜尋</button>
- </div>
-  
-
-<!--   </div> -->
+  </div>
   
   			<div class="row row-cols-3 row-cols-md-3 g-4 ">
   				<c:forEach var="storecomment" items="${listcsdto}" >
@@ -77,13 +67,11 @@ div.awesomeRating {
 				<div class="col">
 					<div class="card h-100 border-warning">
   						<div class="card-body">
-						    廠商 : <c:out value="${storecomment.firmName}"></c:out><br/>
-						    <input name="commentfirmid" value="${storecomment.firmId}" style="display: none">
-						    店家 : <c:out value="${storecomment.storeName}"></c:out>
+						    <c:out value="${storecomment.storeName}"></c:out>
 						    <input value="${storecomment.storeId}" style="display: none">
 						    <h3 class="card-subtitle mb-2 text-muted">-------------------</h3>
 						    
-						    總平均 : <c:out value="${storecomment.avgScore}"></c:out>
+						    <c:out value="${storecomment.avgScore}"></c:out>
 						    <c:if test="${storecomment.avgScore == null}">
 						    	目前沒有評論~
 						    </c:if>
@@ -116,7 +104,7 @@ div.awesomeRating {
   				</c:forEach>
   				</div>
   			
-  </form>
+  
 	
   </div>
 </div>

@@ -98,7 +98,6 @@
 				<label class="control control--checkbox">
 						<input type="checkbox" class="js-check-all" />
 				</label></th>
-				<th scope="col">店家</th>
 				<th scope="col">店名</th>
 				<th scope="col" style="width: 80px">使用者</th>
 				<th scope="col" style="width: 180px ; text-align:center">評分</th>
@@ -117,11 +116,6 @@
 							id="check" value="<c:out value='${comment.commentId}'/>"
 							style="margin-top: 20px;" />
 						</label></td>
-						<td class="align-middle">
-						<div class="d-flex align-items-center">
-							<c:out value="${comment.storeBean.firmBean.firmName}"></c:out>
-						</div>
-					</td>
 					<td class="align-middle">
 						<div class="d-flex align-items-center">
 							<c:out value="${comment.storeBean.storeName}"></c:out>

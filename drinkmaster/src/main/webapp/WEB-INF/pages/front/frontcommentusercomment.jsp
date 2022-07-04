@@ -60,26 +60,22 @@
 
 <table class="table table-hover"
 		style="width: 100%; table-layout: fixed;">
-<!-- 		<thead> -->
-<!-- 			<tr> -->
-<!-- 				<th style="width: 50px;"> -->
-<!-- 				<label class="control control--checkbox"> -->
-<!-- 						<input type="checkbox" class="js-check-all" /> -->
-<!-- 				</label></th> -->
-<!-- 				<th scope="col">店名</th> -->
-<!-- 				<th scope="col" style="width: 80px">使用者</th> -->
-<!-- 				<th scope="col" style="width: 180px ; text-align:center">評分</th> -->
-<!-- 				<th scope="col">評論內容</th> -->
-<!-- 				<th scope="col">圖片</th> -->
-<!-- 				<th scope="col">時間</th> -->
-<!-- 				<th style="width: 140px;text-align: left;">動作</th> -->
-<!-- 			</tr> -->
-<!-- 		</thead> -->
+		<thead>
+			<tr>
+				<th style="width: 50px;">
+				<label class="control control--checkbox">
+						<input type="checkbox" class="js-check-all" />
+				</label></th>
+				<th scope="col">店名</th>
+				<th scope="col" style="width: 80px">使用者</th>
+				<th scope="col" style="width: 180px ; text-align:center">評分</th>
+				<th scope="col">評論內容</th>
+				<th scope="col">圖片</th>
+				<th scope="col">時間</th>
+				<th style="width: 140px;text-align: left;">動作</th>
+			</tr>
+		</thead>
 		<tbody>
-		
-		<c:choose>
-		
-		<c:when test="${not empty userComment}">
 
 			<c:forEach  var="comment" items="${userComment}" >
 				<tr scope="row">
@@ -88,11 +84,6 @@
 							id="check" value="<c:out value='${comment.commentId}'/>"
 							style="margin-top: 20px;" />
 						</label></td>
-						<td class="align-middle">
-						<div class="d-flex align-items-center">
-							<c:out value="${comment.storeBean.firmBean.firmName}"></c:out>
-						</div>
-					</td>
 					<td class="align-middle">
 						<div class="d-flex align-items-center">
 							<c:out value="${comment.storeBean.storeName}"></c:out>
@@ -125,14 +116,6 @@
 					</td>
 				</tr>
 			</c:forEach>
-			
-			</c:when>
-			<c:otherwise>
-				<h3 style="text-align:center ; color: red">您目前沒有任何評論~</h3>
-			
-			</c:otherwise>
-			
-			</c:choose>
 
 		</tbody>
 	</table>

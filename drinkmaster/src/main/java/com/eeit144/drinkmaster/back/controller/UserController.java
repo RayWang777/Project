@@ -97,16 +97,14 @@ public class UserController {
 		
 		System.out.println("UserBean的password = " + user.getUserPassword());
 
-		m.addAttribute("userBean", user);
-		String role = user.getRole();
 
-		System.out.println("嗨嗨!!" + role);
+		String role = user.getRole();
 		m.addAttribute("userBean", user);
+		
+		//System.out.println("嗨嗨!!" + role);
+
 		if(role.equals("admin")) {
-<<<<<<< HEAD
-=======
-			
->>>>>>> c8c8155b6b07942ca289baa7a31266378d4de284
+
 			return("redirect:/backend/");
 			
 		} 
@@ -125,7 +123,8 @@ public class UserController {
 			m.addAttribute("canSeeFirm", firmBean);
 			
 			return("redirect:/backend/");
-		} else if(role.equals("store")) {
+		} 
+		 if(role.equals("store")) {
 			
 			Optional<StoreBean> StoreByUserId = storeService.findStoreByUserId(user.getUserId());
 			if(StoreByUserId.isEmpty()) {

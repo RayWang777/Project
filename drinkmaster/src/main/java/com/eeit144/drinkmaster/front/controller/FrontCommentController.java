@@ -25,8 +25,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eeit144.drinkmaster.back.model.CommentService;
+import com.eeit144.drinkmaster.back.model.FirmService;
 import com.eeit144.drinkmaster.back.model.StoreService;
 import com.eeit144.drinkmaster.bean.CommentBean;
+import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.bean.UserBean;
 import com.eeit144.drinkmaster.dto.CommentAvgScoreBeanDTO;
@@ -42,6 +44,9 @@ public class FrontCommentController {
 	private CommentService commentService;
 	
 	@Autowired
+	private FirmService firmService;
+	
+	@Autowired
 	private StoreService storeService;
 //	private Integer userId = 1;			//測試用
 //	private Integer storeId = 2;		//測試用
@@ -50,14 +55,28 @@ public class FrontCommentController {
 	private Integer scoreType = 10;		//測試用
 	
 	
+	@GetMapping("comment/firmcomment")
+	public String firmcomment(Model model) {
+		
+		
+		List<FirmBean> firm = firmService.findAll3();
+		
+		
+		model.addAttribute("firm", firm);
+		
+		return "front/frontfirmcomment";
+		
+	}
+	
+	
 	@GetMapping("comment/storecomment")
-	public String CommentStorePage(Model model) {
+	public String CommentStorePage(@RequestParam("commentfirmid") Integer commentfirmid, Model model) {
 		
 		
 		
 		List<CommentAvgScoreBeanDTO> listcsdto = new ArrayList<>();
 		
-		List<StoreBean> commentStore = storeService.findAllList();
+		List<StoreBean> commentStore = storeService.findStoreByFirmId(commentfirmid);
 
 		
 		
@@ -65,6 +84,8 @@ public class FrontCommentController {
 			CommentAvgScoreBeanDTO csdto = new CommentAvgScoreBeanDTO();
 			csdto.setStoreId(commentStore.get(i).getStoreId());
 			csdto.setStoreName(commentStore.get(i).getStoreName());
+			csdto.setFirmName(commentStore.get(i).getFirmBean().getFirmName());
+			csdto.setFirmId(commentStore.get(i).getFirmBean().getFirmId());
 			csdto.setAvgScore(commentService.avgScoreByStoreid(commentStore.get(i).getStoreId()));
 			listcsdto.add(csdto);
 		}
@@ -83,6 +104,35 @@ public class FrontCommentController {
 	}
 	
 	
+	@GetMapping("comment/storenamelike")
+	public String storelikename(@RequestParam("commentstorename") String storename, @RequestParam("commentfirmid") Integer commentfirmid, Model model) {
+		
+		
+		
+		List<CommentAvgScoreBeanDTO> listcsdto = new ArrayList<>();
+		
+//		String storenamesql = "'%" + storename + "%'";
+		
+		List<StoreBean> commentStore = storeService.findStoreByStoreNameLike(storename);
+		
+		for(int i=0 ; i<commentStore.size(); i++) {
+			CommentAvgScoreBeanDTO csdto = new CommentAvgScoreBeanDTO();
+			csdto.setStoreId(commentStore.get(i).getStoreId());
+			csdto.setStoreName(commentStore.get(i).getStoreName());
+			csdto.setFirmName(commentStore.get(i).getFirmBean().getFirmName());
+			csdto.setFirmId(commentStore.get(i).getFirmBean().getFirmId());
+			csdto.setAvgScore(commentService.avgScoreByStoreid(commentStore.get(i).getStoreId()));
+			listcsdto.add(csdto);
+		}
+		
+		model.addAttribute("listcsdto", listcsdto);
+		
+//		String url = "redirect:http://localhost:8081/drinkmaster/front/comment/storecomment?commentfirmid=" + commentfirmid;
+		
+		return "front/frontcomment";
+	}
+	
+	
 	@GetMapping("comment/usercomment")
 	public String usercomment(@RequestParam("commentuserid") Integer userid, Model model) {
 		
@@ -92,6 +142,9 @@ public class FrontCommentController {
 		
 		return "front/frontcommentusercomment";
 	}
+	
+	
+	
 	
 	
 

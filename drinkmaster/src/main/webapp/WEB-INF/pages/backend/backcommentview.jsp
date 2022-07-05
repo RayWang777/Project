@@ -63,7 +63,7 @@
 
 <div class="container">
 
-
+<form method="get" action="${contextRoot}/backend/comment/storenamelike">
 
 <div style="text-align:right">
 
@@ -166,7 +166,7 @@
 
 
 
-
+</form>
 
 </div>
 

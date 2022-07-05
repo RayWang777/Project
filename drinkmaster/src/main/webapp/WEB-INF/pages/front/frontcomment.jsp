@@ -56,7 +56,7 @@ div.awesomeRating {
 </head>
 <body>
 
-<br/><br/><br/><br/>
+<br/><br/>
 
 <h1 style="text-align:center">評論區</h1>
 
@@ -80,16 +80,16 @@ div.awesomeRating {
   <button class="btn btn-black dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
     排序
   </button>
-  <br/><br/><br/><br/>
-<%--   <c:forEach var="store" items="${arrayList}"> --%>
+  <br/><br/><br/>
+  <c:forEach var="commentStore" items="${listcsdto}">
   
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
     <li><a class="dropdown-item" href="">全部</a></li>
-    <li><a class="dropdown-item" href="" >評分最高</a></li>
+    <li><a class="dropdown-item" href="${contextRoot}/front/comment/avgscoredesc?commentfirmid=${commentStore.firmId}">評分最高</a></li>
     <li><a class="dropdown-item" href="">評分最低</a></li>
   </ul>
   
-<%--   </c:forEach> --%>
+  </c:forEach>
 </div>
 
 <!--   </div> -->
@@ -120,10 +120,14 @@ div.awesomeRating {
 									
 									var avg = Math.trunc(${storecomment.avgScore})
 									var avgscore = avg+".0"
+									if(avgscore != "NaN.0"){
 									$("#newavg${storecomment.storeId}").attr("value",avgscore);
-									
+									}			
 									newavg = $("#newavg${storecomment.storeId}").val();
 // 									alert(newavg);
+								
+								
+									
 								
 								$("#scores${storecomment.storeId}").awesomeRating({
 									
@@ -132,6 +136,7 @@ div.awesomeRating {
 									values: ["1.0", "2.0", "3.0", "4.0", "5.0"],
 									targetSelector: "div.awesomeRatingValue"
 								});
+								
 							
 								});
 								

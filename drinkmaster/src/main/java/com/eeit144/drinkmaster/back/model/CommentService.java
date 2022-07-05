@@ -60,7 +60,10 @@ public interface CommentService {
 	public List<CommentBean> findCommentByUserid(Integer storeId);
 	
 	
-	public List<CommentBean> findCommentByUserid();
+	public List<Integer> findCommentByAvgDesc();
+	
+	
+	public List<Integer> findCommentByAvgAsc();
 	
 	
 	public List<Integer> findStoreIdByAvgUPThanNum(Double avg);

@@ -1,5 +1,6 @@
 package com.eeit144.drinkmaster.back.controller;
 
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Map;
@@ -18,10 +19,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eeit144.drinkmaster.back.model.CommentService;
+import com.eeit144.drinkmaster.back.model.StoreService;
 import com.eeit144.drinkmaster.bean.CommentBean;
 import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.bean.UserBean;
+import com.eeit144.drinkmaster.dto.CommentAvgScoreBeanDTO;
 
 @Controller
 @RequestMapping("backend/")
@@ -29,6 +32,9 @@ public class CommentController {
 	
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private StoreService storeService;
 //	private Integer userId = 1;			//測試用
 //	private Integer storeId = 2;		//測試用
 //	private Integer productId = 3;		//測試用
@@ -237,15 +243,36 @@ public class CommentController {
 //		
 //	}
 	
-	@PostMapping("comment/commentstore")
-	@ResponseBody
-	public List<CommentBean> findCommentByStoreid(@RequestParam("storeId")Integer storeId, Model model){
+//	@PostMapping("comment/commentstore")
+//	@ResponseBody
+//	public List<CommentBean> findCommentByStoreid(@RequestParam("storeId")Integer storeId, Model model){
+//		
+//		List<CommentBean> CBS = commentService.findCommentByStoreid(storeId);
+//		
+////		model.addAttribute("CBS", CBS);
+//		
+//		return CBS ;
+//	}
+	
+	
+	@GetMapping("comment/storenamelike")
+	public String storelikename(@RequestParam("commentstorename") String storename,Model model) {
 		
-		List<CommentBean> CBS = commentService.findCommentByStoreid(storeId);
 		
-//		model.addAttribute("CBS", CBS);
+		List<CommentBean> page = new ArrayList<CommentBean>();
 		
-		return CBS ;
+		List<StoreBean> store = storeService.findStoreByStoreNameLike(storename);
+		
+		for(int i=0; i<store.size(); i++) {
+			
+			page = commentService.findCommentByStoreid(store.get(i).getStoreId());
+		};
+		
+		model.addAttribute("page", page);
+		
+//		String url = "redirect:http://localhost:8081/drinkmaster/front/comment/storecomment?commentfirmid=" + commentfirmid;
+		
+		return "backend/backcommentview";
 	}
 	
 	

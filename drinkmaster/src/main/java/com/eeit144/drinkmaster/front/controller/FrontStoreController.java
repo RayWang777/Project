@@ -1,5 +1,6 @@
 package com.eeit144.drinkmaster.front.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.dto.Map2Dto;
 import com.eeit144.drinkmaster.dto.MapDto;
+import com.eeit144.drinkmaster.dto.StoreMapDTO;
 
 @Controller
 @RequestMapping("front/")
@@ -55,20 +57,39 @@ public class FrontStoreController {
 		Float score = map.getScore();
 		
 		PageRequest page = PageRequest.of(map.getCounts()-1, 3);
-		List<StoreBean> LocalByFirmNameLike = storeService.findStoreLocalByFirmNameLike(map.getLat(), map.getLng(),map.getFirmName(),page);
-	
+//		List<StoreBean> localByFirmNameLike = storeService.findStoreLocalByFirmNameLike(map.getLat(), map.getLng(),map.getFirmName(),page);
+//		List<Double> findStoreLocalFirmNameLikeDis = storeService.findStoreLocalFirmNameLikeDis(map.getLat(), map.getLng(),map.getFirmName(),page);
+		
+		
+		List<StoreMapDTO> list = new ArrayList<StoreMapDTO>();
+		StoreMapDTO storeMap = null;
+		
 		
 		if(score==null) score =0.0F;
 //		System.out.println(score);
 	
-//		List<StoreBean> LocalByFirmNameLike = storeService.findStoreLocalByFirmNameLikeAndScoreUpThan(map.getLat(), map.getLng(),map.getFirmName(),score,page);
+		List<StoreBean> localByFirmNameLike = storeService.findStoreLocalByFirmNameLikeAndScoreUpThan(map.getLat(), map.getLng(),map.getFirmName(),score,page);
+		List<Double> firmNameLikeAndScoreUpThanDis = storeService.findStoreLocalFirmNameLikeAndScoreUpThanDis(map.getLat(),  map.getLng(), map.getFirmName(),score, page);
 		
+		int size = localByFirmNameLike.size();
+		int size2 = firmNameLikeAndScoreUpThanDis.size();
 		
-		for(StoreBean one : LocalByFirmNameLike) {
-			Integer firmId = one.getFirmBean().getFirmId();
-			one.setFirmId(firmId);
+		System.out.println(size);
+		System.out.println(size2);
+		
+		for(int i = 0; i< size;i++) {
+			
+			storeMap = new StoreMapDTO();
+			storeMap.setFirmId(localByFirmNameLike.get(i).getFirmBean().getFirmId());
+			storeMap.setOpenTime(localByFirmNameLike.get(i).getOpenTime());
+			storeMap.setStoreAddress(localByFirmNameLike.get(i).getStoreAddress());
+			storeMap.setStoreId(localByFirmNameLike.get(i).getStoreId());
+			storeMap.setStoreName(localByFirmNameLike.get(i).getStoreName());
+			storeMap.setStorePhone(localByFirmNameLike.get(i).getStorePhone());
+			storeMap.setDistance(firmNameLikeAndScoreUpThanDis.get(i));
+			list.add(storeMap);
 		}
-		return LocalByFirmNameLike;
+		return localByFirmNameLike;
 	}
 
 //	@GetMapping("store/{id}")

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
+import com.eeit144.drinkmaster.dto.StoreMapDTO;
 
 
 public interface StoreService {
@@ -41,6 +42,10 @@ public interface StoreService {
 	
 	public List<StoreBean> findStoreLocalByFirmNameLike(Double latitude,Double longitude,String firmName,Pageable pab);
 	
+	public List<Double> findStoreLocalFirmNameLikeDis(Double latitude,Double longitude,String firmName,Pageable pab);
+	
 	public List<StoreBean> findStoreLocalByFirmNameLikeAndScoreUpThan(Double latitude,Double longitude,String firmName,Float score,Pageable pab);
+	
+	public List<Double> findStoreLocalFirmNameLikeAndScoreUpThanDis(Double latitude,Double longitude,String firmName,Float score, Pageable pab);
 	
 }

@@ -39,16 +39,6 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="${contextRoot}/front/" style="color:#5A5AAD;"><b style="font-size: large;">首頁</b></a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false" style="color:#5A5AAD;"><b style="font-size: large;">Shop</b></a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">All Products</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                                <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
-                            </ul>
-                        </li>
-                        
                         
                         <li class="nav-item"><button type="button" id="iwantserchfirm" class="nav-link active btn btn-white" data-bs-toggle="modal" data-bs-target="#serchfirmlocal" data-bs-whatever="@getbootstrap" style="color:#5A5AAD;"><b style="font-size: large;"><c:out value="找廠商"/></b></button></li>
                         

@@ -14,13 +14,14 @@ import com.eeit144.drinkmaster.back.model.StoreService;
 import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.dao.StoreRepostiory;
+import com.eeit144.drinkmaster.dto.StoreMapDTO;
 
 @Service
 @Transactional
 public class StoreServiceImp implements StoreService {
-	
+
 	private StoreRepostiory storeDao;
-	
+
 	@Autowired
 	public StoreServiceImp(StoreRepostiory storeDao) {
 		super();
@@ -36,7 +37,6 @@ public class StoreServiceImp implements StoreService {
 	public Page<StoreBean> findAll(Pageable pab) {
 		return storeDao.findAll(pab);
 	}
-	
 
 	@Override
 	public void deleteById(Integer id) {
@@ -49,7 +49,7 @@ public class StoreServiceImp implements StoreService {
 	}
 
 	@Override
-	public Optional<StoreBean> findStoreByUserId(Integer userId){
+	public Optional<StoreBean> findStoreByUserId(Integer userId) {
 		return storeDao.findByUserBean_userId(userId);
 	}
 
@@ -62,46 +62,63 @@ public class StoreServiceImp implements StoreService {
 	public FirmBean findFirmBeanByStoreId(Integer storeId) {
 		return storeDao.findFirmBeanByStoreId(storeId);
 	}
-	
+
 	@Override
-	public List<StoreBean> findAllList(){
+	public List<StoreBean> findAllList() {
 		return storeDao.findAll();
 	}
-	
+
 	@Override
-	public List<StoreBean> findStoreByFirmId(Integer firmId){
+	public List<StoreBean> findStoreByFirmId(Integer firmId) {
 		return storeDao.findByFirmBean_firmId(firmId);
 	}
 
 	@Override
-	public List<Integer> findStoreUserNull(){
+	public List<Integer> findStoreUserNull() {
 		return storeDao.findStoreUserNull();
 	}
+
 	@Override
-	public List<StoreBean> findAll(List<Integer> ids){
+	public List<StoreBean> findAll(List<Integer> ids) {
 		return storeDao.findAllById(ids);
 	}
-	
+
 	@Override
-	public List<StoreBean> findStoreByLocal(Double lat,Double lng,Pageable pab){
+	public List<StoreBean> findStoreByLocal(Double lat, Double lng, Pageable pab) {
 		return storeDao.findStoreByLocal(lat, lng, pab);
 	}
-	
+
 	@Override
-	public List<StoreBean> findStoreByStoreNameLike(String storeName){
+	public List<StoreBean> findStoreByStoreNameLike(String storeName) {
 		return storeDao.findStoreByStoreNameLike(storeName);
 	}
-	
+
 	@Override
-	public List<StoreBean> findStoreLocalByFirmNameLike(Double latitude,Double longitude,String firmName,Pageable pab){
-		String firmNameLike = "%"+firmName+"%";
-		return storeDao.findStoreLocalFirmNameLike(latitude,longitude,firmNameLike,pab);
+	public List<StoreBean> findStoreLocalByFirmNameLike(Double latitude, Double longitude, String firmName,
+			Pageable pab) {
+		String firmNameLike = "%" + firmName + "%";
+		return storeDao.findStoreLocalFirmNameLike(latitude, longitude, firmNameLike, pab);
+	}
+
+	@Override
+	public List<Double> findStoreLocalFirmNameLikeDis(Double latitude, Double longitude, String firmName,
+			Pageable pab) {
+		String firmNameLike = "%" + firmName + "%";
+		return storeDao.findStoreLocalFirmNameLikeDis(latitude, longitude, firmNameLike, pab);
+	}
+
+	@Override
+	public List<StoreBean> findStoreLocalByFirmNameLikeAndScoreUpThan(Double latitude, Double longitude,
+			String firmName, Float score, Pageable pab) {
+		String firmNameLike = "%" + firmName + "%";
+		return storeDao.findStoreLocalFirmNameLikeAndScoreUpThan(latitude, longitude, firmNameLike, score, pab);
 	}
 	
 	@Override
-	public List<StoreBean> findStoreLocalByFirmNameLikeAndScoreUpThan(Double latitude,Double longitude,String firmName,Float score,Pageable pab){
-		String firmNameLike = "%"+firmName+"%";
-		return storeDao.findStoreLocalFirmNameLikeAndScoreUpThan(latitude,longitude,firmNameLike,score,pab);
+	public List<Double> findStoreLocalFirmNameLikeAndScoreUpThanDis(Double latitude,Double longitude,
+			String firmName,Float score, Pageable pab){
+		String firmNameLike = "%" + firmName + "%";
+		return storeDao.findStoreLocalFirmNameLikeAndScoreUpThanDis(latitude, longitude, firmNameLike, score, pab);
 	}
-	
+
 }

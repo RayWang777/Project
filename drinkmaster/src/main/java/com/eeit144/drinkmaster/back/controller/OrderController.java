@@ -10,6 +10,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 //import java.util.Optional;
 //import java.util.Random;
@@ -35,13 +36,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.eeit144.drinkmaster.back.model.FirmService;
 import com.eeit144.drinkmaster.back.model.OrderItemsService;
 import com.eeit144.drinkmaster.back.model.OrderService;
 //import com.eeit144.drinkmaster.back.model.ProductService;
 import com.eeit144.drinkmaster.back.model.StoreService;
 import com.eeit144.drinkmaster.back.model.UserService;
+import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.OrderBean;
 import com.eeit144.drinkmaster.bean.OrderItems;
+import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.bean.UserBean;
 import com.eeit144.drinkmaster.dto.OrderBeanxslx;
@@ -61,7 +65,11 @@ public class OrderController<E> {
 		private UserService userService;
 		@Autowired
 		private OrderItemsService oiService;
-//		@Autowired
+		@Autowired
+		private FirmService firmService;
+		
+		
+		//		@Autowired
 //		private ProductService productService;
 		
 //		@Autowired
@@ -101,7 +109,23 @@ public class OrderController<E> {
 			
 			if((user.getRole().equals("user"))) {
 				return mav;			
+			}else if(user.getRole().equals("store")) {
+				Optional<StoreBean> storeByUserId = storeService.findStoreByUserId(user.getUserId());
+				StoreBean store = storeByUserId.get();
+				Page<OrderBean> page = orderService.findBystoreBean_storeId(pageNumber, store.getStoreId());
+				mav.getModel().put("page", page);
+			}else if(user.getRole().equals("admin")) {
+				Page<OrderBean> page = orderService.findByPage(pageNumber);
+				mav.getModel().put("page", page);
+			}else if(user.getRole().equals("firm")) {
+				List<FirmBean> firmByUserId = firmService.findFirmByUserId(user.getUserId());
+				FirmBean firm = firmByUserId.get(0);
+				Page<OrderBean> page = orderService.findBystoreBean_firmBean_firmId(pageNumber, firm.getFirmId());
+				mav.getModel().put("page", page);
 			}
+			
+			
+			
 			List<UserBean> users = userService.findAllUsers();
 
 			m.addAttribute("orderaddusers", users);
@@ -111,10 +135,10 @@ public class OrderController<E> {
 			m.addAttribute("orderaddstores", stores);
 			
 			
-			Page<OrderBean> page = orderService.findByPage(pageNumber);
+//			Page<OrderBean> page = orderService.findByPage(pageNumber);
 			OrderBean orderBean = new OrderBean();
 			mav.getModel().put("orderBean", orderBean);
-			mav.getModel().put("page", page);
+//			mav.getModel().put("page", page);
 			mav.setViewName("/backend/backorder");
 			return mav;
 		}

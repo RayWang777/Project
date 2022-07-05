@@ -49,4 +49,9 @@ public interface OrderService {
 	public List<OrderBean> findOrdersByUserid(Integer userId);
 	
 //	public List<OrderBean> findOrderOrderitems();
+	
+	public Page<OrderBean> findBystoreBean_storeId(Integer pageNumber,Integer storeId);
+
+	public Page<OrderBean> findBystoreBean_firmBean_firmId(Integer pageNumber,Integer firmId);
+
 }

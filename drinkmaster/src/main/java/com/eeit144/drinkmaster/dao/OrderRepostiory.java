@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.eeit144.drinkmaster.bean.CommentBean;
 import com.eeit144.drinkmaster.bean.OrderBean;
+import com.eeit144.drinkmaster.bean.ProductBean;
 
 @Repository
 public interface OrderRepostiory extends JpaRepository<OrderBean, Integer> {
@@ -40,4 +41,9 @@ public interface OrderRepostiory extends JpaRepository<OrderBean, Integer> {
 	
 	@Query(value="select * from orders as o right join orderitems as oi on o.orderid = oi.orderid ",nativeQuery = true)
 	public List<OrderBean> findOrderOrderitems();
+	
+	public Page<OrderBean> findBystoreBean_storeId(Pageable pageable,Integer storeId);
+
+	public Page<OrderBean> findBystoreBean_firmBean_firmId(Pageable pageable,Integer firmId);
+
 }

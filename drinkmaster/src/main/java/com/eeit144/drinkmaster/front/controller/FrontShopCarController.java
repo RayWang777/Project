@@ -8,6 +8,7 @@ import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 //import java.util.Optional;
 import java.util.Set;
@@ -260,11 +261,11 @@ public class FrontShopCarController {
 			,@RequestParam("userId") Integer userId
 			,@RequestParam("productId") Integer productId
 			,@RequestParam("storeName") String storeName
-			,@RequestParam("storeId") Integer storeId) {//@RequestParam("storeId") Integer storeId
+			,@RequestParam("storeId") Integer storeId) {
 		
-		Map<Integer,ShopcarBean> cart = (Map<Integer,ShopcarBean>) m.getAttribute("shopcarBuy");
+//		Map<Integer,ShopcarBean> cart = (Map<Integer,ShopcarBean>) m.getAttribute("shopcarBuy");
 		
-		
+//		if(cart == null) {
 //		ShopcarBean shopcarBean = new ShopcarBean();
 //		shopcarBean.setAddress(shopcaraddress);
 //		shopcarBean.setPhone(shopcarphone);
@@ -276,28 +277,38 @@ public class FrontShopCarController {
 //		shopcarBean.setTotalPrice(shopcartotalPrice);
 //		shopcarBean.setStoreName(storeName);
 //		shopcarBean.setStoreId(storeId);
-		
+////		cart.put(storeId, shopcarBean);
+////		}
 //		m.addAttribute("shopcarBuy", shopcarBean);
-							
-		Date today = new Date();
+						
+		
 		
 		UserBean user = new UserBean();
 		user.setUserId(userId);
 		
+		Map<Integer,ShopcarBean> cart = (Map<Integer,ShopcarBean>) m.getAttribute("shopcarBuy");
+
+
+		
+		
+		for(Entry<Integer, ShopcarBean> ob: cart.entrySet()) {
 		StoreBean store = new StoreBean();
-		store.setStoreId(storeId);
 		
-		OrderBean ob = new OrderBean();
-		ob.setCreateTime(today);
-		ob.setOrderAddress(shopcaraddress);
-		ob.setOrderPhone(shopcarphone);
-		ob.setOrderStatus("待付款");
-		ob.setTotalPrice(shopcartotalPrice);
-		ob.setUserBean(user);
-		ob.setStoreBean(store);
 		
-		orderService.insertOrder(ob);
 		
+		}
+		
+		
+//		OrderBean ob = new OrderBean();
+//		Date today = new Date();
+//		ob.setCreateTime(today);
+//		ob.setOrderAddress(cart.get);
+//		ob.setOrderPhone(shopcarphone);
+//		ob.setOrderStatus("待付款");
+//		ob.setTotalPrice(shopcartotalPrice);
+//		ob.setUserBean(user);
+//		ob.setStoreBean(store);
+//		orderService.insertOrder(ob);
 		OrderBean ob2 = orderService.findFirstByOrderByCreateTimeDesc();
 							
 		ProductBean product = new ProductBean();
@@ -313,9 +324,17 @@ public class FrontShopCarController {
 		
 		oitemService.insertOrderItems(oi);
 								
-//		ShopcarBean cart = (ShopcarBean) m.getAttribute("shopcarBuy");
+
+		
+		
+//待驗證
+//		ShopcarBean shopcarBean= (ShopcarBean) m.getAttribute("shopcarBuy");
+//		Date today = new Date();
+//		OrderBean ob = new OrderBean(null,storeId,
+//				shopcartotalPrice,shopcarphone,shopcaraddress,today,"待付款");
 //		
-//		Map<Integer, OrderItems> content = cart.getContent();
+//		
+//		Map<Integer, OrderItems> content = shopcarBean.getContent();
 //		Set<OrderItems> items = new LinkedHashSet<>();
 //		Set<Integer> set = content.keySet();
 //		for(Integer i : set) {
@@ -324,8 +343,11 @@ public class FrontShopCarController {
 //			items.add(oib);
 //		}
 //		ob.setOrderItems(items);
-//		
+//		orderService.insertOrder(ob);
 //		oitemService.insertOrderItems(items);
+		
+		
+		
 		
 		return "redirect:/front/shopcar/deleteCar";
 	}

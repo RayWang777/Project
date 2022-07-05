@@ -1,6 +1,5 @@
 package com.eeit144.drinkmaster.bean;
 
-import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -22,7 +21,10 @@ public class ShopcarBean {
 	
 	private Map<Integer, OrderItems> shopcart = new LinkedHashMap<Integer, OrderItems>();
 	
-	
+	private Map<Integer, OrderItems> cart = new LinkedHashMap< >();
+	public Map<Integer, OrderItems>  getContent() { 
+		return cart;
+	}
 	
 	public void additem(Integer productId,OrderItems orderItems) {
 		

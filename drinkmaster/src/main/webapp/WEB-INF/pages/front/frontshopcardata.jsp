@@ -75,16 +75,19 @@
 電話:&thinsp;<input type="text" name="shopcarphone"><br><br>
 地址:&thinsp;<input type="text" value="${canSeeUser.userAddress}" name="shopcaraddress"><br><br>
 
-<input type="hidden" value="${shopcarBuy.storeId}" name="storeId">
-<input type="hidden" value="${shopcarBuy.storeName}" name="storeName">
-<input type="hidden" value="${shopcarBuy.productId}" name="productId">
+<c:forEach varStatus="vs" var="shopcarItems" items="${shopcarBuy}">
+<input type="hidden" value="${shopcarItems.value.storeId}" name="storeId">
+<input type="hidden" value="${shopcarItems.value.storeName}" name="storeName">
+<input type="hidden" value="${shopcarItems.value.productId}" name="productId">
 
-<input type="hidden" value="${shopcarBuy.productName}" name="shopcarname">
-<input type="hidden" value="${shopcarBuy.price}" name="shopcarprice">
-<input type="hidden" value="${shopcarBuy.quantity}" name="shopcarquantity">
-<input type="hidden" value="${shopcarBuy.sweet}" name="shopcarsweet">
-<input type="hidden" value="${shopcarBuy.coldhot}" name="shopcarcoldhot">
-<input type="hidden" value="${shopcarBuy.totalPrice}" name="shopcartotalPrice">
+<input type="hidden" value="${shopcarItems.value.productName}" name="shopcarname">
+<input type="hidden" value="${shopcarItems.value.price}" name="shopcarprice">
+<input type="hidden" value="${shopcarItems.value.quantity}" name="shopcarquantity">
+<input type="hidden" value="${shopcarItems.value.sweet}" name="shopcarsweet">
+<input type="hidden" value="${shopcarItems.value.coldhot}" name="shopcarcoldhot">
+<input type="hidden" value="${shopcarItems.value.totalPrice}" name="shopcartotalPrice">
+</c:forEach>
+
 <button type="submit" onclick="return confirm('確定要送出嗎?')">送出訂單</button> 
 
 </p>

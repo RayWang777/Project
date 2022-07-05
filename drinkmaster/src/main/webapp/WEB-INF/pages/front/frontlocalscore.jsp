@@ -131,7 +131,7 @@
                                 msg_data +=       '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">'
                                 msg_data +=           '<div class="text-center">'+value.storeAddress+'</div>'
                                 msg_data +=  '<div class="text-center">'+value.distance+'公里</div>'
-                                msg_data +=  '評分:<i class="fa-solid fa-star">'+value.avgScore+'</i>'
+                                msg_data +=  '<a href="${contextRoot}/front/comment/all?storeid='+value.storeId+'" class="card-link">評分:'+value.avgScore+'</a>'
                                 msg_data +=           '<div class="text-center">'+value.storePhone+'</div>'
                                 msg_data +=       '</div>'
                                 msg_data +=   '</div>'

@@ -107,6 +107,7 @@ div.awesomeRating {
 						    <h3 class="card-subtitle mb-2 text-muted">-------------------</h3>
 						    
 						    總平均 : <c:out value="${storecomment.avgScore}"></c:out>
+						   <input id="newavg${storecomment.storeId}" value="" style="display: none"/>
 						    <c:if test="${storecomment.avgScore == null}">
 						    	目前沒有評論~
 						    </c:if>
@@ -115,17 +116,24 @@ div.awesomeRating {
 							<div class="awesomeRatingValue" style="display:none"></div>
 								<script type="text/javascript">
 								
+								$(function(){
+									
+									var avg = Math.trunc(${storecomment.avgScore})
+									var avgscore = avg+".0"
+									$("#newavg${storecomment.storeId}").attr("value",avgscore);
+									
+									newavg = $("#newavg${storecomment.storeId}").val();
+// 									alert(newavg);
 								
-								
-							
 								$("#scores${storecomment.storeId}").awesomeRating({
 									
-									valueInitial: "${storecomment.avgScore}",
+									
+									valueInitial: newavg,
 									values: ["1.0", "2.0", "3.0", "4.0", "5.0"],
 									targetSelector: "div.awesomeRatingValue"
 								});
 							
-								console.log(${usercomment.score});
+								});
 								
 								</script>
 						    <br/>

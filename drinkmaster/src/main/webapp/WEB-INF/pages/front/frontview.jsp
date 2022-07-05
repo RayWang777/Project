@@ -15,8 +15,8 @@
                         background-image: url("<c:url value="/images/water.png"/>");
                         background-repeat: no-repeat;
                         background-attachment:fixed;
-                        background-position: 50% 40%;
-                        background-size: 100% 120%;
+                        background-position: 50% 0%;
+                        background-size: 100% 130%;
                     }
 /*                背景滿版    */
 
@@ -52,8 +52,8 @@
                     
                     <input type="text" id="localcounts" hidden="true" value="0">
                     <!-- TOP3 -->
-                      <div class="container px-4 px-lg-5 mt-0">
-                            <div  class="row gx-4 gx-lg-10 row-cols-1 row-cols-md-1 row-cols-xl-1 justify-content-center col mb-5">
+                      <div class="container px-4 px-lg-5 mt-3">
+                            <div  class="row gx-4 gx-lg-10 row-cols-1 row-cols-md-1 row-cols-xl-1 justify-content-center col mb-5" style="text-align: center;">
                         		<h2 style="color: #0292F4;font-family: monospace;"><b>最多人購買品牌</b></h2>
                         	</div>	 
                         	
@@ -64,10 +64,12 @@
                         		  <div class="col mb-5" >
                                     <div class="card h-70" style="width: 250px;margin: auto;background-color:transparent;border: 0">
                                         <!-- Sale badge-->
-                                        <div class="badge text-white position-absolute"
-                                            style="top: 0.5rem; right: 2rem"><img alt="" src="<c:url value="/images/top3/top2.png"/>" style="width: 40px;height: 40px;background-color: transparent;" ></div>
+                                        <div class="badge text-white position-absolute "
+                                            style="top: 0.5rem; right: 2rem"><img alt="" src="<c:url value="/images/top3/top2.png"/>" style="width: 55px;height: 55px;background-color: transparent;margin-right: 30px;" ></div>
                                         <!-- Product image-->
-                                        <a href="<c:url value="/front/firm/${top3[1].firmBean.firmId}"/>"><img class="card-img-top"  src="<c:url value="/backend/firm/${top3[1].firmBean.firmId}/photo"/>" alt="..." style="width: 170px;height: 170px;border-radius: 120px "/></a>
+                                        <div style="padding-left: 15px">
+                                        <a href="<c:url value="/front/firm/${top3[1].firmBean.firmId}"/>"><img class="card-img-top"  src="<c:url value="/backend/firm/${top3[1].firmBean.firmId}/photo"/>" alt="..." style="width: 170px;height: 170px;border-radius: 120px;border:black 0.5px solid; "/></a>
+                                        </div>
                                         <!-- Product details-->
                                         <div class="card-body p-4">
                                             <div class="">
@@ -79,16 +81,18 @@
 	                                    </div>
     	                            </div>
                                <!-- card two --> 
-                   					  <div class="col mb-5">
+                   					  <div class="col mb-5 justify-content-center">
                                     <div class="card h-70" style="width: 250px;margin: auto;background-color:transparent;border: 0">
                                         <!-- Sale badge-->
                                         <div class="badge text-white position-absolute"
-                                            style="top: 0.0rem; right: 0.1rem"><img alt="" src="<c:url value="/images/top3/top1.png"/>" style="width: 44px;height: 44px;background-color: transparent;" ></div>
+                                            style="top: 0.0rem; right: 0.0rem"><img alt="" src="<c:url value="/images/top3/top1.png"/>" style="width: 66px;height: 66px;background-color: transparent;margin-right: 30px;" ></div>
                                         <!-- Product image-->
-                                        <a href="<c:url value="/front/firm/${top3[0].firmBean.firmId}"/>"><img class="card-img-top" src="<c:url value="/backend/firm/${top3[0].firmBean.firmId}/photo"/>" alt="..." style="width: 210px;height: 210px; border-radius: 120px"/></a>
+                                        <div style="padding-left: 15px">
+                                        <a href="<c:url value="/front/firm/${top3[0].firmBean.firmId}"/>"><img class="card-img-top" src="<c:url value="/backend/firm/${top3[0].firmBean.firmId}/photo"/>" alt="..." style="width: 210px;height: 210px; border-radius: 120px; border:black 0.5px solid;"/></a>
+                                        </div>
                                         <!-- Product details-->
                                         <div class="card-body p-4">
-                                            <div class="">
+                                            <div class="" style="padding-left: 15px">
                                                 <!-- firmName-->
                                                 <h5 class="fw-bolder" style="color:#2C9FF4 ;margin-left: 50px"><b>${top3[0].firmBean.firmName}</b></h5>
                                                 <!-- storeName-->
@@ -99,13 +103,15 @@
                         		 
                         		 
                         		<!-- card three -->
-                        		  <div class="col mb-5">
+                        		  <div class="col mb-5 justify-content-center">
                                     <div class="card h-70" style="width: 250px;margin: auto;background-color:transparent;border: 0">
                                         <!-- Sale badge-->
                                         <div class="badge text-white position-absolute"
-                                            style="top: 0.5rem; right: 4rem"><img alt="" src="<c:url value="/images/top3/top3.png"/>" style="width: 30px;height: 30px;background-color: transparent;" ></div>
+                                            style="top: 0.5rem; right: 4rem"><img alt="" src="<c:url value="/images/top3/top3.png"/>" style="width: 45px;height: 45px;background-color: transparent;margin-right: 30px;" ></div>
                                         <!-- Product image-->
-                                        <a href="<c:url value="/front/firm/${top3[2].firmBean.firmId}"/>"><img class="card-img-top" src="<c:url value="/backend/firm/${top3[2].firmBean.firmId}/photo"/>" alt="..." style="width: 140px;height: 140px; border-radius: 120px"/></a>
+                                        <div style="padding-left: 15px">
+                                        <a href="<c:url value="/front/firm/${top3[2].firmBean.firmId}"/>"><img class="card-img-top" src="<c:url value="/backend/firm/${top3[2].firmBean.firmId}/photo"/>" alt="..." style="width: 140px;height: 140px; border-radius: 120px;border:black 0.5px solid;"/></a>
+                                        </div>
                                         <!-- Product details-->
                                         <div class="card-body p-4">
                                             <div class="">

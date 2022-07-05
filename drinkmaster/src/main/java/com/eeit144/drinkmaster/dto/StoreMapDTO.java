@@ -8,6 +8,8 @@ public class StoreMapDTO {
 
 	private Integer firmId;
 
+	private String firmName;
+
 	private String storeName;
 
 	private String storeAddress;
@@ -125,6 +127,14 @@ public class StoreMapDTO {
 
 	public void setAvgScore(Double avgScore) {
 		this.avgScore = avgScore;
+	}
+
+	public String getFirmName() {
+		return firmName;
+	}
+
+	public void setFirmName(String firmName) {
+		this.firmName = firmName;
 	}
 
 }

@@ -20,6 +20,8 @@ import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.bean.StoreTop;
 
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
+
 @Controller
 @RequestMapping("front")
 public class FrontPageController {
@@ -86,13 +88,16 @@ public class FrontPageController {
 	}
 
 	@GetMapping("localstoreScore")
-	public String firmserch(@RequestParam(name="selectValue",defaultValue = "") String firmName,Model m) {
+	public String firmserch(@RequestParam(name="selectValue",defaultValue = "") String firmName
+			 ,@RequestParam(name="avg",defaultValue = "0") Integer avg,  Model m) {
 		List<FirmBean> findAll = firmService.findAll3();
+		
+		System.out.println(avg);
 		
 		m.addAttribute("firms", findAll);
 		m.addAttribute("selectValue", firmName);
-		
-		System.out.println(firmName);
+		m.addAttribute("selectValueAvg", avg);
+
 		return "/front/frontlocalscore";
 	}
 

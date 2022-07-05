@@ -78,9 +78,8 @@ public class FrontStoreController {
 		for(int i = 0; i< size;i++) {
 			
 			storeMap = new StoreMapDTO();
-			firmId = localByFirmNameLike.get(i).getFirmBean().getFirmId();
-			System.out.println(firmId);
-			storeMap.setFirmId(firmId);
+			storeMap.setFirmId(localByFirmNameLike.get(i).getFirmBean().getFirmId());
+			storeMap.setFirmName(localByFirmNameLike.get(i).getFirmBean().getFirmName());
 			storeMap.setOpenTime(localByFirmNameLike.get(i).getOpenTime());
 			storeMap.setStoreAddress(localByFirmNameLike.get(i).getStoreAddress());
 			storeMap.setStoreId(localByFirmNameLike.get(i).getStoreId());

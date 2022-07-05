@@ -18,15 +18,16 @@
   <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
 <style type="text/css">
+
   html { 
             			height: 100%; 
      					} 
                     body {
-                        background-image: url("<c:url value="/images/water.png"/>");
+                        background-image: url("<c:url value="/images/coolbanner.jpg"/>");
                         background-repeat: no-repeat;
                         background-attachment:fixed;
-                        background-position: 50% 0%;
-                        background-size: 100% 130%;
+                        background-position: 50% 40%;
+                        background-size: 180% 140%;
                     }
  a:link
         {

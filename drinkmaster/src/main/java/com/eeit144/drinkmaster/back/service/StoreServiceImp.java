@@ -109,16 +109,16 @@ public class StoreServiceImp implements StoreService {
 
 	@Override
 	public List<StoreBean> findStoreLocalByFirmNameLikeAndScoreUpThan(Double latitude, Double longitude,
-			String firmName, Float score, Pageable pab) {
+			String firmName, List<Integer> ids, Pageable pab) {
 		String firmNameLike = "%" + firmName + "%";
-		return storeDao.findStoreLocalFirmNameLikeAndScoreUpThan(latitude, longitude, firmNameLike, score, pab);
+		return storeDao.findStoreLocalFirmNameLikeAndScoreUpThan(latitude, longitude, firmNameLike, ids, pab);
 	}
 	
 	@Override
 	public List<Double> findStoreLocalFirmNameLikeAndScoreUpThanDis(Double latitude,Double longitude,
-			String firmName,Float score, Pageable pab){
+			String firmName,List<Integer> ids, Pageable pab){
 		String firmNameLike = "%" + firmName + "%";
-		return storeDao.findStoreLocalFirmNameLikeAndScoreUpThanDis(latitude, longitude, firmNameLike, score, pab);
+		return storeDao.findStoreLocalFirmNameLikeAndScoreUpThanDis(latitude, longitude, firmNameLike, ids, pab);
 	}
 
 }

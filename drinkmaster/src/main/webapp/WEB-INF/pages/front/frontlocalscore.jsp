@@ -102,7 +102,7 @@
              		 	
              			console.log(firmName)
              		 
-             			var serchLocalStoreStr = {"lat": lat , "lng": lng ,"counts" : localcounts,"firmName" :firmName };
+             			var serchLocalStoreStr = {"lat": lat , "lng": lng ,"counts" : localcounts,"firmName" :firmName,"score":0 };
                   		var storeJsonString= JSON.stringify(serchLocalStoreStr);
                   		//回填input
                   		$('#localcounts').val(localcounts);
@@ -130,6 +130,7 @@
                                 msg_data +=       '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">'
                                 msg_data +=           '<div class="text-center">'+value.storeAddress+'</div>'
                                 msg_data +=  '<div class="text-center">'+value.distance+'公里</div>'
+                                msg_data +=  '評分:<i class="fa-solid fa-star">'+value.avgScore+'</i>'
                                 msg_data +=           '<div class="text-center">'+value.storePhone+'</div>'
                                 msg_data +=       '</div>'
                                 msg_data +=   '</div>'

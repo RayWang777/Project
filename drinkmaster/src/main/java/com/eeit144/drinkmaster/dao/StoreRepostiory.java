@@ -46,15 +46,13 @@ public interface StoreRepostiory extends JpaRepository<StoreBean, Integer> {
 	public List<Double> findStoreLocalFirmNameLikeDis(Double latitude,Double longitude,@Param(value="firmName") String firmName,Pageable pab);
 	
 	
-	@Query(value="  SELECT * FROM ( SELECT *,( 6371 * acos( cos( radians( :latitude ) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians( :longitude ) )"
-			+ "+ sin( radians( :latitude ) ) * sin( radians( latitude ) ) ) ) AS distance FROM  STORE  ) AS B "
-			+ "LEFT JOIN firm AS f ON B.firmId = f.firmid LEFT JOIN comment AS c on B.storeid = c.storeid  WHERE ( firmname LIKE :firmName AND distance > 0  "
-			+ "AND c.score > :score)   ORDER BY distance ",nativeQuery = true )
-	public List<StoreBean> findStoreLocalFirmNameLikeAndScoreUpThan(Double latitude,Double longitude,String firmName,Float score, Pageable pab);
+	@Query(value=" 	SELECT * FROM ( SELECT *,( 6371 * acos( cos( radians(  :latitude ) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians( :longitude) )+"
+			+ "	sin( radians(  :latitude ) ) * sin( radians( latitude ) ) ) ) AS distance FROM  STORE ) AS B "
+			+ "	left JOIN firm AS f on B.firmId = f.firmid where firmname like :firmName and distance > 0 and  B.storeid in ( :ids ) ORDER BY distance ",nativeQuery = true )
+	public List<StoreBean> findStoreLocalFirmNameLikeAndScoreUpThan(Double latitude,Double longitude,String firmName,List<Integer> ids, Pageable pab);
 	
-	@Query(value="  SELECT distance FROM ( SELECT *,( 6371 * acos( cos( radians( :latitude ) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians( :longitude ) )"
-			+ "+ sin( radians( :latitude ) ) * sin( radians( latitude ) ) ) ) AS distance FROM  STORE  ) AS B "
-			+ "LEFT JOIN firm AS f ON B.firmId = f.firmid LEFT JOIN comment AS c on B.storeid = c.storeid  WHERE ( firmname LIKE :firmName AND distance > 0  "
-			+ "AND c.score > :score)   ORDER BY distance ",nativeQuery = true )
-	public List<Double> findStoreLocalFirmNameLikeAndScoreUpThanDis(Double latitude,Double longitude,String firmName,Float score, Pageable pab);
+	@Query(value=" 	SELECT distance FROM ( SELECT *,( 6371 * acos( cos( radians(  :latitude ) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians( :longitude) )+"
+			+ "	sin( radians(  :latitude ) ) * sin( radians( latitude ) ) ) ) AS distance FROM  STORE ) AS B "
+			+ "	left JOIN firm AS f on B.firmId = f.firmid where firmname like :firmName and distance > 0 and  B.storeid in ( :ids ) ORDER BY distance ",nativeQuery = true )
+	public List<Double> findStoreLocalFirmNameLikeAndScoreUpThanDis(Double latitude,Double longitude,String firmName,List<Integer> ids, Pageable pab);
 }

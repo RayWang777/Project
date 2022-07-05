@@ -44,8 +44,8 @@ public interface StoreService {
 	
 	public List<Double> findStoreLocalFirmNameLikeDis(Double latitude,Double longitude,String firmName,Pageable pab);
 	
-	public List<StoreBean> findStoreLocalByFirmNameLikeAndScoreUpThan(Double latitude,Double longitude,String firmName,Float score,Pageable pab);
+	public List<StoreBean> findStoreLocalByFirmNameLikeAndScoreUpThan(Double latitude,Double longitude,String firmName,List<Integer> ids,Pageable pab);
 	
-	public List<Double> findStoreLocalFirmNameLikeAndScoreUpThanDis(Double latitude,Double longitude,String firmName,Float score, Pageable pab);
+	public List<Double> findStoreLocalFirmNameLikeAndScoreUpThanDis(Double latitude,Double longitude,String firmName,List<Integer> ids, Pageable pab);
 	
 }

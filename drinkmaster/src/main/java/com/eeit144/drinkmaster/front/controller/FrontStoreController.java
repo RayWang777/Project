@@ -1,5 +1,6 @@
 package com.eeit144.drinkmaster.front.controller;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.eeit144.drinkmaster.back.model.CommentService;
 import com.eeit144.drinkmaster.back.model.FirmService;
 import com.eeit144.drinkmaster.back.model.StoreService;
 import com.eeit144.drinkmaster.bean.FirmBean;
@@ -29,12 +31,15 @@ public class FrontStoreController {
 	private FirmService firmService;
 
 	private StoreService storeService;
+	
+	private CommentService commentService;
 
 	@Autowired
-	public FrontStoreController(FirmService firmService, StoreService storeService) {
+	public FrontStoreController(FirmService firmService, StoreService storeService,CommentService commentService) {
 		super();
 		this.firmService = firmService;
 		this.storeService = storeService;
+		this.commentService = commentService;
 	}
 
 	@PostMapping("localstore")
@@ -54,7 +59,8 @@ public class FrontStoreController {
 	@ResponseBody
 	public List<StoreBean> findLocalStoreByFirmNameLike(@RequestBody Map2Dto map){
 		
-		Float score = map.getScore();
+		Double score = map.getScore();
+		
 		
 		PageRequest page = PageRequest.of(map.getCounts()-1, 3);
 //		List<StoreBean> localByFirmNameLike = storeService.findStoreLocalByFirmNameLike(map.getLat(), map.getLng(),map.getFirmName(),page);
@@ -63,30 +69,33 @@ public class FrontStoreController {
 		
 		List<StoreMapDTO> list = new ArrayList<StoreMapDTO>();
 		StoreMapDTO storeMap = null;
+		List<Integer> findStoreIdByAvgUPThanNum = commentService.findStoreIdByAvgUPThanNum(score);
 		
-		
-		if(score==null) score =0.0F;
+		if(score==null) score =0.0D;
 //		System.out.println(score);
 	
-		List<StoreBean> localByFirmNameLike = storeService.findStoreLocalByFirmNameLikeAndScoreUpThan(map.getLat(), map.getLng(),map.getFirmName(),score,page);
-		List<Double> firmNameLikeAndScoreUpThanDis = storeService.findStoreLocalFirmNameLikeAndScoreUpThanDis(map.getLat(),  map.getLng(), map.getFirmName(),score, page);
+		List<StoreBean> localByFirmNameLike = storeService.findStoreLocalByFirmNameLikeAndScoreUpThan(map.getLat(), map.getLng(),map.getFirmName(),findStoreIdByAvgUPThanNum,page);
+		List<Double> firmNameLikeAndScoreUpThanDis = storeService.findStoreLocalFirmNameLikeAndScoreUpThanDis(map.getLat(),  map.getLng(), map.getFirmName(),findStoreIdByAvgUPThanNum, page);
+		
 		
 		int size = localByFirmNameLike.size();
-		int size2 = firmNameLikeAndScoreUpThanDis.size();
-		
-		System.out.println(size);
-		System.out.println(size2);
-		
+		DecimalFormat format = new DecimalFormat("0.00");
+		Integer firmId =null;
 		for(int i = 0; i< size;i++) {
 			
 			storeMap = new StoreMapDTO();
-			storeMap.setFirmId(localByFirmNameLike.get(i).getFirmBean().getFirmId());
+			firmId = localByFirmNameLike.get(i).getFirmBean().getFirmId();
+			System.out.println(firmId);
+			storeMap.setFirmId(firmId);
 			storeMap.setOpenTime(localByFirmNameLike.get(i).getOpenTime());
 			storeMap.setStoreAddress(localByFirmNameLike.get(i).getStoreAddress());
 			storeMap.setStoreId(localByFirmNameLike.get(i).getStoreId());
 			storeMap.setStoreName(localByFirmNameLike.get(i).getStoreName());
 			storeMap.setStorePhone(localByFirmNameLike.get(i).getStorePhone());
-			storeMap.setDistance(firmNameLikeAndScoreUpThanDis.get(i));
+			Double avgScoreByStoreid = commentService.avgScoreByStoreid(localByFirmNameLike.get(i).getStoreId());
+			storeMap.setAvgScore(avgScoreByStoreid);
+			String format2 = format.format(firmNameLikeAndScoreUpThanDis.get(i));
+			storeMap.setDistance(format2);
 			list.add(storeMap);
 		}
 		return localByFirmNameLike;

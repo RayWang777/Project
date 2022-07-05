@@ -34,25 +34,73 @@ public class OrderBeanxslx {
 	@Excel(name="使用者", orderNum="2",width = 15)
 	private String userName;
 	
-//要改
+
 	@Excel(name="店家", orderNum="3",width = 30)
 	private String storeName;
 	
+	
+	@Excel(name="商品名稱", orderNum="4",width = 30)
+	private String productName;
 
-	@Excel(name="總金額", orderNum="8",width = 30)
-	private Integer totalPrice;
-
-	@Excel(name="狀態", orderNum="5",width = 15)
-	private String orderStatus;
-
-	@Excel(name="電話", orderNum="7",width = 30)
+	@Excel(name="電話", orderNum="5",width = 30)
 	private String orderPhone;
-
+	
 	@Excel(name="地址", orderNum="6",width = 50)
 	private String orderAddress;
-
-	@Excel(name="下單時間", orderNum="4",width = 30)
+	
+	@Excel(name="數量", orderNum="7",width = 30)
+	private Integer quantity;
+	
+	
+	@Excel(name="甜度", orderNum="8",width = 30)
+	private String sweet;
+	
+	@Excel(name="溫度", orderNum="9",width = 30)
+	private String coldhot;
+	
+	@Excel(name="狀態", orderNum="10",width = 15)
+	private String orderStatus;
+	
+	@Excel(name="下單時間", orderNum="11",width = 30)
 	private Date createTime;
+		
+	@Excel(name="總金額", orderNum="12",width = 30)
+	private Integer totalPrice;
+
+	
+	
+	
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
+	public String getSweet() {
+		return sweet;
+	}
+
+	public void setSweet(String sweet) {
+		this.sweet = sweet;
+	}
+
+	public String getColdhot() {
+		return coldhot;
+	}
+
+	public void setColdhot(String coldhot) {
+		this.coldhot = coldhot;
+	}
 
 	public OrderBeanxslx() {
 	}

@@ -24,6 +24,12 @@ div.awesomeRating {
 	font-size: 2em;
 }
 
+#dropdownMenuButton2{
+	background-color: white;
+	border: 1px solid gray;
+	float:right;
+}
+
 
 /*                背景滿版     */
                     html { 
@@ -50,6 +56,8 @@ div.awesomeRating {
 </head>
 <body>
 
+<br/><br/><br/><br/>
+
 <h1 style="text-align:center">評論區</h1>
 
 
@@ -57,9 +65,34 @@ div.awesomeRating {
 
 
 <div class="row justify-content-center">
-<div class="col-9">
+<!-- <div class="col-9"> -->
 <!--    <span style="font-size: 1.5em">評論</span> -->
-  </div>
+<form method="get" action="${contextRoot}/front/comment/storenamelike">
+<br/><br/>
+<div style="text-align:right">
+
+<%-- <a href="${contextRoot}/front/comment/storecomment?commentfirmid=${commentStore.firmId}"><button class="btn btn-outline-success">全部</button></a> --%>
+
+<input type="text" id="commentstorename" name="commentstorename"/><button type="submit" class="btn btn-outline-success">搜尋</button>
+ </div>
+  <br/>
+  <div class="dropdown" style="text-align:right">
+  <button class="btn btn-black dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+    排序
+  </button>
+  <br/><br/><br/><br/>
+<%--   <c:forEach var="store" items="${arrayList}"> --%>
+  
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+    <li><a class="dropdown-item" href="">全部</a></li>
+    <li><a class="dropdown-item" href="" >評分最高</a></li>
+    <li><a class="dropdown-item" href="">評分最低</a></li>
+  </ul>
+  
+<%--   </c:forEach> --%>
+</div>
+
+<!--   </div> -->
   
   			<div class="row row-cols-3 row-cols-md-3 g-4 ">
   				<c:forEach var="storecomment" items="${listcsdto}" >
@@ -67,11 +100,13 @@ div.awesomeRating {
 				<div class="col">
 					<div class="card h-100 border-warning">
   						<div class="card-body">
-						    <c:out value="${storecomment.storeName}"></c:out>
+						    廠商 : <c:out value="${storecomment.firmName}"></c:out><br/>
+						    <input name="commentfirmid" value="${storecomment.firmId}" style="display: none">
+						    店家 : <c:out value="${storecomment.storeName}"></c:out>
 						    <input value="${storecomment.storeId}" style="display: none">
 						    <h3 class="card-subtitle mb-2 text-muted">-------------------</h3>
 						    
-						    <c:out value="${storecomment.avgScore}"></c:out>
+						    總平均 : <c:out value="${storecomment.avgScore}"></c:out>
 						    <c:if test="${storecomment.avgScore == null}">
 						    	目前沒有評論~
 						    </c:if>
@@ -104,7 +139,7 @@ div.awesomeRating {
   				</c:forEach>
   				</div>
   			
-  
+  </form>
 	
   </div>
 </div>
@@ -117,6 +152,7 @@ div.awesomeRating {
 
 </script>
 
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 <jsp:include page="layout/footer.jsp" />
 

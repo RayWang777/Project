@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.eeit144.drinkmaster.back.model.FirmService;
 import com.eeit144.drinkmaster.back.model.StoreService;
 import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
+import com.eeit144.drinkmaster.dto.Map2Dto;
 import com.eeit144.drinkmaster.dto.MapDto;
 
 @Controller
@@ -43,23 +45,30 @@ public class FrontStoreController {
 			Integer firmId = one.getFirmBean().getFirmId();
 			one.setFirmId(firmId);
 		}
-		
-		
-//		StoreBean storeBean = null;
-//
-//		int number = map.getCounts() * 4;
-//		int size = findStoreByLocal.size();
-//		for (int i = 0; i < size; i++) {
-//			if (i < number) {
-//				storeBean = findStoreByLocal.get(i);
-//				Integer firmId = storeBean.getFirmBean().getFirmId();
-//				storeBean.setFirmId(firmId);
-//				findStoreByLocal.set(i, storeBean);
-//			} else {
-//				findStoreByLocal.remove(number);
-//			}
-//		}
 		return findStoreByLocal;
+	}
+	
+	@PostMapping("localstorelike")
+	@ResponseBody
+	public List<StoreBean> findLocalStoreByFirmNameLike(@RequestBody Map2Dto map){
+		
+		Float score = map.getScore();
+		
+		PageRequest page = PageRequest.of(map.getCounts()-1, 3);
+		List<StoreBean> LocalByFirmNameLike = storeService.findStoreLocalByFirmNameLike(map.getLat(), map.getLng(),map.getFirmName(),page);
+	
+		
+		if(score==null) score =0.0F;
+//		System.out.println(score);
+	
+//		List<StoreBean> LocalByFirmNameLike = storeService.findStoreLocalByFirmNameLikeAndScoreUpThan(map.getLat(), map.getLng(),map.getFirmName(),score,page);
+		
+		
+		for(StoreBean one : LocalByFirmNameLike) {
+			Integer firmId = one.getFirmBean().getFirmId();
+			one.setFirmId(firmId);
+		}
+		return LocalByFirmNameLike;
 	}
 
 //	@GetMapping("store/{id}")

@@ -130,6 +130,9 @@ public class CommentServiceImp implements CommentService {
 		return commentDao.avgScoreByStoreid(storeId);
 	}
 
+	public Double avgScoreByStoreid1(Integer storeId) {
+		return commentDao.avgScoreByStoreid1(storeId);
+	}
 	
 	public List<CommentBean> findCommentByUserid(Integer storeId) {
 		return commentDao.findCommentByUserid(storeId);

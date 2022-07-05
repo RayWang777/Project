@@ -22,5 +22,8 @@ public interface OrderItemsRepostiory extends JpaRepository<OrderItems, Integer>
 	public List<Integer> countByproductBean();
 	
 	public List<OrderItems> findByproductBean(ProductBean productBean);
+	
+	@Query(value="select * from orders as o right join orderitems as oi on o.orderid = oi.orderid ",nativeQuery = true)
+	public List<OrderItems> findOrderOrderitems();
 
 }

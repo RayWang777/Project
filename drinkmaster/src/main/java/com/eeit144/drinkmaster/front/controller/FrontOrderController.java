@@ -33,15 +33,20 @@ public class FrontOrderController {
 	
 	
 	@GetMapping("order/userOrder")
-	public String userOrder(@RequestParam("orderuserid") Integer userid, Model model) {
+	public ModelAndView userOrder(ModelAndView mav,@RequestParam(name = "o", defaultValue = "1") Integer pageNumber,@RequestParam("orderuserid") Integer userid, Model model) {
 		
 		List<OrderBean> userOrder = orderService.findOrdersByUserid(userid);
 		
-		
-		
+				
 		model.addAttribute("userOrder", userOrder);
 		
-		return "front/frontorderuserorder";
+//		Page<OrderBean> page = orderService.findByPage(pageNumber);
+//		OrderBean orderBean = new OrderBean();
+//		mav.getModel().put("orderBean", orderBean);
+//		mav.getModel().put("page", page);
+		mav.setViewName("/front/frontorderuserorder");
+		
+		return mav;
 	}
 	
 	@GetMapping("orderItems/findId")

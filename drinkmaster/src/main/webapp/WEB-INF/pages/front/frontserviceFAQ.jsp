@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>常見問題</title>
 
 <style>
 body{
@@ -93,7 +93,7 @@ background-image:url(../../images/cold_drink_juice_promotion_image.jpg);
  <h2>官方客服</h2>
  </div>
  <div class="row justify-content-left">
-<div class="col-7">
+<div class="col-7"  style="color:white">
   <img src="<c:url value="/images/QRCODE.png"/>" alt="QRCODE圖片顯示有誤" title="LINE QRCODE" width="200">
   <br/><br/>
   ID : @198qvjif

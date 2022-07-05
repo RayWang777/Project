@@ -4,6 +4,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <jsp:include page="layout/header.jsp" />
+<title>意見回饋</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 <style>
 body{
 background-image:url(../../images/cold_drink_juice_promotion_image.jpg);
@@ -24,13 +29,13 @@ background-image:url(../../images/cold_drink_juice_promotion_image.jpg);
 <div class="form-group">
      <label for="exampleFormControlInput1">UserID :</label>
      
-       <form:input  path="userBean" class="form-control"  value="${canSeeUser.userId}"/>
+       <form:input  path="userBean" class="form-control"  value="${canSeeUser.userId}"  readonly="true"/>
            
 <%--     <c:out value="${latestMsg.userBean.userId}"  /> --%>
  
     <br/>
     <label for="exampleFormControlInput1">姓   名 :</label>
-       <form:input path="userBean" class="form-control"  value="${canSeeUser.userName}"/>
+       <form:input path="userBean" class="form-control"  value="${canSeeUser.userName}"  readonly="true"/>
 <%--     <c:out value="${latestMsg.userBean.userName}" /> --%>
 
 
@@ -46,7 +51,7 @@ background-image:url(../../images/cold_drink_juice_promotion_image.jpg);
      <br/>
      <div class="form-group">
     
-     <input type="submit" name="submit" class="btn btn-success" value="送出">
+     <input type="button" name="submit" class="btn btn-success" value="送出" id="send">
     
  </div>
 </form:form>
@@ -56,6 +61,25 @@ background-image:url(../../images/cold_drink_juice_promotion_image.jpg);
 <br/>
 <br/><br/><br/><br/><br/><br/>
 </div>
+
+<script type="text/javascript">
+
+$(function(){
+	
+	$("#send").click(function(){
+		Swal.fire({
+			  icon:'success',
+			  title:'意見回饋已送出',
+			  showConfirmButton: false,
+			  timer: 3000
+			}).then((result) => {
+					location.replace('http://localhost:8081/drinkmaster/front/service/add')
+			}
+			);
+}
+)});
+
+</script>
 <jsp:include page="layout/footer.jsp" />
 
 

@@ -5,6 +5,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <jsp:include page="layout/header.jsp" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <div class="container">
 
@@ -27,8 +30,8 @@
   <form:textarea path="answer" class="form-control"/>
   </div>
   
-  <input type="submit" name="submit"  class="btn btn-success" value="更新">
-  
+  <input type="submit" name="submit"  class="btn btn-success" value="更新" id="updatebtn" >
+
   </form:form>
     
   </div>
@@ -39,4 +42,5 @@
 </div>
 
 </div>
+
 <jsp:include page="layout/footer.jsp" />

@@ -43,7 +43,7 @@ $(function(){
 			  icon: 'success',
 			  title: '信件已送出',
 			  showConfirmButton: false,
-			  timer: 3500
+			  timer: 3000
 			}).then((result) => {
 					location.replace('http://localhost:8081/drinkmaster/backend/service/reply')
 			}
@@ -84,6 +84,7 @@ Email :   <input id="to" type="text" value="${msg.userBean.userAccount}" class="
 </div>
 
 </body>
+
 </html>
 <%-- <%@ page language="java" contentType="text/html; charset=UTF-8" --%>
 <%--     pageEncoding="UTF-8"%> --%>

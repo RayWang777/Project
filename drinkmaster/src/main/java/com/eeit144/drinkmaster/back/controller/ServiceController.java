@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eeit144.drinkmaster.back.model.ServiceService;
+import com.eeit144.drinkmaster.bean.OrderBean;
 import com.eeit144.drinkmaster.bean.ServiceBean;
 
 @SessionAttributes(names={"userBean"})
@@ -126,5 +127,18 @@ public class ServiceController {
 
 		return "/backend/backserviceadd";
 	}
+	
+	
+//	@GetMapping("backend/service/findStatus")
+//	public ModelAndView findStatusView(ModelAndView mav, @RequestParam(name = "S", defaultValue = "1") Integer pageNumber, 
+//			@RequestParam(name = "sta", defaultValue = "待付款") String orderStatus) {
+//		Page<OrderBean> page = sService.findByserviceStatus(pageNumber, orderStatus);
+//		OrderBean orderBean = new OrderBean();
+//		mav.getModel().put("orderBean", orderBean);
+//		mav.getModel().put("page", page);
+//		
+//		mav.setViewName("/backend/backorder");
+//		return mav;
+//	}
 
 }

@@ -29,7 +29,7 @@
        <span id="accErr"><c:out value="${accErr}"/></span><br><br>
        
        <form:label path="userPassword">密&emsp;&emsp;碼</form:label>
-       <form:input path="userPassword" class="form-control"/>
+       <form:password path="userPassword" class="form-control" id="password"/>
        <form:errors path="userPassword" cssClass="error" />
        <span id="passwordSp"></span><br/>  <br><br>
        
@@ -52,7 +52,7 @@
        <span id="genderErr"></span>  <br><br>
        
        <form:label path="birthday">生&emsp;&emsp;日</form:label>
-	   <form:input type="date" path="birthday" class="form-control" onblur="checkEmpty()"/>
+	   <form:input type="date" path="birthday" class="form-control" onblur="checkEmpty()" id="birthday"/>
 <!--   <input type="date" name="birthday" id="birthday" class="form-control"/> -->
        <form:errors path="birthday" cssClass="error" />
        <span id="bdErr"></span>  <br><br>
@@ -85,10 +85,12 @@
 		</div>
        
        
-       <div class="row justify-content-center" style="margin-bottom: 100px">
+       <div class="row justify-content-center" style="margin-bottom: 10px">
        	<input type="submit" class="btn btn-success" value='<c:out value="送出"/>'>
        </div>
    </form:form>
+   
+   <button style="margin-bottom: 100px" class="btn btn-dark" onclick="fast()">一鍵輸入</button>
 </div>
 </div>
 </div>
@@ -98,6 +100,22 @@
 $(function(){
 	$('#logo').hide();
 });
+
+function fast() {
+	let name = document.getElementById("userName");
+	let acc = document.getElementById("account");
+	let pwd = document.getElementById("password");
+	let add = document.getElementById("address");
+	let phone = document.getElementById("phone");
+	let bd = document.getElementById("birthday");
+	
+	name.value=("阿嘎");
+	acc.value=("hiImJoe@gmail.com");
+	pwd.value=("joe6666");
+	add.value=("基隆市仁愛區");
+	phone.value=("0908081111");
+	bd.value=("1995-06-06");
+}
 
 function preview() {
 	logo.src=URL.createObjectURL(event.target.files[0]);
@@ -111,11 +129,8 @@ document.getElementById("userPassword").addEventListener("blur",checkPwd);
 function checkPwd(){
     //取得userPassword元素
     let thePwdObj=document.getElementById("userPassword");
-    console.log(thePwdObj);
     //取得userPassword元素值
     let thePwdObjVal=thePwdObj.value;
-    console.log(thePwdObjVal);
-    console.log(typeof thePwdObjVal);
 
     //判斷元素值是否為空白，密碼長度是否大於6
     //如果長度是否大於6，判斷是否包含字母、數字、特殊符號
@@ -157,7 +172,6 @@ function checkEmpty(){
 	if(strEmail.value.search(emailRule)!= -1){
 		theacc.innerHTML="";
 	}else{
-        console.log(strEmail.value.search(emailRule));
 		theacc.innerHTML="須符合email格式";
 	}
 	
@@ -207,9 +221,9 @@ function checkEmpty(){
     
     let theBD = document.getElementById("bdErr");
     let birthday = document.getElementById("birthday");
-    console.log(birthday);
+    console.log("生日快樂" + birthday);
     let bd = birthday.value;
-    console.log(bd);
+    console.log("生日快樂2" + bd);
     if (bd == null || bd.length == 0) {
     	theBD.innerHTML = "請選取生日";
     } else {
@@ -217,7 +231,6 @@ function checkEmpty(){
     }
 
 }
-
 </script>
 
 <jsp:include page="layout/footer.jsp" />

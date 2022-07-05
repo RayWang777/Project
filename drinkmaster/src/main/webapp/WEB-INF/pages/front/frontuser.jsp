@@ -111,11 +111,15 @@ span{
           </tr>
           <tr>
             <td scope="row">生日</td>
-            <td>${canSeeUser.birthday}</td>
+            <td>
+            	<fmt:formatDate value="${canSeeUser.birthday}" var="ubd" type="both" pattern="yyyy年MM月dd日" /> ${ubd}
+            </td>
           </tr>
           <tr>
             <td scope="row">創建日期</td>
-            <td>${canSeeUser.createdate}</td>
+            <td>
+                <fmt:formatDate value="${canSeeUser.createdate}" var="ucd" type="both" pattern="yyyy年MM月dd日 hh:mm:ss" /> ${ucd}
+            </td>
           </tr>
           <tr>
           	<td colspan="2" style="text-align: center;">

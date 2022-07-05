@@ -34,7 +34,7 @@ span{
        <span id="accErr"></span><br><br>
        
        <form:label path="userPassword">密&emsp;&emsp;碼</form:label>
-       <form:input path="userPassword" class="form-control"/>
+       <form:password value="${user.userPassword}" path="userPassword" class="form-control"/>
        <form:errors path="userPassword" cssClass="error" />
        <span id="passwordSp"></span><br/>  <br><br>
        

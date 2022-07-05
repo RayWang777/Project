@@ -75,7 +75,15 @@ span{
 		<div class="text-center text-white">
 			<div class="shape-ex6">
 			<div class="shape-ex6-block">
-				<img class="shape-ex6-img" src="data:image/jpg;base64,<c:out value='${canSeeUser.byteArrayString}'/>"/>
+<%-- 				<img class="shape-ex6-img" src="data:image/jpg;base64,<c:out value='${canSeeUser.byteArrayString}'/>"/> --%>
+				
+				<img class="shape-ex6-img" id="logo" src="data:image/jpg;base64,<c:out value='${canSeeUser.byteArrayString}'/>" 
+				width="100px" height="100px" />
+				<c:if test="${user.userId!=null}">
+				<img class="shape-ex6-img" id="oldlogo" src="data:image/jpg;base64,<c:out value='${canSeeUser.byteArrayString}'/>" 
+				onerror="nofind()"/>
+				</c:if>
+				
 			</div>
 			</div>
 			<h1 class="display-4 fw-bolder">${canSeeUser.userName}</h1>
@@ -87,6 +95,14 @@ span{
 	<div class="information">
     <form:form class="form" method="post" action="${contextRoot}/front/userUpdate/${user.userId}" modelAttribute="user" enctype="multipart/form-data">
    	<form:hidden path="userId" id="userId"/>
+   	
+   	   <div class="mb-4">
+			<label for="reallogo" class="form-label">大&ensp;頭&ensp;貼</label>
+			<input name="reallogo" class="form-control" type="file"
+				id="photo" onchange="preview()" />
+			<span id=firmLogoSp><c:url value="${errors.userPhoto}"/></span><br>
+	   </div>
+	   
        <form:label path="userName">名&emsp;&emsp;稱</form:label>
        <form:input path="userName" class="form-control" onblur="checkEmpty()" id="userName"/>
        <form:errors path="userName" cssClass="error" />
@@ -135,20 +151,15 @@ span{
        <br>
        
        
-		<div class="mb-4">
-			<label for="reallogo" class="form-label">大&ensp;頭&ensp;貼</label>
-			<input name="reallogo" class="form-control" type="file"
-				id="photo" onchange="preview()" />
-			<span id=firmLogoSp><c:url value="${errors.userPhoto}"/></span><br>
-		</div>
+		
 	
-		<div class="mb-3"style="text-align: center;">
-			<img id="logo" src="<c:url value="/backend/user/${user.userId}/photo"/>" width="100px" height="100px" />
-			<c:if test="${user.userId!=null}">
-			<img id="oldlogo" src="<c:url value="/backend/user/${user.userId}/photo"/>"width="100px" height="100px"/>
-			</c:if>
-		</div>
-		<br>
+<!-- 		<div class="mb-3"style="text-align: center;"> -->
+<%-- 			<img id="logo" src="<c:url value="/backend/user/${user.userId}/photo"/>" width="100px" height="100px" /> --%>
+<%-- 			<c:if test="${user.userId!=null}"> --%>
+<%-- 			<img id="oldlogo" src="<c:url value="/backend/user/${user.userId}/photo"/>"width="100px" height="100px"/> --%>
+<%-- 			</c:if> --%>
+<!-- 		</div> -->
+<!-- 		<br> -->
        
        
        <div class="row justify-content-center" style="margin-bottom: 100px">

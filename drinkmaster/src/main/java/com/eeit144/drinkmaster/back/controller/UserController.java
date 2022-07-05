@@ -1,9 +1,15 @@
 package com.eeit144.drinkmaster.back.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -172,9 +178,38 @@ public class UserController {
 			return "/backend/backuseradd";
 		}
 		System.out.println("完成後端識別格式");
-		// 以下為新增動作
+		// 新增預設圖片動作
 		String contentType = photo.getContentType();
 		System.out.println(contentType);
+//		
+//		if(user.getPhoto() == null && user.getGender().equals("男")) {
+//			System.out.println("抓到你是男生搂~");
+//			
+//			String url = "C:/Drink/drinkmaster/src/main/webapp/images/male.png";
+//			
+//			try {
+//				BufferedImage bImage = ImageIO.read(new File(url));
+//			    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+//			    ImageIO.write(bImage,"png",bos);
+//			    byte [] photoByte = bos.toByteArray();
+//			    user.setPhoto(photoByte);
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//			
+//		} else if(user.getPhoto() == null && user.getGender().equals("女")) {
+//			System.out.println("抓到你是女生搂~");
+//			File file = new File("female.png");
+//			byte[] photoByte;
+//			try {
+//				photoByte = Files.readAllBytes(file.toPath());
+//				user.setPhoto(photoByte);
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		
+//		System.out.println("完成圖片塞入user");
 		// 把當下的時間加入user內
 		Date createDate = new Date();
 		user.setCreatedate(createDate);
@@ -190,7 +225,7 @@ public class UserController {
 			m.addAttribute("user", userDTO);
 			return "/backend/backuseradd";
 		}
-		System.out.println("完成圖片塞入user");
+		
 		
 		// 密碼加密
 		

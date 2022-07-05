@@ -95,6 +95,7 @@
                 	  //利用input控制數量
                 	    var localcounts = $('#localcounts').val();
                 	 		localcounts++;
+                	 		console.log(localcounts);
 //              		 console.log(lat)
 //              		 console.log(lng)
              		 	var firmName = $('#localserchfirmname').val();
@@ -102,7 +103,7 @@
              		 	
              			console.log(firmName)
              		 
-             			var serchLocalStoreStr = {"lat": lat , "lng": lng ,"counts" : localcounts,"firmName" :firmName,"score":0 };
+             			var serchLocalStoreStr = {"lat": lat , "lng": lng ,"counts" : localcounts,"firmName" :firmName,"score":"0.0" };
                   		var storeJsonString= JSON.stringify(serchLocalStoreStr);
                   		//回填input
                   		$('#localcounts').val(localcounts);

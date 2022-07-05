@@ -1,9 +1,5 @@
 package com.eeit144.drinkmaster.dto;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
-import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.UserBean;
 
 public class StoreMapDTO {
@@ -12,13 +8,12 @@ public class StoreMapDTO {
 
 	private Integer firmId;
 
-	@NotBlank
 	private String storeName;
-	@NotBlank
+
 	private String storeAddress;
-	@NotBlank
+
 	private String storePhone;
-	@NotNull
+
 	private String openTime;
 
 	private Double longitude;
@@ -29,7 +24,9 @@ public class StoreMapDTO {
 
 	private UserBean userBean;
 
-	private Double distance;
+	private String distance;
+
+	private Double avgScore;
 
 	public StoreMapDTO() {
 	}
@@ -114,12 +111,20 @@ public class StoreMapDTO {
 		this.userBean = userBean;
 	}
 
-	public Double getDistance() {
+	public String getDistance() {
 		return distance;
 	}
 
-	public void setDistance(Double distance) {
+	public void setDistance(String distance) {
 		this.distance = distance;
+	}
+
+	public Double getAvgScore() {
+		return avgScore;
+	}
+
+	public void setAvgScore(Double avgScore) {
+		this.avgScore = avgScore;
 	}
 
 }

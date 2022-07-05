@@ -7,18 +7,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.eeit144.drinkmaster.back.model.CommentService;
 import com.eeit144.drinkmaster.back.model.FirmService;
 import com.eeit144.drinkmaster.back.model.StoreService;
-import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.dto.Map2Dto;
 import com.eeit144.drinkmaster.dto.MapDto;
@@ -57,10 +53,9 @@ public class FrontStoreController {
 	
 	@PostMapping("localstorelike")
 	@ResponseBody
-	public List<StoreBean> findLocalStoreByFirmNameLike(@RequestBody Map2Dto map){
+	public List<StoreMapDTO> findLocalStoreByFirmNameLike(@RequestBody Map2Dto map){
 		
 		Double score = map.getScore();
-		
 		
 		PageRequest page = PageRequest.of(map.getCounts()-1, 3);
 //		List<StoreBean> localByFirmNameLike = storeService.findStoreLocalByFirmNameLike(map.getLat(), map.getLng(),map.getFirmName(),page);
@@ -72,7 +67,6 @@ public class FrontStoreController {
 		List<Integer> findStoreIdByAvgUPThanNum = commentService.findStoreIdByAvgUPThanNum(score);
 		
 		if(score==null) score =0.0D;
-//		System.out.println(score);
 	
 		List<StoreBean> localByFirmNameLike = storeService.findStoreLocalByFirmNameLikeAndScoreUpThan(map.getLat(), map.getLng(),map.getFirmName(),findStoreIdByAvgUPThanNum,page);
 		List<Double> firmNameLikeAndScoreUpThanDis = storeService.findStoreLocalFirmNameLikeAndScoreUpThanDis(map.getLat(),  map.getLng(), map.getFirmName(),findStoreIdByAvgUPThanNum, page);
@@ -98,7 +92,7 @@ public class FrontStoreController {
 			storeMap.setDistance(format2);
 			list.add(storeMap);
 		}
-		return localByFirmNameLike;
+		return list;
 	}
 
 //	@GetMapping("store/{id}")

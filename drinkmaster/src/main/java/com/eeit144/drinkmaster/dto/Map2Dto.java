@@ -10,7 +10,7 @@ public class Map2Dto {
 
 	private Integer counts;
 	
-	private Float score;
+	private Double score;
 
 	public Map2Dto() {
 	}
@@ -31,14 +31,6 @@ public class Map2Dto {
 		this.lng = lng;
 	}
 
-	public Integer getCounts() {
-		return counts;
-	}
-
-	public void setCounts(Integer counts) {
-		this.counts = counts;
-	}
-
 	public String getFirmName() {
 		return firmName;
 	}
@@ -47,13 +39,22 @@ public class Map2Dto {
 		this.firmName = firmName;
 	}
 
-	public Float getScore() {
+	public Integer getCounts() {
+		return counts;
+	}
+
+	public void setCounts(Integer counts) {
+		this.counts = counts;
+	}
+
+	public Double getScore() {
 		return score;
 	}
 
-	public void setScore(Float score) {
+	public void setScore(Double score) {
 		this.score = score;
 	}
+
 	
 	
 

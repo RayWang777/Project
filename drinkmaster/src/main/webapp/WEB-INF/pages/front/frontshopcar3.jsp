@@ -58,8 +58,8 @@
 <body>
 <div class="container">
 <form action="${contextRoot}/front/shopcar/writeData" method="post">
-<%-- <input type="hidden" value="${shopcarBuy.storeId}">  --%>
-<%-- <input type="hidden" value="${shopcarBuy.storeName}">  --%>
+<input type="hidden" value="${shopcarBuy.storeId}"> 
+<input type="hidden" value="${shopcarBuy.storeName}"> 
 <%-- <form:form class="form" method="post" action="${contextRoot}/front/shopcar/buy" modelAttribute="shopcarBean"> --%>
 <%-- 	<input type="text" value="${canSeeUser.userName}"> --%>
 	<table id="cart" class="table table-hover table-condensed">
@@ -76,50 +76,50 @@
 						</tr>
 					</thead>
 					<tbody id="tbody">
-					<c:forEach varStatus="vs" var="shopcarItems" items="${shopcarBuy}">
+<%-- 					<c:forEach varStatus="vs" var="shopcarItems" items="${shopcarBuy.content}"> --%>
 						<tr>
 
-							<td style="font-size: 18px;text-align: center;" colspan="2">${shopcarItems.productId }
-								<input type="text" id="productname" value="${shopcarItems.price}" style="text-align: center;border-style:none;" readonly="true">
+							<td style="font-size: 18px;text-align: center;" colspan="2">
+								<input type="text" id="productname" value="${shopcarBuy.productName}" style="text-align: center;border-style:none;" readonly="true">
 							</td>
-							<td></td>
-<!-- 							<td data-th="Price" > -->
-<%-- 							<input type="text" id="price" value="${shopcarBuy.price}" style="width:50px;text-align: center;border-style:none;" readonly="true"> --%>
-<!-- 							</td> -->
-<!-- 							<td data-th="Quantity"> -->
-<%-- 								<input type="number" id="number" name="number" class="form-control text-center" value="${shopcarBuy.quantity}" min="1"> --%>
-<!-- 							</td>  -->
-<!-- 							<td data-th="Product" style="text-align: center;" > -->
-<%-- 							<form:select id="sugar" path="shopcarBuy.sweet"> --%>
-<%-- 							<form:option value="無糖">無糖</form:option> --%>
-<%-- 							<form:option value="微糖">微糖</form:option> --%>
-<%-- 							<form:option value="少糖">少糖</form:option> --%>
-<%-- 							<form:option value="半糖">半糖</form:option> --%>
-<%-- 							<form:option value="正常">正常</form:option> --%>
-<%-- 							</form:select>							 --%>
-<!-- 							</td> -->
-<!-- 							<td data-th="Product" style="text-align: center;"> -->
-<%-- 							<form:select id="coldhot" path="shopcarBuy.coldhot"> --%>
-<%-- 							<form:option value="冷">冷</form:option> --%>
-<%-- 							<form:option value="熱">熱</form:option> --%>
-<%-- 							</form:select>							 --%>
-<!-- 							</td> -->
-<!-- 							<td data-th="Subtotal" class="text-center" > -->
-<%-- 								<input type="text" id="totalprice" value="${shopcarBuy.totalPrice}" style="width:100px;text-align: center;border-style:none;" readonly="true"> --%>
-<!-- 							</td> -->
-<!-- 							<td class="actions" data-th=""> -->
+							
+							<td data-th="Price" >
+							<input type="text" id="price" value="${shopcarBuy.price}" style="width:50px;text-align: center;border-style:none;" readonly="true">
+							</td>
+							<td data-th="Quantity">
+								<input type="number" id="number" name="number" class="form-control text-center" value="${shopcarBuy.quantity}" min="1">
+							</td> 
+							<td data-th="Product" style="text-align: center;" >
+							<form:select id="sugar" path="shopcarBuy.sweet">
+							<form:option value="無糖">無糖</form:option>
+							<form:option value="微糖">微糖</form:option>
+							<form:option value="少糖">少糖</form:option>
+							<form:option value="半糖">半糖</form:option>
+							<form:option value="正常">正常</form:option>
+							</form:select>							
+							</td>
+							<td data-th="Product" style="text-align: center;">
+							<form:select id="coldhot" path="shopcarBuy.coldhot">
+							<form:option value="冷">冷</form:option>
+							<form:option value="熱">熱</form:option>
+							</form:select>							
+							</td>
+							<td data-th="Subtotal" class="text-center" >
+								<input type="text" id="totalprice" value="${shopcarBuy.totalPrice}" style="width:100px;text-align: center;border-style:none;" readonly="true">
+							</td>
+							<td class="actions" data-th="">
 
-<%-- 							<a href="${contextRoot}/front/shopcar/deleteCar/"> --%>
-<!-- 							<button type="button"  id="delete" class="btn btn-danger btn-sm" onclick="return confirm('確定要刪除嗎?')"><i class="fa fa-trash-o"></i></button>								 -->
-<!-- 							</a> -->
-<!-- 							</td> -->
-<!-- 						</tr> -->
-						</c:forEach>
+							<a href="${contextRoot}/front/shopcar/deleteCar/">
+							<button type="button"  id="delete" class="btn btn-danger btn-sm" onclick="return confirm('確定要刪除嗎?')"><i class="fa fa-trash-o"></i></button>								
+							</a>
+							</td>
+						</tr>
+<%-- 						</c:forEach> --%>
 					</tbody>
 					<tfoot>
 						<tr class="visible-xs">
 <!-- 						備註:折扣碼前的價格 -->
-<%-- 							<td class="text-center" id="total"><strong>Total <c:out value="${shopcarBuy.totalPrice}"></c:out></strong></td> --%>
+							<td class="text-center" id="total"><strong>Total <c:out value="${shopcarBuy.totalPrice}"></c:out></strong></td>
 						</tr>
 						<tr>
 							<td><a href="${contextRoot}/front/" class="btn btn-warning">
@@ -131,7 +131,7 @@
 <!-- 							備註:折扣碼後的價格 -->
 							<td class="hidden-xs text-center" colspan="3">
 							<span style="color:red;font-weight: bold;">折扣後&ensp;</span>
-<%-- 							<strong>Total <input type="text" id="totalprice2" value="${shopcarBuy.totalPrice}" style="width:100px;text-align: center;border-style:none;" readonly="true"></strong></td> --%>
+							<strong>Total <input type="text" id="totalprice2" value="${shopcarBuy.totalPrice}" style="width:100px;text-align: center;border-style:none;" readonly="true"></strong></td>
 							<td colspan="2"><button type="submit" class="btn btn-success btn-block" onclick="return confirm('確定要結帳嗎?')">結帳&thinsp;<i class="fa fa-angle-right"></i></button></td>
 						</tr>
 					</tfoot>

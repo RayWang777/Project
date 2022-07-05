@@ -59,8 +59,8 @@
 <div class="container" id="container">
 <form:form class="form" method="post" action="${contextRoot}/front/shopcar/buy" modelAttribute="productBean">
 <input type="hidden" value="${productBean.productId}" name="shopcarproductId">
-<input type=hidden value="${storeBean.storeId}" name="storeId">
-<input type=hidden value="${storeBean.storeName}" name="storeName">
+<input type="hidden" value="${storeBean.storeId}" name="storeId">
+<input type="hidden" value="${storeBean.storeName}" name="storeName">
 	<table id="cart" class="table table-hover table-condensed">
     				<thead>
 						<tr>

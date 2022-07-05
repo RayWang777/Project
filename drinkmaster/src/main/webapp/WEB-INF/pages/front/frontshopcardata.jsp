@@ -71,12 +71,14 @@
 <form action="${contextRoot}/front/shopcar/confirmOrder" method="post">
 <p style="text-align: center;"> 
 <input type="hidden" value="${canSeeUser.userId}" name="userId">
-<input type="hidden" value="${shopcarBuy.storeId}" name="storeId">
-<input type="hidden" value="${shopcarBuy.storeName}" name="storeName">
-<input type="hidden" value="${shopcarBuy.productId}" name="productId">
 姓名:&thinsp;<input type="text" value="${canSeeUser.userName}" ><br><br>
 電話:&thinsp;<input type="text" name="shopcarphone"><br><br>
 地址:&thinsp;<input type="text" value="${canSeeUser.userAddress}" name="shopcaraddress"><br><br>
+
+<input type="hidden" value="${shopcarBuy.storeId}" name="storeId">
+<input type="hidden" value="${shopcarBuy.storeName}" name="storeName">
+<input type="hidden" value="${shopcarBuy.productId}" name="productId">
+
 <input type="hidden" value="${shopcarBuy.productName}" name="shopcarname">
 <input type="hidden" value="${shopcarBuy.price}" name="shopcarprice">
 <input type="hidden" value="${shopcarBuy.quantity}" name="shopcarquantity">

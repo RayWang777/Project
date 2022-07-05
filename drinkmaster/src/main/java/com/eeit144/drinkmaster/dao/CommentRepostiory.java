@@ -65,9 +65,6 @@ public interface CommentRepostiory extends JpaRepository<CommentBean, Integer> {
 	public Integer countScoreByStoreidScore(@Param(value="storeId")Integer storeId,@Param(value="score")Integer score);
 
 	
-	@Query(value="SELECT ROUND(avg(score),0) FROM comment where storeid = :storeId",nativeQuery = true)
-	public Double avgScoreByStoreid1(@Param(value="storeId")Integer storeId);
-	
 	@Query(value="SELECT ROUND(avg(score),1) FROM comment where storeid = :storeId",nativeQuery = true)
 	public Double avgScoreByStoreid(@Param(value="storeId")Integer storeId);
 
@@ -78,5 +75,12 @@ public interface CommentRepostiory extends JpaRepository<CommentBean, Integer> {
 	@Query(value="select * from comment where userid = :userId",nativeQuery = true)
 	public List<CommentBean> findCommentByUserid(@Param(value="userId")Integer storeId);
 	
+	
+	@Query(value="select storeid from comment group by storeid order by avg(score) DESC",nativeQuery = true)
+	public List<CommentBean> findCommentByUserid();
+	
+	@Query(value="select storeid from ( select storeid,avg(score) as a from comment group by storeid) AS B where a > :avgScore",nativeQuery = true)
+	public List<Integer> findStoreIdByAvgUPThanNum(Double avg);
+
 	
 }

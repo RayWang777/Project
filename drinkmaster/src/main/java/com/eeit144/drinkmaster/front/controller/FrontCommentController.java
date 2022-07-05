@@ -86,7 +86,7 @@ public class FrontCommentController {
 			csdto.setStoreName(commentStore.get(i).getStoreName());
 			csdto.setFirmName(commentStore.get(i).getFirmBean().getFirmName());
 			csdto.setFirmId(commentStore.get(i).getFirmBean().getFirmId());
-			csdto.setAvgScore(commentService.avgScoreByStoreid1(commentStore.get(i).getStoreId()));
+			csdto.setAvgScore(commentService.avgScoreByStoreid(commentStore.get(i).getStoreId()));
 			listcsdto.add(csdto);
 		}
 		
@@ -121,7 +121,7 @@ public class FrontCommentController {
 			csdto.setStoreName(commentStore.get(i).getStoreName());
 			csdto.setFirmName(commentStore.get(i).getFirmBean().getFirmName());
 			csdto.setFirmId(commentStore.get(i).getFirmBean().getFirmId());
-			csdto.setAvgScore(commentService.avgScoreByStoreid1(commentStore.get(i).getStoreId()));
+			csdto.setAvgScore(commentService.avgScoreByStoreid(commentStore.get(i).getStoreId()));
 			if(commentStore.get(i).getFirmBean().getFirmId() == commentfirmid) {
 			listcsdto.add(csdto);
 			}

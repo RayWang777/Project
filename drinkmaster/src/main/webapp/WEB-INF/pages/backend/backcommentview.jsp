@@ -65,6 +65,12 @@
 
 
 
+<div style="text-align:right">
+
+<%-- <a href="${contextRoot}/front/comment/storecomment?commentfirmid=${commentStore.firmId}"><button class="btn btn-outline-success">全部</button></a> --%>
+
+<input type="text" id="commentstorename" name="commentstorename"/><button type="submit" class="btn btn-outline-success">搜尋</button>
+ </div>
 
 <!-- <div id="ratingBarFive" class="ratingBar"></div> -->
 <!-- <div id="ratingBarFour" class="ratingBar"></div> -->

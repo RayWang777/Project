@@ -73,14 +73,8 @@
 	  
         	</div>
 			</td>
-<!-- 			<td class="align-middle" style="width: 13%;"><div class="d-flex align-items-center"> -->
-<%-- 				<div style="margin: 5px"><a href="${contextRoot}/backend/service/edit?serviceId=${workMessage.serviceId}"> --%>
-<!-- 					<button type="button" class="btn btn-primary">編輯</button> -->
-<!-- 				</a></div> -->
-<%-- 				<div style="margin: 5px">  <a onclick="return confirm('確認要刪除嗎?')"  href="${contextRoot}/backend/service/delete?serviceId=${workMessage.serviceId}"><button type="button" class="btn btn-danger">刪除</button></a> --%>
-				
-<!-- 				</div> -->
-<!-- 			</div></td> -->
+
+
 		</tr>
 	</c:forEach>
 	</tbody>
@@ -89,59 +83,7 @@
 
 
 
-<!-- <div class="container"> -->
-<!-- <div class="row justify-content-center"> -->
-<!--  <div class="col-6"> -->
-<!-- <h1>意見回覆</h1> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- <div class="container"> -->
 
-<%--   <c:forEach var="workMessage" items="${page.content}"> --%>
-<!--      <div class="row justify-content-center"> -->
-<!--   <div class="col-6"> -->
-   
-<!--   <div class="card"> -->
-<!--    <div class="btn btn-info"> -->
-<!-- 					UserID: -->
-<%-- 					 <c:out value="${workMessage.userBean.userId}" /> --%>
-<!-- 				</div> -->
-<!-- 				<br/> -->
-<!-- 				<div class="btn btn-info"> -->
-<!-- 					姓名 : -->
-<%-- 					 <c:out value="${workMessage.userBean.userName}" /> --%>
-<!-- 				</div> -->
-<!-- 				<br/> -->
-<!-- 				<div class="btn btn-info"> -->
-<!-- 					Email信箱 : -->
-<%-- 					<c:out value="${workMessage.userBean.userAccount}" /> --%>
-<!-- 				</div> -->
-<!-- 				<br/> -->
-<!--     <div class="btn btn-info"> -->
-<%--       最新意見回饋(時間)  <fmt:formatDate pattern="yyyy 年 MM 月 dd 日 hh:mm:ss a EEEE" value="${workMessage.answerTime}" /> --%>
-<!--     </div> -->
-<!--     <div class="card-body"> -->
-<%--       <c:out value="${workMessage.answer}" /> --%>
-<!--       <br/><br/> -->
-<!--       <div class="edit-link"> -->
-      
-<%--       <c:choose> --%>
-<%--     	<c:when test="${workMessage.status=='ok'}"> --%>
-<!--         <button class="btn btn-secondary btn-sm" disabled>已回覆</button> -->
-<%--     	</c:when> --%>
-<%--     	<c:otherwise> --%>
-<%--         <a href="${contextRoot}/backend/service/postreply?serviceId=${workMessage.serviceId}"><button id="noreply" class="btn btn-sm btn-primary">未回覆</button></a> --%>
-<%--     	</c:otherwise> --%>
-<%-- 	  </c:choose> --%>
-        
-<!--       </div>    -->
-<!--     </div> -->
-<!--   </div> -->
-<!--   </div> -->
-<!--   </div> -->
-<!--   <br /> -->
-<%--   </c:forEach> --%>
 
  <div class="row justify-content-center">
   <div class="col-6">

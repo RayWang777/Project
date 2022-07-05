@@ -15,20 +15,20 @@
     
     <label for="exampleFormControlInput1">UserID</label>
     
-  <form:input  path="userBean" class="form-control" />
+  <form:input  path="userBean" class="form-control" id="userId" />
    </div>
   
   
   
   <div class="form-group">
     <label for="exampleFormControlTextarea1">意見回饋</label>
-    <form:textarea path="answer" class="form-control"/>
+    <form:textarea path="answer" class="form-control" id="feedback"/>
+    
      </div>
      
      <div class="form-group">
     
      <input type="submit" name="submit" class="btn btn-success" value="送出">
-    
  </div>
 </form:form>
 </div>
@@ -72,4 +72,7 @@
 	</div>
 
 </div>
+
+
+
 <jsp:include page="layout/footer.jsp" />

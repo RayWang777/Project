@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Chat WebSocket</title>
+<title>客服中心-線上客服</title>
 <link  rel='stylesheet' href="<c:url value='/css/websocket/chatStyle.css' />" />
 <!-- <script src="/websocket/webjars/sockjs-client/sockjs.min.js"></script> -->
 <!-- <script src="/websocket/webjars/stomp-websocket/stomp.min.js"></script> -->
@@ -134,7 +134,7 @@ window.addEventListener('load', function() {
 <body>
 <div  id="chat1" class="card border-primary mb-3" style="max-width: 18rem;">
 <div align='center'>
- <div class="card-header">飲君子客服聊天室</div>
+ <div class="card-header">飲君子線上客服</div>
 <!--     <h2>飲君子聊天室</h2> -->
 <div class="card-body text-primary">
     <h5 class="card-title">	聊天名稱：</h5>

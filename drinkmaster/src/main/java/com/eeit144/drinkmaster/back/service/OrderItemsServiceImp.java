@@ -95,6 +95,10 @@ public class OrderItemsServiceImp implements OrderItemsService{
 	public void insertOrderItems(Set<OrderItems> items) {
 		oitemDao.saveAll(items);
 	}
+	@Override
+	public List<OrderItems> findOrderOrderitems() {
+		return oitemDao.findOrderOrderitems();
+	}
 	
 
 	

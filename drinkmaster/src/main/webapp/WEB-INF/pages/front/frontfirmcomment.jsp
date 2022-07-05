@@ -99,6 +99,7 @@ div.awesomeRating {
 
 </script>
 
+<br/><br/><br/>
 
 <jsp:include page="layout/footer.jsp" />
 

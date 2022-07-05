@@ -66,6 +66,9 @@ public interface CommentRepostiory extends JpaRepository<CommentBean, Integer> {
 
 	
 	@Query(value="SELECT ROUND(avg(score),0) FROM comment where storeid = :storeId",nativeQuery = true)
+	public Double avgScoreByStoreid1(@Param(value="storeId")Integer storeId);
+	
+	@Query(value="SELECT ROUND(avg(score),1) FROM comment where storeid = :storeId",nativeQuery = true)
 	public Double avgScoreByStoreid(@Param(value="storeId")Integer storeId);
 
 	

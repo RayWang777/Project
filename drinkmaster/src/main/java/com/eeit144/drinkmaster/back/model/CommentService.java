@@ -54,6 +54,8 @@ public interface CommentService {
 	
 	public Integer countScoreByStoreidScore(Integer storeId, Integer score);
 	
+	public Double avgScoreByStoreid1(Integer storeId);
+
 	public Double avgScoreByStoreid(Integer storeId);
 	
 	public List<CommentBean> findCommentByUserid(Integer storeId);

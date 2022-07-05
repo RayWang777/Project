@@ -6,7 +6,7 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <jsp:include page="layout/header.jsp"></jsp:include>
 
-
+<title>廠商</title>
 <header class="bg-dark py-5">
 	<div class="container px-4 px-lg-5 my-5">
 		<div class="text-center text-white">

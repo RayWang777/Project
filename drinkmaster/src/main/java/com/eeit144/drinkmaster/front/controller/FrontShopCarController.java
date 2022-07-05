@@ -105,15 +105,23 @@ public class FrontShopCarController {
 	@GetMapping("shopcar/before/editproduct")
 	public String editById(@RequestParam("id") Integer id, Model m,@RequestParam("sid") Integer storeId) {
 		ProductBean productBean = proService.findById(id);
+		
+	
+		
 		StoreBean storeBean = storeService.findById(storeId).get();
+		
+		
+//		List<ShopcarBean> cart = new ArrayList<ShopcarBean>();
+		
+		
 		
 		
 		
 		m.addAttribute("productBean", productBean);
-		m.addAttribute("shopcarBuy", productBean);
+//		m.addAttribute("shopcarBuy", productBean);
 		
 		m.addAttribute("storeBean", storeBean);
-		m.addAttribute("shopcarBuy", storeBean);
+//		m.addAttribute("shopcarBuy", storeBean);
 
 		return "/front/frontbeforeshop";
 	}
@@ -121,8 +129,10 @@ public class FrontShopCarController {
 	
 	
 //	@PostMapping("shopcar/buy")
-//	public String addShopcar(Model m,
-//			@RequestParam("productId") Integer productId,@RequestParam("number") Integer number) {
+//	public String addShopcar2(@SessionAttribute(name="product",required = false) OrderItems orderItems,Model m,@RequestParam("shopcarproductId") Integer productId
+//			,@RequestParam("sugar") String sugar,@RequestParam("coldhot") String coldhot,@RequestParam("number") Integer number,
+//			@RequestParam("totalprice") Integer totalprice,@RequestParam("storeName") String storeName,
+//			@RequestParam("storeId") Integer storeId,@ModelAttribute("productBean") ProductBean productBean) {
 //		
 ////		ProductBean productBean = proService.findById(productId);		
 //		
@@ -152,44 +162,63 @@ public class FrontShopCarController {
 //	}
 	
 	
+
+	
+	
+	
+	
 	@PostMapping("shopcar/buy")
-	public String addShopcar(@SessionAttribute(name="product",required = false) OrderItems orderItems,Model m,@RequestParam("shopcarproductId") Integer productId
+	public String addShopcar(Model m,@RequestParam("shopcarproductId") Integer productId
 			,@RequestParam("sugar") String sugar,@RequestParam("coldhot") String coldhot,@RequestParam("number") Integer number,
 			@RequestParam("totalprice") Integer totalprice,@RequestParam("storeName") String storeName,
 			@RequestParam("storeId") Integer storeId,@ModelAttribute("productBean") ProductBean productBean) {
 		
-	
 		UserBean userBean = (UserBean) m.getAttribute("canSeeUser");
 		if(userBean == null) {
 			return "redirect:/front/login";
 		}
 		
-		
-		
 //		// 取出存放在session物件內的shopcarBuy物件
-//		ShopcarBuy shopcarBuy = (ShopcarBuy) m.getAttribute("shopcarBuy");
-//		if(shopcarBuy == null) {
-//			//沒有的話建立一個
-//			shopcarBuy = new ShopcarBuy();
-//			m.addAttribute("shopcarBuy",shopcarBuy);
-//		}
-//		
+		Map<Integer,ShopcarBean> cart = (Map<Integer,ShopcarBean>) m.getAttribute("shopcarBuy");
 		
-//		Map<Integer, ShopcarBean> cart = new LinkedHashMap<>();
-		
-		List<ShopcarBean> cart = new ArrayList<ShopcarBean>();
-		ShopcarBean shopcarBean2 = new ShopcarBean();
-		shopcarBean2.setTotalPrice(totalprice);
-		cart.add(shopcarBean2);
-		System.out.println(cart.size());
-		for(ShopcarBean shopcarBean : cart) {
-			System.out.println("123");
-//			ShopcarBean shopcarBean = new ShopcarBean();
-			shopcarBean.setProductImage(productBean.getProductImage());
+		ShopcarBean shopcarBean = null;
+
+		if(cart == null) {
+		cart = new LinkedHashMap< >();
+		shopcarBean = new ShopcarBean();
+
+		shopcarBean.setProductId(productId);
+		shopcarBean.setProductName(productBean.getProductName());
+		shopcarBean.setPrice(productBean.getPrice());
+		shopcarBean.setColdhot(coldhot);
+		shopcarBean.setQuantity(number);
+		shopcarBean.setSweet(sugar);
+		shopcarBean.setTotalPrice(totalprice);
+		shopcarBean.setStoreName(storeName);
+		shopcarBean.setStoreId(storeId);
+		cart.put(productId, shopcarBean);
+		}
+		//用原生的方法去判斷有沒有值
+		else if(cart.containsKey(productId)){
+			
+			shopcarBean = new ShopcarBean();
+			ShopcarBean newNumber = cart.get(productId);
 			shopcarBean.setProductId(productId);
 			shopcarBean.setProductName(productBean.getProductName());
-			System.out.println("999");
-			System.out.println(productBean.getProductName());
+			shopcarBean.setPrice(productBean.getPrice());
+			shopcarBean.setColdhot(coldhot);
+			shopcarBean.setQuantity(number+newNumber.getQuantity());
+			shopcarBean.setSweet(sugar);
+			shopcarBean.setTotalPrice(totalprice+newNumber.getTotalPrice());
+			shopcarBean.setStoreName(storeName);
+			shopcarBean.setStoreId(storeId);
+			cart.put(productId, shopcarBean);
+		}
+		else{
+			shopcarBean = new ShopcarBean();
+
+			shopcarBean.setProductId(productId);
+			shopcarBean.setProductName(productBean.getProductName());
 			shopcarBean.setPrice(productBean.getPrice());
 			shopcarBean.setColdhot(coldhot);
 			shopcarBean.setQuantity(number);
@@ -197,40 +226,14 @@ public class FrontShopCarController {
 			shopcarBean.setTotalPrice(totalprice);
 			shopcarBean.setStoreName(storeName);
 			shopcarBean.setStoreId(storeId);
-			System.out.println("000");
-			cart.add(shopcarBean);
+			cart.put(productId, shopcarBean);
 		}
-//		System.out.println(cart.size());
-//		System.out.println(cart.isEmpty());
-		System.out.println("456");
+				
+		
 		m.addAttribute("shopcarBuy", cart);
-		System.out.println("789");
-		
-		
-		
-//		ShopcarBean shopcarBean = new ShopcarBean();
-//		shopcarBean.setProductImage(productBean.getProductImage());
-//		shopcarBean.setProductId(productId);
-//		shopcarBean.setProductName(productBean.getProductName());
-//		shopcarBean.setPrice(productBean.getPrice());
-//		shopcarBean.setColdhot(coldhot);
-//		shopcarBean.setQuantity(number);
-//		shopcarBean.setSweet(sugar);
-//		shopcarBean.setTotalPrice(totalprice);
-//		shopcarBean.setStoreName(storeName);
-//		shopcarBean.setStoreId(storeId);
-		
-//		cart.put(productId, shopcarBean);
-//		m.addAttribute("shopcarBuy", cart);
-
-
-		
-//		m.addAttribute("shopcarBuy", shopcarBean);
-		
 		
 
-		
-		return "/front/frontshopcar2";
+		return "/front/frontshopcar";
 	}
 	
 	
@@ -259,19 +262,22 @@ public class FrontShopCarController {
 			,@RequestParam("storeName") String storeName
 			,@RequestParam("storeId") Integer storeId) {//@RequestParam("storeId") Integer storeId
 		
-		ShopcarBean shopcarBean = new ShopcarBean();
-		shopcarBean.setAddress(shopcaraddress);
-		shopcarBean.setPhone(shopcarphone);
-		shopcarBean.setProductName(shopcarname);
-		shopcarBean.setPrice(shopcarprice);
-		shopcarBean.setColdhot(shopcarcoldhot);
-		shopcarBean.setQuantity(shopcarquantity);
-		shopcarBean.setSweet(shopcarsweet);
-		shopcarBean.setTotalPrice(shopcartotalPrice);
-		shopcarBean.setStoreName(storeName);
-		shopcarBean.setStoreId(storeId);
+		Map<Integer,ShopcarBean> cart = (Map<Integer,ShopcarBean>) m.getAttribute("shopcarBuy");
 		
-		m.addAttribute("shopcarBuy", shopcarBean);
+		
+//		ShopcarBean shopcarBean = new ShopcarBean();
+//		shopcarBean.setAddress(shopcaraddress);
+//		shopcarBean.setPhone(shopcarphone);
+//		shopcarBean.setProductName(shopcarname);
+//		shopcarBean.setPrice(shopcarprice);
+//		shopcarBean.setColdhot(shopcarcoldhot);
+//		shopcarBean.setQuantity(shopcarquantity);
+//		shopcarBean.setSweet(shopcarsweet);
+//		shopcarBean.setTotalPrice(shopcartotalPrice);
+//		shopcarBean.setStoreName(storeName);
+//		shopcarBean.setStoreId(storeId);
+		
+//		m.addAttribute("shopcarBuy", shopcarBean);
 							
 		Date today = new Date();
 		
@@ -325,8 +331,15 @@ public class FrontShopCarController {
 	}
 	
 	
-	
-	
+	@GetMapping("shopcar/delete")
+	public String daleteShopcar(@RequestParam("productId") Integer productId,Model m) {
+		Map<Integer,ShopcarBean> cart = (Map<Integer,ShopcarBean>) m.getAttribute("shopcarBuy");
+		cart.remove(productId);
+		m.addAttribute("shopcarBuy", cart);
+		
+		
+		return "/front/frontshopcar";
+	}
 	
 	
 

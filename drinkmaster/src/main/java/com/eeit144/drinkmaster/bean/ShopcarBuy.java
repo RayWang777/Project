@@ -23,13 +23,13 @@ private Map<Integer, OrderItems> cart = new LinkedHashMap< >();
 		if ( cart.get(productId) == null ) {
 		    cart.put(productId, oi);
 		} 
-//		else {
-//	        // 如果客戶在伺服器端已有此項商品的資料，則客戶『加購』此項商品
-//			OrderItems orderItems = cart.get(productId);
-//			// 加購的數量：bean.getQuantity()
-//			// 原有的數量：oBean.getQuantity()			
-//			orderItems.setQuantity(oi.getQuantity() + orderItems.getQuantity());
-//		}
+		else {
+	        // 如果客戶在伺服器端已有此項商品的資料，則客戶『加購』此項商品
+			OrderItems orderItems = cart.get(productId);
+			// 加購的數量：bean.getQuantity()
+			// 原有的數量：oBean.getQuantity()			
+			orderItems.setQuantity(oi.getQuantity() + orderItems.getQuantity());
+		}
 	}
 
 	public boolean modifyQty(Integer productId, Integer newQty) {

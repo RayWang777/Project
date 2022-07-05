@@ -114,7 +114,7 @@
       				<td class="align-middle" style="text-align: center;">
       				<c:choose>
       				<c:when test="${order.orderStatus=='待付款'}">
-      				<button type="button"  id="${order.orderId}" class="btn btn-danger btn-sm" onclick="return del(event)" value="刪除">刪除
+      				<button type="button"  id="${order.orderId}" class="btn btn-danger btn-sm" onclick="return del(event)" value="取消">取消
 <!--       				<i class="fa fa-trash-o"></i> -->
       				</button>
 					</c:when>
@@ -152,13 +152,13 @@ var local = event.target.id;
 	  
 	 
 Swal.fire({
-title: '確認要刪除嗎?',
+title: '與店家確認過後，決定要取消嗎?',
 icon: 'warning',
 showCancelButton: true,
 confirmButtonColor: '#dc3545',
 cancelButtonColor: '#28a745',
-confirmButtonText: '確認刪除',
-cancelButtonText: '&nbsp&nbsp取&nbsp&nbsp&nbsp&nbsp消&nbsp&nbsp',
+confirmButtonText: '確認取消',
+cancelButtonText: '&nbsp&nbsp返&nbsp&nbsp&nbsp&nbsp回&nbsp&nbsp',
 reverseButtons: true
 
 }).then((result) => {

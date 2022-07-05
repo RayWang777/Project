@@ -86,11 +86,11 @@ public class FrontCommentController {
 			csdto.setStoreName(commentStore.get(i).getStoreName());
 			csdto.setFirmName(commentStore.get(i).getFirmBean().getFirmName());
 			csdto.setFirmId(commentStore.get(i).getFirmBean().getFirmId());
-			csdto.setAvgScore(commentService.avgScoreByStoreid(commentStore.get(i).getStoreId()));
+			csdto.setAvgScore(commentService.avgScoreByStoreid1(commentStore.get(i).getStoreId()));
 			listcsdto.add(csdto);
 		}
 		
-			
+		
 		
 //		Double avg = commentService.avgScoreByStoreid(csdto.getStoreId());
 		
@@ -111,9 +111,37 @@ public class FrontCommentController {
 		
 		List<CommentAvgScoreBeanDTO> listcsdto = new ArrayList<>();
 		
-//		String storenamesql = "'%" + storename + "%'";
+//		List<StoreBean> commentStore = storeService.findStoreByFirmId(commentfirmid);
 		
 		List<StoreBean> commentStore = storeService.findStoreByStoreNameLike(storename);
+		
+		for(int i=0 ; i<commentStore.size(); i++) {
+			CommentAvgScoreBeanDTO csdto = new CommentAvgScoreBeanDTO();
+			csdto.setStoreId(commentStore.get(i).getStoreId());
+			csdto.setStoreName(commentStore.get(i).getStoreName());
+			csdto.setFirmName(commentStore.get(i).getFirmBean().getFirmName());
+			csdto.setFirmId(commentStore.get(i).getFirmBean().getFirmId());
+			csdto.setAvgScore(commentService.avgScoreByStoreid1(commentStore.get(i).getStoreId()));
+			if(commentStore.get(i).getFirmBean().getFirmId() == commentfirmid) {
+			listcsdto.add(csdto);
+			}
+		}
+		
+		model.addAttribute("listcsdto", listcsdto);
+		
+//		String url = "redirect:http://localhost:8081/drinkmaster/front/comment/storecomment?commentfirmid=" + commentfirmid;
+		
+		return "front/frontcomment";
+	}
+	
+	
+	public String avgscoredesc(@RequestParam("commentfirmid") Integer commentfirmid, Model model) {
+		
+List<CommentAvgScoreBeanDTO> listcsdto = new ArrayList<>();
+		
+		List<StoreBean> commentStore = storeService.findStoreByFirmId(commentfirmid);
+
+		
 		
 		for(int i=0 ; i<commentStore.size(); i++) {
 			CommentAvgScoreBeanDTO csdto = new CommentAvgScoreBeanDTO();
@@ -125,12 +153,13 @@ public class FrontCommentController {
 			listcsdto.add(csdto);
 		}
 		
-		model.addAttribute("listcsdto", listcsdto);
+//		sort(listcsdto);
 		
-//		String url = "redirect:http://localhost:8081/drinkmaster/front/comment/storecomment?commentfirmid=" + commentfirmid;
+//		SortList<CommentAvgScoreBeanDTO> sortList = new SortList<CommentAvgScoreBeanDTO>();
 		
-		return "front/frontcomment";
+		return "";
 	}
+	
 	
 	
 	@GetMapping("comment/usercomment")

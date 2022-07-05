@@ -65,7 +65,15 @@ div.awesomeRating {
 
 <div class="row justify-content-center">
 <div class="col-9">
+
+
+<br/><br/><br/>
+
+
 <h1 style="text-align:center">評論</h1>
+
+<br/><br/><br/>
+
 <div class="card border-warning">
  
   <div class="card-body">
@@ -472,7 +480,7 @@ div.awesomeRating {
   <button class="btn btn-black dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
     排序
   </button>
-  
+  <br/><br/>
   <c:forEach var="store" items="${arrayList}">
   
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -484,6 +492,8 @@ div.awesomeRating {
   
   </c:forEach>
 </div>
+
+<br/><br/><br/>
 
 </div>
 </div>

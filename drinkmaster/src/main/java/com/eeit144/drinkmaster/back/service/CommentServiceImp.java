@@ -137,8 +137,12 @@ public class CommentServiceImp implements CommentService {
 	}
 	
 	
-	public List<CommentBean> findCommentByUserid(){
-		return commentDao.findCommentByUserid();
+	public List<Integer> findCommentByAvgDesc(){
+		return commentDao.findCommentByAvgDesc();
+	}
+	
+	public List<Integer> findCommentByAvgAsc(){
+		return commentDao.findCommentByAvgAsc();
 	}
 	
 	

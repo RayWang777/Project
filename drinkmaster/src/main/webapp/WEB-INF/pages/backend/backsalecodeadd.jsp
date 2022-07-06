@@ -17,13 +17,13 @@ color:red;
 
 	<div class="container">
 		<br> <br>
-		<h2 class="mb-4" style="text-align: center;">新增店家</h2>
+		<h2 class="mb-4" style="text-align: center;">產生平台優惠券</h2>
 
 		<div class="row justify-content-center">
 
 
 			<form:form class="form" method="post"	modelAttribute="newSaleCode">
-				
+				<div hidden="true">
 				<c:choose>
 				<c:when test="${userBean.role == 'admin' }">
 				<div class="mb-3">
@@ -45,7 +45,7 @@ color:red;
 					<form:hidden path="firmId" value="${firms[0].firmId}" />
 				</c:otherwise>
 				</c:choose>
-
+			</div>
 
 			
 				<label for="discount" class="form-label">折扣</label>

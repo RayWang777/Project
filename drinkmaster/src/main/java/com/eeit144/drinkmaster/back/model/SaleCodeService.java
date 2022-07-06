@@ -3,6 +3,9 @@ package com.eeit144.drinkmaster.back.model;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.eeit144.drinkmaster.bean.SaleCodeBean;
 
 public interface SaleCodeService {
@@ -14,4 +17,6 @@ public interface SaleCodeService {
 	public SaleCodeBean insertSaleCode(SaleCodeBean saleCodeBean);
 	
 	public Optional<SaleCodeBean> findBySaleCode(String salecode);
+	
+	public Page<SaleCodeBean> findAllValiedCode(Pageable pab);
 }

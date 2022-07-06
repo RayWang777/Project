@@ -59,7 +59,7 @@
 			<form:input path="d" class="form-control" value="${serchFirm.d}"
 				placeholder="排序" />
 		</div>
-		<button type="submit" class="btn btn  btn-sm" style="color: blue;">查詢</button>
+		<button type="submit" class="btn btn-primary">查詢</button>
 		<c:out value="查到 ${firms.totalElements}筆資料"></c:out>
 	</form:form>
 

@@ -73,6 +73,64 @@
 				<input type="text" class="input-group-text btn btn-primary" id="destroybutton" value="註銷折扣碼">
 			<span id="destroySp"></span>
 	</div>
+	
+	<table class="table table-hover"
+		style="width: 100%; table-layout: fixed;">
+		<thead>
+			<tr>
+				<th style="width: 50px;"><label class="control control--checkbox">
+						<input type="checkbox" class="js-check-all" />
+				</label></th>
+				<th style="text-align: center;" scope="col">折扣碼</th>
+				<th style="text-align: center;" scope="col">折扣數</th>
+				<th style="text-align: center;" scope="col">有效時間</th>
+				
+				<th style="width: 140px;text-align: left;">動作</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<c:forEach items="${allValiedCode.content}" var="oneSaleCode">
+				<tr scope="row">
+					<td class="align-middle"><label
+						class="control control--checkbox"><input type="checkbox"
+							id="check" name="saleCodesId"   value="<c:out value='${oneSaleCode.saleCodeId}'/>"
+							style="margin-top: 20px;" />
+						</label></td>
+						
+					<td class="align-middle" style="text-align: center;"><c:out value="${oneSaleCode.saleCode}"/></td>	
+					<td class="align-middle" style="text-align: center;"><c:out value="${oneSaleCode.discount}"/></td>	
+					<td class="align-middle" style="text-align: center;"><c:out value="${oneSaleCode.validDate}"/></td>	
+					
+					
+					<td class="align-middle" style="width: 13%;"> 
+						<button id="${oneSaleCode.saleCode}" type="button" class="btn btn-danger" onclick="del(event)">註銷</button></td>
+				</tr>
+			</c:forEach>
+
+		</tbody>
+	</table>
+	<div class="row justify-content-center" style="font-size: x-large;">
+		<c:forEach var="pageNumber" begin="1" end="${allValiedCode.totalPages}">
+			<c:choose>
+				<c:when test="${allValiedCode.number!=pageNumber-1}">
+				&nbsp;<a
+						href="${contextRoot}/backend/salecode/all?p=${pageNumber}"><c:out
+							value="${pageNumber}" /></a>&nbsp;
+				</c:when>
+				<c:otherwise>
+					&nbsp;<c:out value="${pageNumber}"></c:out>&nbsp;
+				</c:otherwise>
+			</c:choose>
+			&nbsp;<c:if test="${pageNumber!= allValiedCode.totalPages }">|</c:if>&nbsp;
+		</c:forEach>
+	</div>
+	<div class="row justify-content-center"
+		style="font-size: large; color: black;">
+		<c:out value="總共有 ${allValiedCode.totalElements} 筆資料"></c:out>
+	</div>
+	
+	
 
 </body>
 
@@ -132,7 +190,9 @@ $(function(){
 	    			  title: '註銷成功',
 	    			  showConfirmButton: false,
 	    			  timer: 1500
-	    			})
+	    			}).then(
+	    				location.href='http://localhost:8081/drinkmaster/backend/salecode/all'		
+	    			)
 
 	    		}
     	    	 
@@ -158,9 +218,42 @@ $(function(){
     	     }
     	})
 		
-		
-		
 	})
+	
+	
+	
+	function del(event){
+			  console.log(event.target.id)
+	var local = event.target.id;
+	 Swal.fire({
+		  title: '確認要刪除嗎?',
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#dc3545',
+		  cancelButtonColor: '#28a745',
+		  confirmButtonText: '確認刪除',
+		  cancelButtonText: '&nbsp&nbsp取&nbsp&nbsp&nbsp&nbsp消&nbsp&nbsp',
+		  reverseButtons: true
+		  
+		}).then((result) => {
+		  if (result.isConfirmed) {
+			  
+	
+			Swal.fire({
+			  icon: 'success',
+			  title: '資料已移除',
+			  showConfirmButton: false,
+			  timer: 2000
+			}).then( ()=>{
+				
+				document.location.href='${contextRoot}/backend/salecode/destroy?s='+local;
+				
+			})
+		  }else if (result.isDenied) {
+			    return false;
+			  }
+		});
+}
 
 </script>
 

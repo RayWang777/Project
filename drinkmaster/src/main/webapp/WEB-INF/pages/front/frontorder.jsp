@@ -189,27 +189,27 @@ table {
 <br>
 <div style="text-align: center;"><h3>訂單明細</h3></div>
 <div class="wrap">
-<div class="price">
+           
+</div>
+<c:forEach varStatus="vs" var="shopcarItems" items="${shopcarBuy}">
+<div class="wrap">
+        <div class="top">
+        <div class="price">
             <span>訂購人</span>
                 
             <span>
             <c:out value="${canSeeUser.userName}" /></span>
             </div>
-            <div class="price">
+         <div class="price">
                 <span>電話</span>
                 
-<%--                 <span><c:out value="${shopcarBuy.phone}" /></span> --%>
+                <span><c:out value="${shopcarBuy.phone}" /></span>
             </div>
             <div class="price">
                 <span>地址</span>
                 
-                <span><c:out value="${ShopcarBean.address}" /></span>
+                <span><c:out value="${shopcarBuy.address}" /></span>
             </div>
-</div>
-<c:forEach varStatus="vs" var="shopcarItems" items="${shopcarBuy}">
-<div class="wrap">
-        <div class="top">
-        
             
             
             <div class="price">

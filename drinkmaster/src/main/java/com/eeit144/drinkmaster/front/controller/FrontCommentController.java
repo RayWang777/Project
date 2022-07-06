@@ -125,6 +125,7 @@ public class FrontCommentController {
 			csdto.setFirmName(commentStoreLike.get(i).getFirmBean().getFirmName());
 			csdto.setFirmId(commentStoreLike.get(i).getFirmBean().getFirmId());
 			csdto.setAvgScore(commentService.avgScoreByStoreid(commentStoreLike.get(i).getStoreId()));
+			csdto.setCountScore(commentService.countStoreidByStoreid(commentStoreLike.get(i).getStoreId()));
 			if(commentStoreLike.get(i).getFirmBean().getFirmId() == commentfirmid) {
 			listcsdto.add(csdto);
 				}
@@ -138,6 +139,7 @@ public class FrontCommentController {
 				csdto.setFirmName(commentStore.get(i).getFirmBean().getFirmName());
 				csdto.setFirmId(commentStore.get(i).getFirmBean().getFirmId());
 				csdto.setAvgScore(commentService.avgScoreByStoreid(commentStore.get(i).getStoreId()));
+				csdto.setCountScore(commentService.countStoreidByStoreid(commentStore.get(i).getStoreId()));
 				if(commentStore.get(i).getFirmBean().getFirmId() == commentfirmid) {
 				listcsdto.add(csdto);
 					}
@@ -177,6 +179,7 @@ public class FrontCommentController {
 			csdto.setFirmName(storeBean.getFirmBean().getFirmName());
 			csdto.setFirmId(storeBean.getFirmBean().getFirmId());
 			csdto.setAvgScore(commentService.avgScoreByStoreid(storeBean.getStoreId()));
+			csdto.setCountScore(commentService.countStoreidByStoreid(storeBean.getStoreId()));
 			if(storeBean.getFirmBean().getFirmId() == commentfirmid) {
 				listcsdto.add(csdto);
 			}
@@ -214,6 +217,7 @@ public class FrontCommentController {
 			csdto.setFirmName(storeBean.getFirmBean().getFirmName());
 			csdto.setFirmId(storeBean.getFirmBean().getFirmId());
 			csdto.setAvgScore(commentService.avgScoreByStoreid(storeBean.getStoreId()));
+			csdto.setCountScore(commentService.countStoreidByStoreid(storeBean.getStoreId()));
 			if(storeBean.getFirmBean().getFirmId() == commentfirmid) {
 				listcsdto.add(csdto);
 			}

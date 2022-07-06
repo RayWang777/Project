@@ -8,6 +8,7 @@ public class CommentAvgScoreBeanDTO {
 	private String firmName;
 	private Double avgScore;
 	private Double newAvgScore;
+	private Integer countScore;
 	
 
 	public CommentAvgScoreBeanDTO() {
@@ -71,6 +72,16 @@ public class CommentAvgScoreBeanDTO {
 
 	public void setFirmId(Integer firmId) {
 		this.firmId = firmId;
+	}
+
+
+	public Integer getCountScore() {
+		return countScore;
+	}
+
+
+	public void setCountScore(Integer countScore) {
+		this.countScore = countScore;
 	}
 
 

@@ -71,7 +71,7 @@
 <form action="${contextRoot}/front/shopcar/confirmOrder" method="post">
 <p style="text-align: center;"> 
 <input type="hidden" value="${canSeeUser.userId}" name="userId">
-姓名:&thinsp;<input type="text" value="${canSeeUser.userName}" ><br><br>
+姓名:&thinsp;<input type="text" value="${canSeeUser.userName}" readonly="readonly"><br><br>
 電話:&thinsp;<input type="text" name="shopcarphone"><br><br>
 地址:&thinsp;<input type="text" value="${canSeeUser.userAddress}" name="shopcaraddress"><br><br>
 

@@ -56,6 +56,7 @@
 
 
 <body>
+<h1 style="text-align:center">我的購物車</h1>
 <div class="container">
 <form action="${contextRoot}/front/shopcar/writeData" method="post">
 <%-- <input type="text" value="${shopcarBuy.storeId}">  --%>

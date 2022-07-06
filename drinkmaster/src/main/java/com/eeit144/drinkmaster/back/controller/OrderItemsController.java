@@ -1,6 +1,7 @@
 package com.eeit144.drinkmaster.back.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.eeit144.drinkmaster.back.model.FirmService;
 import com.eeit144.drinkmaster.back.model.OrderItemsService;
 import com.eeit144.drinkmaster.back.model.OrderService;
 import com.eeit144.drinkmaster.back.model.ProductService;
+import com.eeit144.drinkmaster.back.model.StoreService;
+import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.OrderBean;
 import com.eeit144.drinkmaster.bean.OrderItems;
 import com.eeit144.drinkmaster.bean.ProductBean;
@@ -36,6 +40,12 @@ public class OrderItemsController {
 	@Autowired
 	private ProductService productService;
 	
+	@Autowired
+	private StoreService storeService;
+	
+	@Autowired
+	private FirmService firmService;
+	
 	
 	
 	@GetMapping("orderItems/findAll")
@@ -43,6 +53,19 @@ public class OrderItemsController {
 		
 		if((user.getRole().equals("user"))) {
 			return mav;			
+		}else if(user.getRole().equals("store")) {
+			Optional<StoreBean> storeByUserId = storeService.findStoreByUserId(user.getUserId());
+			StoreBean store = storeByUserId.get();
+			Page<OrderItems> page = oiService.findByorderBean_storeBean_storeId(pageNumber, store.getStoreId());
+			mav.getModel().put("page", page);
+		}else if(user.getRole().equals("admin")) {
+			Page<OrderItems> page = oiService.findByPage(pageNumber);
+			mav.getModel().put("page", page);
+		}else if(user.getRole().equals("firm")) {
+			List<FirmBean> firmByUserId = firmService.findFirmByUserId(user.getUserId());
+			FirmBean firm = firmByUserId.get(0);
+			Page<OrderItems> page = oiService.findByorderBean_storeBean_firmBean_firmId(pageNumber, firm.getFirmId());
+			mav.getModel().put("page", page);
 		}
 		
 		List<ProductBean> products = orderService.findAllProducts();
@@ -54,10 +77,10 @@ public class OrderItemsController {
 		m.addAttribute("addorders", orders);
 		
 		
-		Page<OrderItems> page = oiService.findByPage(pageNumber);
+//		Page<OrderItems> page = oiService.findByPage(pageNumber);
 		OrderItems orderItems = new OrderItems();
 		mav.getModel().put("orderItems", orderItems);
-		mav.getModel().put("page", page);
+//		mav.getModel().put("page", page);
 		mav.setViewName("/backend/backorderitems");
 		return mav;
 		

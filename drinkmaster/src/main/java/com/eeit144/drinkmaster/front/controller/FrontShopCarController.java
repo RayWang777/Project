@@ -269,6 +269,7 @@ public class FrontShopCarController {
 			
 			
 		}	
+//		m.addAttribute("shopcarBuy", shopcaraddress);
 //		ShopcarBean shopcarBean = null;
 //		
 //		shopcarBean = new ShopcarBean();

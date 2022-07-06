@@ -39,8 +39,16 @@ public interface OrderRepostiory extends JpaRepository<OrderBean, Integer> {
 	
 	public OrderBean findFirstByOrderByCreateTimeDesc();
 	
+	@Query(value="select top (1) *  from [orders] order by orderid DESC",nativeQuery = true)
+	public OrderBean findLatestOrderId();
+	
+	
+	
 	@Query(value="select * from orders where userid = :userId order by createtime desc",nativeQuery = true)
 	public List<OrderBean> findOrdersByUserid(@Param(value="userId")Integer userId);
+	
+	@Query(value="select * from orders where userid = :userId order by createtime desc",nativeQuery = true)
+	public Page<OrderBean> findOrdersByUseridPage(Pageable pageable,@Param(value="userId")Integer userId);
 	
 	@Query(value="select * from orders as o right join orderitems as oi on o.orderid = oi.orderid ",nativeQuery = true)
 	public List<OrderBean> findOrderOrderitems();

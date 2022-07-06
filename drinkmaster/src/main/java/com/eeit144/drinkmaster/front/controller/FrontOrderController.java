@@ -1,6 +1,7 @@
 package com.eeit144.drinkmaster.front.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.eeit144.drinkmaster.back.model.OrderItemsService;
 import com.eeit144.drinkmaster.back.model.OrderService;
+import com.eeit144.drinkmaster.back.model.UserService;
 import com.eeit144.drinkmaster.bean.OrderBean;
 import com.eeit144.drinkmaster.bean.OrderItems;
 import com.eeit144.drinkmaster.bean.UserBean;
@@ -30,20 +32,24 @@ public class FrontOrderController {
 	@Autowired
 	private OrderItemsService oiService;
 	
+	@Autowired
+	private UserService userService;
 	
 	
 	@GetMapping("order/userOrder")
-	public ModelAndView userOrder(ModelAndView mav,@RequestParam(name = "o", defaultValue = "1") Integer pageNumber,@RequestParam("orderuserid") Integer userid, Model model) {
+	public ModelAndView userOrder(ModelAndView mav,@RequestParam(name = "o", defaultValue = "1") Integer pageNumber,@SessionAttribute("canSeeUser") UserBean user, Model model) {
 		
-		List<OrderBean> userOrder = orderService.findOrdersByUserid(userid);
-		
+//		List<OrderBean> userOrder = orderService.findOrdersByUserid(userid);
+		Optional<UserBean> userBean = userService.findById(user.getUserId());
+		UserBean userId = userBean.get();
+		Page<OrderBean> userOrder = orderService.findOrdersByUseridPage(pageNumber, userId.getUserId());
 				
 		model.addAttribute("userOrder", userOrder);
 		
 //		Page<OrderBean> page = orderService.findByPage(pageNumber);
-//		OrderBean orderBean = new OrderBean();
-//		mav.getModel().put("orderBean", orderBean);
-//		mav.getModel().put("page", page);
+		OrderBean orderBean = new OrderBean();
+		mav.getModel().put("orderBean", orderBean);
+		mav.getModel().put("page", userOrder);
 		mav.setViewName("/front/frontorderuserorder");
 		
 		return mav;

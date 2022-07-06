@@ -198,12 +198,12 @@ table {
             <div class="price">
                 <span>電話</span>
                 
-                <span><c:out value="${shopcarBuy.phone}" /></span>
+<%--                 <span><c:out value="${shopcarBuy.phone}" /></span> --%>
             </div>
             <div class="price">
                 <span>地址</span>
                 
-                <span><c:out value="${shopcarBuy.address}" /></span>
+                <span><c:out value="${ShopcarBean.address}" /></span>
             </div>
 </div>
 <c:forEach varStatus="vs" var="shopcarItems" items="${shopcarBuy}">

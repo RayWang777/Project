@@ -46,8 +46,9 @@
 <br/>
 <%-- <c:out value="有 ${page.totalElements } 筆資料"></c:out> --%>
 <br/>
-
-
+<div style="text-align: center;color: gray;">
+<c:out value="查到 ${page.totalElements } 筆資料"></c:out>
+</div><br>
 <table class="table table-hover"
 		style="width: 100%; table-layout: fixed;">
 		<thead>
@@ -67,7 +68,7 @@
 		</thead>
 		<tbody>
 
-			<c:forEach  var="order" items="${userOrder}" >
+			<c:forEach  var="order" items="${page.content}" >
 				<tr scope="row">
 					<td class="align-middle">
 						<input type="hidden" value="<c:out value="${order.orderId}"/>">
@@ -126,25 +127,29 @@
 		</tbody>
 	</table>
 <div>
-<!-- <div class="row justify-content-center" style="font-size: x-large;"> -->
-<%--   <c:forEach var="pageNumber" begin="1" end="${page.totalPages}"> --%>
-<%--    <c:choose> --%>
-<%--    <c:when test="${page.number!=pageNumber-1}"> --%>
-<%--    <a href="${contextRoot}/front/order/userOrder?o=${pageNumber}"> <c:out value="${pageNumber}" /> </a> --%>
-<%--    </c:when> --%>
-<%--    <c:otherwise> --%>
-<%--    <c:out value="${pageNumber}"></c:out> --%>
-<%--    </c:otherwise> --%>
-<%--    </c:choose>  --%>
-<%--    <c:if test="${pageNumber!= page.totalPages }"> --%>
-<!--     &thinsp;| &thinsp; -->
-<%--    </c:if> --%>
-<%--    </c:forEach> --%>
+
+
+</div>
+
+</div>
+<div style="font-size: x-large; text-align: center;">
+  <c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
+   <c:choose>
+   <c:when test="${page.number!=pageNumber-1}">
+<!--    <div style="text-align: center;"> -->
+   <a href="${contextRoot}/front/order/userOrder?o=${pageNumber}"> <c:out value="${pageNumber}" /> 
+   </a>
 <!--    </div> -->
-
-</div>
-
-</div>
+   </c:when>
+   <c:otherwise>
+   <c:out value="${pageNumber}"></c:out>
+   </c:otherwise>
+   </c:choose> 
+   <c:if test="${pageNumber!= page.totalPages }">
+    &thinsp;| &thinsp;
+   </c:if>
+   </c:forEach>
+   </div>
 <script type="text/javascript">
 function del(event){
 	  console.log(event.target.id)

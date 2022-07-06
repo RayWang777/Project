@@ -152,5 +152,18 @@ public class OrderServiceImp implements OrderService {
 	}
 
 
+	@Override
+	public Page<OrderBean> findOrdersByUseridPage(Integer pageNumber, Integer userId) {
+		Pageable page = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "orderId");
+		return orderDao.findOrdersByUseridPage(page, userId);
+	}
+
+
+	@Override
+	public OrderBean findLatestOrderId() {
+		return orderDao.findLatestOrderId();
+	}
+
+
 
 }

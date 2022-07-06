@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.eeit144.drinkmaster.bean.OrderBean;
 import com.eeit144.drinkmaster.bean.OrderItems;
 import com.eeit144.drinkmaster.bean.ProductBean;
 
@@ -25,5 +26,9 @@ public interface OrderItemsRepostiory extends JpaRepository<OrderItems, Integer>
 	
 	@Query(value="select * from orders as o right join orderitems as oi on o.orderid = oi.orderid ",nativeQuery = true)
 	public List<OrderItems> findOrderOrderitems();
+	
+	public Page<OrderItems> findByorderBean_storeBean_storeId(Pageable pageable,Integer storeId);
+
+	public Page<OrderItems> findByorderBean_storeBean_firmBean_firmId(Pageable pageable,Integer firmId);
 
 }

@@ -81,12 +81,7 @@ public class OrderItemsServiceImp implements OrderItemsService{
 	};
 	
 	
-	/**
-	 * 
-	 * @return top 3 producyid
-	 * 
-	 * 
-	 */
+
 	@Override
 	public List<Integer> countByProductBean() {
 		return oitemDao.countByproductBean();
@@ -98,6 +93,16 @@ public class OrderItemsServiceImp implements OrderItemsService{
 	@Override
 	public List<OrderItems> findOrderOrderitems() {
 		return oitemDao.findOrderOrderitems();
+	}
+	@Override
+	public Page<OrderItems> findByorderBean_storeBean_storeId(Integer pageNumber, Integer storeId) {
+		Pageable page = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "orderItemId");
+		return oitemDao.findByorderBean_storeBean_storeId(page, storeId);
+	}
+	@Override
+	public Page<OrderItems> findByorderBean_storeBean_firmBean_firmId(Integer pageNumber, Integer firmId) {
+		Pageable page = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "orderItemId");
+		return oitemDao.findByorderBean_storeBean_firmBean_firmId(page, firmId);
 	}
 	
 

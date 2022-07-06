@@ -187,59 +187,69 @@ table {
 
 <body>
 <br>
+<div style="text-align: center;"><h3>訂單明細</h3></div>
 <div class="wrap">
-        <div class="top">
-        
-            <h3>訂單明細</h3>
-            <div class="price">
-                <span>訂購人</span>
+<div class="price">
+            <span>訂購人</span>
                 
-                <span><input type="text" value="${canSeeUser.userName}" readonly="readonly" style="border:none"></span>
-            </div>
-            <div class="price">
-                <span>商店名稱</span>
-                
-                <span><input type="text" value="${shopcarBuy.storeName}" readonly="readonly" style="border:none"></span>
-            </div>
-            <div class="price">
-                <span>商品名稱</span>
-                
-                <span><input type="text" value="${shopcarBuy.productName}" readonly="readonly" style="border:none"></span>
-            </div>
-            <div class="price">
-                <span>數量</span>
-                
-                <span><input type="text" value="${shopcarBuy.quantity}" readonly="readonly" style="border:none"></span>
-            </div>
-            <div class="price">
-                <span>甜度</span>
-                
-                <span><input type="text" value="${shopcarBuy.sweet}" readonly="readonly" style="border:none"></span>
-            </div>
-            <div class="price">
-                <span>冷熱</span>
-                
-                <span><input type="text" value="${shopcarBuy.coldhot}" readonly="readonly" style="border:none"></span>
+            <span>
+            <c:out value="${canSeeUser.userName}" /></span>
             </div>
             <div class="price">
                 <span>電話</span>
                 
-                <span><input type="text" value="${shopcarBuy.phone}" readonly="readonly" style="border:none"></span>
+                <span><c:out value="${shopcarBuy.phone}" /></span>
             </div>
             <div class="price">
                 <span>地址</span>
                 
-                <span><input type="text" value="${shopcarBuy.address}" readonly="readonly" style="border:none"></span>
+                <span><c:out value="${shopcarBuy.address}" /></span>
             </div>
+</div>
+<c:forEach varStatus="vs" var="shopcarItems" items="${shopcarBuy}">
+<div class="wrap">
+        <div class="top">
+        
+            
+            
+            <div class="price">
+                <span>商店名稱</span>
+                
+                <span><c:out value="${shopcarItems.value.storeName}" /></span>
+            </div>
+            <div class="price">
+                <span>商品名稱</span>
+                
+                <span><c:out value="${shopcarItems.value.productName}" /></span>
+            </div>
+            <div class="price">
+                <span>數量</span>
+                
+                <span><c:out value="${shopcarItems.value.quantity}" /></span>
+            </div>
+            <div class="price">
+                <span>甜度</span>
+                
+                <span><c:out value="${shopcarItems.value.sweet}" /></span>
+            </div>
+            <div class="price">
+                <span>冷熱</span>
+                
+                <span><c:out value="${shopcarItems.value.coldhot}" /></span>
+            </div>
+            
             <br>
             <div class="total">
             
                 <span>總金額</span>
                 
-                <span id="totalprice">NT$ <input type="text" value="${shopcarBuy.totalPrice}" readonly="readonly" style="border:none"></span>
+                <span id="totalprice">NT$ <c:out value="${shopcarItems.value.totalPrice}" /></span>
             	
             </div>
         </div>
+
+            </div>  
+            </c:forEach>  
         <div style="text-align: center;">
         <a href="${contextRoot}/front/">
         <button type="button" class="btn btn-success">繼續購買</button>
@@ -249,7 +259,6 @@ table {
 		<button type="button" class="btn btn-warning">查看訂單</button>
 		</a>
 		</div>
-            </div>    
 <br>
     
 </body>

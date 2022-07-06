@@ -56,6 +56,7 @@
 
 
 <body>
+<h1 style="text-align:center">確認商品</h1>
 <div class="container" id="container">
 <form:form class="form" method="post" action="${contextRoot}/front/shopcar/buy" modelAttribute="productBean">
 <input type="hidden" value="${productBean.productId}" name="shopcarproductId">
@@ -111,15 +112,33 @@
 							</select>							
 							</td>
 							
+							<c:choose>
+							<c:when test="${productBean.coldHot=='冷熱'}">
 							<td data-th="Product" style="text-align: center;">
 							<select id="coldhot" name="coldhot">
 							<option value="冷">冷</option>
 							<option value="熱">熱</option>
-							</select>							
-							</td>
+							</select>
+							</td>	
+							</c:when>
+							<c:when test="${productBean.coldHot=='冷'}">
+							<td data-th="Product" style="text-align: center;">
+							<select id="coldhot" name="coldhot">
+							<option value="冷">冷</option>
+							</select>
+							</td>	
+							</c:when>
+							<c:when test="${productBean.coldHot=='熱'}">
+							<td data-th="Product" style="text-align: center;">
+							<select id="coldhot" name="coldhot">
+							<option value="熱">熱</option>
+							</select>
+							</td>	
+							</c:when>
+							</c:choose>
+							
 							<td data-th="Subtotal" class="text-center"  >
 <%-- 							<c:out value="${productBean.price}"/> --%>
-<%-- 							<form:input path="price" style="width:100px" readonly="true"/> --%>
 								<input name="totalprice" id="totalprice" style="width:100px;text-align: center;border-style:none;" readonly="true"/>
 							</td>
 							

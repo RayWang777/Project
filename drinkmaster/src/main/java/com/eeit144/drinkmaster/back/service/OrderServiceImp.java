@@ -136,8 +136,21 @@ public class OrderServiceImp implements OrderService {
 	}
 
 
-//	@Override
-//	public List<OrderBean> findOrderOrderitems() {
-//		return orderDao.findOrderOrderitems();
-//	};
+	@Override
+	public Page<OrderBean> findByorderStatusAndStoreBean_storeId(Integer pageNumber, String orderStatus,
+			Integer storeId) {
+		Pageable page = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "orderId");
+		return orderDao.findByorderStatusAndStoreBean_storeId(page, orderStatus, storeId);
+	}
+
+
+	@Override
+	public Page<OrderBean> findByorderStatusAndStoreBean_FirmBean_firmId(Integer pageNumber, String orderStatus,
+			Integer firmId) {
+		Pageable page = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "orderId");
+		return orderDao.findByorderStatusAndStoreBean_FirmBean_firmId(page, orderStatus, firmId);
+	}
+
+
+
 }

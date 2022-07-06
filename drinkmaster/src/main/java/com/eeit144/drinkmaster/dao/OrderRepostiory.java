@@ -28,6 +28,9 @@ public interface OrderRepostiory extends JpaRepository<OrderBean, Integer> {
 	public Page<OrderBean> findByorderStatus1(Pageable pageable,@Param(value="orderstatus") String orderStatus);
 
 	
+//	public Page<OrderBean> findByorderStatus(Pageable pageable,String orderStatus);
+
+	
 	public Page<OrderBean> findByorderIdLike(Pageable pageable,@Param(value="orderId") Integer orderId);
 	
 	@Query(value = "select top(20) [storeid] from [orders] group by [storeid] order by  sum([totalprice]) DESC ;",nativeQuery = true)
@@ -45,5 +48,9 @@ public interface OrderRepostiory extends JpaRepository<OrderBean, Integer> {
 	public Page<OrderBean> findBystoreBean_storeId(Pageable pageable,Integer storeId);
 
 	public Page<OrderBean> findBystoreBean_firmBean_firmId(Pageable pageable,Integer firmId);
+	
+	public Page<OrderBean> findByorderStatusAndStoreBean_storeId(Pageable pageable,String orderStatus,Integer storeId);
 
+	
+	public Page<OrderBean> findByorderStatusAndStoreBean_FirmBean_firmId(Pageable pageable,String orderStatus,Integer firmId);
 }

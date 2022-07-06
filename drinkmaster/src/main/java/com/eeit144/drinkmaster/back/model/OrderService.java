@@ -54,4 +54,7 @@ public interface OrderService {
 
 	public Page<OrderBean> findBystoreBean_firmBean_firmId(Integer pageNumber,Integer firmId);
 
+	public Page<OrderBean> findByorderStatusAndStoreBean_storeId(Integer pageNumber,String orderStatus,Integer storeId);
+
+	public Page<OrderBean> findByorderStatusAndStoreBean_FirmBean_firmId(Integer pageNumber,String orderStatus,Integer firmId);
 }

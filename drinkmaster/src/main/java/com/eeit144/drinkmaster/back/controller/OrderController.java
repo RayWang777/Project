@@ -257,11 +257,47 @@ public class OrderController<E> {
 		
 		@GetMapping("order/findStatus")
 		public ModelAndView findStatusView(ModelAndView mav, @RequestParam(name = "S", defaultValue = "1") Integer pageNumber, 
-				@RequestParam(name = "sta", defaultValue = "待付款") String orderStatus) {
-			Page<OrderBean> page = orderService.findByorderStatus(pageNumber, orderStatus);
+				@RequestParam(name = "sta", defaultValue = "待付款") String orderStatus,@SessionAttribute("userBean") UserBean user) {
+			
+			if((user.getRole().equals("user"))) {
+				return mav;			
+			}else if(user.getRole().equals("store")) {
+				Optional<StoreBean> storeByUserId = storeService.findStoreByUserId(user.getUserId());
+				StoreBean store = storeByUserId.get();
+				if(orderStatus.equals("待付款") || orderStatus.equals("待出貨")){
+				Page<OrderBean> page = orderService.findByorderStatusAndStoreBean_storeId(pageNumber, orderStatus, store.getStoreId());
+				mav.getModel().put("page", page);
+				}
+				else {
+					Page<OrderBean> page = orderService.findByorderStatusAndStoreBean_storeId(pageNumber, orderStatus, store.getStoreId());
+					mav.getModel().put("page", page);
+					}
+				}
+			
+			 else if(user.getRole().equals("admin")) {
+				Page<OrderBean> page = orderService.findByorderStatus(pageNumber, orderStatus);
+				mav.getModel().put("page", page);
+			}
+			 else if(user.getRole().equals("firm")) {
+				List<FirmBean> firmByUserId = firmService.findFirmByUserId(user.getUserId());
+				FirmBean firm = firmByUserId.get(0);
+				if(orderStatus.equals("待付款") || orderStatus.equals("待出貨")) {
+				Page<OrderBean> page = orderService.findByorderStatusAndStoreBean_FirmBean_firmId(pageNumber, orderStatus, firm.getFirmId());
+				mav.getModel().put("page", page);
+				}
+				else {
+					Page<OrderBean> page = orderService.findByorderStatusAndStoreBean_FirmBean_firmId(pageNumber, orderStatus, firm.getFirmId());
+					mav.getModel().put("page", page);}
+				}
+			
 			OrderBean orderBean = new OrderBean();
 			mav.getModel().put("orderBean", orderBean);
-			mav.getModel().put("page", page);
+		
+//			Page<OrderBean> page = orderService.findByorderStatus(pageNumber, orderStatus);
+			
+			
+			
+//			mav.getModel().put("page", page);
 			
 //			if(orderStatus.equals("待付款") || orderStatus.equals("待出貨")) {
 //				Page<OrderBean> page = orderService.findByorderStatus(pageNumber, orderStatus);
@@ -274,7 +310,18 @@ public class OrderController<E> {
 			
 			mav.setViewName("/backend/backorder");
 			return mav;
+		
+		
+		
 		}
+
+
+			
+			
+			
+			
+
+		
 		
 		
 		@GetMapping("order/select")

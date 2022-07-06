@@ -67,7 +67,7 @@
 	</div>
 	
 	<div class="login-block-right">
-	 <form:form class="form-right" method="post" action="${contextRoot}/front/loginGo">
+	 <form:form class="form-right" method="post" action="${contextRoot}/front/user/loginGo">
 		<div class="mb-3">
 			<label for="select" class="form-label">帳號</label>
 			<input type="text" class="form-control" name="userAccount" id="userAccount" 

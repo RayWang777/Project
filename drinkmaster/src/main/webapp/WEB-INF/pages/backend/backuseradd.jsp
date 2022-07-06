@@ -110,7 +110,7 @@ function fast() {
 	let bd = document.getElementById("birthday");
 	
 	name.value=("阿嘎");
-	acc.value=("hiImJoe@gmail.com");
+	acc.value=("kuojoejava188@gmail.com");
 	pwd.value=("joe6666");
 	add.value=("基隆市仁愛區");
 	phone.value=("0908081111");

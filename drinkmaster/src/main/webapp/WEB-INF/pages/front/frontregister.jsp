@@ -10,6 +10,50 @@
 <meta charset="UTF-8">
 <title>飲君子 註冊</title>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+
+$(function(){
+	
+	$("#send").click(function(){
+		var email= $("#account").val();
+		var messageto = $('#message').val();
+		var msgId = $('#msgId').val();
+		
+		var myHeaders = new Headers();
+		myHeaders.append("Content-Type", "application/json");
+
+		var raw = JSON.stringify({
+		  "to": ""+email,
+		  "message": ""+messageto,
+		  "msgId": ""+msgId
+		});
+
+		var requestOptions = {
+		  method: 'POST',
+		  headers: myHeaders,
+		  body: raw,
+		  redirect: 'follow'
+		};
+
+		fetch("http://localhost:8081/drinkmaster/send-email", requestOptions)
+		  .then(response => response.text())
+		  .then(result => console.log(result))
+		  .catch(error => console.log('error', error));
+		
+		Swal.fire({
+			  icon: 'success',
+			  title: '認證信件已寄至您的信箱',
+			  showConfirmButton: false,
+			  timer: 9900
+			}).then((result) => {
+					location.replace('http://localhost:8081/drinkmaster/front/login')
+			}
+			);
+	})
+})
+</script>
 
 <style>
 .shape-ex6{
@@ -118,7 +162,7 @@ span{
        <span id="accErr"></span><br>
        
        <form:label path="userPassword">密&emsp;&emsp;碼</form:label>
-       <form:password value="${user.userPassword}" path="userPassword" class="form-control"/>
+       <form:password value="${user.userPassword}" path="userPassword" class="form-control" id="password"/>
        <form:errors path="userPassword" cssClass="error" />
        <span id="passwordSp"></span><br/>  <br>
        
@@ -153,13 +197,16 @@ span{
        <form:label path="role">職&emsp;&emsp;權</form:label>
        <form:input path="role" class="form-control" id="role" value="user" readonly="true"/>
        <br>
-       
+              
        <div class="row justify-content-center" style="margin-bottom: 100px">
-       	<input type="submit" class="btn btn-success" value='<c:out value="送出"/>'>
+       	<input id="send" type="submit" class="btn btn-success" value='<c:out value="送出"/>'>
        </div>
    </form:form>
+   <button style="margin-bottom: 100px" class="btn btn-dark" onclick="fast()">一鍵輸入</button>
    </div>
 </body>
+
+
 
 
 <script type="text/javascript">
@@ -280,6 +327,22 @@ function checkEmpty(){
         theRole.innerHTML = "";
     }
 
+}
+
+function fast() {
+	let name = document.getElementById("userName");
+	let acc = document.getElementById("account");
+	let pwd = document.getElementById("password");
+	let add = document.getElementById("address");
+	let phone = document.getElementById("phone");
+	let bd = document.getElementById("birthday");
+	
+	name.value=("阿嘎");
+	acc.value=("kuojoejava188@gmail.com");
+	pwd.value=("joe6666");
+	add.value=("基隆市仁愛區");
+	phone.value=("0908081111");
+	bd.value=("1995-06-06");
 }
 
 </script>

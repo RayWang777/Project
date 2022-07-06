@@ -76,7 +76,7 @@ div.awesomeRating {
 
 <div class="card border-warning">
  
-  <div class="card-body">
+  <div class="card-body" >
   
  
   				<c:forEach var="store" items="${arrayList}">

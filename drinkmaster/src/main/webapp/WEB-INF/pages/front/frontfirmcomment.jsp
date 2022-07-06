@@ -52,7 +52,7 @@ div.awesomeRating {
 <br>
 <br>
 <br>
-<h1 style="text-align:center">評論區(找廠商)</h1>
+<h1 style="text-align:center">評論區</h1>
 
 
 <div class="container">

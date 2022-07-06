@@ -85,13 +85,13 @@
 
 
 
- <div class="row justify-content-center">
+  <div class="row justify-content-center" style="font-size:23px;">
   <div class="col-6">
    <c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
    
    <c:choose>
      <c:when test="${page.number != pageNumber-1}">
-        <a href="${contextRoot}/backend/service/reply?p=${pageNumber}"><c:out value="${pageNumber}" /></a>
+        <a href="${contextRoot}/backend/service/reply?p=${pageNumber}" style="color:#84C1FF"><c:out value="${pageNumber}" /></a>
      </c:when>
    
      <c:otherwise>

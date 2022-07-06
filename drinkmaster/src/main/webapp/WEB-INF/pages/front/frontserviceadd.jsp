@@ -10,12 +10,19 @@
 
 
 <style>
-body{
-background-image:url(../../images/cold_drink_juice_promotion_image.jpg);
-  background-repeat:no-repeat;
-   background-size: 100% 90%;
+/*                背景滿版     */
+                    html { 
+            			height: 100%; 
+     					} 
+                    body {
+                        background-image: url("<c:url value="/images/cold_drink_juice_promotion_image.jpg"/>");
+                        background-repeat: no-repeat;
+                        background-attachment:fixed;
+                        background-position: 50% 40%;
+                        background-size: 100% 120%;
+                    }
+/*                背景滿版    */
 
-}
 
 
 </style>
@@ -27,7 +34,7 @@ background-image:url(../../images/cold_drink_juice_promotion_image.jpg);
  <h1>新增意見回饋</h1>
 <form:form class="form" method="post" action="${contextRoot}/front/service/post" modelAttribute="workMessages">
 <div class="form-group">
-     <label for="exampleFormControlInput1">UserID :</label>
+     <label for="exampleFormControlInput1">會員編號 :</label>
      
        <form:input  path="userBean" class="form-control"  value="${canSeeUser.userId}"  readonly="true"/>
            

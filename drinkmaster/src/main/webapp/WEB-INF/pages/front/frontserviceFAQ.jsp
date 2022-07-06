@@ -11,11 +11,19 @@
 <title>常見問題</title>
 
 <style>
-body{
-background-image:url(../../images/cold_drink_juice_promotion_image.jpg);
-  background-repeat:no-repeat;
-   background-size: 100% 120%;
-   }
+/*                背景滿版     */
+                    html { 
+            			height: 100%; 
+     					} 
+                    body {
+                        background-image: url("<c:url value="/images/cold_drink_juice_promotion_image.jpg"/>");
+                        background-repeat: no-repeat;
+                        background-attachment:fixed;
+                        background-position: 50% 40%;
+                        background-size: 100% 120%;
+                    }
+/*                背景滿版    */
+
    
 .div1{
  border:1px solid #F0F0F0;
@@ -46,7 +54,7 @@ background-image:url(../../images/cold_drink_juice_promotion_image.jpg);
 	.fixed1	{
 				position:fixed;
 				width:400px;				
-				bottom:30px;
+				bottom:20px;
 				right:0;
 				}
 				

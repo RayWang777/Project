@@ -122,7 +122,9 @@
 					</tbody>
 					<tfoot>
 						<tr class="visible-xs">
-							<td style="font-weight: bolder;">總金額:&thinsp;<input type="text" name="totalpricedefore" id="totalpricedefore" style="width: 120px;border-style:none;" readonly="true" value="${rowTotal}" ></td>
+							<td style="font-weight: bolder;">總金額:&thinsp;${price.totalPrice }
+<%-- 							<input type="text" name="totalpricedefore" id="totalpricedefore" style="width: 120px;border-style:none;" readonly="true" value="${rowTotal}" > --%>
+							</td>
 						</tr>
 						<tr>
 							<td><a href="${contextRoot}/front/" class="btn btn-warning">
@@ -266,7 +268,7 @@ function changeprice(event){
    	 TotalTotalPrice+= row;
     }
 //     console.log(TotalTotalPrice)
-	$('#totalpricedefore').val(TotalTotalPrice);
+// 	$('#totalpricedefore').val(TotalTotalPrice);
 // 	$('#totalpricedefore').attr('value',TotalTotalPrice);	
 	$('#totalpricefinal').val(TotalTotalPrice * textsale);
 }

@@ -112,12 +112,11 @@
     <tr>
 
       <th scope="col">流水號</th>
-<!--       <th scope="col">訂單編號</th> -->
       <th scope="col">商品名稱</th>
       <th scope="col">數量</th>
       <th scope="col">甜度</th>
       <th scope="col">溫度</th>
-      <th scope="col">價格</th>
+      <th scope="col">單價</th>
       <th scope="col"></th>
     </tr>
   </thead>

@@ -196,9 +196,19 @@ public class FrontShopCarController {
 			shopcarBean.setStoreId(storeId);
 			cart.put(productId, shopcarBean);
 		}
-
 		
 		m.addAttribute("shopcarBuy", cart);
+		Map<Integer,ShopcarBean> cart2 = (Map<Integer,ShopcarBean>) m.getAttribute("shopcarBuy");
+		Integer total = 0;
+		ShopcarBean shopcarBean2 = new ShopcarBean();
+		for(Integer i :cart2.keySet()) {
+			total += cart2.get(i).getTotalPrice();
+//			System.out.println(total);
+		}
+		shopcarBean2.setTotalPrice(total);
+		m.addAttribute("price", shopcarBean2);
+		
+		
 		
 
 		return "/front/frontshopcar";

@@ -67,7 +67,7 @@ span{
        <form:errors path="createdate" cssClass="error" /><br><br>
        
        <form:label path="role">職&emsp;&emsp;權</form:label>
-       <select name="role" required="required" class="form-control" onblur="checkEmpty()">
+       <select id="role" name="role" required="required" class="form-control">
        		<option value="admin">管理者</option>
        		<option value="firm">廠商</option>
        		<option value="store">店家</option>

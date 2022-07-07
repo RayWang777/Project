@@ -18,7 +18,7 @@ import com.eeit144.drinkmaster.bean.UserBean;
 
 @Controller
 @Transactional
-@RequestMapping("front/")
+@RequestMapping("/")
 public class UserEmailController {
 
 	private final EmailSenderService emailSenderService;
@@ -30,7 +30,18 @@ public class UserEmailController {
 		this.emailSenderService = emailSenderService;
 	}
 	
-	@PostMapping("send-register-email")
+	@PostMapping("backend/send-register-email")
+	public String backRegisterEmail(@ModelAttribute("user") UserBean user, 
+			BindingResult result, @RequestParam("reallogo") MultipartFile photo,Model m) {
+
+		System.out.println(user);
+		EmailMessage emailMessage = new EmailMessage();
+		emailMessage.setTo(user.getUserAccount());
+		this.emailSenderService.registerBackEmail(emailMessage.getTo());
+		return "/backend/backlogin";
+	}
+	
+	@PostMapping("front/send-register-email")
 	public String sendRegisterEmail(@ModelAttribute("user") UserBean user, 
 			BindingResult result, @RequestParam("reallogo") MultipartFile photo,Model m) {
 

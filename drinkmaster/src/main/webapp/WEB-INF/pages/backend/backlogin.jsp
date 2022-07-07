@@ -87,7 +87,7 @@
 	<button onclick="firm()">firm帳密</button>
 	<button onclick="store()">store帳密</button>
 	<button onclick="user()">user帳密</button>
-	
+	<button onclick="user2()">新user帳密</button>
 </div>
 </body>
 
@@ -159,7 +159,7 @@ function user() {
 	acc.value=("cindy1@gmail.com");
 	pwd.value=("cindy9527");
 	Swal.fire({
-		  icon: 'false',
+		  icon: 'error',
 		  title: '一般使用者無法登入',
 		  showConfirmButton: false,
 		  timer: 2000
@@ -167,6 +167,25 @@ function user() {
 			
 			console.log('123')
 			$('#buttonsubmit').trigger('click');
+		})
+}
+
+
+function user2() {
+	let acc = document.getElementById("userAccount");
+	let pwd = document.getElementById("userPassword");
+	acc.value=("kuojoejava188@gmail.com");
+	pwd.value=("joe6666");
+	
+	Swal.fire({
+		  icon: 'error',
+		  title: '一般使用者無法登入',
+		  showConfirmButton: false,
+		  timer: 2000
+		}).then( ()=>{
+			
+			console.log('123')
+			$('#buttonsubmitlogin').trigger('click');
 		})
 }
 

@@ -34,6 +34,8 @@ span{
 			<th scope="col">手機</th>
 			<th scope="col">性別</th>
 			<th scope="col">生日</th>
+			<th scope="col">創建日期</th>
+			<th scope="col">職權</th>
 			<th scope="col">大頭貼</th>
 			<th scope="col" style="text-align: left;">功能</th>
 		</tr>
@@ -41,14 +43,15 @@ span{
 	<tbody>
 	<c:forEach var="userBean" items="${page.content}">
 		<tr>
-			<td class="align-middle">
+			<td class="align-middle" style="">
 			<label class="control control--checkbox">
 				<input type="checkbox" id="check" value="<c:out value='${userBean.userId}'/>"
 					style="margin-top:20px;"/>
 			</label>
 			</td>
 			<td class="align-middle"><div class="d-flex align-items-center">
-				<a href="#"><c:out value="${userBean.userName}"/></a>
+				<c:url value="/backend/user/update/${userBean.userId}" var="update_url" />
+				<a href="${update_url}"><c:out value="${userBean.userName}"/></a>
 			</div></td>
 			<td class="align-middle"><div class="d-flex align-items-center">
 				<c:out value="${userBean.userAccount}"/>
@@ -64,6 +67,24 @@ span{
 			</div></td>
 			<td class="align-middle"><div class="d-flex align-items-center">
 				<c:out value="${userBean.birthday}"/>
+			</div></td>
+			<td class="align-middle"><div class="d-flex align-items-center">
+				<fmt:formatDate value="${userBean.createdate}" pattern="yyyy-MM-dd hh:mm" />
+			</div></td>
+			<td class="align-middle"><div class="d-flex align-items-center">
+<%-- 				<c:out value="${userBean.role}"/> --%>
+				<c:if test="${userBean.role =='admin'}">
+				管理者
+				</c:if>
+				<c:if test="${userBean.role =='firm'}">
+				廠商
+				</c:if>
+				<c:if test="${userBean.role =='store'}">
+				店家
+				</c:if>
+				<c:if test="${userBean.role =='user'}">
+				一般會員
+				</c:if>
 			</div></td>
 			
 			<td class="align-middle">
@@ -86,7 +107,7 @@ span{
 	</tbody>
 </table>
 
-<div class="row justify-content-center" style="font-size:23px;">
+<div class="row justify-content-center" style="font-size:23px; margin-bottom: 50px">
 		<c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
 			<c:choose>
 				<c:when test="${page.number!=pageNumber-1}">

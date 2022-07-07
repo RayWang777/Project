@@ -31,7 +31,7 @@ public class EmailSenderServiceImpl implements EmailSenderService {
 	}
 	
 	@Override
-	public void registerEmail(String to, String subject, String message) {
+	public void registerEmail(String to) {
 		
 		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
 		simpleMailMessage.setFrom("cdwewe456@gmail.com");
@@ -44,5 +44,17 @@ public class EmailSenderServiceImpl implements EmailSenderService {
 		
 	}
 	
-
+	@Override
+	public void registerBackEmail(String to) {
+		
+		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+		simpleMailMessage.setFrom("cdwewe456@gmail.com");
+		simpleMailMessage.setTo(to);
+		simpleMailMessage.setSubject("飲君子註冊驗證信件");
+		simpleMailMessage.setText("Hi, \n感謝您的註冊，請點擊以下連結\nhttp://localhost:8081/drinkmaster/backend/login \n"
+				+ "========================\n此為自動回覆，請勿直接回覆此mail");
+		
+		this.mailSender.send(simpleMailMessage);
+		
+	}
 }

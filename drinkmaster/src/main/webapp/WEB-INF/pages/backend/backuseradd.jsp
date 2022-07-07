@@ -6,6 +6,11 @@
 <jsp:include page="layout/header.jsp" />
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
+<style>
+span{
+	color: #ae0000;
+}
+</style>
 <div class="row justify-content-center">
 </div>
 
@@ -61,7 +66,7 @@
        
        <form:label path="role">職&emsp;&emsp;權</form:label>
        <select name="role" required="required" class="form-control" onblur="checkEmpty()">
-       		<option value="admim">管理者</option>
+       		<option value="admin">管理者</option>
        		<option value="firm">廠商</option>
        		<option value="store">店家</option>
        		<option value="user">一般會員</option>

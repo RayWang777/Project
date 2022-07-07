@@ -10,50 +10,7 @@
 <meta charset="UTF-8">
 <title>飲君子 註冊</title>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script type="text/javascript">
 
-$(function(){
-	
-	$("#send").click(function(){
-		var email= $("#account").val();
-		var messageto = $('#message').val();
-		var msgId = $('#msgId').val();
-		
-		var myHeaders = new Headers();
-		myHeaders.append("Content-Type", "application/json");
-
-		var raw = JSON.stringify({
-		  "to": ""+email,
-		  "message": ""+messageto,
-		  "msgId": ""+msgId
-		});
-
-		var requestOptions = {
-		  method: 'POST',
-		  headers: myHeaders,
-		  body: raw,
-		  redirect: 'follow'
-		};
-
-		fetch("http://localhost:8081/drinkmaster/send-email", requestOptions)
-		  .then(response => response.text())
-		  .then(result => console.log(result))
-		  .catch(error => console.log('error', error));
-		
-		Swal.fire({
-			  icon: 'success',
-			  title: '認證信件已寄至您的信箱',
-			  showConfirmButton: false,
-			  timer: 9900
-			}).then((result) => {
-					location.replace('http://localhost:8081/drinkmaster/front/login')
-			}
-			);
-	})
-})
-</script>
 
 <style>
 .shape-ex6{
@@ -130,16 +87,12 @@ span{
 				<img class="shape-ex6-img" id="oldlogo" src="data:image/jpg;base64,<c:out value='${canSeeUser.byteArrayString}'/>" 
 				onerror="nofind()"/>
 				</c:if>
-				
 			</div>
 			</div>
-			   
-			<form:form class="form" method="post" action="${contextRoot}/front/register" modelAttribute="user" enctype="multipart/form-data">
-				
-			</form:form>
 		</div>
 	</div>
 </header>
+
 <body>
 	<div class="information">
     <form:form class="form" method="post" action="${contextRoot}/front/register" modelAttribute="user" enctype="multipart/form-data">
@@ -157,17 +110,17 @@ span{
        <span id="nameError"></span><br>
        
        <form:label path="userAccount">帳&emsp;&emsp;號</form:label>
-       <form:input path="userAccount" class="form-control" onblur="checkEmpty()" id="account"/>
+       <form:input path="userAccount" class="form-control" onblur="checkEmpty()" id="userAccount"/>
        <form:errors path="userAccount" cssClass="error" />
        <span id="accErr"></span><br>
        
        <form:label path="userPassword">密&emsp;&emsp;碼</form:label>
-       <form:password value="${user.userPassword}" path="userPassword" class="form-control" id="password"/>
+       <form:password value="${user.userPassword}" path="userPassword" class="form-control" id="userPassword"/>
        <form:errors path="userPassword" cssClass="error" />
        <span id="passwordSp"></span><br/>  <br>
        
        <form:label path="userAddress">地&emsp;&emsp;址</form:label>
-       <form:input path="userAddress" class="form-control" onblur="checkEmpty()" id="address"/>
+       <form:input path="userAddress" class="form-control" onblur="checkEmpty()" id="userAddress"/>
        <form:errors path="userAddress" cssClass="error" />
        <span id="addErr"></span>  <br>
             
@@ -198,13 +151,14 @@ span{
        <form:input path="role" class="form-control" id="role" value="user" readonly="true"/>
        <br>
               
-       <div class="row justify-content-center" style="margin-bottom: 100px">
+       <div class="row justify-content-center" style="margin-bottom: 10px">
        	<input id="send" type="submit" class="btn btn-success" value='<c:out value="送出"/>'>
        </div>
    </form:form>
    <button style="margin-bottom: 100px" class="btn btn-dark" onclick="fast()">一鍵輸入</button>
    </div>
 </body>
+
 
 
 
@@ -269,7 +223,7 @@ function checkPwd(){
 function checkEmpty(){
 	
 	//please input the test email to see is valid
-	let strEmail = document.getElementById("account");
+	let strEmail = document.getElementById("userAccount");
 	let theacc = document.getElementById("accErr");
 	
 	//Regular expression Testing
@@ -294,7 +248,7 @@ function checkEmpty(){
     }
 
     let theAdd = document.getElementById("addErr");
-    let address = document.getElementById("address");
+    let address = document.getElementById("userAddress");
     let add = address.value;
     if (add == "" || add.length == 0) {
         theAdd.innerHTML = "請輸入地址";
@@ -331,9 +285,9 @@ function checkEmpty(){
 
 function fast() {
 	let name = document.getElementById("userName");
-	let acc = document.getElementById("account");
-	let pwd = document.getElementById("password");
-	let add = document.getElementById("address");
+	let acc = document.getElementById("userAccount");
+	let pwd = document.getElementById("userPassword");
+	let add = document.getElementById("userAddress");
 	let phone = document.getElementById("phone");
 	let bd = document.getElementById("birthday");
 	
@@ -343,6 +297,15 @@ function fast() {
 	add.value=("基隆市仁愛區");
 	phone.value=("0908081111");
 	bd.value=("1995-06-06");
+	
+	Swal.fire({
+		  icon: 'success',
+		  title: '驗證信已送出',
+		  showConfirmButton: false,
+		  timer: 2000
+		}).then( ()=>{
+			$('#send').trigger('click');
+		})
 }
 
 </script>

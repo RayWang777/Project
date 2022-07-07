@@ -29,8 +29,10 @@
      <div class="form-group">
     
      <input type="submit" name="submit" class="btn btn-success" value="送出">
+    
  </div>
 </form:form>
+ <button style="margin-bottom: 100px" class="btn btn-dark" onclick="fast()">一鍵輸入</button>
 </div>
 </div>
 
@@ -72,7 +74,21 @@
 	</div>
 
 </div>
+<script type="text/javascript">
 
+$(function(){
 
+});
 
+function fast() {
+	let userId = document.getElementById("userId");
+	let answer = document.getElementById("feedback");
+	
+	
+	userId.value=("68");
+	answer.value=("台北站前店的可不可商家沒有辦法提供電子載具，是否可向門市爭取!!!");
+	
+}
+
+</script>
 <jsp:include page="layout/footer.jsp" />

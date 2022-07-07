@@ -69,7 +69,7 @@
 </head>
 <body>
 <div class="div1">
-    <h2 style="color:white">常見問題 FAQ</h2>
+    <h2>常見問題 FAQ</h2>
     <div class="row justify-content-right">
 <div class="col-10">
             <ul class="list-group">
@@ -122,10 +122,10 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">掃描行動條碼即可將官方帳號加入好友</h5>
+        <h5 class="modal-title" id="exampleModalLabel"  style="color:black">掃描行動條碼即可將官方帳號加入好友</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body" id="qrcode">
+      <div class="modal-body" id="qrcode" style="color:black">
         請先點選LINE程式搜尋欄位旁的掃描圖示，再掃描此行動條碼。
         <img src="<c:url value="/images/QRCODE.png"/>" alt="QRCODE圖片顯示有誤" title="LINE QRCODE" width="250" id="qrcode">
       </div>

@@ -134,7 +134,7 @@ public class SaleCodeController {
 		m.addAttribute("allValiedCode", showAllSaleCode);
 
 		if (saleCodeBeanOp.isEmpty()) {
-			return 10.0;
+			return null;
 		}
 		SaleCodeBean saleCodeBean = saleCodeBeanOp.get();
 		Date validDate = saleCodeBean.getValidDate();

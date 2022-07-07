@@ -130,11 +130,11 @@ public class SaleCodeController {
 		String code = Util.saleCode(saleCode);
 		Optional<SaleCodeBean> saleCodeBeanOp = saleCodeService.findBySaleCode(code);
 		
-		Page<SaleCodeBean> showAllSaleCode = showAllSaleCode(0);
+		Page<SaleCodeBean> showAllSaleCode = showAllSaleCode(1);
 		m.addAttribute("allValiedCode", showAllSaleCode);
 
 		if (saleCodeBeanOp.isEmpty()) {
-			return null;
+			return 10.0;
 		}
 		SaleCodeBean saleCodeBean = saleCodeBeanOp.get();
 		Date validDate = saleCodeBean.getValidDate();

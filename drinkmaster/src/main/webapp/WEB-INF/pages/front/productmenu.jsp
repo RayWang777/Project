@@ -8,6 +8,14 @@
 <head>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+	
+<link href="${contextRoot}/css/lib/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+<link href="${contextRoot}/css/lib/awesomeRating.min.css" rel="stylesheet" type="text/css" media="all">
+<link href="${contextRoot}/font/fontawesome-webfont.ttf" rel="stylesheet" type="text/css" media="all">
+<link href="${contextRoot}/font/fontawesome-webfont.woff" rel="stylesheet" type="text/css" media="all">
+<link href="${contextRoot}/font/fontawesome-webfont.woff2" rel="stylesheet" type="text/css" media="all">
+
+<script src="${contextRoot}/js/lib/awesomeRating.min.js"></script>
 
 <title>店家菜單</title>
 
@@ -42,9 +50,35 @@ color: black;
                   <ul ><li class="liclass" style="font-family:sans-serif;list-style-type:none; "> <b>店家名稱:</b>  <c:out value="${store.firmBean.firmName}"></c:out> <c:out value="${store.storeName}"></c:out> </li>
                   <li class="liclass">電話:&nbsp; <a class="aclass"  href="<c:out value='tel:${store.storePhone }'/>"><c:out value="${store.storePhone }"></c:out></a> </li>
                  <li class="liclass">地址:&nbsp;<a class="aclass" href='<c:url value="https://www.google.com/maps/place/${store.storeAddress}/@${store.latitude},${store.longitude},17z/"/>' target="_blank">${store.storeAddress}</a></li>
-                 <li class="liclass">評分:<i class="fa-solid fa-star" style="color: #FCFF9C"></i></li>
-                 <li class="liclass">營業時間:&nbsp;<c:out value="${store.openTime}"></c:out></li>
-                  </ul>
+                 <li class="liclass">評分:&nbsp;<a class="aclass" href="${contextRoot}/front/comment/all?storeid=${store.storeId}"><c:out value="${csdto.avgScore}"></c:out>(<c:out value="${csdto.countScore}"></c:out>)</a>
+                 <span style="pointer-events:none ;text-align:center" id="scores${store.storeId}" class="awesomeRating"></span>
+				 <div class="awesomeRatingValue" style="display:none"></div></li>
+				  <li class="liclass">營業時間:&nbsp;<c:out value="${store.openTime}"></c:out></li>
+				 
+                 </ul>
+                  
+                  
+                  <input id="newavg${store.storeId}" value="" style="display: none"/>
+                  
+                  <script type="text/javascript">
+								
+								$(function(){
+									var avg = Math.trunc(${csdto.avgScore})
+									var avgscore = avg+".0"
+									if(avgscore != "NaN.0"){
+									$("#newavg${store.storeId}").attr("value",avgscore);
+									}			
+									newavg = $("#newavg${store.storeId}").val();
+								
+								$("#scores${store.storeId}").awesomeRating({
+									
+									valueInitial: newavg,
+									values: ["1.0", "2.0", "3.0", "4.0", "5.0"],
+									targetSelector: "div.awesomeRatingValue"
+								});
+								
+								});
+								</script>
                   
                   </div>
                   </div>

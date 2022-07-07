@@ -93,7 +93,7 @@ public class FrontUserController {
 			user = userService.findByAccPwd(userAccount, encryptPwd);
 		} catch (Exception e) {
 			m.addAttribute("errorloginstr", "帳號或密碼錯誤!");
-			return "redirect:/backend/login";
+			return "redirect:/front/login";
 		}
 
 //		user = userService.findByAccPwd(userAccount, userPassword);

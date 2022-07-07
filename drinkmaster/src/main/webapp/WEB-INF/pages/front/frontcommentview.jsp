@@ -74,25 +74,26 @@ div.awesomeRating {
 
 <br/><br/><br/>
 
-<div class="card border-warning">
- 
-  <div class="card-body">
+<div class="card" style="background-color:transparent; border: 0">
+<c:forEach var="store" items="${arrayList}">
+<a href="${contextRoot}/front/comment/storecomment?commentfirmid=${store.firmBean.firmId}" ><button type="button" class="btn btn-outline-primary">回店家評論區</button></a>
+</c:forEach>
+  <div class="card-body" >
   
  
   				<c:forEach var="store" items="${arrayList}">
   				
   					<div class="row justify-content-center">
-						<div class="col-9">
-  						<span style="font-size: 1.5em ; text-align:center ">店家資訊</span><br/>
+						<div class="col-9" style="background-color: white ;  border: 3px solid red; border-radius: 50px">
+						<img class="card-img-top" src="http://localhost:8081/drinkmaster/front/firm/${store.firmBean.firmId}/photo" style="width: 130px; height: 130px ;display:block; margin:0 10px; border-radius: 150px ;float: left; "/>
+  						&nbsp;&nbsp;<span style="font-size: 1.5em ; text-align:center ">店家資訊</span><br/>
   						<input id="storeid" name="storeid" value="${store.storeId}" type="hidden" />
   						
-  						店家 : <c:out value="${store.storeName}"  /><br/>
-  						地址 : <c:out value="${store.storeAddress}"  /><br/>
-  						電話 : <c:out value="${store.storePhone}"  /><br/>
-  						營業時間 : <c:out value="${store.openTime}"  /><br/>
-  		
-  		
-  		
+  						&nbsp;&nbsp;店家 : <c:out value="${store.firmBean.firmName}" />&nbsp;<c:out value="${store.storeName}"  /><br/>
+  						&nbsp;&nbsp;地址 : <c:out value="${store.storeAddress}"  /><br/>
+  						&nbsp;&nbsp;電話 : <c:out value="${store.storePhone}"  /><br/>
+  						&nbsp;&nbsp;營業時間 : <c:out value="${store.openTime}"  /><br/>
+
   		
   				
   						</div>
@@ -367,7 +368,7 @@ div.awesomeRating {
   	
 
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal0" data-bs-whatever="@mdo">撰寫評論</button>
+<div style="text-align:center"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal0" data-bs-whatever="@mdo">撰寫評論</button></div>
 
 <div class="modal fade" id="exampleModal0" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -543,6 +544,8 @@ div.awesomeRating {
 </div>
 </div>
 </div>
+
+<br/>
 
 </c:forEach>
 

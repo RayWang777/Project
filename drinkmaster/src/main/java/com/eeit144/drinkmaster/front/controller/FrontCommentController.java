@@ -87,6 +87,7 @@ public class FrontCommentController {
 			csdto.setFirmName(commentStore.get(i).getFirmBean().getFirmName());
 			csdto.setFirmId(commentStore.get(i).getFirmBean().getFirmId());
 			csdto.setAvgScore(commentService.avgScoreByStoreid(commentStore.get(i).getStoreId()));
+			csdto.setCountScore(commentService.countStoreidByStoreid(commentStore.get(i).getStoreId()));
 			listcsdto.add(csdto);
 		}
 		
@@ -115,6 +116,8 @@ public class FrontCommentController {
 		
 		List<StoreBean> commentStoreLike = storeService.findStoreByStoreNameLike(storename);
 		
+		if(commentStoreLike != null) {
+			
 		for(int i=0 ; i<commentStoreLike.size(); i++) {
 			CommentAvgScoreBeanDTO csdto = new CommentAvgScoreBeanDTO();
 			csdto.setStoreId(commentStoreLike.get(i).getStoreId());
@@ -122,11 +125,27 @@ public class FrontCommentController {
 			csdto.setFirmName(commentStoreLike.get(i).getFirmBean().getFirmName());
 			csdto.setFirmId(commentStoreLike.get(i).getFirmBean().getFirmId());
 			csdto.setAvgScore(commentService.avgScoreByStoreid(commentStoreLike.get(i).getStoreId()));
+			csdto.setCountScore(commentService.countStoreidByStoreid(commentStoreLike.get(i).getStoreId()));
 			if(commentStoreLike.get(i).getFirmBean().getFirmId() == commentfirmid) {
 			listcsdto.add(csdto);
+				}
 			}
+		}else {
+			
+			for(int i=0 ; i<commentStore.size(); i++) {
+				CommentAvgScoreBeanDTO csdto = new CommentAvgScoreBeanDTO();
+				csdto.setStoreId(commentStore.get(i).getStoreId());
+				csdto.setStoreName(commentStore.get(i).getStoreName());
+				csdto.setFirmName(commentStore.get(i).getFirmBean().getFirmName());
+				csdto.setFirmId(commentStore.get(i).getFirmBean().getFirmId());
+				csdto.setAvgScore(commentService.avgScoreByStoreid(commentStore.get(i).getStoreId()));
+				csdto.setCountScore(commentService.countStoreidByStoreid(commentStore.get(i).getStoreId()));
+				if(commentStore.get(i).getFirmBean().getFirmId() == commentfirmid) {
+				listcsdto.add(csdto);
+					}
+				}
+			
 		}
-		
 		model.addAttribute("listcsdto", listcsdto);
 		model.addAttribute("commentStore", commentStore);
 		
@@ -135,33 +154,6 @@ public class FrontCommentController {
 		return "front/frontcomment";
 	}
 	
-//	@GetMapping("comment/avgscoredesc")
-//	public String avgscoredesc(@RequestParam("commentfirmid") Integer commentfirmid, Model model) {
-//		
-//		List<CommentAvgScoreBeanDTO> listcsdto = new ArrayList<>();
-//		
-//		List<StoreBean> commentStore = storeService.findStoreByFirmId(commentfirmid);
-//
-//		List<CommentBean> findCommentByAvgDesc = commentService.findCommentByAvgDesc();
-//		
-//		for(int i=0 ; i<commentStore.size(); i++) {
-//			CommentAvgScoreBeanDTO csdto = new CommentAvgScoreBeanDTO();
-//			csdto.setStoreId(commentStore.get(i).getStoreId());
-//			csdto.setStoreName(commentStore.get(i).getStoreName());
-//			csdto.setFirmName(commentStore.get(i).getFirmBean().getFirmName());
-//			csdto.setFirmId(commentStore.get(i).getFirmBean().getFirmId());
-//			csdto.setAvgScore(commentService.avgScoreByStoreid(commentStore.get(i).getStoreId()));
-//			if(commentStore.get(i).getStoreId() == findCommentByAvgDesc.get(i).getStoreId()) {
-//				listcsdto.add(csdto);
-//			}
-//			
-//		}
-//		
-//		model.addAttribute("listcsdto", listcsdto);
-//		model.addAttribute("commentStore", commentStore);
-//		
-//		return "front/frontcomment";
-//	}
 	
 	@GetMapping("comment/avgscoredesc")
 	public String avgscoredesc(@RequestParam("commentfirmid") Integer commentfirmid, Model model) {
@@ -187,38 +179,50 @@ public class FrontCommentController {
 			csdto.setFirmName(storeBean.getFirmBean().getFirmName());
 			csdto.setFirmId(storeBean.getFirmBean().getFirmId());
 			csdto.setAvgScore(commentService.avgScoreByStoreid(storeBean.getStoreId()));
-//			if(commentStore.get(i).getStoreId() == findCommentByAvgDesc.get(i).getStoreId()) {
-			listcsdto.add(csdto);
+			csdto.setCountScore(commentService.countStoreidByStoreid(storeBean.getStoreId()));
+			if(storeBean.getFirmBean().getFirmId() == commentfirmid) {
+				listcsdto.add(csdto);
+			}
 		}
 		
 		
-//		List<StoreBean> storeBean = new ArrayList<>();
+		model.addAttribute("listcsdto", listcsdto);
+		model.addAttribute("commentStore", commentStore);
 		
-//		for(int i=0 ; i<findCommentByAvgDesc.size(); i++) {
-//			
-//			Optional<StoreBean> findById = storeService.findById(findCommentByAvgDesc.get(i).getStoreId());
-//			
-//			if(findById.isPresent()) {
-//				storeBean.add(findById.get());
-//			}
-//			
-//		}
+		return "front/frontcomment";
+	}
+	
+	
+	@GetMapping("comment/avgscoreasc")
+	public String avgscoreasc(@RequestParam("commentfirmid") Integer commentfirmid, Model model) {
 		
-//		List<StoreBean> findAllStore = storeService.findAll(findCommentByAvgDesc);
-//					
-//		
-//		for(int i=0 ; i<findAllStore.size(); i++) {
-//			CommentAvgScoreBeanDTO csdto = new CommentAvgScoreBeanDTO();
-//			csdto.setStoreId(findAllStore.get(i).getStoreId());
-//			csdto.setStoreName(findAllStore.get(i).getStoreName());
-//			csdto.setFirmName(findAllStore.get(i).getFirmBean().getFirmName());
-//			csdto.setFirmId(findAllStore.get(i).getFirmBean().getFirmId());
-//			csdto.setAvgScore(commentService.avgScoreByStoreid(findAllStore.get(i).getStoreId()));
-////			if(commentStore.get(i).getStoreId() == findCommentByAvgDesc.get(i).getStoreId()) {
-//				listcsdto.add(csdto);
-//			}
 			
-//		}
+		List<StoreBean> commentStore = storeService.findStoreByFirmId(commentfirmid);
+
+		List<Integer> findCommentByAvgAsc = commentService.findCommentByAvgAsc();
+		
+		for(Integer storeid:findCommentByAvgAsc) {
+			System.out.println(storeid);
+		}
+		
+		List<CommentAvgScoreBeanDTO> listcsdto = new ArrayList<CommentAvgScoreBeanDTO>();
+		
+		CommentAvgScoreBeanDTO csdto =null;
+		for(Integer one: findCommentByAvgAsc) {
+			
+			csdto= new CommentAvgScoreBeanDTO();
+			StoreBean storeBean = storeService.findById(one).get();
+			csdto.setStoreId(storeBean.getStoreId());
+			csdto.setStoreName(storeBean.getStoreName());
+			csdto.setFirmName(storeBean.getFirmBean().getFirmName());
+			csdto.setFirmId(storeBean.getFirmBean().getFirmId());
+			csdto.setAvgScore(commentService.avgScoreByStoreid(storeBean.getStoreId()));
+			csdto.setCountScore(commentService.countStoreidByStoreid(storeBean.getStoreId()));
+			if(storeBean.getFirmBean().getFirmId() == commentfirmid) {
+				listcsdto.add(csdto);
+			}
+		}
+		
 		
 		model.addAttribute("listcsdto", listcsdto);
 		model.addAttribute("commentStore", commentStore);

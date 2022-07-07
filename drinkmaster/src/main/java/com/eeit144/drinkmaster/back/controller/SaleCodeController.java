@@ -1,8 +1,6 @@
 package com.eeit144.drinkmaster.back.controller;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.net.URLEncoder;
+import java.lang.annotation.Repeatable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,9 +8,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.jaxb.SpringDataJaxb.PageRequestDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,13 +20,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 
 import com.eeit144.drinkmaster.back.model.FirmService;
 import com.eeit144.drinkmaster.back.model.SaleCodeService;
@@ -36,10 +33,6 @@ import com.eeit144.drinkmaster.bean.SaleCodeBean;
 import com.eeit144.drinkmaster.bean.SaleCodeVO;
 import com.eeit144.drinkmaster.bean.UserBean;
 import com.eeit144.drinkmaster.dto.SaleCodeDTO;
-import com.eeit144.drinkmaster.dto.SaleCodeExcel;
-
-import cn.afterturn.easypoi.excel.ExcelExportUtil;
-import cn.afterturn.easypoi.excel.entity.ExportParams;
 
 @Controller
 @RequestMapping("backend/salecode/")
@@ -58,7 +51,11 @@ public class SaleCodeController {
 	}
 
 	@GetMapping("all")
-	public String allSaleCodePage() {
+	public String allSaleCodePage(@RequestParam(name="p",defaultValue = "1") Integer page,Model m) {
+		
+		Page<SaleCodeBean> showAllSaleCode = showAllSaleCode(page);
+		m.addAttribute("allValiedCode", showAllSaleCode);
+		
 		return "/backend/backsalecode";
 	}
 
@@ -129,9 +126,12 @@ public class SaleCodeController {
 
 	@GetMapping("valied")
 	@ResponseBody
-	public Double CheckSaleCodeValied(String saleCode) {
+	public Double CheckSaleCodeValied(String saleCode,Model m) {
 		String code = Util.saleCode(saleCode);
 		Optional<SaleCodeBean> saleCodeBeanOp = saleCodeService.findBySaleCode(code);
+		
+		Page<SaleCodeBean> showAllSaleCode = showAllSaleCode(0);
+		m.addAttribute("allValiedCode", showAllSaleCode);
 
 		if (saleCodeBeanOp.isEmpty()) {
 			return null;
@@ -203,6 +203,23 @@ public class SaleCodeController {
 		return new ResponseEntity<String>("註銷成功", HttpStatus.OK);
 	}
 	
+	@GetMapping("destroy")
+	public String disableSaleCodeForm(@RequestParam(name="s") String saleCode,Model m){
+		
+		ResponseEntity<String> disableSaleCode = disableSaleCode(saleCode, m);
+		
+		return "redirect:/backend/salecode/all";
+		
+		
+	}
+	
+	private Page<SaleCodeBean> showAllSaleCode(Integer page) {
+		Pageable pab = PageRequest.of(page-1, 7);
+		Page<SaleCodeBean> valiedCodes = saleCodeService.findAllValiedCode(pab);
+		valiedCodes.forEach(valiedCode -> valiedCode.setSaleCode(Util.DeSaleCode(valiedCode.getSaleCode())));
+		return valiedCodes;
+	}
+	
 
 	private String createSaleCode() {
 		String str = "zxcvbnmlkjhgfdsaqwertyuiopQWERTYUIOPASDFGHJKLZXCVBNM1234567890";
@@ -213,43 +230,6 @@ public class SaleCodeController {
 			sb.append(str.charAt(number));
 		}
 		return sb.toString();
-	}
-
-	@GetMapping("xlsx")
-	public ResponseEntity<byte[]> OutputExcel(@SessionAttribute("salecodes") List<SaleCodeBean> salecodes,
-			SessionStatus status) throws IOException {
-
-		SaleCodeExcel saleCodeExcel = null;
-
-		List<SaleCodeExcel> list = new ArrayList<SaleCodeExcel>();
-
-		for (SaleCodeBean salecode : salecodes) {
-			saleCodeExcel = new SaleCodeExcel();
-			saleCodeExcel.setSaleCode(salecode.getSaleCode());
-			saleCodeExcel.setDiscount(salecode.getDiscount());
-			saleCodeExcel.setValidDate(salecode.getValidDate());
-			list.add(saleCodeExcel);
-		}
-
-		ExportParams exportParams = new ExportParams();
-		exportParams.setSheetName("折扣碼清單");
-
-		Workbook workbook = ExcelExportUtil.exportExcel(exportParams, SaleCodeExcel.class, list);
-
-		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		try {
-			workbook.write(bos);
-		} finally {
-			bos.close();
-		}
-		byte[] bytes = bos.toByteArray();
-
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("content-disposition", "attachment;fileName=" + URLEncoder.encode("折扣碼清單.xls", "UTF-8"));
-
-		status.setComplete();
-
-		return new ResponseEntity<byte[]>(bytes, headers, HttpStatus.OK);
 	}
 
 }

@@ -46,4 +46,8 @@ public interface OrderItemsService {
 	public void insertOrderItems(Set<OrderItems> items);
 	
 	public List<OrderItems> findOrderOrderitems();
+	
+	public Page<OrderItems> findByorderBean_storeBean_storeId(Integer pageNumber,Integer storeId);
+
+	public Page<OrderItems> findByorderBean_storeBean_firmBean_firmId(Integer pageNumber,Integer firmId);
 }

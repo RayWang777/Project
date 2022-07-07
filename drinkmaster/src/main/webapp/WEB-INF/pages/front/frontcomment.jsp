@@ -58,7 +58,7 @@ div.awesomeRating {
 
 <br/><br/>
 
-<h1 style="text-align:center">評論區</h1>
+<h1 style="text-align:center">店家評論區</h1>
 
 
 <div class="container">
@@ -69,50 +69,64 @@ div.awesomeRating {
 <!--    <span style="font-size: 1.5em">評論</span> -->
 <form method="get" action="${contextRoot}/front/comment/storenamelike">
 <br/><br/>
+
+<a href="${contextRoot}/front/comment/firmcomment" ><button type="button" class="btn btn-outline-primary">回評論區</button></a>
 <div style="text-align:right">
 
-<%-- <a href="${contextRoot}/front/comment/storecomment?commentfirmid=${commentStore.firmId}"><button class="btn btn-outline-success">全部</button></a> --%>
 
-<input type="text" id="commentstorename" name="commentstorename"/><button type="submit" class="btn btn-outline-success">搜尋</button>
+<c:forEach var="commentStore" items="${commentStore}">
+
+	<input name="commentfirmid" value="${commentStore.firmBean.firmId}" style="display: none">
+
+</c:forEach>
+<input type="text" id="commentstorename" name="commentstorename"/>&nbsp;<button type="submit" class="btn btn-outline-success">搜尋</button>
  </div>
+ 
+</form>
   <br/>
   <div class="dropdown" style="text-align:right">
   <button class="btn btn-black dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
     排序
   </button>
-  <br/><br/><br/>
-  <c:forEach var="commentStore" items="${listcsdto}">
+  <br/>
+  <c:forEach var="commentStore" items="${commentStore}">
   
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-    <li><a class="dropdown-item" href="">全部</a></li>
-    <li><a class="dropdown-item" href="${contextRoot}/front/comment/avgscoredesc?commentfirmid=${commentStore.firmId}">評分最高</a></li>
-    <li><a class="dropdown-item" href="">評分最低</a></li>
+    <li><a class="dropdown-item" href="${contextRoot}/front/comment/storecomment?commentfirmid=${commentStore.firmBean.firmId}">全部</a></li>
+    <li><a class="dropdown-item" href="${contextRoot}/front/comment/avgscoredesc?commentfirmid=${commentStore.firmBean.firmId}">評分最高</a></li>
+    <li><a class="dropdown-item" href="${contextRoot}/front/comment/avgscoreasc?commentfirmid=${commentStore.firmBean.firmId}">評分最低</a></li>
   </ul>
   
   </c:forEach>
 </div>
 
 <!--   </div> -->
-  
-  			<div class="row row-cols-3 row-cols-md-3 g-4 ">
+  <br/>
+  			<div class="row row-cols-3 row-cols-md-4 g-5">
   				<c:forEach var="storecomment" items="${listcsdto}" >
   			
 				<div class="col">
-					<div class="card h-100 border-warning">
+					<div class="card h-100" style="border: 3px solid yellow;  width: 300px ; height: 300px ; background-color:	#FFF8D7">
   						<div class="card-body">
-						    廠商 : <c:out value="${storecomment.firmName}"></c:out><br/>
+<%-- 						    <h2 style="text-align:center"><c:out value="${storecomment.firmName}"></c:out></h2> --%>
+							<img class="card-img-top" src="http://localhost:8081/drinkmaster/front/firm/${storecomment.firmId}/photo" style="width: 80px; height: 80px ;display:block; margin:auto; border-radius: 150px"/>
 						    <input name="commentfirmid" value="${storecomment.firmId}" style="display: none">
-						    店家 : <c:out value="${storecomment.storeName}"></c:out>
+						    <h5 style="text-align:center"><c:out value="${storecomment.storeName}"></c:out></h5>
 						    <input value="${storecomment.storeId}" style="display: none">
-						    <h3 class="card-subtitle mb-2 text-muted">-------------------</h3>
+<!-- 						    <h3 class="card-subtitle mb-2 text-muted">-------------------</h3> -->
+						  	<h2 style="text-align:center"><c:out value="${storecomment.avgScore}"></c:out>&nbsp;(<c:out value="${storecomment.countScore}"></c:out>)</h2>
+						  	<input id="newavg${storecomment.storeId}" value="" style="display: none"/>
 						    
-						    總平均 : <c:out value="${storecomment.avgScore}"></c:out>
-						   <input id="newavg${storecomment.storeId}" value="" style="display: none"/>
-						    <c:if test="${storecomment.avgScore == null}">
-						    	目前沒有評論~
-						    </c:if>
+						    <c:choose>
+						    <c:when test="${storecomment.avgScore == null}">
+						    <h6 style="text-align:center">目前沒有評論~</h6>
+						    </c:when>
+						    <c:otherwise>
+						    <br/>
+						    </c:otherwise>
+						    </c:choose>
 						    
-						    <div style="pointer-events:none" id="scores${storecomment.storeId}" class="awesomeRating"></div>
+						    <div style="pointer-events:none ;text-align:center" id="scores${storecomment.storeId}" class="awesomeRating"></div>
 							<div class="awesomeRatingValue" style="display:none"></div>
 								<script type="text/javascript">
 								
@@ -141,10 +155,10 @@ div.awesomeRating {
 								});
 								
 								</script>
-						    <br/>
-						    
+						    <div style="text-align:center">
 						    <a href="${contextRoot}/front/comment/all?storeid=${storecomment.storeId}" class="card-link"><button type="button" class="btn btn-outline-primary">去評分</button></a>
 						    <a href="${contextRoot}/front/productmenu?id=${storecomment.storeId}" class="card-link"><button type="button" class="btn btn-outline-success">去購買</button></a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -152,7 +166,7 @@ div.awesomeRating {
   				</c:forEach>
   				</div>
   			
-  </form>
+
 	
   </div>
 </div>

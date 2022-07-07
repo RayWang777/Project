@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.eeit144.drinkmaster.bean.CommentBean;
 import com.eeit144.drinkmaster.bean.OrderBean;
+import com.eeit144.drinkmaster.bean.ProductBean;
 
 @Repository
 public interface OrderRepostiory extends JpaRepository<OrderBean, Integer> {
@@ -27,6 +28,9 @@ public interface OrderRepostiory extends JpaRepository<OrderBean, Integer> {
 	public Page<OrderBean> findByorderStatus1(Pageable pageable,@Param(value="orderstatus") String orderStatus);
 
 	
+//	public Page<OrderBean> findByorderStatus(Pageable pageable,String orderStatus);
+
+	
 	public Page<OrderBean> findByorderIdLike(Pageable pageable,@Param(value="orderId") Integer orderId);
 	
 	@Query(value = "select top(20) [storeid] from [orders] group by [storeid] order by  sum([totalprice]) DESC ;",nativeQuery = true)
@@ -35,9 +39,26 @@ public interface OrderRepostiory extends JpaRepository<OrderBean, Integer> {
 	
 	public OrderBean findFirstByOrderByCreateTimeDesc();
 	
+	@Query(value="select top (1) *  from [orders] order by orderid DESC",nativeQuery = true)
+	public OrderBean findLatestOrderId();
+	
+	
+	
 	@Query(value="select * from orders where userid = :userId order by createtime desc",nativeQuery = true)
 	public List<OrderBean> findOrdersByUserid(@Param(value="userId")Integer userId);
 	
+	@Query(value="select * from orders where userid = :userId order by createtime desc",nativeQuery = true)
+	public Page<OrderBean> findOrdersByUseridPage(Pageable pageable,@Param(value="userId")Integer userId);
+	
 	@Query(value="select * from orders as o right join orderitems as oi on o.orderid = oi.orderid ",nativeQuery = true)
 	public List<OrderBean> findOrderOrderitems();
+	
+	public Page<OrderBean> findBystoreBean_storeId(Pageable pageable,Integer storeId);
+
+	public Page<OrderBean> findBystoreBean_firmBean_firmId(Pageable pageable,Integer firmId);
+	
+	public Page<OrderBean> findByorderStatusAndStoreBean_storeId(Pageable pageable,String orderStatus,Integer storeId);
+
+	
+	public Page<OrderBean> findByorderStatusAndStoreBean_FirmBean_firmId(Pageable pageable,String orderStatus,Integer firmId);
 }

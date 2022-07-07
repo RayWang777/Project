@@ -32,4 +32,13 @@ public class EmailController {
 		return ResponseEntity.ok("Success");
 	}
 	
+	@PostMapping("/send-register-email")
+	public ResponseEntity sendRegisterEmail(@RequestBody EmailMessage emailMessage) {
+		this.emailSenderService.registerEmail(emailMessage.getTo(), emailMessage.getSubject(), emailMessage.getMessage());
+		ServiceBean bean = sService.findById(emailMessage.getMsgId());
+		bean.setStatus("ok");
+		sService.insertService(bean);
+		return ResponseEntity.ok("Success");
+	}
+	
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.eeit144.drinkmaster.back.model.CommentService;
 import com.eeit144.drinkmaster.back.model.OrderItemsService;
 import com.eeit144.drinkmaster.back.model.ProductCategoryService;
 import com.eeit144.drinkmaster.back.model.ProductService;
@@ -23,6 +24,7 @@ import com.eeit144.drinkmaster.bean.ProductBean;
 import com.eeit144.drinkmaster.bean.ProductCategoryBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.bean.StoreTop;
+import com.eeit144.drinkmaster.dto.CommentAvgScoreBeanDTO;
 
 @Controller
 @RequestMapping("front/")
@@ -36,6 +38,9 @@ private StoreService storeService;
 @Autowired
 private OrderItemsService itemsService;
 
+@Autowired
+private CommentService commentService;
+
 	@Autowired
 	public FrontProductController(ProductService productService) {
 		super();
@@ -45,6 +50,12 @@ private OrderItemsService itemsService;
 	public String productMenu(@RequestParam("id") Integer id, Model m) {
 		Optional<StoreBean> storeBean= storeService.findById(id);
 		StoreBean  store=storeBean.get();
+		CommentAvgScoreBeanDTO csdto = new CommentAvgScoreBeanDTO();
+		Double avgScore = commentService.avgScoreByStoreid(id);
+		csdto.setCountScore(commentService.countStoreidByStoreid(id));
+		csdto.setAvgScore(avgScore);
+		
+		m.addAttribute("csdto", csdto);
 		m.addAttribute("store", store);
 		 List<ProductCategoryBean> category=categoryService.findByStoreBean(store);
 		 m.addAttribute("category",category);

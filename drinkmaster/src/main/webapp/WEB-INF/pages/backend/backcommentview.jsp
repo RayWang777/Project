@@ -77,7 +77,7 @@
 <!-- <div id="ratingBarThree" class="ratingBar"></div> -->
 <!-- <div id="ratingBarTwo" class="ratingBar"></div> -->
 <!-- <div id="ratingBarOne" class="ratingBar"></div> -->
-
+</form>
 <br/>
 
 <div class="dropdown" style="text-align:right">
@@ -166,7 +166,7 @@
 
 
 
-</form>
+
 
 </div>
 

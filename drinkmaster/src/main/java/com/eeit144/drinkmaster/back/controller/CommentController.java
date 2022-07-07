@@ -264,8 +264,7 @@ public class CommentController {
 		List<StoreBean> store = storeService.findStoreByStoreNameLike(storename);
 		
 		for(int i=0; i<store.size(); i++) {
-			
-			page = commentService.findCommentByStoreid(store.get(i).getStoreId());
+			page.addAll(commentService.findCommentByStoreid(store.get(i).getStoreId())) ;
 		};
 		
 		model.addAttribute("page", page);

@@ -31,7 +31,7 @@ public class EmailSenderServiceImpl implements EmailSenderService {
 	}
 	
 	@Override
-	public void registerEmail(String to, String subject, String message) {
+	public void registerEmail(String to) {
 		
 		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
 		simpleMailMessage.setFrom("cdwewe456@gmail.com");

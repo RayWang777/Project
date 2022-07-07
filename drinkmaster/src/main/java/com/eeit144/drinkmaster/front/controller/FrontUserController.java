@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -22,10 +23,12 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eeit144.drinkmaster.back.controller.UserBeanValidator;
+import com.eeit144.drinkmaster.back.model.EmailSenderService;
 import com.eeit144.drinkmaster.back.model.FirmService;
 import com.eeit144.drinkmaster.back.model.StoreService;
 import com.eeit144.drinkmaster.back.model.UserService;
 import com.eeit144.drinkmaster.back.util.Util;
+import com.eeit144.drinkmaster.bean.EmailMessage;
 import com.eeit144.drinkmaster.bean.FirmBean;
 import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.bean.UserBean;
@@ -44,6 +47,8 @@ public class FrontUserController {
 
 	@Autowired
 	private StoreService storeService;
+	
+	private EmailSenderService emailSenderService;
 	
 	@Autowired
 	public FrontUserController(UserService userService) {
@@ -191,9 +196,9 @@ public class FrontUserController {
 
 	@PostMapping("register")
 	// 前端會提供UserBean user 跟 MultipartFile photo這兩個物件
-	public String insertUserGo(@ModelAttribute("user") UserBean user, BindingResult result,
-			@RequestParam("reallogo") MultipartFile photo,Model m) {
-
+	public String insertUserGo(@ModelAttribute("user") UserBean user, 
+			BindingResult result, @RequestParam("reallogo") MultipartFile photo,Model m) {
+		
 		System.out.println("user account：" + user.getUserAccount());
 		//確認是否已有帳號
 		if(!userService.findUserByAccount(user.getUserAccount())) {
@@ -209,9 +214,6 @@ public class FrontUserController {
 			return "/front/frontregister";
 		}
 		System.out.println("完成後端識別格式");
-		// 以下為新增動作
-		String contentType = photo.getContentType();
-		System.out.println(contentType);
 		// 把當下的時間加入user內
 		Date createDate = new Date();
 		user.setCreatedate(createDate);
@@ -237,11 +239,11 @@ public class FrontUserController {
 		System.out.println(encryptPwd);
 		
 		user.setUserPassword(encryptPwd);
-		
-		//存入資料庫
+		m.addAttribute("canSeeUser", user);
+		//存入資料庫，前往寄出驗證信controller
 		userService.insertUser(user);
 		System.out.println("完成新增");
-		return "redirect:/front/login";
+		return "forward:/front/send-register-email";
 	}
 	
 }

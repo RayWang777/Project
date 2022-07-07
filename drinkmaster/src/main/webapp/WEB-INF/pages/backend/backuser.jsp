@@ -86,7 +86,7 @@ span{
 	</tbody>
 </table>
 
-<div class="row justify-content-center" style="font-size:23px;">
+<div class="row justify-content-center" style="font-size:23px; margin-bottom: 50px">
 		<c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
 			<c:choose>
 				<c:when test="${page.number!=pageNumber-1}">

@@ -19,4 +19,6 @@ public interface SaleCodeService {
 	public Optional<SaleCodeBean> findBySaleCode(String salecode);
 	
 	public Page<SaleCodeBean> findAllValiedCode(Pageable pab);
+	
+	public void deleteSaleCodeMany(List<Integer> saleCodeIds);
 }

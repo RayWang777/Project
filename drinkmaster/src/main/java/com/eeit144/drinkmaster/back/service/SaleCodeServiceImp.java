@@ -66,5 +66,9 @@ public class SaleCodeServiceImp  implements SaleCodeService {
 		return saleCodeDao.findAllValiedCode(pab);
 	}
 	
+	public void deleteSaleCodeMany(List<Integer> saleCodeIds) {
+		 saleCodeDao.deleteAllById(saleCodeIds);
+	};
+	
 	
 }

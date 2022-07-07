@@ -7,40 +7,40 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
 
-<h1>後台首頁</h1>
-<p>你好, ${userBean.userName}</p>
+
+<h3 class="col mb-5">你好, ${userBean.userName}</h3>
 <span style="color:red;">${error}</span>
 
-<c:out value="role: ${userBean.role}" />&nbsp;&nbsp;<c:out value="userID: ${userBean.userId}" />
-<c:out value="firmId: ${canSeeFirm.firmId}" />&nbsp;&nbsp;<c:out value="firmName: ${canSeeFirm.firmName}" />
-<c:out value="storeId: ${canSeeStore.storeId}" />&nbsp;&nbsp;<c:out value="storeName: ${canSeeStore.storeName}" />
+<%-- <c:out value="role: ${userBean.role}" />&nbsp;&nbsp;<c:out value="userID: ${userBean.userId}" /> --%>
+<%-- <c:out value="firmId: ${canSeeFirm.firmId}" />&nbsp;&nbsp;<c:out value="firmName: ${canSeeFirm.firmName}" /> --%>
+<%-- <c:out value="storeId: ${canSeeStore.storeId}" />&nbsp;&nbsp;<c:out value="storeName: ${canSeeStore.storeName}" /> --%>
 <table class="table table-hover" style="width:100%;table-layout:fixed;">
+<!-- 	<tr> -->
+<!-- 		<th scope="col">ID</th> -->
+<!-- 		<th scope="col">姓名</th> -->
+<!-- 		<th scope="col">帳號</th> -->
+<!-- 		<th scope="col">密碼</th> -->
+		
+<!-- 	</tr> -->
+<!-- 	<tr> -->
+<!-- 		<td class="align-middle"><div class="d-flex align-items-center"> -->
+<%-- 			<c:out value="${userBean.userId}"/> --%>
+<!-- 		</div></td> -->
+<!-- 		<td class="align-middle"><div class="d-flex align-items-center"> -->
+<%-- 			<c:out value="${userBean.userName}"/> --%>
+<!-- 		</div></td> -->
+<!-- 		<td class="align-middle"><div class="d-flex align-items-center"> -->
+<%-- 			<c:out value="${userBean.userAccount}"/> --%>
+<!-- 		</div></td> -->
+<!-- 		<td class="align-middle"><div class="d-flex align-items-center"> -->
+<%-- 			<c:out value="${userBean.userPassword}"/> --%>
+<!-- 		</div></td> -->
+<!-- 		<td class="align-middle"><div class="d-flex align-items-center"> -->
+<%-- 			<c:out value="${userBean.userAddress}"/> --%>
+<!-- 		</div></td>		 -->
+<!-- 	</tr>	 -->
 	<tr>
-		<th scope="col">ID</th>
 		<th scope="col">姓名</th>
-		<th scope="col">帳號</th>
-		<th scope="col">密碼</th>
-		<th scope="col">地址</th>
-	</tr>
-	<tr>
-		<td class="align-middle"><div class="d-flex align-items-center">
-			<c:out value="${userBean.userId}"/>
-		</div></td>
-		<td class="align-middle"><div class="d-flex align-items-center">
-			<c:out value="${userBean.userName}"/>
-		</div></td>
-		<td class="align-middle"><div class="d-flex align-items-center">
-			<c:out value="${userBean.userAccount}"/>
-		</div></td>
-		<td class="align-middle"><div class="d-flex align-items-center">
-			<c:out value="${userBean.userPassword}"/>
-		</div></td>
-		<td class="align-middle"><div class="d-flex align-items-center">
-			<c:out value="${userBean.userAddress}"/>
-		</div></td>		
-	</tr>	
-	<tr>
-		<th scope="col">電話</th>
 		<th scope="col">性別</th>
 		<th scope="col">權限</th>
 		<th scope="col">生日</th>
@@ -49,7 +49,7 @@
 	</tr>
 	<tr>
 		<td class="align-middle"><div class="d-flex align-items-center">
-			<c:out value="${userBean.phone}"/>
+			<c:out value="${userBean.userName}"/>
 		</div></td>
 		<td class="align-middle"><div class="d-flex align-items-center">
 			<c:out value="${userBean.gender}"/>

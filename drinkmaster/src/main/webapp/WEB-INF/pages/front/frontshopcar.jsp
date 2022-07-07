@@ -92,7 +92,7 @@
 <!-- 							<div class="control__indicator"></div></label></td> -->
 						
 							<td style="font-size: 18px;text-align: center;">
-							<input type="hidden" value="${shopcarItems.value.productId}" >
+							<input type="hidden" value="${shopcarItems.value.productId}" name="shopcarproductId" >
 							<input type="text" id="storename" value="${shopcarItems.value.storeName}" style="text-align: center;border-style:none;" readonly="true">	
 							</td>
 							<td><input type="text" id="productname" value="${shopcarItems.value.productName}" style="text-align: center;border-style:none;" readonly="true"></td>
@@ -122,23 +122,23 @@
 					</tbody>
 					<tfoot>
 						<tr class="visible-xs">
-<!-- 						備註:折扣碼前的價格 -->
-<%-- 							<td class="text-center" id="total"><strong>Total <c:out value="${shopcarBuy.totalPrice}"></c:out></strong></td> --%>
+							<td style="font-weight: bolder;">總金額:&thinsp;<input type="text" name="totalpricedefore" id="totalpricedefore" style="width: 120px;border-style:none;" readonly="true" value="${rowTotal}" ></td>
 						</tr>
 						<tr>
 							<td><a href="${contextRoot}/front/" class="btn btn-warning">
 							<i class="fa fa-angle-left"></i> 
 							&thinsp;繼續購買</a></td>
 							
-							<td >總金額:&thinsp;<input type="text" name="totalpricedefore" id="totalpricedefore" style="width: 120px;" ></td>
 							
-							<td style="font-weight: bolder;">折扣碼:&thinsp;<input type="text" name="salescode" id="salescode" style="width: 120px;" ></td>
-							<td "><span id="textsale" style="color:red;font-weight: bolder;"></span></td>
+							
+							<td style="font-weight: bolder;">折扣碼:&thinsp;<input type="text" name="salescode" id="salescode" style="width: 130px;" onkeydown="changeprice(event)" onkeyup="changeprice(event)" onclick="changeprice(event)"></td>
+							<td ><input type="hidden" id="textsale" style="border-style:none;">
+							<span id="salecodeshow" style="color:red;font-weight: bolder;"></span></td>
 							
 <!-- 							備註:折扣碼後的價格 -->
 							<td class="hidden-xs text-center" colspan="3">
 							<span style="color:red;font-weight: bold;">折扣後&ensp;</span>
-							<strong>Total <input type="text" id="totalpricefinal" value="${shopcarItems.value.totalPrice}" style="width:100px;text-align: center;border-style:none;" readonly="true"></strong></td>
+							<strong>Total <input type="text" name="totalpricefinal" id="totalpricefinal" value="${shopcarItems.value.totalPrice}" style="width:100px;text-align: center;border-style:none;" readonly="true"></strong></td>
 							<td colspan="3"><button type="submit" class="btn btn-success btn-block" onclick="return confirm('確定要結帳嗎?')">結帳&thinsp;<i class="fa fa-angle-right"></i></button></td>
 						</tr>
 					</tfoot>
@@ -150,8 +150,12 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+	
+		
+	
 	  $('#salescode').keyup(function(){
 	    var inputsalescode = $('#salescode').val();
+	   
 
 	
 	$.ajax({
@@ -163,18 +167,22 @@ $(document).ready(function(){
 	    success: function(data){
 	    	
 // 	    	console.log(data);
-	    	$('#textsale').html(data+'折');
+// 	    	$('#textsale').html(data+'折');
 
 	    	
 	    	if(inputsalescode == ""){
-	    		$('#textsale').html('');
+	    		$('#salecodeshow').html('');
+	    		$('#textsale').val(1);
 	    	}
 	    	else if(data == 1.0){
-				$('#textsale').html('折扣碼已過期');
-			}else
-			
-	    	if(data > 1.0){
-				$('#textsale').html('無此折扣碼');
+				$('#salecodeshow').html('折扣碼已過期');
+				$('#textsale').val(1);
+			}else if(data > 1.0){
+				$('#salecodeshow').html('無此折扣碼');
+				$('#textsale').val(1);
+			}else{
+				$('#salecodeshow').html(data+'折');
+				$('#textsale').val(data);
 			}
 	    	
 	    	
@@ -238,6 +246,7 @@ if (result.isConfirmed) {
 function changeprice(event){
 // 	console.log(event.target)？
 // 	number2
+	var textsale = $('#textsale').val();
 	var local = event.target.id.substring(6);
 	var localpriceStr = "#price"+local;
 	var totalpriceStr = "#totalprice"+local;
@@ -258,93 +267,14 @@ function changeprice(event){
     }
 //     console.log(TotalTotalPrice)
 	$('#totalpricedefore').val(TotalTotalPrice);
-		
+// 	$('#totalpricedefore').attr('value',TotalTotalPrice);	
+	$('#totalpricefinal').val(TotalTotalPrice * textsale);
 }
 
 
 
-$(function(){ 
 
 
-	
-	$('#number').click(function(){				
-	 var s = 0;
-	 var price = $('#price').val();      
-     var number = $('#number').val();
-     var totalprice = price*number;
-     $('#totalprice').val(totalprice);
-     
-		s += price*number;
-		$('#totalprice2').val(s);
-	})
-		
-		
-		
-	function setTotal(){
-	$('#cart').each(function(){
-		var s = 0;
-		s += $('#price').val()*$('#number').val();
-	console.log(s);
- })
-	}
-	
-})	
-	
-	
-	
-// 	$('#number').click(function(){				
-// //         var price = $('#price').val();      
-//         var number = $('#number').val();
-
-// //         var totalprice = price*number;
-
-// //         $('#totalprice').attr('value',totalprice);
-//         setTotal();
-//     })
-    
-//     $('#number').keyup(function(){				
-//         var price = $('#price').val();      
-//         var number = $('#number').val();
-//         var totalprice = price*number;
-
-//         $('#totalprice').attr('value',totalprice);  
-//         setTotal();
-//     })
-    
-//     function setTotal(){
-// 	var s = 0;
-// 	var price = $('#price').val();      
-//  	var number = $('#number').val();
-// 	$('#cart  td').each(function(){ 
-// 		s += $('#price').val()*$('#number').val();
-// 		parseInt($(this).find('input[id*=number]').val())*parseInt($(this).find('input[id*=price]').val());
-		
-		
-
-				
-// 	});
-//     $('#totalprice2').val(s.toFixed(2)); 
-	
-// 	}
-
-// 	setTotal();
-
-    
-
-    
-
-    
-// 	$('#number').click(function(){				
-//         var price = $('#price').val();      
-//         var number = $('#number').val();
-//         var totalprice = price*number;
-
-//         $('#total').html("<strong>Total " + totalprice + "</strong>");
-//     })
-    
-
-// 	})
-// })
 </script>
 
 <script src="<c:url value="/js/lib/bootstrap.min.js"/>"></script>

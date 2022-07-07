@@ -142,13 +142,9 @@ span{
        <form:errors path="birthday" cssClass="error" />
        <span id="bdErr"></span>  <br>
        
-       <form:label path="createdate">創建日期</form:label>
-       <form:input path="createdate" class="form-control" id="createdate" readonly="true"/>
-       <form:errors path="createdate" cssClass="error" /><br>
+       <form:hidden path="createdate" class="form-control" id="createdate" readonly="true"/>
        
-       <form:label path="role">職&emsp;&emsp;權</form:label>
-       <form:input path="role" class="form-control" id="role" readonly="true"/>
-       <br>
+       <form:hidden path="role" class="form-control" id="role" readonly="true"/>
        
        
 		

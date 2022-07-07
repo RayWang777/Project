@@ -87,7 +87,7 @@
 	<button onclick="firm()">firm帳密</button>
 	<button onclick="store()">store帳密</button>
 	<button onclick="user()">user帳密</button>
-	<button onclick="user2()">user2帳密</button>
+	<button onclick="user2()">新user帳密</button>
 </div>
 </body>
 

@@ -139,7 +139,12 @@
 							&thinsp;繼續購買</a></td>
 						</c:when>
 						</c:choose>	
-							
+							<c:choose>
+						<c:when test="${price.storeId == null}">
+						<td><input type="hidden"></td>
+						<td colspan="6"></td>
+						</c:when>
+						<c:when test="${price.storeId != null}">
 							<td style="font-weight: bolder;">折扣碼:&thinsp;<input type="text" name="salescode" id="salescode" style="width: 130px;" onkeydown="changeprice(event)" onchange="changeprice(event)" onfocus="changeprice(event)" onkeyup="changeprice(event)" onclick="changeprice(event)"></td>
 							<td ><input type="hidden" id="textsale" style="border-style:none;">
 							<span id="salecodeshow" style="color:red;font-weight: bolder;"></span></td>
@@ -149,6 +154,8 @@
 							<span style="color:red;font-weight: bold;">折扣後&ensp;</span>
 							<strong>Total <input type="text" name="totalpricefinal" id="totalpricefinal" value="${shopcarItems.value.totalPrice}" style="width:100px;text-align: center;border-style:none;" readonly="true"></strong></td>
 							<td colspan="3"><button type="submit" class="btn btn-success btn-block" onclick="return confirm('確定要結帳嗎?')">結帳&thinsp;<i class="fa fa-angle-right"></i></button></td>
+						</c:when>
+						</c:choose>
 						</tr>
 					</tfoot>
 				</table>

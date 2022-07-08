@@ -1,5 +1,6 @@
 package com.eeit144.drinkmaster.back.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.eeit144.drinkmaster.back.model.UserService;
+import com.eeit144.drinkmaster.bean.AuthenticationProvider;
 import com.eeit144.drinkmaster.bean.UserBean;
 import com.eeit144.drinkmaster.dao.UserRepostiory;
 
@@ -90,5 +92,33 @@ public class UserServiceImp implements UserService {
 	@Override
 	public List<UserBean> findNullTypeUsers(List<Integer> userIds){
 		return userDao.findAllById(userIds);
+	}
+	
+	@Override
+	public UserBean findAllByUserAccount(String useraccount) {
+		return userDao.findAllByUserAccount(useraccount);
+	}
+	@Override 
+	public void createNewCustomerAfterOAuthLoginSuccess(String useraccount ,String name ,AuthenticationProvider provider) {
+		UserBean user =new UserBean();
+		user.setUserName(name);
+		user.setUserAccount(useraccount);
+		user.setRole("store");
+		user.setGender("男");
+		user.setUserPassword("dFQ9TAiTXYG1DKM9ugbHsw==");
+		user.setPhone("0939566761");
+		user.setUserAddress("新北市淡水區八勢一街35號");
+		user.setCreatedate(new Date());
+		user.setAuthProvider(provider);
+		userDao.save(user);
+	
+		
+	}
+	@Override
+	public void updateCustomerAfterLogin(String useraccount ,String name ,AuthenticationProvider provider) {
+		UserBean user = userDao.findAllByUserAccount(useraccount);
+		user.setUserName(name);
+		user.setUserAccount(useraccount);
+		userDao.save(user);
 	}
 }

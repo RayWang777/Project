@@ -1,5 +1,6 @@
 package com.eeit144.drinkmaster.back.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,8 +67,8 @@ public class SaleCodeServiceImp  implements SaleCodeService {
 		return saleCodeDao.findAllValiedCode(pab);
 	}
 	
-	public void deleteSaleCodeMany(List<Integer> saleCodeIds) {
-		 saleCodeDao.deleteAllById(saleCodeIds);
+	public void deleteSaleCodeMany(Date valieddate,List<Integer> saleCodeIds) {
+		 saleCodeDao.updateValiedDateIds(valieddate,saleCodeIds);
 	};
 	
 	

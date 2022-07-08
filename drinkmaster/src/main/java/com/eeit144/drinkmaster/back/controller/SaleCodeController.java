@@ -219,7 +219,8 @@ public class SaleCodeController {
 		if(saleCodeIds.isEmpty()) {
 			return "redirect:/backend/salecode/all";
 		}
-		saleCodeService.deleteSaleCodeMany(saleCodeIds); 
+		Date date = new Date();
+		saleCodeService.deleteSaleCodeMany(date,saleCodeIds); 
 		
 		return "redirect:/backend/salecode/all";
 	}

@@ -116,7 +116,17 @@
 
 <br>
 <p>
+<c:choose>
+	<c:when test="${userBean.role=='firm'}">
+		<input type="hidden">
+	</c:when>
+	<c:when test="${userBean.role=='store'}">
 <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="">新增</button>&emsp;
+	</c:when>
+	<c:when test="${userBean.role=='admin'}">
+	<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="">新增</button>&emsp;
+	</c:when>
+	</c:choose>
 </p>
 
 <form action="${contextRoot}/backend/order/select" method="get">
@@ -173,8 +183,18 @@
       <td><c:out value="${orderItems.price}"/></td>
 
       <td>
+      <c:choose>
+	<c:when test="${userBean.role=='firm'}">
+		<input type="hidden">
+	</c:when>
+	<c:when test="${userBean.role=='store'}">
       <a href="${contextRoot}/backend/orderItems/edit?id=${orderItems.orderItemId}"><button class="btn btn-outline-primary btn-sm">編輯</button></a>
-      <button onclick="return del(event)" id="${orderItems.orderItemId}" class="btn btn-outline-danger btn-sm">刪除</button></td>
+     </c:when>
+     <c:when test="${userBean.role=='admin'}">
+     <a href="${contextRoot}/backend/orderItems/edit?id=${orderItems.orderItemId}"><button class="btn btn-outline-primary btn-sm">編輯</button></a>
+     </c:when>
+     </c:choose>
+<button onclick="return del(event)" id="${orderItems.orderItemId}" class="btn btn-outline-danger btn-sm">刪除</button></td>
       </tr>
     </c:forEach>
     

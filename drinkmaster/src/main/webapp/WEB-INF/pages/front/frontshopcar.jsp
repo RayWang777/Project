@@ -100,7 +100,7 @@
 							<input type="text" id="price${vs.count}" value="${shopcarItems.value.price}" style="width:50px;text-align: center;border-style:none;" readonly="true">
 							</td>
 							<td data-th="Quantity">
-								<input type="number" id="number${vs.count}" name="number" class="form-control text-center" value="${shopcarItems.value.quantity}" min="1" onkeyup="changeprice(event)" onclick="changeprice(event)">
+								<input type="number" id="number${vs.count}" name="number" class="form-control text-center" value="${shopcarItems.value.quantity}" min="1" onfocus="changeprice(event)" onkeyup="changeprice(event)" onclick="changeprice(event)">
 							</td> 
 							<td data-th="Price" >
 							<input type="text" id="sugar" value="${shopcarItems.value.sweet}" style="width:50px;text-align: center;border-style:none;" readonly="true">
@@ -127,13 +127,20 @@
 							</td>
 						</tr>
 						<tr>
+						<c:choose>
+						<c:when test="${price.storeId == null}">
 							<td><a href="${contextRoot}/front/" class="btn btn-warning">
 							<i class="fa fa-angle-left"></i> 
 							&thinsp;繼續購買</a></td>
+						</c:when>
+						<c:when test="${price.storeId != null}">
+							<td><a href="${contextRoot}/front/productmenu?id=${price.storeId}" class="btn btn-warning">
+							<i class="fa fa-angle-left"></i> 
+							&thinsp;繼續購買</a></td>
+						</c:when>
+						</c:choose>	
 							
-							
-							
-							<td style="font-weight: bolder;">折扣碼:&thinsp;<input type="text" name="salescode" id="salescode" style="width: 130px;" onkeydown="changeprice(event)" onkeyup="changeprice(event)" onclick="changeprice(event)"></td>
+							<td style="font-weight: bolder;">折扣碼:&thinsp;<input type="text" name="salescode" id="salescode" style="width: 130px;" onkeydown="changeprice(event)" onchange="changeprice(event)" onfocus="changeprice(event)" onkeyup="changeprice(event)" onclick="changeprice(event)"></td>
 							<td ><input type="hidden" id="textsale" style="border-style:none;">
 							<span id="salecodeshow" style="color:red;font-weight: bolder;"></span></td>
 							

@@ -48,10 +48,10 @@ div.awesomeRating {
   
 <div class="form-group">
 	
-	userid<form:input path="userBean" class="form-control" />
-	storeid<form:input path="storeBean" class="form-control" />
-	productid<form:input path="productBean" class="form-control" />
-	score<form:input id="score1" path="score" class="form-control" style="pointer-events: none" />
+	使用者id<form:input id="commentuserid" path="userBean" class="form-control" />
+	店家id<form:input id="commentstoreid" path="storeBean" class="form-control" />
+	<form:input id="commentproductid" path="productBean" class="form-control" type="hidden"/>
+	分數<form:input id="score1" path="score" class="form-control" style="pointer-events: none" />
 	
 	<div id="scores" class="awesomeRating"></div>
 	<input class="awesomeRatingValue" style="display:none" required></input>
@@ -78,8 +78,8 @@ div.awesomeRating {
 	</script>
 	
 	
-	<form:input path="scoreType" class="form-control"/>
-	content<form:input path="content" class="form-control" />
+	<form:input id="commentscoretypeid" path="scoreType" class="form-control"/>
+	評論<form:input id="commentcontent" path="content" class="form-control" />
 	
 	<br/>
 	
@@ -94,7 +94,8 @@ div.awesomeRating {
 	
 </div>    
     
-    <input type="submit" name="submit" value="新增訊息">
+    <input type="submit" name="submit" value="新增訊息">&nbsp;&nbsp;<button onclick="add()">一鍵輸入</button>
+    
   
   </form:form>
   
@@ -111,6 +112,24 @@ div.awesomeRating {
 			$('#image').show();
 		}
 	}
+	
+	
+	
+	function add() {
+		let commentuserid = document.getElementById("commentuserid");
+		let commentstoreid = document.getElementById("commentstoreid");
+		let commentcontent = document.getElementById("commentcontent");
+		let commentproductid = document.getElementById("commentproductid");
+		let commentscoretypeid = document.getElementById("commentscoretypeid");
+		
+		commentuserid.value=("10");
+		commentstoreid.value=("1");
+		commentcontent.value=("這家推");
+		commentproductid.value=("44");
+		commentscoretypeid.value=("10");
+	}
+	
+	
 	
 	</script>
   

@@ -31,7 +31,7 @@
 <div class="container">
 <div class="row justify-content-center">
 <div class="col-6">
- <h1>新增意見回饋</h1>
+ <h1>意見回饋</h1>
 <form:form class="form" method="post" action="${contextRoot}/front/service/post" modelAttribute="workMessages">
 <div class="form-group">
      <label for="exampleFormControlInput1">會員編號 :</label>
@@ -51,17 +51,17 @@
   <br/>
   
   <div class="form-group">
-    <label for="exampleFormControlTextarea1">意見回饋 :</label>
+    <label for="exampleFormControlTextarea1" >意見回饋 :</label>
     <br/>
-    <form:textarea path="answer" class="form-control"/>
+    <form:textarea path="answer" class="form-control" id="userfeedback" />
      </div>
      <br/>
      <div class="form-group">
     
-     <input type="button" name="submit" class="btn btn-success" value="送出" id="send">
-    
+     <input type="submit" name="submit" class="btn btn-success" value="送出" id="send"><br/><br/>
  </div>
 </form:form>
+     <button style="margin-bottom: 100px" class="btn btn-dark" onclick="fast()">一鍵輸入</button>
 </div>
 </div>
 
@@ -69,7 +69,17 @@
 <br/><br/><br/><br/><br/><br/>
 </div>
 
+
+
 <script type="text/javascript">
+$(function(){
+
+});
+
+function fast() { 
+	let answer = document.getElementById("userfeedback"); 
+	answer.value=("50嵐南京店沒辦法提供刷卡服務，是否可請店家提供，謝謝"); 
+	 } 
 
 $(function(){
 	
@@ -85,6 +95,7 @@ $(function(){
 			);
 }
 )});
+
 
 </script>
 <jsp:include page="layout/footer.jsp" />

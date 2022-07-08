@@ -49,8 +49,11 @@ public class FrontPageController {
 		List<StoreTop> top3 = findTop3();
 		List<Integer> findAllIds = firmService.findAllIds();
 		m.addAttribute("swiperPic", findAllIds);
-
 		m.addAttribute("top3", top3);
+		
+		
+		
+		
 
 		return "/front/frontview";
 	}

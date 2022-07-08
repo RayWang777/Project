@@ -118,7 +118,17 @@
 
 <br>
 <p>
-<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="">新增訂單</button>&emsp;
+<c:choose>
+	<c:when test="${userBean.role=='firm'}">
+		<input type="hidden">
+	</c:when>
+	<c:when test="${userBean.role=='store'}">
+		<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="">新增訂單</button>&emsp;
+	</c:when>
+	<c:when test="${userBean.role=='admin'}">
+	<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="">新增訂單</button>&emsp;
+	</c:when>
+</c:choose>	
 <a href="${contextRoot}/backend/order/findAll"><button type="button" class="btn btn-outline-dark btn-sm">訂單列表</button></a>&emsp;
 <a href="${contextRoot}/backend/order/findStatus?sta=待付款"><button type="button" class="btn btn-outline-dark btn-sm">待付款</button></a>&emsp;
 <a href="${contextRoot}/backend/order/findStatus?sta=待出貨"><button type="button" class="btn btn-outline-dark btn-sm">待出貨</button></a>&emsp;
@@ -198,7 +208,17 @@
       <a href="${contextRoot}/backend/orderItems/findId?id=${orderBean.orderId}">
       <i class="tiny material-icons" >collections</i></a></td>
       <td>
+      <c:choose>
+		<c:when test="${userBean.role=='firm'}">
+		<input type="hidden">
+		</c:when>
+		<c:when test="${userBean.role=='store'}">
       <a href="${contextRoot}/backend/order/edit?id=${orderBean.orderId}"><button class="btn btn-outline-primary btn-sm">編輯</button></a>
+      </c:when>
+      <c:when test="${userBean.role=='admin'}">
+      <a href="${contextRoot}/backend/order/edit?id=${orderBean.orderId}"><button class="btn btn-outline-primary btn-sm">編輯</button></a>
+      </c:when>
+      </c:choose>
       <button id="${orderBean.orderId}" class="btn btn-outline-danger btn-sm" onclick="return del(event)">刪除</button></td>
       </tr>
     </c:forEach>

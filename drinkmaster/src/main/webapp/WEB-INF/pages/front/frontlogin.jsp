@@ -49,8 +49,9 @@
 		
 		padding: 7% 120px 20px;
 	}
-
-	
+	span{
+		color: #ae0000;
+	}
 </style>
 
         <!-- Bootstrap icons-->
@@ -67,7 +68,7 @@
 		<img class="login-block-left" src="http://localhost:8081/drinkmaster/images/front_login.png" />
 	</div>
 	
-	<div class="login-block-right">
+	<div class="login-block-right" style="width: 600px;">
 	 <form:form class="form-right" method="post" action="${contextRoot}/front/loginGo">
 		<div class="mb-3">
 			<label for="select" class="form-label">帳號</label>
@@ -102,10 +103,8 @@
 <!-- 		<button class="btn btn-light" onclick="admin()">admin帳密</button> -->
 <!-- 		<button class="btn btn-light" onclick="firm()">firm帳密</button> -->
 <!-- 		<button class="btn btn-light" onclick="store()">store帳密</button> -->
-		<button class="btn btn-light text-white bg-white border-0" >admi帳密帳密密</button>
 		<button class="btn btn-light" onclick="user()">使用者帳密</button>
-		<button class="btn btn-light text-white bg-white border-0" >firmn</button>
-		<button class="btn btn-light text-white bg-white border-0" >store帳</button>
+		<button class="btn btn-light" onclick="user2()">新user帳密</button>
 		
 	</div>
 	
@@ -179,6 +178,24 @@ function user() {
 	let pwd = document.getElementById("userPassword");
 	acc.value=("cindy1@gmail.com");
 	pwd.value=("cindy9527");
+	
+	Swal.fire({
+		  icon: 'success',
+		  title: '使用者登入成功',
+		  showConfirmButton: false,
+		  timer: 2000
+		}).then( ()=>{
+			
+			console.log('123')
+			$('#buttonsubmitlogin').trigger('click');
+		})
+}
+
+function user2() {
+	let acc = document.getElementById("userAccount");
+	let pwd = document.getElementById("userPassword");
+	acc.value=("kuojoejava188@gmail.com");
+	pwd.value=("joe6666");
 	
 	Swal.fire({
 		  icon: 'success',

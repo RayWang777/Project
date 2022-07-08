@@ -51,21 +51,26 @@
 			<input name="salecode" class="form-control" type="text" id="salecode" />
 				<input type="submit" class="input-group-text btn btn-primary" value="折扣碼確認">
 			<span id="salecodeSp"></span>
-	</div>
-	<div class="mb-3 input-group">
 			<label id="statuslb" class="input-group-text" for="status">折扣碼狀態</label>
 			<input name="status" readonly="true" class="form-control" type="text" id="status" value="${status.saleCode}"/>
 			<label class="input-group-text" for="discount">&nbsp&nbsp折&nbsp&nbsp&nbsp&nbsp扣&nbsp&nbsp</label>
 			<input name="discount" readonly="true" class="form-control" type="text" id="status" value="<c:if test="${status.discount < 1}">
 			<fmt:formatNumber type="number" value="${(status.discount*100)}"/>折</c:if>"/>
-	<c:choose>
-	<c:when test="${status!=null}">
-	
-	</c:when>
-	<c:otherwise>
-	</c:otherwise>
-	</c:choose>
 	</div>
+<!-- 	<div class="mb-3 input-group"> -->
+<!-- 			<label id="statuslb" class="input-group-text" for="status">折扣碼狀態</label> -->
+<%-- 			<input name="status" readonly="true" class="form-control" type="text" id="status" value="${status.saleCode}"/> --%>
+<!-- 			<label class="input-group-text" for="discount">&nbsp&nbsp折&nbsp&nbsp&nbsp&nbsp扣&nbsp&nbsp</label> -->
+<%-- 			<input name="discount" readonly="true" class="form-control" type="text" id="status" value="<c:if test="${status.discount < 1}"> --%>
+<%-- 			<fmt:formatNumber type="number" value="${(status.discount*100)}"/>折</c:if>"/> --%>
+<%-- 	<c:choose> --%>
+<%-- 	<c:when test="${status!=null}"> --%>
+	
+<%-- 	</c:when> --%>
+<%-- 	<c:otherwise> --%>
+<%-- 	</c:otherwise> --%>
+<%-- 	</c:choose> --%>
+<!-- 	</div> -->
 	</form>
 	
 	<div class="mb-3 input-group">
@@ -88,8 +93,8 @@
 				<th style="width: 140px;text-align: left;">動作</th>
 			</tr>
 		</thead>
+		<form action="${contextRoot}/backend/salecode/destroyall" method="get">
 		<tbody>
-
 			<c:forEach items="${allValiedCode.content}" var="oneSaleCode">
 				<tr scope="row">
 					<td class="align-middle"><label
@@ -107,8 +112,9 @@
 						<button id="${oneSaleCode.saleCode}" type="button" class="btn btn-danger" onclick="del(event)">註銷</button></td>
 				</tr>
 			</c:forEach>
-
+			<button type="submit" class="btn btn-danger">多筆刪除</button>
 		</tbody>
+		</form>
 	</table>
 	<div class="row justify-content-center" style="font-size: x-large;">
 		<c:forEach var="pageNumber" begin="1" end="${allValiedCode.totalPages}">
@@ -190,9 +196,10 @@ $(function(){
 	    			  title: '註銷成功',
 	    			  showConfirmButton: false,
 	    			  timer: 1500
-	    			}).then(
+	    			}).then(()=>{
+	    				
 	    				location.href='http://localhost:8081/drinkmaster/backend/salecode/all'		
-	    			)
+	    			})
 
 	    		}
     	    	 

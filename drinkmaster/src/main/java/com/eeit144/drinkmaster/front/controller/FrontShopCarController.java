@@ -45,7 +45,7 @@ import com.eeit144.drinkmaster.bean.UserBean;
 
 @Controller
 @RequestMapping("front/")
-@SessionAttributes(names= {"orderuserBean","shopcarBuy","product","canSeeUser"})
+@SessionAttributes(names= {"orderuserBean","shopcarBuy","product","canSeeUser","price","data","address"})
 @SuppressWarnings("unchecked")
 public class FrontShopCarController {
 
@@ -148,6 +148,8 @@ public class FrontShopCarController {
 		
 		ShopcarBean shopcarBean = null;
 
+		
+
 		if(cart == null) {
 		cart = new LinkedHashMap< >();
 		shopcarBean = new ShopcarBean();
@@ -162,6 +164,7 @@ public class FrontShopCarController {
 		shopcarBean.setStoreName(storeName);
 		shopcarBean.setStoreId(storeId);
 		cart.put(productId, shopcarBean);
+		
 		}
 		//用原生的方法去判斷有沒有值
 		else if(cart.containsKey(productId)){
@@ -193,9 +196,19 @@ public class FrontShopCarController {
 			shopcarBean.setStoreId(storeId);
 			cart.put(productId, shopcarBean);
 		}
-				
 		
 		m.addAttribute("shopcarBuy", cart);
+		Map<Integer,ShopcarBean> cart2 = (Map<Integer,ShopcarBean>) m.getAttribute("shopcarBuy");
+		Integer total = 0;
+		ShopcarBean shopcarBean2 = new ShopcarBean();
+		for(Integer i :cart2.keySet()) {
+			total += cart2.get(i).getTotalPrice();
+//			System.out.println(total);
+		}
+		shopcarBean2.setTotalPrice(total);
+		shopcarBean2.setStoreId(storeId);
+		m.addAttribute("price", shopcarBean2);
+		
 		
 
 		return "/front/frontshopcar";
@@ -204,85 +217,17 @@ public class FrontShopCarController {
 	
 	
 	@PostMapping("shopcar/writeData")
-	public String orderData(Model m) {
-		
+	public String orderData(@RequestParam(name="totalpricefinal",defaultValue = "0") Integer totalPriceFinal,Model m) {
+//		System.out.println(totalPriceFinal);
 //		ShopcarBean shopcarBean = new ShopcarBean();
 //		m.addAttribute("shopcarBuy", shopcarBean);
+		m.addAttribute("product", totalPriceFinal);
 		
 		return "/front/frontshopcardata";
 	}
 	
 	
-//	@PostMapping("shopcar/confirmOrder")
-//	public String confirmOrder(Model m,
-//			@RequestParam("shopcarphone") String shopcarphone
-//			,@RequestParam("shopcaraddress") String shopcaraddress
-//			,@RequestParam("shopcarname") String shopcarname
-//			,@RequestParam("shopcarprice") Integer shopcarprice
-//			,@RequestParam("shopcarquantity") Integer shopcarquantity
-//			,@RequestParam("shopcarsweet") String shopcarsweet
-//			,@RequestParam("shopcarcoldhot") String shopcarcoldhot
-//			,@RequestParam("shopcartotalPrice") Integer shopcartotalPrice
-//			,@RequestParam("userId") Integer userId
-//			,@RequestParam("productId") Integer productId
-//			,@RequestParam("storeName") String storeName
-//			,@RequestParam("storeId") Integer storeId
-//			) {
-//		
-//		
-//		
-//						
-//		
-//		Map<Integer,ShopcarBean> cart = (Map<Integer,ShopcarBean>) m.getAttribute("shopcarBuy");
-//		
-//		for(Integer productIds:cart.keySet()) {
-//			
-//			OrderBean ob = new OrderBean();
-//			UserBean user = new UserBean();
-//			StoreBean store = new StoreBean();
-//			
-//			store.setStoreId(cart.get(productIds).getStoreId());
-//			user.setUserId(userId);
-//			Date today = new Date();
-//			
-//			ob.setCreateTime(today);
-//			ob.setOrderAddress(shopcaraddress);
-//			ob.setOrderPhone(shopcarphone);
-//			ob.setOrderStatus("待付款");
-//			ob.setStoreBean(store);
-//			ob.setTotalPrice(cart.get(productIds).getTotalPrice());
-//			ob.setUserBean(user);
-//			
-//			orderService.insertOrder(ob);
-//			
-//			
-//			OrderItems oi = new OrderItems();
-//			OrderBean ob2 = orderService.findFirstByOrderByCreateTimeDesc();
-//			
-//			ProductBean product = new ProductBean();
-//			product.setProductId(productIds);
-//			
-//			oi.setPrice(cart.get(productIds).getPrice());
-//			oi.setQuantity(cart.get(productIds).getQuantity());
-//			oi.setSweet(cart.get(productIds).getSweet());
-//			oi.setColdhot(cart.get(productIds).getColdhot());
-//			oi.setProductBean(product);
-//			oi.setOrderBean(ob2);
-//			
-//			oitemService.insertOrderItems(oi);
-//			
-//			
-//		}	
-////		m.addAttribute("shopcarBuy", shopcaraddress);
-////		ShopcarBean shopcarBean = null;
-////		
-////		shopcarBean = new ShopcarBean();
-////		shopcarBean.setAddress(shopcaraddress);
-////		shopcarBean.setPhone(shopcarphone);
-////		m.addAttribute("shopcarBuy", shopcarBean);
-//		
-//		return "redirect:/front/shopcar/deleteCar";
-//	}
+
 	
 	
 	@PostMapping("shopcar/confirmOrder")
@@ -302,9 +247,11 @@ public class FrontShopCarController {
 			) {
 						
 		Map<Integer,ShopcarBean> cart = (Map<Integer,ShopcarBean>) m.getAttribute("shopcarBuy");
-		
+		Integer totalPriceFinal = (Integer) m.getAttribute("product");
 		
 		Set<Integer> storeIdSet = new HashSet<Integer>();
+		
+		Date today = new Date();
 		//可以從set知道有幾家店
 		for(Integer i : cart.keySet()) {
 			storeIdSet.add(cart.get(i).getStoreId());
@@ -312,7 +259,7 @@ public class FrontShopCarController {
 		}
 		//用大迴圈把店家拿出來 知道有哪些店
 		for(Integer store : storeIdSet) {
-		Date today = new Date();	
+			
 		StoreBean storeBean = storeService.findById(store).get();
 		OrderBean orderBean = new OrderBean();
 		UserBean user = new UserBean();
@@ -345,11 +292,20 @@ public class FrontShopCarController {
 				
 				totalprice += oitems.getPrice();
 			}
-			orderBean.setTotalPrice(totalprice);
+			orderBean.setTotalPrice(totalPriceFinal);
 			orderService.insertOrder(orderBean);
 		}
 		
 		m.addAttribute("shopcarBuy", cart);
+		
+		OrderBean orderBean2 = new OrderBean();
+		orderBean2.setOrderAddress(shopcaraddress);
+		orderBean2.setOrderPhone(shopcarphone);
+		orderBean2.setOrderStatus("待付款");
+		orderBean2.setCreateTime(today);
+		orderBean2.setTotalPrice(totalPriceFinal);
+		m.addAttribute("data", orderBean2);
+		
 		return "redirect:/front/shopcar/deleteCar";
 	}
 	
@@ -362,7 +318,14 @@ public class FrontShopCarController {
 		Map<Integer,ShopcarBean> cart = (Map<Integer,ShopcarBean>) m.getAttribute("shopcarBuy");
 		cart.remove(productId);
 		m.addAttribute("shopcarBuy", cart);
-		
+		Integer total = 0;
+		ShopcarBean shopcarBean2 = new ShopcarBean();
+		for(Integer i :cart.keySet()) {
+			total += cart.get(i).getTotalPrice();
+//			System.out.println(total);
+		}
+		shopcarBean2.setTotalPrice(total);
+		m.addAttribute("price", shopcarBean2);
 		
 		return "/front/frontshopcar";
 	}

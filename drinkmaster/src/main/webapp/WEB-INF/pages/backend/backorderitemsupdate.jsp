@@ -52,7 +52,7 @@
   <form:option value="冷">冷</form:option>
   <form:option value="熱">熱</form:option>
   </form:select><br><br>
-  金&emsp;&emsp;額<form:label path="price"></form:label>
+  單&emsp;&emsp;價<form:label path="price"></form:label>
   <form:input path="price" /><br><br>
   
 

@@ -40,15 +40,42 @@ public class FrontStoreController {
 
 	@PostMapping("localstore")
 	@ResponseBody
-	public List<StoreBean> findLocalStoreByLatLng(@RequestBody MapDto map) {
+	public List<StoreMapDTO> findLocalStoreByLatLng(@RequestBody MapDto map) {
 		
 		PageRequest page = PageRequest.of(map.getCounts()-1, 4);
 		List<StoreBean> findStoreByLocal = storeService.findStoreByLocal(map.getLat(), map.getLng(),page);
-		for(StoreBean one : findStoreByLocal) {
-			Integer firmId = one.getFirmBean().getFirmId();
-			one.setFirmId(firmId);
+		List<Double> localDis = storeService.findStoreByLocalDis(map.getLat(), map.getLng(),page);
+		
+		int size = localDis.size();
+		List<StoreMapDTO> list = new ArrayList<StoreMapDTO>();
+		
+		StoreMapDTO storeMap = null;
+		DecimalFormat format = new DecimalFormat("0.00");
+		Integer firmId =null;
+		
+		for(int i = 0; i< size;i++) {
+			
+			storeMap = new StoreMapDTO();
+			storeMap.setFirmId(findStoreByLocal.get(i).getFirmBean().getFirmId());
+			storeMap.setFirmName(findStoreByLocal.get(i).getFirmBean().getFirmName());
+			storeMap.setOpenTime(findStoreByLocal.get(i).getOpenTime());
+			storeMap.setStoreAddress(findStoreByLocal.get(i).getStoreAddress());
+			storeMap.setStoreId(findStoreByLocal.get(i).getStoreId());
+			storeMap.setStoreName(findStoreByLocal.get(i).getStoreName());
+			storeMap.setStorePhone(findStoreByLocal.get(i).getStorePhone());
+			Double avgScoreByStoreid = commentService.avgScoreByStoreid(findStoreByLocal.get(i).getStoreId());
+			storeMap.setAvgScore(avgScoreByStoreid);
+			String format2 = format.format(localDis.get(i));
+			storeMap.setDistance(format2);
+			list.add(storeMap);
 		}
-		return findStoreByLocal;
+		return list;
+//		
+//		for(StoreBean one : findStoreByLocal) {
+//			Integer firmId = one.getFirmBean().getFirmId();
+//			one.setFirmId(firmId);
+//		}
+//		return findStoreByLocal;
 	}
 	
 	@PostMapping("localstorelike")

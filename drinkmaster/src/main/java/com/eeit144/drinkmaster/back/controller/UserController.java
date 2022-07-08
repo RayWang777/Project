@@ -97,7 +97,12 @@ public class UserController {
 			user = userService.findByAccPwd(userAccount, encryptPwd);
 		} catch (Exception e) {
 			m.addAttribute("errorloginstr", "帳號或密碼錯誤!");
-			return "redirect:/backend/login";
+			return "redirect:/backend/backlogin";
+		}
+		
+		if(user == null) {
+			m.addAttribute("errorloginstr", "帳號或密碼錯誤!");
+			return "/backend/backlogin";
 		}
 //		user = userService.findByAccPwd(userAccount, userPassword);
 		
@@ -240,6 +245,64 @@ public class UserController {
 		userService.insertUser(user);
 		System.out.println("完成新增");
 		return "redirect:/backend/user/all";
+	}
+	
+	@GetMapping("register")
+	public String register(Model m) {
+		UserBeanDTO user = new UserBeanDTO();
+		m.addAttribute("user", user);
+		return "/backend/backregister";
+	}
+
+	@PostMapping("register")
+	// 前端會提供UserBean user 跟 MultipartFile photo這兩個物件
+	public String registerGo(@ModelAttribute("user") UserBean user, BindingResult result,
+			@RequestParam("reallogo") MultipartFile photo,Model m) {
+
+		System.out.println("成功進入insert postmapping");
+		System.out.println("user account：" + user.getUserAccount());
+		//確認是否已有帳號
+		if(!userService.findUserByAccount(user.getUserAccount())) {
+			System.out.println("成功進入帳號除錯");
+			m.addAttribute("accErr", "帳號已有人使用");
+			return "/backend/backregister";
+		};
+		System.out.println("準備進入後端識別格式");
+		// 以下為用UserBeanValidator後端識別欄位錯誤格式
+		UserBeanValidator validator = new UserBeanValidator();
+		validator.validate(user, result);
+		if(result.hasErrors()) {
+			return "/backend/backregister";
+		}
+		System.out.println("完成後端識別格式");
+		// 新增預設圖片動作
+		String contentType = photo.getContentType();
+		System.out.println(contentType);
+		// 把當下的時間加入user內
+		Date createDate = new Date();
+		user.setCreatedate(createDate);
+		if(user.getBirthday() == null) {
+			user.setBirthday(createDate);
+		}
+		System.out.println("完成塞入日期");
+		try {
+			user.setPhoto(photo.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+			UserBeanDTO userDTO = new UserBeanDTO();
+			m.addAttribute("user", userDTO);
+			return "/backend/backregister";
+		}
+		// 密碼加密
+		String pwd= user.getUserPassword();
+		String encryptPwd = Util.saleCode(pwd);
+		System.out.println(encryptPwd);
+		user.setUserPassword(encryptPwd);
+		
+		//存入資料庫
+		userService.insertUser(user);
+		System.out.println("完成新增");
+		return "forward:/backend/send-register-email";
 	}
 
 	

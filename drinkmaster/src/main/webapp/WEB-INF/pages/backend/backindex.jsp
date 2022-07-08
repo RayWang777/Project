@@ -40,12 +40,14 @@
 <!-- 		</div></td>		 -->
 <!-- 	</tr>	 -->
 	<tr>
+
 		<th scope="col">姓名</th>
+
 		<th scope="col">性別</th>
 		<th scope="col">權限</th>
 		<th scope="col">生日</th>
 		<th scope="col">創建日期</th>
-		<th scope="col">大頭貼</th>
+		<th scope="col">地址</th>
 	</tr>
 	<tr>
 		<td class="align-middle"><div class="d-flex align-items-center">
@@ -63,9 +65,9 @@
 		<td class="align-middle"><div class="d-flex align-items-center">
 			<c:out value="${userBean.createdate}"/>
 		</div></td>
-		
-		<td class="align-middle"><img src="<c:url value="/backend/user/${userBean.userId}/photo"/>"
-						style="width: 100px; height: 100px;"></td>
+		<td class="align-middle"><div class="d-flex align-items-center">
+			<c:out value="${userBean.userAddress}"/>
+		</div></td>
 	</tr>
 </table>
 

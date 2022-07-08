@@ -7,14 +7,21 @@
 <jsp:include page="layout/header.jsp"></jsp:include>
 
 <title>廠商</title>
-<header class="bg-dark py-5">
-	<div class="container px-4 px-lg-5 my-5">
-		<div class="text-center text-white">
-			<h1 class="display-4 fw-bolder">Shop in style</h1>
-			<p class="lead fw-normal text-white-50 mb-0">With this shop
-				hompeage template</p>
-		</div>
-	</div>
+<body style="background-color: #F2FCFF;">
+<header class="py-2"> 
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+
+                  <div class="swiper-slide" style="text-align: center;">
+						<a href="http://localhost:8081/drinkmaster/front/firm/${stores[0].firmBean.firmId}"><img alt="" src="<c:url value="/backend/firm/banner/${stores[0].firmBean.firmId}"/>" width="1200" height="370"/></a>
+				</div>
+
+      </div>
+    
+      <div class="swiper-pagination"></div>
+<!--       <div class="swiper-scrollbar"></div> -->
+    </div>
+                    
 </header>
 <!-- Section-->
 <section class="py-5">
@@ -113,5 +120,5 @@
         
         </script>
 
-
+</body>
 <jsp:include page="layout/footer.jsp"></jsp:include>

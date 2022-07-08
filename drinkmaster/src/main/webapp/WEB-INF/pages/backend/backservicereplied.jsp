@@ -77,8 +77,8 @@ Email :   <input id="to" type="text" value="${msg.userBean.userAccount}" class="
 
 回覆訊息 :<input id="message" type="text"  class="form-control" />
 <input type="hidden" id="msgId" value="${msg.serviceId}">
-<button id="send" type="submit"  class="btn btn-lg btn-primary" >回覆</button>
-	
+<button id="send" type="submit"  class="btn btn-lg btn-primary" >回覆</button><br/><br/>
+ <button style="margin-bottom: 100px" class="btn btn-dark" onclick="fast()">一鍵輸入</button>	
 </div>
 </div>
 </div>
@@ -86,44 +86,21 @@ Email :   <input id="to" type="text" value="${msg.userBean.userAccount}" class="
 </body>
 
 </html>
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8" --%>
-<%--     pageEncoding="UTF-8"%> --%>
-<%-- <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %> --%>
-<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> --%>
-<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> --%>
 
-<%-- <jsp:include page="layout/header.jsp" /> --%>
-<%-- <c:set var="contextRoot" value="${pageContext.request.contextPath}" /> --%>
-<!-- <div class="container"> -->
 
-<!-- <div class="row justify-content-center"> -->
-<!-- <div class="col-6"> -->
-<!--   <h1>回覆意見頁面</h1> -->
-<!-- <div class="card"> -->
-<!--   <div class="card-header"> -->
-<!--     請輸入想回覆的訊息 -->
-<!--   </div> -->
-<!--   <div class="card-body"> -->
-  
-<%--   <form:form class="form" method="post" modelAttribute="model"> --%>
-  
-<%--   <form:input path="to" /> --%>
-<%--   <form:input path="subject" type="hidden" /> --%>
-  
-<!--   <div class="form-group"> -->
-<%--   <form:textarea path="message" value="clear" class="form-control"/> --%>
-<!--   </div> -->
-  
-<!--   <input type="submit" name="submit" class="btn btn-lg btn-primary" value="回覆"> -->
- 
-<%--   </form:form> --%>
-    
-<!--   </div> -->
-<!-- </div> -->
+<script type="text/javascript">
 
-<!-- </div> -->
+$(function(){
 
-<!-- </div> -->
+});
 
-<!-- </div> -->
-<%-- <jsp:include page="layout/footer.jsp" /> --%>
+function fast() {
+	let answer = document.getElementById("message");
+	
+	answer.value=("謝謝您的意見回饋，我們會盡快向門市爭取!!!");
+	
+}
+
+</script>
+
+<jsp:include page="layout/footer.jsp" />

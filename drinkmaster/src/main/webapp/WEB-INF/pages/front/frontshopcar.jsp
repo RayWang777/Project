@@ -67,10 +67,10 @@
 	<table id="cart" class="table table-hover table-condensed">
     				<thead>
 						<tr>
-							<th scope="col"><label class="control control--checkbox">
-							<input type="checkbox" class="js-check-all" />
-							<div class="control__indicator"></div>
-							</label></th>
+<!-- 							<th scope="col"><label class="control control--checkbox"> -->
+<!-- 							<input type="checkbox" class="js-check-all" /> -->
+<!-- 							<div class="control__indicator"></div> -->
+<!-- 							</label></th> -->
 							<th style="width:150px;text-align: center;">店名</th>
 							<th style="width:100px;text-align: center;">商品</th>
 							<th style="width:30px;text-align: center;">單價</th>
@@ -82,25 +82,25 @@
 						</tr>
 					</thead>
 					<tbody id="tbody">
-					<c:forEach varStatus="vs" var="shopcarItems" items="${shopcarBuy}">
-						<tr scope="row">
+					<c:forEach varStatus="vs" var="shopcarItems" items="${shopcarBuy}" >
+						<tr scope="row" class="count">
 						
-							<td class="align-middle"><label
-							class="control control--checkbox"><input type="checkbox"
-							id="check" value="<c:out value='${orderBean.orderId}'/>"
-							style="margin-top: 20px;" />
-							<div class="control__indicator"></div></label></td>
+<!-- 							<td class="align-middle"><label -->
+<!-- 							class="control control--checkbox"><input type="checkbox" -->
+<%-- 							id="check" value="<c:out value='${orderBean.orderId}'/>" --%>
+<!-- 							style="margin-top: 20px;" /> -->
+<!-- 							<div class="control__indicator"></div></label></td> -->
 						
 							<td style="font-size: 18px;text-align: center;">
-							<input type="hidden" value="${shopcarItems.value.productId}" >
-							<input type="text" id="productname" value="${shopcarItems.value.storeName}" style="text-align: center;border-style:none;" readonly="true">	
+							<input type="hidden" value="${shopcarItems.value.productId}" name="shopcarproductId" >
+							<input type="text" id="storename" value="${shopcarItems.value.storeName}" style="text-align: center;border-style:none;" readonly="true">	
 							</td>
 							<td><input type="text" id="productname" value="${shopcarItems.value.productName}" style="text-align: center;border-style:none;" readonly="true"></td>
 							<td data-th="Price" >
-							<input type="text" id="price" value="${shopcarItems.value.price}" style="width:50px;text-align: center;border-style:none;" readonly="true">
+							<input type="text" id="price${vs.count}" value="${shopcarItems.value.price}" style="width:50px;text-align: center;border-style:none;" readonly="true">
 							</td>
 							<td data-th="Quantity">
-								<input type="number" id="number" name="number" class="form-control text-center" value="${shopcarItems.value.quantity}" min="1">
+								<input type="number" id="number${vs.count}" name="number" class="form-control text-center" value="${shopcarItems.value.quantity}" min="1" onfocus="changeprice(event)" onkeyup="changeprice(event)" onclick="changeprice(event)">
 							</td> 
 							<td data-th="Price" >
 							<input type="text" id="sugar" value="${shopcarItems.value.sweet}" style="width:50px;text-align: center;border-style:none;" readonly="true">
@@ -109,7 +109,7 @@
 							<input type="text" id="coldhot" value="${shopcarItems.value.coldhot}" style="width:50px;text-align: center;border-style:none;" readonly="true">
 							</td>
 							<td data-th="Subtotal" class="text-center" >
-							<input type="text" id="totalprice" value="${shopcarItems.value.totalPrice}" style="width:100px;text-align: center;border-style:none;" readonly="true">
+							<input type="text" id="totalprice${vs.count}" value="${shopcarItems.value.totalPrice}" style="width:100px;text-align: center;border-style:none;" readonly="true">
 							</td>
 							<td class="actions" data-th="">
 <%-- 							<a href="${contextRoot}/front/shopcar/delete?productId=${shopcarItems.value.productId}"> --%>
@@ -122,20 +122,32 @@
 					</tbody>
 					<tfoot>
 						<tr class="visible-xs">
-<!-- 						備註:折扣碼前的價格 -->
-<%-- 							<td class="text-center" id="total"><strong>Total <c:out value="${shopcarBuy.totalPrice}"></c:out></strong></td> --%>
+							<td style="font-weight: bolder;">總金額:&thinsp;${price.totalPrice }
+<%-- 							<input type="text" name="totalpricedefore" id="totalpricedefore" style="width: 120px;border-style:none;" readonly="true" value="${rowTotal}" > --%>
+							</td>
 						</tr>
 						<tr>
+						<c:choose>
+						<c:when test="${price.storeId == null}">
 							<td><a href="${contextRoot}/front/" class="btn btn-warning">
 							<i class="fa fa-angle-left"></i> 
 							&thinsp;繼續購買</a></td>
-							<td colspan="2">折扣碼:&thinsp;<input type="text" ></td>
+						</c:when>
+						<c:when test="${price.storeId != null}">
+							<td><a href="${contextRoot}/front/productmenu?id=${price.storeId}" class="btn btn-warning">
+							<i class="fa fa-angle-left"></i> 
+							&thinsp;繼續購買</a></td>
+						</c:when>
+						</c:choose>	
 							
+							<td style="font-weight: bolder;">折扣碼:&thinsp;<input type="text" name="salescode" id="salescode" style="width: 130px;" onkeydown="changeprice(event)" onchange="changeprice(event)" onfocus="changeprice(event)" onkeyup="changeprice(event)" onclick="changeprice(event)"></td>
+							<td ><input type="hidden" id="textsale" style="border-style:none;">
+							<span id="salecodeshow" style="color:red;font-weight: bolder;"></span></td>
 							
 <!-- 							備註:折扣碼後的價格 -->
 							<td class="hidden-xs text-center" colspan="3">
 							<span style="color:red;font-weight: bold;">折扣後&ensp;</span>
-							<strong>Total <input type="text" id="totalprice2" value="${shopcarItems.value.totalPrice}" style="width:100px;text-align: center;border-style:none;" readonly="true"></strong></td>
+							<strong>Total <input type="text" name="totalpricefinal" id="totalpricefinal" value="${shopcarItems.value.totalPrice}" style="width:100px;text-align: center;border-style:none;" readonly="true"></strong></td>
 							<td colspan="3"><button type="submit" class="btn btn-success btn-block" onclick="return confirm('確定要結帳嗎?')">結帳&thinsp;<i class="fa fa-angle-right"></i></button></td>
 						</tr>
 					</tfoot>
@@ -146,6 +158,64 @@
 </body>
 
 <script type="text/javascript">
+$(document).ready(function(){
+	
+		
+	
+	  $('#salescode').keyup(function(){
+	    var inputsalescode = $('#salescode').val();
+	   
+
+	
+	$.ajax({
+		url:'http://localhost:8081/drinkmaster/backend/salecode/valied?saleCode='+inputsalescode,
+		method:'GET',
+// 		contentType:"application/x-www-form-urlencoded",
+//		data: JSON.stringify(jsonsalescode),
+		dataType: 'json',
+	    success: function(data){
+	    	
+// 	    	console.log(data);
+// 	    	$('#textsale').html(data+'折');
+
+	    	
+	    	if(inputsalescode == ""){
+	    		$('#salecodeshow').html('');
+	    		$('#textsale').val(1);
+	    	}
+	    	else if(data == 1.0){
+				$('#salecodeshow').html('折扣碼已過期');
+				$('#textsale').val(1);
+			}else if(data > 1.0){
+				$('#salecodeshow').html('無此折扣碼');
+				$('#textsale').val(1);
+			}else{
+				$('#salecodeshow').html(data+'折');
+				$('#textsale').val(data);
+			}
+	    	
+	    	
+			},
+			
+
+   	   
+
+	    	
+
+	 	error:function(err){
+	       console.log(err);
+	    }
+	    
+	    
+	    
+		
+	});
+	
+});
+});	
+
+
+
 function del(event){
 	  console.log(event.target.id)
 var local = event.target.id;
@@ -182,83 +252,38 @@ if (result.isConfirmed) {
 }	
 
 
-
-
-
-
-$(function(){
+function changeprice(event){
+// 	console.log(event.target)？
+// 	number2
+	var textsale = $('#textsale').val();
+	var local = event.target.id.substring(6);
+	var localpriceStr = "#price"+local;
+	var totalpriceStr = "#totalprice"+local;
+	var localPrice = $(localpriceStr).val();
+	var totalPrice = localPrice * event.target.value;
+	$(totalpriceStr).val(totalPrice);
 	
-
-// 	$('#tbody').mouseover(function(){
-// 		$('#totalprice').css("background-color","rgb(218, 218, 218)");
-// 		$('#price').css("background-color","rgb(218, 218, 218)");
-// 		$('#productname').css("background-color","rgb(218, 218, 218)");
-// 	})
-
-	
-// 	$('#tbody').mouseout(function(){
-// 		$('#totalprice').css("background-color","white");
-// 		$('#price').css("background-color","white");
-// 		$('#productname').css("background-color","white");
-// 	})
-	
-	
-	$('#number').click(function(){				
-        var price = $('#price').val();      
-        var number = $('#number').val();
-        var totalprice = price*number;
-
-        $('#totalprice').attr('value',totalprice);
-    })
-    
-    $('#number').keyup(function(){				
-        var price = $('#price').val();      
-        var number = $('#number').val();
-        var totalprice = price*number;
-
-        $('#totalprice').attr('value',totalprice);       	
-    })
-    
-    $('#number').click(function(){				
-        var price = $('#price').val();      
-        var number = $('#number').val();
-        var totalprice = price*number;
-
-        $('#totalprice2').attr('value',totalprice);
-    })
-    
-    $('#number').keyup(function(){				
-        var price = $('#price').val();      
-        var number = $('#number').val();
-        var totalprice = price*number;
-
-        $('#totalprice2').attr('value',totalprice);       	
-    })
-    
-	$('#number').click(function(){				
-        var price = $('#price').val();      
-        var number = $('#number').val();
-        var totalprice = price*number;
-
-        $('#total').html("<strong>Total " + totalprice + "</strong>");
-    })
-    
-    $('#number').keyup(function(){				
-        var price = $('#price').val();      
-        var number = $('#number').val();
-        var totalprice = price*number;
-
-        $('#total').html(totalprice);      	
-    })
-    
-//     $('#delete').click(function(){				
+    //利用標籤判斷數量 
+    var loopTimes  = document.querySelectorAll('#sugar').length
+    var TotalTotalPrice = 0;
+    for(i=0;i<loopTimes;i++){
+   	 var totalpriceOne = '#totalprice'+(i+1);
+   	 console.log(totalpriceOne)
+   	 
+   	 var row = parseInt( $(totalpriceOne).val() );
+   	 console.log(row)
+   	 TotalTotalPrice+= row;
+    }
+//     console.log(TotalTotalPrice)
+// 	$('#totalpricedefore').val(TotalTotalPrice);
+// 	$('#totalpricedefore').attr('value',TotalTotalPrice);	
+	$('#totalpricefinal').val(TotalTotalPrice * textsale);
+}
 
 
-//         $('#cart').remove();    
-//         $(window).attr('location','${contextRoot}/front/');
-//     })
-	
-})
+
+
+
 </script>
 
 <script src="<c:url value="/js/lib/bootstrap.min.js"/>"></script>

@@ -24,12 +24,17 @@ public interface StoreRepostiory extends JpaRepository<StoreBean, Integer> {
 	
 	public List<StoreBean> findByFirmBean_firmId(Integer firmId);
 	
+	
 	@Query(value = "select u.userid from store as s right join users as u on s.userid=u.userid where s.userid is null and u.role = 'store';",nativeQuery = true)
 	public List<Integer> findStoreUserNull();
 	
 	@Query(value = "SELECT * FROM ( SELECT *,( 6371 * acos( cos( radians( :latitude ) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians( :longitude ) ) "
 			+ "+ sin( radians( :latitude ) ) * sin( radians( latitude ) ) ) ) AS distance FROM  STORE ) AS B WHERE distance > 0 ORDER BY distance ASC",nativeQuery = true)
 	public List<StoreBean> findStoreByLocal(Double latitude,Double longitude,Pageable pab); 
+	
+	@Query(value = "SELECT distance FROM ( SELECT *,( 6371 * acos( cos( radians( :latitude ) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians( :longitude ) ) "
+			+ "+ sin( radians( :latitude ) ) * sin( radians( latitude ) ) ) ) AS distance FROM  STORE ) AS B WHERE distance > 0 ORDER BY distance ASC",nativeQuery = true)
+	public List<Double> findStoreByLocalDis(Double latitude,Double longitude,Pageable pab); 
 	
 	@Query(value = "select * from store where storename Like %:storeName%",nativeQuery = true)
 	public List<StoreBean> findStoreByStoreNameLike(@Param(value="storeName")String storeName);

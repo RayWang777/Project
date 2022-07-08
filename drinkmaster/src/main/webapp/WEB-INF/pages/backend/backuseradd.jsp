@@ -6,6 +6,11 @@
 <jsp:include page="layout/header.jsp" />
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
+<style>
+span{
+	color: #ae0000;
+}
+</style>
 <div class="row justify-content-center">
 </div>
 
@@ -24,17 +29,17 @@
        <span id="nameError"></span><br><br>
        
        <form:label path="userAccount">帳&emsp;&emsp;號</form:label>
-       <form:input path="userAccount" class="form-control" onblur="checkEmpty()" id="account"/>
+       <form:input path="userAccount" class="form-control" onblur="checkEmpty()" id="userAccount"/>
        <form:errors path="userAccount" cssClass="error" />
        <span id="accErr"><c:out value="${accErr}"/></span><br><br>
        
        <form:label path="userPassword">密&emsp;&emsp;碼</form:label>
-       <form:password path="userPassword" class="form-control" id="password"/>
+       <form:password path="userPassword" class="form-control" id="userPassword"/>
        <form:errors path="userPassword" cssClass="error" />
        <span id="passwordSp"></span><br/>  <br><br>
        
        <form:label path="userAddress">地&emsp;&emsp;址</form:label>
-       <form:input path="userAddress" class="form-control" onblur="checkEmpty()" id="address"/>
+       <form:input path="userAddress" class="form-control" onblur="checkEmpty()" id="userAddress"/>
        <form:errors path="userAddress" cssClass="error" />
        <span id="addErr"></span>  <br><br>
             
@@ -61,7 +66,7 @@
        
        <form:label path="role">職&emsp;&emsp;權</form:label>
        <select name="role" required="required" class="form-control" onblur="checkEmpty()">
-       		<option value="admim">管理者</option>
+       		<option value="admin">管理者</option>
        		<option value="firm">廠商</option>
        		<option value="store">店家</option>
        		<option value="user">一般會員</option>
@@ -103,9 +108,9 @@ $(function(){
 
 function fast() {
 	let name = document.getElementById("userName");
-	let acc = document.getElementById("account");
-	let pwd = document.getElementById("password");
-	let add = document.getElementById("address");
+	let acc = document.getElementById("userAccount");
+	let pwd = document.getElementById("userPassword");
+	let add = document.getElementById("userAddress");
 	let phone = document.getElementById("phone");
 	let bd = document.getElementById("birthday");
 	
@@ -162,7 +167,7 @@ function checkPwd(){
 function checkEmpty(){
 	
 	//please input the test email to see is valid
-	let strEmail = document.getElementById("account");
+	let strEmail = document.getElementById("userAccount");
 	let theacc = document.getElementById("accErr");
 	
 	//Regular expression Testing
@@ -186,7 +191,7 @@ function checkEmpty(){
     }
 
     let theAdd = document.getElementById("addErr");
-    let address = document.getElementById("address");
+    let address = document.getElementById("userAddress");
     let add = address.value;
     if (add == "" || add.length == 0) {
         theAdd.innerHTML = "請輸入地址";

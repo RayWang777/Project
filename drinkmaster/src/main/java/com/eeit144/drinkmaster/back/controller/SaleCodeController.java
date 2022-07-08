@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+import javax.persistence.EntityManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -119,9 +121,9 @@ public class SaleCodeController {
 			salecode = Util.DeSaleCode(insertSaleCodeToDB.get(i).getSaleCode());
 			insertSaleCodeToDB.get(i).setSaleCode(salecode);
 		}
-
+		
 		m.addAttribute("salecodes", insertSaleCodeToDB);
-		return "/backend/backsalecode";
+		return "redirect:/backend/salecode/all";
 	}
 
 	@GetMapping("valied")
@@ -130,11 +132,8 @@ public class SaleCodeController {
 		String code = Util.saleCode(saleCode);
 		Optional<SaleCodeBean> saleCodeBeanOp = saleCodeService.findBySaleCode(code);
 		
-		Page<SaleCodeBean> showAllSaleCode = showAllSaleCode(0);
-		m.addAttribute("allValiedCode", showAllSaleCode);
-
 		if (saleCodeBeanOp.isEmpty()) {
-			return null;
+			return 10.0;
 		}
 		SaleCodeBean saleCodeBean = saleCodeBeanOp.get();
 		Date validDate = saleCodeBean.getValidDate();
@@ -152,6 +151,9 @@ public class SaleCodeController {
 	public String CheckSaleCodeStatus(@RequestParam(name ="salecode") String saleCode,Model m) {
 		String code = Util.saleCode(saleCode);
 		Optional<SaleCodeBean> saleCodeBeanOp = saleCodeService.findBySaleCode(code);
+		
+		Page<SaleCodeBean> showAllSaleCode = showAllSaleCode(1);
+		m.addAttribute("allValiedCode", showAllSaleCode);
 
 		SaleCodeVO saleCodeVO = new SaleCodeVO();
 		if (saleCodeBeanOp.isEmpty()) {
@@ -174,6 +176,7 @@ public class SaleCodeController {
 		saleCodeVO.setSaleCode("可使用");
 		saleCodeVO.setDiscount(saleCodeBeanOp.get().getDiscount());
 		m.addAttribute("status", saleCodeVO);
+		
 		return "/backend/backsalecode";
 	}
 	
@@ -205,12 +208,21 @@ public class SaleCodeController {
 	
 	@GetMapping("destroy")
 	public String disableSaleCodeForm(@RequestParam(name="s") String saleCode,Model m){
-		
 		ResponseEntity<String> disableSaleCode = disableSaleCode(saleCode, m);
+		return "redirect:/backend/salecode/all";
+	}
+	
+	
+	@GetMapping("destroyall")
+	public String disableSaleCodeMany(@RequestParam(name="saleCodesId",defaultValue = "") List<Integer> saleCodeIds,Model m){
+		
+		if(saleCodeIds.isEmpty()) {
+			return "redirect:/backend/salecode/all";
+		}
+		Date date = new Date();
+		saleCodeService.deleteSaleCodeMany(date,saleCodeIds); 
 		
 		return "redirect:/backend/salecode/all";
-		
-		
 	}
 	
 	private Page<SaleCodeBean> showAllSaleCode(Integer page) {

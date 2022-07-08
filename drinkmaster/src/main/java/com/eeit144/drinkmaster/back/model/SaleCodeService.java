@@ -1,5 +1,6 @@
 package com.eeit144.drinkmaster.back.model;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,4 +20,6 @@ public interface SaleCodeService {
 	public Optional<SaleCodeBean> findBySaleCode(String salecode);
 	
 	public Page<SaleCodeBean> findAllValiedCode(Pageable pab);
+	
+	public void deleteSaleCodeMany(Date valieddate,List<Integer> saleCodeIds);
 }

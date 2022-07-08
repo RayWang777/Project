@@ -191,7 +191,7 @@ table {
 <div class="wrap">
            
 </div>
-<c:forEach varStatus="vs" var="shopcarItems" items="${shopcarBuy}">
+<%-- <c:forEach varStatus="vs" var="shopcarItems" items="${shopcarBuy}"> --%>
 <div class="wrap">
         <div class="top">
         <div class="price">
@@ -203,53 +203,67 @@ table {
          <div class="price">
                 <span>電話</span>
                 
-                <span><c:out value="${shopcarBuy.phone}" /></span>
+                <span><c:out value="${data.orderPhone}" /></span>
             </div>
             <div class="price">
                 <span>地址</span>
                 
-                <span><c:out value="${shopcarBuy.address}" /></span>
+                <span><c:out value="${data.orderAddress}" /></span>
+            </div>
+            
+            <div class="price">
+                <span>下單時間</span>
+                
+                <span>
+                <fmt:formatDate  value="${data.createTime}" pattern="yyyy-MM-dd HH:mm"/>
+<%--                 <c:out value="${data.createTime}" /> --%>
+                </span>
+            </div>
+            <div class="price">
+                <span>訂單狀態</span>
+                
+                <span><c:out value="${data.orderStatus}" /></span>
             </div>
             
             
-            <div class="price">
-                <span>商店名稱</span>
+<!--             <div class="price"> -->
+<!--                 <span>商店名稱</span> -->
                 
-                <span><c:out value="${shopcarItems.value.storeName}" /></span>
-            </div>
-            <div class="price">
-                <span>商品名稱</span>
+<%--                 <span><c:out value="${shopcarItems.value.storeName}" /></span> --%>
+<!--             </div> -->
+<!--             <div class="price"> -->
+<!--                 <span>商品名稱</span> -->
                 
-                <span><c:out value="${shopcarItems.value.productName}" /></span>
-            </div>
-            <div class="price">
-                <span>數量</span>
+<%--                 <span><c:out value="${shopcarItems.value.productName}" /></span> --%>
+<!--             </div> -->
+<!--             <div class="price"> -->
+<!--                 <span>數量</span> -->
                 
-                <span><c:out value="${shopcarItems.value.quantity}" /></span>
-            </div>
-            <div class="price">
-                <span>甜度</span>
+<%--                 <span><c:out value="${shopcarItems.value.quantity}" /></span> --%>
+<!--             </div> -->
+<!--             <div class="price"> -->
+<!--                 <span>甜度</span> -->
                 
-                <span><c:out value="${shopcarItems.value.sweet}" /></span>
-            </div>
-            <div class="price">
-                <span>冷熱</span>
+<%--                 <span><c:out value="${shopcarItems.value.sweet}" /></span> --%>
+<!--             </div> -->
+<!--             <div class="price"> -->
+<!--                 <span>冷熱</span> -->
                 
-                <span><c:out value="${shopcarItems.value.coldhot}" /></span>
-            </div>
+<%--                 <span><c:out value="${shopcarItems.value.coldhot}" /></span> --%>
+<!--             </div> -->
             
             <br>
             <div class="total">
             
                 <span>總金額</span>
                 
-                <span id="totalprice">NT$ <c:out value="${shopcarItems.value.totalPrice}" /></span>
+                <span id="totalprice">NT$ <c:out value="${data.totalPrice}" /></span>
             	
             </div>
         </div>
 
             </div>  
-            </c:forEach>  
+<%--             </c:forEach>   --%>
         <div style="text-align: center;">
         <a href="${contextRoot}/front/">
         <button type="button" class="btn btn-success">繼續購買</button>

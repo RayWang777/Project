@@ -48,8 +48,9 @@
 		
 		padding: 7% 120px 20px;
 	}
-
-	
+	span{
+		color: #ae0000;
+	}
 </style>
 
         <!-- Bootstrap icons-->

@@ -97,7 +97,12 @@ public class UserController {
 			user = userService.findByAccPwd(userAccount, encryptPwd);
 		} catch (Exception e) {
 			m.addAttribute("errorloginstr", "帳號或密碼錯誤!");
-			return "redirect:/backend/login";
+			return "redirect:/backend/backlogin";
+		}
+		
+		if(user == null) {
+			m.addAttribute("errorloginstr", "帳號或密碼錯誤!");
+			return "/backend/backlogin";
 		}
 //		user = userService.findByAccPwd(userAccount, userPassword);
 		

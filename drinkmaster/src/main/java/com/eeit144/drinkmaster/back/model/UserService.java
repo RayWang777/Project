@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 
+import com.eeit144.drinkmaster.bean.AuthenticationProvider;
 import com.eeit144.drinkmaster.bean.UserBean;
 
 public interface UserService {
@@ -25,9 +26,15 @@ public interface UserService {
 	public UserBean findByAccPwd(String userAccount, String userPassword);
 
 	public String findIdByName(String userName);
-	
+
 	public Boolean findUserByAccount(String userAccount);
-	
+
 	public List<UserBean> findNullTypeUsers(List<Integer> userIds);
 
+	public UserBean findAllByUserAccount(String useraccount);
+
+	public void createNewCustomerAfterOAuthLoginSuccess(String useraccount, String name,
+			AuthenticationProvider provider);
+
+	public void updateCustomerAfterLogin(String useraccount, String name, AuthenticationProvider provider);
 }

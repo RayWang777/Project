@@ -23,4 +23,8 @@ public interface UserRepostiory extends JpaRepository<UserBean, Integer> {
 	@Query(value="select useraccount from users where useraccount =:userAccount", nativeQuery = true)
 	String findByAccount(@Param(value="userAccount") String userAccount);
 	
+	public UserBean findByuserName(String name);
+
+	public UserBean findAllByUserAccount(String useraccount);
+
 }

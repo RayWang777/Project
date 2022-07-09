@@ -11,7 +11,8 @@
 <title>飲君子 登入</title>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
-	
+		<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
 
 <style>
@@ -96,7 +97,9 @@
 		</div>
 		
 	</form:form>
-	
+	<div class="mb-3 text-center">
+		<a class="btn btn-lg btn-white " href="${contextRoot}/oauth2/authorization/google"  ><i class="fa-brands fa-google"></i>&nbsp;&nbsp; Google</a>
+		</div>
 <!-- 		<button class="btn btn-light" onclick="admin()">admin帳密</button> -->
 <!-- 		<button class="btn btn-light" onclick="firm()">firm帳密</button> -->
 <!-- 		<button class="btn btn-light" onclick="store()">store帳密</button> -->

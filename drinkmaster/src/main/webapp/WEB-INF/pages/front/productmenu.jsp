@@ -97,7 +97,7 @@ color: black;
 	<section class="py-2">
 		<div class="container px-4 px-lg-0 mt-5">
 			<div
-				class="row gx-4 gx-lg-10 row-cols-2 row-cols-md-3 row-cols-xl-3 j">	
+				class="row gx-4 gx-lg-10 row-cols-1 row-cols-md-1 row-cols-xl-3 j">	
 				<c:forEach var="categoryBean" items="${category}">
 					<div class="col mb-5">
 						<div class="card h-100"

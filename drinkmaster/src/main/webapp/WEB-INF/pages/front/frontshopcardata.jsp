@@ -49,6 +49,10 @@
 	
 /* } */
 
+
+
+
+
 </style>
 </head>
 
@@ -56,10 +60,7 @@
 
 
 <body>
-<div class="container">
 
-<div class="row justify-content-center">
-</div>
 
 <div class="container">
 
@@ -67,13 +68,18 @@
 
 <div class="row justify-content-center">
 
-<div >
+<div id="div">
+
 <form action="${contextRoot}/front/shopcar/confirmOrder" method="post">
-<p style="text-align: center;"> 
+<p style="margin:0 auto; width:  300px"> 
 <input type="hidden" value="${canSeeUser.userId}" name="userId">
-姓名:&thinsp;<input type="text" value="${canSeeUser.userName}" readonly="readonly"><br><br>
-電話:&thinsp;<input type="text" name="shopcarphone"><br><br>
-地址:&thinsp;<input type="text" value="${canSeeUser.userAddress}" name="shopcaraddress"><br><br>
+姓名:&thinsp;<input type="text" value="${canSeeUser.userName}" readonly="readonly"><br><br><br>
+電話:&thinsp;<input type="text" name="shopcarphone" id="shopcarphone"><br>
+<span id="result1" style="color: red; font-size: 16px;padding-left: 50px;"></span><br><br>
+
+地址:&thinsp;<input type="text" value="${canSeeUser.userAddress}" name="shopcaraddress" id="shopcaraddress"><br>
+<span id="result2" style="color: red; font-size: 16px;padding-left: 50px;"></span><br><br>
+
 
 <c:forEach varStatus="vs" var="shopcarItems" items="${shopcarBuy}">
 <input type="hidden" value="${shopcarItems.value.storeId}" name="storeId">
@@ -87,11 +93,13 @@
 <input type="hidden" value="${shopcarItems.value.coldhot}" name="shopcarcoldhot">
 <input type="hidden" value="${shopcarItems.value.totalPrice}" name="shopcartotalPrice">
 </c:forEach>
-
-<button type="submit" onclick="return confirm('確定要送出嗎?')">送出訂單</button> 
-
+<div style="text-align: center;">
+<button type="submit" id="aftersubmit"  >送出訂單</button> 
+</div>
 </p>
 </form>
+
+
 </div>
 </div>
 </div>
@@ -109,6 +117,43 @@
 </body>
 
 <script type="text/javascript">
+$(function(){
+	var a=false;
+    var b=false;
+	$("#shopcarphone").blur(function(){
+        if($(this).val().length == 0) {
+            $("#result1").html("電話不為空");
+            a=false;
+        }
+            else{
+                $("#result1").html("");
+                a=true;
+            }
+        })
+    })	
+	$("#shopcaraddress").blur(function(){
+        if($(this).val().length == 0) {
+            $("#result2").html("地址不為空");
+            b=false;
+        }
+            else{
+                $("#result2").html("");
+                b=true;
+            }
+        })
+    $("#aftersubmit").click(function() {
+            if(a && b == true){           	
+            	return true;
+            }
+            else{
+                alert("有信息填寫錯誤");
+                return false;
+            }
+        });
+
+
+
+
 
 </script>
 

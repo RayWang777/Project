@@ -248,8 +248,9 @@
 					</form:select><br><br>
 					<form:hidden path="productId" value="${orderItems.productBean.productId}" />
   <form:label path="quantity">數&emsp;&emsp;量</form:label>
-  <form:input path="quantity" /><br><br>
-  
+  <form:input path="quantity" id="quantity"/><br>
+  <span id="result1" style="color: red; font-size: 14px;padding-left: 65px;"></span>
+  <br>
   <form:label path="sweet">甜&emsp;&emsp;度</form:label>
   <form:select path="sweet" >
   <form:option value="無糖">無糖</form:option>
@@ -266,7 +267,9 @@
   </form:select><br><br>
 
   <form:label path="price">金&emsp;&emsp;額</form:label>
-  <form:input path="price" /><br><br>
+  <form:input path="price" id="price"/><br>
+  <span id="result2" style="color: red; font-size: 14px;padding-left: 65px;"></span>
+  <br>
   
 
   
@@ -294,6 +297,41 @@
 
 
 <script type="text/javascript">
+$(function(){
+	var a=false;
+    var b=false;
+	$("#quantity").blur(function(){
+        if($(this).val().length == 0) {
+            $("#result1").html("數量不為空");
+            a=false;
+        }
+            else{
+                $("#result1").html("");
+                a=true;
+            }
+        })
+    })	
+	$("#price").blur(function(){
+        if($(this).val().length == 0) {
+            $("#result2").html("金額不為空");
+            b=false;
+        }
+            else{
+                $("#result2").html("");
+                b=true;
+            }
+        })
+    $("#aftersubmit").click(function() {
+            if(a && b == true){           	
+            	return true;
+            }
+            else{
+                alert("有信息填寫錯誤");
+                return false;
+            }
+        });
+
+
 
 function del(event){
 	  console.log(event.target.id)

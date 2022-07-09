@@ -106,7 +106,7 @@ public class OrderController<E> {
 		
 		@GetMapping("order/findAll")
 		public ModelAndView findView(ModelAndView mav, @RequestParam(name = "o", defaultValue = "1") Integer pageNumber,@SessionAttribute("userBean") UserBean user,Model m) {
-			
+			mav.getModel().put("past", "1");
 			if((user.getRole().equals("user"))) {
 				return mav;			
 			}else if(user.getRole().equals("store")) {
@@ -258,7 +258,7 @@ public class OrderController<E> {
 		@GetMapping("order/findStatus")
 		public ModelAndView findStatusView(ModelAndView mav, @RequestParam(name = "S", defaultValue = "1") Integer pageNumber, 
 				@RequestParam(name = "sta", defaultValue = "待付款") String orderStatus,@SessionAttribute("userBean") UserBean user) {
-			
+			mav.getModel().put("past", "2");
 			if((user.getRole().equals("user"))) {
 				return mav;			
 			}else if(user.getRole().equals("store")) {

@@ -231,7 +231,7 @@
 <p>
     <a href="${contextRoot}/backend/order/export"><button type="button" class="btn btn-warning btn-sm" >匯出Excel</button></a>&emsp;
 </p>
-
+<c:if test="${past=='1' }">
 <div class="row justify-content-center" style="font-size: x-large;">
   <c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
    <c:choose>
@@ -247,7 +247,25 @@
    </c:if>
    </c:forEach>
    </div>
+</c:if>
 
+<c:if test="${past=='2' }">
+<div class="row justify-content-center" style="font-size: x-large;">
+  <c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
+   <c:choose>
+   <c:when test="${page.number!=pageNumber-1}">
+   <a href="${contextRoot}/backend/order/findStatus?s=${pageNumber}&sta=${orderStatus}"> <c:out value="${pageNumber}" /> </a>
+   </c:when>
+   <c:otherwise>
+   <c:out value="${pageNumber}"></c:out>
+   </c:otherwise>
+   </c:choose> 
+   <c:if test="${pageNumber!= page.totalPages }">
+    &thinsp;| &thinsp;
+   </c:if>
+   </c:forEach>
+   </div>
+</c:if>
    
 <!--    新增訂單 -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -281,22 +299,25 @@
 					</form:select><br><br>
 					<form:hidden path="storeId" value="1" />
 					
-  <form:label path="orderAddress">地&emsp;&emsp;址</form:label>
-  <form:input path="orderAddress" /><br><br>
-  <form:label path="orderPhone">電&emsp;&emsp;話</form:label>
-  <form:input path="orderPhone" /><br><br>
-  <form:label path="orderStatus">狀&emsp;&emsp;態</form:label>
-  <select id="orderStatus" path="orderStatus">
-  <option value="-1">請選擇</option>
+  <form:label path="orderAddress" >地&emsp;&emsp;址</form:label>
+  <form:input path="orderAddress" id="address"/><br>
+  <span id="result1" style="color: red; font-size: 14px;padding-left: 65px;"></span><br>
+  <form:label path="orderPhone" >電&emsp;&emsp;話</form:label>
+  <form:input path="orderPhone" id="phone"/><br>
+  <span id="result2" style="color: red; font-size: 14px;padding-left: 65px;"></span><br>
+  <form:label path="orderStatus" >狀&emsp;&emsp;態</form:label>
+  <select id="orderStatus" path="orderStatus" id="status">
+  <option value="-1" >請選擇</option>
   <option value="待付款">待付款</option>
   <option value="待出貨">待出貨</option>
   <option value="已出貨">已出貨</option>
   <option value="已取消">已取消</option>
   </select>
+  <span id="result3" style="color: red; font-size: 14px;padding-left: 65px;"></span>  
   <form:hidden id="substatus" path="orderStatus" /><br><br>
-  <form:label path="totalPrice">總&ensp;金&ensp;額</form:label>
-  <form:input path="totalPrice" /><br>
-  
+  <form:label path="totalPrice" >總&ensp;金&ensp;額</form:label>
+  <form:input path="totalPrice" id="price"/><br>
+  <span id="result4" style="color: red; font-size: 14px;padding-left: 65px;"></span>
  
   <br><br>
   <div class="row justify-content-center">
@@ -320,7 +341,61 @@
 
 <script type="text/javascript">
 
-
+$(function(){
+	var a=false;
+    var b=false;
+    var c=false;
+    var d=false;
+	$("#address").blur(function(){
+        if($(this).val().length == 0) {
+            $("#result1").html("地址不為空");
+            a=false;
+        }
+            else{
+                $("#result1").html("");
+                a=true;
+            }
+        })
+    })	
+	$("#phone").blur(function(){
+        if($(this).val().length == 0) {
+            $("#result2").html("電話不為空");
+            b=false;
+        }
+            else{
+                $("#result2").html("");
+                b=true;
+            }
+        })
+        $("#status").blur(function(){
+        if($(this).val() == -1) {
+            $("#result3").html("狀態不為空");
+            b=false;
+        }
+            else{
+                $("#result3").html("");
+                b=true;
+            }
+        })
+        $("#price").blur(function(){
+        if($(this).val().length == 0) {
+            $("#result4").html("總金額不為空");
+            b=false;
+        }
+            else{
+                $("#result4").html("");
+                b=true;
+            }
+        })
+    $("#ordersubmit").click(function() {
+            if(a && b == true){           	
+            	return true;
+            }
+            else{
+                alert("有信息填寫錯誤");
+                return false;
+            }
+        });
 
 
 

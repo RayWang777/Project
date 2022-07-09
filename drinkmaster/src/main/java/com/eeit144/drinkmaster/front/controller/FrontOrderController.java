@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -19,6 +21,7 @@ import com.eeit144.drinkmaster.back.model.OrderService;
 import com.eeit144.drinkmaster.back.model.UserService;
 import com.eeit144.drinkmaster.bean.OrderBean;
 import com.eeit144.drinkmaster.bean.OrderItems;
+import com.eeit144.drinkmaster.bean.StoreBean;
 import com.eeit144.drinkmaster.bean.UserBean;
 
 @Controller
@@ -76,6 +79,39 @@ public class FrontOrderController {
 		
 		orderService.deleteById(id);
 		return "redirect:http://localhost:8081/drinkmaster/front/order/userOrder?orderuserid=" + userId;
+	}
+	
+	@GetMapping("order/edit")
+	public String editById(@RequestParam("id") Integer id, Model m) {
+
+
+		
+								
+		OrderBean orderBean = orderService.findById(id);
+		m.addAttribute("orderBean", orderBean);
+		return "/front/frontorderupdate";
+	}
+	
+	@PostMapping("order/update")
+	public String updateOrder(@ModelAttribute("order") OrderBean orderBean, Model m) {
+
+
+		
+		
+		List<OrderBean> orders = orderService.findAll();
+
+		m.addAttribute("orderstatus", orders);
+		
+		UserBean oldUser = userService.findById(orderBean.getUserId()).get();
+		
+		
+		
+		orderBean.setUserBean(oldUser);
+		
+		
+		orderService.insertOrder(orderBean);
+
+		return "redirect:/front/order/userOrder";
 	}
 	
 }

@@ -64,7 +64,7 @@
 
 <div class="container">
 
-<h2 class="mb-4" style="text-align: center; margin-top: 20px" >確認資料</h2>
+<h2 class="mb-4" style="text-align: center; " >確認資料</h2>
 
 <div class="row justify-content-center">
 

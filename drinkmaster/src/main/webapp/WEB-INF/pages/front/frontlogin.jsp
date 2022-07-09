@@ -99,13 +99,14 @@
 	</form:form>
 	<div class="mb-3 text-center">
 		<a class="btn btn-lg btn-white " href="${contextRoot}/oauth2/authorization/google"  ><i class="fa-brands fa-google"></i>&nbsp;&nbsp; Google</a>
-		</div>
+		</div >
 <!-- 		<button class="btn btn-light" onclick="admin()">admin帳密</button> -->
 <!-- 		<button class="btn btn-light" onclick="firm()">firm帳密</button> -->
 <!-- 		<button class="btn btn-light" onclick="store()">store帳密</button> -->
+<div class=" text-center">
 		<button class="btn btn-light" onclick="user()">使用者帳密</button>
 		<button class="btn btn-light" onclick="user2()">新user帳密</button>
-		
+		</div>
 	</div>
 	
 </div>

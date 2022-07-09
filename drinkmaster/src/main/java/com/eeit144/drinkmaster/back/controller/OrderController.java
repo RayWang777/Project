@@ -238,8 +238,7 @@ public class OrderController<E> {
 			orderBean.setUserBean(oldUser);
 			orderBean.setStoreBean(oldStore);
 			
-			System.out.println("stroeid:"+oldStore.getStoreId());
-			System.out.println("userid:"+oldUser.getUserId());
+
 			
 			orderService.insertOrder(orderBean);
 

@@ -71,7 +71,7 @@
 			<c:forEach  var="order" items="${page.content}" >
 				<tr scope="row">
 					<td class="align-middle">
-						<input type="hidden" value="<c:out value="${order.orderId}"/>">
+						<input type="hidden" value="<c:out value="${order.orderId}" />">
 						<input type="hidden" value="<c:out value="${canSeeUser.userId}"/>" name="orderuserid">
 <%-- 						<input type="hidden" vaule="${order.orderId}" name="id"> --%>
 						</td>
@@ -115,9 +115,8 @@
       				<td class="align-middle" style="text-align: center;">
       				<c:choose>
       				<c:when test="${order.orderStatus=='待付款'}">
-      				<button type="button"  id="${order.orderId}" class="btn btn-danger btn-sm" onclick="return del(event)" value="取消">取消
-<!--       				<i class="fa fa-trash-o"></i> -->
-      				</button>
+      				<a href="${contextRoot}/front/order/edit?id=${order.orderId}"><button class="btn btn-danger btn-sm">取消</button></a>
+
 					</c:when>
 					</c:choose>
 					</td>

@@ -46,7 +46,20 @@ public class OrderItemsController {
 	@Autowired
 	private FirmService firmService;
 	
-	
+	@GetMapping("orderItems/insertview")
+	public String addView(Model m) {
+		List<ProductBean> products = orderService.findAllProducts();
+
+		m.addAttribute("addproducts", products);
+		
+		List<OrderBean> orders = orderService.findAll();
+
+		m.addAttribute("addorders", orders);
+		
+		OrderItems orderItems = new OrderItems();
+		m.addAttribute("orderItems", orderItems);
+		return "/backend/backorderitemsadd";
+	}
 	
 	@GetMapping("orderItems/findAll")
 	public ModelAndView findView(ModelAndView mav, @RequestParam(name = "o", defaultValue = "1") Integer pageNumber,@SessionAttribute("userBean") UserBean user,Model m) {
@@ -128,6 +141,29 @@ public class OrderItemsController {
 		oiService.insertOrderItems(orderItems);
 		return "redirect:/backend/orderItems/findAll";
 	}
+	
+	@PostMapping("orderItems/insert2")
+	public String insertOrderItems2(@ModelAttribute("orderItems") OrderItems orderItems, Model model){
+		List<ProductBean> products = orderService.findAllProducts();
+
+		model.addAttribute("addproducts", products);
+		
+		List<OrderBean> orders = orderService.findAll();
+
+		model.addAttribute("addorders", orders);
+		
+		ProductBean oldProduct = productService.findById(orderItems.getProductId());
+		orderItems.setProductBean(oldProduct);
+		
+		OrderBean oldOrder = orderService.findById(orderItems.getOrderId());
+		orderItems.setOrderBean(oldOrder);
+		
+		oiService.insertOrderItems(orderItems);
+		return "redirect:/backend/order/findAll";
+	}
+	
+	
+	
 	
 	@GetMapping("orderItems/edit")
 	public String editById(@RequestParam("id") Integer id, Model m) {

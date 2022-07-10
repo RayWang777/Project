@@ -283,6 +283,7 @@
     </div>
   </form:form>
   <br>
+  <button style="margin-left:210px; margin-bottom: 100px; text-align: center; width: 100px;" class="btn btn-secondary btn-sm" onclick="fast()">一鍵輸入</button>
       </div>
       </div>
       </div>
@@ -297,6 +298,24 @@
 
 
 <script type="text/javascript">
+function fast() {
+	let quantity = document.getElementById("quantity");
+	let price = document.getElementById("price");
+// 	let price = document.getElementById("price");
+// 	let userId = document.getElementById("userId");
+// 	let storeId = document.getElementById("storeId");
+// 	let substatus = document.getElementById("substatus");
+	
+	quantity.value=("30");
+	price.value=("900");
+// 	price.value=("900");
+// 	userId.value=("2");
+// 	storeId.value=("2");
+// 	substatus.value=("待付款");
+}
+
+
+
 $(function(){
 	var a=false;
     var b=false;

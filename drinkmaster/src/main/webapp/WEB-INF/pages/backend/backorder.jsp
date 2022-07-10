@@ -129,6 +129,21 @@
 	<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="">新增訂單</button>&emsp;
 	</c:when>
 </c:choose>	
+<c:choose>
+	<c:when test="${userBean.role=='firm'}">
+		<input type="hidden">
+	</c:when>
+	<c:when test="${userBean.role=='store'}">
+	<a href="${contextRoot}/backend/orderItems/insertview">
+		<button type="button" class="btn btn-success btn-sm" >新增訂單細項</button>&emsp;
+	</a>	
+	</c:when>
+	<c:when test="${userBean.role=='admin'}">
+	<a href="${contextRoot}/backend/orderItems/insertview">
+		<button type="button" class="btn btn-success btn-sm" >新增訂單細項</button>&emsp;
+	</a>
+	</c:when>
+</c:choose>	
 <a href="${contextRoot}/backend/order/findAll"><button type="button" class="btn btn-outline-dark btn-sm">訂單列表</button></a>&emsp;
 <a href="${contextRoot}/backend/order/findStatus?sta=待付款"><button type="button" class="btn btn-outline-dark btn-sm">待付款</button></a>&emsp;
 <a href="${contextRoot}/backend/order/findStatus?sta=待出貨"><button type="button" class="btn btn-outline-dark btn-sm">待出貨</button></a>&emsp;
@@ -289,7 +304,7 @@
 						<form:options items="${orderaddusers}" itemLabel="userName"
 							itemValue="userId" id="useridoption"/>
 					</form:select><br><br>
-					<form:hidden path="userId" value="1" />
+					<form:hidden path="userId" id="userId" value="1" />
 
 <label for="selectstore">店家名稱</label>
 					<form:select id="selectstore" path="storeBean.storeId">
@@ -297,7 +312,7 @@
 						<form:options items="${orderaddstores}" itemLabel="storeName"
 							itemValue="storeId" />
 					</form:select><br><br>
-					<form:hidden path="storeId" value="1" />
+					<form:hidden path="storeId" id="storeId" value="1" />
 					
   <form:label path="orderAddress" >地&emsp;&emsp;址</form:label>
   <form:input path="orderAddress" id="address"/><br>
@@ -324,9 +339,12 @@
   <a href="${contextRoot}/backend/order/insert">
   <button type="submit" id="ordersubmit" class="btn btn-primary btn-sm"  name="submit"  onclick="return confirm('確定要新增嗎?')" >確認</button></a>&emsp;  
   
-  <button type="button" id="closebutton" class="btn btn-outline-dark btn-sm" data-dismiss="modal" aria-label="Close" >取消</button>
+  <button type="button" id="closebutton" class="btn btn-outline-dark btn-sm" data-dismiss="modal" aria-label="Close" >取消</button><br>
+  
   </div>
   </form:form>
+  <br>
+  <button style="margin-left:180px; margin-bottom: 100px; text-align: center;" class="btn btn-secondary btn-sm" onclick="fast()">一鍵輸入</button>
       </div>
       
     </div>
@@ -340,6 +358,24 @@
 
 
 <script type="text/javascript">
+function fast() {
+	let address = document.getElementById("address");
+	let phone = document.getElementById("phone");
+	let price = document.getElementById("price");
+// 	let userId = document.getElementById("userId");
+// 	let storeId = document.getElementById("storeId");
+// 	let substatus = document.getElementById("substatus");
+	
+	address.value=("台北市大安區復興南路1號");
+	phone.value=("0977123456");
+	price.value=("900");
+// 	userId.value=("2");
+// 	storeId.value=("2");
+// 	substatus.value=("待付款");
+}
+
+
+
 
 $(function(){
 	var a=false;

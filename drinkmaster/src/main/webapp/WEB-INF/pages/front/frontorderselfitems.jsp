@@ -52,6 +52,7 @@
 		style="width: 100%; table-layout: fixed;">
 		<thead>
 			<tr>
+				<th scope="col" style="text-align: center;"></th>
 				<th scope="col" style="text-align: center;">商品名稱</th>
 				<th scope="col" style="text-align: center;">數量</th>
 				<th scope="col" style="text-align: center">甜度</th>
@@ -64,6 +65,8 @@
 
 			<c:forEach  var="orderItems" items="${page.content}" >
 				<tr scope="row">
+				<td class="align-middle" style="text-align: center;">
+				</td>
 					<td class="align-middle" style="text-align: center;">
 						<c:out value="${orderItems.productBean.productName}"></c:out>
 					</td>

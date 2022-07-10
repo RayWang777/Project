@@ -2,6 +2,7 @@ package com.eeit144.drinkmaster.front.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -62,7 +63,13 @@ public class FrontPageController {
 	@ResponseBody
 	public List<StoreTop> findTop3() {
 		List<Integer> count = orderService.countBystoreId();
-		List<StoreBean> allstore = storeService.findAll(count);
+		ArrayList<StoreBean> allstore = new ArrayList<StoreBean>();
+		for(int i=0;i<3;i++) {
+			StoreBean findById = storeService.findById(count.get(i)).get();
+			allstore.add(findById);
+		}
+		
+//		List<StoreBean> allstore = storeService.findAll(count);
 		List<StoreTop> topList = new ArrayList<StoreTop>();
 		String firmName = allstore.get(0).getFirmBean().getFirmName();
 		StoreTop top1 = new StoreTop();

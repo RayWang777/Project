@@ -34,7 +34,7 @@
       <div class="swiper-wrapper">
         <div class="swiper-button-next" style="margin-right: 15%"></div>
       <div class="swiper-button-prev" style="margin-left: 15%"></div>
-       <c:forEach items="${swiperPic}" var="one">
+       <c:forEach items="${swiperPic}" var="one" end="5">
                   <div class="swiper-slide" style="text-align: center;">
 						<a href="http://localhost:8081/drinkmaster/front/firm/${one}"><img alt="" src="<c:url value="/backend/firm/banner/${one}"/>" width="1000" height="370"/></a>
 				</div>

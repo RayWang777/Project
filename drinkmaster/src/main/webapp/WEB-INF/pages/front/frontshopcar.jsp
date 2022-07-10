@@ -152,7 +152,7 @@
 <!-- 							備註:折扣碼後的價格 -->
 							<td class="hidden-xs text-center" colspan="3">
 							<span style="color:red;font-weight: bold;">折扣後&ensp;</span>
-							<strong>Total <input type="text" name="totalpricefinal" id="totalpricefinal" value="${shopcarItems.value.totalPrice}" style="width:100px;text-align: center;border-style:none;" readonly="true"></strong></td>
+							<strong>Total <input type="text" name="totalpricefinal" id="totalpricefinal" value="${price.totalPrice }" style="width:100px;text-align: center;border-style:none;" readonly="true"></strong></td>
 							<td colspan="3"><button type="submit" class="btn btn-success btn-block" onclick="return confirm('確定要結帳嗎?')">結帳&thinsp;<i class="fa fa-angle-right"></i></button></td>
 						</c:when>
 						</c:choose>

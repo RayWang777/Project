@@ -156,8 +156,8 @@ function store() {
 function user() {
 	let acc = document.getElementById("userAccount");
 	let pwd = document.getElementById("userPassword");
-	acc.value=("cindy1@gmail.com");
-	pwd.value=("cindy9527");
+	acc.value=("william@gmail.com");
+	pwd.value=("william123");
 	Swal.fire({
 		  icon: 'error',
 		  title: '一般使用者無法登入',

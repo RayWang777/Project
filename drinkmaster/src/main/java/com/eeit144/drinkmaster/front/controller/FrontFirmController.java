@@ -74,6 +74,9 @@ public class FrontFirmController {
 	@GetMapping("firm/{id}")
 	public String findAllStoreByFirmId(@PathVariable("id") Integer firmId,Model m){
 		
+		if( firmId > 6) {
+			return "redirect:/front/";
+		}
 
 		FirmBean findById = firmService.findById(firmId).get();
 	

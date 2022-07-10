@@ -116,7 +116,7 @@ public class UserController {
 
 		if(role.equals("admin")) {
 
-			return("redirect:/backend/");
+			return "redirect:/backend/";
 			
 		} 
 		
@@ -128,25 +128,25 @@ public class UserController {
 			firmBean = firmByUserId.get(0);
 			}catch (Exception e) {
 				m.addAttribute("errorloginstr", "請聯絡平台獲取權限");
-				return "backlogin";
+				return "/backend/backlogin";
 			}
 			
 			m.addAttribute("canSeeFirm", firmBean);
 			
-			return("redirect:/backend/");
+			return "redirect:/backend/";
 		} 
 		 if(role.equals("store")) {
 			
 			Optional<StoreBean> StoreByUserId = storeService.findStoreByUserId(user.getUserId());
 			if(StoreByUserId.isEmpty()) {
 				m.addAttribute("errorloginstr", "請聯絡平台廠商獲取權限");
-				return "backlogin";
+				return "/backend/backlogin";
 			}
 			StoreBean storeBean = StoreByUserId.get();
 			
 			m.addAttribute("canSeeStore", storeBean);
 			
-			return("redirect:/backend/");
+			return "redirect:/backend/";
 		} 
 		System.out.println("程式跑到這邊惹");
 		m.addAttribute("errorloginstr", "請聯絡平台廠商獲取權限");

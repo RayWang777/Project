@@ -208,7 +208,7 @@
   <c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
    <c:choose>
    <c:when test="${page.number!=pageNumber-1}">
-   <a href="${contextRoot}/backend/orderItems/findAll?o=${pageNumber}"> <c:out value="${pageNumber}" /> </a>
+   <a href="${contextRoot}/backend/orderItems/findAll?o=${pageNumber}" style="color:#84C1FF"> <c:out value="${pageNumber}" /> </a>
    </c:when>
    <c:otherwise>
    <c:out value="${pageNumber}"></c:out>

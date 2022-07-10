@@ -82,7 +82,7 @@
 <!-- 								<div class="row"> -->
 									<div class="col-sm-2 hidden-xs">
 									<c:if test="${productBean.productImage!=null}">
-									<img src="${productBean.productImage}" style="width: 250px;height: 200px;text-align: center;" name="shopcarimg" /></div>
+									<img src="${productBean.productImage}" style="width: 100px;height: 100px;text-align: center;" name="shopcarimg" /></div>
 									</c:if>
 									<div class="col-sm-10">
 										

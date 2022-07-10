@@ -136,7 +136,7 @@
    <c:choose>
    <c:when test="${page.number!=pageNumber-1}">
 <!--    <div style="text-align: center;"> -->
-   <a href="${contextRoot}/front/order/userOrder?o=${pageNumber}"> <c:out value="${pageNumber}" /> 
+   <a href="${contextRoot}/front/order/userOrder?o=${pageNumber}" style="color:#84C1FF"> <c:out value="${pageNumber}" /> 
    </a>
 <!--    </div> -->
    </c:when>

@@ -71,10 +71,10 @@
 <div id="div">
 
 <form action="${contextRoot}/front/shopcar/confirmOrder" method="post">
-<p style="margin:0 auto; width:  300px"> 
+<p style="margin:0 auto; width:  250px"> 
 <input type="hidden" value="${canSeeUser.userId}" name="userId">
 姓名:&thinsp;<input type="text" value="${canSeeUser.userName}" readonly="readonly"><br><br><br>
-電話:&thinsp;<input type="text" name="shopcarphone" id="shopcarphone"><br>
+電話:&thinsp;<input type="text" name="shopcarphone" id="shopcarphone" value="${canSeeUser.phone}"><br>
 <span id="result1" style="color: red; font-size: 16px;padding-left: 50px;"></span><br><br>
 
 地址:&thinsp;<input type="text" value="${canSeeUser.userAddress}" name="shopcaraddress" id="shopcaraddress"><br>

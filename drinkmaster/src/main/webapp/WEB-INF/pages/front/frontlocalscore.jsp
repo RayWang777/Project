@@ -26,8 +26,8 @@
                         background-image: url("<c:url value="/images/coolbanner.jpg"/>");
                         background-repeat: no-repeat;
                         background-attachment:fixed;
-                        background-position: 50% 40%;
-                        background-size: 180% 140%;
+                        background-position: 0% 40%;
+                        background-size: 110% 110%;
                     }
  a:link
         {

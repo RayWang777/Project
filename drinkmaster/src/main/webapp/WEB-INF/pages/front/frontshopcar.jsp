@@ -181,7 +181,7 @@ $(document).ready(function(){
 				$('#salecodeshow').html('無此折扣碼');
 				$('#textsale').val(1);
 			}else{
-				$('#salecodeshow').html(data+'折');
+				$('#salecodeshow').html((data*10)+'折');
 				$('#textsale').val(data);
 			}
 	    	

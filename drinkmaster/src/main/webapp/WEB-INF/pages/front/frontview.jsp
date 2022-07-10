@@ -50,7 +50,7 @@
                     <!-- Section-->
                     <section class="">
                     
-                    <input type="text" id="localcounts" hidden="true" value="0">
+                    <input type="text" id="localcounts" hidden="true" value="0"> <!-- hidden="true" -->
                     <!-- TOP3 -->
                       <div class="container px-4 px-lg-5 mt-3">
                             <div  class="row gx-4 gx-lg-10 row-cols-1 row-cols-md-1 row-cols-xl-1 justify-content-center col mb-5" style="text-align: center;">
@@ -210,6 +210,8 @@
                 	  //利用input控制數量
                 	    var localcounts = $('#localcounts').val();
                 	 		localcounts++;
+                		if(localcounts == 5)return;
+                		
              		 console.log(lat)
              		 console.log(lng)
              		 

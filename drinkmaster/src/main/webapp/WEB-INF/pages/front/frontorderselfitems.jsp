@@ -57,7 +57,7 @@
 				<th scope="col" style="text-align: center;">數量</th>
 				<th scope="col" style="text-align: center">甜度</th>
 				<th scope="col" style="text-align: center;">溫度</th>
-				<th scope="col" style="text-align: center;">單價</th>
+				<th scope="col" style="text-align: center;">金額</th>
 				
 			</tr>
 		</thead>

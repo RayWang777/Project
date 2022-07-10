@@ -255,9 +255,9 @@ table {
             <br>
             <div class="total">
             
-                <span>總金額</span>
+                <span style="margin-left: 15px;">總金額</span>
                 
-                <span id="totalprice">NT$ <c:out value="${data.totalPrice}" /></span>
+                <span  id="totalprice">NT$ <c:out value="${data.totalPrice}" /></span>
             	
             </div>
         </div>

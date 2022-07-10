@@ -51,7 +51,7 @@ color:red;
 				<label for="discount" class="form-label">折扣</label>
 				<div class="mb-3 input-group">
 					<form:input path="discount" class="form-control" type="text"
-						id="storeName" />
+						id="discount" />
 					<span class="input-group-text">折(%)</span>
 					<form:errors path="discount" cssClass="error"></form:errors>
 					<span id=discountSp></span>
@@ -82,13 +82,21 @@ color:red;
 				</div>
 			</form:form>
 
-
 		</div>
+			<button id="autoinput" type="button" class="btn btn-primary">折扣產生器</button>
 
 	</div>
 </div>
 
 <script type="text/javascript">
+
+$('#autoinput').click(function(){
+	$('#discount').val('90');
+	$('#count').val('10');
+	
+})
+
+
 
 $('#selectfirmId').click(function() {
 

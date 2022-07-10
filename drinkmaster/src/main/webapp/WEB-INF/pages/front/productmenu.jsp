@@ -108,6 +108,7 @@ color: black;
 								</h3>
 							</div>
 							<c:forEach var="productBean" items="${categoryBean.products}">
+								<c:if test="${productBean.status=='true' }">
 								<div
 									style="font-size: large; border-bottom: 2px inset #C0C0C0; height: 52px;"
 									class="align-middle">
@@ -138,7 +139,40 @@ color: black;
 												<c:out value="${productBean.price}"></c:out></span>
 										</c:if>
 									</a>
+									
 								</div>
+								</c:if>
+								<c:if test="${productBean.status=='false' }">
+								<div
+									style="font-size: large; border-bottom: 2px inset #C0C0C0; height: 52px;"
+									class="align-middle">
+
+
+									 <c:if test="${productBean.productImage!=null}">
+
+											<img src="${productBean.productImage}" style="width: 60px"
+												height="50px" />
+										</c:if>&nbsp;&nbsp; <b><c:out value="${productBean.productName}"></c:out></b>
+										&nbsp;&nbsp; <c:if test="${productBean.status=='false' }">
+											<i class="fa-solid fa-ban"
+												style="color: red; font-size: xx-small;"></i>
+										</c:if> <c:if
+											test="${productBean.coldHot=='熱' || productBean.coldHot=='冷熱'}">
+											<span
+												style="position: absolute; right: 70px; margin-top: 10px; color: #FF4D00">
+												<i class="fa-brands fa-hotjar" style="color: #FF4D00;"></i>
+												<c:out value="${productBean.price}" />
+											</span>
+										</c:if> <c:if
+											test="${productBean.coldHot=='冷' || productBean.coldHot=='冷熱'}">
+											<span
+												style="position: absolute; right: 10px; margin-top: 10px; color: #2894FF"><i
+												class="fa-regular fa-snowflake" style="color: #2894FF"></i>
+												<c:out value="${productBean.price}"></c:out></span>
+										</c:if>
+								
+								</div>
+								</c:if>
 							</c:forEach>
 						</div>
 					</div>

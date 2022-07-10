@@ -67,10 +67,6 @@
 	<table id="cart" class="table table-hover table-condensed">
     				<thead>
 						<tr>
-<!-- 							<th scope="col"><label class="control control--checkbox"> -->
-<!-- 							<input type="checkbox" class="js-check-all" /> -->
-<!-- 							<div class="control__indicator"></div> -->
-<!-- 							</label></th> -->
 							<th style="width:150px;text-align: center;">店名</th>
 							<th style="width:100px;text-align: center;">商品</th>
 							<th style="width:30px;text-align: center;">單價</th>
@@ -85,11 +81,6 @@
 					<c:forEach varStatus="vs" var="shopcarItems" items="${shopcarBuy}" >
 						<tr scope="row" class="count">
 						
-<!-- 							<td class="align-middle"><label -->
-<!-- 							class="control control--checkbox"><input type="checkbox" -->
-<%-- 							id="check" value="<c:out value='${orderBean.orderId}'/>" --%>
-<!-- 							style="margin-top: 20px;" /> -->
-<!-- 							<div class="control__indicator"></div></label></td> -->
 						
 							<td style="font-size: 18px;text-align: center;">
 							<input type="hidden" value="${shopcarItems.value.productId}" name="shopcarproductId" >
@@ -112,9 +103,7 @@
 							<input type="text" id="totalprice${vs.count}" value="${shopcarItems.value.totalPrice}" style="width:100px;text-align: center;border-style:none;" readonly="true">
 							</td>
 							<td class="actions" data-th="">
-<%-- 							<a href="${contextRoot}/front/shopcar/delete?productId=${shopcarItems.value.productId}"> --%>
 							<button type="button" onclick="return del(event)" id="${shopcarItems.value.productId}" value="刪除" class="btn btn-danger btn-sm">刪除</button>
-<!-- 							</a> -->
 							</td>						
 							
 
@@ -123,7 +112,6 @@
 					<tfoot>
 						<tr class="visible-xs">
 							<td style="font-weight: bolder;">總金額:&thinsp;${price.totalPrice }
-<%-- 							<input type="text" name="totalpricedefore" id="totalpricedefore" style="width: 120px;border-style:none;" readonly="true" value="${rowTotal}" > --%>
 							</td>
 						</tr>
 						<tr>
@@ -139,12 +127,7 @@
 							&thinsp;繼續購買</a></td>
 						</c:when>
 						</c:choose>	
-							<c:choose>
-						<c:when test="${price.storeId == null}">
-						<td><input type="hidden"></td>
-						<td colspan="6"></td>
-						</c:when>
-						<c:when test="${price.storeId != null}">
+<!-- 							<td> -->
 							<td style="font-weight: bolder;">折扣碼:&thinsp;<input type="text" name="salescode" id="salescode" style="width: 130px;" onkeydown="changeprice(event)" onchange="changeprice(event)" onfocus="changeprice(event)" onkeyup="changeprice(event)" onclick="changeprice(event)"></td>
 							<td ><input type="hidden" id="textsale" style="border-style:none;">
 							<span id="salecodeshow" style="color:red;font-weight: bolder;"></span></td>
@@ -153,14 +136,15 @@
 							<td class="hidden-xs text-center" colspan="3">
 							<span style="color:red;font-weight: bold;">折扣後&ensp;</span>
 							<strong>Total <input type="text" name="totalpricefinal" id="totalpricefinal" value="${price.totalPrice }" style="width:100px;text-align: center;border-style:none;" readonly="true"></strong></td>
-							<td colspan="3"><button type="submit" class="btn btn-success btn-block" onclick="return confirm('確定要結帳嗎?')">結帳&thinsp;<i class="fa fa-angle-right"></i></button></td>
-						</c:when>
-						</c:choose>
+
+							<td colspan="3"><button type="submit" class="btn btn-success btn-block" onclick="return confirm('確定要結帳嗎?')">去買單&thinsp;<i class="fa fa-angle-right"></i></button></td>
+
+
+
 						</tr>
 					</tfoot>
 				</table>
 				</form>
-<%-- 				</form:form> --%>
 </div>
 </body>
 

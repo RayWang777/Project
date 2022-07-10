@@ -19,27 +19,11 @@
 <div class="container">
 
 
-<div class="row justify-content-center" style="margin-left:400px; width:  700px">
+<div class="row justify-content-center" style="margin-left:500px; width:  700px">
 <!-- <p style="margin:0 auto; width:  500px"> -->
 <div >
 <form:form class="form" method="post" action="${contextRoot}/front/order/update" modelAttribute="orderBean">
 <form:hidden path="orderId"/>
-<!-- <label for="selectuserId">使用者名稱</label> -->
-<%-- 					<form:select id="selectuserId" path="userBean.userId"> --%>
-
-<%-- 						<form:options items="${orderaddusers}" itemLabel="userName" --%>
-<%-- 							itemValue="userId" /> --%>
-<%-- 					</form:select><br><br> --%>
-<%-- 					<form:hidden path="userId" value="${ orderBean.userBean.userId}" /> --%>
-
-<!-- <label for="selectstore">店家名稱</label> -->
-<%-- 					<form:select id="selectstore" path="storeBean.storeId"> --%>
-
-<%-- 						<form:options items="${orderaddstores}" itemLabel="storeName" --%>
-<%-- 							itemValue="storeId" /> --%>
-<%-- 					</form:select><br><br> --%>
-<%-- 					<form:hidden path="storeId" value="${orderBean.storeBean.storeId }" /> --%>
-					
   <form:input type="hidden" path="userBean.userId" readonly="true"/>
   <form:input type="hidden" path="storeBean.storeId" readonly="true"/><br><br>
   下單時間<form:label path="createTime" width="150px"></form:label>
@@ -59,9 +43,10 @@
   
  
   <br>
-  
+  <p style="margin-left: 40px;">
   <input type="submit" style="text-align: center;" name="submit" value="取消訂單" onclick="return confirm('與店家確認過後，決定要取消嗎?')">&emsp;
   <input type ="button" style="text-align: center;" onclick="history.back()" value="回到上一頁"></input>
+  </p>
 </form:form>
 
 </div>

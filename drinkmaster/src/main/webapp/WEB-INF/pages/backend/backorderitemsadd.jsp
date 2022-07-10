@@ -69,7 +69,7 @@ span{
   <a href="${contextRoot}/backend/orderItems/insert">
   <button type="submit" id="ordersubmit" class="btn btn-primary btn-sm"  name="submit"  onclick="return confirm('確定要新增嗎?')" >確認</button></a>&emsp;  
   
-  <button type="button" id="closebutton" class="btn btn-outline-dark btn-sm" data-dismiss="modal" aria-label="Close" >取消</button>
+  <input type ="button" onclick="history.back()" value="回到上一頁"></input>
   <br>
     </div>
   </form:form>

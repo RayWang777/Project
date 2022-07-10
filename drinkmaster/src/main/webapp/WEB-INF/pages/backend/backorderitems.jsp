@@ -152,7 +152,7 @@
       <th scope="col">數量</th>
       <th scope="col">甜度</th>
       <th scope="col">溫度</th>
-      <th scope="col">單價</th>
+      <th scope="col">金額</th>
       <th scope="col"></th>
     </tr>
   </thead>

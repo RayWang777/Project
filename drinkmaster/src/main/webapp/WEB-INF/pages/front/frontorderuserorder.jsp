@@ -76,7 +76,9 @@
 <%-- 						<input type="hidden" vaule="${order.orderId}" name="id"> --%>
 						</td>
 					<td class="align-middle" style="text-align: center;">
+					<a href="${contextRoot}/front/productmenu?id=${order.storeBean.storeId}">
 					<c:out value="${order.storeBean.storeName}"></c:out>
+					</a>
 					</td>
 					<td class="align-middle" style="text-align: center;"><fmt:formatDate  value="${order.createTime}" pattern="yyyy-MM-dd HH:mm"/>
 					</td>

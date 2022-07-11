@@ -61,7 +61,7 @@
 </head>
 
 <body>
-			
+			<div  style="width: 50%;margin-left: 350px">
 <div class="login-block">
 
 	<div>
@@ -114,7 +114,7 @@
 
 
 
-
+</div>
 
 
 

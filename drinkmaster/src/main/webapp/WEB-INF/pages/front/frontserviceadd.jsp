@@ -32,7 +32,7 @@
 <div class="row justify-content-center">
 <div class="col-6">
  <h1>意見回饋</h1>
-<form:form class="form" method="post" action="${contextRoot}/front/service/post" modelAttribute="workMessages">
+<form:form id="needsubmit" class="form" method="post" action="${contextRoot}/front/service/post" modelAttribute="workMessages">
 <div class="form-group">
      <label for="exampleFormControlInput1">會員編號 :</label>
      
@@ -58,7 +58,7 @@
      <br/>
      <div class="form-group">
     
-     <input type="submit" name="submit" class="btn btn-success" value="送出" id="send"><br/><br/>
+     <button type="button" class="btn btn-success" id="send">送出</button><br/><br/>
  </div>
 </form:form>
      <button style="margin-bottom: 100px" class="btn btn-dark" onclick="fast()">一鍵輸入</button>
@@ -72,9 +72,11 @@
 
 
 <script type="text/javascript">
-$(function(){
 
-});
+function sendto(){
+	$('#needsubmit').submit();
+}
+
 
 function fast() { 
 	let answer = document.getElementById("userfeedback"); 
@@ -89,12 +91,14 @@ $(function(){
 			  title:'意見回饋已送出',
 			  showConfirmButton: false,
 			  timer: 3000
-			}).then((result) => {
-					location.replace('http://localhost:8081/drinkmaster/front/service/add')
-			}
-			);
-}
-)});
+			}).then(
+					
+// 					location.replace('http://localhost:8081/drinkmaster/front/service/add')
+
+					setTimeout(function () { $("#needsubmit").submit(); }, 3000)
+				);
+})
+});
 
 
 </script>

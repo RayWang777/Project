@@ -219,7 +219,7 @@ public class SaleCodeController {
 		if(saleCodeIds.isEmpty()) {
 			return "redirect:/backend/salecode/all";
 		}
-		Date date = new Date();
+		Date date = new Date(2020-01-01);
 		saleCodeService.deleteSaleCodeMany(date,saleCodeIds); 
 		
 		return "redirect:/backend/salecode/all";

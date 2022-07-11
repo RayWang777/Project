@@ -91,7 +91,7 @@ color:red;
 <script type="text/javascript">
 
 $('#autoinput').click(function(){
-	$('#discount').val('90');
+	$('#discount').val('80');
 	$('#count').val('10');
 	
 })

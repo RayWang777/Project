@@ -277,7 +277,7 @@ function changeprice(event){
 
 </script>
 
-<script src="<c:url value="/js/lib/bootstrap.min.js"/>"></script>
+<%-- <script src="<c:url value="/js/lib/bootstrap.min.js"/>"></script> --%>
 <script src="<c:url value="/js/lib/jquery.min.js"/>"></script>
 
 <jsp:include page="layout/footer.jsp"></jsp:include>

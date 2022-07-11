@@ -19,7 +19,7 @@
 <div class="container">
 
 
-<div class="row justify-content-center" style="margin-left:500px; width:  700px">
+<div class="row justify-content-center" style="margin-left:425px; width:  600px">
 <!-- <p style="margin:0 auto; width:  500px"> -->
 <div >
 <form:form class="form" method="post" action="${contextRoot}/front/order/update" modelAttribute="orderBean">

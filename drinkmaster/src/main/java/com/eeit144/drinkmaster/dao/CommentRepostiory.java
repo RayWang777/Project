@@ -82,7 +82,7 @@ public interface CommentRepostiory extends JpaRepository<CommentBean, Integer> {
 	@Query(value="select storeid from comment group by storeid order by avg(score) ASC",nativeQuery = true)
 	public List<Integer> findCommentByAvgAsc();
 	
-	@Query(value="select storeid from ( select storeid,avg(score) as a from comment group by storeid) AS B where a > :avgScore",nativeQuery = true)
+	@Query(value="select storeid from ( select storeid,avg(score) as a from comment group by storeid) AS B where a >= :avgScore",nativeQuery = true)
 	public List<Integer> findStoreIdByAvgUPThanNum(@Param(value="avgScore") Double avg);
 
 	

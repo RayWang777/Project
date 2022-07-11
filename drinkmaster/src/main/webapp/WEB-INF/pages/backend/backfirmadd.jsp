@@ -87,11 +87,22 @@ color:red;
 
 
 		</div>
-
+<button id="autoinput" type="button" class="btn btn-primary">廠商產生器</button>
 	</div>
 </div>
 
 <script type="text/javascript">
+	$('#autoinput').click(function(){
+		
+		$('#firmName').val('Sharetea');
+		$('#firmAddress').val('台北市大安區復興南路一段');
+		$('#firmPhone').val('0800-520-843');
+		$('#firmAddress').val('台北市大安區復興南路一段');
+	})
+
+
+
+
 	$(function() {
 		$('#logo').hide();
 	});
